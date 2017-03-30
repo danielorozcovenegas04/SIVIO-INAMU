@@ -1,0 +1,5 @@
+C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Utilitarios\bin\Debug\SIVIO.Utilitarios.dll
+C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Utilitarios\bin\Debug\SIVIO.Utilitarios.pdb
+C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.dll
+C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.pdb
+C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.csprojResolveAssemblyReference.cache

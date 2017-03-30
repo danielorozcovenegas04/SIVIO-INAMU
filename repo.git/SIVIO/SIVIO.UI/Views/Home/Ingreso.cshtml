@@ -1,0 +1,144 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+@{
+    ViewBag.Title = "Ingreso";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        document.title = "SIVIO - Ingreso al Sistema";
+        var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+        $("#btn-login")
+            .click(function () {
+
+                var resultadoValidacion = $('#loginform').parsley().validate();
+                if (resultadoValidacion == true) {
+                    $.LoadingOverlay("show");
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("AutenticarUsuario")',
+                        data: { usuario: $('#txtLogin').val(), clave: $('#txtClave').val() },
+                        processData: true,
+                        success: function (data) {
+
+                            $.LoadingOverlay("hide");
+                            if (data.TipoMensaje == 2) {
+
+                                $("#txtModalTitulo").css("color", "red");
+                                $("#txtModalTitulo").text("Conexión Fallida");
+                                $("#txtModalContenido").text(data.ContenidoMensaje);
+                                instMensajes.open();
+                            }
+                            else if (data.TipoMensaje == 1) {
+                                try
+                                {
+                                    window.location.href = '@Url.Action("Index","Home")';
+                                }
+                                catch (err) {
+                                    window.location.href = '@Url.Action("Index","Home")';
+                                }
+
+
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, error) {
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("Conexión Fallida");
+                            $("#txtModalContenido").text("Error al contactar al servidor, intente de nuevo");
+                            instMensajes.open();
+                            $.LoadingOverlay("hide");
+
+                        }
+                    });
+
+                } else
+                {
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Formulario Incompleto");
+                    $("#txtModalContenido").text("Error, debe suministrar su usuario de red además de su contraseña.");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                }
+
+            });
+
+    });
+</script>
+<div class="remodal" style="background-color: white;" data-remodal-id="modalDialogo"
+     data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
+
+    <button data-remodal-action="close" class="remodal-close"></button>
+    <h3 id="txtModalTitulo">SIVIO</h3>
+    <p>
+        <span id="txtModalContenido"></span>
+    </p>
+</div>
+<br />
+<br />
+<br />
+<div class="center-block" style="text-align:center;">
+    <img class="imagenAlinearCentro" src="~/Content/Imagenes/descarga.jpg" />
+
+</div>
+<div class="row" id="contenedorControles">
+    <div class="container">
+        <div id="loginbox" style="margin-top: 50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+                <div class="panel-heading" style="background-color: #0099ba">
+                    <div class="panel-title" style="text-align: center">Sistema para la Atención y Prevención de la Violencia contra las Mujeres</div>
+                    <div style="float: right; font-size: 80%; position: relative; top: -10px">@*<a href="#">Forgot password?</a>*@</div>
+                </div>
+
+                <div style="padding-top: 30px" class="panel-body">
+
+                    <div style="display: none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                    <form id="loginform" class="form-horizontal" role="form" method="POST">
+
+                        <div class="row" style="padding-bottom: 5px">
+                            <div class="col-xs-1"><span class="input-group-addon" style="border: none;"><i class="glyphicon glyphicon-user" style="padding-top: 3.5px"></i></span></div>
+                            <div class="col-xs-11">
+                                <input id="txtLogin" type="text" class="form-control" name="username" value="" placeholder="usuario@inamu.go.cr" style="max-width: 100%" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-1"><span class="input-group-addon" style="border: none;"><i class="glyphicon glyphicon-log-in" style="padding-top: 3.5px"></i></span></div>
+                            <div class="col-xs-11">
+                                <input id="txtClave" type="password" class="form-control" name="password" placeholder="Contraseña" style="max-width: 100%" required>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px" class="form-group">
+                            <!-- Button -->
+
+                            <div class="col-sm-12 controls" style="text-align: center">
+                                <a id="btn-login" class="flat-btn flat-btn-success" style="background-color: #ff471a">Ingresar</a>
+                                @*<a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>*@
+
+                            </div>
+                        </div>
+
+
+                        @*<div class="form-group">
+                                <div class="col-md-12 control">
+                                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                                        Don't have an account!
+                                        <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                            Sign Up Here
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </form>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+

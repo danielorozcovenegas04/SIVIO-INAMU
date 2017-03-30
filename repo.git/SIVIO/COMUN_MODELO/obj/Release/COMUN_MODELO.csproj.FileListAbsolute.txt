@@ -1,0 +1,24 @@
+C:\Users\jgomez\documents\visual studio 2013\Projects\GB.INAMU.Formularios\COMUN_MODELO\bin\Release\COMUN_MODELO.dll.config
+C:\Users\jgomez\documents\visual studio 2013\Projects\GB.INAMU.Formularios\COMUN_MODELO\bin\Release\COMUN_MODELO.dll
+C:\Users\jgomez\documents\visual studio 2013\Projects\GB.INAMU.Formularios\COMUN_MODELO\bin\Release\COMUN_MODELO.pdb
+C:\Users\jgomez\documents\visual studio 2013\Projects\GB.INAMU.Formularios\COMUN_MODELO\bin\Release\EntityFramework.dll
+C:\Users\jgomez\documents\visual studio 2013\Projects\GB.INAMU.Formularios\COMUN_MODELO\bin\Release\EntityFramework.xml
+C:\Users\jgomez\documents\visual studio 2013\Projects\GB.INAMU.Formularios\COMUN_MODELO\obj\Release\COMUN_MODELO.csprojResolveAssemblyReference.cache
+C:\Users\jgomez\documents\visual studio 2013\Projects\GB.INAMU.Formularios\COMUN_MODELO\obj\Release\COMUN_MODELO.dll
+C:\Users\jgomez\documents\visual studio 2013\Projects\GB.INAMU.Formularios\COMUN_MODELO\obj\Release\COMUN_MODELO.pdb
+G:\INAMU TFS NUEVO\MUJERES EMPRESARIAS\Código Fuente\GB.INAMU.Formularios\COMUN_MODELO\bin\Release\COMUN_MODELO.dll.config
+G:\INAMU TFS NUEVO\MUJERES EMPRESARIAS\Código Fuente\GB.INAMU.Formularios\COMUN_MODELO\bin\Release\COMUN_MODELO.dll
+G:\INAMU TFS NUEVO\MUJERES EMPRESARIAS\Código Fuente\GB.INAMU.Formularios\COMUN_MODELO\bin\Release\COMUN_MODELO.pdb
+G:\INAMU TFS NUEVO\MUJERES EMPRESARIAS\Código Fuente\GB.INAMU.Formularios\COMUN_MODELO\bin\Release\EntityFramework.dll
+G:\INAMU TFS NUEVO\MUJERES EMPRESARIAS\Código Fuente\GB.INAMU.Formularios\COMUN_MODELO\bin\Release\EntityFramework.xml
+G:\INAMU TFS NUEVO\MUJERES EMPRESARIAS\Código Fuente\GB.INAMU.Formularios\COMUN_MODELO\obj\Release\COMUN_MODELO.csprojResolveAssemblyReference.cache
+G:\INAMU TFS NUEVO\MUJERES EMPRESARIAS\Código Fuente\GB.INAMU.Formularios\COMUN_MODELO\obj\Release\COMUN_MODELO.dll
+G:\INAMU TFS NUEVO\MUJERES EMPRESARIAS\Código Fuente\GB.INAMU.Formularios\COMUN_MODELO\obj\Release\COMUN_MODELO.pdb
+G:\INAMU TFS NUEVO\SIPAMU\Código Fuente\SIPAMU 2.0\COMUN_MODELO\bin\Release\COMUN_MODELO.dll.config
+G:\INAMU TFS NUEVO\SIPAMU\Código Fuente\SIPAMU 2.0\COMUN_MODELO\bin\Release\COMUN_MODELO.dll
+G:\INAMU TFS NUEVO\SIPAMU\Código Fuente\SIPAMU 2.0\COMUN_MODELO\bin\Release\COMUN_MODELO.pdb
+G:\INAMU TFS NUEVO\SIPAMU\Código Fuente\SIPAMU 2.0\COMUN_MODELO\bin\Release\EntityFramework.dll
+G:\INAMU TFS NUEVO\SIPAMU\Código Fuente\SIPAMU 2.0\COMUN_MODELO\bin\Release\EntityFramework.xml
+G:\INAMU TFS NUEVO\SIPAMU\Código Fuente\SIPAMU 2.0\COMUN_MODELO\obj\Release\COMUN_MODELO.csprojResolveAssemblyReference.cache
+G:\INAMU TFS NUEVO\SIPAMU\Código Fuente\SIPAMU 2.0\COMUN_MODELO\obj\Release\COMUN_MODELO.dll
+G:\INAMU TFS NUEVO\SIPAMU\Código Fuente\SIPAMU 2.0\COMUN_MODELO\obj\Release\COMUN_MODELO.pdb
