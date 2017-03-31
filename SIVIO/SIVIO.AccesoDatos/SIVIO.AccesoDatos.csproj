@@ -61,10 +61,39 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SIVIO.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="SIVIO.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="SIVIO.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SIVIO.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_ACCION.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_CATALOGO.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_DIRECCION.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_PERSONA.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_ROL.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_TELEFONO.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_USUARIO.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_VALORCATALOGO.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -85,17 +114,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SIVIO.edmx</DependentUpon>
       <LastGenOutput>SIVIO.Context.cs</LastGenOutput>
-      <CustomToolNamespace>SIVIO.Entidades</CustomToolNamespace>
+    </Content>
+    <Content Include="SIVIO.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SIVIO.edmx</DependentUpon>
+      <LastGenOutput>SIVIO.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SIVIO.Entidades\SIVIO.Entidades.csproj">
-      <Project>{C6378732-DDDB-4348-A0A3-49811872203F}</Project>
-      <Name>SIVIO.Entidades</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -44,55 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mensaje.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SIVIO.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="TBL_ACCION.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TBL_BITACORA.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TBL_CATALOGO.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TBL_DIRECCION.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TBL_LABORAL.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TBL_PERSONA.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TBL_ROL.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TBL_TELEFONO.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TBL_USUARIO.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TBL_VALORCATALOGO.cs">
-      <DependentUpon>SIVIO.tt</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Validadores\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="SIVIO.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SIVIO.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

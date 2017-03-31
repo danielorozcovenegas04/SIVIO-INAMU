@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SIVIO.UI</RootNamespace>
-    <AssemblyName>SIVIO.UI</AssemblyName>
+    <RootNamespace>WebApplication1</RootNamespace>
+    <AssemblyName>WebApplication1</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -194,118 +194,48 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\SeguridadModel.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\animate.min.css" />
-    <Content Include="Content\bootstrap-formhelpers.css" />
-    <Content Include="Content\bootstrap-formhelpers.min.css" />
-    <Content Include="Content\bootstrap-material-design.min.css" />
-    <Content Include="Content\bootstrap-multiselect.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\chosen-sprite%402x.png" />
-    <Content Include="Content\chosen-sprite.png" />
-    <Content Include="Content\chosen.css" />
-    <Content Include="Content\demo.css" />
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\fonts\Pe-icon-7-stroke.svg" />
-    <Content Include="Content\Imagenes\ajax-loader.gif" />
-    <Content Include="Content\Imagenes\bootstrap-formhelpers-countries.flags.png" />
-    <Content Include="Content\Imagenes\bootstrap-formhelpers-currencies.flags.png" />
-    <Content Include="Content\Imagenes\bootstrap-formhelpers-googlefonts.png" />
-    <Content Include="Content\Imagenes\descarga.jpg" />
-    <Content Include="Content\Imagenes\hex-loader2.gif" />
-    <Content Include="Content\Imagenes\image1.jpeg" />
-    <Content Include="Content\Imagenes\image2.jpeg" />
-    <Content Include="Content\Imagenes\load.gif" />
-    <Content Include="Content\Imagenes\loadingGif.gif" />
-    <Content Include="Content\images\layers-2x.png" />
-    <Content Include="Content\images\layers.png" />
-    <Content Include="Content\images\marker-icon-2x.png" />
-    <Content Include="Content\images\marker-icon.png" />
-    <Content Include="Content\images\marker-shadow.png" />
-    <Content Include="Content\images\personal-car_636080748360183529.jpg" />
-    <Content Include="Content\images\sort_asc.png" />
-    <Content Include="Content\images\sort_both.png" />
-    <Content Include="Content\images\sort_desc.png" />
-    <Content Include="Content\jquery-ui.css" />
-    <Content Include="Content\leaflet.css" />
-    <Content Include="Content\light-bootstrap-dashboard.css" />
-    <Content Include="Content\pe-icon-7-stroke.css" />
-    <Content Include="Content\remodal-default-theme.css" />
-    <Content Include="Content\remodal.css" />
-    <Content Include="Content\responsiveslides.css" />
-    <Content Include="Content\ripples.min.css" />
-    <Content Include="Content\selectize.bootstrap3.css" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Content\tablas.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\bootstrap-filestyle.min.js" />
-    <Content Include="Scripts\bootstrap-formhelpers.js" />
-    <Content Include="Scripts\bootstrap-multiselect.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\chosen.jquery.min.js" />
-    <Content Include="Scripts\detect.js" />
-    <Content Include="Scripts\es.js" />
-    <Content Include="Scripts\FileInput\fileinput.min.js" />
-    <Content Include="Scripts\images\layers-2x.png" />
-    <Content Include="Scripts\images\layers.png" />
-    <Content Include="Scripts\images\marker-icon-2x.png" />
-    <Content Include="Scripts\images\marker-icon.png" />
-    <Content Include="Scripts\images\marker-shadow.png" />
-    <Content Include="Scripts\INAMU.datatables.min.js" />
-    <Content Include="Content\Spanish.json" />
-    <Content Include="Content\fonts\Pe-icon-7-stroke.eot" />
-    <Content Include="Content\fonts\Pe-icon-7-stroke.ttf" />
-    <Content Include="Content\fonts\Pe-icon-7-stroke.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\jquery.paginate.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\justgage.js" />
-    <Content Include="Scripts\leaflet.js" />
-    <Content Include="Scripts\loading.gif" />
-    <Content Include="Scripts\loadingoverlay.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\parsley.js" />
-    <Content Include="Scripts\raphael-2.1.4.min.js" />
-    <Content Include="Scripts\remodal.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\responsiveslides.min.js" />
-    <Content Include="Scripts\selectize.bootstrap3.css" />
-    <Content Include="Scripts\selectize.min.js" />
-    <Content Include="Scripts\Sortable.min.js" />
-    <Content Include="Scripts\validator.js" />
-    <Content Include="Scripts\widgets.js" />
-    <None Include="Scripts\_references.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -314,14 +244,34 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout_Login.cshtml" />
-    <Content Include="Views\Home\Ingreso.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -330,20 +280,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SIVIO.AccesoDatos\SIVIO.AccesoDatos.csproj">
-      <Project>{AF6F3493-0F38-4449-8BF2-7D0AB1F9A5F0}</Project>
-      <Name>SIVIO.AccesoDatos</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SIVIO.Entidades\SIVIO.Entidades.csproj">
-      <Project>{C6378732-DDDB-4348-A0A3-49811872203F}</Project>
-      <Name>SIVIO.Entidades</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SIVIO.Utilitarios\SIVIO.Utilitarios.csproj">
-      <Project>{0371D611-6826-4965-903E-D43F9EDC71F7}</Project>
-      <Name>SIVIO.Utilitarios</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

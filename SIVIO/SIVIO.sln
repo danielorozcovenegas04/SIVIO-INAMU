@@ -9,9 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIVIO.Entidades", "SIVIO.En
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIVIO.AccesoDatos", "SIVIO.AccesoDatos\SIVIO.AccesoDatos.csproj", "{AF6F3493-0F38-4449-8BF2-7D0AB1F9A5F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIVIO.Comun", "COMUN_MODELO\SIVIO.Comun.csproj", "{F61328BC-DD55-4F0C-BC99-15B35899C934}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIVIO.Utilitarios", "SIVIO.Utilitarios\SIVIO.Utilitarios.csproj", "{0371D611-6826-4965-903E-D43F9EDC71F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMUN_MODELO", "COMUN_MODELO\COMUN_MODELO.csproj", "{F61328BC-DD55-4F0C-BC99-15B35899C934}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,18 +33,14 @@ Global
 		{F61328BC-DD55-4F0C-BC99-15B35899C934}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F61328BC-DD55-4F0C-BC99-15B35899C934}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F61328BC-DD55-4F0C-BC99-15B35899C934}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0371D611-6826-4965-903E-D43F9EDC71F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0371D611-6826-4965-903E-D43F9EDC71F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0371D611-6826-4965-903E-D43F9EDC71F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0371D611-6826-4965-903E-D43F9EDC71F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://inamu.visualstudio.com/
+		SccTeamFoundationServer = http://192.168.1.68:8080/tfs/inamu
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = SIVIO.AccesoDatos\\SIVIO.AccesoDatos.csproj
 		SccProjectName1 = SIVIO.AccesoDatos
@@ -57,11 +51,8 @@ Global
 		SccProjectUniqueName3 = SIVIO.UI\\SIVIO.UI.csproj
 		SccProjectName3 = SIVIO.UI
 		SccLocalPath3 = SIVIO.UI
-		SccProjectUniqueName4 = COMUN_MODELO\\SIVIO.Comun.csproj
+		SccProjectUniqueName4 = COMUN_MODELO\\COMUN_MODELO.csproj
 		SccProjectName4 = COMUN_MODELO
 		SccLocalPath4 = COMUN_MODELO
-		SccProjectUniqueName5 = SIVIO.Utilitarios\\SIVIO.Utilitarios.csproj
-		SccProjectName5 = SIVIO.Utilitarios
-		SccLocalPath5 = SIVIO.Utilitarios
 	EndGlobalSection
 EndGlobal
