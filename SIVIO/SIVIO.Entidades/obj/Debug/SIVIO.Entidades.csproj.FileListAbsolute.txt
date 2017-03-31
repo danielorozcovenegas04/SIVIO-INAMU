@@ -1,4 +1,0 @@
-G:\INAMU TFS NUEVO\SIVIO\Código Fuente\SIVIO.Entidades\bin\Debug\SIVIO.Entidades.dll
-G:\INAMU TFS NUEVO\SIVIO\Código Fuente\SIVIO.Entidades\bin\Debug\SIVIO.Entidades.pdb
-G:\INAMU TFS NUEVO\SIVIO\Código Fuente\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.dll
-G:\INAMU TFS NUEVO\SIVIO\Código Fuente\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.pdb
