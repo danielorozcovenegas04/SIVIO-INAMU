@@ -9,11 +9,10 @@
 
 namespace SIVIO.Entidades
 {
-    using Entidades;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class SIVIOEntities : DbContext
     {
         public SIVIOEntities()
@@ -36,5 +35,13 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_TELEFONO> TBL_TELEFONO { get; set; }
         public virtual DbSet<TBL_USUARIO> TBL_USUARIO { get; set; }
         public virtual DbSet<TBL_VALORCATALOGO> TBL_VALORCATALOGO { get; set; }
+        public virtual DbSet<TBL_AGRESOR> TBL_AGRESOR { get; set; }
+        public virtual DbSet<TBL_ATENCION> TBL_ATENCION { get; set; }
+        public virtual DbSet<TBL_CONSULTA> TBL_CONSULTA { get; set; }
+        public virtual DbSet<TBL_REFERENCIA> TBL_REFERENCIA { get; set; }
+        public virtual DbSet<TBL_REGISTRO> TBL_REGISTRO { get; set; }
+        public virtual DbSet<TBL_UNIDAD> TBL_UNIDAD { get; set; }
+        public virtual DbSet<TBL_AGRESION> TBL_AGRESION { get; set; }
+        public virtual DbSet<TBL_PERSONAAPOYO> TBL_PERSONAAPOYO { get; set; }
     }
 }

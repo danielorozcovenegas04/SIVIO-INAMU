@@ -24,6 +24,35 @@
         <AssociationConnector Association="SIVIOModel.TBL_ADICCIONES" />
         <AssociationConnector Association="SIVIOModel.TBL_ROLACCION" />
         <AssociationConnector Association="SIVIOModel.TBL_ROLUSUARIO" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESOR" Width="1.5" PointX="5.25" PointY="9.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCION" Width="1.5" PointX="14.75" PointY="12.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_CONSULTA" Width="1.5" PointX="14.75" PointY="8.125" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_REFERENCIA" Width="1.5" PointX="14.75" PointY="3.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO" Width="1.5" PointX="12.5" PointY="4.875" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_UNIDAD" Width="1.5" PointX="12.5" PointY="1.125" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION" Width="1.5" PointX="7.5" PointY="12.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONAAPOYO" Width="1.5" PointX="8.25" PointY="9.25" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_TBL_AGRESOR" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESOR_TBL_PERSONA" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO1" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO2" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO3" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_CONSULTA_TBL_REGISTRO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_BITACORA_TBL_VALORCATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCION_TBL_REGISTRO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_TBL_VALORCATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONAAPOYO_TBL_PERSONA" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_TBL_PERSONA" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_REGISTRO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_UNIDAD" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO1" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_TBL_USUARIO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_TBL_VALORCATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_TBL_VALORCATALOGO1" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO" />
+        <AssociationConnector Association="SIVIOModel.TBL_PERSONACONDICIONESPECIAL" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

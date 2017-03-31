@@ -24,6 +24,52 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ADICCIONES' does not have a primary 
           <Property Name="FK_PERSONA" Type="int" Nullable="false" />
           <Property Name="FK_TIPOADICCION" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIVIO.dbo.TBL_AGRESION' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TBL_AGRESION">
+          <Key>
+            <PropertyRef Name="PK_AGRESION" />
+            <PropertyRef Name="FK_AGRESOR" />
+            <PropertyRef Name="DT_FECHAAGRESION" />
+            <PropertyRef Name="I_DURACION" />
+            <PropertyRef Name="TXT_RELATO" />
+          </Key>
+          <Property Name="PK_AGRESION" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_AGRESOR" Type="int" Nullable="false" />
+          <Property Name="DT_FECHAAGRESION" Type="datetime" Nullable="false" />
+          <Property Name="I_DURACION" Type="int" Nullable="false" />
+          <Property Name="TXT_RELATO" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_AGRESOR">
+          <Key>
+            <PropertyRef Name="PK_AGRESOR" />
+          </Key>
+          <Property Name="PK_AGRESOR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+          <Property Name="VC_IDENTIFICACION" Type="varchar" MaxLength="200" />
+          <Property Name="VC_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VC_APELLIDO1" Type="varchar" MaxLength="50" />
+          <Property Name="VC_APELLIDO2" Type="varchar" MaxLength="50" />
+          <Property Name="FK_TIPORELACION" Type="int" Nullable="false" />
+          <Property Name="DT_COMIENZORELACION" Type="datetime" Nullable="false" />
+          <Property Name="FK_GENERO" Type="int" Nullable="false" />
+          <Property Name="DT_FECHANACIMIENTO" Type="datetime" Nullable="false" />
+          <Property Name="FK_OCUPACION" Type="int" Nullable="false" />
+          <Property Name="FK_NIVELEDUCATIVO" Type="int" Nullable="false" />
+          <Property Name="B_DENUNCIAPENAL" Type="bit" Nullable="false" />
+          <Property Name="B_MEDIDASPROTECCION" Type="bit" />
+          <Property Name="DT_FECHAVENCIMIENTOPROTECCION" Type="datetime" />
+          <Property Name="VC_LUGARTRABAJO" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="I_SEPARACIONES" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_ATENCION">
+          <Key>
+            <PropertyRef Name="PK_ATENCION" />
+          </Key>
+          <Property Name="PK_ATENCION" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_TIPOATENCION" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="TBL_BITACORA">
           <Key>
             <PropertyRef Name="PK_BITACORA" />
@@ -42,6 +88,22 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ADICCIONES' does not have a primary 
           <Property Name="PK_CATALOGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VC_NOMBRECATALOGO" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="FK_CATALOGOPADRE" Type="int" />
+        </EntityType>
+        <EntityType Name="TBL_CONSULTA">
+          <Key>
+            <PropertyRef Name="PK_CONSULTA" />
+          </Key>
+          <Property Name="PK_CONSULTA" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="B_INGRESOCEEAM" Type="bit" />
+          <Property Name="FK_RAZONRECHAZO" Type="int" />
+          <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="1000" />
+          <Property Name="B_REINGRESOCEEAM" Type="bit" />
+          <Property Name="FK_TIPOCEEAMREINGRESO" Type="int" />
+          <Property Name="FK_TIPOCEEAMINGRESO" Type="int" />
+          <Property Name="VC_CONTACTOCEEAM" Type="varchar" MaxLength="500" />
+          <Property Name="FK_ENTIDADTRASLADA" Type="int" />
+          <Property Name="TM_TRASLADOAPROX" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="TBL_DIRECCION">
           <Key>
@@ -87,6 +149,65 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ADICCIONES' does not have a primary 
           <Property Name="FK_TIPOFAMILIA" Type="int" Nullable="false" />
           <Property Name="FK_ESTADOEMBARAZO" Type="int" Nullable="false" />
           <Property Name="FK_CONDICIONSALUD" Type="int" Nullable="false" />
+          <Property Name="FK_ORIENTACIONSEXUAL" Type="int" Nullable="false" />
+          <Property Name="I_HIJOS" Type="int" Nullable="false" />
+          <Property Name="I_HIJOSCEEAM" Type="int" Nullable="false" />
+          <Property Name="I_HIJOSMAYORESDOCE" Type="int" Nullable="false" />
+          <Property Name="FK_PROVINCIAPROCEDENCIA" Type="int" Nullable="false" />
+          <Property Name="FK_CANTONPROCEDENCIA" Type="int" Nullable="false" />
+          <Property Name="FK_DISTRITOPROCEDENCIA" Type="int" Nullable="false" />
+          <Property Name="VC_CORREO" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIVIO.dbo.TBL_PERSONAAPOYO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TBL_PERSONAAPOYO">
+          <Key>
+            <PropertyRef Name="FK_PERSONA" />
+            <PropertyRef Name="FK_TIPOAPOYO" />
+            <PropertyRef Name="VC_NOMBRE" />
+            <PropertyRef Name="VC_MEDIOCONTACTO" />
+          </Key>
+          <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+          <Property Name="FK_TIPOAPOYO" Type="int" Nullable="false" />
+          <Property Name="VC_NOMBRE" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="VC_MEDIOCONTACTO" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIVIO.dbo.TBL_PERSONACONDICIONESPECIAL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TBL_PERSONACONDICIONESPECIAL">
+          <Key>
+            <PropertyRef Name="FK_PERSONA" />
+            <PropertyRef Name="FK_CONDICIONESPECIAL" />
+          </Key>
+          <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+          <Property Name="FK_CONDICIONESPECIAL" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_REFERENCIA">
+          <Key>
+            <PropertyRef Name="PK_REFERENCIA" />
+          </Key>
+          <Property Name="PK_REFERENCIA" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_TIPOREFERENCIA" Type="int" Nullable="false" />
+          <Property Name="FK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_INSTITUCIONORIGEN" Type="int" Nullable="false" />
+          <Property Name="FK_INSTITUCIONDESTINO" Type="int" Nullable="false" />
+          <Property Name="VC_FUNCIONARIOCONTACTO" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="VC_CORREOCONTACTO" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="VC_TELEFONOCONTACTO" Type="varchar" MaxLength="50" />
+          <Property Name="FK_UNIDAD" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_REGISTRO">
+          <Key>
+            <PropertyRef Name="PK_REGISTRO" />
+          </Key>
+          <Property Name="PK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+          <Property Name="FK_USUARIOREGISTRA" Type="int" Nullable="false" />
+          <Property Name="DT_FECHAINICIO" Type="datetime" Nullable="false" />
+          <Property Name="DT_FECHAFIN" Type="datetime" Nullable="false" />
+          <Property Name="FK_TIPOSERVICIO" Type="int" Nullable="false" />
+          <Property Name="FK_TIPOREGISTRO" Type="int" Nullable="false" />
+          <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="TBL_ROL">
           <Key>
@@ -124,6 +245,17 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
           <Property Name="FK_PERSONA" Type="int" Nullable="false" />
           <Property Name="VC_NUMERO" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FK_TIPOTELEFONO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_UNIDAD">
+          <Key>
+            <PropertyRef Name="PK_UNIDAD" />
+          </Key>
+          <Property Name="PK_UNIDAD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VC_CODIGO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VC_DESCRIPCION" Type="nvarchar" MaxLength="100" />
+          <Property Name="VC_PREFIJO" Type="nvarchar" MaxLength="50" />
+          <Property Name="I_NUMERO" Type="int" />
+          <Property Name="I_ANNO" Type="int" />
         </EntityType>
         <EntityType Name="TBL_USUARIO">
           <Key>
@@ -174,6 +306,114 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TBL_AGRESION_TBL_AGRESOR">
+          <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="1" />
+          <End Role="TBL_AGRESION" Type="Self.TBL_AGRESION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_AGRESOR">
+              <PropertyRef Name="PK_AGRESOR" />
+            </Principal>
+            <Dependent Role="TBL_AGRESION">
+              <PropertyRef Name="FK_AGRESOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_TBL_PERSONA">
+          <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+          <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PERSONA">
+              <PropertyRef Name="PK_PERSONA" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_TIPORELACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO1">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_GENERO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO2">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_OCUPACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO3">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_NIVELEDUCATIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ATENCION_TBL_REGISTRO">
+          <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="1" />
+          <End Role="TBL_CONSULTA" Type="Self.TBL_CONSULTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_REGISTRO">
+              <PropertyRef Name="PK_REGISTRO" />
+            </Principal>
+            <Dependent Role="TBL_CONSULTA">
+              <PropertyRef Name="FK_REGISTRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BITACORA_TBL_VALORCATALOGO">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_BITACORA" Type="Self.TBL_BITACORA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_BITACORA">
+              <PropertyRef Name="FK_TIPOEVENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_CONSULTA_TBL_REGISTRO">
+          <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="1" />
+          <End Role="TBL_ATENCION" Type="Self.TBL_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_REGISTRO">
+              <PropertyRef Name="PK_REGISTRO" />
+            </Principal>
+            <Dependent Role="TBL_ATENCION">
+              <PropertyRef Name="FK_REGISTRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TBL_DIRECCION_TBL_PERSONA">
           <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
           <End Role="TBL_DIRECCION" Type="Self.TBL_DIRECCION" Multiplicity="*" />
@@ -207,6 +447,162 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
             </Principal>
             <Dependent Role="TBL_LABORAL">
               <PropertyRef Name="FK_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PERSONA_TBL_VALORCATALOGO">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_PERSONA">
+              <PropertyRef Name="FK_ORIENTACIONSEXUAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PERSONAAPOYO_TBL_PERSONA">
+          <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+          <End Role="TBL_PERSONAAPOYO" Type="Self.TBL_PERSONAAPOYO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PERSONA">
+              <PropertyRef Name="PK_PERSONA" />
+            </Principal>
+            <Dependent Role="TBL_PERSONAAPOYO">
+              <PropertyRef Name="FK_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_PERSONAAPOYO" Type="Self.TBL_PERSONAAPOYO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_PERSONAAPOYO">
+              <PropertyRef Name="FK_TIPOAPOYO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PERSONACONDICIONESPECIAL_TBL_PERSONA">
+          <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+          <End Role="TBL_PERSONACONDICIONESPECIAL" Type="Self.TBL_PERSONACONDICIONESPECIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PERSONA">
+              <PropertyRef Name="PK_PERSONA" />
+            </Principal>
+            <Dependent Role="TBL_PERSONACONDICIONESPECIAL">
+              <PropertyRef Name="FK_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PERSONACONDICIONESPECIAL_TBL_VALORCATALOGO">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_PERSONACONDICIONESPECIAL" Type="Self.TBL_PERSONACONDICIONESPECIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_PERSONACONDICIONESPECIAL">
+              <PropertyRef Name="FK_CONDICIONESPECIAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REFERENCIA_TBL_REGISTRO">
+          <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="1" />
+          <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_REGISTRO">
+              <PropertyRef Name="PK_REGISTRO" />
+            </Principal>
+            <Dependent Role="TBL_REFERENCIA">
+              <PropertyRef Name="FK_REGISTRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REFERENCIA_TBL_UNIDAD">
+          <End Role="TBL_UNIDAD" Type="Self.TBL_UNIDAD" Multiplicity="1" />
+          <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_UNIDAD">
+              <PropertyRef Name="PK_UNIDAD" />
+            </Principal>
+            <Dependent Role="TBL_REFERENCIA">
+              <PropertyRef Name="FK_UNIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_REFERENCIA">
+              <PropertyRef Name="FK_INSTITUCIONDESTINO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO1">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_REFERENCIA">
+              <PropertyRef Name="FK_INSTITUCIONORIGEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REGISTRO_TBL_PERSONA">
+          <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+          <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PERSONA">
+              <PropertyRef Name="PK_PERSONA" />
+            </Principal>
+            <Dependent Role="TBL_REGISTRO">
+              <PropertyRef Name="FK_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REGISTRO_TBL_USUARIO">
+          <End Role="TBL_USUARIO" Type="Self.TBL_USUARIO" Multiplicity="1" />
+          <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_USUARIO">
+              <PropertyRef Name="PK_USUARIO" />
+            </Principal>
+            <Dependent Role="TBL_REGISTRO">
+              <PropertyRef Name="FK_USUARIOREGISTRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_REGISTRO">
+              <PropertyRef Name="FK_TIPOSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO1">
+          <End Role="TBL_VALORCATALOGO" Type="Self.TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_REGISTRO">
+              <PropertyRef Name="FK_TIPOREGISTRO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -296,13 +692,19 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
         </Association>
         <EntityContainer Name="SIVIOModelStoreContainer">
           <EntitySet Name="TBL_ACCION" EntityType="Self.TBL_ACCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_AGRESOR" EntityType="Self.TBL_AGRESOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ATENCION" EntityType="Self.TBL_ATENCION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_BITACORA" EntityType="Self.TBL_BITACORA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_CATALOGO" EntityType="Self.TBL_CATALOGO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_CONSULTA" EntityType="Self.TBL_CONSULTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_DIRECCION" EntityType="Self.TBL_DIRECCION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_LABORAL" EntityType="Self.TBL_LABORAL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_PERSONA" EntityType="Self.TBL_PERSONA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_REFERENCIA" EntityType="Self.TBL_REFERENCIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_REGISTRO" EntityType="Self.TBL_REGISTRO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_ROL" EntityType="Self.TBL_ROL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_TELEFONO" EntityType="Self.TBL_TELEFONO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_UNIDAD" EntityType="Self.TBL_UNIDAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_USUARIO" EntityType="Self.TBL_USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_VALORCATALOGO" EntityType="Self.TBL_VALORCATALOGO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_ADICCIONES" EntityType="Self.TBL_ADICCIONES" store:Type="Tables" store:Schema="dbo">
@@ -310,6 +712,29 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
     [TBL_ADICCIONES].[FK_PERSONA] AS [FK_PERSONA], 
     [TBL_ADICCIONES].[FK_TIPOADICCION] AS [FK_TIPOADICCION]
     FROM [dbo].[TBL_ADICCIONES] AS [TBL_ADICCIONES]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TBL_AGRESION" EntityType="Self.TBL_AGRESION" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TBL_AGRESION].[PK_AGRESION] AS [PK_AGRESION], 
+    [TBL_AGRESION].[FK_AGRESOR] AS [FK_AGRESOR], 
+    [TBL_AGRESION].[DT_FECHAAGRESION] AS [DT_FECHAAGRESION], 
+    [TBL_AGRESION].[I_DURACION] AS [I_DURACION], 
+    [TBL_AGRESION].[TXT_RELATO] AS [TXT_RELATO]
+    FROM [dbo].[TBL_AGRESION] AS [TBL_AGRESION]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TBL_PERSONAAPOYO" EntityType="Self.TBL_PERSONAAPOYO" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TBL_PERSONAAPOYO].[FK_PERSONA] AS [FK_PERSONA], 
+    [TBL_PERSONAAPOYO].[FK_TIPOAPOYO] AS [FK_TIPOAPOYO], 
+    [TBL_PERSONAAPOYO].[VC_NOMBRE] AS [VC_NOMBRE], 
+    [TBL_PERSONAAPOYO].[VC_MEDIOCONTACTO] AS [VC_MEDIOCONTACTO]
+    FROM [dbo].[TBL_PERSONAAPOYO] AS [TBL_PERSONAAPOYO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TBL_PERSONACONDICIONESPECIAL" EntityType="Self.TBL_PERSONACONDICIONESPECIAL" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TBL_PERSONACONDICIONESPECIAL].[FK_PERSONA] AS [FK_PERSONA], 
+    [TBL_PERSONACONDICIONESPECIAL].[FK_CONDICIONESPECIAL] AS [FK_CONDICIONESPECIAL]
+    FROM [dbo].[TBL_PERSONACONDICIONESPECIAL] AS [TBL_PERSONACONDICIONESPECIAL]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="TBL_ROLACCION" EntityType="Self.TBL_ROLACCION" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -331,6 +756,42 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
             <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
             <End Role="TBL_ADICCIONES" EntitySet="TBL_ADICCIONES" />
           </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESION_TBL_AGRESOR" Association="Self.FK_TBL_AGRESION_TBL_AGRESOR">
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+            <End Role="TBL_AGRESION" EntitySet="TBL_AGRESION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_TBL_PERSONA" Association="Self.FK_TBL_AGRESOR_TBL_PERSONA">
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO" Association="Self.FK_TBL_AGRESOR_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO1" Association="Self.FK_TBL_AGRESOR_TBL_VALORCATALOGO1">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO2" Association="Self.FK_TBL_AGRESOR_TBL_VALORCATALOGO2">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO3" Association="Self.FK_TBL_AGRESOR_TBL_VALORCATALOGO3">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ATENCION_TBL_REGISTRO" Association="Self.FK_TBL_ATENCION_TBL_REGISTRO">
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+            <End Role="TBL_CONSULTA" EntitySet="TBL_CONSULTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BITACORA_TBL_VALORCATALOGO" Association="Self.FK_TBL_BITACORA_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_BITACORA" EntitySet="TBL_BITACORA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_CONSULTA_TBL_REGISTRO" Association="Self.FK_TBL_CONSULTA_TBL_REGISTRO">
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+            <End Role="TBL_ATENCION" EntitySet="TBL_ATENCION" />
+          </AssociationSet>
           <AssociationSet Name="FK_TBL_DIRECCION_TBL_PERSONA" Association="Self.FK_TBL_DIRECCION_TBL_PERSONA">
             <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
             <End Role="TBL_DIRECCION" EntitySet="TBL_DIRECCION" />
@@ -342,6 +803,58 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
           <AssociationSet Name="FK_TBL_LABORAL_TBL_PERSONA" Association="Self.FK_TBL_LABORAL_TBL_PERSONA">
             <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
             <End Role="TBL_LABORAL" EntitySet="TBL_LABORAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PERSONA_TBL_VALORCATALOGO" Association="Self.FK_TBL_PERSONA_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PERSONAAPOYO_TBL_PERSONA" Association="Self.FK_TBL_PERSONAAPOYO_TBL_PERSONA">
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+            <End Role="TBL_PERSONAAPOYO" EntitySet="TBL_PERSONAAPOYO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO" Association="Self.FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_PERSONAAPOYO" EntitySet="TBL_PERSONAAPOYO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PERSONACONDICIONESPECIAL_TBL_PERSONA" Association="Self.FK_TBL_PERSONACONDICIONESPECIAL_TBL_PERSONA">
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+            <End Role="TBL_PERSONACONDICIONESPECIAL" EntitySet="TBL_PERSONACONDICIONESPECIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PERSONACONDICIONESPECIAL_TBL_VALORCATALOGO" Association="Self.FK_TBL_PERSONACONDICIONESPECIAL_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_PERSONACONDICIONESPECIAL" EntitySet="TBL_PERSONACONDICIONESPECIAL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REFERENCIA_TBL_REGISTRO" Association="Self.FK_TBL_REFERENCIA_TBL_REGISTRO">
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+            <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REFERENCIA_TBL_UNIDAD" Association="Self.FK_TBL_REFERENCIA_TBL_UNIDAD">
+            <End Role="TBL_UNIDAD" EntitySet="TBL_UNIDAD" />
+            <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO" Association="Self.FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO1" Association="Self.FK_TBL_REFERENCIA_TBL_VALORCATALOGO1">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REGISTRO_TBL_PERSONA" Association="Self.FK_TBL_REGISTRO_TBL_PERSONA">
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REGISTRO_TBL_USUARIO" Association="Self.FK_TBL_REGISTRO_TBL_USUARIO">
+            <End Role="TBL_USUARIO" EntitySet="TBL_USUARIO" />
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO" Association="Self.FK_TBL_REGISTRO_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO1" Association="Self.FK_TBL_REGISTRO_TBL_VALORCATALOGO1">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
           </AssociationSet>
           <AssociationSet Name="FK_TBL_ROLACCION_TBL_ACCION" Association="Self.FK_TBL_ROLACCION_TBL_ACCION">
             <End Role="TBL_ACCION" EntitySet="TBL_ACCION" />
@@ -423,6 +936,98 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
             <End Role="TBL_ROL" EntitySet="TBL_ROL" />
             <End Role="TBL_USUARIO" EntitySet="TBL_USUARIO" />
           </AssociationSet>
+          <EntitySet Name="TBL_AGRESOR" EntityType="SIVIOModel.TBL_AGRESOR" />
+          <EntitySet Name="TBL_ATENCION" EntityType="SIVIOModel.TBL_ATENCION" />
+          <EntitySet Name="TBL_CONSULTA" EntityType="SIVIOModel.TBL_CONSULTA" />
+          <EntitySet Name="TBL_REFERENCIA" EntityType="SIVIOModel.TBL_REFERENCIA" />
+          <EntitySet Name="TBL_REGISTRO" EntityType="SIVIOModel.TBL_REGISTRO" />
+          <EntitySet Name="TBL_UNIDAD" EntityType="SIVIOModel.TBL_UNIDAD" />
+          <EntitySet Name="TBL_AGRESION" EntityType="SIVIOModel.TBL_AGRESION" />
+          <EntitySet Name="TBL_PERSONAAPOYO" EntityType="SIVIOModel.TBL_PERSONAAPOYO" />
+          <AssociationSet Name="FK_TBL_AGRESION_TBL_AGRESOR" Association="SIVIOModel.FK_TBL_AGRESION_TBL_AGRESOR">
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+            <End Role="TBL_AGRESION" EntitySet="TBL_AGRESION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_TBL_PERSONA" Association="SIVIOModel.FK_TBL_AGRESOR_TBL_PERSONA">
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO" Association="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO1" Association="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO1">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO2" Association="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO2">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO3" Association="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO3">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_CONSULTA_TBL_REGISTRO" Association="SIVIOModel.FK_TBL_CONSULTA_TBL_REGISTRO">
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+            <End Role="TBL_ATENCION" EntitySet="TBL_ATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_BITACORA_TBL_VALORCATALOGO" Association="SIVIOModel.FK_TBL_BITACORA_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_BITACORA" EntitySet="TBL_BITACORA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ATENCION_TBL_REGISTRO" Association="SIVIOModel.FK_TBL_ATENCION_TBL_REGISTRO">
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+            <End Role="TBL_CONSULTA" EntitySet="TBL_CONSULTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PERSONA_TBL_VALORCATALOGO" Association="SIVIOModel.FK_TBL_PERSONA_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PERSONAAPOYO_TBL_PERSONA" Association="SIVIOModel.FK_TBL_PERSONAAPOYO_TBL_PERSONA">
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+            <End Role="TBL_PERSONAAPOYO" EntitySet="TBL_PERSONAAPOYO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REGISTRO_TBL_PERSONA" Association="SIVIOModel.FK_TBL_REGISTRO_TBL_PERSONA">
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REFERENCIA_TBL_REGISTRO" Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_REGISTRO">
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+            <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REFERENCIA_TBL_UNIDAD" Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_UNIDAD">
+            <End Role="TBL_UNIDAD" EntitySet="TBL_UNIDAD" />
+            <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO" Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO1" Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO1">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REGISTRO_TBL_USUARIO" Association="SIVIOModel.FK_TBL_REGISTRO_TBL_USUARIO">
+            <End Role="TBL_USUARIO" EntitySet="TBL_USUARIO" />
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO" Association="SIVIOModel.FK_TBL_REGISTRO_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO1" Association="SIVIOModel.FK_TBL_REGISTRO_TBL_VALORCATALOGO1">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO" Association="SIVIOModel.FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO">
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+            <End Role="TBL_PERSONAAPOYO" EntitySet="TBL_PERSONAAPOYO" />
+          </AssociationSet>
+          <AssociationSet Name="TBL_PERSONACONDICIONESPECIAL" Association="SIVIOModel.TBL_PERSONACONDICIONESPECIAL">
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+            <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="TBL_ACCION">
           <Key>
@@ -444,6 +1049,7 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
           <Property Name="FK_USUARIO" Type="Int32" Nullable="false" />
           <Property Name="VC_DETALLE" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="VC_DIRECCIONIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_VALORCATALOGO" Relationship="SIVIOModel.FK_TBL_BITACORA_TBL_VALORCATALOGO" FromRole="TBL_BITACORA" ToRole="TBL_VALORCATALOGO" />
         </EntityType>
         <EntityType Name="TBL_CATALOGO">
           <Key>
@@ -505,6 +1111,19 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
           <NavigationProperty Name="TBL_LABORAL" Relationship="SIVIOModel.FK_TBL_LABORAL_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_LABORAL" />
           <NavigationProperty Name="TBL_TELEFONO" Relationship="SIVIOModel.FK_TBL_TELEFONO_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_TELEFONO" />
           <NavigationProperty Name="TBL_VALORCATALOGO" Relationship="SIVIOModel.TBL_ADICCIONES" FromRole="TBL_PERSONA" ToRole="TBL_VALORCATALOGO" />
+          <Property Name="FK_ORIENTACIONSEXUAL" Type="Int32" Nullable="false" />
+          <Property Name="I_HIJOS" Type="Int32" Nullable="false" />
+          <Property Name="I_HIJOSCEEAM" Type="Int32" Nullable="false" />
+          <Property Name="I_HIJOSMAYORESDOCE" Type="Int32" Nullable="false" />
+          <Property Name="FK_PROVINCIAPROCEDENCIA" Type="Int32" Nullable="false" />
+          <Property Name="FK_CANTONPROCEDENCIA" Type="Int32" Nullable="false" />
+          <Property Name="FK_DISTRITOPROCEDENCIA" Type="Int32" Nullable="false" />
+          <Property Name="VC_CORREO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_AGRESOR" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_AGRESOR" />
+          <NavigationProperty Name="TBL_VALORCATALOGO1" Relationship="SIVIOModel.FK_TBL_PERSONA_TBL_VALORCATALOGO" FromRole="TBL_PERSONA" ToRole="TBL_VALORCATALOGO" />
+          <NavigationProperty Name="TBL_PERSONAAPOYO" Relationship="SIVIOModel.FK_TBL_PERSONAAPOYO_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_PERSONAAPOYO" />
+          <NavigationProperty Name="TBL_REGISTRO" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_REGISTRO" />
+          <NavigationProperty Name="TBL_VALORCATALOGO2" Relationship="SIVIOModel.TBL_PERSONACONDICIONESPECIAL" FromRole="TBL_PERSONA" ToRole="TBL_VALORCATALOGO" />
         </EntityType>
         <EntityType Name="TBL_ROL">
           <Key>
@@ -542,6 +1161,7 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
           <Property Name="IM_SALT1" Type="Binary" Nullable="false" MaxLength="100" FixedLength="false" />
           <Property Name="IM_SALT2" Type="Binary" Nullable="false" MaxLength="100" FixedLength="false" />
           <NavigationProperty Name="TBL_ROL" Relationship="SIVIOModel.TBL_ROLUSUARIO" FromRole="TBL_USUARIO" ToRole="TBL_ROL" />
+          <NavigationProperty Name="TBL_REGISTRO" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_USUARIO" FromRole="TBL_USUARIO" ToRole="TBL_REGISTRO" />
         </EntityType>
         <EntityType Name="TBL_VALORCATALOGO">
           <Key>
@@ -556,6 +1176,18 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
           <NavigationProperty Name="TBL_DIRECCION" Relationship="SIVIOModel.FK_TBL_DIRECCION_TBL_VALORCATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_DIRECCION" />
           <NavigationProperty Name="TBL_TELEFONO" Relationship="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_TELEFONO" />
           <NavigationProperty Name="TBL_PERSONA" Relationship="SIVIOModel.TBL_ADICCIONES" FromRole="TBL_VALORCATALOGO" ToRole="TBL_PERSONA" />
+          <NavigationProperty Name="TBL_AGRESOR" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_AGRESOR" />
+          <NavigationProperty Name="TBL_AGRESOR1" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO1" FromRole="TBL_VALORCATALOGO" ToRole="TBL_AGRESOR" />
+          <NavigationProperty Name="TBL_AGRESOR2" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO2" FromRole="TBL_VALORCATALOGO" ToRole="TBL_AGRESOR" />
+          <NavigationProperty Name="TBL_AGRESOR3" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO3" FromRole="TBL_VALORCATALOGO" ToRole="TBL_AGRESOR" />
+          <NavigationProperty Name="TBL_BITACORA" Relationship="SIVIOModel.FK_TBL_BITACORA_TBL_VALORCATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_BITACORA" />
+          <NavigationProperty Name="TBL_PERSONA1" Relationship="SIVIOModel.FK_TBL_PERSONA_TBL_VALORCATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_PERSONA" />
+          <NavigationProperty Name="TBL_REFERENCIA" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_REFERENCIA" />
+          <NavigationProperty Name="TBL_REFERENCIA1" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO1" FromRole="TBL_VALORCATALOGO" ToRole="TBL_REFERENCIA" />
+          <NavigationProperty Name="TBL_REGISTRO" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_VALORCATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_REGISTRO" />
+          <NavigationProperty Name="TBL_REGISTRO1" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_VALORCATALOGO1" FromRole="TBL_VALORCATALOGO" ToRole="TBL_REGISTRO" />
+          <NavigationProperty Name="TBL_PERSONAAPOYO" Relationship="SIVIOModel.FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_PERSONAAPOYO" />
+          <NavigationProperty Name="TBL_PERSONA2" Relationship="SIVIOModel.TBL_PERSONACONDICIONESPECIAL" FromRole="TBL_VALORCATALOGO" ToRole="TBL_PERSONA" />
         </EntityType>
         <Association Name="FK_TBL_VALORCATALOGO_TBL_CATALOGO">
           <End Type="SIVIOModel.TBL_CATALOGO" Role="TBL_CATALOGO" Multiplicity="1" />
@@ -641,6 +1273,383 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
           <End Type="SIVIOModel.TBL_ROL" Role="TBL_ROL" Multiplicity="*" />
           <End Type="SIVIOModel.TBL_USUARIO" Role="TBL_USUARIO" Multiplicity="*" />
         </Association>
+        <EntityType Name="TBL_AGRESOR">
+          <Key>
+            <PropertyRef Name="PK_AGRESOR" />
+          </Key>
+          <Property Name="PK_AGRESOR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_PERSONA" Type="Int32" Nullable="false" />
+          <Property Name="VC_IDENTIFICACION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VC_NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VC_APELLIDO1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VC_APELLIDO2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_TIPORELACION" Type="Int32" Nullable="false" />
+          <Property Name="DT_COMIENZORELACION" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_GENERO" Type="Int32" Nullable="false" />
+          <Property Name="DT_FECHANACIMIENTO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_OCUPACION" Type="Int32" Nullable="false" />
+          <Property Name="FK_NIVELEDUCATIVO" Type="Int32" Nullable="false" />
+          <Property Name="B_DENUNCIAPENAL" Type="Boolean" Nullable="false" />
+          <Property Name="B_MEDIDASPROTECCION" Type="Boolean" />
+          <Property Name="DT_FECHAVENCIMIENTOPROTECCION" Type="DateTime" Precision="3" />
+          <Property Name="VC_LUGARTRABAJO" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="I_SEPARACIONES" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBL_AGRESION" Relationship="SIVIOModel.FK_TBL_AGRESION_TBL_AGRESOR" FromRole="TBL_AGRESOR" ToRole="TBL_AGRESION" />
+          <NavigationProperty Name="TBL_PERSONA" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_PERSONA" FromRole="TBL_AGRESOR" ToRole="TBL_PERSONA" />
+          <NavigationProperty Name="TBL_VALORCATALOGO" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO" FromRole="TBL_AGRESOR" ToRole="TBL_VALORCATALOGO" />
+          <NavigationProperty Name="TBL_VALORCATALOGO1" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO1" FromRole="TBL_AGRESOR" ToRole="TBL_VALORCATALOGO" />
+          <NavigationProperty Name="TBL_VALORCATALOGO2" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO2" FromRole="TBL_AGRESOR" ToRole="TBL_VALORCATALOGO" />
+          <NavigationProperty Name="TBL_VALORCATALOGO3" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO3" FromRole="TBL_AGRESOR" ToRole="TBL_VALORCATALOGO" />
+        </EntityType>
+        <EntityType Name="TBL_ATENCION">
+          <Key>
+            <PropertyRef Name="PK_ATENCION" />
+          </Key>
+          <Property Name="PK_ATENCION" Type="Guid" Nullable="false" />
+          <Property Name="FK_REGISTRO" Type="Guid" Nullable="false" />
+          <Property Name="FK_TIPOATENCION" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBL_REGISTRO" Relationship="SIVIOModel.FK_TBL_CONSULTA_TBL_REGISTRO" FromRole="TBL_ATENCION" ToRole="TBL_REGISTRO" />
+        </EntityType>
+        <EntityType Name="TBL_CONSULTA">
+          <Key>
+            <PropertyRef Name="PK_CONSULTA" />
+          </Key>
+          <Property Name="PK_CONSULTA" Type="Guid" Nullable="false" />
+          <Property Name="FK_REGISTRO" Type="Guid" Nullable="false" />
+          <Property Name="B_INGRESOCEEAM" Type="Boolean" />
+          <Property Name="FK_RAZONRECHAZO" Type="Int32" />
+          <Property Name="VC_OBSERVACIONES" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="B_REINGRESOCEEAM" Type="Boolean" />
+          <Property Name="FK_TIPOCEEAMREINGRESO" Type="Int32" />
+          <Property Name="FK_TIPOCEEAMINGRESO" Type="Int32" />
+          <Property Name="VC_CONTACTOCEEAM" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FK_ENTIDADTRASLADA" Type="Int32" />
+          <Property Name="TM_TRASLADOAPROX" Type="Time" Precision="7" />
+          <NavigationProperty Name="TBL_REGISTRO" Relationship="SIVIOModel.FK_TBL_ATENCION_TBL_REGISTRO" FromRole="TBL_CONSULTA" ToRole="TBL_REGISTRO" />
+        </EntityType>
+        <EntityType Name="TBL_REFERENCIA">
+          <Key>
+            <PropertyRef Name="PK_REFERENCIA" />
+          </Key>
+          <Property Name="PK_REFERENCIA" Type="Guid" Nullable="false" />
+          <Property Name="FK_TIPOREFERENCIA" Type="Int32" Nullable="false" />
+          <Property Name="FK_REGISTRO" Type="Guid" Nullable="false" />
+          <Property Name="FK_INSTITUCIONORIGEN" Type="Int32" Nullable="false" />
+          <Property Name="FK_INSTITUCIONDESTINO" Type="Int32" Nullable="false" />
+          <Property Name="VC_FUNCIONARIOCONTACTO" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="VC_CORREOCONTACTO" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="VC_TELEFONOCONTACTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FK_UNIDAD" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBL_REGISTRO" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_REGISTRO" FromRole="TBL_REFERENCIA" ToRole="TBL_REGISTRO" />
+          <NavigationProperty Name="TBL_UNIDAD" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_UNIDAD" FromRole="TBL_REFERENCIA" ToRole="TBL_UNIDAD" />
+          <NavigationProperty Name="TBL_VALORCATALOGO" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO" FromRole="TBL_REFERENCIA" ToRole="TBL_VALORCATALOGO" />
+          <NavigationProperty Name="TBL_VALORCATALOGO1" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO1" FromRole="TBL_REFERENCIA" ToRole="TBL_VALORCATALOGO" />
+        </EntityType>
+        <EntityType Name="TBL_REGISTRO">
+          <Key>
+            <PropertyRef Name="PK_REGISTRO" />
+          </Key>
+          <Property Name="PK_REGISTRO" Type="Guid" Nullable="false" />
+          <Property Name="FK_PERSONA" Type="Int32" Nullable="false" />
+          <Property Name="FK_USUARIOREGISTRA" Type="Int32" Nullable="false" />
+          <Property Name="DT_FECHAINICIO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DT_FECHAFIN" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_TIPOSERVICIO" Type="Int32" Nullable="false" />
+          <Property Name="FK_TIPOREGISTRO" Type="Int32" Nullable="false" />
+          <Property Name="VC_OBSERVACIONES" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_ATENCION" Relationship="SIVIOModel.FK_TBL_CONSULTA_TBL_REGISTRO" FromRole="TBL_REGISTRO" ToRole="TBL_ATENCION" />
+          <NavigationProperty Name="TBL_CONSULTA" Relationship="SIVIOModel.FK_TBL_ATENCION_TBL_REGISTRO" FromRole="TBL_REGISTRO" ToRole="TBL_CONSULTA" />
+          <NavigationProperty Name="TBL_PERSONA" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_PERSONA" FromRole="TBL_REGISTRO" ToRole="TBL_PERSONA" />
+          <NavigationProperty Name="TBL_REFERENCIA" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_REGISTRO" FromRole="TBL_REGISTRO" ToRole="TBL_REFERENCIA" />
+          <NavigationProperty Name="TBL_USUARIO" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_USUARIO" FromRole="TBL_REGISTRO" ToRole="TBL_USUARIO" />
+          <NavigationProperty Name="TBL_VALORCATALOGO" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_VALORCATALOGO" FromRole="TBL_REGISTRO" ToRole="TBL_VALORCATALOGO" />
+          <NavigationProperty Name="TBL_VALORCATALOGO1" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_VALORCATALOGO1" FromRole="TBL_REGISTRO" ToRole="TBL_VALORCATALOGO" />
+        </EntityType>
+        <EntityType Name="TBL_UNIDAD">
+          <Key>
+            <PropertyRef Name="PK_UNIDAD" />
+          </Key>
+          <Property Name="PK_UNIDAD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VC_CODIGO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VC_DESCRIPCION" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VC_PREFIJO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="I_NUMERO" Type="Int32" />
+          <Property Name="I_ANNO" Type="Int32" />
+          <NavigationProperty Name="TBL_REFERENCIA" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_UNIDAD" FromRole="TBL_UNIDAD" ToRole="TBL_REFERENCIA" />
+        </EntityType>
+        <EntityType Name="TBL_AGRESION">
+          <Key>
+            <PropertyRef Name="PK_AGRESION" />
+            <PropertyRef Name="FK_AGRESOR" />
+            <PropertyRef Name="DT_FECHAAGRESION" />
+            <PropertyRef Name="I_DURACION" />
+            <PropertyRef Name="TXT_RELATO" />
+          </Key>
+          <Property Name="PK_AGRESION" Type="Guid" Nullable="false" />
+          <Property Name="FK_AGRESOR" Type="Int32" Nullable="false" />
+          <Property Name="DT_FECHAAGRESION" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="I_DURACION" Type="Int32" Nullable="false" />
+          <Property Name="TXT_RELATO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_AGRESOR" Relationship="SIVIOModel.FK_TBL_AGRESION_TBL_AGRESOR" FromRole="TBL_AGRESION" ToRole="TBL_AGRESOR" />
+        </EntityType>
+        <EntityType Name="TBL_PERSONAAPOYO">
+          <Key>
+            <PropertyRef Name="FK_PERSONA" />
+            <PropertyRef Name="FK_TIPOAPOYO" />
+            <PropertyRef Name="VC_NOMBRE" />
+            <PropertyRef Name="VC_MEDIOCONTACTO" />
+          </Key>
+          <Property Name="FK_PERSONA" Type="Int32" Nullable="false" />
+          <Property Name="FK_TIPOAPOYO" Type="Int32" Nullable="false" />
+          <Property Name="VC_NOMBRE" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="VC_MEDIOCONTACTO" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_PERSONA" Relationship="SIVIOModel.FK_TBL_PERSONAAPOYO_TBL_PERSONA" FromRole="TBL_PERSONAAPOYO" ToRole="TBL_PERSONA" />
+          <NavigationProperty Name="TBL_VALORCATALOGO" Relationship="SIVIOModel.FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO" FromRole="TBL_PERSONAAPOYO" ToRole="TBL_VALORCATALOGO" />
+        </EntityType>
+        <Association Name="FK_TBL_AGRESION_TBL_AGRESOR">
+          <End Type="SIVIOModel.TBL_AGRESOR" Role="TBL_AGRESOR" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_AGRESION" Role="TBL_AGRESION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_AGRESOR">
+              <PropertyRef Name="PK_AGRESOR" />
+            </Principal>
+            <Dependent Role="TBL_AGRESION">
+              <PropertyRef Name="FK_AGRESOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_TBL_PERSONA">
+          <End Type="SIVIOModel.TBL_PERSONA" Role="TBL_PERSONA" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_AGRESOR" Role="TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PERSONA">
+              <PropertyRef Name="PK_PERSONA" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_AGRESOR" Role="TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_TIPORELACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO1">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_AGRESOR" Role="TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_GENERO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO2">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_AGRESOR" Role="TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_OCUPACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO3">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_AGRESOR" Role="TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_NIVELEDUCATIVO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_CONSULTA_TBL_REGISTRO">
+          <End Type="SIVIOModel.TBL_REGISTRO" Role="TBL_REGISTRO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_ATENCION" Role="TBL_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_REGISTRO">
+              <PropertyRef Name="PK_REGISTRO" />
+            </Principal>
+            <Dependent Role="TBL_ATENCION">
+              <PropertyRef Name="FK_REGISTRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_BITACORA_TBL_VALORCATALOGO">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_BITACORA" Role="TBL_BITACORA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_BITACORA">
+              <PropertyRef Name="FK_TIPOEVENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ATENCION_TBL_REGISTRO">
+          <End Type="SIVIOModel.TBL_REGISTRO" Role="TBL_REGISTRO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_CONSULTA" Role="TBL_CONSULTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_REGISTRO">
+              <PropertyRef Name="PK_REGISTRO" />
+            </Principal>
+            <Dependent Role="TBL_CONSULTA">
+              <PropertyRef Name="FK_REGISTRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PERSONA_TBL_VALORCATALOGO">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_PERSONA" Role="TBL_PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_PERSONA">
+              <PropertyRef Name="FK_ORIENTACIONSEXUAL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PERSONAAPOYO_TBL_PERSONA">
+          <End Type="SIVIOModel.TBL_PERSONA" Role="TBL_PERSONA" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_PERSONAAPOYO" Role="TBL_PERSONAAPOYO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PERSONA">
+              <PropertyRef Name="PK_PERSONA" />
+            </Principal>
+            <Dependent Role="TBL_PERSONAAPOYO">
+              <PropertyRef Name="FK_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REGISTRO_TBL_PERSONA">
+          <End Type="SIVIOModel.TBL_PERSONA" Role="TBL_PERSONA" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_REGISTRO" Role="TBL_REGISTRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PERSONA">
+              <PropertyRef Name="PK_PERSONA" />
+            </Principal>
+            <Dependent Role="TBL_REGISTRO">
+              <PropertyRef Name="FK_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REFERENCIA_TBL_REGISTRO">
+          <End Type="SIVIOModel.TBL_REGISTRO" Role="TBL_REGISTRO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_REFERENCIA" Role="TBL_REFERENCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_REGISTRO">
+              <PropertyRef Name="PK_REGISTRO" />
+            </Principal>
+            <Dependent Role="TBL_REFERENCIA">
+              <PropertyRef Name="FK_REGISTRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REFERENCIA_TBL_UNIDAD">
+          <End Type="SIVIOModel.TBL_UNIDAD" Role="TBL_UNIDAD" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_REFERENCIA" Role="TBL_REFERENCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_UNIDAD">
+              <PropertyRef Name="PK_UNIDAD" />
+            </Principal>
+            <Dependent Role="TBL_REFERENCIA">
+              <PropertyRef Name="FK_UNIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_REFERENCIA" Role="TBL_REFERENCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_REFERENCIA">
+              <PropertyRef Name="FK_INSTITUCIONDESTINO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO1">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_REFERENCIA" Role="TBL_REFERENCIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_REFERENCIA">
+              <PropertyRef Name="FK_INSTITUCIONORIGEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REGISTRO_TBL_USUARIO">
+          <End Type="SIVIOModel.TBL_USUARIO" Role="TBL_USUARIO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_REGISTRO" Role="TBL_REGISTRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_USUARIO">
+              <PropertyRef Name="PK_USUARIO" />
+            </Principal>
+            <Dependent Role="TBL_REGISTRO">
+              <PropertyRef Name="FK_USUARIOREGISTRA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_REGISTRO" Role="TBL_REGISTRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_REGISTRO">
+              <PropertyRef Name="FK_TIPOSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO1">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_REGISTRO" Role="TBL_REGISTRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_REGISTRO">
+              <PropertyRef Name="FK_TIPOREGISTRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO">
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_PERSONAAPOYO" Role="TBL_PERSONAAPOYO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALORCATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_PERSONAAPOYO">
+              <PropertyRef Name="FK_TIPOAPOYO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TBL_PERSONACONDICIONESPECIAL">
+          <End Type="SIVIOModel.TBL_PERSONA" Role="TBL_PERSONA" Multiplicity="*" />
+          <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -704,6 +1713,14 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
           <EntitySetMapping Name="TBL_PERSONA">
             <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA">
               <MappingFragment StoreEntitySet="TBL_PERSONA">
+                <ScalarProperty Name="VC_CORREO" ColumnName="VC_CORREO" />
+                <ScalarProperty Name="FK_DISTRITOPROCEDENCIA" ColumnName="FK_DISTRITOPROCEDENCIA" />
+                <ScalarProperty Name="FK_CANTONPROCEDENCIA" ColumnName="FK_CANTONPROCEDENCIA" />
+                <ScalarProperty Name="FK_PROVINCIAPROCEDENCIA" ColumnName="FK_PROVINCIAPROCEDENCIA" />
+                <ScalarProperty Name="I_HIJOSMAYORESDOCE" ColumnName="I_HIJOSMAYORESDOCE" />
+                <ScalarProperty Name="I_HIJOSCEEAM" ColumnName="I_HIJOSCEEAM" />
+                <ScalarProperty Name="I_HIJOS" ColumnName="I_HIJOS" />
+                <ScalarProperty Name="FK_ORIENTACIONSEXUAL" ColumnName="FK_ORIENTACIONSEXUAL" />
                 <ScalarProperty Name="FK_CONDICIONSALUD" ColumnName="FK_CONDICIONSALUD" />
                 <ScalarProperty Name="FK_ESTADOEMBARAZO" ColumnName="FK_ESTADOEMBARAZO" />
                 <ScalarProperty Name="FK_TIPOFAMILIA" ColumnName="FK_TIPOFAMILIA" />
@@ -794,6 +1811,125 @@ warning 6002: The table/view 'SIVIO.dbo.TBL_ROLUSUARIO' does not have a primary 
             </EndProperty>
             <EndProperty Name="TBL_ROL">
               <ScalarProperty Name="PK_ROL" ColumnName="FK_ROL" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="TBL_AGRESOR">
+            <EntityTypeMapping TypeName="SIVIOModel.TBL_AGRESOR">
+              <MappingFragment StoreEntitySet="TBL_AGRESOR">
+                <ScalarProperty Name="I_SEPARACIONES" ColumnName="I_SEPARACIONES" />
+                <ScalarProperty Name="VC_LUGARTRABAJO" ColumnName="VC_LUGARTRABAJO" />
+                <ScalarProperty Name="DT_FECHAVENCIMIENTOPROTECCION" ColumnName="DT_FECHAVENCIMIENTOPROTECCION" />
+                <ScalarProperty Name="B_MEDIDASPROTECCION" ColumnName="B_MEDIDASPROTECCION" />
+                <ScalarProperty Name="B_DENUNCIAPENAL" ColumnName="B_DENUNCIAPENAL" />
+                <ScalarProperty Name="FK_NIVELEDUCATIVO" ColumnName="FK_NIVELEDUCATIVO" />
+                <ScalarProperty Name="FK_OCUPACION" ColumnName="FK_OCUPACION" />
+                <ScalarProperty Name="DT_FECHANACIMIENTO" ColumnName="DT_FECHANACIMIENTO" />
+                <ScalarProperty Name="FK_GENERO" ColumnName="FK_GENERO" />
+                <ScalarProperty Name="DT_COMIENZORELACION" ColumnName="DT_COMIENZORELACION" />
+                <ScalarProperty Name="FK_TIPORELACION" ColumnName="FK_TIPORELACION" />
+                <ScalarProperty Name="VC_APELLIDO2" ColumnName="VC_APELLIDO2" />
+                <ScalarProperty Name="VC_APELLIDO1" ColumnName="VC_APELLIDO1" />
+                <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+                <ScalarProperty Name="VC_IDENTIFICACION" ColumnName="VC_IDENTIFICACION" />
+                <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+                <ScalarProperty Name="PK_AGRESOR" ColumnName="PK_AGRESOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ATENCION">
+            <EntityTypeMapping TypeName="SIVIOModel.TBL_ATENCION">
+              <MappingFragment StoreEntitySet="TBL_ATENCION">
+                <ScalarProperty Name="FK_TIPOATENCION" ColumnName="FK_TIPOATENCION" />
+                <ScalarProperty Name="FK_REGISTRO" ColumnName="FK_REGISTRO" />
+                <ScalarProperty Name="PK_ATENCION" ColumnName="PK_ATENCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_CONSULTA">
+            <EntityTypeMapping TypeName="SIVIOModel.TBL_CONSULTA">
+              <MappingFragment StoreEntitySet="TBL_CONSULTA">
+                <ScalarProperty Name="TM_TRASLADOAPROX" ColumnName="TM_TRASLADOAPROX" />
+                <ScalarProperty Name="FK_ENTIDADTRASLADA" ColumnName="FK_ENTIDADTRASLADA" />
+                <ScalarProperty Name="VC_CONTACTOCEEAM" ColumnName="VC_CONTACTOCEEAM" />
+                <ScalarProperty Name="FK_TIPOCEEAMINGRESO" ColumnName="FK_TIPOCEEAMINGRESO" />
+                <ScalarProperty Name="FK_TIPOCEEAMREINGRESO" ColumnName="FK_TIPOCEEAMREINGRESO" />
+                <ScalarProperty Name="B_REINGRESOCEEAM" ColumnName="B_REINGRESOCEEAM" />
+                <ScalarProperty Name="VC_OBSERVACIONES" ColumnName="VC_OBSERVACIONES" />
+                <ScalarProperty Name="FK_RAZONRECHAZO" ColumnName="FK_RAZONRECHAZO" />
+                <ScalarProperty Name="B_INGRESOCEEAM" ColumnName="B_INGRESOCEEAM" />
+                <ScalarProperty Name="FK_REGISTRO" ColumnName="FK_REGISTRO" />
+                <ScalarProperty Name="PK_CONSULTA" ColumnName="PK_CONSULTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_REFERENCIA">
+            <EntityTypeMapping TypeName="SIVIOModel.TBL_REFERENCIA">
+              <MappingFragment StoreEntitySet="TBL_REFERENCIA">
+                <ScalarProperty Name="FK_UNIDAD" ColumnName="FK_UNIDAD" />
+                <ScalarProperty Name="VC_TELEFONOCONTACTO" ColumnName="VC_TELEFONOCONTACTO" />
+                <ScalarProperty Name="VC_CORREOCONTACTO" ColumnName="VC_CORREOCONTACTO" />
+                <ScalarProperty Name="VC_FUNCIONARIOCONTACTO" ColumnName="VC_FUNCIONARIOCONTACTO" />
+                <ScalarProperty Name="FK_INSTITUCIONDESTINO" ColumnName="FK_INSTITUCIONDESTINO" />
+                <ScalarProperty Name="FK_INSTITUCIONORIGEN" ColumnName="FK_INSTITUCIONORIGEN" />
+                <ScalarProperty Name="FK_REGISTRO" ColumnName="FK_REGISTRO" />
+                <ScalarProperty Name="FK_TIPOREFERENCIA" ColumnName="FK_TIPOREFERENCIA" />
+                <ScalarProperty Name="PK_REFERENCIA" ColumnName="PK_REFERENCIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_REGISTRO">
+            <EntityTypeMapping TypeName="SIVIOModel.TBL_REGISTRO">
+              <MappingFragment StoreEntitySet="TBL_REGISTRO">
+                <ScalarProperty Name="VC_OBSERVACIONES" ColumnName="VC_OBSERVACIONES" />
+                <ScalarProperty Name="FK_TIPOREGISTRO" ColumnName="FK_TIPOREGISTRO" />
+                <ScalarProperty Name="FK_TIPOSERVICIO" ColumnName="FK_TIPOSERVICIO" />
+                <ScalarProperty Name="DT_FECHAFIN" ColumnName="DT_FECHAFIN" />
+                <ScalarProperty Name="DT_FECHAINICIO" ColumnName="DT_FECHAINICIO" />
+                <ScalarProperty Name="FK_USUARIOREGISTRA" ColumnName="FK_USUARIOREGISTRA" />
+                <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+                <ScalarProperty Name="PK_REGISTRO" ColumnName="PK_REGISTRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_UNIDAD">
+            <EntityTypeMapping TypeName="SIVIOModel.TBL_UNIDAD">
+              <MappingFragment StoreEntitySet="TBL_UNIDAD">
+                <ScalarProperty Name="I_ANNO" ColumnName="I_ANNO" />
+                <ScalarProperty Name="I_NUMERO" ColumnName="I_NUMERO" />
+                <ScalarProperty Name="VC_PREFIJO" ColumnName="VC_PREFIJO" />
+                <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+                <ScalarProperty Name="VC_CODIGO" ColumnName="VC_CODIGO" />
+                <ScalarProperty Name="PK_UNIDAD" ColumnName="PK_UNIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_AGRESION">
+            <EntityTypeMapping TypeName="SIVIOModel.TBL_AGRESION">
+              <MappingFragment StoreEntitySet="TBL_AGRESION">
+                <ScalarProperty Name="TXT_RELATO" ColumnName="TXT_RELATO" />
+                <ScalarProperty Name="I_DURACION" ColumnName="I_DURACION" />
+                <ScalarProperty Name="DT_FECHAAGRESION" ColumnName="DT_FECHAAGRESION" />
+                <ScalarProperty Name="FK_AGRESOR" ColumnName="FK_AGRESOR" />
+                <ScalarProperty Name="PK_AGRESION" ColumnName="PK_AGRESION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_PERSONAAPOYO">
+            <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONAAPOYO">
+              <MappingFragment StoreEntitySet="TBL_PERSONAAPOYO">
+                <ScalarProperty Name="VC_MEDIOCONTACTO" ColumnName="VC_MEDIOCONTACTO" />
+                <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+                <ScalarProperty Name="FK_TIPOAPOYO" ColumnName="FK_TIPOAPOYO" />
+                <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TBL_PERSONACONDICIONESPECIAL" TypeName="SIVIOModel.TBL_PERSONACONDICIONESPECIAL" StoreEntitySet="TBL_PERSONACONDICIONESPECIAL">
+            <EndProperty Name="TBL_VALORCATALOGO">
+              <ScalarProperty Name="PK_VALORCATALOGO" ColumnName="FK_CONDICIONESPECIAL" />
+            </EndProperty>
+            <EndProperty Name="TBL_PERSONA">
+              <ScalarProperty Name="PK_PERSONA" ColumnName="FK_PERSONA" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
