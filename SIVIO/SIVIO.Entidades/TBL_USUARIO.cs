@@ -17,7 +17,8 @@ namespace SIVIO.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TBL_USUARIO()
         {
-            this.TBL_ROL = new HashSet<TBL_ROL>();
+            this.TBL_REGISTRO = new HashSet<TBL_REGISTRO>();
+            this.TBL_ROL_USUARIO = new HashSet<TBL_ROL_USUARIO>();
         }
     
         public int PK_USUARIO { get; set; }
@@ -32,6 +33,8 @@ namespace SIVIO.Entidades
         public byte[] IM_SALT2 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_ROL> TBL_ROL { get; set; }
+        public virtual ICollection<TBL_REGISTRO> TBL_REGISTRO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_ROL_USUARIO> TBL_ROL_USUARIO { get; set; }
     }
 }

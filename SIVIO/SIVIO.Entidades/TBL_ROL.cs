@@ -17,8 +17,8 @@ namespace SIVIO.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TBL_ROL()
         {
-            this.TBL_ACCION = new HashSet<TBL_ACCION>();
-            this.TBL_USUARIO = new HashSet<TBL_USUARIO>();
+            this.TBL_ROL_ACCION = new HashSet<TBL_ROL_ACCION>();
+            this.TBL_ROL_USUARIO = new HashSet<TBL_ROL_USUARIO>();
         }
     
         public int PK_ROL { get; set; }
@@ -26,8 +26,8 @@ namespace SIVIO.Entidades
         public string VC_DESCRIPCION { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_ACCION> TBL_ACCION { get; set; }
+        public virtual ICollection<TBL_ROL_ACCION> TBL_ROL_ACCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_USUARIO> TBL_USUARIO { get; set; }
+        public virtual ICollection<TBL_ROL_USUARIO> TBL_ROL_USUARIO { get; set; }
     }
 }

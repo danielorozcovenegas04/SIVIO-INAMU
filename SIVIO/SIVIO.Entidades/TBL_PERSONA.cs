@@ -17,9 +17,15 @@ namespace SIVIO.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TBL_PERSONA()
         {
+            this.TBL_ADICCIONES = new HashSet<TBL_ADICCIONES>();
+            this.TBL_AGRESOR = new HashSet<TBL_AGRESOR>();
             this.TBL_DIRECCION = new HashSet<TBL_DIRECCION>();
+            this.TBL_PERSONA_RED_APOYO = new HashSet<TBL_PERSONA_RED_APOYO>();
+            this.TBL_PERSONA_SALUD = new HashSet<TBL_PERSONA_SALUD>();
+            this.TBL_PERSONA_APOYO = new HashSet<TBL_PERSONA_APOYO>();
+            this.TBL_PERSONA_CONDICIONESPECIAL = new HashSet<TBL_PERSONA_CONDICIONESPECIAL>();
+            this.TBL_REGISTRO = new HashSet<TBL_REGISTRO>();
             this.TBL_TELEFONO = new HashSet<TBL_TELEFONO>();
-            this.TBL_VALORCATALOGO = new HashSet<TBL_VALORCATALOGO>();
         }
     
         public int PK_PERSONA { get; set; }
@@ -35,19 +41,39 @@ namespace SIVIO.Entidades
         public int FK_GENERO { get; set; }
         public int FK_OCUPACION { get; set; }
         public int FK_CONDICIONMIGRATORIA { get; set; }
-        public int FK_CONDICIONLABORAL { get; set; }
         public int FK_CONDICIONASEGURAMIENTO { get; set; }
         public int FK_TIPOVIVIENDA { get; set; }
         public int FK_TIPOFAMILIA { get; set; }
         public int FK_ESTADOEMBARAZO { get; set; }
         public int FK_CONDICIONSALUD { get; set; }
+        public int FK_ORIENTACIONSEXUAL { get; set; }
+        public int I_HIJOS { get; set; }
+        public int I_HIJOSCEEAM { get; set; }
+        public int I_HIJOSMAYORESDOCE { get; set; }
+        public int FK_PROVINCIAPROCEDENCIA { get; set; }
+        public int FK_CANTONPROCEDENCIA { get; set; }
+        public int FK_DISTRITOPROCEDENCIA { get; set; }
+        public string VC_CORREO { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_ADICCIONES> TBL_ADICCIONES { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_AGRESOR> TBL_AGRESOR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_DIRECCION> TBL_DIRECCION { get; set; }
         public virtual TBL_LABORAL TBL_LABORAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_TELEFONO> TBL_TELEFONO { get; set; }
+        public virtual ICollection<TBL_PERSONA_RED_APOYO> TBL_PERSONA_RED_APOYO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_VALORCATALOGO> TBL_VALORCATALOGO { get; set; }
+        public virtual ICollection<TBL_PERSONA_SALUD> TBL_PERSONA_SALUD { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_PERSONA_APOYO> TBL_PERSONA_APOYO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_PERSONA_CONDICIONESPECIAL> TBL_PERSONA_CONDICIONESPECIAL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_REGISTRO> TBL_REGISTRO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_TELEFONO> TBL_TELEFONO { get; set; }
     }
 }

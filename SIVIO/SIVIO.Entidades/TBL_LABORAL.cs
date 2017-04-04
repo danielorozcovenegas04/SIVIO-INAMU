@@ -18,7 +18,10 @@ namespace SIVIO.Entidades
         public string VC_NOMBRELUGARTRABAJO { get; set; }
         public string VC_OBSERVACIONES { get; set; }
         public int I_ANNOSEXPERIENCIA { get; set; }
+        public int FK_CONDICIONLABORAL { get; set; }
+        public string VC_OCUPACION { get; set; }
     
         public virtual TBL_PERSONA TBL_PERSONA { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
     }
 }

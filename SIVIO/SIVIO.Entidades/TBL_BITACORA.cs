@@ -20,5 +20,7 @@ namespace SIVIO.Entidades
         public int FK_USUARIO { get; set; }
         public string VC_DETALLE { get; set; }
         public string VC_DIRECCIONIP { get; set; }
+    
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
     }
 }

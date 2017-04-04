@@ -58,13 +58,52 @@
     <Compile Include="TBL_ACCION.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="TBL_ADICCIONES.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_AGRESION.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_AGRESION_ATENCION_MEDICA.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_AGRESION_DETALLE_VIOLENCIA.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_AGRESION_VIOLENCIA.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_AGRESOR.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_AGRESOR_MOTIVO_REGRESO.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_ARCHIVO.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_ATENCION.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_ATENCIONASESORIA.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="TBL_BITACORA.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_CATALOGO.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="TBL_CONSULTA.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="TBL_DIRECCION.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_FAMILIAR_ACADEMICO.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_FAMILIAR_SALUD.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_LABORAL.cs">
@@ -73,16 +112,55 @@
     <Compile Include="TBL_PERSONA.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="TBL_PERSONA_APOYO.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_PERSONA_CONDICIONESPECIAL.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_PERSONA_FAMILIAR.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_PERSONA_RED_APOYO.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_PERSONA_SALUD.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_REFERENCIA.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_REFERENCIA_DETALLE.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_REGISTRO.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_REGISTRO_CEAAM.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_REGISTRO_COORDINACION.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="TBL_ROL.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_ROL_ACCION.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_ROL_USUARIO.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_TELEFONO.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="TBL_UNIDAD.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="TBL_USUARIO.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
-    <Compile Include="TBL_VALORCATALOGO.cs">
+    <Compile Include="TBL_VALOR_CATALOGO.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
   </ItemGroup>

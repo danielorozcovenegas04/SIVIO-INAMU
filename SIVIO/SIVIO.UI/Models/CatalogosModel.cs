@@ -15,7 +15,7 @@ namespace SIVIO.UI.Models
                 var catalogoConsulta = entidades.TBL_CATALOGO.FirstOrDefault(m => m.PK_CATALOGO == idCatalogo);
                 if (catalogoConsulta != null)
                 {
-                    catalogoConsulta.TBL_VALORCATALOGO = catalogoConsulta.TBL_VALORCATALOGO;
+                    catalogoConsulta.TBL_VALOR_CATALOGO = catalogoConsulta.TBL_VALOR_CATALOGO;
                 }
                 return catalogoConsulta;
             }

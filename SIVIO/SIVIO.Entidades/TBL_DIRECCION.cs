@@ -23,6 +23,6 @@ namespace SIVIO.Entidades
         public int FK_DISTRITO { get; set; }
     
         public virtual TBL_PERSONA TBL_PERSONA { get; set; }
-        public virtual TBL_VALORCATALOGO TBL_VALORCATALOGO { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
     }
 }

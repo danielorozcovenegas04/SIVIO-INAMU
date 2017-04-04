@@ -71,11 +71,16 @@ namespace SIVIO.UI.Models
                     var listaUsuarios = entidades.TBL_USUARIO.ToList();
                     foreach (var usuario in listaUsuarios)
                     {
-                        usuario.TBL_ROL = usuario.TBL_ROL;
-                        foreach (var rol in usuario.TBL_ROL)
+                        usuario.TBL_ROL_USUARIO = usuario.TBL_ROL_USUARIO;
+                        foreach (var asignacion in usuario.TBL_ROL_USUARIO)
                         {
-                            rol.TBL_ACCION = rol.TBL_ACCION;
+                            asignacion.TBL_ROL = asignacion.TBL_ROL;
+                            foreach (var rol in asignacion.TBL_ROL.TBL_ROL_ACCION)
+                            {
+                                rol.TBL_ACCION = rol.TBL_ACCION;
+                            }
                         }
+
                     }
                     return listaUsuarios;
                 }
@@ -131,6 +136,7 @@ namespace SIVIO.UI.Models
                 try
                 {
                     entidades.TBL_USUARIO.Add(usuario);
+                    usuario.DT_FECHAREGISTRO = DateTime.Now;
                     entidades.SaveChanges();
 
                     RegistrarBitacora(new TBL_BITACORA
@@ -236,13 +242,16 @@ namespace SIVIO.UI.Models
             using (var entidades = new SIVIOEntities())
             {
                 TBL_USUARIO usuarioObj = (TBL_USUARIO)HttpContext.Current.Application["usuarioActual"];
-                usuarioObj.TBL_ROL = usuarioObj.TBL_ROL;
-                foreach (var rol in usuarioObj.TBL_ROL)
+                usuarioObj.TBL_ROL_USUARIO = usuarioObj.TBL_ROL_USUARIO;
+                foreach (var rol in usuarioObj.TBL_ROL_USUARIO)
                 {
-                    rol.TBL_ACCION = rol.TBL_ACCION;
+                    rol.TBL_ROL.TBL_ROL_ACCION = rol.TBL_ROL.TBL_ROL_ACCION;
+                    foreach (var asignacion in rol.TBL_ROL.TBL_ROL_ACCION)
+                    {
+                        asignacion.TBL_ACCION = asignacion.TBL_ACCION;
+                    }
                     var listaAccionesCoinciden =
-                        rol.TBL_ACCION.Where(
-                            i => i.VC_CONTROLADOR == controlador && i.VC_ACCION == accion);
+                        rol.TBL_ROL.TBL_ROL_ACCION.Where(m => m.TBL_ACCION.VC_CONTROLADOR == controlador && m.TBL_ACCION.VC_ACCION == accion);
                     if (listaAccionesCoinciden.Any())
                         return true;
                 }

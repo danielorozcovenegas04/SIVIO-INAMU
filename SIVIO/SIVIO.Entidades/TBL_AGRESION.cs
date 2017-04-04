@@ -12,28 +12,26 @@ namespace SIVIO.Entidades
     using System;
     using System.Collections.Generic;
     
-    public partial class TBL_VALORCATALOGO
+    public partial class TBL_AGRESION
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TBL_VALORCATALOGO()
+        public TBL_AGRESION()
         {
-            this.TBL_DIRECCION = new HashSet<TBL_DIRECCION>();
-            this.TBL_TELEFONO = new HashSet<TBL_TELEFONO>();
-            this.TBL_PERSONA = new HashSet<TBL_PERSONA>();
+            this.TBL_AGRESION_ATENCION_MEDICA = new HashSet<TBL_AGRESION_ATENCION_MEDICA>();
+            this.TBL_AGRESION_VIOLENCIA = new HashSet<TBL_AGRESION_VIOLENCIA>();
         }
     
-        public int PK_VALORCATALOGO { get; set; }
-        public int FK_CATALOGO { get; set; }
-        public string VC_VALOR1 { get; set; }
-        public string VC_VALOR2 { get; set; }
-        public bool B_EDITABLE { get; set; }
+        public System.Guid PK_AGRESION { get; set; }
+        public int FK_AGRESOR { get; set; }
+        public System.DateTime DT_FECHAAGRESION { get; set; }
+        public int I_DURACION { get; set; }
+        public string TXT_RELATO { get; set; }
+        public string VC_CENTRODSALUDATENCION { get; set; }
     
-        public virtual TBL_CATALOGO TBL_CATALOGO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_DIRECCION> TBL_DIRECCION { get; set; }
+        public virtual ICollection<TBL_AGRESION_ATENCION_MEDICA> TBL_AGRESION_ATENCION_MEDICA { get; set; }
+        public virtual TBL_AGRESOR TBL_AGRESOR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_TELEFONO> TBL_TELEFONO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_PERSONA> TBL_PERSONA { get; set; }
+        public virtual ICollection<TBL_AGRESION_VIOLENCIA> TBL_AGRESION_VIOLENCIA { get; set; }
     }
 }
