@@ -367,15 +367,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TBL_ROL">
-      <EntityTypeMapping TypeName="SIVIOModel.TBL_ROL">
-        <MappingFragment StoreEntitySet="TBL_ROL">
-          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
-          <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
-          <ScalarProperty Name="PK_ROL" ColumnName="PK_ROL" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TBL_ROL_ACCION">
       <EntityTypeMapping TypeName="SIVIOModel.TBL_ROL_ACCION">
         <MappingFragment StoreEntitySet="TBL_ROL_ACCION">
@@ -440,6 +431,16 @@
           <ScalarProperty Name="VC_VALOR1" ColumnName="VC_VALOR1" />
           <ScalarProperty Name="FK_CATALOGO" ColumnName="FK_CATALOGO" />
           <ScalarProperty Name="PK_VALORCATALOGO" ColumnName="PK_VALORCATALOGO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ROL">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_ROL">
+        <MappingFragment StoreEntitySet="TBL_ROL">
+          <ScalarProperty Name="FK_TIPOSERVICIO" ColumnName="FK_TIPOSERVICIO" />
+          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+          <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+          <ScalarProperty Name="PK_ROL" ColumnName="PK_ROL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

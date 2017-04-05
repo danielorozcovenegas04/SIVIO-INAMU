@@ -349,6 +349,7 @@
           <Property Name="PK_ROL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VC_NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="VC_DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FK_TIPOSERVICIO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TBL_ROL_ACCION">
           <Key>
@@ -1083,6 +1084,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TBL_ROL_TBL_VALOR_CATALOGO">
+          <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+          <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALOR_CATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_ROL">
+              <PropertyRef Name="FK_TIPOSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TBL_ROLACCION_TBL_ACCION">
           <End Role="TBL_ACCION" Type="Self.TBL_ACCION" Multiplicity="1" />
           <End Role="TBL_ROL_ACCION" Type="Self.TBL_ROL_ACCION" Multiplicity="*" />
@@ -1428,6 +1441,10 @@
             <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
             <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
           </AssociationSet>
+          <AssociationSet Name="FK_TBL_ROL_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_ROL_TBL_VALOR_CATALOGO">
+            <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+          </AssociationSet>
           <AssociationSet Name="FK_TBL_ROLACCION_TBL_ACCION" Association="Self.FK_TBL_ROLACCION_TBL_ACCION">
             <End Role="TBL_ACCION" EntitySet="TBL_ACCION" />
             <End Role="TBL_ROL_ACCION" EntitySet="TBL_ROL_ACCION" />
@@ -1491,7 +1508,6 @@
           <EntitySet Name="TBL_REGISTRO" EntityType="SIVIOModel.TBL_REGISTRO" />
           <EntitySet Name="TBL_REGISTRO_CEAAM" EntityType="SIVIOModel.TBL_REGISTRO_CEAAM" />
           <EntitySet Name="TBL_REGISTRO_COORDINACION" EntityType="SIVIOModel.TBL_REGISTRO_COORDINACION" />
-          <EntitySet Name="TBL_ROL" EntityType="SIVIOModel.TBL_ROL" />
           <EntitySet Name="TBL_ROL_ACCION" EntityType="SIVIOModel.TBL_ROL_ACCION" />
           <EntitySet Name="TBL_ROL_USUARIO" EntityType="SIVIOModel.TBL_ROL_USUARIO" />
           <EntitySet Name="TBL_TELEFONO" EntityType="SIVIOModel.TBL_TELEFONO" />
@@ -1734,14 +1750,6 @@
             <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
             <End Role="TBL_REGISTRO_COORDINACION" EntitySet="TBL_REGISTRO_COORDINACION" />
           </AssociationSet>
-          <AssociationSet Name="FK_TBL_ROLACCION_TBL_ROL" Association="SIVIOModel.FK_TBL_ROLACCION_TBL_ROL">
-            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
-            <End Role="TBL_ROL_ACCION" EntitySet="TBL_ROL_ACCION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TBL_ROLUSUARIO_TBL_ROL" Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL">
-            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
-            <End Role="TBL_ROL_USUARIO" EntitySet="TBL_ROL_USUARIO" />
-          </AssociationSet>
           <AssociationSet Name="FK_TBL_ROLUSUARIO_TBL_USUARIO" Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_USUARIO">
             <End Role="TBL_USUARIO" EntitySet="TBL_USUARIO" />
             <End Role="TBL_ROL_USUARIO" EntitySet="TBL_ROL_USUARIO" />
@@ -1749,6 +1757,19 @@
           <AssociationSet Name="FK_TBL_TELEFONO_TBL_VALORCATALOGO" Association="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO">
             <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
             <End Role="TBL_TELEFONO" EntitySet="TBL_TELEFONO" />
+          </AssociationSet>
+          <EntitySet Name="TBL_ROL" EntityType="SIVIOModel.TBL_ROL" />
+          <AssociationSet Name="FK_TBL_ROL_TBL_VALOR_CATALOGO" Association="SIVIOModel.FK_TBL_ROL_TBL_VALOR_CATALOGO">
+            <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ROLACCION_TBL_ROL" Association="SIVIOModel.FK_TBL_ROLACCION_TBL_ROL">
+            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+            <End Role="TBL_ROL_ACCION" EntitySet="TBL_ROL_ACCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ROLUSUARIO_TBL_ROL" Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL">
+            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+            <End Role="TBL_ROL_USUARIO" EntitySet="TBL_ROL_USUARIO" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="TBL_ACCION">
@@ -2171,16 +2192,6 @@
           <NavigationProperty Name="TBL_REGISTRO" Relationship="SIVIOModel.FK_TBL_REGISTRO_COORDINACION_TBL_REGISTRO" FromRole="TBL_REGISTRO_COORDINACION" ToRole="TBL_REGISTRO" />
           <NavigationProperty Name="TBL_VALOR_CATALOGO" Relationship="SIVIOModel.FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO" FromRole="TBL_REGISTRO_COORDINACION" ToRole="TBL_VALOR_CATALOGO" />
         </EntityType>
-        <EntityType Name="TBL_ROL">
-          <Key>
-            <PropertyRef Name="PK_ROL" />
-          </Key>
-          <Property Name="PK_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VC_NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="VC_DESCRIPCION" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TBL_ROL_ACCION" Relationship="SIVIOModel.FK_TBL_ROLACCION_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_ROL_ACCION" />
-          <NavigationProperty Name="TBL_ROL_USUARIO" Relationship="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_ROL_USUARIO" />
-        </EntityType>
         <EntityType Name="TBL_ROL_ACCION">
           <Key>
             <PropertyRef Name="PK_ROLACCION" />
@@ -2198,8 +2209,8 @@
           <Property Name="FK_USUARIO" Type="Int32" Nullable="false" />
           <Property Name="FK_ROL" Type="Int32" Nullable="false" />
           <Property Name="PK_ROLUSUAIO" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="TBL_ROL" Relationship="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL" FromRole="TBL_ROL_USUARIO" ToRole="TBL_ROL" />
           <NavigationProperty Name="TBL_USUARIO" Relationship="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_USUARIO" FromRole="TBL_ROL_USUARIO" ToRole="TBL_USUARIO" />
+          <NavigationProperty Name="TBL_ROL" Relationship="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL" FromRole="TBL_ROL_USUARIO" ToRole="TBL_ROL" />
         </EntityType>
         <EntityType Name="TBL_TELEFONO">
           <Key>
@@ -2282,6 +2293,7 @@
           <NavigationProperty Name="TBL_REGISTRO_CEAAM2" Relationship="SIVIOModel.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO2" FromRole="TBL_VALOR_CATALOGO" ToRole="TBL_REGISTRO_CEAAM" />
           <NavigationProperty Name="TBL_REGISTRO_COORDINACION" Relationship="SIVIOModel.FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO" FromRole="TBL_VALOR_CATALOGO" ToRole="TBL_REGISTRO_COORDINACION" />
           <NavigationProperty Name="TBL_TELEFONO" Relationship="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO" FromRole="TBL_VALOR_CATALOGO" ToRole="TBL_TELEFONO" />
+          <NavigationProperty Name="TBL_ROL" Relationship="SIVIOModel.FK_TBL_ROL_TBL_VALOR_CATALOGO" FromRole="TBL_VALOR_CATALOGO" ToRole="TBL_ROL" />
         </EntityType>
         <Association Name="FK_TBL_ROLACCION_TBL_ACCION">
           <End Type="SIVIOModel.TBL_ACCION" Role="TBL_ACCION" Multiplicity="1" />
@@ -2991,30 +3003,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TBL_ROLACCION_TBL_ROL">
-          <End Type="SIVIOModel.TBL_ROL" Role="TBL_ROL" Multiplicity="1" />
-          <End Type="SIVIOModel.TBL_ROL_ACCION" Role="TBL_ROL_ACCION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_ROL">
-              <PropertyRef Name="PK_ROL" />
-            </Principal>
-            <Dependent Role="TBL_ROL_ACCION">
-              <PropertyRef Name="FK_ROL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TBL_ROLUSUARIO_TBL_ROL">
-          <End Type="SIVIOModel.TBL_ROL" Role="TBL_ROL" Multiplicity="1" />
-          <End Type="SIVIOModel.TBL_ROL_USUARIO" Role="TBL_ROL_USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_ROL">
-              <PropertyRef Name="PK_ROL" />
-            </Principal>
-            <Dependent Role="TBL_ROL_USUARIO">
-              <PropertyRef Name="FK_ROL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TBL_ROLUSUARIO_TBL_USUARIO">
           <End Type="SIVIOModel.TBL_USUARIO" Role="TBL_USUARIO" Multiplicity="1" />
           <End Type="SIVIOModel.TBL_ROL_USUARIO" Role="TBL_ROL_USUARIO" Multiplicity="*" />
@@ -3036,6 +3024,54 @@
             </Principal>
             <Dependent Role="TBL_TELEFONO">
               <PropertyRef Name="FK_TIPOTELEFONO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TBL_ROL">
+          <Key>
+            <PropertyRef Name="PK_ROL" />
+          </Key>
+          <Property Name="PK_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VC_NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VC_DESCRIPCION" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FK_TIPOSERVICIO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBL_VALOR_CATALOGO" Relationship="SIVIOModel.FK_TBL_ROL_TBL_VALOR_CATALOGO" FromRole="TBL_ROL" ToRole="TBL_VALOR_CATALOGO" />
+          <NavigationProperty Name="TBL_ROL_ACCION" Relationship="SIVIOModel.FK_TBL_ROLACCION_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_ROL_ACCION" />
+          <NavigationProperty Name="TBL_ROL_USUARIO" Relationship="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_ROL_USUARIO" />
+        </EntityType>
+        <Association Name="FK_TBL_ROL_TBL_VALOR_CATALOGO">
+          <End Type="SIVIOModel.TBL_VALOR_CATALOGO" Role="TBL_VALOR_CATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_ROL" Role="TBL_ROL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALOR_CATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_ROL">
+              <PropertyRef Name="FK_TIPOSERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ROLACCION_TBL_ROL">
+          <End Type="SIVIOModel.TBL_ROL" Role="TBL_ROL" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_ROL_ACCION" Role="TBL_ROL_ACCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ROL">
+              <PropertyRef Name="PK_ROL" />
+            </Principal>
+            <Dependent Role="TBL_ROL_ACCION">
+              <PropertyRef Name="FK_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ROLUSUARIO_TBL_ROL">
+          <End Type="SIVIOModel.TBL_ROL" Role="TBL_ROL" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_ROL_USUARIO" Role="TBL_ROL_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ROL">
+              <PropertyRef Name="PK_ROL" />
+            </Principal>
+            <Dependent Role="TBL_ROL_USUARIO">
+              <PropertyRef Name="FK_ROL" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3411,15 +3447,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TBL_ROL">
-            <EntityTypeMapping TypeName="SIVIOModel.TBL_ROL">
-              <MappingFragment StoreEntitySet="TBL_ROL">
-                <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
-                <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
-                <ScalarProperty Name="PK_ROL" ColumnName="PK_ROL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TBL_ROL_ACCION">
             <EntityTypeMapping TypeName="SIVIOModel.TBL_ROL_ACCION">
               <MappingFragment StoreEntitySet="TBL_ROL_ACCION">
@@ -3484,6 +3511,16 @@
                 <ScalarProperty Name="VC_VALOR1" ColumnName="VC_VALOR1" />
                 <ScalarProperty Name="FK_CATALOGO" ColumnName="FK_CATALOGO" />
                 <ScalarProperty Name="PK_VALORCATALOGO" ColumnName="PK_VALORCATALOGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ROL">
+            <EntityTypeMapping TypeName="SIVIOModel.TBL_ROL">
+              <MappingFragment StoreEntitySet="TBL_ROL">
+                <ScalarProperty Name="FK_TIPOSERVICIO" ColumnName="FK_TIPOSERVICIO" />
+                <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+                <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+                <ScalarProperty Name="PK_ROL" ColumnName="PK_ROL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

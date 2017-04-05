@@ -48,6 +48,7 @@ namespace SIVIO.Entidades
             this.TBL_REGISTRO_CEAAM2 = new HashSet<TBL_REGISTRO_CEAAM>();
             this.TBL_REGISTRO_COORDINACION = new HashSet<TBL_REGISTRO_COORDINACION>();
             this.TBL_TELEFONO = new HashSet<TBL_TELEFONO>();
+            this.TBL_ROL = new HashSet<TBL_ROL>();
         }
     
         public int PK_VALORCATALOGO { get; set; }
@@ -119,5 +120,7 @@ namespace SIVIO.Entidades
         public virtual ICollection<TBL_REGISTRO_COORDINACION> TBL_REGISTRO_COORDINACION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_TELEFONO> TBL_TELEFONO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_ROL> TBL_ROL { get; set; }
     }
 }

@@ -344,6 +344,7 @@
     <Property Name="PK_ROL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="VC_NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="VC_DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FK_TIPOSERVICIO" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TBL_ROL_ACCION">
     <Key>
@@ -1078,6 +1079,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TBL_ROL_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_ROL">
+        <PropertyRef Name="FK_TIPOSERVICIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TBL_ROLACCION_TBL_ACCION">
     <End Role="TBL_ACCION" Type="Self.TBL_ACCION" Multiplicity="1" />
     <End Role="TBL_ROL_ACCION" Type="Self.TBL_ROL_ACCION" Multiplicity="*" />
@@ -1422,6 +1435,10 @@
     <AssociationSet Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO1" Association="Self.FK_TBL_REGISTRO_TBL_VALORCATALOGO1">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ROL_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_ROL_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_ROL" EntitySet="TBL_ROL" />
     </AssociationSet>
     <AssociationSet Name="FK_TBL_ROLACCION_TBL_ACCION" Association="Self.FK_TBL_ROLACCION_TBL_ACCION">
       <End Role="TBL_ACCION" EntitySet="TBL_ACCION" />

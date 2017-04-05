@@ -34,7 +34,6 @@
         <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO" Width="1.5" PointX="13.5" PointY="57.875" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO_CEAAM" Width="1.5" PointX="15.75" PointY="47.75" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO_COORDINACION" Width="1.5" PointX="18.75" PointY="49" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_ROL" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_ROL_ACCION" Width="1.5" PointX="3" PointY="3.75" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_ROL_USUARIO" Width="1.5" PointX="13.5" PointY="36.75" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_TELEFONO" Width="1.5" PointX="10.5" PointY="65" />
@@ -100,10 +99,12 @@
         <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO1" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO2" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO" />
-        <AssociationConnector Association="SIVIOModel.FK_TBL_ROLACCION_TBL_ROL" />
-        <AssociationConnector Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_USUARIO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ROL" Width="1.5" PointX="5.25" PointY="47.375" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ROL_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ROLACCION_TBL_ROL" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

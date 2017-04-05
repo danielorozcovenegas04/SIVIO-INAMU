@@ -329,6 +329,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout_Login.cshtml" />
     <Content Include="Views\Home\Ingreso.cshtml" />
+    <Content Include="Views\Shared\Menu\MenuDelegacion.cshtml" />
+    <Content Include="Views\Shared\Menu\MenuCoavif.cshtml" />
+    <Content Include="Views\Shared\Menu\MenuCeaam.cshtml" />
+    <Content Include="Views\Shared\Menu\MenuAdministracion.cshtml" />
+    <Content Include="Views\Shared\Errores\ErrorParcial.cshtml" />
+    <Content Include="Views\Shared\Errores\Error.cshtml" />
+    <Content Include="Views\Shared\Menu\MenuDefecto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

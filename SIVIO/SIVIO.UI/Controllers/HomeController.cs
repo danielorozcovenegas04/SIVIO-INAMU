@@ -10,7 +10,7 @@ using System.Web.Security;
 
 namespace SIVIO.UI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         #region Modelos
 
@@ -22,7 +22,48 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            if (ComprobarPermisosAcccion())
+            {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            else return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+
+        }
+        [ChildActionOnly]
+        [Authorize]
+        public ActionResult RetornarMenuPrincipal(int tipoServicio)
+        {
+            try
+            {
+                var catalogoServicios = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.TipoServicio);
+                var servicioElegido = catalogoServicios.TBL_VALOR_CATALOGO.FirstOrDefault(m => m.PK_VALORCATALOGO == tipoServicio);
+                var idMenu = int.Parse(servicioElegido.VC_VALOR2);
+                switch (idMenu)
+                {
+                    case (int)Utilitarios.Enumerados.TipoMenu.AdministracionSIVIO:
+                        return View(viewName: "~/Views/Shared/Menu/MenuAdministracion.cshtml");
+                    case (int)Utilitarios.Enumerados.TipoMenu.CEAAM:
+                        return View(viewName: "~/Views/Shared/Menu/MenuCeaam.cshtml");
+                    case (int)Utilitarios.Enumerados.TipoMenu.COAVIFEquipoEstrategico:
+                        return View(viewName: "~/Views/Shared/Menu/MenuCoavif.cshtml");
+                    case (int)Utilitarios.Enumerados.TipoMenu.DelegacionUnidadesRegionales:
+                        return View(viewName: "~/Views/Shared/Menu/MenuDelegacion.cshtml");
+                    default:
+                        return View(viewName: "~/Views/Shared/Menu/MenuDefecto.cshtml");
+                }
+            }
+            catch
+            {
+                return View(viewName: "~/Views/Shared/Menu/MenuDefecto.cshtml");
+            }
+            
+        }
+
+        [Authorize]
+        public ActionResult RetornarTipoMenu()
+        {
+            var usuarioConsulta = (TBL_USUARIO)Session["usuarioActual"];
+            return View(viewName: "~/Views/Shared/Menu/MenuAdministracion.cshtml");
         }
 
         [AllowAnonymous]
@@ -64,13 +105,22 @@ namespace SIVIO.UI.Controllers
                         return Json(new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al comprobar credenciales", "valor"), JsonRequestBehavior.AllowGet);
                     }
                 }
-                FormsAuthentication.SetAuthCookie(usuarioConsulta.VC_USUARIO, false);
-                Session["usuarioActual"] = usuarioConsulta;
-                Session["tipoServicio"] = tipoServicio;
-                return Json(
-                    new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso,
-                    usuarioConsulta.PK_USUARIO.ToString(),
-                    string.Empty), JsonRequestBehavior.AllowGet);
+                if (usuarioConsulta.TBL_ROL_USUARIO.Where(m => m.TBL_ROL.FK_TIPOSERVICIO == tipoServicio).Any())
+                {
+                    FormsAuthentication.SetAuthCookie(usuarioConsulta.VC_USUARIO, false);
+
+                    HttpContext.Session.Add("usuarioActual", usuarioConsulta);
+                    HttpContext.Session.Add("tipoServicio", tipoServicio);
+                    return Json(
+                        new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso,
+                        usuarioConsulta.PK_USUARIO.ToString(),
+                        string.Empty), JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Usted no posee acceso al tipo de servicio seleccionado", "valor"), JsonRequestBehavior.AllowGet);
+                }
+
             }
             catch (Exception e)
             {

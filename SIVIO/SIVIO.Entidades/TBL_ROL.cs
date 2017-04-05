@@ -24,7 +24,9 @@ namespace SIVIO.Entidades
         public int PK_ROL { get; set; }
         public string VC_NOMBRE { get; set; }
         public string VC_DESCRIPCION { get; set; }
+        public int FK_TIPOSERVICIO { get; set; }
     
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_ROL_ACCION> TBL_ROL_ACCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -54,12 +54,12 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_REGISTRO> TBL_REGISTRO { get; set; }
         public virtual DbSet<TBL_REGISTRO_CEAAM> TBL_REGISTRO_CEAAM { get; set; }
         public virtual DbSet<TBL_REGISTRO_COORDINACION> TBL_REGISTRO_COORDINACION { get; set; }
-        public virtual DbSet<TBL_ROL> TBL_ROL { get; set; }
         public virtual DbSet<TBL_ROL_ACCION> TBL_ROL_ACCION { get; set; }
         public virtual DbSet<TBL_ROL_USUARIO> TBL_ROL_USUARIO { get; set; }
         public virtual DbSet<TBL_TELEFONO> TBL_TELEFONO { get; set; }
         public virtual DbSet<TBL_UNIDAD> TBL_UNIDAD { get; set; }
         public virtual DbSet<TBL_USUARIO> TBL_USUARIO { get; set; }
         public virtual DbSet<TBL_VALOR_CATALOGO> TBL_VALOR_CATALOGO { get; set; }
+        public virtual DbSet<TBL_ROL> TBL_ROL { get; set; }
     }
 }

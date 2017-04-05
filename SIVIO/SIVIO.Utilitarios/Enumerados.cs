@@ -95,5 +95,13 @@ namespace SIVIO.Utilitarios
             ErrorCapaAccesoDatos = 541,
             OtroTipoError = 542
         }
+
+        public enum TipoMenu
+        {
+            DelegacionUnidadesRegionales = 634,
+            CEAAM = 635,
+            COAVIFEquipoEstrategico = 637,
+            AdministracionSIVIO = 638
+        }
     }
 }
