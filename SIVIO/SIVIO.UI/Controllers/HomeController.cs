@@ -22,11 +22,20 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            if (ComprobarPermisosAcccion())
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
             {
                 return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
             }
-            else return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+                   
 
         }
         [ChildActionOnly]

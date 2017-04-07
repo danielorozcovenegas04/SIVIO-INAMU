@@ -16,8 +16,8 @@
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
-
-        document.title = "SIPAMU - Principal";
+        
+        document.title = "SIVIO - Principal";
         debugger;
         @*$("#contenedorEspera").hide();
         $.LoadingOverlay("show");
@@ -26,7 +26,7 @@
             url: '@Url.Action("RetornarTipoMenu", "Home")',
             async: true
         }).done(function (data) {
-
+            
             $.LoadingOverlay("hide");
             $('#contenedorMenu').html(data);
 
@@ -71,7 +71,7 @@
      data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
 
     <button data-remodal-action="close" class="remodal-close"></button>
-    <h3 id="txtModalTitulo">Sistema de Información Programa Avanzamos Mujeres</h3>
+    <h3 id="txtModalTitulo">Sistema para la Atención y Prevención de la Violencia contra las Mujeres</h3>
     <p>
         <span id="txtModalContenido"></span>
     </p>
@@ -92,71 +92,4 @@
 
 
 </div> <!-- /container -->
-<script>
 
-    var mymap = L.map('mapid').setView([9.934125, -84.057445], 8);
-
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        subdomains: ['a', 'b', 'c']
-    }).addTo(mymap);
-
-
-
-
-    var linkHuetarNorte = $('<a href="#" class=linkBtn>Región Huetar Norte</a>').click(function () {
-        ConsultarIndicadoresRegion(5, "Región Huetar Norte");
-    })[0];
-    L.marker([10.768453, -84.454208]).addTo(mymap).bindPopup(linkHuetarNorte);
-    var linkBrunca = $('<a href="#" class=linkBtn>Región Brunca</a>').click(function () {
-        ConsultarIndicadoresRegion(6, "Región Brunca");
-    })[0];
-    L.marker([9.065347, -83.304383]).addTo(mymap)
-        .bindPopup(linkBrunca);
-    var linkAtlantica = $('<a href="#" class=linkBtn>Región Huetar Atlántica</a>').click(function () {
-        ConsultarIndicadoresRegion(4, "Región Huetar Atlántica");
-    })[0];
-    L.marker([9.957926, -83.133476]).addTo(mymap)
-        .bindPopup(linkAtlantica);
-    var linkCentral = $('<a href="#" class=linkBtn>Región Central</a>').click(function () {
-        ConsultarIndicadoresRegion(1, "Región Central");
-    })[0];
-    L.marker([9.975298, -84.205816]).addTo(mymap)
-        .bindPopup(linkCentral).openPopup();
-    var linkChorotega = $('<a href="#" class=linkBtn>Región Chorotega</a>').click(function () {
-        ConsultarIndicadoresRegion(3, "Región Chorotega");
-    })[0];
-    L.marker([10.651224, -85.349282]).addTo(mymap)
-        .bindPopup(linkChorotega);
-    var linkPacifico = $('<a href="#" class=linkBtn>Región Pacífico Central</a>').click(function () {
-        ConsultarIndicadoresRegion(2, "Región Pacífico Central");
-    })[0];
-    L.marker([10.019780, -84.831037]).addTo(mymap)
-        .bindPopup(linkPacifico);
-
-
-    //L.circle([51.508, -0.11], 500, {
-    //    color: 'red',
-    //    fillColor: '#f03',
-    //    fillOpacity: 0.5
-    //}).addTo(mymap).bindPopup("I am a circle.");
-
-    //L.polygon([
-    //    [51.509, -0.08],
-    //    [51.503, -0.06],
-    //    [51.51, -0.047]
-    //]).addTo(mymap).bindPopup("I am a polygon.");
-
-
-    var popup = L.popup();
-
-    function onMapClick(e) {
-        //popup
-        //    .setLatLng(e.latlng)
-        //    .setContent("You clicked the map at " + e.latlng.toString())
-        //    .openOn(mymap);
-    }
-
-    mymap.on('click', onMapClick);
-
-</script>

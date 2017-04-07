@@ -26,16 +26,18 @@ namespace SIVIO.UI.Controllers
         /// </summary>
         /// <param name="usuario"></param>
         /// <returns></returns>
-        public bool ComprobarPermisosAcccion()
+        public bool ComprobarPermisosAcccion(out bool estadoSesion)
         {
             try
             {
                 var usuarioActual = (TBL_USUARIO)System.Web.HttpContext.Current.Session["usuarioActual"];
                 if (usuarioActual == null)
                 {
+                    estadoSesion = false;
                     FormsAuthentication.SignOut();
                     return false;
                 }
+                estadoSesion = true;
                 string actionName = this.ControllerContext.RouteData.Values["action"].ToString();
                 string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
                 var manejoSeguridad = new Models.SeguridadModel();
@@ -43,6 +45,7 @@ namespace SIVIO.UI.Controllers
             }
             catch (Exception ex)
             {
+                estadoSesion = true;
                 return false;
             }
         }

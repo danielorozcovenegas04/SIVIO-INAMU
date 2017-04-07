@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace SIVIO.UI.Controllers
 {
-    public class ReporteController : Controller
+    public class ReporteController : BaseController
     {
         // GET: Reporte
         public ActionResult Index()
