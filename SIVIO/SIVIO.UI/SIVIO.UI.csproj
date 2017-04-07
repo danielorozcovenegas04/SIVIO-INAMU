@@ -201,7 +201,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ExpedienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
+    <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -336,10 +339,16 @@
     <Content Include="Views\Shared\Errores\ErrorParcial.cshtml" />
     <Content Include="Views\Shared\Errores\Error.cshtml" />
     <Content Include="Views\Shared\Menu\MenuDefecto.cshtml" />
+    <Content Include="Views\Seguridad\GridUsuarios.cshtml" />
+    <Content Include="Views\Seguridad\GridRoles.cshtml" />
+    <Content Include="Views\Seguridad\GridBitácora.cshtml" />
+    <Content Include="Views\Seguridad\GridTarjetasInteligentes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Expediente\" />
+    <Folder Include="Views\Reporte\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

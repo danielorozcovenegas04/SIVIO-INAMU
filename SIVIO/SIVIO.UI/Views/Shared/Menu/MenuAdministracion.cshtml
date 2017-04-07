@@ -25,7 +25,7 @@
     });
 
 
-    $('#btnInstrumentoA').click(function () {
+    $('#btnBuscarExpediente').click(function () {
         $('#contendorFrames').hide();
         $("#contenedorEspera").show();
         $.ajax({
@@ -49,7 +49,7 @@
         });
     });
 
-    $('#btnInstrumentoB').click(function () {
+    $('#btnBuscarPersona').click(function () {
         debugger;
         $('#contendorFrames').hide();
         $("#contenedorEspera").show();
@@ -74,7 +74,7 @@
         });
     });
 
-    $('#btnPlanVida').click(function () {
+    $('#btnSistemas').click(function () {
         $('#contendorFrames').hide();
         $("#contenedorEspera").show();
         $.ajax({
@@ -98,7 +98,7 @@
         });
     });
 
-    $('#btnEdicion').click(function () {
+    $('#btnBuscarBitacora').click(function () {
         debugger;
         $('#contendorFrames').hide();
         $("#contenedorEspera").show();
@@ -223,7 +223,7 @@
         });
     });
 
-    $('#btnRptDigitacion').click(function () {
+    $('#btnRptAtenciones').click(function () {
         debugger;
         $('#contendorFrames').hide();
         $("#contenedorEspera").show();
@@ -248,7 +248,7 @@
         });
     });
 
-    $('#btnRptParticipantes').click(function () {
+    $('#btpRptConsultas').click(function () {
         debugger;
         $('#contendorFrames').hide();
         $("#contenedorEspera").show();
@@ -308,13 +308,13 @@
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="pe-7s-note2" style="margin-right: 3px"></i>Ficha Socioeconómica <span class="caret"></span>
+                        <i class="pe-7s-note2" style="margin-right: 3px"></i>Expediente <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" id="btnInstrumentoA">Llenar Instrumento A</a></li>
-                        <li><a href="#" id="btnInstrumentoB">LLenar Instrumento B</a></li>
-                        <li><a href="#" id="btnPlanVida">LLenar Instrumento Plan de Vida</a></li>
-                        <li><a href="#" id="btnEdicion">Editar Información</a></li>
+                        <li><a href="#" id="btnBuscarExpediente">Buscar Expediente</a></li>
+                        <li><a href="#" id="btnBuscarPersona">Buscar Persona en el Padrón</a></li>
+                        <li><a href="#" id="btnSistemas">Buscar en Sistemas INAMU</a></li>
+
 
                     </ul>
                 </li>
@@ -335,11 +335,10 @@
                     </a>
                     <!--jose angel-->
                     <ul class="dropdown-menu">
-                        <li><a href="#" id="btnUsuarios">Administrar Usuarios</a></li>
-                        <li><a href="#" id="btnRoles">Administrar Roles</a></li>
-                        @*<li><a href="#">Administrar Perfiles</a></li>
-                            <li><a href="#">Administrar Permisos</a></li>*@
-                        <li><a href="#" id="btnGrupos">Administrar Grupos</a></li>
+                        <li><a href="#" id="btnUsuarios">Administrar Personas Usuarias</a></li>
+                        <li><a href="#" id="btnRoles">Administrar Roles y Permisos</a></li>
+                        <li><a href="#" id="btnGrupos">Administrar Tarjetas Inteligentes</a></li>
+                        <li><a href="#" id="btnBuscarBitacora">Bitácora</a></li>
                     </ul>
                     <!--Jose angel-->
 
@@ -352,10 +351,11 @@
                         <i class="pe-7s-news-paper" style="margin-right: 3px"></i>Reportes <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">Captura</li>
-                        <li><a href="#" id="btnRptDigitacion">Reporte de Digitaciones</a></li>
-                        <li class="dropdown-header">Fichas</li>
-                        <li><a href="#" id="btnRptParticipantes">Reporte de Participantes</a></li>
+                        <li class="dropdown-header">Expedientes</li>
+                        <li><a href="#" id="btnRptAtenciones">Reporte de Expedientes</a></li>
+                        <li class="dropdown-header">Flujos de Trabajo</li>
+                        <li><a href="#" id="btpRptConsultas">Reporte de Consultas</a></li>
+                        <li><a href="#" id="btnRptAtenciones">Reporte de Atenciones</a></li>
                         @*<li class="dropdown-header">Seguridad</li>
                             <li class="dropdown-header">Otros</li>*@
 
