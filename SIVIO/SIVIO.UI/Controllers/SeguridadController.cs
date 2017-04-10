@@ -9,6 +9,13 @@ namespace SIVIO.UI.Controllers
 {
     public class SeguridadController : BaseController
     {
+        #region Modelos
+
+        SIVIO.UI.Models.SeguridadModel _modelSeguridad = new Models.SeguridadModel();
+        SIVIO.UI.Models.CatalogosModel _modelCatalogos = new Models.CatalogosModel();
+
+        #endregion
+
         // GET: Seguridad
         [Authorize]
         public ActionResult GridUsuarios()
@@ -16,7 +23,7 @@ namespace SIVIO.UI.Controllers
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion))
             {
-                return View();
+                return View(_modelSeguridad.ListarUsuarios());
             }
             else if (!estadoSesion)
             {
