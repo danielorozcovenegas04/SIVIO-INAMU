@@ -1,279 +1,63 @@
 ﻿<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/loadingoverlay.min.js"></script>
+<script src="~/Scripts/remodal.min.js"></script>
 <script type="text/javascript">
-    $('#btnCerrarSesion').click(function () {
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("Index")',
-            processData: true,
-            success: function (data) {
+    $(document).ready(function () {
+        var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+        $('#btnCerrarSesion').click(function () {
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CerrarSesion","Seguridad")',
+                processData: true,
+                success: function (data) {
 
-                window.location.href = '@Url.Action("Ingreso", "Home")';
-            },
-            error: function (xhr, ajaxOptions, error) {
+                    $.LoadingOverlay("hide");
+                    window.location.href = '@Url.Action("Ingreso", "Home")';
+                },
+                error: function (xhr, ajaxOptions, error) {
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error de Sistema");
+                    $("#txtModalContenido").text("Fallo al cerrar sesión, contacte a la persona administradora de SIVIO");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+                }
+            });
+        });
+
+        $('#btnInicio').click(function () {
+            window.location.href = '@Url.Action("Index", "Home")';
+        });
+
+        $('#btnUsuarios').click(function () {
+            debugger;
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GridUsuarios", "Seguridad")',
+                async: true
+            }).done(function (data) {
+
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+
+
+            }).fail(function (exception) {
                 $("#txtModalTitulo").css("color", "red");
                 $("#txtModalTitulo").text("Error de Sistema");
-                $("#txtModalContenido").text("Fallo al cerrar sesión, contacte a la persona administradora de SIPAMU");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
                 instMensajes.open();
-
-            }
-        });
-    });
-
-    $('#btnInicio').click(function () {
-        window.location.href = '@Url.Action("Index", "Home")';
-    });
-
-
-    $('#btnBuscarExpediente').click(function () {
-        $('#contendorFrames').hide();
-        $("#contenedorEspera").show();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("FrmInstrumentoA", "Ficha")',
-            async: true
-        }).done(function (data) {
-
-
-            $('#contendorFrames').html(data);
-            $("#contenedorEspera").hide();
-            $('#contendorFrames').fadeIn();
-
-
-        }).fail(function (exception) {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error de Sistema");
-            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-            $("#contenedorEspera").hide();
-            instMensajes.open();
-        });
-    });
-
-    $('#btnBuscarPersona').click(function () {
-        debugger;
-        $('#contendorFrames').hide();
-        $("#contenedorEspera").show();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("GridInstrumentoB", "Ficha")',
-            async: true
-        }).done(function (data) {
-
-
-            $('#contendorFrames').html(data);
-            $("#contenedorEspera").hide();
-            $('#contendorFrames').fadeIn();
-
-
-        }).fail(function (exception) {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error de Sistema");
-            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-            $("#contenedorEspera").hide();
-            instMensajes.open();
-        });
-    });
-
-    $('#btnSistemas').click(function () {
-        $('#contendorFrames').hide();
-        $("#contenedorEspera").show();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("GridPlanVida", "Ficha")',
-            async: true
-        }).done(function (data) {
-
-
-            $('#contendorFrames').html(data);
-            $("#contenedorEspera").hide();
-            $('#contendorFrames').fadeIn();
-
-
-        }).fail(function (exception) {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error de Sistema");
-            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-            $("#contenedorEspera").hide();
-            instMensajes.open();
-        });
-    });
-
-    $('#btnBuscarBitacora').click(function () {
-        debugger;
-        $('#contendorFrames').hide();
-        $("#contenedorEspera").show();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("GridEdicionFicha", "Ficha")',
-            async: true
-        }).done(function (data) {
-
-
-            $('#contendorFrames').html(data);
-            $("#contenedorEspera").hide();
-            $('#contendorFrames').fadeIn();
-
-
-        }).fail(function (exception) {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error de Sistema");
-            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-            $("#contenedorEspera").hide();
-            instMensajes.open();
-        });
-    });
-    ////////////////////////////////////////////////////////jose angel
-    $('#btnUsuarios').click(function () {
-        debugger;
-        $('#contendorFrames').hide();
-        $("#contenedorEspera").show();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("GridUsuarios", "Seguridad")',
-            async: true
-        }).done(function (data) {
-
-
-            $('#contendorFrames').html(data);
-            $("#contenedorEspera").hide();
-            $('#contendorFrames').fadeIn();
-
-
-        }).fail(function (exception) {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error de Sistema");
-            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-            $("#contenedorEspera").hide();
-            instMensajes.open();
-        });
-    });
-
-    $('#btnRoles').click(function () {
-        debugger;
-        $('#contendorFrames').hide();
-        $("#contenedorEspera").show();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("GridRoles", "Seguridad")',
-            async: true
-        }).done(function (data) {
-
-
-            $('#contendorFrames').html(data);
-            $("#contenedorEspera").hide();
-            $('#contendorFrames').fadeIn();
-
-
-        }).fail(function (exception) {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error de Sistema");
-            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-            $("#contenedorEspera").hide();
-            instMensajes.open();
-        });
-    });
-
-    $('#btnGrupos').click(function () {
-        debugger;
-        $('#contendorFrames').hide();
-        $("#contenedorEspera").show();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("GridGrupos", "Seguridad")',
-            async: true
-        }).done(function (data) {
-
-
-            $('#contendorFrames').html(data);
-            $("#contenedorEspera").hide();
-            $('#contendorFrames').fadeIn();
-
-
-        }).fail(function (exception) {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error de Sistema");
-            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-            $("#contenedorEspera").hide();
-            instMensajes.open();
-        });
-    });
-
-    $('#btnCatalogos').click(function () {
-        debugger;
-        $('#contendorFrames').hide();
-        $("#contenedorEspera").show();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("GridCatalogos", "Catalogos")',
-            async: true
-        }).done(function (data) {
-
-
-            $('#contendorFrames').html(data);
-            $("#contenedorEspera").hide();
-            $('#contendorFrames').fadeIn();
-
-
-        }).fail(function (exception) {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error de Sistema");
-            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-            $("#contenedorEspera").hide();
-            instMensajes.open();
-        });
-    });
-
-    $('#btnRptAtenciones').click(function () {
-        debugger;
-        $('#contendorFrames').hide();
-        $("#contenedorEspera").show();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("Digitacion", "Reportes")',
-            async: true
-        }).done(function (data) {
-
-
-            $('#contendorFrames').html(data);
-            $("#contenedorEspera").hide();
-            $('#contendorFrames').fadeIn();
-
-
-        }).fail(function (exception) {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error de Sistema");
-            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-            $("#contenedorEspera").hide();
-            instMensajes.open();
-        });
-    });
-
-    $('#btpRptConsultas').click(function () {
-        debugger;
-        $('#contendorFrames').hide();
-        $("#contenedorEspera").show();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("Participantes", "Reportes")',
-            async: true
-        }).done(function (data) {
-
-
-            $('#contendorFrames').html(data);
-            $("#contenedorEspera").hide();
-            $('#contendorFrames').fadeIn();
-
-
-        }).fail(function (exception) {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error de Sistema");
-            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-            $("#contenedorEspera").hide();
-            instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
         });
     });
 </script>
-<nav class="navbar navbar-default navbar-static-top borde" style="margin-top: 5px; margin-left: 10px !important; margin-right: 10px !important; padding-bottom: 5px !important; background-color: white !important">
+<nav class="navbar navbar-default navbar-static-top borde" style="margin-top: 5px; padding-bottom: 5px !important; background-color: white !important">
 
     <div class="container" style="width: 100%; padding-left: 15px; padding-right: 15px;">
 
@@ -312,6 +96,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#" id="btnBuscarExpediente">Buscar Expediente</a></li>
+                        <li><a href="#" id="btnDatosAdministrativos">Registrar Datos Administrativos</a></li>
                         <li><a href="#" id="btnBuscarPersona">Buscar Persona en el Padrón</a></li>
                         <li><a href="#" id="btnSistemas">Buscar en Sistemas INAMU</a></li>
 
@@ -323,22 +108,12 @@
                         <text>*@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="pe-7s-portfolio" style="margin-right: 3px"></i>Catálogos <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" id="btnCatalogos">Administrar Catálogos</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="pe-7s-settings" style="margin-right: 3px"></i>Seguridad <span class="caret"></span>
+                        <i class="pe-7s-settings" style="margin-right: 3px"></i>Referencias <span class="caret"></span>
                     </a>
                     <!--jose angel-->
                     <ul class="dropdown-menu">
-                        <li><a href="#" id="btnUsuarios">Administrar Personas Usuarias</a></li>
-                        <li><a href="#" id="btnRoles">Administrar Roles y Permisos</a></li>
-                        <li><a href="#" id="btnGrupos">Administrar Tarjetas Inteligentes</a></li>
-                        <li><a href="#" id="btnBuscarBitacora">Bitácora</a></li>
+                        <li><a href="#" id="btnBuscarReferencia">Buscar</a></li>
+                        <li><a href="#" id="btnReferir">Referir</a></li>
                     </ul>
                     <!--Jose angel-->
 
