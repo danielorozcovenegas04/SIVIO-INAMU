@@ -1,0 +1,401 @@
+﻿
+@{
+    Layout = null;
+}  
+<style>
+        .jumbotron {
+            padding-left: 5px !important;
+            padding-right: 5px !important;
+        }
+
+        .container {
+            padding-left: 5px !important;
+            padding-right: 5px !important;
+        }
+    </style>
+    <script src="https://www.google.com/cloudprint/client/cpgadget.js">
+    </script>
+    <script type="text/javascript">
+    $("#btnCerrarFrmUsuarios").click(function (e) {
+        e.preventDefault();
+        $("#btnUsuarios").trigger("click");
+    });
+    var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+    $(document).ready(function () {
+        $.LoadingOverlay("hide");
+        debugger;
+        //$.ajax({
+        //    type: "POST",
+        //    url: '/sipamu/Seguridad/ListarUnidades',
+        //    dataType: "json",
+        //    contentType: "application/json",
+        //    processData: true,
+        //    success: function (resultado) {
+        //        debugger;
+
+        //        $.each(resultado.data, function (key, value) {
+        //            $('#cmbUnidad').append($("<option></option>", {
+        //                value: value.PKUNIDAD,
+        //                text: value.CODIGO + ' ' + value.DESCRIPCION
+        //            }));
+        //        });
+
+        //        $('#cmbUnidad').selectize({
+        //            create: false,
+        //            sortField: {
+        //                field: 'text',
+        //                direction: 'asc'
+        //            },
+        //            dropdownParent: 'body'
+        //        });
+
+
+        //    },
+        //    error: function (xhr, ajaxOptions, error) {
+        //        $("#contenedorBotones").show();
+        //        $("#contenedorEspera").hide();
+        //        $("#txtModalTitulo").css("color", "red");
+        //        $("#txtModalTitulo").text("Error al registrar");
+        //        $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+        //        instMensajes.open();
+
+        //    }
+        //});
+        //$.ajax({
+        //    type: "POST",
+        //    url: '/sipamu/Seguridad/ListarRoles',
+        //    dataType: "json",
+        //    contentType: "application/json",
+        //    processData: true,
+        //    success: function (resultado) {
+        //        debugger;
+
+        //        $.each(resultado.data, function (key, value) {
+        //            $('#cmbRol').append($("<option></option>", {
+        //                value: value.PKROL,
+        //                text: value.NOMBRE
+        //            }));
+        //        });
+
+        //        $('#cmbRol').selectize({
+        //            create: false,
+        //            sortField: {
+        //                field: 'text',
+        //                direction: 'asc'
+        //            },
+        //            dropdownParent: 'body'
+        //        });
+
+
+        //    },
+        //    error: function (xhr, ajaxOptions, error) {
+        //        $("#contenedorBotones").show();
+        //        $("#contenedorEspera").hide();
+        //        $("#txtModalTitulo").css("color", "red");
+        //        $("#txtModalTitulo").text("Error al registrar");
+        //        $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+        //        instMensajes.open();
+
+        //    }
+        //});
+        //PrevenirCaracteresInvalidos();
+        debugger;
+        document.title = "SIPAMU - Editar Persona Usuaria";
+        InicializarOtrosEventos();
+        InicializarCamposObservaciones();
+
+    });
+
+    function InicializarOtrosEventos() {
+        var d = new Date();
+
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        var fechaHoy = (day < 10 ? '0' : '') + day + '/' +
+            (month < 10 ? '0' : '') + month + '/' +
+            d.getFullYear();
+
+        $("#txtFechaAplicacion").val(fechaHoy);
+        $('#txtFechaAplicacion').css("background-color", "#f2f2f2");
+        $("#txtFechaAplicacion").prop("readonly", true);
+
+        
+
+        $("#btnEnviarFormulario").click(function () {
+
+            RegistroUsuario();
+            $('#formagregarUsuarios').find('input:text').val('');
+            $('textarea:text').val('');
+
+
+        });
+
+        $("#btnCerrarFrmUsuario").click(function (e) {
+
+            e.preventDefault();
+            $("#btnUsuarios").trigger("click");
+        });
+
+        $("#btnTerminar").click(function () {
+
+            window.location.href = '/sipamu/';
+            setTimeout(volver(), 1000);
+
+        });
+
+        function volver() {
+            window.location.href = '/sipamu/';
+        }
+
+    }
+
+
+    function InicializarCamposObservaciones() { }
+
+    function RegistroUsuario() {
+        debugger;
+        $('#contenedorPrincipal').hide();
+        $('#contenedorEspera').fadeIn();
+        var resultadoValidacion = $('#formagregarUsuarios').parsley().validate();
+        if (resultadoValidacion === true) {
+            var formularioAgregarUsuario = $();
+
+
+
+
+            formularioAgregarUsuario.Nombre = $("#txtNombre").val();
+            formularioAgregarUsuario.PrimerApellido = $("#txtApellido1").val();
+            formularioAgregarUsuario.SegundoApellido = $("#txtApellido2").val();
+            formularioAgregarUsuario.NombreUsuario = $("#txtUsuario").val();
+            formularioAgregarUsuario.FkUnidad = $("#cmbUnidad").val();
+            formularioAgregarUsuario.Rol = $("#cmbRol").val();
+            formularioAgregarUsuario.Clave = $("#txtContrasena").val();
+            formularioAgregarUsuario.ValidarContrasena = $("#txtValidarContrasena").val();
+            formularioAgregarUsuario.Correo = $("txtCorreo").val();
+
+            if (formularioAgregarUsuario.Clave !== formularioAgregarUsuario.ValidarContrasena) {
+                $("#contenedorBotones").show();
+                $("#contenedorEspera").hide();
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error");
+                $("#txtModalContenido").text("Las contraseñas digitadas con coinciden");
+                instMensajes.open();
+
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: '/sipamu/Seguridad/AgregarPersonaUsuaria',
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        objUsuarios: formularioAgregarUsuario
+                    }),
+                    processData: true,
+                    success: function (data) {
+                        if (data.TipoMensaje === 1) {
+
+                            $("#contenedorBotones").show();
+                            $("#contenedorEspera").hide();
+                            $("#txtModalTitulo").css("color", "green");
+                            $("#txtModalTitulo").text("Operación Exitosa");
+                            $("#txtModalContenido").text(data.ContenidoMensaje);
+                            instMensajes.open();
+
+
+
+
+
+                        } else {
+                            $("#contenedorBotones").show();
+                            $("#contenedorEspera").hide();
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("Error al registrar");
+                            $("#txtModalContenido").text(data.ContenidoMensaje);
+                            instMensajes.open();
+                        }
+
+                    },
+                    error: function (xhr, ajaxOptions, error) {
+                        $("#contenedorBotones").show();
+                        $("#contenedorEspera").hide();
+                        $("#txtModalTitulo").css("color", "red");
+                        $("#txtModalTitulo").text("Error al registrar");
+                        $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                        instMensajes.open();
+
+                    }
+                });
+            }
+
+
+
+            debugger;
+
+
+
+        } else {
+            $("#txtModalTitulo").css("color", "red");
+            $("#txtModalTitulo").text("Información Incompleta");
+            $("#txtModalContenido").text("El formulario todavía tiene campos pendientes de llenar.");
+            instMensajes.open();
+        }
+        $('#contenedorEspera').fadeOut();
+        $('#contenedorPrincipal').fadeIn();
+
+
+    }
+
+
+
+    </script>
+    <style>
+        .pad {
+            padding-bottom: 3px;
+            margin-bottom: 3px;
+        }
+
+        .parsley-required {
+            color: red;
+            font-weight: bold;
+        }
+
+        .checkNoSpace {
+            padding-left: 0px !important;
+        }
+
+        ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+            color: white;
+        }
+
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: white;
+            opacity: 1;
+        }
+
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: white;
+            opacity: 1;
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: white;
+        }
+    </style>
+
+    <style>
+        input, select, textarea {
+            max-width: 100%;
+            padding: 4px;
+        }
+
+        input {
+            background-color: blue;
+        }
+    </style>
+    <div class="container-fluid" id="contenedorPrincipal">
+
+
+
+
+
+
+
+
+        <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-toggle="tab" href="#home">
+                        <i class="fa fa-user" aria-hidden="true"></i>Información de Persona Usuaria
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <div class="row comunForm">
+                        <div class="row">
+                            <div class="col-xs-10">
+                            </div>
+                            <div class="col-xs-2">
+                                <button class="botonCerrar danger" id="btnCerrarFrmUsuarios">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-xs-4 form-group">
+                                <label>Nombre de Persona Usuaria</label>
+
+                                <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                            </div>
+
+                            <div class="col-xs-4 form-group">
+                                <label>Primer Apellido</label>
+
+                                <input class="form-control" placeholder="Primer Apellido" id="txtApellido1" type="text" required="">
+                            </div>
+
+                            <div class="col-xs-4 form-group">
+                                <label>Segundo Apellido</label>
+
+                                <input class="form-control" placeholder="Segundo Apellido" id="txtApellido2" type="text" required="">
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-xs-4 form-group">
+
+                                <label>Usuario</label>
+                                <input class="form-control" placeholder="nombre@inamu.go.cr" id="txtUsuario" type="email" required="">
+
+                            </div>
+                            <div class="col-xs-4 form-group">
+
+                                <label>Contraseña</label>
+                                <input class="form-control" placeholder="Contraseña" id="txtContrasena" type="password" required="">
+
+                            </div>
+                            <div class="col-xs-4 form-group">
+
+                                <label>Verificar Contraseña</label>
+                                <input class="form-control" placeholder="Verifique su Contraseña" id="txtValidarContrasena" type="password" required="">
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Rol de Persona Usuaria</label>
+                                <select class="form-control selectized" id="cmbRol" tabindex="-1" style="display: none;"><option value="3" selected="selected">Persona Administradora</option></select><div class="selectize-control form-control single"><div class="selectize-input items full has-options has-items"><div class="item" data-value="3">Persona Administradora</div><input type="text" autocomplete="off" tabindex="" style="width: 4px;"></div></div>
+                            </div>
+
+                        </div>
+
+                        <div class="row" id="contenedorBotones">
+                            <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                                <button type="button" id="btnEnviarFormulario" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Registrar Nueva Persona Usuaria</button>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+        </form>
+
+    </div>
+
