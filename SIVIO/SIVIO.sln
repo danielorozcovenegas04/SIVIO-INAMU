@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIVIO.Comun", "COMUN_MODELO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIVIO.Utilitarios", "SIVIO.Utilitarios\SIVIO.Utilitarios.csproj", "{0371D611-6826-4965-903E-D43F9EDC71F7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0C1EABEC-15A5-457F-8699-03B18528C410}"
+	ProjectSection(SolutionItems) = preProject
+		SIVIO.UI\Models\ExpedienteModel.cs = SIVIO.UI\Models\ExpedienteModel.cs
+		SIVIO.UI\Views\Expediente\GridConsultas.cshtml = SIVIO.UI\Views\Expediente\GridConsultas.cshtml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
