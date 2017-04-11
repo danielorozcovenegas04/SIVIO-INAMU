@@ -16,6 +16,12 @@ namespace SIVIO.UI.Controllers
 
         #endregion
 
+        [AllowAnonymous]
+        public ActionResult FrmAgregarUsuario()
+        {
+            return View();
+        }
+
         // GET: Seguridad
         [Authorize]
         public ActionResult GridUsuarios()
