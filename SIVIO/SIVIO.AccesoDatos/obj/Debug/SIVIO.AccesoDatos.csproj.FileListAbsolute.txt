@@ -32,3 +32,15 @@ G:\GIT UCR\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.Entidades.dll
 G:\GIT UCR\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.Entidades.pdb
 G:\GIT UCR\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.xml
 G:\GIT UCR\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.SqlServer.xml
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.dll.config
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.dll
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.pdb
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.dll
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.SqlServer.dll
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.Entidades.dll
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.Entidades.pdb
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.xml
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.SqlServer.xml
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.csprojResolveAssemblyReference.cache
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.dll
+F:\UCR GIT\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.pdb

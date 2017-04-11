@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     Layout = null;
 }
 @using SIVIO.Entidades
@@ -100,7 +101,7 @@
 
                     var contSeleccionados = tablaUsuarios.rows({ selected: true }).count();
                     var filaSeleccionada = tablaUsuarios.rows({ selected: true }).data();
-                    if (contSeleccionados > 0) {
+                    @*if (contSeleccionados > 0) {
 
                         $("#contenedorGrid").hide();
                         $("#contenedorRoles").fadeIn();
@@ -129,7 +130,7 @@
                         $("#txtModalTitulo").text("No se seleccionaron roles");
                         $("#txtModalContenido").text("Seleccione un rol para continuar");
                         instMensajes.open();
-                    }
+                    }*@
 
                     debugger;
                 }
@@ -142,24 +143,24 @@
 
                 $("#contenedorGrid").hide();
                 $("#contenedorUsuarios").fadeIn();
-                $("#contenedorEspera").show();
+                $.LoadingOverlay("show");
                 $.ajax({
                     type: "POST",
-                    url: '@Url.Action("FrmAgregarUsuarios", "Seguridad")',
+                    url: '@Url.Action("FrmAgregarUsuario", "Seguridad")',
                     async: true
                 }).done(function (data) {
 
-
+                    $.LoadingOverlay("hide");
                     $('#contenedorUsuarios').html(data);
-                    $("#contenedorEspera").hide();
                     $('#contenedorUsuarios').fadeIn();
+
 
 
                 }).fail(function (exception) {
                     $("#txtModalTitulo").css("color", "red");
                     $("#txtModalTitulo").text("Error");
                     $("#txtModalContenido").text(exception);
-                    instMensajes.open();
+                    $.LoadingOverlay("hide");
                 });
 
 

@@ -344,6 +344,7 @@
     <Content Include="Views\Seguridad\GridBitácora.cshtml" />
     <Content Include="Views\Seguridad\GridTarjetasInteligentes.cshtml" />
     <Content Include="Views\Shared\Errores\Sesion.cshtml" />
+    <Content Include="Views\Seguridad\FrmAgregarUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
