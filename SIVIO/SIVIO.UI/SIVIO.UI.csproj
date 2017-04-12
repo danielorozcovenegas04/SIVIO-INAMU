@@ -209,6 +209,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CatalogosModel.cs" />
+    <Compile Include="Models\ExpedienteModel.cs" />
     <Compile Include="Models\SeguridadModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -345,11 +346,11 @@
     <Content Include="Views\Seguridad\GridTarjetasInteligentes.cshtml" />
     <Content Include="Views\Shared\Errores\Sesion.cshtml" />
     <Content Include="Views\Seguridad\FrmAgregarUsuario.cshtml" />
+    <Content Include="Views\Expediente\GridConsultas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Expediente\" />
     <Folder Include="Views\Reporte\" />
   </ItemGroup>
   <ItemGroup>
