@@ -34,6 +34,28 @@ namespace SIVIO.UI.Models
                     return new List<TBL_CONSULTA>();
                 }
             }
-        }        
+        }
+        
+        public List<TBL_REGISTRO> ListarRegistros(int persona)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    var personaConsulta = entidades.TBL_PERSONA.Find(persona);
+                    if(personaConsulta != null)
+                    {
+                        return personaConsulta.TBL_REGISTRO.ToList();
+                    } else
+                    {
+                        return new List<TBL_REGISTRO>();
+                    }
+                }
+                catch
+                {
+                    return new List<TBL_REGISTRO>();
+                }
+            }
+        }    
     }
 }

@@ -347,6 +347,7 @@
     <Content Include="Views\Shared\Errores\Sesion.cshtml" />
     <Content Include="Views\Seguridad\FrmAgregarUsuario.cshtml" />
     <Content Include="Views\Expediente\GridConsultas.cshtml" />
+    <Content Include="Views\Expediente\GridRegistros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
