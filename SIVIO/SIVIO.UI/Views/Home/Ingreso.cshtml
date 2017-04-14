@@ -8,6 +8,8 @@
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
         document.title = "SIVIO - Ingreso al Sistema";
+        $('#btn-login').fadeOut();
+        $.LoadingOverlay("show");
         var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
         $.ajax({
             type: "POST",
@@ -18,14 +20,25 @@
             success: function (resultado) {
                 debugger;
                 var respuesta = JSON.parse(resultado);
-                if (respuesta.Mensaje.TipoMensaje === 1)
-                {
-                    $.each(respuesta.Catalogo, function (key, value) {
+                if (respuesta.Mensaje.TipoMensaje === 1) {
+                    $.each(respuesta.Catalogo, function(key, value) {
                         $('#cmbTipoServicio').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
+                    $('#btn-login').fadeIn();
+                    $.LoadingOverlay("hide");
+                } else {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error");
+                    $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                    
+
                 }
 
 
@@ -38,6 +51,7 @@
                 $("#txtModalTitulo").text("Error al registrar");
                 $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
                 instMensajes.open();
+                $.LoadingOverlay("hide");
 
             }
         });
