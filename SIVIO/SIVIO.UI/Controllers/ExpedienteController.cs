@@ -19,6 +19,30 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
+        public ActionResult FrmCrearUsuariaAT() {
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion)) {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            } else if (!estadoSesion) {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            } else {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+        }
+
+        [Authorize]
+        public ActionResult BusquedaExpediente() {
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion)) {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            } else if (!estadoSesion) {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            } else {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+        }
+
+        [Authorize]
         public ActionResult GridConsultas(int persona)
         {
             bool estadoSesion = true;
