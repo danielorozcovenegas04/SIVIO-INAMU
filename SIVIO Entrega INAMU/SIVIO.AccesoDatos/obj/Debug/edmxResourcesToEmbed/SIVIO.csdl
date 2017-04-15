@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SIVIOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SIVIOEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TBL_ACCION" EntityType="SIVIOModel.TBL_ACCION" />
+    <EntitySet Name="TBL_BITACORA" EntityType="SIVIOModel.TBL_BITACORA" />
+    <EntitySet Name="TBL_CATALOGO" EntityType="SIVIOModel.TBL_CATALOGO" />
+    <EntitySet Name="TBL_DIRECCION" EntityType="SIVIOModel.TBL_DIRECCION" />
+    <EntitySet Name="TBL_LABORAL" EntityType="SIVIOModel.TBL_LABORAL" />
+    <EntitySet Name="TBL_PERSONA" EntityType="SIVIOModel.TBL_PERSONA" />
+    <EntitySet Name="TBL_ROL" EntityType="SIVIOModel.TBL_ROL" />
+    <EntitySet Name="TBL_TELEFONO" EntityType="SIVIOModel.TBL_TELEFONO" />
+    <EntitySet Name="TBL_USUARIO" EntityType="SIVIOModel.TBL_USUARIO" />
+    <EntitySet Name="TBL_VALORCATALOGO" EntityType="SIVIOModel.TBL_VALORCATALOGO" />
+    <AssociationSet Name="FK_TBL_VALORCATALOGO_TBL_CATALOGO" Association="SIVIOModel.FK_TBL_VALORCATALOGO_TBL_CATALOGO">
+      <End Role="TBL_CATALOGO" EntitySet="TBL_CATALOGO" />
+      <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_DIRECCION_TBL_PERSONA" Association="SIVIOModel.FK_TBL_DIRECCION_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_DIRECCION" EntitySet="TBL_DIRECCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_DIRECCION_TBL_VALORCATALOGO" Association="SIVIOModel.FK_TBL_DIRECCION_TBL_VALORCATALOGO">
+      <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+      <End Role="TBL_DIRECCION" EntitySet="TBL_DIRECCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_LABORAL_TBL_PERSONA" Association="SIVIOModel.FK_TBL_LABORAL_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_LABORAL" EntitySet="TBL_LABORAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_TELEFONO_TBL_PERSONA" Association="SIVIOModel.FK_TBL_TELEFONO_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_TELEFONO" EntitySet="TBL_TELEFONO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_TELEFONO_TBL_VALORCATALOGO" Association="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO">
+      <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+      <End Role="TBL_TELEFONO" EntitySet="TBL_TELEFONO" />
+    </AssociationSet>
+    <AssociationSet Name="TBL_ADICCIONES" Association="SIVIOModel.TBL_ADICCIONES">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_VALORCATALOGO" EntitySet="TBL_VALORCATALOGO" />
+    </AssociationSet>
+    <AssociationSet Name="TBL_ROLACCION" Association="SIVIOModel.TBL_ROLACCION">
+      <End Role="TBL_ACCION" EntitySet="TBL_ACCION" />
+      <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+    </AssociationSet>
+    <AssociationSet Name="TBL_ROLUSUARIO" Association="SIVIOModel.TBL_ROLUSUARIO">
+      <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+      <End Role="TBL_USUARIO" EntitySet="TBL_USUARIO" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TBL_ACCION">
+    <Key>
+      <PropertyRef Name="PK_ACCION" />
+    </Key>
+    <Property Name="PK_ACCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VC_CONTROLADOR" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="VC_ACCION" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="VC_DESCRIPCION" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBL_ROL" Relationship="SIVIOModel.TBL_ROLACCION" FromRole="TBL_ACCION" ToRole="TBL_ROL" />
+  </EntityType>
+  <EntityType Name="TBL_BITACORA">
+    <Key>
+      <PropertyRef Name="PK_BITACORA" />
+    </Key>
+    <Property Name="PK_BITACORA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DT_FECHAEVENTO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FK_TIPOEVENTO" Type="Int32" Nullable="false" />
+    <Property Name="FK_USUARIO" Type="Int32" Nullable="false" />
+    <Property Name="VC_DETALLE" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="VC_DIRECCIONIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TBL_CATALOGO">
+    <Key>
+      <PropertyRef Name="PK_CATALOGO" />
+    </Key>
+    <Property Name="PK_CATALOGO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VC_NOMBRECATALOGO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FK_CATALOGOPADRE" Type="Int32" />
+    <NavigationProperty Name="TBL_VALORCATALOGO" Relationship="SIVIOModel.FK_TBL_VALORCATALOGO_TBL_CATALOGO" FromRole="TBL_CATALOGO" ToRole="TBL_VALORCATALOGO" />
+  </EntityType>
+  <EntityType Name="TBL_DIRECCION">
+    <Key>
+      <PropertyRef Name="PK_DIRECCION" />
+    </Key>
+    <Property Name="PK_DIRECCION" Type="Int32" Nullable="false" />
+    <Property Name="FK_PERSONA" Type="Int32" Nullable="false" />
+    <Property Name="VC_DETALLE" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="FK_TIPODIRECCION" Type="Int32" Nullable="false" />
+    <Property Name="FK_PROVINCIA" Type="Int32" Nullable="false" />
+    <Property Name="FK_CANTON" Type="Int32" Nullable="false" />
+    <Property Name="FK_DISTRITO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TBL_PERSONA" Relationship="SIVIOModel.FK_TBL_DIRECCION_TBL_PERSONA" FromRole="TBL_DIRECCION" ToRole="TBL_PERSONA" />
+    <NavigationProperty Name="TBL_VALORCATALOGO" Relationship="SIVIOModel.FK_TBL_DIRECCION_TBL_VALORCATALOGO" FromRole="TBL_DIRECCION" ToRole="TBL_VALORCATALOGO" />
+  </EntityType>
+  <EntityType Name="TBL_LABORAL">
+    <Key>
+      <PropertyRef Name="FK_PERSONA" />
+    </Key>
+    <Property Name="FK_PERSONA" Type="Int32" Nullable="false" />
+    <Property Name="VC_NOMBRELUGARTRABAJO" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="VC_OBSERVACIONES" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="I_ANNOSEXPERIENCIA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TBL_PERSONA" Relationship="SIVIOModel.FK_TBL_LABORAL_TBL_PERSONA" FromRole="TBL_LABORAL" ToRole="TBL_PERSONA" />
+  </EntityType>
+  <EntityType Name="TBL_PERSONA">
+    <Key>
+      <PropertyRef Name="PK_PERSONA" />
+    </Key>
+    <Property Name="PK_PERSONA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VC_IDENTIFICACION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FK_TIPOIDENTIFICACION" Type="Int32" Nullable="false" />
+    <Property Name="FK_NACIONALIDAD" Type="Int32" Nullable="false" />
+    <Property Name="VC_NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VC_APELLIDO1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VC_APELLIDO2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DT_FECHANACIMIENTO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FK_ESTADOCIVIL" Type="Int32" Nullable="false" />
+    <Property Name="FK_ESCOLARIDAD" Type="Int32" Nullable="false" />
+    <Property Name="FK_GENERO" Type="Int32" Nullable="false" />
+    <Property Name="FK_OCUPACION" Type="Int32" Nullable="false" />
+    <Property Name="FK_CONDICIONMIGRATORIA" Type="Int32" Nullable="false" />
+    <Property Name="FK_CONDICIONLABORAL" Type="Int32" Nullable="false" />
+    <Property Name="FK_CONDICIONASEGURAMIENTO" Type="Int32" Nullable="false" />
+    <Property Name="FK_TIPOVIVIENDA" Type="Int32" Nullable="false" />
+    <Property Name="FK_TIPOFAMILIA" Type="Int32" Nullable="false" />
+    <Property Name="FK_ESTADOEMBARAZO" Type="Int32" Nullable="false" />
+    <Property Name="FK_CONDICIONSALUD" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TBL_DIRECCION" Relationship="SIVIOModel.FK_TBL_DIRECCION_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_DIRECCION" />
+    <NavigationProperty Name="TBL_LABORAL" Relationship="SIVIOModel.FK_TBL_LABORAL_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_LABORAL" />
+    <NavigationProperty Name="TBL_TELEFONO" Relationship="SIVIOModel.FK_TBL_TELEFONO_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_TELEFONO" />
+    <NavigationProperty Name="TBL_VALORCATALOGO" Relationship="SIVIOModel.TBL_ADICCIONES" FromRole="TBL_PERSONA" ToRole="TBL_VALORCATALOGO" />
+  </EntityType>
+  <EntityType Name="TBL_ROL">
+    <Key>
+      <PropertyRef Name="PK_ROL" />
+    </Key>
+    <Property Name="PK_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VC_NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="VC_DESCRIPCION" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TBL_ACCION" Relationship="SIVIOModel.TBL_ROLACCION" FromRole="TBL_ROL" ToRole="TBL_ACCION" />
+    <NavigationProperty Name="TBL_USUARIO" Relationship="SIVIOModel.TBL_ROLUSUARIO" FromRole="TBL_ROL" ToRole="TBL_USUARIO" />
+  </EntityType>
+  <EntityType Name="TBL_TELEFONO">
+    <Key>
+      <PropertyRef Name="PK_TELEFONO" />
+    </Key>
+    <Property Name="PK_TELEFONO" Type="Int32" Nullable="false" />
+    <Property Name="FK_PERSONA" Type="Int32" Nullable="false" />
+    <Property Name="VC_NUMERO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FK_TIPOTELEFONO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TBL_PERSONA" Relationship="SIVIOModel.FK_TBL_TELEFONO_TBL_PERSONA" FromRole="TBL_TELEFONO" ToRole="TBL_PERSONA" />
+    <NavigationProperty Name="TBL_VALORCATALOGO" Relationship="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO" FromRole="TBL_TELEFONO" ToRole="TBL_VALORCATALOGO" />
+  </EntityType>
+  <EntityType Name="TBL_USUARIO">
+    <Key>
+      <PropertyRef Name="PK_USUARIO" />
+    </Key>
+    <Property Name="PK_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VC_USUARIO" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="DT_FECHAREGISTRO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="VC_NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VC_APELLIDO1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VC_APELLIDO2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VC_CORREO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IM_CLAVE" Type="Binary" Nullable="false" MaxLength="1000" FixedLength="false" />
+    <Property Name="IM_SALT1" Type="Binary" Nullable="false" MaxLength="100" FixedLength="false" />
+    <Property Name="IM_SALT2" Type="Binary" Nullable="false" MaxLength="100" FixedLength="false" />
+    <NavigationProperty Name="TBL_ROL" Relationship="SIVIOModel.TBL_ROLUSUARIO" FromRole="TBL_USUARIO" ToRole="TBL_ROL" />
+  </EntityType>
+  <EntityType Name="TBL_VALORCATALOGO">
+    <Key>
+      <PropertyRef Name="PK_VALORCATALOGO" />
+    </Key>
+    <Property Name="PK_VALORCATALOGO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_CATALOGO" Type="Int32" Nullable="false" />
+    <Property Name="VC_VALOR1" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="VC_VALOR2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="B_EDITABLE" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="TBL_CATALOGO" Relationship="SIVIOModel.FK_TBL_VALORCATALOGO_TBL_CATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_CATALOGO" />
+    <NavigationProperty Name="TBL_DIRECCION" Relationship="SIVIOModel.FK_TBL_DIRECCION_TBL_VALORCATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_DIRECCION" />
+    <NavigationProperty Name="TBL_TELEFONO" Relationship="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO" FromRole="TBL_VALORCATALOGO" ToRole="TBL_TELEFONO" />
+    <NavigationProperty Name="TBL_PERSONA" Relationship="SIVIOModel.TBL_ADICCIONES" FromRole="TBL_VALORCATALOGO" ToRole="TBL_PERSONA" />
+  </EntityType>
+  <Association Name="FK_TBL_VALORCATALOGO_TBL_CATALOGO">
+    <End Type="SIVIOModel.TBL_CATALOGO" Role="TBL_CATALOGO" Multiplicity="1" />
+    <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_CATALOGO">
+        <PropertyRef Name="PK_CATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_VALORCATALOGO">
+        <PropertyRef Name="FK_CATALOGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_DIRECCION_TBL_PERSONA">
+    <End Type="SIVIOModel.TBL_PERSONA" Role="TBL_PERSONA" Multiplicity="1" />
+    <End Type="SIVIOModel.TBL_DIRECCION" Role="TBL_DIRECCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_DIRECCION">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_DIRECCION_TBL_VALORCATALOGO">
+    <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+    <End Type="SIVIOModel.TBL_DIRECCION" Role="TBL_DIRECCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALORCATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_DIRECCION">
+        <PropertyRef Name="FK_TIPODIRECCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_LABORAL_TBL_PERSONA">
+    <End Type="SIVIOModel.TBL_PERSONA" Role="TBL_PERSONA" Multiplicity="1" />
+    <End Type="SIVIOModel.TBL_LABORAL" Role="TBL_LABORAL" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_LABORAL">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_TELEFONO_TBL_PERSONA">
+    <End Type="SIVIOModel.TBL_PERSONA" Role="TBL_PERSONA" Multiplicity="1" />
+    <End Type="SIVIOModel.TBL_TELEFONO" Role="TBL_TELEFONO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_TELEFONO">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_TELEFONO_TBL_VALORCATALOGO">
+    <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="1" />
+    <End Type="SIVIOModel.TBL_TELEFONO" Role="TBL_TELEFONO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALORCATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_TELEFONO">
+        <PropertyRef Name="FK_TIPOTELEFONO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TBL_ADICCIONES">
+    <End Type="SIVIOModel.TBL_PERSONA" Role="TBL_PERSONA" Multiplicity="*" />
+    <End Type="SIVIOModel.TBL_VALORCATALOGO" Role="TBL_VALORCATALOGO" Multiplicity="*" />
+  </Association>
+  <Association Name="TBL_ROLACCION">
+    <End Type="SIVIOModel.TBL_ACCION" Role="TBL_ACCION" Multiplicity="*" />
+    <End Type="SIVIOModel.TBL_ROL" Role="TBL_ROL" Multiplicity="*" />
+  </Association>
+  <Association Name="TBL_ROLUSUARIO">
+    <End Type="SIVIOModel.TBL_ROL" Role="TBL_ROL" Multiplicity="*" />
+    <End Type="SIVIOModel.TBL_USUARIO" Role="TBL_USUARIO" Multiplicity="*" />
+  </Association>
+</Schema>
