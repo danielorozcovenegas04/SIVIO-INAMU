@@ -18,6 +18,12 @@ namespace SIVIO.UI.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult CrearCaso()
+        {
+            return View();
+        }
+
         [Authorize]
         public ActionResult FrmCrearUsuariaAT() {
             bool estadoSesion = true;
