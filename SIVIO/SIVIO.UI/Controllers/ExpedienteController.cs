@@ -19,7 +19,7 @@ namespace SIVIO.UI.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+        [Authorize]
         public ActionResult CrearCaso()
         {
             return View();
