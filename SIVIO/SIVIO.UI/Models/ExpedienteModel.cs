@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using SIVIO.Entidades;
 using SIVIO.Utilitarios;
+using System.Data;
 
 namespace SIVIO.UI.Models
 {
@@ -56,6 +57,20 @@ namespace SIVIO.UI.Models
                     return new List<TBL_REGISTRO>();
                 }
             }
-        }    
+        }
+
+        public List<TBL_PERSONA> ListarPersonas(string palabra) {
+            System.Diagnostics.Debug.WriteLine(palabra);
+            using (var entidades = new SIVIOEntities()) {
+                try {
+                    List<TBL_PERSONA> personaConsulta = entidades.TBL_PERSONA
+                        .Where(m => (m.VC_NOMBRE + " " + m.VC_APELLIDO1 + " " + m.VC_APELLIDO2 + " " + m.VC_IDENTIFICACION)
+                        .Trim().Contains(palabra.Trim())).ToList();
+                    return personaConsulta;
+                } catch {
+                    return new List<TBL_PERSONA>();
+                }
+            }
+        }
     }
 }
