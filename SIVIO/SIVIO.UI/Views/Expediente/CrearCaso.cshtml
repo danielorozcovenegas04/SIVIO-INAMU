@@ -433,11 +433,273 @@
 
                     <div class="row">
 
-                        <h3>Perfil</h3>
+                        <h3>Perfil de la usuaria</h3>
+                        <label>Edad</label><br>
+                        <input class="form-control" id="txtEdad" type="text" required="">
+                        <label>Fecha de nacimiento</label><br>
+                        <input class="form-control" id="txtEdad" type="date" required=""><br>
 
-                        <!--Formulario-->
+                        <label>Condición civil</label><br>
+                        <table style="width:40%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioCondCivil" value="Casada"> Casada<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondCivil" value="Union libre"> Unión libre<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondCivil" value="Soltera"> Soltera<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioCondCivil" value="Divorciada"> Divorciada<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondCivil" value="Separada"> Separada<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondCivil" value="Viuda"> Viuda<br>
+                                </td>
+                            </tr>
+                        </table>
 
-                    </div>
+                        <label>Escolaridad</label><br>
+                        <table style="width:50%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Primaria completa"> Primaria completa<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Primaria incompleta"> Primaria incompleta<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Secundaria completa"> Secundaria completa<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Secundaria incompleta"> Secundaria incompleta<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Para universitario/tecnico"> Para universitario/técnico<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Universitaria completa"> Universitaria completa<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Universitaria incompleta"> Universitaria incompleta<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Ningun grado"> Ningún grado<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="col-xs-4 form-group">
+
+                            <label>Número total de hijas/os</label> <input class="form-control" id="txtProvinciaDestino" type="text" required="">
+                            <label>Número de hijos/as con los que ingresa al CEAAM</label> <input class="form-control" id="txtCantonDestino" type="text" required="">
+                        </div>
+
+                        <label>Tipo de familia</label><br>
+                        <table style="width:50%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioIipoFamilia" value="Familia nuclear"> Familia nuclear<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioIipoFamilia" value="Familia uniparental"> Familia uniparental<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioIipoFamilia" value="Familia nuclear extendida"> Familia nuclear extendida<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Nacionalidad</label>
+
+                            <input class="form-control" id="txtNacionalidad" type="text" required="">
+                        </div>
+
+                        <label>Condición migratoria</label><br>
+                        <table style="width:50%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioCondMigratoria" value="Nacional"> Nacional<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondMigratoria" value="Regular"> Regular<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondMigratoria" value="Residente"> Residente<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioCondMigratoria" value="Refugiada"> Refugiada<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondMigratoria" value="Irregular"> Irregular<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Ocupación</label>
+
+                            <input class="form-control" id="txtOcupacion" type="text" required="">
+                        </div>
+
+                        <label>Condición laboral</label><br>
+                        <table style="width:50%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioCondLaboral" value="Remunerada"> Remunerada<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondLaboral" value="No remunerada"> No remunerada<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioCondLaboral" value="Desempleada"> Desempleada<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondLaboral" value="Pensionada"> Pensionada<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <label>Experiencia laboral</label><br>
+                        <table style="width:50%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioExpLaboral" value="Si"> Sí<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioExpLaboral" value="No"> No<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Lugar de trabajo</label>
+
+                            <input class="form-control" id="txtLugarDeTrabajo" type="text" required="">
+                        </div>
+
+                        <label>Condición de aseguramiento</label><br>
+                        <table style="width:40%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioCondAseg" value="Directa"> Directa<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondAseg" value="Familiar"> Familiar<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondAseg" value="Voluntario o convenio"> Voluntario o convenio<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioCondAseg" value="Pensionada"> Pensionada<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondAseg" value="Por el estado"> Por el estado<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioCondAseg" value="No tiene"> No tiene<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <label>Vivienda</label><br>
+                        <table style="width:40%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioVivienda" value="Alquilada"> Alquilada<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioVivienda" value="Precario"> Precario<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioVivienda" value="Prestada"> Prestada<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioVivienda" value="Propia total"> Propia total<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioVivienda" value="Propia con hipoteca"> Propia con hipoteca<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioVivienda" value="No tiene"> No tiene<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <label>Condiciones especiales y de salud</label>
+                        <div class="col-xs-4 form-group">
+                            <label>Discapacidad</label><br>
+                            <input type="checkbox" name="fisica" value="fisica">Física<br>
+                            <input type="checkbox" name="cognitiva" value="cognitiva">Cognitiva<br>
+                            <input type="checkbox" name="mental" value="mental">Mental<br>
+                            <input type="checkbox" name="sensorial" value="sensorial">Sensorial<br>
+                            <input type="checkbox" name="embarazo" value="embarazo">Embarazo <label>meses</label><input class="form-control" id="txtOcupacion" type="text" required=""><br>
+                            <input type="checkbox" name="sensorial" value="Padecimientos crónicos">Padecimientos crónicos<br>
+                            <input type="checkbox" name="sensorial" value="ITS">ITS<br>
+                            <input type="checkbox" name="sensorial" value="VIH-SIDA">VIH-SIDA<br>
+                            <input type="checkbox" name="sensorial" value="Condición psiquiátrica">Condición psiquiátrica<br>
+                            <input type="checkbox" name="sensorial" value="Enfermedad terminal">Enfermedad terminal<br>
+                        </div>
+
+                        <label>Adicciones</label><br>
+                        <table style="width:40%">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="radioAdicciones" value="Ninguna"> Ninguna<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="radioAdicciones" value="Medicamentos"> Medicamentos<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="radioAdicciones" value="Alcohol"> Alcohol<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="radioAdicciones" value="Drogras"> Drogras<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <label>Redes o recursos de apoyo con los que cuenta la usuaria</label><br>
+                        <input type="checkbox" name="radioApoyo" value="No tiene"> No tiene<br>
+                        <label>Primaria</label><br>
+                        <div class="col-xs-4 form-group">
+                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                       </div>
+                        <label>Secundaria</label><br>
+                        <div class="col-xs-4 form-group">
+                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                        </div>
+                      
+
+
+                            <!--Formulario-->
+
+</div>
 
                     <div class="row">
 
