@@ -1,8 +1,34 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+    Layout = null;
 }
 @using SIVIO.Entidades
 @model List<TBL_PERSONA>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnBusquedaExpediente").click(function () {
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("BusquedaExpediente", "Expediente")' + "?" + $("#frmBusqueda").serialize(),
+                async: true,
+            }).done(function (data) {
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        });
+    });
+
+</script>
 
 <style>
     .jumbotron {
@@ -76,73 +102,222 @@
             padding: 4px;
         }
     </style>
-    <script src="~/Scripts/INAMU.datatables.min.js"></script>
+    
 
     <!-- Campo de búsqueda -->
-    <br><br><b>Digite el nombre o identificación:</b><br><br>
-    <form action="BusquedaExpediente">
-        <input type="text" name="palabra" value="" />
-        <input type="submit" value="Buscar">
-    </form>
-
-    <br><br><br>
-
-    <!-- Comprueba si hay resultados -->
-    @{  
-        int cantidad = 0;
-        foreach (TBL_PERSONA expediente in Model) {
-            if (expediente.VC_NOMBRE != "") {
-                cantidad++;
-            }
-        }
-    }
-
-    @if (@Request.QueryString["palabra"] != "" & @Request.QueryString["palabra"] != null) {
-        System.Diagnostics.Debug.WriteLine("esto:" + @Request.QueryString["palabra"]);
-        if (cantidad > 0) {
-            <div class="row" id="contenedorGrid" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;                                                                                                                                                                                                                                      border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
-                <div class="col-md-12">
-                     <table id="tblBusquedaExpediente" class="display table-bordered" cellspacing="0" style="width: 100%">
-                
-                        <caption> <b>Resultados para "@Request.QueryString["palabra"]" :</b><br><br></caption>
-
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Identificación</th>
-                                <th>Fecha de última atención</th>
-                                <th>Servicio que brindó la atención</th>
-                                <th>Egreso técnico</th>
-                                <th>CLAIS</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                        @foreach (TBL_PERSONA expediente in Model) {
-                            <tr>
-                                <td>
-                                    @Html.Raw(expediente.VC_NOMBRE) @Html.Raw(expediente.VC_APELLIDO1) @Html.Raw(expediente.VC_APELLIDO2)
-                                </td>
-                                <td>@Html.Raw(expediente.VC_IDENTIFICACION)</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        }  
-                        </tbody>
-                    </table>
+    <div id="busquedaExpediente" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px; border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
+        <div class="row" style="margin-left: 10px; margin-bottom: 10px">
+            <div class="col-md-12">
+                <br /><b>Digite el nombre o identificación:</b><br />
+            </div>
+        </div>
+        <form id="frmBusqueda" name="frmBusqueda">
+            <div class="row" style="margin-left: 10px">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Nombre..." name="palabra" value="" />
+                </div>
+                <div class="col-md-1">
+                    <a href="#" id="btnBusquedaExpediente" class="btn btn-default">Buscar</a>
                 </div>
             </div>
-
-        } else {
-        <b>No se ha encontrado ningún resultado con la palabra clave "@Request.QueryString["palabra"]"</b><br><br>
-        }
-        <br>
-        <form action="">
-            <input type="submit" value="Crear usuaria (atención en comunidad)">
         </form>
-    }
+        <br><br><br>
 
-</div>
+        @if (@Request.QueryString["palabra"] != "" & @Request.QueryString["palabra"] != null)
+        {
+            if (Model.Any())
+            {
+                <script src="~/Scripts/INAMU.datatables.min.js"></script>
+                <script>
+
+        var tablaBusquedaExpediente = $('#tblBusquedaExpediente').DataTable({
+            responsive: true,
+            dom: 'fBrtlp<"clear">',
+            select: true,
+            buttons: [
+
+        {
+            extend: 'excelHtml5',
+            text: '<i class="fa fa-file-excel-o"></i>',
+            titleAttr: 'Excel'
+        },
+        {
+            extend: 'pdfHtml5',
+            text: '<i class="fa fa-file-pdf-o"></i>',
+            titleAttr: 'PDF'
+        }, {
+            text: '<i class="fa fa-pencil-square-o"></i>',
+            titleAttr: 'Editar Persona Usuaria',
+                action: function (e, dt, node, config) {
+                    debugger;
+
+                    var contSeleccionados = tablaBusquedaExpediente.rows({ selected: true }).count();
+                    var filaSeleccionada = tablaBusquedaExpediente.rows({ selected: true }).data();
+                    @*if (contSeleccionados > 0) {
+
+                        $("#contenedorGrid").hide();
+                        $("#contenedorRoles").fadeIn();
+                        $("#contenedorEspera").show();
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("FrmBusquedaExpediente", "Seguridad")',
+                            data: { pkUsuario: filaSeleccionada[0].PKUSUARIO },
+                            async: true
+                        }).done(function (data) {
+
+
+                            $('#contenedorBusquedaExpediente').html(data);
+                            $("#contenedorEspera").hide();
+                            $('#contenedorBusquedaExpediente').fadeIn();
+
+
+                        }).fail(function (exception) {
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("Error");
+                            $("#txtModalContenido").text(exception);
+                            instMensajes.open();
+                        });
+                    } else {
+                        $("#txtModalTitulo").css("color", "red");
+                        $("#txtModalTitulo").text("No se seleccionaron roles");
+                        $("#txtModalContenido").text("Seleccione un rol para continuar");
+                        instMensajes.open();
+                    }*@
+
+                    debugger;
+                }
+        }
+
+            ],
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            tableTools: {
+                "sRowSelect": "single"
+            },
+                        //<th>Nombre</th>
+                        //<th>Identificación</th>
+                        //<th>Fecha de última atención</th>
+                        //<th>Servicio que brindó la atención</th>
+                        //<th>Egreso técnico</th>
+                        //<th>CLAIS</th>
+            "columns": [
+                { "data": "PKPERSONA", "name": "PKPERSONA", "autoWidth": true, "visible":false},
+                { "data": "NOMBRE", "name": "NOMBRE", "autoWidth": true},
+                { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
+                { "data": "FECHA", "name": "FECHA", "autoWidth": true },
+                { "data": "SERVICIO", "name": "SERVICIO", "autoWidth": true },
+                { "data": "EGRESOTECNICO", "name": "EGRESOTECNICO", "autoWidth": true },
+                { "data": "CLAIS", "name": "CLAIS", "autoWidth": true }
+
+            ]
+
+        });
+        $('#tblBusquedaExpediente tbody').on('click', 'tr', function () {
+            debugger;
+            if ($(this).hasClass('selected')) {
+
+
+
+
+                $("#tblBusquedaExpediente tr").removeClass("selectedDT");
+                $("#tblBusquedaExpediente tr").removeClass("selected");
+                $(this).addClass('selected');
+                $(this).addClass('selectedDT');
+            }
+            else {
+                $(this).removeClass('selectedDT');
+
+            }
+        });
+        $(document).ready(function () {
+            document.title = "CEAAM - Buscar Expediente";
+            var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+
+            //$("#contenedorBusquedaExpediente").hide();
+
+
+        });
+
+        function refrescarGrid() { tablaBusquedaExpediente.ajax.reload() }
+                </script>
+                <div class="row" id="contenedorBusquedaExpediente" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
+                                                                                                                                                                                                                                                background-color: #FFFFFF;
+                                                                                                                                                                                                                                                 border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
+                    <div class="col-md-12" >
+                        <table id="tblBusquedaExpediente" class="display table-bordered" cellspacing="0" style="width: 100%">
+
+                            <caption> <b>Resultados para "@Request.QueryString["palabra"]" :</b><br><br></caption>
+
+                            <thead>
+                                <tr>
+                                    <th>PKPERSONA</th>
+                                    <th>Nombre</th>
+                                    <th>Identificación</th>
+                                    <th>Fecha de última atención</th>
+                                    <th>Servicio que brindó la atención</th>
+                                    <th>Egreso técnico</th>
+                                    <th>CLAIS</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (TBL_PERSONA expediente in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.Raw(expediente.PK_PERSONA)
+                                        </td>
+                                        <td>
+                                            @Html.Raw(expediente.VC_NOMBRE + " " + expediente.VC_APELLIDO1 + " " + expediente.VC_APELLIDO2)
+                                        </td>
+                                        <td>@Html.Raw(expediente.VC_IDENTIFICACION)</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <b>No se ha encontrado ningún resultado con la palabra clave "@Request.QueryString["palabra"]"</b><br><br>
+            }
+            <br>
+
+            <div class="row" style="margin-left: 10px">
+                <a href="#" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Crear usuaria (atención en comunidad)</a>
+            </div>
+          }
+            </div>
+        <script src="~/Scripts/INAMU.datatables.min.js"></script>
+    </div>
 

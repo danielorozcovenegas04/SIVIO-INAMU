@@ -348,6 +348,9 @@
     <Content Include="Views\Seguridad\FrmAgregarUsuario.cshtml" />
     <Content Include="Views\Expediente\GridConsultas.cshtml" />
     <Content Include="Views\Expediente\GridRegistros.cshtml" />
+    <Content Include="Views\Expediente\BusquedaExpediente.cshtml" />
+    <Content Include="Views\Expediente\CrearCaso.cshtml" />
+    <Content Include="Views\Expediente\FrmCrearUsuariaAT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
