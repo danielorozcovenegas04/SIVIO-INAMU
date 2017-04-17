@@ -712,7 +712,52 @@
                     <div class="row">
 
                         <h3>Atenciones</h3>
+                       
+                        <label>Legal</label><br>
+                        <input type="checkbox" name="radioApoyo" value="No desea recibir atencion"> No desea recibir atención<br>
+                        <label>Fecha de la atención o sesión realizada</label><br>
+                        <input class="form-control" id="txtFechaAtencion" type="date" required=""><br>
+                        <label>Objetivo de la atención</label><br>
+                        <input class="form-control" id="txtObjetivoAtencion" type="text" required=""><br>
+                        <label>Resumen de la atención</label><br>
+                        <input class="form-control" id="txtResumenAtencion" type="text" required=""><br>
 
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="radioAtenciones" value="Asesoria en vioencia doméstica"> Asesoria en vioencia doméstica<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="radioAtenciones" value="Solicitud de medidas de proteccion"> Solicitud de medidas de proteccion<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="radioAtenciones" value="Asesoria en separacion, divorcio, union de hecho, ganancialidad"> Asesoria en separacion, divorcio, union de hecho, ganancialidad<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="radioAtenciones" value="Asesoría en hostigamiento sexual"> Asesoría en hostigamiento sexual<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="radioAtenciones" value="Asesoría en pensión alimentaria"> Asesoría en pensión alimentaria<br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="radioAtenciones" value="Asesoría en autoridad parental"> Asesoría en autoridad parental<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="radioAtenciones" value="Asesoría en filiación"> Asesoría en filiación<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="radioAtenciones" value="Asesoría en procesos penales"> Asesoría en procesos penales<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="radioAtenciones" value="Asesoría en ley de penalización VcM"> Asesoría en ley de penalización VcM<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="radioAtenciones" value="Asesoría en derechos humanos"> Asesoría en derechos humanos<br>
+                                </td>
+                            </tr>
+                        </table>
                         <!--Formulario-->
 
                     </div>
@@ -721,7 +766,105 @@
 
                         <h3>Hijos e hijas</h3>
 
-                        <!--Formulario-->
+                        <label>Nombre</label><br>
+                        <input class="form-control" id="txtNombre" type="text" required=""><br>
+                        <label>Sexo</label><br>
+                        <table style="width:30%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioSexo" value="Hombre">Hombre<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioSexo" value="Mujer"> Mujer<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <label>Fecha de nacimiento</label><br>
+                        <input class="form-control" id="txtEdad" type="date" required=""><br>
+                        <label>Edad</label><br>
+                        <input class="form-control" id="txtEdad" type="number" required=""><br>
+                        <label>Nacionalidad</label><br>
+                        <input class="form-control" id="txtEdad" type="text" required=""><br>
+                        <label>Escolaridad</label><br>
+                        <table style="width:40%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Ningún grado"> Ningún grado<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Materno"> Materno<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Kinder"> Kinder<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Primaria"> Primaria<br>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Secundaria"> Secundaria<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Aula abierta"> Aula abierta<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Universitaria"> Universitaria<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioEscolaridad" value="Para universitaria"> Para universitaria<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <label>Parentesco con la usuaria</label><input class="form-control" id="txtParentesco" type="text" required=""><br>
+
+                        <label>Condiciones especiales y de salud</label>
+                        <div class="col-xs-4 form-group">
+                            <label>Discapacidad</label><br>
+                            <input type="checkbox" name="fisica" value="fisica">Física<br>
+                            <input type="checkbox" name="cognitiva" value="cognitiva">Cognitiva<br>
+                            <input type="checkbox" name="mental" value="mental">Mental<br>
+                            <input type="checkbox" name="sensorial" value="sensorial">Sensorial<br>
+                            <input type="checkbox" name="sensorial" value="Padecimientos crónicos">Padecimientos crónicos<br>
+                            <input type="checkbox" name="sensorial" value="Alergias">Alergias<br>
+                            <input type="checkbox" name="sensorial" value="VIH-SIDA">VIH-SIDA<br>
+                            <input type="checkbox" name="sensorial" value="Problemas respiratorios">Problemas respiratorios<br>
+                        </div>
+                        <label>Tipo de maltrato vivido</label>
+                        <table style="width:20%">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="checkMaltrato" value="Psicológico"> Psicológico<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="checkMaltrato" value="Físico"> Físico<br>
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="checkMaltrato" value="Bullying"> Bullying<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <label>Abuso sexual</label>
+                        <table style="width:30%">
+                            <tr>
+                                <td>
+                                    <input type="radio" name="radioAbuso" value="No"> No<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioAbuso" value="Sí, con denuncia"> Sí, con denuncia<br>
+                                </td>
+                                <td>
+                                    <input type="radio" name="radioAbuso" value="Sí, sin denuncia"> Sí, sin denuncia<br>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <label>Parentesco del presunto ofensor</label><input class="form-control" id="txtOfensor" type="text" required=""><br>
+                                <!--Formulario-->
 
                     </div>
 
