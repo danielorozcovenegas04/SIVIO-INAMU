@@ -429,13 +429,12 @@
 
                     </div>
 
-                    <!--Escoja uno y sigalo pa-->
-
                     <div class="row">
 
                         <h3>Perfil de la usuaria</h3>
+
                         <label>Edad</label><br>
-                        <input class="form-control" id="txtEdad" type="text" required="">
+                        <input class="form-control" id="txtEdad" type="text" required=""><br>
                         <label>Fecha de nacimiento</label><br>
                         <input class="form-control" id="txtEdad" type="date" required=""><br>
 
@@ -657,7 +656,7 @@
                             <input type="checkbox" name="sensorial" value="ITS">ITS<br>
                             <input type="checkbox" name="sensorial" value="VIH-SIDA">VIH-SIDA<br>
                             <input type="checkbox" name="sensorial" value="Condición psiquiátrica">Condición psiquiátrica<br>
-                            <input type="checkbox" name="sensorial" value="Enfermedad terminal">Enfermedad terminal<br>
+                            <input type="checkbox" name="sensorial" value="Enfermedad terminal">EnfermF terminal<br>
                         </div>
 
                         <label>Adicciones</label><br>
@@ -694,18 +693,302 @@
                             <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
                             <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
                         </div>
-                      
 
-
-                            <!--Formulario-->
-
-</div>
+                    </div>
 
                     <div class="row">
 
                         <h3>Historia de violencia</h3>
 
-                        <!--Formulario-->
+                        <div class="col-xs-4 form-group">
+                            <label>Nombre de persona agresora:</label>
+
+                            <input class="form-control" id="txtPersonaAgresora" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Edad:</label>
+
+                            <input class="form-control" id="txtEdad" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Sexo:</label><br>
+
+                            <input type="radio" name="radioSexo" value="Hombre"> Hombre<br>
+                            <input type="radio" name="radioSexo" value="Mujer"> Mujer
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Nacionalidad:</label>
+
+                            <input class="form-control" id="txtNacionalidad" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Escolaridad:</label>
+
+                            <input class="form-control" id="txtEscolaridad" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Ocupación:</label>
+
+                            <input class="form-control" id="txtOcupacion" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Lugar de trabajo:</label>
+
+                            <input class="form-control" id="txtLugarTrabajo" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Adicciones:</label><br>
+
+                            <input type="radio" name="radioAdicciones" value="Alcohol"> Alcohol<br>
+                            <input type="radio" name="radioAdicciones" value="Medicamentos"> Medicamentos<br>
+                            <input type="radio" name="radioAdicciones" value="Drogas"> Drogas<br>
+                            <input type="radio" name="radioAdicciones" value="Juego"> Juego
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Vínculo con la usuaria:</label>
+
+                            <input class="form-control" id="txtVinculoUsuaria" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Tiempo de la relación:</label>
+
+                            <input class="form-control" id="txtTiempoRelacion" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Tiempo de la agresión:</label>
+
+                            <input class="form-control" id="txtTiempoAgresion" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Número de separaciones de la persona agresora:</label><br>
+
+                            <input type="radio" name="radioSeparaciones" value="1"> 1<br>
+                            <input type="radio" name="radioSeparaciones" value="2 a 4"> 2 a 4<br>
+                            <input type="radio" name="radioSeparaciones" value="5 a 7"> 5 a 7<br>
+                            <input type="radio" name="radioSeparaciones" value="Más de 7"> Más de 7
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Motivos para regresar:</label><br>
+
+                            <input type="radio" name="radioMotivosRegresar" value="Amenazas"> Amenazas<br>
+                            <input type="radio" name="radioMotivosRegresar" value="Dependencia económica"> Dependencia económica<br>
+                            <input type="radio" name="radioMotivosRegresar" value="Factores emocionales"> Factores emocionales<br>
+                            <input type="radio" name="radioMotivosRegresar" value="Mandato religioso"> Mandato religioso<br>
+                            <input type="radio" name="radioMotivosRegresar" value="Promesas de cambio"> Promesas de cambio<br>
+                            <input type="radio" name="radioMotivosRegresar" value="Ausencia de recursos de apoyo"> Ausencia de recursos de apoyo
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Antecedentes legales:</label><br>
+
+                            <input type="radio" name="radioAntecedentesLegales" value="No indica"> No indica<br>
+                            <input type="radio" name="radioAntecedentesLegales" value="No"> No<br>
+                            <input type="radio" name="radioAntecedentesLegales" value="Sí"> Sí
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Antecedentes psiquiátricos:</label><br>
+
+                            <input type="radio" name="radioAntecedentesLegales" value="No indica"> No indica<br>
+                            <input type="radio" name="radioAntecedentesLegales" value="No"> No<br>
+                            <input type="radio" name="radioAntecedentesLegales" value="Sí"> Sí
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Atención médica producto de la agresión:</label><br>
+
+                            <input type="radio" name="radioAtencionMedicaAgresion" value="No"> No<br>
+                            <input type="radio" name="radioAtencionMedicaAgresion" value="Sí"> Sí<br>
+                            <input type="radio" name="radioAtencionMedicaAgresion" value="Aborto"> Aborto<br>
+                            <input type="radio" name="radioAtencionMedicaAgresion" value="Cirugía"> Cirugía<br>
+                            <input type="radio" name="radioAtencionMedicaAgresion" value="Curaciones"> Curaciones<br>
+                            <input type="radio" name="radioAtencionMedicaAgresion" value="Rayos X"> Rayos X<br>
+                            <input type="radio" name="radioAtencionMedicaAgresion" value="Psiquiatría / Psicología"> Psiquiatría / Psicología<br>
+                            <input type="radio" name="radioAtencionMedicaAgresion" value="Ultrasonido"> Ultrasonido<br>
+                            <input type="radio" name="radioAtencionMedicaAgresion" value="Valoración médica"> Valoración médica
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Nombre del centro de salud:</label>
+
+                            <input class="form-control" id="txtCentroSalud" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Tipo de violencia:</label><br>
+
+                            <input type="radio" name="radioTipoViolencia" value="Acoso sexual callejero"> Acoso sexual callejero<br>
+                            <input type="radio" name="radioTipoViolencia" value="Acoso laboral"> Acoso laboral<br>
+                            <input type="radio" name="radioTipoViolencia" value="Hostigamiento sexual"> Hostigamiento sexual<br>
+                            <input type="radio" name="radioTipoViolencia" value="Trata de personas"> Trata de personas<br>
+                            <input type="radio" name="radioTipoViolencia" value="Violencia obstétrica"> Violencia obstétrica
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Impacto de la violencia:</label><br>
+
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="Ansiedad"> Ansiedad<br>
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="Deterioro del aspecto personal"> Deterioro del aspecto personal<br>
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="Desorden del sueño"> Desorden del sueño<br>
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="Dificultad para reconocer capacidades"> Dificultad para reconocer capacidades<br>
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="Desorden alimenticio"> Desorden alimenticio<br>
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="Irritabilidad"> Irritabilidad<br>
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="Llanto"> Llanto<br>
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="Dificultad para adherirse al proceso de intervención"> Dificultad para adherirse al proceso de intervención<br>
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="No reconoce la violencia"> No reconoce la violencia<br>
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="Tristeza"> Tristeza<br>
+                            <input type="checkbox" name="checkboxImpactoViolencia" value="Temores generalizados"> Temores generalizados
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Valoración de riesgo:</label><br>
+
+                            <input type="radio" name="radioValoracionRiesgo" value="Precaución"> Precaución<br>
+                            <input type="radio" name="radioValoracionRiesgo" value="Alto riesgo"> Alto riesgo<br>
+                            <input type="radio" name="radioValoracionRiesgo" value="Riesgo severo"> Riesgo severo
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Condición legal al ingreso:</label>
+
+                            <input class="form-control" id="txtCondicionLegalIngreso" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Medidas de protección:</label><br>
+
+                            <input type="radio" name="radioMedidasProteccion" value="Medidas a favor"> Medidas a favor<br>
+                            <input type="radio" name="radioMedidasProteccion" value="Medidas en contra"> Medidas en contra<br>
+                            <input type="radio" name="radioMedidasProteccion" value="No tiene"> No tiene<br>
+                            <input type="radio" name="radioMedidasProteccion" value="Proceso de familia"> Proceso de familia<br>
+                            <input type="radio" name="radioMedidasProteccion" value="Pensión alimentaria"> Pensión alimentaria<br>
+                            <input type="radio" name="radioMedidasProteccion" value="Proceso penal"> Proceso penal<br>
+                            <input type="radio" name="radioMedidasProteccion" value="Ley de penalización"> Ley de penalización<br>
+                            <input type="radio" name="radioMedidasProteccion" value="Delito sexual"> Delito sexual<br>
+                            <input type="radio" name="radioMedidasProteccion" value="Desobediencia"> Desobediencia<br>
+                            <input type="radio" name="radioMedidasProteccion" value="Tramites migratorios"> Tramites migratorios<br>
+                            <input type="radio" name="radioMedidasProteccion" value="Proceso PANI"> Proceso PANI
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Se encuentra con el programa OAPVD:</label><br>
+
+                            <input type="radio" name="radioOAPVD" value="Sí"> Sí<br>
+                            <input type="radio" name="radioOAPVD" value="No"> No
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Violencia fisica:</label><br>
+
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha lanzado cualquier tipo de objetos"> Le ha lanzado cualquier tipo de objetos<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="La ha empujado o zarandeado"> La ha empujado o zarandeado<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="La ha tirado/halado el pelo"> La ha tirado/halado el pelo<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha dado golpe en la cara"> Le ha dado golpe en la cara<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="La patearon"> La patearon<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha causado fracturas"> Le ha causado fracturas<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="La tiraron al piso"> La tiraron al piso<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Ha intentado ahorcarla o asfixiarla"> Ha intentado ahorcarla o asfixiarla<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha impedido el acceso a los alimentos"> Le ha impedido el acceso a los alimentos<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="La ha amenazado con un arma de fuego"> La ha amenazado con un arma de fuego<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="La ha amenazado con arma punzo cortante"> La ha amenazado con arma punzo cortante<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="La ha quemado en alguna parte del cuerpo"> La ha quemado en alguna parte del cuerpo<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Ha utilizado contra usted algún objeto"> Ha utilizado contra usted algún objeto<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Ha utilizado contra usted un arma de fuego"> Ha utilizado contra usted un arma de fuego<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="La ha amarrado para impedirle salir/hacer sus cosas"> La ha amarrado para impedirle salir/hacer sus cosas<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Ha utilizado contra usted algún arma punzo cortante"> Ha utilizado contra usted algún arma punzo cortante<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha pegado con la mano en cualquier otra parte del cuerpo"> Le ha pegado con la mano en cualquier otra parte del cuerpo<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="La ha mordido y dejado marcas de dientes en el cuerpo"> La ha mordido y dejado marcas de dientes en el cuerpo<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha dado algo para envenenarla/intoxicarla"> Le ha dado algo para envenenarla/intoxicarla<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Ha amenazado con un objeto, palo o garrote"> Ha amenazado con un objeto, palo o garrote<br>
+                            <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha ocurrido alguna otra situación similar."> Le ha ocurrido alguna otra situación similar. 
+                            <label>Cual:</label>
+                            <input class="form-control" id="txtViolenciaFisicaCual" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Violencia psicológica:</label><br>
+
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="Se ha referido a usted con palabras groseras o agresivas"> Se ha referido a usted con palabras groseras o agresivas<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha humillado"> La ha humillado<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="No le presta la debida atención"> No le presta la debida atención<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha seguido, vigilado"> La ha seguido, vigilado<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="Ha registrado sus objetos personales"> Ha registrado sus objetos personales<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha amenazado de muerte"> La ha amenazado de muerte<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha criticado sobre lo que hace o deja de hacer"> La ha criticado sobre lo que hace o deja de hacer<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="Le ha impedido que planifique y controle los embarazos"> Le ha impedido que planifique y controle los embarazos<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha culpado de las cosas que no salen bien"> La ha culpado de las cosas que no salen bien<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha acusado de serle infiel"> La ha acusado de serle infiel<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha dejado encerrada"> La ha dejado encerrada<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha ignorado y no la toma en cuenta en las decisiones"> La ha ignorado y no la toma en cuenta en las decisiones<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="Le ha prohibido amistades o visitar a amigos y familiares"> Le ha prohibido amistades o visitar a amigos y familiares<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="Le ha impedido realizar actividades fuera de la casa"> Le ha impedido realizar actividades fuera de la casa<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="Le ha impedido ir al médico o no se preocupa por su salud"> Le ha impedido ir al médico o no se preocupa por su salud<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha amenazado con quitarle los hijos y/o no verlos"> La ha amenazado con quitarle los hijos y/o no verlos<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="Se ha burlado de usted en distintos aspectos"> Se ha burlado de usted en distintos aspectos<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha amenazado para que no tramite pensión"> La ha amenazado para que no tramite pensión<br>
+                            <input type="checkbox" name="checkboxViolenciaPsicologica" value="Le ha ocurrido alguna otra situación similar."> Le ha ocurrido alguna otra situación similar.
+                            <label>Cual:</label>
+                            <input class="form-control" id="txtViolenciaPsicologicaCual" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Violencia sexual:</label><br>
+
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="Se ha burlado/criticado de su comportamiento sexual"> Se ha burlado/criticado de su comportamiento sexual<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="No toma en consideración sus necesidades y sentimientos sexuales"> No toma en consideración sus necesidades y sentimientos sexuales<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha asediado sexualmente en momentos inoportunos"> La ha asediado sexualmente en momentos inoportunos<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha insultado diciéndole “puta, “frígida” u otras palabras ofensivas"> La ha insultado diciéndole “puta, “frígida” u otras palabras ofensivas<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="Ha intentado besarla/la ha besado a la fuerza"> Ha intentado besarla/la ha besado a la fuerza<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="Le ha hecho comentarios obscenos o morbosos"> Le ha hecho comentarios obscenos o morbosos<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="Ha intentado/le ha introducido objetos por el ano"> Ha intentado/le ha introducido objetos por el ano<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="Ha intentado/le ha introducido objetos por vagina"> Ha intentado/le ha introducido objetos por vagina<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="Ha intentado/ha tenido sexo oral sin su permiso"> Ha intentado/ha tenido sexo oral sin su permiso<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="Ha intentado/le ha quitado su ropa sin que usted lo quiera"> Ha intentado/le ha quitado su ropa sin que usted lo quiera<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="Le ha mostrado material pornográfico sin que usted lo quiera"> Le ha mostrado material pornográfico sin que usted lo quiera<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha tocado  partes de su cuerpo sin que usted quiera"> La ha tocado  partes de su cuerpo sin que usted quiera<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha obligado a que sostenga relaciones sexuales con animales"> La ha obligado a que sostenga relaciones sexuales con animales<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha obligado a tener sexo con otras personas para observar"> La ha obligado a tener sexo con otras personas para observar<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha hecho/mencionado propuestas sexuales que sean incómodas"> La ha hecho/mencionado propuestas sexuales que sean incómodas<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha obligado a que observe a otras personas teniendo sexo"> La ha obligado a que observe a otras personas teniendo sexo<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha chantajeado para que tenga relaciones sexuales con él"> La ha chantajeado para que tenga relaciones sexuales con él<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha agredido si se niega a tener sexo con él"> La ha agredido si se niega a tener sexo con él<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha obligado a tener sexo con otras personas por dinero"> La ha obligado a tener sexo con otras personas por dinero<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="La ha obligado tener relaciones sexuales con él"> La ha obligado tener relaciones sexuales con él<br>
+                            <input type="checkbox" name="checkboxViolenciaSexual" value="Le ha ocurrido alguna otra situación similar."> Le ha ocurrido alguna otra situación similar.
+                            <label>Cual:</label>
+                            <input class="form-control" id="txtViolenciaSexualCual" type="text" required="">
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Violencia patrimonial:</label><br>
+
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="La ha amenazado con quitarle los bienes"> La ha amenazado con quitarle los bienes<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Se ha apropiado de sus bienes a través de engaños, amenazas o chantaje afectivo"> Se ha apropiado de sus bienes a través de engaños, amenazas o chantaje afectivo<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="La ha obligado a entregar su salario o ingresos"> La ha obligado a entregar su salario o ingresos<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Sus bienes aparecen a nombre de persona agresora"> Sus bienes aparecen a nombre de persona agresora<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="La ha obligado a adquirir deudas para beneficio económico de él/ella"> La ha obligado a adquirir deudas para beneficio económico de él/ella<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Sus bienes son manejados por personas que no le dejan utilizarlo"> Sus bienes son manejados por personas que no le dejan utilizarlo<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Le ha destruido objetos de valor para usted (afectivos-históricos)"> Le ha destruido objetos de valor para usted (afectivos-históricos)<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Le quita o restringe el dinero para satisfacer sus necesidades"> Le quita o restringe el dinero para satisfacer sus necesidades<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="La ha amenazado para que no interponga la pensión alimentaria"> La ha amenazado para que no interponga la pensión alimentaria<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Incumple con el pago de la pensión alimentaria"> Incumple con el pago de la pensión alimentaria<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="La amenaza con no comprar alimentos o necesidades básicas"> La amenaza con no comprar alimentos o necesidades básicas<br>
+                            <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Le ha ocurrido alguna otra situación similar."> Le ha ocurrido alguna otra situación similar.
+                            <label>Cual:</label>
+                            <input class="form-control" id="txtViolenciaPatrimonialCual" type="text" required="">
+                        </div>
 
                     </div>
 
