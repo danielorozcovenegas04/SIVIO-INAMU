@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static SIVIO.UI.Models.ExpedienteModel;
 
 namespace SIVIO.UI.Controllers
 {
@@ -18,7 +19,7 @@ namespace SIVIO.UI.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+        [Authorize]
         public ActionResult CrearCaso()
         {
             return View();
@@ -37,14 +38,15 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult BusquedaExpediente() {
+        public ActionResult BusquedaExpediente(string palabra) {
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion)) {
-                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+                return View(_modelExpediente.ListarPersonas(palabra));
+
             } else if (!estadoSesion) {
                 return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
             } else {
-                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
             }
         }
 
