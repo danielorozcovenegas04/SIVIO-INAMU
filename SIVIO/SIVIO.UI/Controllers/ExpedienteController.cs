@@ -86,5 +86,13 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
             }
         }
+
+        #region Coavif
+        [Authorize]
+        public ActionResult Coavif()
+        {
+            return View();
+        }
+        #endregion
     }
 }
