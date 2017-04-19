@@ -206,27 +206,27 @@
         <ul class="nav nav-tabs">
             <li class="active">
                 <a data-toggle="tab" href="#datAdministrativos">
-                    <i class="fa fa-user" aria-hidden="true"></i>Datos administrativos
+                    <i class="fa fa-file-text" aria-hidden="true"></i>Datos administrativos
                 </a>
             </li>
             <li>
                 <a data-toggle="tab" href="#datPersonales">
-                    <i class="fa fa-user" aria-hidden="true"></i>Datos Personales
+                    <i class="fa fa-address-card" aria-hidden="true"></i>Datos Personales
                 </a>
             </li>
             <li>
                 <a data-toggle="tab" href="#valoración">
-                    <i class="fa fa-user" aria-hidden="true"></i>Valoración
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Valoración
                 </a>
             </li>
             <li>
                 <a data-toggle="tab" href="#referencias">
-                    <i class="fa fa-user" aria-hidden="true"></i>Referencias
+                    <i class="fa fa-arrow-up" aria-hidden="true"></i>Referencias
                 </a>
             </li>
             <li>
                 <a data-toggle="tab" href="#historial">
-                    <i class="fa fa-user" aria-hidden="true"></i>Historial
+                    <i class="fa fa-history" aria-hidden="true"></i>Historial
                 </a>
             </li>
         </ul>
@@ -246,21 +246,93 @@
 
                 </div>
             </div>
-            <div id="datPersonales" class="tab-pane fade in active">
+            <div id="datPersonales" class="tab-pane fade in ">
                 <div class="row comunForm">
 
                     <div class="row">
-                        <div class="col-xs-4 form-group">
-                            <label>Nombre de Persona Usuaria</label>
+                        <div class="col-xs-6 form-group">
+                            <div class="col-xs-12 form-group">
+                                <label>Nombre</label>
+                                <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                            </div>
 
-                            <input class="form-control" placeholder="Nombre" id="txtNombre2" type="date" required="">
+                            <div class="col-xs-6 form-group">
+                                <label>Edad</label>
+                                <input class="form-control" placeholder="Edad" id="intEdad" type="number" required="">
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+                                <label>País de Procedencia</label>
+                                <select id="comPais" class="form-control"></select>
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+                                <label>Teléfono</label>
+                                <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="">
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+                                <label>Otra Nacionalidad</label>
+                                <select id="comOtraNacionalidad" class="form-control"></select>
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+                                <label>Condición Migratoria</label>
+                                <input class="form-control" placeholder="Condicion Migratoria" id="comOtraNacionalidad" type="text" required="">
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+                                <label>Numero de Hijos</label>
+                                <input class="form-control" placeholder="Número de Hijos" id="intHijos" type="number" required="">
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+                                <input type="checkbox" name="hijo mayor" value="Mayor">Hijo mayor de 12 años
+
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+                                <label>Discapacidades en hijos/hijas</label>
+                                <select id="comDiscapacidad" class="form-control"></select>
+                            </div>
                         </div>
 
-                    </div>
+                        <div class="col-xs-6 form-group">
+                            <div class="col-xs-12 form-group">
+                                <label>Número Documento de identificación</label>
+                                <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="">
+                            </div>
 
+                            <div class="col-xs-12 form-group">
+                                <label>Lugar de Procedencia</label>
+                            </div>
+                            <div class="col-xs-4 form-group">
+                                <label>Provincia</label>
+                                <select id="comProvincia" class="form-control"></select>
+                            </div>
+                            <div class="col-xs-4 form-group">
+                                <label>Cantón</label>
+                                <select id="comCanton" class="form-control"></select>
+                            </div>
+                            <div class="col-xs-4 form-group">
+                                <label>Distrito</label>
+                                <select id="comDistrito" class="form-control"></select>
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+                                <label>Nacionalidad</label>
+                                <select id="comNacionalidad" class="form-control"></select>
+                            </div>
+
+                            <div class="col-xs-12 form-group">
+                                <label>Lugar de Trabajo</label>
+                                <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="valoración" class="tab-pane fade in active">
+            <div id="valoración" class="tab-pane fade in">
                 <div class="row comunForm">
 
                     <div class="row">
@@ -274,7 +346,8 @@
 
                 </div>
             </div>
-            <div id="referencias" class="tab-pane fade in active">
+
+            <div id="referencias" class="tab-pane fade in ">
                 <div class="row comunForm">
 
                     <div class="row">
@@ -288,7 +361,7 @@
 
                 </div>
             </div>
-            <div id="historial" class="tab-pane fade in active">
+            <div id="historial" class="tab-pane fade in ">
                 <div class="row comunForm">
 
                     <div class="row">
@@ -304,7 +377,7 @@
             </div>
         </div>
 
-        
+
 
     </form>
 

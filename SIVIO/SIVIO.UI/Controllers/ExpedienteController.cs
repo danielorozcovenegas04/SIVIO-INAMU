@@ -11,6 +11,7 @@ namespace SIVIO.UI.Controllers
     {
         #region Modelos
         SIVIO.UI.Models.ExpedienteModel _modelExpediente = new Models.ExpedienteModel();
+        SIVIO.UI.Models.CatalogosModel _modelCatalogos = new Models.CatalogosModel();
         #endregion
 
         // GET: Expediente
@@ -91,6 +92,7 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult Coavif()
         {
+            var catalogoServicios = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Nacionalidad);
             return View();
         }
         #endregion
