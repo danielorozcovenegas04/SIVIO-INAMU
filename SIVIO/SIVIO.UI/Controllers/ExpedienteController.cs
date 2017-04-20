@@ -26,7 +26,7 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult FrmCrearUsuariaAT() {
+        public ActionResult CrearUsuariaAtencionComunidad() {
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion)) {
                 return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
