@@ -72,5 +72,74 @@ namespace SIVIO.UI.Models
                 }
             }
         }
+
+        #region COAVIF
+        public List<TBL_PERSONA> ListarPersonas() {
+
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<TBL_PERSONA> personaConsulta = entidades.TBL_PERSONA.ToList();
+                    return personaConsulta;
+                }
+                catch
+                {
+                    return new List<TBL_PERSONA>();
+                }
+            }
+        }
+        public List<TBL_USUARIO> ListarUSuarios()
+        {
+
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<TBL_USUARIO> usuarioConsulta = entidades.TBL_USUARIO.ToList();
+                    return usuarioConsulta;
+                }
+                catch
+                {
+                    return new List<TBL_USUARIO>();
+                }
+            }
+        }
+
+        public List<TBL_ROL> ListarRoles()
+        {
+
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<TBL_ROL> rolConsulta = entidades.TBL_ROL.ToList();
+                    return rolConsulta;
+                }
+                catch
+                {
+                    return new List<TBL_ROL>();
+                }
+            }
+        }
+
+        public List<TBL_ROL_USUARIO> ListarUSuariosRoles()
+        {
+
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<TBL_ROL_USUARIO> rolUsuarioConsulta = entidades.TBL_ROL_USUARIO.ToList();
+                    return rolUsuarioConsulta;
+                }
+                catch
+                {
+                    return new List<TBL_ROL_USUARIO>();
+                }
+            }
+        }
+
+        #endregion
     }
 }

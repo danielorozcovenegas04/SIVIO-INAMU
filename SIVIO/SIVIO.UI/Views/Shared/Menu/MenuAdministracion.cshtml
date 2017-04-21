@@ -55,11 +55,11 @@
             });
         });
 
-        $('#btnBuscarExpediente').click(function () {
+        $('#btnBuscarBitacora').click(function () {
             $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("BusquedaExpediente", "Expediente")',
+                url: '@Url.Action("BusquedaExpediente", "Expediente")',         
                 async: true
             }).done(function (data) {
 
@@ -67,6 +67,8 @@
                 $('#contendorFrames').html(data);
                 $("#contenedorEspera").hide();
                 $('#contendorFrames').fadeIn();
+
+
             }).fail(function (exception) {
                 $("#txtModalTitulo").css("color", "red");
                 $("#txtModalTitulo").text("Error de Sistema");
@@ -75,6 +77,7 @@
                 instMensajes.open();
                 $.LoadingOverlay("hide");
             });
+                
         });
     });
 </script>
