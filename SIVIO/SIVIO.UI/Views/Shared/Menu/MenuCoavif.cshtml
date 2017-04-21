@@ -30,12 +30,12 @@
             window.location.href = '@Url.Action("Index", "Home")';
         });
 
-        $('#btnUsuarios').click(function () {
+        $('#btnBuscarExpediente').click(function () {
             debugger;
             $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("Coavif", "Expediente")',
+                url: '@Url.Action("BusquedaExpediente", "Expediente")',
                 async: true
             }).done(function (data) {
 
