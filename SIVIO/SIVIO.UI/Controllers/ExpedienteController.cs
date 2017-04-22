@@ -86,5 +86,38 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
             }
         }
+
+        #region Coavif
+        [Authorize]
+        public ActionResult Coavif()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult ConsultaCoavif()
+        {
+           
+            var listaPersonas = _modelExpediente.ListarPersonas();
+            var listaUsuarios = _modelExpediente.ListarUSuarios();
+            var listaRol = _modelExpediente.ListarRoles();
+            var listaConsulta = _modelExpediente.ListarConsultas();
+            var listaRolUsuario = _modelExpediente.ListarUSuariosRoles();
+            foreach (var rol in listaRol) {
+                foreach (var usuario in listaUsuarios) {
+                    foreach (var rolusuario in listaRolUsuario)
+                    {
+                        if (rol.PK_ROL==rolusuario.FK_ROL && usuario.PK_USUARIO==rolusuario.FK_USUARIO) {
+                            ViewBag.grid(rol.VC_NOMBRE,(usuario.VC_NOMBRE+ usuario.VC_APELLIDO1));
+                        }
+                    }
+                }
+            }
+            
+            return View(_modelExpediente.ListarPersonas());
+        }
+
+
+        #endregion
     }
 }

@@ -351,10 +351,13 @@
     <Content Include="Views\Expediente\BusquedaExpediente.cshtml" />
     <Content Include="Views\Expediente\CrearCaso.cshtml" />
     <Content Include="Views\Expediente\FrmCrearUsuariaAT.cshtml" />
+    <Content Include="Views\Expediente\Coavif.cshtml" />
+    <Content Include="Views\Expediente\ConsultaCoavif.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\DatPersonales\" />
     <Folder Include="Views\Reporte\" />
   </ItemGroup>
   <ItemGroup>
