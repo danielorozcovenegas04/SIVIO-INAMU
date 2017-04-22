@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SIVIO.Entidades;
+using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +13,7 @@ namespace SIVIO.UI.Controllers
     {
         #region Modelos
         SIVIO.UI.Models.ExpedienteModel _modelExpediente = new Models.ExpedienteModel();
+        SIVIO.UI.Models.CatalogosModel _modelCatalogos = new Models.CatalogosModel();
         #endregion
 
         // GET: Expediente
@@ -24,6 +27,22 @@ namespace SIVIO.UI.Controllers
         {
             return View();
         }
+        
+        [AllowAnonymous]
+        public JsonResult ListarCatalogosCrearCaso()
+        {
+            List<int> catalogos = new List<int>()
+            {
+                (int)Utilitarios.Enumerados.EnumCatalogos.CEAAM,
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoIngresoCEAAM,
+                    
+                              
+            };
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_modelCatalogos.llenarListaCatalogos(catalogos)), JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
         [Authorize]
         public ActionResult FrmCrearUsuariaAT() {
