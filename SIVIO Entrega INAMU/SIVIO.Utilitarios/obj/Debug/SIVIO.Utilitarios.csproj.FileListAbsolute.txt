@@ -3,3 +3,8 @@ C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Utilitarios\bin\Debug\SIVIO.Utilit
 C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.dll
 C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.pdb
 C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.csprojResolveAssemblyReference.cache
+C:\Users\Daniel Orozco\Documents\GitHub\Proyecto\SIVIO Entrega INAMU\SIVIO.Utilitarios\bin\Debug\SIVIO.Utilitarios.dll
+C:\Users\Daniel Orozco\Documents\GitHub\Proyecto\SIVIO Entrega INAMU\SIVIO.Utilitarios\bin\Debug\SIVIO.Utilitarios.pdb
+C:\Users\Daniel Orozco\Documents\GitHub\Proyecto\SIVIO Entrega INAMU\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.csprojResolveAssemblyReference.cache
+C:\Users\Daniel Orozco\Documents\GitHub\Proyecto\SIVIO Entrega INAMU\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.dll
+C:\Users\Daniel Orozco\Documents\GitHub\Proyecto\SIVIO Entrega INAMU\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.pdb

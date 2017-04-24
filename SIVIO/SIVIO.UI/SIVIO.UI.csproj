@@ -352,6 +352,7 @@
     <Content Include="Views\Expediente\CrearCaso.cshtml" />
     <Content Include="Views\Expediente\FrmCrearUsuariaAT.cshtml" />
     <Content Include="Views\Expediente\Coavif.cshtml" />
+    <Content Include="Views\Expediente\CrearUsuaria_DelegacionMujer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

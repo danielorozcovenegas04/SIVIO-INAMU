@@ -38,6 +38,27 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
+        public ActionResult CrearUsuaria_DelegacionMujer()
+        {
+            bool estadoSesion = true;
+            /*
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            } */
+            //return View(viewName: "~/Views/Expediente/CrearUsuaria_DelegacionMujer.cshtml"); // Quitar
+            return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+        }
+
+        [Authorize]
         public ActionResult BusquedaExpediente(string palabra) {
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion)) {
