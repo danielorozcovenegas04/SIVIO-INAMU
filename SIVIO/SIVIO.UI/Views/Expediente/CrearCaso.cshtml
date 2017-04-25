@@ -10,7 +10,7 @@
             var catalogo = respuesta[nombreCatalogo];
 
             console.log(catalogo);
-
+            debugger;
             if (catalogo.Mensaje.TipoMensaje === 1) {
                 $.each(catalogo.Catalogo, function (key, value) {
                     console.log($(nombreComboBox));
@@ -59,10 +59,15 @@
             return respuesta;
         }).then(llenarComboBox("CEEAM", "#cmbTipoCEAAM"))
             .then(llenarComboBox("Tipo de Ingreso CEEAM", "#cmbTipoIngreso"))
-            .then(llenarComboBox("Tipo de Egreso", "#cmbTipoEgreso"))
+            .then(llenarComboBox("Tipo de Egreso CEEAM", "#cmbTipoEgreso"))
             //.then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbRespuestaSiNosponible"))
             .then(() => {
-            $('#btn-login').fadeIn();
+                $('#btn-login').fadeIn();
+                $('#cmbTipoCEAAM').selectize({
+                    sortField: 'text',
+                    create: false,
+                    placeholder: "Tipo de CEAAM",
+                });
             $.LoadingOverlay("hide");
         });
 
@@ -310,7 +315,7 @@
         </ul>
 
         <div class="tab-content">
-            <div id="tabIngresoEgreso" class="tab-pane fade in active">
+            <div id="tabIngresoEgreso" class="tab-pane fade in active" style="padding:5px">
                 <h3>Ingreso y Egreso</h3>
                 @* Pestaña Ingreso y egreso *@
 
@@ -320,9 +325,9 @@
                         <label>CEAAM al que ingresa:</label><br>
 
                         <div class="row">
-                            <div class="col-xs-11">
-                                <select id="cmbTipoCEAAM" class="form-control">
-                                    <option selected disabled>Seleccione una opcion</option>
+                            <div class="col-xs-12">
+                                <select id="cmbTipoCEAAM" class="form-control" multiple>
+                                    @*<option selected disabled>Seleccione una opcion</option>*@
                                 </select>
                             </div>
                         </div>
@@ -332,7 +337,7 @@
                         <label>Tipo de ingreso:</label><br>
 
                         <div class="row">
-                            <div class="col-xs-11">
+                            <div class="col-xs-12">
                                 <select id="cmbTipoIngreso" class="form-control">
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
@@ -361,8 +366,8 @@
                     </div>
 
                     <div class="col-xs-4 form-group">
-                        <label>Numero de familia:</label>
-                        <input class="form-control" id="txtNumeroFamilia" type="text" required="">
+                        <label>Número de familia:</label>
+                        <input class="form-control" id="txtNumeroFamilia" type="number" required="">
                     </div>
 
                     <div class="col-xs-4 form-group">
@@ -373,7 +378,7 @@
                     <div class="col-xs-4 form-group">
                         <label>Tipo de egreso:</label><br>
                         <div class="row">
-                            <div class="col-xs-11">
+                            <div class="col-xs-12">
                                 <select id="cmbTipoEgreso" class="form-control">
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
@@ -418,25 +423,57 @@
                 </div>
             </div>
 
-            <div id="tabPerfilUsuaria" class="tab-pane fade">
+            <div id="tabPerfilUsuaria" class="tab-pane fade" style="padding:5px">
                 <h3>Perfil de Usuaria</h3>
                 
                 @* Pestaña Perfil de la Usuaria *@
 
                 <div class="row" id="tabPerfilUsuaria">
-                    
-                    <label>Edad</label><br>
-                    <input class="form-control" id="txtEdad" type="text" required=""><br>
-                    <label>Fecha de nacimiento</label><br>
-                    <input class="form-control" id="txtEdad" type="date" required=""><br>
+
+
+                    <div class="col-xs-4 form-group">
+                        <label>Edad:</label>
+                        <input class="form-control" id="txtEdad" type="text" required="">
+                    </div>
+
+                    <div class="col-xs-4 form-group">
+                        <label>Fecha de nacimiento:</label>
+                        <input class="form-control" id="txtFechaNacimiento" type="date" required="">
+                    </div>
+
+                    <div class="col-xs-4 form-group">
+                        <label>Orientación sexual:</label><br>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <select id="cmbOrientacionSexual" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 form-group">
+                        <label>Origen Étnico:</label><br>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <select id="cmbOrigenEtnico" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+               
 
                     <div class="col-xs-4 form-group">
                         <label>Condición civil</label><br>
 
                         <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Condición Civil" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbCondicionCivil" class="form-control"></select>
+                            <div class="col-xs-12">
+                                <select id="cmbCondicionCivil" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -446,18 +483,18 @@
                         <label>Escolaridad</label><br>
 
                         <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Escolaridad" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbEscolaridad" class="form-control"></select>
+                            <div class="col-xs-12">
+                                <select id="cmbEscolaridad" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
 
                     <div class="col-xs-4 form-group">
-
-                        <label>Número total de hijas/os</label> <input class="form-control" id="txtProvinciaDestino" type="text" required="">
-                        <label>Número de hijos/as con los que ingresa al CEAAM</label> <input class="form-control" id="txtCantonDestino" type="text" required="">
+                        <label>Número total de hijos:</label>
+                        <input class="form-control" id="txtNumeroHijos" type="number" required="">
                     </div>
 
 
@@ -465,35 +502,54 @@
                         <label>Tipo de familia</label><br>
 
                         <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Familia" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbTipoFamilia" class="form-control"></select>
+                            <div class="col-xs-12">
+                                <select id="cmbTipoFamilia" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="col-xs-4 form-group">
-                        <label>Nacionalidad</label>
+                        <label>Nacionalidad</label><br>
 
-                        <input class="form-control" id="txtNacionalidad" type="text" required="">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <select id="cmbNacionalidad" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <label>Otra nacionalidad</label><br>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <select id="cmbOtraNacionalidad" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <input type="radio" name="radioApatrida" value="Apatrida"> Ápatrida
                     </div>
+
+                   
 
                     <div class="col-xs-4 form-group">
                         <label>Condición migratoria</label><br>
 
                         <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Condicion Migratoria" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbCondicionMigratoria" class="form-control"></select>
+                            <div class="col-xs-12">
+                                <select id="cmbCondicionMigratoria" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="col-xs-4 form-group">
-                        <label>Ocupación</label>
-
+                        <label>Ocupación:</label>
                         <input class="form-control" id="txtOcupacion" type="text" required="">
                     </div>
 
@@ -501,29 +557,26 @@
                         <label>Condición laboral</label><br>
 
                         <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Condicion laboral" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbCondicionLaborarl" class="form-control"></select>
+                            <div class="col-xs-12">
+                                <select id="cmbCondicionLaboral" class="form-control"></select>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="col-xs-4 form-group">
-                        <label>Experiencia laboral</label><br>
-
+                        <label>Experiencia Laboral</label><br>
                         <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Experiencia laboral" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbExperienciaLaboral" class="form-control"></select>
+                            <div class="col-xs-12">
+                                <input type="radio" name="radioCondicionLaboralSi" value="radioCondicionLaboralSi"> Si
+                                <input type="radio" name="radioCondicionLaboralNo" value="radioCondicionLaboralSi"> No
                             </div>
                         </div>
                     </div>
 
-
-
+                
                     <div class="col-xs-4 form-group">
                         <label>Lugar de trabajo</label>
-
                         <input class="form-control" id="txtLugarDeTrabajo" type="text" required="">
                     </div>
 
@@ -531,8 +584,7 @@
                         <label>Condición de aseguramiento</label><br>
 
                         <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Condición de aseguramiento" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
+                            <div class="col-xs-12">
                                 <select id="cmbCondicionAseguramiento" class="form-control"></select>
                             </div>
                         </div>
@@ -598,7 +650,7 @@
                 </div>
             </div>
 
-            <div id="tabHistoriaViolencia" class="tab-pane fade">
+            <div id="tabHistoriaViolencia" class="tab-pane fade" style="padding:5px">
                 <h3>Historia de Violencia</h3>
                 @* Pestaña Historia de violencia *@
 
@@ -928,7 +980,7 @@
                 </div>
             </div>
 
-            <div id="tabAtenciones" class="tab-pane fade">
+            <div id="tabAtenciones" class="tab-pane fade" style="padding:5px">
                 <h3>Atenciones</h3>
                 
                 @* Pestaña Atenciones *@
@@ -940,7 +992,7 @@
                 </div>                
             </div>
 
-            <div id="tabHijosHijas" class="tab-pane fade">
+            <div id="tabHijosHijas" class="tab-pane fade" style="padding:5px">
                 <h3>Hijos e Hijas</h3>
                 @* Pestaña Hijos e Hijas *@
                 <div class="row" id="tabHijosHijas">
@@ -948,7 +1000,7 @@
                 </div>
             </div>
 
-            <div id="tabSeguimientos" class="tab-pane fade">
+            <div id="tabSeguimientos" class="tab-pane fade" style="padding:5px">
                 <h3>Seguimientos</h3>
                 @* Pestaña Seguimientos *@
 
