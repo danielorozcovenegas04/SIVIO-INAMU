@@ -59,7 +59,7 @@
             $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("BusquedaExpediente", "Expediente")',         
+                url: '@Url.Action("ConsultaCoavif", "Expediente")',         
                 async: true
             }).done(function (data) {
 
