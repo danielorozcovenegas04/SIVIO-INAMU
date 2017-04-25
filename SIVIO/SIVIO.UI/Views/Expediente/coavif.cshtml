@@ -15,10 +15,7 @@
 <script src="https://www.google.com/cloudprint/client/cpgadget.js">
 </script>
 <script type="text/javascript">
-    $("#btnCerrarFrmUsuarios").click(function (e) {
-        e.preventDefault();
-        $("#btnUsuarios").trigger("click");
-    });
+
     var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
     $(document).ready(function () {
         $.LoadingOverlay("hide");
@@ -120,26 +117,75 @@
 
 
 
-        $("#btnEnviarFormulario").click(function () {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CargarCatalogos")',
+            dataType: "json",
+            contentType: "application/json",
+            processData: true,
+            success: function (resultado) {
+                debugger;
+                var respuesta = JSON.parse(resultado);
+                if (respuesta.Mensaje.TipoMensaje === 1) {
+                    $.each(respuesta.Catalogo, function(key, value) {
+                        $('#comPais').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
 
-            RegistroUsuario();
-            $('#formagregarUsuarios').find('input:text').val('');
-            $('textarea:text').val('');
+                    $.each(respuesta.Catalogo, function(key, value) {
+                        $('#comOtraNacionalidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
+                    $.each(respuesta.Catalogo, function(key, value) {
+                        $('#comNacionalidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
+                    $.each(respuesta.CatalogoCondicionMigratoria, function(key, value) {
+                        $('#comMigratoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
+                    $.each(respuesta.CatalogoDiscapasidades, function(key, value) {
+                        $('#comDiscapacidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                } else {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error");
+                    $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                    
+
+                }
 
 
-        });
 
-        $("#btnCerrarFrmUsuario").click(function (e) {
+            },
+            error: function (xhr, ajaxOptions, error) {
+                $("#contenedorBotones").show();
+                $("#contenedorEspera").hide();
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error al registrar");
+                $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                instMensajes.open();
+                $.LoadingOverlay("hide");
 
-            e.preventDefault();
-            $("#btnUsuarios").trigger("click");
-        });
-
-        $("#btnTerminar").click(function () {
-
-            window.location.href = '/sipamu/';
-            setTimeout(volver(), 1000);
-
+            }
         });
 
         function volver() {
@@ -201,7 +247,6 @@
 
 
 
-
     <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
         <ul class="nav nav-tabs">
             <li class="active">
@@ -210,29 +255,24 @@
                 </a>
             </li>
             <li>
-                <a data-toggle="tab" href="#datPersonales">
-                    <i class="fa fa-address-card" aria-hidden="true"></i>Datos Personales
+                <a data-toggle="tab" href="#datUsuaria">
+                    <i class="fa fa-address-card" aria-hidden="true"></i>Datos Usuaria
                 </a>
             </li>
             <li>
-                <a data-toggle="tab" href="#valoración">
+                <a data-toggle="tab" href="#valoracion">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Valoración
                 </a>
             </li>
             <li>
-                <a data-toggle="tab" href="#referencias">
-                    <i class="fa fa-arrow-up" aria-hidden="true"></i>Referencias
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#historial">
-                    <i class="fa fa-history" aria-hidden="true"></i>Historial
+                <a data-toggle="tab" href="#atencion">
+                    <i class="fa fa-arrow-up" aria-hidden="true"></i>Atención
                 </a>
             </li>
         </ul>
 
         <div class="tab-content">
-            <div id="datAdministrativos" class="tab-pane fade in active">
+            <div id="datAdministrativos" class="tab-pane active">
                 <div class="row comunForm">
 
                     <div class="row">
@@ -246,9 +286,8 @@
 
                 </div>
             </div>
-            <div id="datPersonales" class="tab-pane fade in ">
+            <div id="datUsuaria" class="tab-pane">
                 <div class="row comunForm">
-
                     <div class="row">
                         <div class="col-xs-6 form-group">
                             <div class="col-xs-12 form-group">
@@ -256,9 +295,10 @@
                                 <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
                             </div>
 
+
                             <div class="col-xs-6 form-group">
                                 <label>Edad</label>
-                                <input class="form-control" placeholder="Edad" id="intEdad" type="number" required="">
+                                <input class="form-control" placeholder="Edad" id="intEdad" type="number" required="" min="0">
                             </div>
 
                             <div class="col-xs-12 form-group">
@@ -278,23 +318,25 @@
 
                             <div class="col-xs-12 form-group">
                                 <label>Condición Migratoria</label>
-                                <input class="form-control" placeholder="Condicion Migratoria" id="comOtraNacionalidad" type="text" required="">
+                                <select id="comMigratoria" class="form-control"></select>
                             </div>
 
                             <div class="col-xs-12 form-group">
                                 <label>Numero de Hijos</label>
-                                <input class="form-control" placeholder="Número de Hijos" id="intHijos" type="number" required="">
+                                <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
                             </div>
 
                             <div class="col-xs-12 form-group">
-                                <input type="checkbox" name="hijo mayor" value="Mayor">Hijo mayor de 12 años
-
+                                <label>
+                                    <input style="display:inline-block;" id="checkMayorDoce" type="checkbox"> Hijo mayor de 12 años
+                                </label>
                             </div>
 
                             <div class="col-xs-12 form-group">
                                 <label>Discapacidades en hijos/hijas</label>
                                 <select id="comDiscapacidad" class="form-control"></select>
                             </div>
+
                         </div>
 
                         <div class="col-xs-6 form-group">
@@ -325,14 +367,32 @@
                             </div>
 
                             <div class="col-xs-12 form-group">
+                                <label>
+                                    <input style="display:inline-block;" id="checkApatrida" type="checkbox"> Apátrida
+                                </label>
+                            </div>
+
+                            <div class="col-xs-12 form-group">
                                 <label>Lugar de Trabajo</label>
                                 <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
                             </div>
+
+                            <div class="col-xs-4 form-group">
+                                <label>
+                                    <input style="display:inline-block;" id="checkEmbarazo" type="checkbox"> Embarazo
+                                </label>
+                            </div>
+
+                            <div class="col-xs-8 form-group">
+                                <label>Meses de embarazo</label>
+                                <input class="form-control" placeholder="Meses de embarazo" id="intEmbarazo" type="number" required="" min="0">
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="valoración" class="tab-pane fade in">
+            <div id="valoracion" class="tab-pane">
                 <div class="row comunForm">
 
                     <div class="row">
@@ -346,8 +406,7 @@
 
                 </div>
             </div>
-
-            <div id="referencias" class="tab-pane fade in ">
+            <div id="atencion" class="tab-pane">
                 <div class="row comunForm">
 
                     <div class="row">
@@ -355,20 +414,6 @@
                             <label>Nombre de Persona Usuaria</label>
 
                             <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div id="historial" class="tab-pane fade in ">
-                <div class="row comunForm">
-
-                    <div class="row">
-                        <div class="col-xs-2 form-group">
-                            <label>Nombre de Persona Usuaria</label>
-
-                            <input class="form-control" placeholder="Nombre" id="txtNombre5" type="date" required="">
                         </div>
 
                     </div>
