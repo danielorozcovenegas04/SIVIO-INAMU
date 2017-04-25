@@ -33,10 +33,11 @@ namespace SIVIO.UI.Controllers
         {
             List<int> catalogos = new List<int>()
             {
-                (int)Utilitarios.Enumerados.EnumCatalogos.CEAAM,
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoCEAAM,
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoIngresoCEAAM,
-                    
-                              
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoEgresoCEAAM,
+                (int)Utilitarios.Enumerados.EnumCatalogos.RespuestaSiNosponible,
+
             };
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_modelCatalogos.llenarListaCatalogos(catalogos)), JsonRequestBehavior.AllowGet);
         }
