@@ -68,7 +68,10 @@ namespace SIVIO.Utilitarios
             TipoVinculoRelación = 62,
             SituacionRiesgo = 63,
             CategoriaRiesgo = 64,
-            TipoServicio = 65
+            TipoServicio = 65,
+            TipoCEAAM = 76,
+            TipoIngresoCEAAM = 77,
+            TipoEgresoCEAAM = 78
         }
 
         public enum Roles
