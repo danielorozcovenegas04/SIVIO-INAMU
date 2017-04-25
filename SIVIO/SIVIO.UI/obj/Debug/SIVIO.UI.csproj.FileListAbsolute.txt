@@ -520,3 +520,6 @@ C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.UI\bin\Microsoft.Owin.Security.Micr
 C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.csprojResolveAssemblyReference.cache
 C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.dll
 C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.pdb
+C:\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.csprojResolveAssemblyReference.cache
+C:\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.dll
+C:\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.pdb
