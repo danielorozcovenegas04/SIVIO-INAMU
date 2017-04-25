@@ -40,7 +40,7 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult CrearUsuaria_DelegacionMujer()
         {
-            bool estadoSesion = true;
+           bool estadoSesion = true;
             /*
             if (ComprobarPermisosAcccion(out estadoSesion))
             {
@@ -53,9 +53,10 @@ namespace SIVIO.UI.Controllers
             else
             {
                 return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
-            } */
-            //return View(viewName: "~/Views/Expediente/CrearUsuaria_DelegacionMujer.cshtml"); // Quitar
-            return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            */
+            return View(viewName: "~/Views/Expediente/CrearUsuaria_DelegacionMujer.cshtml"); // Quitar
+            //return View();
         }
 
         [Authorize]

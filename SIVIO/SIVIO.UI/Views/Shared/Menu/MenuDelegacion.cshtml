@@ -54,6 +54,7 @@
                 $.LoadingOverlay("hide");
             });
         });
+
     });
 </script>
 <nav class="navbar navbar-default navbar-static-top borde" style="margin-top: 5px; padding-bottom: 5px !important; background-color: white !important">
@@ -87,6 +88,15 @@
 
                 </li>
 
+                
+                
+                
+
+                @*@if (Model)
+                    {
+                        <text>*@
+
+                <!--
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="pe-7s-note2" style="margin-right: 3px"></i>Expedientes <span class="caret"></span>
@@ -99,9 +109,12 @@
 
                     </ul>
                 </li>
-                @*@if (Model)
-                    {
-                        <text>*@
+                -->
+
+                <li class="nav">
+                    <a href="~/ExpedienteController/CrearUsuaria_DelegacionMujer">Expedientes</a>
+                </li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="pe-7s-portfolio" style="margin-right: 3px"></i>Atenciones <span class="caret"></span>
@@ -185,6 +198,7 @@
                         <li><a href="#" id="btnRptAtenciones">Reporte de Atenciones</a></li>
                     </ul>
                 </li>
+
             </ul>
 
 
@@ -200,4 +214,6 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
+
 
