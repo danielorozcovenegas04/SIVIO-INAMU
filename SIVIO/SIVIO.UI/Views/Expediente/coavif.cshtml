@@ -115,7 +115,65 @@
         $('#txtFechaAplicacion').css("background-color", "#f2f2f2");
         $("#txtFechaAplicacion").prop("readonly", true);
 
+        $("#txtFecha").val(fechaHoy);
+        $('#txtFecha').css("background-color", "#f2f2f2");
+        $("#txtFecha").prop("readonly", true);
 
+        var hora = d.getHours();
+        var jornada = (hora > 12 ? 'PM' : 'AM');
+        var minutos = d.getMinutes();
+        var inicio = (hora > 12 ? '0' + hora - 12 : hora) + ':' + (minutos > 9 ? '' : '0') + minutos + ' ' + jornada;
+
+        $("#txtHoraInicio").val(inicio);
+        $('#txtHoraInicio').css("background-color", "#f2f2f2");
+        $("#txtHoraInicio").prop("readonly", true);
+        $('#txtHoraFinalizacion').css("background-color", "#f2f2f2");
+        $("#txtHoraFinalizacion").prop("readonly", true);        
+
+        $("#txtInstitucion").val("INAMU");
+        $('#txtInstitucion').css("background-color", "#f2f2f2");
+        $("#txtInstitucion").prop("readonly", true);
+        
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CargarPersonas")',
+            datatype: "json",
+            contentType: "application/json",
+            processData: true,
+            success: function (resultado) {
+                var respuesta = JSON.parse(resultado);
+                if (respuesta.Mensaje.TipoMensaje === 1) {
+                    var usuario = respuesta.usuarioNombre + ' ' + respuesta.usuarioApellido1 + ' ' + respuesta.usuarioApellido2;
+                    $("#txtPersonaAtiende").val(usuario);
+                    $('#txtPersonaAtiende').css("background-color", "#f2f2f2");
+                    $("#txtPersonaAtiende").prop("readonly", true);
+
+                    var personaRefiere = respuesta.personaNombre + ' ' + respuesta.personaApellido1 + ' ' + respuesta.personaApellido2;
+                    $("#txtPersonaQuienRefiere").val(personaRefiere);
+                    $('#txtPersonaQuienRefiere').css("background-color", "#f2f2f2");
+                    $("#txtPersonaQuienRefiere").prop("readonly", true);
+
+                    var telefonoPersona = respuesta.personaTelefono;
+                    $("#txtTelefonoPersona").val(telefonoPersona)
+                    $('#txtTelefonoPersona').css("background-color", "#f2f2f2");
+                    $("#txtTelefonoPersona").prop("readonly", true);
+
+                    $("#txtCorreoPersona").val(respuesta.personaCorreo);
+                    $('#txtCorreoPersona').css("background-color", "#f2f2f2");
+                    $("#txtCorreoPersona").prop("readonly", true);
+                } else {
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error");
+                    $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
+                    instMensajes.open();
+                }
+            }, error: function (xhr, ajaxOptions, error) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error al registrar");
+                $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                instMensajes.open();
+            }
+        })
 
         $.ajax({
             type: "POST",
@@ -127,21 +185,27 @@
                 debugger;
                 var respuesta = JSON.parse(resultado);
                 if (respuesta.Mensaje.TipoMensaje === 1) {
-                    $.each(respuesta.Catalogo, function(key, value) {
+                    $.each(respuesta.CatalogoTiposDisponibilidad, function (key, value) {
+                        $('#cmbTipoDisponibilidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#comPais').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
 
-                    $.each(respuesta.Catalogo, function(key, value) {
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#comOtraNacionalidad').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
 
-                    $.each(respuesta.Catalogo, function(key, value) {
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#comNacionalidad').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
@@ -169,12 +233,7 @@
                     $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
                     instMensajes.open();
                     $.LoadingOverlay("hide");
-                    
-
                 }
-
-
-
             },
             error: function (xhr, ajaxOptions, error) {
                 $("#contenedorBotones").show();
@@ -248,10 +307,14 @@
 
 
     <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+        <div style="margin-left:20px;">
+            @*<h2>Expediente de: @Model.persona.VC_NOMBRE @Model.persona.VC_APELLIDO1 @Model.persona.VC_APELLIDO2</h2>
+            <h4>Identificación: @Model.persona.VC_IDENTIFICACION <br /> Número de expediente: @Model.persona.PK_PERSONA</h4>*@
+        </div>
         <ul class="nav nav-tabs">
             <li class="active">
                 <a data-toggle="tab" href="#datAdministrativos">
-                    <i class="fa fa-file-text" aria-hidden="true"></i>Datos administrativos
+                    <i class="fa fa-file-text" aria-hidden="true"></i>Datos Administrativos
                 </a>
             </li>
             <li>
@@ -272,18 +335,69 @@
         </ul>
 
         <div class="tab-content">
-            <div id="datAdministrativos" class="tab-pane active">
+            <div id="datAdministrativos" class="tab-pane fade in active">
                 <div class="row comunForm">
-
                     <div class="row">
-                        <div class="col-xs-1 form-group">
-                            <label>Nombre de Persona Usuaria</label>
-
-                            <input class="form-control" placeholder="Nombre" id="txtNombre1" type="date" required="">
+                        <div class="col-xs-10">
                         </div>
-
+                        <div class="col-xs-2">
+                            @*<button class="botonCerrar danger" id="btnCerrarFrmDatosAdministrativos">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>*@
+                        </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-xs-6 form-group">
+                            <label>Fecha del incidente</label>
+                            <input class="form-control" id="txtFecha" type="text" required="">
+                        </div>
+                        <div class="col-xs-3 form-group">
+                            <label>Hora inicio</label>
+                            <input class="form-control" id="txtHoraInicio" type="text" required="">
+                        </div>
+                        <div class="col-xs-3 form-group">
+                            <label>Hora finalización</label>
+                            <input class="form-control" placeholder="--:-- --" id="txtHoraFinalización" type="text" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 form-group">
+                            <label>Persona que atiende</label>
+                            <input class="form-control" id="txtPersonaAtiende" type="text" required="">
+                        </div>
+                        <div class="col-xs-6 form-group">
+                            <label>Tipo de disponibilidad</label>
+                            <select class="form-control" id="cmbTipoDisponibilidad" type="">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 form-group">
+                            <label>Institucion que refiere</label>
+                            <input class="form-control" id="txtInstitucion" type="text" required="">
+                        </div>
+                        <div class="col-xs-6 form-group">
+                            <label>Nombre de quien refiere</label>
+                            <input class="form-control" id="txtPersonaQuienRefiere" type="text" required="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 form-group">
+                            <label>Telefono</label>
+                            <input class="form-control" id="txtTelefonoPersona" type="text" required="">
+                        </div>
+                        <div class="col-xs-6 form-group">
+                            <label>Correo</label>
+                            <input class="form-control" id="txtCorreoPersona" type="text" required="">
+                        </div>
+                    </div>
+                    <div class="row" id="contenedorBotones">
+                        <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                            <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                            <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="datUsuaria" class="tab-pane">

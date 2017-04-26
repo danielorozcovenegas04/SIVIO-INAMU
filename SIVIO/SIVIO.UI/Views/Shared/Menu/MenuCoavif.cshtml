@@ -36,7 +36,7 @@
             $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("coavif", "Expediente")',
+                url: '@Url.Action("Coavif", "Expediente")',
                 async: true
             }).done(function (data) {
 
@@ -121,7 +121,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#" id="btnBuscarExpediente">Buscar Expediente</a></li>
-                        <li><a href="#" id="btncoavif">vista coavif</a></li>
+                        <li><a href="#" id="btncoavif">vista COAVIF</a></li>
                         <li><a href="#" id="btnBuscarPersona">Buscar Persona en el Padrón</a></li>
                         <li><a href="#" id="btnSistemas">Buscar en Sistemas INAMU</a></li>
 
