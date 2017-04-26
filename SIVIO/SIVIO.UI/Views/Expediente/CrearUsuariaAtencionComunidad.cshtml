@@ -37,10 +37,20 @@
 
     $(document).ready(function () {
 
+        $("#btnGuardarAtencionEnComunidad").click(function () {
+            var persona = serializeArrayAObjeto($("#crearpersona").serializeArray());
+            console.log(persona);
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CrearUsuariaAtencionComunidadPost")',
+                data: persona
+            }).then(console.log)
+        });
+
         var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
         $.ajax({
             type: "POST",
-            url: '@Url.Action("ListarCatalogosCrearCaso")',
+            url: '@Url.Action("ListarCatalogoscrearpersona")',
             dataType: "json",
             contentType: "application/json",
             processData: true,
@@ -91,6 +101,13 @@
 
 
 <script type="text/javascript">
+    function serializeArrayAObjeto(arr) {
+        var obj = {};
+        for (var i = 0; i < arr.length; i++) {
+            obj[arr[i].name] = arr[i].value;
+        }
+        return obj;
+    }
     $("#btnCerrarFrmUsuarios").click(function (e) {
         e.preventDefault();
         $("#btnUsuarios").trigger("click");
@@ -296,32 +313,6 @@
     }
 </style>
 <div class="container-fluid" id="contenedorPrincipal">
-
-    <form method="post" >
-        <fieldset>
-          <legend>MiniPrueba</legend>
-          <div>
-            <label for="NombrePersona">Nombre:</label>
-            <input type="text" name="NombrePersona" value="a" />
-          </div>
-          <div>
-            <label for="Apellido1">Contact Name:</label>
-            <input type="text" name="Apellido1" value="b" />
-          </div>
-          <div>
-            <label for="Apellido2">Employee Count:</label>
-            <input type="text" name="Apellido2" value="c" />
-          </div>
-          <div>
-            <label>&nbsp;</label>
-            <input type="submit" value="Submit" class="submit" />
-          </div>
-        </fieldset>
-      </form>
-
-    <form id="crearcaso" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
-
-
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#tabPerfilUsuaria">Perfil de Usuaria</a></li>
             <li><a data-toggle="tab" href="#tabHistoriaViolencia">Historia de Violencia</a></li>
@@ -333,570 +324,104 @@
                 <h3>Perfil de Usuaria</h3>
 
                 @* Pestaña Perfil de la Usuaria *@
-
+                
                 <div class="row" id="tabPerfilUsuaria">
-
-                    <div class="col-xs-4 form-group">
-                        <label>Identificacion</label><br>
-                        <input class="form-control" id="txtIdentificacion" type="text" value='12345' required=""><br>
-                        <label>Tipo de identificacion</label><br>
-                        <input class="form-control" id="txtIdentificacionTipo" type="number" value='5' required=""><br>
-                        <label>Nacionalidad</label>
-                        <input class="form-control" id="txtNacionalidad" type="number" value='5' required=""><br>
-                        <label>Nombre</label><br>
-                        <input class="form-control" id="txtNombre" type="text" value='Juliana' required=""><br>
-                        <label>Primer apellido</label><br>
-                        <input class="form-control" id="txtApellido1" type="text" value='Trump' required=""><br>
-                        <label>Segundo apellido</label><br>
-                        <input class="form-control" id="txtApellido2" type="text" value='Beckenbauer' required=""><br>
-                        <label>Fecha de nacimiento</label><br>
-                        <input class="form-control" id="txtFecha" type="date" value='1966-10-10' required=""><br>
-                        <label>Estado civil</label><br>
-                        <input class="form-control" id="txtEstadoCivil" type="number" value='5' required=""><br>
-                        <label>Escolaridad</label><br>
-                        <input class="form-control" id="txtEscolaridad" type="number" value='5' required=""><br>
-                    </div>
-                    <div class="col-xs-4 form-group">
-                        <label>Género</label><br>
-                        <input class="form-control" id="txtGenero" type="number" value='5' required=""><br>
-                        <label>Ocupacion</label><br>
-                        <input class="form-control" id="txtOcupacion" type="number" value='5' required=""><br>
-                        <label>Codicion Migratoria</label><br>
-                        <input class="form-control" id="txtCondicionMigratoria" value='5' type="number" required=""><br>
-                        <label>Condicion Aseguramiento</label><br>
-                        <input class="form-control" id="txtCondicionAseguramiento" value='5' type="number" required=""><br>
-                        <label>Tipo Vivienda</label><br>
-                        <input class="form-control" id="txtTipoVivienda" type="number" value='5' required=""><br>
-                        <label>Tipo familia</label><br>
-                        <input class="form-control" id="txtTipoFamilia" type="number" value='5' required=""><br>
-                        <label>Estado Embarazo</label><br>
-                        <input class="form-control" id="txtEstadoEmbarazo" type="number" value='5' required=""><br>
-                        <label>Condicion Salud</label><br>
-                        <input class="form-control" id="txtCondicionSalud" type="number" value='5' required=""><br>
-                        <label>Orientacion Sexual</label><br>
-                        <input class="form-control" id="txtOrientacionSexual" type="number" value='5' required=""><br>
-                        
-                       
-                    </div>
-                    <div class="col-xs-4 form-group">
-                        <label>Hijos</label><br>
-                        <input class="form-control" id="txtHijos" type="number" value='5' required=""><br>
-                        <label>Hijos CEAAM</label><br>
-                        <input class="form-control" id="txtHijosCEAAM" type="number" value='5' required=""><br>
-                        <label>Hijos Mayores Doce</label><br>
-                        <input class="form-control" id="txtHijosMayoresDoce" type="number" value='5' required=""><br>
-                        <label>Provincia</label><br>
-                        <input class="form-control" id="txtProvincia" type="number" value='5' required=""><br>
-                        <label>Canton</label><br>
-                        <input class="form-control" id="txtCanton" type="number" value='5' required=""><br>
-                        <label>Distrito</label><br>
-                        <input class="form-control" id="txtDistrito" type="number" value='5' required=""><br>
-                        <label>Correo</label><br>
-                        <input class="form-control" id="txtCorreo" type="text" value='juliana@gmail.com' required=""><br>
-                        <label>Etnia</label><br>
-                        <input class="form-control" id="txtEtnia" type="number" value='5' required=""><br>
-                        <label>Nacionalidad</label><br>
-                        <input class="form-control" id="txtNacionalidad" type="number" value='5' required=""><br>
-                        
-                        <br><br><br><br><br><br><br><br><br><br><br><br>
-                    </div>
-
-                        <br><br><br><br><br><br>
-
+                    <form id="crearpersona" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
                         <div class="col-xs-4 form-group">
-                            <label>Condición civil</label><br>
-
-                            <div class="row">
-                                <div class="col-xs-1"><span data-toggle="tooltip" title="Condición Civil" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                                <div class="col-xs-11">
-                                    <select id="cmbCondicionCivil" class="form-control"></select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xs-4 form-group">
+                            <label>Identificacion</label><br>
+                            <input class="form-control" id="txtIdentificacion" name="VC_IDENTIFICACION" type="text" value='12345' required=""><br>
+                            <label>Tipo de identificacion</label><br>
+                            <input class="form-control" id="txtIdentificacionTipo" name="FK_TIPOIDENTIFICACION" type="number" value='5' required=""><br>
+                            <label>Nacionalidad</label>
+                            <input class="form-control" id="txtNacionalidad" name="FK_NACIONALIDAD" type="number" value='5' required=""><br>
+                            <label>Nombre</label><br>
+                            <input class="form-control" id="txtNombre" name="VC_NOMBRE" type="text" value='Mariana' required=""><br>
+                            <label>Primer apellido</label><br>
+                            <input class="form-control" id="txtApellido1" name="VC_APELLIDO1" type="text" value='Trump' required=""><br>
+                            <label>Segundo apellido</label><br>
+                            <input class="form-control" id="txtApellido2" name="VC_APELLIDO2" type="text" value='Beckenbauer' required=""><br>
+                            <label>Fecha de nacimiento</label><br>
+                            <input class="form-control" id="txtFecha" name="DT_FECHANACIMIENTO" type="date" value='1966-10-10' required=""><br>
+                            <label>Estado civil</label><br>
+                            <input class="form-control" id="txtEstadoCivil" name="FK_ESTADOCIVIL" type="number" value='5' required=""><br>
                             <label>Escolaridad</label><br>
-
-                            <div class="row">
-                                <div class="col-xs-1"><span data-toggle="tooltip" title="Escolaridad" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                                <div class="col-xs-11">
-                                    <select id="cmbEscolaridad" class="form-control"></select>
-                                </div>
-                            </div>
+                            <input class="form-control" id="txtEscolaridad" name="FK_ESCOLARIDAD" type="number" value='5' required=""><br>
                         </div>
 
+                        <a href="#" class="btn btn-primary" id="btnGuardarAtencionEnComunidad">Guardar</a>
 
                         <div class="col-xs-4 form-group">
+                            <label>Género</label><br>
+                            <input class="form-control" id="txtGenero" name="FK_GENERO" type="number" value='5' required=""><br>
+                            <label>Ocupacion</label><br>
+                            <input class="form-control" id="txtOcupacion" name="FK_OCUPACION" type="number" value='5' required=""><br>
+                            <label>Codicion Migratoria</label><br>
+                            <input class="form-control" id="txtCondicionMigratoria" name="FK_CONDICIONMIGRATORIA" value='5' type="number" required=""><br>
+                            <label>Condicion Aseguramiento</label><br>
+                            <input class="form-control" id="txtCondicionAseguramiento" name="FK_CONDICIONASEGURAMIENTO" value='5' type="number" required=""><br>
+                            <label>Tipo Vivienda</label><br>
+                            <input class="form-control" id="txtTipoVivienda" type="number" name="FK_TIPOVIVIENDA" value='5' required=""><br>
+                            <label>Tipo familia</label><br>
+                            <input class="form-control" id="txtTipoFamilia" type="number" name="FK_TIPOFAMILIA" value='5' required=""><br>
+                            <label>Estado Embarazo</label><br>
+                            <input class="form-control" id="txtEstadoEmbarazo" type="number" name="FK_ESTADOEMBARAZO" value='5' required=""><br>
+                            <label>Condicion Salud</label><br>
+                            <input class="form-control" id="txtCondicionSalud" type="number" name="FK_CONDICIONSALUD" value='5' required=""><br>
+                            <label>Orientacion Sexual</label><br>
+                            <input class="form-control" id="txtOrientacionSexual" type="number" name="FK_ORIENTACIONSEXUAL" value='5' required=""><br>
 
-                            <label>Número total de hijas/os</label> <input class="form-control" id="txtProvinciaDestino" type="text" required="">
-                            <label>Número de hijos/as con los que ingresa al CEAAM</label> <input class="form-control" id="txtCantonDestino" type="text" required="">
+
                         </div>
-
-
                         <div class="col-xs-4 form-group">
-                            <label>Tipo de familia</label><br>
+                            <label>Hijos</label><br>
+                            <input class="form-control" id="txtHijos" name="I_HIJOS" type="number" value='5' required=""><br>
+                            <label>Hijos CEAAM</label><br>
+                            <input class="form-control" id="txtHijosCEAAM" name="I_HIJOSCEEAM" type="number" value='5' required=""><br>
+                            <label>Hijos Mayores Doce</label><br>
+                            <input class="form-control" id="txtHijosMayoresDoce" name="I_HIJOSMAYORESDOCE" type="number" value='5' required=""><br>
+                            <label>Provincia</label><br>
+                            <input class="form-control" id="txtProvincia" name="FK_PROVINCIAPROCEDENCIA" type="number" value='5' required=""><br>
+                            <label>Canton</label><br>
+                            <input class="form-control" id="txtCanton" name="FK_CANTONPROCEDENCIA" type="number" value='5' required=""><br>
+                            <label>Distrito</label><br>
+                            <input class="form-control" id="txtDistrito" name="FK_DISTRITOPROCEDENCIA" type="number" value='5' required=""><br>
+                            <label>Correo</label><br>
+                            <input class="form-control" id="txtCorreo" name="VC_CORREO" type="text" value='juliana@gmail.com' required=""><br>
+                            <label>Etnia</label><br>
+                            <input class="form-control" id="txtEtnia" name="FK_ETNIA" type="number" value='5' required=""><br>
+                            <label>Nacionalidad</label><br>
+                            <input class="form-control" id="txtNacionalidad" name="FK_NACIONALIDAD2" type="number" value='5' required=""><br>
 
-                            <div class="row">
-                                <div class="col-xs-1"><span data-toggle="tooltip" title="Familia" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                                <div class="col-xs-11">
-                                    <select id="cmbTipoFamilia" class="form-control"></select>
-                                </div>
-                            </div>
+                            <br><br><br><br><br><br><br><br><br><br><br><br>
                         </div>
-
-
                         <div class="col-xs-4 form-group">
+                            <label>Género</label><br>
+                            <input class="form-control" id="txtGenero" name="FK_GENERO" type="number" value='5' required=""><br>
+                            <label>Ocupacion</label><br>
+                            <input class="form-control" id="txtOcupacion" name="FK_OCUPACION" type="number" value='5' required=""><br>
+                            <label>Codicion Migratoria</label><br>
+                            <input class="form-control" id="txtCondicionMigratoria" name="FK_CONDICIONMIGRATORIA" value='5' type="number" required=""><br>
+                            <label>Condicion Aseguramiento</label><br>
+                            <input class="form-control" id="txtCondicionAseguramiento" name="FK_CONDICIONASEGURAMIENTO" value='5' type="number" required=""><br>
+                            <label>Tipo Vivienda</label><br>
+                            <input class="form-control" id="txtTipoVivienda" type="number" name="FK_TIPOVIVIENDA" value='5' required=""><br>
+                            <label>Tipo familia</label><br>
+                            <input class="form-control" id="txtTipoFamilia" type="number" name="FK_TIPOFAMILIA" value='5' required=""><br>
+                            <label>Estado Embarazo</label><br>
+                            <input class="form-control" id="txtEstadoEmbarazo" type="number" name="FK_ESTADOEMBARAZO" value='5' required=""><br>
+                            <label>Condicion Salud</label><br>
+                            <input class="form-control" id="txtCondicionSalud" type="number" name="FK_CONDICIONSALUD" value='5' required=""><br>
+                            <label>Orientacion Sexual</label><br>
+                            <input class="form-control" id="txtOrientacionSexual" type="number" name="FK_ORIENTACIONSEXUAL" value='5' required=""><br>
 
+                            <br><br><br><br><br><br>
                         </div>
-
-                        <div class="col-xs-4 form-group">
-                            <label>Condición migratoria</label><br>
-
-                            <div class="row">
-                                <div class="col-xs-1"><span data-toggle="tooltip" title="Condicion Migratoria" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                                <div class="col-xs-11">
-                                    <select id="cmbCondicionMigratoria" class="form-control"></select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xs-4 form-group">
-                            <label>Ocupación</label>
-
-                            <input class="form-control" id="txtOcupacion" type="text" required="">
-                        </div>
-
-                        <div class="col-xs-4 form-group">
-                            <label>Condición laboral</label><br>
-
-                            <div class="row">
-                                <div class="col-xs-1"><span data-toggle="tooltip" title="Condicion laboral" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                                <div class="col-xs-11">
-                                    <select id="cmbCondicionLaborarl" class="form-control"></select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-4 form-group">
-                            <label>Experiencia laboral</label><br>
-
-                            <div class="row">
-                                <div class="col-xs-1"><span data-toggle="tooltip" title="Experiencia laboral" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                                <div class="col-xs-11">
-                                    <select id="cmbExperienciaLaboral" class="form-control"></select>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="col-xs-4 form-group">
-                            <label>Lugar de trabajo</label>
-
-                            <input class="form-control" id="txtLugarDeTrabajo" type="text" required="">
-                        </div>
-
-                        <div class="col-xs-4 form-group">
-                            <label>Condición de aseguramiento</label><br>
-
-                            <div class="row">
-                                <div class="col-xs-1"><span data-toggle="tooltip" title="Condición de aseguramiento" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                                <div class="col-xs-11">
-                                    <select id="cmbCondicionAseguramiento" class="form-control"></select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xs-4 form-group">
-                            <label>Vivienda</label><br>
-
-                            <div class="row">
-                                <div class="col-xs-1"><span data-toggle="tooltip" title="Vivienda" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                                <div class="col-xs-11">
-                                    <select id="cmbVivienda" class="form-control"></select>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <label>Condiciones especiales y de salud</label>
-                        <div class="col-xs-4 form-group">
-                            <label>Discapacidad</label><br>
-                            <input type="checkbox" name="fisica" value="fisica">Física<br>
-                            <input type="checkbox" name="cognitiva" value="cognitiva">Cognitiva<br>
-                            <input type="checkbox" name="mental" value="mental">Mental<br>
-                            <input type="checkbox" name="sensorial" value="sensorial">Sensorial<br>
-                            <input type="checkbox" name="embarazo" value="embarazo">Embarazo <label>meses</label><input class="form-control" id="txtOcupacion" type="text" required=""><br>
-                            <input type="checkbox" name="sensorial" value="Padecimientos crónicos">Padecimientos crónicos<br>
-                            <input type="checkbox" name="sensorial" value="ITS">ITS<br>
-                            <input type="checkbox" name="sensorial" value="VIH-SIDA">VIH-SIDA<br>
-                            <input type="checkbox" name="sensorial" value="Condición psiquiátrica">Condición psiquiátrica<br>
-                            <input type="checkbox" name="sensorial" value="Enfermedad terminal">Enfermedad terminal<br>
-                        </div>
-
-
-                        <div class="col-xs-4 form-group">
-                            <label>Adicciones</label><br>
-
-                            <div class="row">
-                                <div class="col-xs-1"><span data-toggle="tooltip" title="Adicciones" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                                <div class="col-xs-11">
-                                    <select id="cmbAdicciones" class="form-control"></select>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <label>Redes o recursos de apoyo con los que cuenta la usuaria</label><br>
-                        <input type="checkbox" name="radioApoyo" value="No tiene"> No tiene<br>
-                        <label>Primaria</label><br>
-                        <div class="col-xs-4 form-group">
-                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                        </div>
-                        <label>Secundaria</label><br>
-                        <div class="col-xs-4 form-group">
-                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                            <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                        </div>
-
-                    </div>
+                    </form>
+                </div>
             </div>
 
             <div id="tabHistoriaViolencia" class="tab-pane fade">
-                <h3>Historia de Violencia</h3>
-                @* Pestaña Historia de violencia *@
-
-                <div class="row" id="tabHIstoriaViolencia">
-
-                    <div class="col-xs-4 form-group">
-                        <label>Nombre de persona agresora:</label>
-
-                        <input class="form-control" id="txtPersonaAgresora" type="text" required="">
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Edad:</label>
-
-                        <input class="form-control" id="txtEdad" type="text" required="">
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Género</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Género" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbGenero" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Nacionalidad</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Nacionalidad" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbNacionalidad" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Escolaridad</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Escolaridad" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbEscolaridad" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Ocupación:</label>
-
-                        <input class="form-control" id="txtOcupacion" type="text" required="">
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Lugar de trabajo:</label>
-
-                        <input class="form-control" id="txtLugarTrabajo" type="text" required="">
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Adicciones:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Adicciones:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbAdicciones" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-4 form-group">
-                        <label>Vínculo con la usuaria:</label>
-
-                        <input class="form-control" id="txtVinculoUsuaria" type="text" required="">
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Tiempo de la relación:</label>
-
-                        <input class="form-control" id="txtTiempoRelacion" type="text" required="">
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Tiempo de la agresión:</label>
-
-                        <input class="form-control" id="txtTiempoAgresion" type="text" required="">
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Número de separaciones de la persona agresora:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Número de separaciones de la persona agresora:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbNumeroSeparacionesPersonaAgresora" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Motivos para regresar:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Motivos para regresar:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbMotivosRegresar" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Antecedentes legales:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Antecedentes legales:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbAntecedentesLegales" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-4 form-group">
-                        <label>Antecedentes psiquiátricos:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Antecedentes psiquiátricos:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbAntecedentespsiquiatricos" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Atención médica producto de la agresión:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Atención médica producto de la agresión:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbAtencionMedicaProductoDeAgresion" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-4 form-group">
-                        <label>Nombre del centro de salud:</label>
-
-                        <input class="form-control" id="txtCentroSalud" type="text" required="">
-                    </div>
-
-
-                    <div class="col-xs-4 form-group">
-                        <label>Tipo de violencia:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Tipo de violencia:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbTipoViolencia" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-4 form-group">
-                        <label>Impacto de la violencia:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Impacto de la violencia:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbImpactoViolencia" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-4 form-group">
-                        <label>Valoración de riesgo:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Valoración de riesgo:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbValoracionRiesgo" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-4 form-group">
-                        <label>Condición legal al ingreso:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Condición legal al ingreso:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbCondicionLegalIngreso" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Medidas de protección:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Medidas de protección:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbMedidasProteccion" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Se encuentra con el programa OAPVD:</label><br>
-
-                        <div class="row">
-                            <div class="col-xs-1"><span data-toggle="tooltip" title="Se encuentra con el programa OAPVD:" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
-                            <div class="col-xs-11">
-                                <select id="cmbEncuentraEnProgramaOAPVD" class="form-control"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Violencia fisica:</label><br>
-
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha lanzado cualquier tipo de objetos"> Le ha lanzado cualquier tipo de objetos<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="La ha empujado o zarandeado"> La ha empujado o zarandeado<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="La ha tirado/halado el pelo"> La ha tirado/halado el pelo<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha dado golpe en la cara"> Le ha dado golpe en la cara<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="La patearon"> La patearon<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha causado fracturas"> Le ha causado fracturas<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="La tiraron al piso"> La tiraron al piso<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Ha intentado ahorcarla o asfixiarla"> Ha intentado ahorcarla o asfixiarla<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha impedido el acceso a los alimentos"> Le ha impedido el acceso a los alimentos<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="La ha amenazado con un arma de fuego"> La ha amenazado con un arma de fuego<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="La ha amenazado con arma punzo cortante"> La ha amenazado con arma punzo cortante<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="La ha quemado en alguna parte del cuerpo"> La ha quemado en alguna parte del cuerpo<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Ha utilizado contra usted algún objeto"> Ha utilizado contra usted algún objeto<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Ha utilizado contra usted un arma de fuego"> Ha utilizado contra usted un arma de fuego<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="La ha amarrado para impedirle salir/hacer sus cosas"> La ha amarrado para impedirle salir/hacer sus cosas<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Ha utilizado contra usted algún arma punzo cortante"> Ha utilizado contra usted algún arma punzo cortante<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha pegado con la mano en cualquier otra parte del cuerpo"> Le ha pegado con la mano en cualquier otra parte del cuerpo<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="La ha mordido y dejado marcas de dientes en el cuerpo"> La ha mordido y dejado marcas de dientes en el cuerpo<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha dado algo para envenenarla/intoxicarla"> Le ha dado algo para envenenarla/intoxicarla<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Ha amenazado con un objeto, palo o garrote"> Ha amenazado con un objeto, palo o garrote<br>
-                        <input type="checkbox" name="checkboxViolenciaFisica" value="Le ha ocurrido alguna otra situación similar."> Le ha ocurrido alguna otra situación similar.
-                        <label>Cual:</label>
-                        <input class="form-control" id="txtViolenciaFisicaCual" type="text" required="">
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Violencia psicológica:</label><br>
-
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="Se ha referido a usted con palabras groseras o agresivas"> Se ha referido a usted con palabras groseras o agresivas<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha humillado"> La ha humillado<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="No le presta la debida atención"> No le presta la debida atención<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha seguido, vigilado"> La ha seguido, vigilado<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="Ha registrado sus objetos personales"> Ha registrado sus objetos personales<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha amenazado de muerte"> La ha amenazado de muerte<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha criticado sobre lo que hace o deja de hacer"> La ha criticado sobre lo que hace o deja de hacer<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="Le ha impedido que planifique y controle los embarazos"> Le ha impedido que planifique y controle los embarazos<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha culpado de las cosas que no salen bien"> La ha culpado de las cosas que no salen bien<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha acusado de serle infiel"> La ha acusado de serle infiel<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha dejado encerrada"> La ha dejado encerrada<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha ignorado y no la toma en cuenta en las decisiones"> La ha ignorado y no la toma en cuenta en las decisiones<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="Le ha prohibido amistades o visitar a amigos y familiares"> Le ha prohibido amistades o visitar a amigos y familiares<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="Le ha impedido realizar actividades fuera de la casa"> Le ha impedido realizar actividades fuera de la casa<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="Le ha impedido ir al médico o no se preocupa por su salud"> Le ha impedido ir al médico o no se preocupa por su salud<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha amenazado con quitarle los hijos y/o no verlos"> La ha amenazado con quitarle los hijos y/o no verlos<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="Se ha burlado de usted en distintos aspectos"> Se ha burlado de usted en distintos aspectos<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="La ha amenazado para que no tramite pensión"> La ha amenazado para que no tramite pensión<br>
-                        <input type="checkbox" name="checkboxViolenciaPsicologica" value="Le ha ocurrido alguna otra situación similar."> Le ha ocurrido alguna otra situación similar.
-                        <label>Cual:</label>
-                        <input class="form-control" id="txtViolenciaPsicologicaCual" type="text" required="">
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Violencia sexual:</label><br>
-
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="Se ha burlado/criticado de su comportamiento sexual"> Se ha burlado/criticado de su comportamiento sexual<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="No toma en consideración sus necesidades y sentimientos sexuales"> No toma en consideración sus necesidades y sentimientos sexuales<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha asediado sexualmente en momentos inoportunos"> La ha asediado sexualmente en momentos inoportunos<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha insultado diciéndole “puta, “frígida” u otras palabras ofensivas"> La ha insultado diciéndole “puta, “frígida” u otras palabras ofensivas<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="Ha intentado besarla/la ha besado a la fuerza"> Ha intentado besarla/la ha besado a la fuerza<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="Le ha hecho comentarios obscenos o morbosos"> Le ha hecho comentarios obscenos o morbosos<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="Ha intentado/le ha introducido objetos por el ano"> Ha intentado/le ha introducido objetos por el ano<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="Ha intentado/le ha introducido objetos por vagina"> Ha intentado/le ha introducido objetos por vagina<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="Ha intentado/ha tenido sexo oral sin su permiso"> Ha intentado/ha tenido sexo oral sin su permiso<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="Ha intentado/le ha quitado su ropa sin que usted lo quiera"> Ha intentado/le ha quitado su ropa sin que usted lo quiera<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="Le ha mostrado material pornográfico sin que usted lo quiera"> Le ha mostrado material pornográfico sin que usted lo quiera<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha tocado  partes de su cuerpo sin que usted quiera"> La ha tocado  partes de su cuerpo sin que usted quiera<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha obligado a que sostenga relaciones sexuales con animales"> La ha obligado a que sostenga relaciones sexuales con animales<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha obligado a tener sexo con otras personas para observar"> La ha obligado a tener sexo con otras personas para observar<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha hecho/mencionado propuestas sexuales que sean incómodas"> La ha hecho/mencionado propuestas sexuales que sean incómodas<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha obligado a que observe a otras personas teniendo sexo"> La ha obligado a que observe a otras personas teniendo sexo<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha chantajeado para que tenga relaciones sexuales con él"> La ha chantajeado para que tenga relaciones sexuales con él<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha agredido si se niega a tener sexo con él"> La ha agredido si se niega a tener sexo con él<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha obligado a tener sexo con otras personas por dinero"> La ha obligado a tener sexo con otras personas por dinero<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="La ha obligado tener relaciones sexuales con él"> La ha obligado tener relaciones sexuales con él<br>
-                        <input type="checkbox" name="checkboxViolenciaSexual" value="Le ha ocurrido alguna otra situación similar."> Le ha ocurrido alguna otra situación similar.
-                        <label>Cual:</label>
-                        <input class="form-control" id="txtViolenciaSexualCual" type="text" required="">
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Violencia patrimonial:</label><br>
-
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="La ha amenazado con quitarle los bienes"> La ha amenazado con quitarle los bienes<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Se ha apropiado de sus bienes a través de engaños, amenazas o chantaje afectivo"> Se ha apropiado de sus bienes a través de engaños, amenazas o chantaje afectivo<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="La ha obligado a entregar su salario o ingresos"> La ha obligado a entregar su salario o ingresos<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Sus bienes aparecen a nombre de persona agresora"> Sus bienes aparecen a nombre de persona agresora<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="La ha obligado a adquirir deudas para beneficio económico de él/ella"> La ha obligado a adquirir deudas para beneficio económico de él/ella<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Sus bienes son manejados por personas que no le dejan utilizarlo"> Sus bienes son manejados por personas que no le dejan utilizarlo<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Le ha destruido objetos de valor para usted (afectivos-históricos)"> Le ha destruido objetos de valor para usted (afectivos-históricos)<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Le quita o restringe el dinero para satisfacer sus necesidades"> Le quita o restringe el dinero para satisfacer sus necesidades<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="La ha amenazado para que no interponga la pensión alimentaria"> La ha amenazado para que no interponga la pensión alimentaria<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Incumple con el pago de la pensión alimentaria"> Incumple con el pago de la pensión alimentaria<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="La amenaza con no comprar alimentos o necesidades básicas"> La amenaza con no comprar alimentos o necesidades básicas<br>
-                        <input type="checkbox" name="checkboxViolenciaPatrimonial" value="Le ha ocurrido alguna otra situación similar."> Le ha ocurrido alguna otra situación similar.
-                        <label>Cual:</label>
-                        <input class="form-control" id="txtViolenciaPatrimonialCual" type="text" required="">
-                    </div>
-
-                </div>
+                <h3>Historia de Violencia</h3>              
             </div>
 
             <div id="tabAtenciones" class="tab-pane fade">
@@ -947,7 +472,7 @@
         *@
 
 
-    </form>
+    
 
 </div>
 
