@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+<script type="text/javascript">
+    $(document).ready(function () {});
+
+</script>
+
+<form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#home">
+                <i class="fa fa-user" aria-hidden="true"></i>Información de Persona
+            </a>
+        </li>
+    </ul>
+
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="row comunForm">
+                <table width="100%" border="0" cellspacing="100" align="right">
+                    <td style="top">
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Nombre</label>
+                                <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>Primer apellido</label>
+                                <input class="form-control" placeholder="Nombre" id="txtApellido1" type="text" required="">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Segundo apellido</label>
+                                <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>No se que sigue</label>
+                                <input class="form-control" placeholder="Nombre" id="txtNoSe" type="text" required="">
+                            </div>
+                        </div>
+                    </td>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

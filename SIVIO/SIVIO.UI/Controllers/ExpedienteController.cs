@@ -38,10 +38,10 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult CrearUsuaria_DelegacionMujer()
+        public ActionResult CrearUsuaria_DatosUsuaria()
         {
-           bool estadoSesion = true;
             /*
+            bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion))
             {
                 return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
@@ -55,15 +55,56 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
             }
             */
-            return View(viewName: "~/Views/Expediente/CrearUsuaria_DelegacionMujer.cshtml"); // Quitar
-            //return View();
+            return View(viewName: "~/Views/Expediente/CrearUsuaria_DatosUsuaria.cshtml");
         }
+
+        [Authorize]
+        public ActionResult CrearUsuaria_DatosPerfil()
+        {
+            /*
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+            */
+            return View(viewName: "~/Views/Expediente/CrearUsuaria_DatosPerfil.cshtml");
+        }
+
+        [Authorize]
+        public ActionResult MenuExpediente()
+        {
+            /*
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+            */
+            return View(viewName: "~/Views/Expediente/MenuExpediente.cshtml");
+        }
+
         public ActionResult CrearUsuaria_DatosAdministrativos()
         {
-            bool estadoSesion = true;
             _modelExpediente.fecha = DateTime.Now.Date;
-
             /*
+            bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion))
             {
                 return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
@@ -77,9 +118,9 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
             }
             */
-            return View(_modelExpediente); // Quitar
-            //return View();
+            return View(_modelExpediente); 
         }
+
         [Authorize]
         public ActionResult BusquedaExpediente(string palabra) {
             bool estadoSesion = true;
