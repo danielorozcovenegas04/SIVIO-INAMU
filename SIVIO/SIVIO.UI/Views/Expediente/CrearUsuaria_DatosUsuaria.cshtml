@@ -1,10 +1,72 @@
-﻿@{
+﻿
+@model SIVIO.UI.Models.ExpedienteModel
+
+@{
     Layout = null;
 }
-<script type="text/javascript">
-    $(document).ready(function () {});
 
+<script type="text/javascript">
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CargarDropdowns")',
+            dataType: "json",
+            contentType: "application/json",
+            processData: true,
+            success: function (resultado) {
+                debugger;
+                var respuesta = JSON.parse(resultado);
+                if (respuesta.Mensaje.TipoMensaje === 1) {
+                    $.each(respuesta.CatalogoNacionalidad, function(key, value) {
+                        $('#cmbNacionalidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoCondicionCivil, function (key, value) {
+                        $('#cmbCondicionCivil').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoEscolaridad, function (key, value) {
+                        $('#cmbEscolaridad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
+                    $('#btn-login').fadeIn();
+                    $.LoadingOverlay("hide");
+                } else {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error");
+                    $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+
+                }
+
+
+
+            },
+            error: function (xhr, ajaxOptions, error) {
+                $("#contenedorBotones").show();
+                $("#contenedorEspera").hide();
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error al registrar");
+                $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+
+            }
+        });
 </script>
+
+
+
 
 <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
     <ul class="nav nav-tabs">
@@ -38,13 +100,140 @@
                                 <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
                             </div>
                             <div class="col-xs-5 form-group">
-                                <label>No se que sigue</label>
-                                <input class="form-control" placeholder="Nombre" id="txtNoSe" type="text" required="">
+                                <label>Identificación</label>
+                                <input class="form-control" placeholder="Número de identificación" id="txtIdentificación" type="text" required="">
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Fecha de nacimiento</label>
+                                <input type="date" id="txtEdad">
+                                <!-- Buscar manera de que el label se ubique SOBRE el calendario -->
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>Edad</label>
+                                <input class="form-control" placeholder="Edad en años cumplidos" id="txtEdad" type="text" required="">
+                                <!-- Ocultar si se toca el calendario -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Provincia</label>
+                                <!-- Crear un dropdown con provincias -->
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>Cantón</label>
+                                <!-- Crear un dropdown con cantones -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Distrito</label>
+                                <!-- Crear un dropdown con distritos -->
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>País de procedencia</label>
+                                <!-- Crear un dropdown con países -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Dirección exacta de domicilio</label>
+                                <input class="form-control" placeholder="Dirección exacta de domicilio" id="txtDireccionDomicilio" type="text" required="">
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>Dirección para notificaciones</label>
+                                <input class="form-control" placeholder="Dirección para notificaciones" id="txtDireccionNotificaciones" type="text" required="">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Correo electrónico</label>
+                                <input class="form-control" placeholder="Dirección de correo electrónico" id="txtCorreoElectronico" type="text" required="">
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>Teléfono</label>
+                                <input class="form-control" placeholder="Número de teléfono" id="txtTelefono" type="text" required="">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Condición civil</label>
+                                <select id="cmbCondicionCivil" class="form-control"></select>
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>Escolaridad</label>
+                                <!-- Crear un dropdown con escolaridades -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Número de hijas/os</label>
+                                <input class="form-control" placeholder="Número de hijas/os" id="txtNumeroHijos" type="text" required="">
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>Embarazo (meses)</label>
+                                <input class="form-control" placeholder="Número de meses de embarazo" id="txtMesesEmbarazo" type="text" required="">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Nacionalidad</label>
+                                <input class="form-control" placeholder="Nacionalidad" id="txtNacionalidad" type="text" required="">
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>Ora nacionalidad</label>
+                                <input class="form-control" placeholder="Otra nacionalidad" id="txtOtraNacionalidad" type="text" required="">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Apátrida de</label>
+                                <input class="form-control" placeholder="Apátrida de" id="txtApatrida" type="text" required="">
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>Condición migratoria</label>
+                                <input class="form-control" placeholder="Condición migratoria" id="txtCondicionMigratoria" type="text" required="">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Ocupación</label>
+                                <input class="form-control" placeholder="Ocupación" id="txtOcupacion" type="text" required="">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <label>Tipificación de la violencia</label>
+                                <!-- Checkbox con las tipificaciones de violencia -->
+                            </div>
+                            <div class="col-xs-5 form-group">
+                                <label>Vínculo con persona agresora</label>
+                                <input class="form-control" placeholder="Vínculo con persona agresora" id="txtPersonaAgresora" type="text" required="">
+                            </div>
+                        </div>
+
+
+
                     </td>
                 </table>
             </div>
         </div>
     </div>
 </form>
+
+
+
+
+
