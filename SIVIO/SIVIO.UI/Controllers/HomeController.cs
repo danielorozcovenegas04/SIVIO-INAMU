@@ -56,8 +56,8 @@ namespace SIVIO.UI.Controllers
                     case (int)Utilitarios.Enumerados.TipoMenu.COAVIFEquipoEstrategico:
                         return View(viewName: "~/Views/Shared/Menu/MenuCoavif.cshtml");
                     case (int)Utilitarios.Enumerados.TipoMenu.DelegacionUnidadesRegionales:
-                        return View(viewName: "~/Views/Expediente/CrearUsuaria_DelegacionMujer.cshtml");
-                    //return View(viewName: "~/Views/Shared/Menu/MenuDelegacion.cshtml");
+                        //return View(viewName: "~/Views/Expediente/CrearUsuaria_DelegacionMujer.cshtml");
+                        return View(viewName: "~/Views/Shared/Menu/MenuDelegacion.cshtml");
                     default:
                         return View(viewName: "~/Views/Shared/Menu/MenuDefecto.cshtml");
                 }

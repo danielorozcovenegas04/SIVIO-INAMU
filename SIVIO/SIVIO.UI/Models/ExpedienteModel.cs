@@ -141,5 +141,9 @@ namespace SIVIO.UI.Models
         }
 
         #endregion
+
+        #region DELEGACION
+            
+        #endregion
     }
 }
