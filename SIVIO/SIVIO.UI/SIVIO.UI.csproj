@@ -355,6 +355,7 @@
     <Content Include="Views\Expediente\CrearUsuaria_DelegacionMujer.cshtml" />
     <Content Include="Views\Expediente\ViewPage1.cshtml" />
     <Content Include="Views\Expediente\GridDatosUsuaria.cshtml" />
+    <Content Include="Views\Expediente\CrearUsuaria_DatosAdministrativos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

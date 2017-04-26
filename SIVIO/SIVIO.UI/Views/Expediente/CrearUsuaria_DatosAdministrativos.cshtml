@@ -1,0 +1,119 @@
+﻿@model SIVIO.UI.Models.ExpedienteModel
+@{
+    Layout = null;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+</script>
+
+
+
+table {
+    border-collapse: collapse;
+}
+
+<!--Para generar dos columnas
+#content-wrapper
+{
+    width: 60%;
+    height: 60%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}
+
+#nav
+{
+    width: 100px;
+}
+-->
+
+<form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="#home">
+                <i class="fa fa-user" aria-hidden="true"></i>Datos Administrativos
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+            <div class="row comunForm">
+                <div class="row">
+                    <div class="col-xs-10">
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="botonCerrar danger" id="btnCerrarFrmUsuarios">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!--Inicio de filas-->
+                <table width=90% border="0" cellspacing="100" align="right">
+                    <td style="top">
+                        <div class="row">
+                            <div class="col-xs-3 form-group">
+                                <label>Fecha de Registro</label>
+                                @Html.EditorFor(ExpedienteModel => ExpedienteModel.fecha, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                            </div>
+                           
+                            <div class="col-xs-3 form-group">
+                                <label>Hora de inicio de registro</label>
+                                <input class="form-control" value="10:23" id="Hora" type="time" required="" readonly="readonly">
+                            </div>                                                         
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-3 form-group">
+                                <label>Tipo de atención</label>
+                                <select class="form-control">
+                                    <option value="atension 1">atension 1</option>
+                                    <option value="atension 2">atension 2</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-3 form-group">
+                                <label>Profesional</label>
+                                <select class="form-control">
+                                    <option value="atension 1">Profesional 1</option>
+                                    <option value="atension 2">Profesional 2</option>
+                                </select>
+                            </div> 
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-3 form-group">
+                                <label>Institusión que refiere</label>
+                                <input class="form-control" placeholder="" id="txtInstitusion" type="text" required="">
+                            </div>
+
+                            <div class="col-xs-3 form-group">
+                                <label>Persona que refiere</label>
+                                <input class="form-control" placeholder="nombre apellido" id="txtPersRefiere" type="text" required="">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-3 form-group">
+                                <label>Telefono</label>
+                                <input class="form-control" placeholder="telefono" id="txtTelefono" type="text" required="">
+                            </div>
+
+                            <div class="col-xs-3 form-group">
+                                <label>Correo</label>
+                                <input class="form-control" placeholder="ejemplo@ejemplo.com" id="txtCorreo" type="email" required="">
+                            </div>
+                        </div>                   
+                    </td>
+                </table>
+            </div>
+
+            <!--Fin de filas-->
+
+        </div>
+   </div>
+
+</form>
