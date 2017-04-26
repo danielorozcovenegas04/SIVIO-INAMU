@@ -60,6 +60,18 @@
         }).then(llenarComboBox("CEEAM", "#cmbTipoCEAAM"))
             .then(llenarComboBox("Tipo de Ingreso CEEAM", "#cmbTipoIngreso"))
             .then(llenarComboBox("Tipo de Egreso CEEAM", "#cmbTipoEgreso"))
+            .then(llenarComboBox("Orientación Sexual", "#cmbOrientacionSexual"))
+            .then(llenarComboBox("Etnia", "#cmbOrigenEtnico"))
+            .then(llenarComboBox("Estado Civil", "#cmbCondicionCivil"))
+            .then(llenarComboBox("Grado Académico", "#cmbEscolaridad"))
+            .then(llenarComboBox("Tipo de Familia", "#cmbTipoFamilia"))
+            .then(llenarComboBox("Nacionalidad", "#cmbNacionalidad"))
+            .then(llenarComboBox("Nacionalidad", "#cmbOtraNacionalidad"))
+            .then(llenarComboBox("Situación Migratoria", "#cmbCondicionMigratoria"))
+            .then(llenarComboBox("Situación Laboral", "#cmbCondicionLaboral"))
+            //.then(llenarComboBox("", "#cmbCondicionAseguramiento"))
+            .then(llenarComboBox("Tipo de vivienda", "#cmbVivienda"))
+            .then(llenarComboBox("Adicción", "#cmbAdicciones"))
             //.then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbRespuestaSiNosponible"))
             .then(() => {
                 $('#btn-login').fadeIn();
@@ -558,7 +570,9 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <select id="cmbCondicionLaboral" class="form-control"></select>
+                                <select id="cmbCondicionLaboral" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -585,7 +599,9 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <select id="cmbCondicionAseguramiento" class="form-control"></select>
+                                <select id="cmbCondicionAseguramiento" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -597,7 +613,9 @@
                         <div class="row">
                             <div class="col-xs-1"><span data-toggle="tooltip" title="Vivienda" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
                             <div class="col-xs-11">
-                                <select id="cmbVivienda" class="form-control"></select>
+                                <select id="cmbVivienda" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -625,7 +643,9 @@
                         <div class="row">
                             <div class="col-xs-1"><span data-toggle="tooltip" title="Adicciones" class="input-group-addon" style="border: none;"><i style="padding-top: 3.5px"></i></span></div>
                             <div class="col-xs-11">
-                                <select id="cmbAdicciones" class="form-control"></select>
+                                <select id="cmbAdicciones" class="form-control">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
                             </div>
                         </div>
                     </div>
