@@ -157,6 +157,50 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public List<TBL_REGISTRO> ListarRegistro()
+        {
+
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    //List<TBL_REGISTRO> Registro = entidades.TBL_REGISTRO.ToList();
+                    //Registro
+                    //return Registro;
+                    List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
+                    R.Add(new TBL_REGISTRO()
+                    {
+                        //PK_REGISTRO = 2,
+                        FK_PERSONA = 5,
+                        FK_USUARIOREGISTRA = 7,
+                        DT_FECHAINICIO = DateTime.Now,
+                        DT_FECHAFIN = DateTime.Now,
+                        FK_TIPOSERVICIO = 4,
+                        FK_TIPOREGISTRO = 7,
+                        VC_OBSERVACIONES = "algo"
+                    });
+
+                    return R;
+                }
+                catch
+                {
+                    //return new List<TBL_REGISTRO>();
+                    List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
+                    R.Add(new TBL_REGISTRO()
+                    {
+                        //PK_REGISTRO = 2,
+                        FK_PERSONA = 5,
+                        FK_USUARIOREGISTRA = 7,
+                        DT_FECHAINICIO = DateTime.Now,
+                        DT_FECHAFIN = DateTime.Now,
+                        FK_TIPOSERVICIO = 4,
+                        FK_TIPOREGISTRO = 7,
+                        VC_OBSERVACIONES = "algo"
+                    });
+                    return R;
+                }
+            }
+        }
         //public DatoAdministrativoModel llenarExpediente(int pkPersona)
         //{
         //    DatoAdministrativoModel resultado = new DatoAdministrativoModel();

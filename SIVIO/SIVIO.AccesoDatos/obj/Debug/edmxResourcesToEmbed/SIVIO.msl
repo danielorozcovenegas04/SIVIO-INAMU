@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SIVIOModelStoreContainer" CdmEntityContainer="SIVIOEntities">
+    <EntitySetMapping Name="TBL_ACCION">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_ACCION">
+        <MappingFragment StoreEntitySet="TBL_ACCION">
+          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+          <ScalarProperty Name="VC_ACCION" ColumnName="VC_ACCION" />
+          <ScalarProperty Name="VC_CONTROLADOR" ColumnName="VC_CONTROLADOR" />
+          <ScalarProperty Name="PK_ACCION" ColumnName="PK_ACCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ADICCIONES">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_ADICCIONES">
+        <MappingFragment StoreEntitySet="TBL_ADICCIONES">
+          <ScalarProperty Name="FK_TIPOADICCION" ColumnName="FK_TIPOADICCION" />
+          <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+          <ScalarProperty Name="PK_ADICCION" ColumnName="PK_ADICCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_AGRESION">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_AGRESION">
+        <MappingFragment StoreEntitySet="TBL_AGRESION">
+          <ScalarProperty Name="VC_CENTRODSALUDATENCION" ColumnName="VC_CENTRODSALUDATENCION" />
+          <ScalarProperty Name="TXT_RELATO" ColumnName="TXT_RELATO" />
+          <ScalarProperty Name="I_DURACION" ColumnName="I_DURACION" />
+          <ScalarProperty Name="DT_FECHAAGRESION" ColumnName="DT_FECHAAGRESION" />
+          <ScalarProperty Name="FK_AGRESOR" ColumnName="FK_AGRESOR" />
+          <ScalarProperty Name="PK_AGRESION" ColumnName="PK_AGRESION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_AGRESION_ATENCION_MEDICA">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_AGRESION_ATENCION_MEDICA">
+        <MappingFragment StoreEntitySet="TBL_AGRESION_ATENCION_MEDICA">
+          <ScalarProperty Name="FK_TIPOATENCION" ColumnName="FK_TIPOATENCION" />
+          <ScalarProperty Name="FK_AGRESION" ColumnName="FK_AGRESION" />
+          <ScalarProperty Name="PK_ATENCION_MEDICA" ColumnName="PK_ATENCION_MEDICA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_AGRESION_DETALLE_VIOLENCIA">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_AGRESION_DETALLE_VIOLENCIA">
+        <MappingFragment StoreEntitySet="TBL_AGRESION_DETALLE_VIOLENCIA">
+          <ScalarProperty Name="PK_SITUACIONVIOLENCIA" ColumnName="PK_SITUACIONVIOLENCIA" />
+          <ScalarProperty Name="FK_SITUACIONVIOLENCIA" ColumnName="FK_SITUACIONVIOLENCIA" />
+          <ScalarProperty Name="FK_AGRESIONVIOLENCIA" ColumnName="FK_AGRESIONVIOLENCIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_AGRESION_VIOLENCIA">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_AGRESION_VIOLENCIA">
+        <MappingFragment StoreEntitySet="TBL_AGRESION_VIOLENCIA">
+          <ScalarProperty Name="VC_OBSERVACIONES" ColumnName="VC_OBSERVACIONES" />
+          <ScalarProperty Name="FK_TIPOVIOLENCIA" ColumnName="FK_TIPOVIOLENCIA" />
+          <ScalarProperty Name="FK_AGRESION" ColumnName="FK_AGRESION" />
+          <ScalarProperty Name="PK_AGRESION_VIOLENCIA" ColumnName="PK_AGRESION_VIOLENCIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_AGRESOR">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_AGRESOR">
+        <MappingFragment StoreEntitySet="TBL_AGRESOR">
+          <ScalarProperty Name="FK_NACIONALIDAD" ColumnName="FK_NACIONALIDAD" />
+          <ScalarProperty Name="VC_OBSERVACIONANTPSIQUIATRICOS" ColumnName="VC_OBSERVACIONANTPSIQUIATRICOS" />
+          <ScalarProperty Name="B_ANTECEDENTESPSIQUIATRICOS" ColumnName="B_ANTECEDENTESPSIQUIATRICOS" />
+          <ScalarProperty Name="VC_OBSERVACIONANTECEDESTESLEGALES" ColumnName="VC_OBSERVACIONANTECEDESTESLEGALES" />
+          <ScalarProperty Name="B_ANTECEDENTESLEGALES" ColumnName="B_ANTECEDENTESLEGALES" />
+          <ScalarProperty Name="I_SEPARACIONES" ColumnName="I_SEPARACIONES" />
+          <ScalarProperty Name="VC_LUGARTRABAJO" ColumnName="VC_LUGARTRABAJO" />
+          <ScalarProperty Name="DT_FECHAVENCIMIENTOPROTECCION" ColumnName="DT_FECHAVENCIMIENTOPROTECCION" />
+          <ScalarProperty Name="B_MEDIDASPROTECCION" ColumnName="B_MEDIDASPROTECCION" />
+          <ScalarProperty Name="B_DENUNCIAPENAL" ColumnName="B_DENUNCIAPENAL" />
+          <ScalarProperty Name="FK_NIVELEDUCATIVO" ColumnName="FK_NIVELEDUCATIVO" />
+          <ScalarProperty Name="FK_OCUPACION" ColumnName="FK_OCUPACION" />
+          <ScalarProperty Name="DT_FECHANACIMIENTO" ColumnName="DT_FECHANACIMIENTO" />
+          <ScalarProperty Name="FK_GENERO" ColumnName="FK_GENERO" />
+          <ScalarProperty Name="DT_COMIENZORELACION" ColumnName="DT_COMIENZORELACION" />
+          <ScalarProperty Name="FK_TIPORELACION" ColumnName="FK_TIPORELACION" />
+          <ScalarProperty Name="VC_APELLIDO2" ColumnName="VC_APELLIDO2" />
+          <ScalarProperty Name="VC_APELLIDO1" ColumnName="VC_APELLIDO1" />
+          <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+          <ScalarProperty Name="VC_IDENTIFICACION" ColumnName="VC_IDENTIFICACION" />
+          <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+          <ScalarProperty Name="PK_AGRESOR" ColumnName="PK_AGRESOR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_AGRESOR_MOTIVO_REGRESO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_AGRESOR_MOTIVO_REGRESO">
+        <MappingFragment StoreEntitySet="TBL_AGRESOR_MOTIVO_REGRESO">
+          <ScalarProperty Name="PK_MOTIVOREGRESO" ColumnName="PK_MOTIVOREGRESO" />
+          <ScalarProperty Name="FK_MOTIVOREGRESO" ColumnName="FK_MOTIVOREGRESO" />
+          <ScalarProperty Name="FK_AGRESOR" ColumnName="FK_AGRESOR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ARCHIVO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_ARCHIVO">
+        <MappingFragment StoreEntitySet="TBL_ARCHIVO">
+          <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+          <ScalarProperty Name="VC_ENLACE" ColumnName="VC_ENLACE" />
+          <ScalarProperty Name="FK_REGISTRO" ColumnName="FK_REGISTRO" />
+          <ScalarProperty Name="PK_ARCHIVO" ColumnName="PK_ARCHIVO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ATENCION">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_ATENCION">
+        <MappingFragment StoreEntitySet="TBL_ATENCION">
+          <ScalarProperty Name="FK_TIPOATENCION" ColumnName="FK_TIPOATENCION" />
+          <ScalarProperty Name="FK_REGISTRO" ColumnName="FK_REGISTRO" />
+          <ScalarProperty Name="PK_ATENCION" ColumnName="PK_ATENCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ATENCIONASESORIA">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_ATENCIONASESORIA">
+        <MappingFragment StoreEntitySet="TBL_ATENCIONASESORIA">
+          <ScalarProperty Name="PK_ASESORIA" ColumnName="PK_ASESORIA" />
+          <ScalarProperty Name="FK_TIPOASESORIA" ColumnName="FK_TIPOASESORIA" />
+          <ScalarProperty Name="FK_ATENCION" ColumnName="FK_ATENCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_BITACORA">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_BITACORA">
+        <MappingFragment StoreEntitySet="TBL_BITACORA">
+          <ScalarProperty Name="VC_DIRECCIONIP" ColumnName="VC_DIRECCIONIP" />
+          <ScalarProperty Name="VC_DETALLE" ColumnName="VC_DETALLE" />
+          <ScalarProperty Name="FK_USUARIO" ColumnName="FK_USUARIO" />
+          <ScalarProperty Name="FK_TIPOEVENTO" ColumnName="FK_TIPOEVENTO" />
+          <ScalarProperty Name="DT_FECHAEVENTO" ColumnName="DT_FECHAEVENTO" />
+          <ScalarProperty Name="PK_BITACORA" ColumnName="PK_BITACORA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_CATALOGO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_CATALOGO">
+        <MappingFragment StoreEntitySet="TBL_CATALOGO">
+          <ScalarProperty Name="FK_CATALOGOPADRE" ColumnName="FK_CATALOGOPADRE" />
+          <ScalarProperty Name="VC_NOMBRECATALOGO" ColumnName="VC_NOMBRECATALOGO" />
+          <ScalarProperty Name="PK_CATALOGO" ColumnName="PK_CATALOGO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_CONSULTA">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_CONSULTA">
+        <MappingFragment StoreEntitySet="TBL_CONSULTA">
+          <ScalarProperty Name="TM_TRASLADOAPROX" ColumnName="TM_TRASLADOAPROX" />
+          <ScalarProperty Name="FK_ENTIDADTRASLADA" ColumnName="FK_ENTIDADTRASLADA" />
+          <ScalarProperty Name="VC_CONTACTOCEEAM" ColumnName="VC_CONTACTOCEEAM" />
+          <ScalarProperty Name="FK_TIPOCEEAMINGRESO" ColumnName="FK_TIPOCEEAMINGRESO" />
+          <ScalarProperty Name="FK_TIPOCEEAMREINGRESO" ColumnName="FK_TIPOCEEAMREINGRESO" />
+          <ScalarProperty Name="B_REINGRESOCEEAM" ColumnName="B_REINGRESOCEEAM" />
+          <ScalarProperty Name="VC_OBSERVACIONES" ColumnName="VC_OBSERVACIONES" />
+          <ScalarProperty Name="FK_RAZONRECHAZO" ColumnName="FK_RAZONRECHAZO" />
+          <ScalarProperty Name="B_INGRESOCEEAM" ColumnName="B_INGRESOCEEAM" />
+          <ScalarProperty Name="FK_REGISTRO" ColumnName="FK_REGISTRO" />
+          <ScalarProperty Name="PK_CONSULTA" ColumnName="PK_CONSULTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_DIRECCION">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_DIRECCION">
+        <MappingFragment StoreEntitySet="TBL_DIRECCION">
+          <ScalarProperty Name="FK_DISTRITO" ColumnName="FK_DISTRITO" />
+          <ScalarProperty Name="FK_CANTON" ColumnName="FK_CANTON" />
+          <ScalarProperty Name="FK_PROVINCIA" ColumnName="FK_PROVINCIA" />
+          <ScalarProperty Name="FK_TIPODIRECCION" ColumnName="FK_TIPODIRECCION" />
+          <ScalarProperty Name="VC_DETALLE" ColumnName="VC_DETALLE" />
+          <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+          <ScalarProperty Name="PK_DIRECCION" ColumnName="PK_DIRECCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_FAMILIAR_ACADEMICO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_FAMILIAR_ACADEMICO">
+        <MappingFragment StoreEntitySet="TBL_FAMILIAR_ACADEMICO">
+          <ScalarProperty Name="PK_FAMILIARACADEMICO" ColumnName="PK_FAMILIARACADEMICO" />
+          <ScalarProperty Name="FK_GRADOACADEMICO" ColumnName="FK_GRADOACADEMICO" />
+          <ScalarProperty Name="FK_FAMILIAR" ColumnName="FK_FAMILIAR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_FAMILIAR_SALUD">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_FAMILIAR_SALUD">
+        <MappingFragment StoreEntitySet="TBL_FAMILIAR_SALUD">
+          <ScalarProperty Name="PK_FAMILIARSALUD" ColumnName="PK_FAMILIARSALUD" />
+          <ScalarProperty Name="FK_CONDICIONSALUD" ColumnName="FK_CONDICIONSALUD" />
+          <ScalarProperty Name="FK_FAMILIAR" ColumnName="FK_FAMILIAR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_LABORAL">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_LABORAL">
+        <MappingFragment StoreEntitySet="TBL_LABORAL">
+          <ScalarProperty Name="VC_OCUPACION" ColumnName="VC_OCUPACION" />
+          <ScalarProperty Name="FK_CONDICIONLABORAL" ColumnName="FK_CONDICIONLABORAL" />
+          <ScalarProperty Name="I_ANNOSEXPERIENCIA" ColumnName="I_ANNOSEXPERIENCIA" />
+          <ScalarProperty Name="VC_OBSERVACIONES" ColumnName="VC_OBSERVACIONES" />
+          <ScalarProperty Name="VC_NOMBRELUGARTRABAJO" ColumnName="VC_NOMBRELUGARTRABAJO" />
+          <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_PERSONA">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA">
+        <MappingFragment StoreEntitySet="TBL_PERSONA">
+          <ScalarProperty Name="VC_CORREO" ColumnName="VC_CORREO" />
+          <ScalarProperty Name="FK_DISTRITOPROCEDENCIA" ColumnName="FK_DISTRITOPROCEDENCIA" />
+          <ScalarProperty Name="FK_CANTONPROCEDENCIA" ColumnName="FK_CANTONPROCEDENCIA" />
+          <ScalarProperty Name="FK_PROVINCIAPROCEDENCIA" ColumnName="FK_PROVINCIAPROCEDENCIA" />
+          <ScalarProperty Name="I_HIJOSMAYORESDOCE" ColumnName="I_HIJOSMAYORESDOCE" />
+          <ScalarProperty Name="I_HIJOSCEEAM" ColumnName="I_HIJOSCEEAM" />
+          <ScalarProperty Name="I_HIJOS" ColumnName="I_HIJOS" />
+          <ScalarProperty Name="FK_ORIENTACIONSEXUAL" ColumnName="FK_ORIENTACIONSEXUAL" />
+          <ScalarProperty Name="FK_CONDICIONSALUD" ColumnName="FK_CONDICIONSALUD" />
+          <ScalarProperty Name="FK_ESTADOEMBARAZO" ColumnName="FK_ESTADOEMBARAZO" />
+          <ScalarProperty Name="FK_TIPOFAMILIA" ColumnName="FK_TIPOFAMILIA" />
+          <ScalarProperty Name="FK_TIPOVIVIENDA" ColumnName="FK_TIPOVIVIENDA" />
+          <ScalarProperty Name="FK_CONDICIONASEGURAMIENTO" ColumnName="FK_CONDICIONASEGURAMIENTO" />
+          <ScalarProperty Name="FK_CONDICIONMIGRATORIA" ColumnName="FK_CONDICIONMIGRATORIA" />
+          <ScalarProperty Name="FK_OCUPACION" ColumnName="FK_OCUPACION" />
+          <ScalarProperty Name="FK_GENERO" ColumnName="FK_GENERO" />
+          <ScalarProperty Name="FK_ESCOLARIDAD" ColumnName="FK_ESCOLARIDAD" />
+          <ScalarProperty Name="FK_ESTADOCIVIL" ColumnName="FK_ESTADOCIVIL" />
+          <ScalarProperty Name="DT_FECHANACIMIENTO" ColumnName="DT_FECHANACIMIENTO" />
+          <ScalarProperty Name="VC_APELLIDO2" ColumnName="VC_APELLIDO2" />
+          <ScalarProperty Name="VC_APELLIDO1" ColumnName="VC_APELLIDO1" />
+          <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+          <ScalarProperty Name="FK_NACIONALIDAD" ColumnName="FK_NACIONALIDAD" />
+          <ScalarProperty Name="FK_TIPOIDENTIFICACION" ColumnName="FK_TIPOIDENTIFICACION" />
+          <ScalarProperty Name="VC_IDENTIFICACION" ColumnName="VC_IDENTIFICACION" />
+          <ScalarProperty Name="PK_PERSONA" ColumnName="PK_PERSONA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_PERSONA_APOYO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA_APOYO">
+        <MappingFragment StoreEntitySet="TBL_PERSONA_APOYO">
+          <ScalarProperty Name="VC_MEDIOCONTACTO" ColumnName="VC_MEDIOCONTACTO" />
+          <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+          <ScalarProperty Name="FK_TIPOAPOYO" ColumnName="FK_TIPOAPOYO" />
+          <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+          <ScalarProperty Name="PK_PERSONAAPOYO" ColumnName="PK_PERSONAAPOYO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_PERSONA_CONDICIONESPECIAL">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA_CONDICIONESPECIAL">
+        <MappingFragment StoreEntitySet="TBL_PERSONA_CONDICIONESPECIAL">
+          <ScalarProperty Name="PK_CONDICIONESPECIAL" ColumnName="PK_CONDICIONESPECIAL" />
+          <ScalarProperty Name="FK_CONDICIONESPECIAL" ColumnName="FK_CONDICIONESPECIAL" />
+          <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_PERSONA_FAMILIAR">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA_FAMILIAR">
+        <MappingFragment StoreEntitySet="TBL_PERSONA_FAMILIAR">
+          <ScalarProperty Name="B_DENUNCIAABUSOSEXUAL" ColumnName="B_DENUNCIAABUSOSEXUAL" />
+          <ScalarProperty Name="B_ABUSOSEXUAL" ColumnName="B_ABUSOSEXUAL" />
+          <ScalarProperty Name="FK_PARENTESCOAGRESOR" ColumnName="FK_PARENTESCOAGRESOR" />
+          <ScalarProperty Name="FK_PARENTESCOPERSONA" ColumnName="FK_PARENTESCOPERSONA" />
+          <ScalarProperty Name="FK_NACIONALIDAD" ColumnName="FK_NACIONALIDAD" />
+          <ScalarProperty Name="VC_APELLIDO2" ColumnName="VC_APELLIDO2" />
+          <ScalarProperty Name="VC_APELLIDO1" ColumnName="VC_APELLIDO1" />
+          <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+          <ScalarProperty Name="PK_PERSONA" ColumnName="PK_PERSONA" />
+          <ScalarProperty Name="PK_FAMILIAR" ColumnName="PK_FAMILIAR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_PERSONA_RED_APOYO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA_RED_APOYO">
+        <MappingFragment StoreEntitySet="TBL_PERSONA_RED_APOYO">
+          <ScalarProperty Name="FK_TIPOREDAPOYO" ColumnName="FK_TIPOREDAPOYO" />
+          <ScalarProperty Name="VC_OBSERVACIONES" ColumnName="VC_OBSERVACIONES" />
+          <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+          <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+          <ScalarProperty Name="PK_RED_APOYO" ColumnName="PK_RED_APOYO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_PERSONA_SALUD">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA_SALUD">
+        <MappingFragment StoreEntitySet="TBL_PERSONA_SALUD">
+          <ScalarProperty Name="PK_PERSONASALUD" ColumnName="PK_PERSONASALUD" />
+          <ScalarProperty Name="FK_CONDICIONSALUD" ColumnName="FK_CONDICIONSALUD" />
+          <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_REFERENCIA">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_REFERENCIA">
+        <MappingFragment StoreEntitySet="TBL_REFERENCIA">
+          <ScalarProperty Name="FK_INSTITUCIONDESTINO" ColumnName="FK_INSTITUCIONDESTINO" />
+          <ScalarProperty Name="FK_INSTITUCIONORIGEN" ColumnName="FK_INSTITUCIONORIGEN" />
+          <ScalarProperty Name="FK_REGISTRO" ColumnName="FK_REGISTRO" />
+          <ScalarProperty Name="FK_TIPOREFERENCIA" ColumnName="FK_TIPOREFERENCIA" />
+          <ScalarProperty Name="PK_REFERENCIA" ColumnName="PK_REFERENCIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_REFERENCIA_DETALLE">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_REFERENCIA_DETALLE">
+        <MappingFragment StoreEntitySet="TBL_REFERENCIA_DETALLE">
+          <ScalarProperty Name="FK_UNIDAD" ColumnName="FK_UNIDAD" />
+          <ScalarProperty Name="FK_INSTITUCION" ColumnName="FK_INSTITUCION" />
+          <ScalarProperty Name="VC_TELEFONO" ColumnName="VC_TELEFONO" />
+          <ScalarProperty Name="VC_CORREO" ColumnName="VC_CORREO" />
+          <ScalarProperty Name="VC_FUNCIONARIO" ColumnName="VC_FUNCIONARIO" />
+          <ScalarProperty Name="FK_REFERENCIA" ColumnName="FK_REFERENCIA" />
+          <ScalarProperty Name="PK_REFERENCIADETALLE" ColumnName="PK_REFERENCIADETALLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_REGISTRO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_REGISTRO">
+        <MappingFragment StoreEntitySet="TBL_REGISTRO">
+          <ScalarProperty Name="VC_OBSERVACIONES" ColumnName="VC_OBSERVACIONES" />
+          <ScalarProperty Name="FK_TIPOREGISTRO" ColumnName="FK_TIPOREGISTRO" />
+          <ScalarProperty Name="FK_TIPOSERVICIO" ColumnName="FK_TIPOSERVICIO" />
+          <ScalarProperty Name="DT_FECHAFIN" ColumnName="DT_FECHAFIN" />
+          <ScalarProperty Name="DT_FECHAINICIO" ColumnName="DT_FECHAINICIO" />
+          <ScalarProperty Name="FK_USUARIOREGISTRA" ColumnName="FK_USUARIOREGISTRA" />
+          <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+          <ScalarProperty Name="PK_REGISTRO" ColumnName="PK_REGISTRO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_REGISTRO_CEAAM">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_REGISTRO_CEAAM">
+        <MappingFragment StoreEntitySet="TBL_REGISTRO_CEAAM">
+          <ScalarProperty Name="B_PROGRAMAOAPVD" ColumnName="B_PROGRAMAOAPVD" />
+          <ScalarProperty Name="FK_VALORACIONRIESGO" ColumnName="FK_VALORACIONRIESGO" />
+          <ScalarProperty Name="B_KITEMERGENCIA" ColumnName="B_KITEMERGENCIA" />
+          <ScalarProperty Name="VC_DESTINOEXTRANJERO" ColumnName="VC_DESTINOEXTRANJERO" />
+          <ScalarProperty Name="FK_DISTRITO" ColumnName="FK_DISTRITO" />
+          <ScalarProperty Name="FK_CANTON" ColumnName="FK_CANTON" />
+          <ScalarProperty Name="FK_PROVINCIA" ColumnName="FK_PROVINCIA" />
+          <ScalarProperty Name="VC_OBSERVACIONESEGRESO" ColumnName="VC_OBSERVACIONESEGRESO" />
+          <ScalarProperty Name="FK_TIPOEGRESO" ColumnName="FK_TIPOEGRESO" />
+          <ScalarProperty Name="DT_FECHAEGRESO" ColumnName="DT_FECHAEGRESO" />
+          <ScalarProperty Name="VC_NUMEROFAMILIA" ColumnName="VC_NUMEROFAMILIA" />
+          <ScalarProperty Name="VC_PERSONARECIBE" ColumnName="VC_PERSONARECIBE" />
+          <ScalarProperty Name="DT_FECHAINGRESO" ColumnName="DT_FECHAINGRESO" />
+          <ScalarProperty Name="VC_OBSERVACIONESINGRESO" ColumnName="VC_OBSERVACIONESINGRESO" />
+          <ScalarProperty Name="FK_TIPOINGRESO" ColumnName="FK_TIPOINGRESO" />
+          <ScalarProperty Name="FK_REGISTRO" ColumnName="FK_REGISTRO" />
+          <ScalarProperty Name="PK_REGISTRO_CEAAM" ColumnName="PK_REGISTRO_CEAAM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_REGISTRO_COORDINACION">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_REGISTRO_COORDINACION">
+        <MappingFragment StoreEntitySet="TBL_REGISTRO_COORDINACION">
+          <ScalarProperty Name="VC_CORREO" ColumnName="VC_CORREO" />
+          <ScalarProperty Name="VC_TELEFONO" ColumnName="VC_TELEFONO" />
+          <ScalarProperty Name="VC_PERSONACOORDINA" ColumnName="VC_PERSONACOORDINA" />
+          <ScalarProperty Name="FK_INSTITUCION" ColumnName="FK_INSTITUCION" />
+          <ScalarProperty Name="FK_REGISTRO" ColumnName="FK_REGISTRO" />
+          <ScalarProperty Name="PK_COORDINACION" ColumnName="PK_COORDINACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ROL_ACCION">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_ROL_ACCION">
+        <MappingFragment StoreEntitySet="TBL_ROL_ACCION">
+          <ScalarProperty Name="PK_ROLACCION" ColumnName="PK_ROLACCION" />
+          <ScalarProperty Name="FK_ACCION" ColumnName="FK_ACCION" />
+          <ScalarProperty Name="FK_ROL" ColumnName="FK_ROL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ROL_USUARIO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_ROL_USUARIO">
+        <MappingFragment StoreEntitySet="TBL_ROL_USUARIO">
+          <ScalarProperty Name="PK_ROLUSUAIO" ColumnName="PK_ROLUSUAIO" />
+          <ScalarProperty Name="FK_ROL" ColumnName="FK_ROL" />
+          <ScalarProperty Name="FK_USUARIO" ColumnName="FK_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_TELEFONO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_TELEFONO">
+        <MappingFragment StoreEntitySet="TBL_TELEFONO">
+          <ScalarProperty Name="FK_TIPOTELEFONO" ColumnName="FK_TIPOTELEFONO" />
+          <ScalarProperty Name="VC_NUMERO" ColumnName="VC_NUMERO" />
+          <ScalarProperty Name="FK_PERSONA" ColumnName="FK_PERSONA" />
+          <ScalarProperty Name="PK_TELEFONO" ColumnName="PK_TELEFONO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_UNIDAD">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_UNIDAD">
+        <MappingFragment StoreEntitySet="TBL_UNIDAD">
+          <ScalarProperty Name="I_ANNO" ColumnName="I_ANNO" />
+          <ScalarProperty Name="I_NUMERO" ColumnName="I_NUMERO" />
+          <ScalarProperty Name="VC_PREFIJO" ColumnName="VC_PREFIJO" />
+          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+          <ScalarProperty Name="VC_CODIGO" ColumnName="VC_CODIGO" />
+          <ScalarProperty Name="PK_UNIDAD" ColumnName="PK_UNIDAD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_USUARIO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_USUARIO">
+        <MappingFragment StoreEntitySet="TBL_USUARIO">
+          <ScalarProperty Name="IM_SALT2" ColumnName="IM_SALT2" />
+          <ScalarProperty Name="IM_SALT1" ColumnName="IM_SALT1" />
+          <ScalarProperty Name="IM_CLAVE" ColumnName="IM_CLAVE" />
+          <ScalarProperty Name="VC_CORREO" ColumnName="VC_CORREO" />
+          <ScalarProperty Name="VC_APELLIDO2" ColumnName="VC_APELLIDO2" />
+          <ScalarProperty Name="VC_APELLIDO1" ColumnName="VC_APELLIDO1" />
+          <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+          <ScalarProperty Name="DT_FECHAREGISTRO" ColumnName="DT_FECHAREGISTRO" />
+          <ScalarProperty Name="VC_USUARIO" ColumnName="VC_USUARIO" />
+          <ScalarProperty Name="PK_USUARIO" ColumnName="PK_USUARIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_VALOR_CATALOGO">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_VALOR_CATALOGO">
+        <MappingFragment StoreEntitySet="TBL_VALOR_CATALOGO">
+          <ScalarProperty Name="B_EDITABLE" ColumnName="B_EDITABLE" />
+          <ScalarProperty Name="VC_VALOR2" ColumnName="VC_VALOR2" />
+          <ScalarProperty Name="VC_VALOR1" ColumnName="VC_VALOR1" />
+          <ScalarProperty Name="FK_CATALOGO" ColumnName="FK_CATALOGO" />
+          <ScalarProperty Name="PK_VALORCATALOGO" ColumnName="PK_VALORCATALOGO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ROL">
+      <EntityTypeMapping TypeName="SIVIOModel.TBL_ROL">
+        <MappingFragment StoreEntitySet="TBL_ROL">
+          <ScalarProperty Name="FK_TIPOSERVICIO" ColumnName="FK_TIPOSERVICIO" />
+          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+          <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+          <ScalarProperty Name="PK_ROL" ColumnName="PK_ROL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -22,3 +22,8 @@ C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.Entidades\bin\Debug\SIVIO.Entidad
 C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.csprojResolveAssemblyReference.cache
 C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.dll
 C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.pdb
+C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.Entidades\bin\Debug\SIVIO.Entidades.dll
+C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.Entidades\bin\Debug\SIVIO.Entidades.pdb
+C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.csprojResolveAssemblyReference.cache
+C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.dll
+C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.pdb

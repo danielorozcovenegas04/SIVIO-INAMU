@@ -158,27 +158,46 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult ConsultaCoavif()
         {
-
             var listaPersonas = _modelExpediente.ListarPersonas();
             var listaUsuarios = _modelExpediente.ListarUSuarios();
-            var listaRol = _modelExpediente.ListarRoles();
             var listaConsulta = _modelExpediente.ListarConsultas();
-            var listaRolUsuario = _modelExpediente.ListarUSuariosRoles();
-            foreach (var rol in listaRol)
+            var listaRegistro = _modelExpediente.ListarRegistro();
+
+            foreach (var r in listaRegistro)
             {
-                foreach (var usuario in listaUsuarios)
+                foreach (var u in listaUsuarios)
                 {
-                    foreach (var rolusuario in listaRolUsuario)
+                    if (r.FK_USUARIOREGISTRA == u.PK_USUARIO)
                     {
-                        if (rol.PK_ROL == rolusuario.FK_ROL && usuario.PK_USUARIO == rolusuario.FK_USUARIO)
-                        {
-                            ViewBag.grid(rol.VC_NOMBRE, (usuario.VC_NOMBRE + usuario.VC_APELLIDO1));
-                        }
+                        r.TBL_USUARIO = new TBL_USUARIO();
+                        r.TBL_USUARIO.PK_USUARIO = u.PK_USUARIO;
+                        r.TBL_USUARIO.VC_APELLIDO1 = u.VC_APELLIDO1;
+                        r.TBL_USUARIO.VC_APELLIDO2 = u.VC_APELLIDO2;
+                        r.TBL_USUARIO.VC_NOMBRE = u.VC_NOMBRE;
                     }
                 }
-            }
+                foreach (var p in listaPersonas)
+                {
+                    if (r.FK_PERSONA == p.PK_PERSONA)
+                    {
+                        r.TBL_PERSONA = new TBL_PERSONA();
+                        r.TBL_PERSONA.PK_PERSONA = p.PK_PERSONA;
+                        r.TBL_PERSONA.VC_NOMBRE = p.VC_NOMBRE;
+                        r.TBL_PERSONA.VC_APELLIDO1 = p.VC_APELLIDO1;
+                        r.TBL_PERSONA.VC_APELLIDO2 = p.VC_APELLIDO2;
+                        r.TBL_PERSONA.VC_IDENTIFICACION = p.VC_IDENTIFICACION;
+                    }
 
-            return View(_modelExpediente.ListarPersonas());
+                }
+            }
+            return View(listaRegistro);
+        }
+
+        [Authorize]
+        public ActionResult ConsultaPersona()
+        {
+
+            return View();
         }
         #endregion
     }
