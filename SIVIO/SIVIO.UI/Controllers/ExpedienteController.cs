@@ -191,6 +191,27 @@ namespace SIVIO.UI.Controllers
         #endregion
 
         #region Delegacion
+        [Authorize]
+        public ActionResult Delegacion_Mujer()
+        {
+            /*
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+            */
+            return View(viewName: "~/Views/Expediente/Delegacion_Mujer.cshtml");
+        }
+
         public JsonResult CargarDropdowns()
         {
             dynamic objetoRetorno = new ExpandoObject();
