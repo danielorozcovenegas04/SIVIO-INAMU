@@ -128,12 +128,12 @@
         $('#txtHoraInicio').css("background-color", "#f2f2f2");
         $("#txtHoraInicio").prop("readonly", true);
         $('#txtHoraFinalizacion').css("background-color", "#f2f2f2");
-        $("#txtHoraFinalizacion").prop("readonly", true);        
+        $("#txtHoraFinalizacion").prop("readonly", true);
 
         $("#txtInstitucion").val("INAMU");
         $('#txtInstitucion').css("background-color", "#f2f2f2");
         $("#txtInstitucion").prop("readonly", true);
-        
+
         $.ajax({
             type: "POST",
             url: '@Url.Action("CargarPersonas")',
@@ -212,14 +212,14 @@
                         }));
                     });
 
-                    $.each(respuesta.CatalogoCondicionMigratoria, function(key, value) {
+                    $.each(respuesta.CatalogoCondicionMigratoria, function (key, value) {
                         $('#comMigratoria').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
 
-                    $.each(respuesta.CatalogoDiscapasidades, function(key, value) {
+                    $.each(respuesta.CatalogoDiscapasidades, function (key, value) {
                         $('#comDiscapacidad').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
@@ -298,248 +298,263 @@
         background-color: blue;
     }
 </style>
-<div class="container-fluid" id="contenedorPrincipal">
+<div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
 
 
 
 
 
+    <div class="col-md-12 form-group">
+        <div class="col-md-2 form-group">
+            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:50px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Expediente</button>
 
+            <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
 
-    <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
-        <div style="margin-left:20px;">
-            @*<h2>Expediente de: @Model.persona.VC_NOMBRE @Model.persona.VC_APELLIDO1 @Model.persona.VC_APELLIDO2</h2>
-            <h4>Identificación: @Model.persona.VC_IDENTIFICACION <br /> Número de expediente: @Model.persona.PK_PERSONA</h4>*@
-        </div>
-        <ul class="nav nav-tabs">
-            <li class="active">
-                <a data-toggle="tab" href="#datAdministrativos">
-                    <i class="fa fa-file-text" aria-hidden="true"></i>Datos Administrativos
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#datUsuaria">
-                    <i class="fa fa-address-card" aria-hidden="true"></i>Datos Usuaria
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#valoracion">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Valoración
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#atencion">
-                    <i class="fa fa-arrow-up" aria-hidden="true"></i>Atención
-                </a>
-            </li>
-        </ul>
+            <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="margin-bottom:100%; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
+    
+            <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; padding-top display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
 
-        <div class="tab-content">
-            <div id="datAdministrativos" class="tab-pane fade in active">
-                <div class="row comunForm">
-                    <div class="row">
-                        <div class="col-xs-10">
-                        </div>
-                        <div class="col-xs-2">
-                            @*<button class="botonCerrar danger" id="btnCerrarFrmDatosAdministrativos">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </button>*@
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6 form-group">
-                            <label>Fecha del incidente</label>
-                            <input class="form-control" id="txtFecha" type="text" required="">
-                        </div>
-                        <div class="col-xs-3 form-group">
-                            <label>Hora inicio</label>
-                            <input class="form-control" id="txtHoraInicio" type="text" required="">
-                        </div>
-                        <div class="col-xs-3 form-group">
-                            <label>Hora finalización</label>
-                            <input class="form-control" placeholder="--:-- --" id="txtHoraFinalización" type="text" readonly="readonly">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6 form-group">
-                            <label>Persona que atiende</label>
-                            <input class="form-control" id="txtPersonaAtiende" type="text" required="">
-                        </div>
-                        <div class="col-xs-6 form-group">
-                            <label>Tipo de disponibilidad</label>
-                            <select class="form-control" id="cmbTipoDisponibilidad" type="">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6 form-group">
-                            <label>Institucion que refiere</label>
-                            <input class="form-control" id="txtInstitucion" type="text" required="">
-                        </div>
-                        <div class="col-xs-6 form-group">
-                            <label>Nombre de quien refiere</label>
-                            <input class="form-control" id="txtPersonaQuienRefiere" type="text" required="">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6 form-group">
-                            <label>Telefono</label>
-                            <input class="form-control" id="txtTelefonoPersona" type="text" required="">
-                        </div>
-                        <div class="col-xs-6 form-group">
-                            <label>Correo</label>
-                            <input class="form-control" id="txtCorreoPersona" type="text" required="">
-                        </div>
-                    </div>
-                    <div class="row" id="contenedorBotones">
-                        <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                            <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
-                            <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="datUsuaria" class="tab-pane">
-                <div class="row comunForm">
-                    <div class="row">
-                        <div class="col-xs-6 form-group">
-                            <div class="col-xs-12 form-group">
-                                <label>Nombre</label>
-                                <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                            </div>
-
-
-                            <div class="col-xs-6 form-group">
-                                <label>Edad</label>
-                                <input class="form-control" placeholder="Edad" id="intEdad" type="number" required="" min="0">
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>País de Procedencia</label>
-                                <select id="comPais" class="form-control"></select>
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>Teléfono</label>
-                                <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="">
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>Otra Nacionalidad</label>
-                                <select id="comOtraNacionalidad" class="form-control"></select>
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>Condición Migratoria</label>
-                                <select id="comMigratoria" class="form-control"></select>
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>Numero de Hijos</label>
-                                <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>
-                                    <input style="display:inline-block;" id="checkMayorDoce" type="checkbox"> Hijo mayor de 12 años
-                                </label>
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>Discapacidades en hijos/hijas</label>
-                                <select id="comDiscapacidad" class="form-control"></select>
-                            </div>
-
-                        </div>
-
-                        <div class="col-xs-6 form-group">
-                            <div class="col-xs-12 form-group">
-                                <label>Número Documento de identificación</label>
-                                <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="">
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>Lugar de Procedencia</label>
-                            </div>
-                            <div class="col-xs-4 form-group">
-                                <label>Provincia</label>
-                                <select id="comProvincia" class="form-control"></select>
-                            </div>
-                            <div class="col-xs-4 form-group">
-                                <label>Cantón</label>
-                                <select id="comCanton" class="form-control"></select>
-                            </div>
-                            <div class="col-xs-4 form-group">
-                                <label>Distrito</label>
-                                <select id="comDistrito" class="form-control"></select>
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>Nacionalidad</label>
-                                <select id="comNacionalidad" class="form-control"></select>
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>
-                                    <input style="display:inline-block;" id="checkApatrida" type="checkbox"> Apátrida
-                                </label>
-                            </div>
-
-                            <div class="col-xs-12 form-group">
-                                <label>Lugar de Trabajo</label>
-                                <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
-                            </div>
-
-                            <div class="col-xs-4 form-group">
-                                <label>
-                                    <input style="display:inline-block;" id="checkEmbarazo" type="checkbox"> Embarazo
-                                </label>
-                            </div>
-
-                            <div class="col-xs-8 form-group">
-                                <label>Meses de embarazo</label>
-                                <input class="form-control" placeholder="Meses de embarazo" id="intEmbarazo" type="number" required="" min="0">
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="valoracion" class="tab-pane">
-                <div class="row comunForm">
-
-                    <div class="row">
-                        <div class="col-xs-4 form-group">
-                            <label>Nombre de Persona Usuaria</label>
-
-                            <input class="form-control" placeholder="Nombre" id="txtNombre3" type="date" required="">
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div id="atencion" class="tab-pane">
-                <div class="row comunForm">
-
-                    <div class="row">
-                        <div class="col-xs-4 form-group">
-                            <label>Nombre de Persona Usuaria</label>
-
-                            <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
+            <button type="button" id="btnCerrarCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Cerrar Caso</button>
         </div>
 
+        <div class="col-md-10 form-group">
+            <form id="formCoavif" method="post">
+                <div style="margin-left:20px;">
+                    @*<h2>Expediente de: @Model.persona.VC_NOMBRE @Model.persona.VC_APELLIDO1 @Model.persona.VC_APELLIDO2</h2>
+                    <h4>Identificación: @Model.persona.VC_IDENTIFICACION <br /> Número de expediente: @Model.persona.PK_PERSONA</h4>*@
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#datAdministrativos">
+                            <i class="fa fa-file-text" aria-hidden="true"></i>Datos Administrativos
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#datUsuaria">
+                            <i class="fa fa-address-card" aria-hidden="true"></i>Datos Usuaria
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#valoracion">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Valoración
+                        </a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#atencion">
+                            <i class="fa fa-hand-paper-o" aria-hidden="true"></i>Atención
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="datAdministrativos" class="tab-pane fade in active">
+                        <div class="row comunForm">
+                            <div class="row">
+                                <div class="col-md-10">
+                                </div>
+                                <div class="col-md-2">
+                                    @*<button class="botonCerrar danger" id="btnCerrarFrmDatosAdministrativos">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>*@
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>Fecha del incidente</label>
+                                    <input class="form-control" id="txtFecha" type="text" required="">
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Hora inicio</label>
+                                    <input class="form-control" id="txtHoraInicio" type="text" required="">
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Hora finalización</label>
+                                    <input class="form-control" placeholder="--:-- --" id="txtHoraFinalización" type="text" readonly="readonly">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>Persona que atiende</label>
+                                    <input class="form-control" id="txtPersonaAtiende" type="text" required="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Tipo de disponibilidad</label>
+                                    <select class="form-control" id="cmbTipoDisponibilidad" type="">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>Institucion que refiere</label>
+                                    <input class="form-control" id="txtInstitucion" type="text" required="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Nombre de quien refiere</label>
+                                    <input class="form-control" id="txtPersonaQuienRefiere" type="text" required="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>Telefono</label>
+                                    <input class="form-control" id="txtTelefonoPersona" type="text" required="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Correo</label>
+                                    <input class="form-control" id="txtCorreoPersona" type="text" required="">
+                                </div>
+                            </div>
+                            <div class="row" id="contenedorBotones">
+                                <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="datUsuaria" class="tab-pane">
+                        <div class="row comunForm">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <div class="col-md-12 form-group">
+                                        <label>Nombre</label>
+                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                    </div>
 
 
-    </form>
+                                    <div class="col-md-6 form-group">
+                                        <label>Edad</label>
+                                        <input class="form-control" placeholder="Edad" id="intEdad" type="number" required="" min="0">
+                                    </div>
 
+                                    <div class="col-md-12 form-group">
+                                        <label>País de Procedencia</label>
+                                        <select id="comPais" class="form-control"></select>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>Teléfono</label>
+                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="">
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>Otra Nacionalidad</label>
+                                        <select id="comOtraNacionalidad" class="form-control">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>Condición Migratoria</label>
+                                        <select id="comMigratoria" class="form-control"></select>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>Numero de Hijos</label>
+                                        <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>
+                                            <input style="display:inline-block;" id="checkMayorDoce" type="checkbox"> Hijo mayor de 12 años
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>Discapacidades en hijos/hijas</label>
+                                        <select id="comDiscapacidad" class="form-control"></select>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 form-group">
+                                    <div class="col-md-12 form-group">
+                                        <label>Número Documento de identificación</label>
+                                        <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="">
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>Lugar de Procedencia</label>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label>Provincia</label>
+                                        <select id="comProvincia" class="form-control"></select>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label>Cantón</label>
+                                        <select id="comCanton" class="form-control"></select>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label>Distrito</label>
+                                        <select id="comDistrito" class="form-control"></select>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>Nacionalidad</label>
+                                        <select id="comNacionalidad" class="form-control"></select>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>
+                                            <input style="display:inline-block;" id="checkApatrida" type="checkbox"> Apátrida
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>Lugar de Trabajo</label>
+                                        <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
+                                    </div>
+
+                                    <div class="col-md-4 form-group">
+                                        <label>
+                                            <input style="display:inline-block;" id="checkEmbarazo" type="checkbox"> Embarazo
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-8 form-group">
+                                        <label>Meses de embarazo</label>
+                                        <input class="form-control" placeholder="Meses de embarazo" id="intEmbarazo" type="number" required="" min="0">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="valoracion" class="tab-pane">
+                        <div class="row comunForm">
+
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Nombre de Persona Usuaria</label>
+
+                                    <input class="form-control" placeholder="Nombre" id="txtNombre3" type="date" required="">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="atencion" class="tab-pane">
+                        <div class="row comunForm">
+
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Nombre de Persona Usuaria</label>
+
+                                    <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+        </div>
 </div>
 
 
