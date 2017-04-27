@@ -18,3 +18,8 @@ C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.Utilitarios\bin\Debug\SIVIO.Utili
 C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.csprojResolveAssemblyReference.cache
 C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.dll
 C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.pdb
+C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.Utilitarios\bin\Debug\SIVIO.Utilitarios.dll
+C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.Utilitarios\bin\Debug\SIVIO.Utilitarios.pdb
+C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.csprojResolveAssemblyReference.cache
+C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.dll
+C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.Utilitarios\obj\Debug\SIVIO.Utilitarios.pdb
