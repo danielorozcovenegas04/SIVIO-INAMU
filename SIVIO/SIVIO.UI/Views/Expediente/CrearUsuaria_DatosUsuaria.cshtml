@@ -16,8 +16,26 @@
                 debugger;
                 var respuesta = JSON.parse(resultado);
                 if (respuesta.Mensaje.TipoMensaje === 1) {
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                        $('#cmbPaisProcedencia').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
                     $.each(respuesta.CatalogoNacionalidad, function(key, value) {
                         $('#cmbNacionalidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                        $('#cmbOtraNacionalidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                        $('#cmbApatrida').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -30,6 +48,24 @@
                     });
                     $.each(respuesta.CatalogoEscolaridad, function (key, value) {
                         $('#cmbEscolaridad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoEmbarazo, function (key, value) {
+                        $('#cmbEmbarazo').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoCondicionMigratoria, function (key, value) {
+                        $('#cmbCondicionMigratoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoOcupacion, function (key, value) {
+                        $('#cmbOcupacion').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -136,7 +172,7 @@
                             </div>
                             <div class="col-xs-5 form-group">
                                 <label>País de procedencia</label>
-                                <!-- Crear un dropdown con países -->
+                                <select id="cmbPaisProcedencia" class="form-control"></select>
                             </div>
                         </div>
 
@@ -169,7 +205,7 @@
                             </div>
                             <div class="col-xs-5 form-group">
                                 <label>Escolaridad</label>
-                                <!-- Crear un dropdown con escolaridades -->
+                                <select id="cmbEscolaridad" class="form-control"></select>
                             </div>
                         </div>
 
@@ -180,36 +216,36 @@
                             </div>
                             <div class="col-xs-5 form-group">
                                 <label>Embarazo (meses)</label>
-                                <input class="form-control" placeholder="Número de meses de embarazo" id="txtMesesEmbarazo" type="text" required="">
+                                <select id="cmbEmbarazo" class="form-control"></select>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-5 form-group">
                                 <label>Nacionalidad</label>
-                                <input class="form-control" placeholder="Nacionalidad" id="txtNacionalidad" type="text" required="">
+                                <select id="cmbNacionalidad" class="form-control"></select>
                             </div>
                             <div class="col-xs-5 form-group">
                                 <label>Ora nacionalidad</label>
-                                <input class="form-control" placeholder="Otra nacionalidad" id="txtOtraNacionalidad" type="text" required="">
+                                <select id="cmbOtraNacionalidad" class="form-control"></select>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-5 form-group">
                                 <label>Apátrida de</label>
-                                <input class="form-control" placeholder="Apátrida de" id="txtApatrida" type="text" required="">
+                                <select id="cmbApatrida" class="form-control"></select>
                             </div>
                             <div class="col-xs-5 form-group">
                                 <label>Condición migratoria</label>
-                                <input class="form-control" placeholder="Condición migratoria" id="txtCondicionMigratoria" type="text" required="">
+                                <select id="cmbCondicionMigratoria" class="form-control"></select>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-5 form-group">
                                 <label>Ocupación</label>
-                                <input class="form-control" placeholder="Ocupación" id="txtOcupacion" type="text" required="">
+                                <select id="cmbOcupacion" class="form-control"></select>
                             </div>
                         </div>
 
