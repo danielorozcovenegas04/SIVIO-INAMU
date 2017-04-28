@@ -283,14 +283,14 @@
                             <tbody>
                                 @foreach (var consulta in Model)
                                 {
-                                    if (consulta.FK_TIPOREGISTRO == 549) {
+                                    if (consulta.TBL_VALOR_CATALOGO1.VC_VALOR2.CompareTo("1")==0) {
                                     <tr>
                                         <td></td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
                                         <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
                                         <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO.VC_VALOR1)</td>
-                                        <td> Consulta </td>
+                                        <td> @Html.Raw(consulta.TBL_VALOR_CATALOGO1.VC_VALOR1) </td>
                                         <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
                                     </tr>
                                     }
@@ -329,14 +329,14 @@
                             <tbody>
                                 @foreach (var consulta in Model)
                                 {
-                                    if (consulta.FK_TIPOREGISTRO==550) {
+                                    if (consulta.TBL_VALOR_CATALOGO1.VC_VALOR2.CompareTo("2") == 0){
                                     <tr>
                                         <td></td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
                                         <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
                                         <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO.VC_VALOR1)</td>
-                                        <td> Atencion </td>
+                                        <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO1.VC_VALOR1) </td>
                                         <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
                                     </tr>
                                     }

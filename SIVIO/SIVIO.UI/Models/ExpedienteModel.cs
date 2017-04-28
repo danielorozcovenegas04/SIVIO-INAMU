@@ -219,7 +219,7 @@ namespace SIVIO.UI.Models
                         DT_FECHAINICIO = DateTime.Now,
                         DT_FECHAFIN = DateTime.Now,
                         FK_TIPOSERVICIO = 4,
-                        FK_TIPOREGISTRO = 549,
+                        FK_TIPOREGISTRO = 47,
                         VC_OBSERVACIONES = "algo"
                     });
                     R.Add(new TBL_REGISTRO()
@@ -230,7 +230,7 @@ namespace SIVIO.UI.Models
                         DT_FECHAINICIO = DateTime.Now,
                         DT_FECHAFIN = DateTime.Now,
                         FK_TIPOSERVICIO = 69,
-                        FK_TIPOREGISTRO = 550,
+                        FK_TIPOREGISTRO = 69,
                         VC_OBSERVACIONES = "algo"
                     });
                     return R;

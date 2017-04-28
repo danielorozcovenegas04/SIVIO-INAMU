@@ -266,8 +266,7 @@
                 <tbody>
                     @foreach (var consulta in Model)
                     {
-                        if (consulta.FK_TIPOREGISTRO == 549)
-                        {
+                        
                             <tr>
                                 <td></td>
                                 <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
@@ -277,7 +276,7 @@
                                 <td> Consulta </td>
                                 <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
                             </tr>
-                        }
+                        
                     }
                 </tbody>
             </table>

@@ -158,6 +158,7 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult ConsultaCoavif()
         {
+            int t = 0;
             //TBL_REGISTRO
             var listaPersonas = _modelExpediente.ListarPersonas();
             var listaUsuarios = _modelExpediente.ListarUSuarios();
@@ -165,7 +166,6 @@ namespace SIVIO.UI.Controllers
             var listaRegistro = _modelExpediente.ListarRegistro();
             var listaCatalogo = _modelExpediente.ListarCatalogo();
             var listaAtencion = _modelExpediente.ListarAtencion();
-            
             foreach (var r in listaRegistro)
             {
                 foreach (var u in listaUsuarios)
@@ -195,17 +195,46 @@ namespace SIVIO.UI.Controllers
                 }
                 foreach (var c in listaCatalogo)
                 {
-                    if (r.FK_TIPOSERVICIO == c.FK_CATALOGO) {
+                    if (r.TBL_VALOR_CATALOGO==null) {
                         r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
+                        r.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
+                    }
+                    if (r.FK_TIPOSERVICIO == c.FK_CATALOGO) {
                         r.TBL_VALOR_CATALOGO.FK_CATALOGO = c.FK_CATALOGO;
                         r.TBL_VALOR_CATALOGO.VC_VALOR1 = c.VC_VALOR1;
+                       
                     }
+                    if (r.FK_TIPOREGISTRO == c.FK_CATALOGO)
                     {
+                        r.TBL_VALOR_CATALOGO1.FK_CATALOGO = c.FK_CATALOGO;
+                        r.TBL_VALOR_CATALOGO1.VC_VALOR1 = c.VC_VALOR1;
                         
                     }
-
                 }
-                
+                foreach (var c in listaConsulta)
+                {
+                   if (r.PK_REGISTRO==c.FK_REGISTRO ) {
+                        r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
+                    }
+                }
+                foreach (var a in listaAtencion)
+                {
+                    if (r.PK_REGISTRO == a.FK_REGISTRO )
+                    {
+                        r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
+                    }
+                }
+                //SOLO PARA PRUEBAS ELIMINAR
+                if (t == 0)
+                {
+                    r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
+                }
+                if ( t == 1)
+                {
+                    r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
+                }
+                t++;
+                //SOLO PARA PRUEBAS ELIMINAR
             }
             return View(listaRegistro);
         }
