@@ -129,6 +129,43 @@
                         }));
                     });
 
+                    $.each(respuesta.CatalogoIdentidadGenero, function (key, value) {
+                        $('#cmbIdentidadGenero').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoOrigenEtnico, function (key, value) {
+                        $('#cmbOrigenEtnico').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoCondicionLaboral, function (key, value) {
+                        $('#cmbCondicionLaboral').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoTipoFamilia, function (key, value) {
+                        $('#cmbTipoFamilia').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoTipoVivienda, function (key, value) {
+                        $('#cmbTipoVivienda').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoParentesco, function (key, value) {
+                        $('#cmbComposicionFamiliarParentesco').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
                     $('#btn-login').fadeIn();
                     $.LoadingOverlay("hide");
                 } else {
@@ -622,25 +659,30 @@
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Identidad de género</label>
-                                            <select id="cmbTipoIdentidadGenero" class="form-control"></select>
+                                            <select id="cmbIdentidadGenero" class="form-control">
+                                                <option></option>
+                                            </select>
                                         </div>
                                         <div class="col-xs-6 form-group">
                                             <label>Orientacion sexual</label>
-                                            <select id="cmbTipoIdentidadGenero" class="form-control"></select>
+                                            <select id="cmbOrientacionSexual" class="form-control">
+                                                <option></option>
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Origen étnico</label>
-                                            <select id="cmbTipoOrigenEtnico" class="form-control"></select>
+                                            <select id="cmbOrigenEtnico" class="form-control">
+                                                <option></option>
+                                            </select>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Condición laboral</label>
-                                            <select id="cmbTipoCondicionLaboral" class="form-control"></select>
+                                            <select id="cmbCondicionLaboral" class="form-control">
+                                                <option></option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -649,21 +691,17 @@
                                             <label>Experiencia laboral</label>
                                             <input class="form-control" placeholder="Nombre" id="txtExperienciaLaboral" type="text" required="">
                                         </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Lugar de trabajo</label>
                                             <input class="form-control" placeholder="Nombre" id="txtLugarTrabajo" type="text" required="">
                                         </div>
+                                    </div>
 
+                                    <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Puesto que desempeña</label>
                                             <input class="form-control" placeholder="Nombre" id="txtPuestoTrabajo" type="text" required="">
                                         </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Direccion de lugar de trabajo</label>
                                             <input class="form-control" placeholder="Nombre" id="txtDireccionLugarTrabajo" type="text" required="">
@@ -673,19 +711,25 @@
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Tipo de familia</label>
-                                            <select id="cmbTipoFamilia" class="form-control"></select>
+                                            <select id="cmbTipoFamilia" class="form-control">
+                                                <option></option>
+                                            </select>
                                         </div>
 
                                         <div class="col-xs-6 form-group">
                                             <label>Condición de aseguramiento</label>
-                                            <select id="cmbTipoCondicionAseguramiento" class="form-control"></select>
+                                            <select id="cmbCondicionAseguramiento" class="form-control">
+                                                <option></option>
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Tipo de vivienda</label>
-                                            <select id="cmbTipoVivienda" class="form-control"></select>
+                                            <select id="cmbTipoVivienda" class="form-control">
+                                                <option></option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -693,7 +737,6 @@
                                     <div class="row" style="top:auto">
                                         <div class="col-xs-12">
                                             <ng-form>
-                                                <input type="button" style="margin:7px"/>
                                                 <legend>Condiciones especiales de salud</legend>
                                                 <div class="col-xs-2" style="height:100%">
                                                     <div id="read-confirm-box">
@@ -779,14 +822,11 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <legend>Redes de apoyo de la usuaria</legend>
-                                            <div id="read-confirm-box" style="border-spacing:initial">
-                                                <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxRedesApoyo" /></div>
-                                                <div class="inlineCheckBox">Tiene redes de apoyo</div>
-                                            </div>
+                                            <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="ocultarMostrarFormRedesApoyo" onchange="ocultarMostrarRedesApoyo()" /></div>
                                         </div>
                                     </div>
                                     <!--Inicia Redes de apoyo-->
-                                    <div class="row">
+                                    <div id="containerRedesApoyo" style="display:none;">
                                         <div class="col-xs-12">
                                             <ng-form>
                                                 <div class="row">
@@ -850,13 +890,32 @@
                                             <ng-form>
                                                 <legend>Composición familiar</legend>
                                                 <table class="display table-bordered dataTable no-footer" style="width:80%; align-content:center; border-width:3px">
-                                                    <tr>
-                                                        <th>Nombre completo</th>
-                                                        <th>Parentesco</th>
-                                                        <th>Edad</th>
-                                                        <th>Escolaridad</th>
-                                                        <th>Ocupación</th>
-                                                    </tr>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nombre completo</th>
+                                                            <th>Parentesco</th>
+                                                            <th>Edad</th>
+                                                            <th>Escolaridad</th>
+                                                            <th>Ocupación</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Laura Brenes</td>
+                                                            <td>
+                                                                <select id="cmbComposicionFamiliarParentesco" class="form-control">
+                                                                    <option></option>
+                                                                </select>
+                                                            </td>
+                                                            <td></td>
+                                                            <td>
+                                                                <select id="cmbComposicionFamiliarEscolaridad" class="form-control">
+                                                                    <option></option>
+                                                                </select>
+                                                            </td>
+                                                            <td>Secretaria</td>
+                                                        </tr>
+                                                    </tbody>
                                                     <!--Falta un foreach-->
                                                 </table>
                                             </ng-form>
@@ -865,6 +924,12 @@
                                     <!--Finaliza Composicion familiar-->
                                 </td>
                             </table>
+                            <div class="row" id="contenedorBotones">
+                                <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                                    <button type="button" id="btnGuardarDatosPerfil" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                    <button type="button" id="btnCancelarDatosPerfil" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!--Finaliza pestaña Datos de perfil de usuaria-->
