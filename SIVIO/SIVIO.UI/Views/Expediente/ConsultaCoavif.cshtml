@@ -19,7 +19,7 @@
 
     <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
         <ul class="nav nav-tabs">
-            <li class="deactive">
+            <li class="active">
                 <a data-toggle="tab" href="#consulta">
                     <i class="fa fa-user" aria-hidden="true"></i>Consulta de Persona
                 </a>
@@ -110,7 +110,7 @@
                 titleAttr: 'PDF'
             }, {
                 text: '<i class="fa fa-pencil-square-o"></i>',
-                titleAttr: 'Editar Persona Usuaria',
+                titleAttr: 'Editar Persona',
                 action: function (e, dt, node, config) {
                     debugger;
 
@@ -152,7 +152,7 @@
             }, {
                 //extend: 'plusHtml5',
                 text: '<i class="fa fa-plus-square"></i>',
-                titleAttr: 'Agregar un nueva Persona Usuaria',
+                titleAttr: 'Agregar un nueva Persona',
                 action: function (e, dt, node, config) {
                     debugger;
 
@@ -261,7 +261,7 @@
             function refrescarGrid() { tablaConsultas.ajax.reload() }
         </script>
         <div class="tab-content">
-            <div id="consulta" class="tab-pane fade in deactive">
+            <div id="consulta" class="tab-pane fade in">
 
                 <div class="row" id="contenedorGrid" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
                                                                                                                                                                                                                                                 background-color: #FFFFFF;
@@ -283,15 +283,17 @@
                             <tbody>
                                 @foreach (var consulta in Model)
                                 {
+                                    if (consulta.FK_TIPOREGISTRO == 549) {
                                     <tr>
                                         <td></td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
                                         <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
-                                        <td></td>
-                                        <td>  </td>
+                                        <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO.VC_VALOR1)</td>
+                                        <td> Consulta </td>
                                         <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
                                     </tr>
+                                    }
                                 }
                             </tbody>
                         </table>
@@ -305,7 +307,7 @@
             </div>
         </div>
         <div class="tab-content">
-            <div id="atencion" class="tab-pane fade in deactivate">
+            <div id="atencion" class="tab-pane fade in">
 
                 <div class="row" id="contenedorGrid" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
                                                                                                                                                                                                                                                 background-color: #FFFFFF;
@@ -327,19 +329,25 @@
                             <tbody>
                                 @foreach (var consulta in Model)
                                 {
+                                    if (consulta.FK_TIPOREGISTRO==550) {
                                     <tr>
                                         <td></td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
                                         <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
-                                        <td></td>
-                                        <td>  </td>
+                                        <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO.VC_VALOR1)</td>
+                                        <td> Atencion </td>
                                         <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
                                     </tr>
+                                    }
                                 }
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div id="contenedorConsultas">
+
+
                 </div>
                 </div>
             </div>

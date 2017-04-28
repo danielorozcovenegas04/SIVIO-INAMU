@@ -158,11 +158,14 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult ConsultaCoavif()
         {
+            //TBL_REGISTRO
             var listaPersonas = _modelExpediente.ListarPersonas();
             var listaUsuarios = _modelExpediente.ListarUSuarios();
             var listaConsulta = _modelExpediente.ListarConsultas();
             var listaRegistro = _modelExpediente.ListarRegistro();
-
+            var listaCatalogo = _modelExpediente.ListarCatalogo();
+            var listaAtencion = _modelExpediente.ListarAtencion();
+            
             foreach (var r in listaRegistro)
             {
                 foreach (var u in listaUsuarios)
@@ -174,6 +177,7 @@ namespace SIVIO.UI.Controllers
                         r.TBL_USUARIO.VC_APELLIDO1 = u.VC_APELLIDO1;
                         r.TBL_USUARIO.VC_APELLIDO2 = u.VC_APELLIDO2;
                         r.TBL_USUARIO.VC_NOMBRE = u.VC_NOMBRE;
+                        
                     }
                 }
                 foreach (var p in listaPersonas)
@@ -189,6 +193,19 @@ namespace SIVIO.UI.Controllers
                     }
 
                 }
+                foreach (var c in listaCatalogo)
+                {
+                    if (r.FK_TIPOSERVICIO == c.FK_CATALOGO) {
+                        r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
+                        r.TBL_VALOR_CATALOGO.FK_CATALOGO = c.FK_CATALOGO;
+                        r.TBL_VALOR_CATALOGO.VC_VALOR1 = c.VC_VALOR1;
+                    }
+                    {
+                        
+                    }
+
+                }
+                
             }
             return View(listaRegistro);
         }
