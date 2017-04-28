@@ -72,6 +72,17 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public void InsertarPersonaConAgresor(TBL_PERSONA persona, TBL_AGRESOR agresor)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                entidades.Entry(agresor).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(persona).State = System.Data.Entity.EntityState.Added;
+
+                entidades.SaveChanges();
+            }
+        }
+
         #region COAVIF
         public List<TBL_PERSONA> ListarPersonas() {
 

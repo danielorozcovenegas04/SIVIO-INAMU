@@ -2,15 +2,13 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 <script type="text/javascript">
     function llenarComboBox(nombreCatalogo, nombreComboBox) {
         return function (respuesta) {
             var catalogo = respuesta[nombreCatalogo];
 
             console.log(catalogo);
-
+            debugger;
             if (catalogo.Mensaje.TipoMensaje === 1) {
                 $.each(catalogo.Catalogo, function (key, value) {
                     console.log($(nombreComboBox));
@@ -37,13 +35,80 @@
 
     $(document).ready(function () {
 
+        var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ListarCatalogosCrearCaso")',
+            dataType: "json",
+            contentType: "application/json",
+            processData: true,
+            error: function (xhr, ajaxOptions, error) {
+                $("#contenedorBotones").show();
+                $("#contenedorEspera").hide();
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error al registrar");
+                $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+
+            }
+        }).then(function(resultado) {
+            var respuesta = JSON.parse(resultado);
+            return respuesta;
+        }).then(llenarComboBox("CEEAM", "#cmbTipoCEAAM"))
+            .then(llenarComboBox("Tipo de Ingreso CEEAM", "#cmbTipoIngreso"))
+            .then(llenarComboBox("Tipo de Egreso CEEAM", "#cmbTipoEgreso"))
+            .then(llenarComboBox("Orientación Sexual", "#cmbOrientacionSexual"))
+            .then(llenarComboBox("Etnia", "#cmbOrigenEtnico"))
+            .then(llenarComboBox("Estado Civil", "#cmbCondicionCivil"))
+            .then(llenarComboBox("Grado Académico", "#cmbEscolaridad"))
+            .then(llenarComboBox("Tipo de Familia", "#cmbTipoFamilia"))
+            .then(llenarComboBox("Nacionalidad", "#cmbNacionalidad"))
+            .then(llenarComboBox("Nacionalidad", "#cmbOtraNacionalidad"))
+            .then(llenarComboBox("Situación Migratoria", "#cmbCondicionMigratoria"))
+            .then(llenarComboBox("Situación Laboral", "#cmbCondicionLaboral"))
+            //.then(llenarComboBox("", "#cmbCondicionAseguramiento"))
+            .then(llenarComboBox("Tipo de vivienda", "#cmbVivienda"))
+            .then(llenarComboBox("Adicción", "#cmbAdicciones"))
+            //.then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbRespuestaSiNosponible"))
+            .then(() => {
+                $('#btn-login').fadeIn();
+                $('#cmbTipoCEAAM').selectize({
+                    sortField: 'text',
+                    create: false,
+                    placeholder: "Tipo de CEAAM",
+                });
+            $.LoadingOverlay("hide");
+        });
+
+
+
+
+
+
+
+    });
+</script>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
         $("#btnGuardarAtencionEnComunidad").click(function () {
             var persona = serializeArrayAObjeto($("#crearpersona").serializeArray());
+            var agresor = serializeArrayAObjeto($("#crearpersona2").serializeArray());
+
+            var objparapost = {
+                persona: persona,
+                agresor: agresor
+            }
             console.log(persona);
+
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("CrearUsuariaAtencionComunidadPost")',
-                data: persona
+                data: objparapost
             }).then(console.log)
         });
 
@@ -175,9 +240,6 @@
         var resultadoValidacion = $('#formagregarUsuarios').parsley().validate();
         if (resultadoValidacion === true) {
             var formularioAgregarUsuario = $();
-
-
-
 
             formularioAgregarUsuario.Nombre = $("#txtNombre").val();
             formularioAgregarUsuario.PrimerApellido = $("#txtApellido1").val();
@@ -366,8 +428,19 @@
                             <input class="form-control" id="txtEstadoEmbarazo" type="number" name="FK_ESTADOEMBARAZO" value='5' required=""><br>
                             <label>Condicion Salud</label><br>
                             <input class="form-control" id="txtCondicionSalud" type="number" name="FK_CONDICIONSALUD" value='5' required=""><br>
-                            <label>Orientacion Sexual</label><br>
-                            <input class="form-control" id="txtOrientacionSexual" type="number" name="FK_ORIENTACIONSEXUAL" value='5' required=""><br>
+
+                            <div class="col-xs-4 form-group">
+                                <label>Orientación sexual:</label><br>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <select id="cmbOrientacionSexual" class="form-control" name="FK_ORIENTACIONSEXUAL">
+                                            <option selected disabled>Seleccione una opcion</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="col-xs-4 form-group">
@@ -391,14 +464,6 @@
                             <input class="form-control" id="txtNacionalidad" name="FK_NACIONALIDAD2" type="number" value='5' required=""><br>
 
                         </div>
-
-                        @* Botón de cancelar *@
-                        <a href="BusquedaExpediente" class="btn btn-primary" id="btnCancelar">Cancelar</a>
-
-                        @* Botón de crear usuaria *@
-                        <a href="#" class="btn btn-primary" id="btnGuardarAtencionEnComunidad">Guardar</a>
-                        <br><br>
-
                     </form>
                 </div>
             </div>
@@ -408,34 +473,57 @@
                 <div class="row" id="tabHIstoriaViolencia">
                     <form id="crearpersona2" method="post">
                         <div class="col-xs-4 form-group">
-                            <label>Género</label><br>
-                            <input class="form-control" id="txtGenero" name="FK_GENERO" type="number" value='5' required=""><br>
+                            <label>Identificacion</label><br>
+                            <input class="form-control" id="txtId" name="VC_IDENTIFICACION" type="text" value='5' required=""><br>
+                            <label>Nombre</label><br>
+                            <input class="form-control" id="txtNombre2" name="VC_NOMBRE" value='5' type="text" required=""><br>
+                            <label>Apellido 1</label><br>
+                            <input class="form-control" id="txtApellido1" name="VC_APELLIDO1" value='5' type="text" required=""><br>
+                            <label>Apellido 2</label><br>
+                            <input class="form-control" id="txtApellido2" type="text" name="VC_APELLIDO2" value='5' required=""><br>
+                            <label>Tipo relación</label><br>
+                            <input class="form-control" id="txtTipoTipoRelacion" type="number" name="FK_TIPORELACION" value='5' required=""><br>
+                            <label>Fecha Comienzo relacion</label><br>
+                            <input class="form-control" id="txtComienzoRelacion" type="date" name="DT_COMIENZORELACION" value='1966-10-10' required=""><br>
+                            <label>Genero</label><br>
+                            <input class="form-control" id="txtGeneroAgresor" type="number" name="FK_GENERO" value='5' required=""><br>
+                            <label>Fecha Nacimiento</label><br>
+                            <input class="form-control" id="txtFechaNacAgresor" type="date" name="DT_FECHANACIMIENTO" value='1966-10-10' required=""><br>
                             <label>Ocupacion</label><br>
-                            <input class="form-control" id="txtOcupacion" name="FK_OCUPACION" type="number" value='5' required=""><br>
-                            <label>Codicion Migratoria</label><br>
-                            <input class="form-control" id="txtCondicionMigratoria" name="FK_CONDICIONMIGRATORIA" value='5' type="number" required=""><br>
-                            <label>Condicion Aseguramiento</label><br>
-                            <input class="form-control" id="txtCondicionAseguramiento" name="FK_CONDICIONASEGURAMIENTO" value='5' type="number" required=""><br>
-                            <label>Tipo Vivienda</label><br>
-                            <input class="form-control" id="txtTipoVivienda" type="number" name="FK_TIPOVIVIENDA" value='5' required=""><br>
-                            <label>Tipo familia</label><br>
-                            <input class="form-control" id="txtTipoFamilia" type="number" name="FK_TIPOFAMILIA" value='5' required=""><br>
-                            <label>Estado Embarazo</label><br>
-                            <input class="form-control" id="txtEstadoEmbarazo" type="number" name="FK_ESTADOEMBARAZO" value='5' required=""><br>
-                            <label>Condicion Salud</label><br>
-                            <input class="form-control" id="txtCondicionSalud" type="number" name="FK_CONDICIONSALUD" value='5' required=""><br>
-                            <label>Orientacion Sexual</label><br>
-                            <input class="form-control" id="txtOrientacionSexual" type="number" name="FK_ORIENTACIONSEXUAL" value='5' required=""><br>
+                            <input class="form-control" id="txtOcupacion" type="number" name="FK_OCUPACION" value='5' required=""><br>
+                        </div>
+                        <div class="col-xs-4 form-group">
+                            <label>Nivel educativo</label><br>
+                            <input class="form-control" id="txtNivelEducativoAgresor" type="number" name="FK_NIVELEDUCATIVO" value='5' required=""><br>
+                            <label>Denuncia penal</label><br>
+                            <input class="form-control" id="txtDenunciaPenalAgresor" type="radio" name="B_DENUNCIAPENAL"><br>
+                            <label>Medidas proteccion</label><br>
+                            <input class="form-control" id="txtMedidasProteccion" type="radio" name="B_MEDIDASPROTECCION" value='5' required=""><br>
+                            <label>Fecha vencimiento proteccion</label><br>
+                            <input class="form-control" id="txtFechaVenProte" type="date" name="DT_FECHAVENCIMIENTOPROTECCION" value='1966-10-10' required=""><br>
+                            <label>Lugar trabajo</label><br>
+                            <input class="form-control" id="txtLugarTrabajo" type="text" name="VC_LUGARTRABAJO" value='5' required=""><br>
+                            <label>Separaciones</label><br>
+                            <input class="form-control" id="txtSeparaciones" type="number" name="I_SEPARACIONES" value='5' required=""><br>
+                            <label>Antecedentes legales</label><br>
+                            <input class="form-control" id="txtAntecenteslega" type="radio" name="B_ANTECEDENTESLEGALES" value='5' required=""><br>
+                            <label>Observacion antecedentes legales</label><br>
+                            <input class="form-control" id="txtaal" type="text" name="VC_OBSERVACIONANTECEDESTESLEGALES" value='5' required=""><br>
+                            <label>Antecedentes psiquiatricos</label><br>
+                            <input class="form-control" id="txtss" type="radio" name="B_ANTECEDENTESPSIQUIATRICOS" value='5' required=""><br>
+                            <label>Observacion antecedentes psiquiatricos</label><br>
+                            <input class="form-control" id="txtdd" type="text" name="VC_OBSERVACIONANTPSIQUIATRICOS" value='5' required=""><br>
+                            <label>Nacionalidad</label><br>
+                            <input class="form-control" id="txtff" type="number" name="FK_NACIONALIDAD" value='5' required=""><br>
+                            <label>Numero expeidente temp</label><br>
+                            <input class="form-control" id="txtgg" type="text" name="VC_NUMEXPEDIENTEMP" value='5' required=""><br>
+                            <label>Numero expediente denuncia</label><br>
+                            <input class="form-control" id="txtww" type="text" name="VC_NUMEXPEDIENTEDENUNCIA" value='5' required=""><br>
+                            <label>Sede judicial denuncia</label><br>
+                            <input class="form-control" id="txtpp" type="text" name="VC_SEDEJUDICIALDENUNCIA" value='5' required=""><br>
 
                             <br><br><br><br><br><br>
                         </div>
-
-                        @* Botón de cancelar *@
-                        <a href="BusquedaExpediente" class="btn btn-primary" id="btnCancelar">Cancelar</a>
-
-                        @* Botón de crear usuaria *@
-                        <a href="#" class="btn btn-primary" id="btnGuardarAtencionEnComunidad">Guardar</a>
-                        <br><br>
 
                     </form>
                 </div>
@@ -455,6 +543,13 @@
                     </div>
                 </div>
             </div>
+
+            @* Botón de cancelar *@
+            <a href="BusquedaExpediente" class="btn btn-primary" id="btnCancelar">Cancelar</a>
+
+            @* Botón de crear usuaria *@
+            <a href="#" class="btn btn-primary" form="crearpersona" id="btnGuardarAtencionEnComunidad">Guardar</a>
+            <br><br>
 
         </div>
 
