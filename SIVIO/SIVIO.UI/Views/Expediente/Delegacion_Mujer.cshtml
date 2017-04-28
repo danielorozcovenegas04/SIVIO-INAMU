@@ -607,20 +607,217 @@
                 </div>
         </div>
         <!--Finaliza pestaña Datos de perfil de usuaria-->
-        <div id="historialViolencia" class="tab-pane">
-            <div class="row comunForm">
+                    <div id="historialViolencia" class="tab-pane">
 
-                <div class="row">
-                    <div class="col-md-4 form-group">
-                        <label>Historial de violencia</label>
+                        <div class="row comunForm">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#perAgresora">
+                                        <i class="fa fa-file-text" aria-hidden="true"></i>Persona agresora
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#relHechos">
+                                        <i class="fa fa-address-card" aria-hidden="true"></i>Relato de los hechos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#valRiesgo">
+                                        <i class="fa fa-address-card" aria-hidden="true"></i>Valoracion de riesgo
+                                    </a>
+                                </li>
+                            </ul>
 
-                        <input class="form-control" placeholder="Nombre" id="txtNombre3" type="date" required="">
+                            <div id="perAgresora" class="tab-pane">
+                                <div class="row comunForm">
+                                    <div class="row">
+                                        <div class="col-xs-4 form-group">
+                                            <label>Nombre de la Persona agresora:</label>
+                                            <input type="text" class="form-control" placeholder="" id="nombre" value="" />
+                                        </div>
+
+                                        <div class="col-xs-4 form-group">
+                                            <label>Ocupación de la persona agrespra:</label>
+                                            <input type="text" class="form-control" placeholder="." id="ocupacion" value="" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-xs-4 form-group">
+                                            <label>Sexo de la persona agresora:</label>
+                                            <input type="text" list="exampleList" id="sexo" />
+                                            <datalist id="exampleList">
+                                                <option value="femenino">
+                                                <option value="masculino">
+                                            </datalist>
+                                        </div>
+                                        <div class="col-xs-4 form-group">
+                                            <label>Escolaridad de la persona agresora:</label>
+
+                                            <input type="text" list="exampleList2" id="escolaridad" />
+                                            <datalist id="exampleList2">
+                                                <option value="primaria completa">
+                                                <option value="primaria incompleta">
+                                                <option value="secundaria completa ">
+                                                <option value="secundaria incompleta">
+                                                <option value="universitario/técnico">
+                                                <option value="universitaria completa ">
+                                                <option value="universitaria incompleta">
+                                                <option value="ningún grado">
+                                                <option value="Analfabeta">
+                                            </datalist>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-4 form-group">
+                                            <label>Edad de la persona agresora:</label>
+                                            <input type="text" class="form-control" placeholder="." id="edad" value="" />
+                                        </div>
+                                        <div class="col-xs-4 form-group">
+                                            <label>Nacionalidad de la persona agresora:</label>
+                                            <select class="form-control selectized" id="cmbnacionalidad" tabindex="-1" style="display: none;"><option value="3" selected="selected">nacionalidad</option></select><div class="selectize-control form-control single"><div class="selectize-input items full has-options has-items"><div class="item" data-value="3">nacionalidad</div><input type="text" autocomplete="off" tabindex="" style="width: 4px;"></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4 form-group">
+                                            <input type="checkbox" id="MP"> Tiene MP<br>
+                                        </div>
+
+                                        <div class="col-xs-4 form-group">
+                                            <input type="checkbox" id="denunciaPenal"> Tiene Denuncia Penal<br>
+                                        </div>
+                                    </div>
+                                    <div id="datosMP" style="padding-top: 15px; padding-bottom: 11px; background-color: white; margin-bottom: 11px; margin-left: 0px; margin-right: 0px; border: 2px solid #808080; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
+                                        <label>MP</label>
+                                        <div class="row">
+                                            <div class="col-xs-4 form-group">
+                                                <label>Fecha de Vencimiento:</label>
+                                                <input type="text" class="form-control" placeholder="" id="MPvencimiento" value="" />
+                                            </div>
+
+                                            <div class="col-xs-4 form-group">
+                                                <label>numero Expediente:</label>
+                                                <input type="text" class="form-control" placeholder="." id="MPExpediente" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="datosDenuncia" style="padding-top: 15px; padding-bottom: 11px; background-color: white; margin-bottom: 11px; margin-left: 0px; margin-right: 0px; border: 2px solid #808080; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
+                                        <label>Denuncia Penal</label>
+                                        <div class="row">
+                                            <div class="col-xs-4 form-group">
+                                                <label>Fecha de Vencimiento:</label>
+                                                <input type="text" class="form-control" placeholder="" id="Denunciavencimiento" value="" />
+                                            </div>
+
+                                            <div class="col-xs-4 form-group">
+                                                <label>numero Expediente:</label>
+                                                <input type="text" class="form-control" placeholder="." id="DenunciaExpediente" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="contenedorBotones">
+                                        <div class="col-xs-4 form-group">
+                                            <button type="button" id="cancelar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                            <button type="button" id="guardar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div id="relHechos" class="tab-pane">
+                                <div class="row comunForm">
+                                    <div class="row">
+                                        <div class="col-xs-4 form-group">
+                                            <div class="col-xs-4 form-group" style="">
+                                                <label>Relato hechos de violencia:</label>
+                                                <textarea rows="10" cols="60" id="txtRelato"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-4 form-group">
+                                            <label>tiempo de la relación:</label>
+                                            <input type="text" class="form-control" placeholder="." id="txtTiempoRelacion" value="" />
+                                            <label>tiempo de la agresión:</label>
+                                            <input type="text" class="form-control" placeholder="." id="txtTiempoAgresion" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="row" id="contenedorBotonesRelHechos">
+                                        <div class="col-xs-4 form-group">
+                                            <button type="button" id="cancelar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                            <button type="button" id="guardar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="valRiesgo" class="tab-pane">
+                                <div class="row comunForm">
+                                    <style>
+                                        table, th, td {
+                                            border: 1px solid gray;
+                                        }
+                                    </style>
+                                    <div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+                                        <div class="row">
+                                            <label>Valoración de riesgo: </label>
+                                            <input type="text" class="form-control" placeholder="." id="txtValoracion" value="" style="width: 20%;" />
+                                            <button type="button" id="btnValoracion" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:0%; margin-left:93%; display: block; width: 5%; color: white; background-color: #368DE9; border-color: #368DE9; ">+</button>
+                                        </div>
+                                        <table style="margin-bottom:5px; margin-top:5px; margin-left:5px; margin-right: 5px" id="tblFormularioValoracion">
+                                            <tr>
+                                                <th>Criterio</th>
+                                                <th>Si       </th>
+                                                <th>No       </th>
+                                                <th>Se desconoce</th>
+                                                <th>Observaciones</th>
+                                            </tr>
+                                            <tr>
+                                                <td>¿Han habido agresiones físicas garaves que causaron lesiones a la víctima o ameritaron una intervención médica?</td>
+                                                <form action="" id="fila1">
+                                                    <td><input type="radio" name="radio1" value=1><br></td>
+                                                    <td><input type="radio" name="radio1" value=-1><br></td>
+                                                    <td><input type="radio" name="radio1" value=0></td>
+                                                    <td><textarea rows="5" cols="15" id="txtObservaciones1"></textarea></td>
+                                                </form>
+                                            </tr>
+                                            <tr>
+                                                <form action="" id="fila2">
+                                                    <td>¿Ha usado o amenazado con usar un arma de fuego, cuchillo y otra arma letal contra la víctima?</td>
+                                                    <td><input type="radio" name="radio2" value=1><checkbox> </td>
+                                                    <td><input type="radio" name="radio2" value=-1><checkbox></td>
+                                                    <td><input type="radio" name="radio2" value=0><checkbox></td>
+                                                    <td><textarea rows="5" cols="15" id="txtObservaciones1"></textarea></td>
+                                                </form>
+                                            </tr>
+
+                                        </table>
+                                        <div class="row">
+                                            <table style="margin-bottom:5px; margin-top:5px; margin-left:5px; margin-right: 5px">
+                                                <tr>
+                                                    <th>Valoración de riesgo</th>
+                                                    <th>Fecha</th>
+                                                    <th>Responsable de valorar</th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th><input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required=""></th>
+                                                    <th><input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required=""></th>
+                                                    <th><input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required=""></th>
+                                                </tr>
+                                            </table>
+                                            <button type="button" id="btnEnviar" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Enviar por correo</button>
+
+                                            <button type="button" id="btnEliminar" class="btn btn-default btn-responsive" style="display: block; width: 5%; color: white; background-color: #ff0000; border-color: #ff0000;">x</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                </div>
-
-            </div>
-        </div>
         <div id="atencion" class="tab-pane">
             <div class="row comunForm">
 
