@@ -73,6 +73,16 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public void InsertarPersona(TBL_PERSONA persona)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                entidades.Entry(persona).State = System.Data.Entity.EntityState.Added;
+
+                entidades.SaveChanges();
+            }
+        }
+
         #region COAVIF
         public List<TBL_PERSONA> ListarPersonas() {
 

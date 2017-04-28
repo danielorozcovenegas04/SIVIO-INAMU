@@ -42,7 +42,16 @@ namespace SIVIO.UI.Controllers
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_modelCatalogos.llenarListaCatalogos(catalogos)), JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
+        public ActionResult CrearUsuariaAtencionComunidadPost(TBL_PERSONA persona) {
+            try {  
+                _modelExpediente.InsertarPersona(persona);
+                return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "true" }));
+            } catch (Exception ex) {
+                return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "false", error = ex.ToString() }));
+            }
 
+        }
 
 
         [Authorize]
