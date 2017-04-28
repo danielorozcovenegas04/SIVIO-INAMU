@@ -53,9 +53,12 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult CrearUsuariaAtencionComunidadPost(TBL_PERSONA persona) {
-            try {  
-                _modelExpediente.InsertarPersona(persona);
+        public ActionResult CrearUsuariaAtencionComunidadPost(TBL_PERSONA persona, TBL_AGRESOR agresor) {
+            try {
+                var listaAgresor = new List<TBL_AGRESOR>();
+                listaAgresor.Add(agresor);
+                persona.TBL_AGRESOR = listaAgresor;
+                _modelExpediente.InsertarPersonaConAgresor(persona, agresor);
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "true" }));
             } catch (Exception ex) {
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "false", error = ex.ToString() }));
