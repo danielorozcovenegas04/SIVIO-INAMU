@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
+using COMUN_MODELO;
 using System.Web.Mvc;
 using static SIVIO.UI.Models.ExpedienteModel;
 
