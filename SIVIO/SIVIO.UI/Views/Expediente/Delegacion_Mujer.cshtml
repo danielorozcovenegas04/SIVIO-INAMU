@@ -468,24 +468,52 @@
                                     </div>
 
                                     <!--Inicia Condiciones especiales de salud-->
-                                    <div class="row" style="top">
+                                    <div class="row" style="top:auto">
                                         <div class="col-xs-12">
                                             <ng-form>
+                                                <input type="button" style="margin:7px"></input>
                                                 <legend>Condiciones especiales de salud</legend>
                                                 <div class="col-xs-2" style="height:100%">
-                                                    <input style="display:inline-block;" id="fisica" type="checkbox"> Física
-                                                    <input style="display:inline-block;" id="cognitiva" type="checkbox"> Cognitiva
-                                                    <input style="display:inline-block;" id="mental" type="checkbox"> Mental
-                                                    <input style="display:inline-block;" id="sensorial" type="checkbox"> Sensorial
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox">Física</div>
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxFisica" /></div>
+                                                    </div>
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox">Cognitiva</div>
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxCognitiva" /></div>
+                                                    </div>
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox">Mental</div>
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxMental" /></div>
+                                                    </div>
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox">Sensorial</div>
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxSensorial" /></div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-xs-2">
-                                                    <input style="display:inline-block;" id="padecimientosCrónicos" type="checkbox"> Padecimientos crónicos
-                                                    <input style="display:inline-block;" id="condicionPsiquiatrica" type="checkbox"> Condición Psiquiátrica
-                                                    <input style="display:inline-block;" id="enfermedadTerminal" type="checkbox"> Enfermedad terminal
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox">Padecimientos crónicos</div>
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxPadecimientosCrónicos" /></div>
+                                                    </div>
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox">Condición Psiquiátrica</div>
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxCondicionPsiquiatrica" /></div>
+                                                    </div>
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox">Enfermedad terminal</div>
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxEnfermedadTerminal" /></div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-xs-2">
-                                                    <input style="display:inline-block;" id="its" type="checkbox"> ITS
-                                                    <input style="display:inline-block;" id="sida" type="checkbox"> VIH-SIDA
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox">ITS</div>
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxITS" /></div>
+                                                    </div>
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox">VIH-SIDA</div>
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxSIDA" /></div>
+                                                    </div>
                                                 </div>
                                             </ng-form>
                                         </div>
@@ -581,7 +609,7 @@
                                         <div class="col-xs-12">
                                             <ng-form>
                                                 <legend>Composición familiar</legend>
-                                                <table class="display table-bordered dataTable no-footer"  style="width:100%">
+                                                <table class="display table-bordered dataTable no-footer" style="width:100%">
                                                     <tr>
                                                         <th>Nombre completo</th>
                                                         <th>Parentesco</th>
@@ -603,10 +631,10 @@
                                     </div>
                                     <!--Finaliza Composicion familiar-->
                                 </td>
-                    </table>
-                </div>
-        </div>
-        <!--Finaliza pestaña Datos de perfil de usuaria-->
+                            </table>
+                        </div>
+                    </div>
+                    <!--Finaliza pestaña Datos de perfil de usuaria-->
                     <div id="historialViolencia" class="tab-pane">
 
                         <div class="row comunForm">
