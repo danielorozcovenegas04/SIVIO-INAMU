@@ -7,6 +7,54 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        //function will be called on button click having id btnsave
+        $("#btnGuardar").click(function () {
+            $.ajax(
+            {
+                type: "POST", //HTTP POST Method  
+                url: '@Url.Action("Delegacion_Mujer")', // Controller/View   
+                data: { //Passing data  
+                    Nombre: $("#txtName").val(), //Reading text box values using Jquery   MODIFICAR DE LA FORMA objInstrumentoA: formularioInstrumentoA POSTERIORMENTE
+                    Apellido1: $("#txtApellido1").val(),
+                    Apellido2: $("#txtApellido2").val(),
+                    Identificacion: $("#txtIdentificacion").val(),
+                    FechaNacimiento: $("#txtFechaNacimiento").val(),
+                    Edad: $("#txtEdad").val(),
+                    ProvinciaPersona: $("#cmbPersonaProvincia").val(),
+                    CantonPersona: $("#cmbPersonaCanton").val(),
+                    DistritoPersona: $("#cmbPersonaDistrito").val(),
+                    PaisProcedencia: $("#cmbPaisProcedencia").val(),
+                    DireccionDomicilio: $("#txtDireccionDomicilio").val(),
+                    DireccionNotificaciones: $("#txtDireccionNotificaciones").val(),
+                    CorreoElectronico: $("#txtCorreoElectronico").val(),
+                    Telefono: $("#txtTelefono").val(),
+                    CondicionCivil: $("#cmbCondicionCivil").val(),
+                    Escolaridad: $("#cmbEscolaridad").val(),
+                    NumeroHijos: $("#txtNumeroHijos").val(),
+                    Embarazo: $("#cmbEmbarazo").val(),
+                    Nacionalidad: $("#cmbNacionalidad").val(),
+                    OtraNacionalidad: $("#cmbOtraNacionalidad").val(),
+                    Apatrida: $("#cmbApatrida").val(),
+                    CondicionMigratoria: $("#cmbCondicionMigratoria").val(),
+                    Ocupacion: $("#cmbOcupacion").val(),
+                    ViolenciaFisica: $("#chbxViolenciaFisica").val(),
+                    ViolenciaSexual: $("#chbxViolenciaSexual").val(),
+                    ViolenciaPatrimonial: $("#chbxViolenciaPatrimonial").val(),
+                    ViolenciaPsicologica: $("#chbxViolenciaPsicologica").val(),
+                    AcosoSexual: $("#chbxAcosoSexual").val(),
+                    AcosoLaboral: $("#chbxAcosoLaboral").val(),
+                    HostigamientoSexual: $("#chbxHostigamientoSexual").val(),
+                    TrataPersonal: $("#chbxTrataPersonas").val(),
+                    ViolenciaObstetrica: $("#chbxViolenciaObstetrica").val(),
+                    PersonaAgresora: $("#txtPersonaAgresora").val()
+                }
+
+            });
+
+        });
+    });
+
+    $(document).ready(function () {
         PrevenirCaracteresInvalidos();
         debugger;
         document.title = "SIVIO - Delegación de la Mujer";
@@ -233,6 +281,10 @@
                 .append($("<option />").val(divisionTerritorial[3].Value[j].I_IDREGION).text(divisionTerritorial[3].Value[j].VC_DESCRIPCION));
         }
     }
+
+
+
+
 </script>
 
     
@@ -390,18 +442,18 @@
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Segundo apellido</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                            <input class="form-control" placeholder="Nombre" id="txtApellido2" type="text" required="">
                                         </div>
                                         <div class="col-xs-6 form-group">
                                             <label>Identificación</label>
-                                            <input class="form-control" placeholder="Número de identificación" id="txtIdentificación" type="text" required="">
+                                            <input class="form-control" placeholder="Número de identificación" id="txtIdentificacion" type="text" required="">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Fecha de nacimiento</label>
-                                            <input type="date" id="txtEdad">
+                                            <input type="date" id="txtFechaNacimiento">
                                             <!-- Buscar manera de que el label se ubique SOBRE el calendario -->
                                         </div>
                                         <div class="col-xs-6 form-group">
@@ -495,6 +547,7 @@
                                         <div class="col-xs-6 form-group">
                                             <label>Apátrida de</label>
                                             <select id="cmbApatrida" class="form-control"></select>
+                                            <!-- Corregir - Apátrida es que no tiene nacionalidad -->
                                         </div>
                                         <div class="col-xs-6 form-group">
                                             <label>Condición migratoria</label>
