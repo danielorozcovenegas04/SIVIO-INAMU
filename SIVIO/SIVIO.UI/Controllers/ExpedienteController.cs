@@ -36,6 +36,16 @@ namespace SIVIO.UI.Controllers
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoCEAAM,
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoIngresoCEAAM,
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoEgresoCEAAM,
+                (int)Utilitarios.Enumerados.EnumCatalogos.OrientacionSexual,
+                (int)Utilitarios.Enumerados.EnumCatalogos.Etnia,
+                (int)Utilitarios.Enumerados.EnumCatalogos.EstadoCivil,
+                (int)Utilitarios.Enumerados.EnumCatalogos.GradoAcademico,
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoFamilia,
+                (int)Utilitarios.Enumerados.EnumCatalogos.Nacionalidad,
+                (int)Utilitarios.Enumerados.EnumCatalogos.SituacionMigratoria,
+                (int)Utilitarios.Enumerados.EnumCatalogos.SituacionLaboral,
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoVivienda,
+                (int)Utilitarios.Enumerados.EnumCatalogos.Adiccion,
                 (int)Utilitarios.Enumerados.EnumCatalogos.RespuestaSiNosponible,
 
             };

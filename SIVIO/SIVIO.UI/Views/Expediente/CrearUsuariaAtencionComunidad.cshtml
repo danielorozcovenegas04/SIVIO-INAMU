@@ -312,7 +312,7 @@
         background-color: blue;
     }
 </style>
-<div class="container-fluid" id="contenedorPrincipal">
+<div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#tabPerfilUsuaria">Perfil de Usuaria</a></li>
             <li><a data-toggle="tab" href="#tabHistoriaViolencia">Historia de Violencia</a></li>
@@ -324,9 +324,10 @@
                 <h3>Perfil de Usuaria</h3>
 
                 @* Pestaña Perfil de la Usuaria *@
-                
                 <div class="row" id="tabPerfilUsuaria">
-                    <form id="crearpersona" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+
+                    <form id="crearpersona" method="post">
+                        
                         <div class="col-xs-4 form-group">
                             <label>Identificacion</label><br>
                             <input class="form-control" id="txtIdentificacion" name="VC_IDENTIFICACION" type="text" value='12345' required=""><br>
@@ -348,8 +349,6 @@
                             <input class="form-control" id="txtEscolaridad" name="FK_ESCOLARIDAD" type="number" value='5' required=""><br>
                         </div>
 
-                        <a href="#" class="btn btn-primary" id="btnGuardarAtencionEnComunidad">Guardar</a>
-
                         <div class="col-xs-4 form-group">
                             <label>Género</label><br>
                             <input class="form-control" id="txtGenero" name="FK_GENERO" type="number" value='5' required=""><br>
@@ -369,9 +368,8 @@
                             <input class="form-control" id="txtCondicionSalud" type="number" name="FK_CONDICIONSALUD" value='5' required=""><br>
                             <label>Orientacion Sexual</label><br>
                             <input class="form-control" id="txtOrientacionSexual" type="number" name="FK_ORIENTACIONSEXUAL" value='5' required=""><br>
-
-
                         </div>
+
                         <div class="col-xs-4 form-group">
                             <label>Hijos</label><br>
                             <input class="form-control" id="txtHijos" name="I_HIJOS" type="number" value='5' required=""><br>
@@ -392,8 +390,23 @@
                             <label>Nacionalidad</label><br>
                             <input class="form-control" id="txtNacionalidad" name="FK_NACIONALIDAD2" type="number" value='5' required=""><br>
 
-                            <br><br><br><br><br><br><br><br><br><br><br><br>
                         </div>
+
+                        @* Botón de cancelar *@
+                        <a href="BusquedaExpediente" class="btn btn-primary" id="btnCancelar">Cancelar</a>
+
+                        @* Botón de crear usuaria *@
+                        <a href="#" class="btn btn-primary" id="btnGuardarAtencionEnComunidad">Guardar</a>
+                        <br><br>
+
+                    </form>
+                </div>
+            </div>
+
+            <div id="tabHistoriaViolencia" class="tab-pane fade" style="padding:5px">
+                <h3>Historia de Violencia</h3>
+                <div class="row" id="tabHIstoriaViolencia">
+                    <form id="crearpersona2" method="post">
                         <div class="col-xs-4 form-group">
                             <label>Género</label><br>
                             <input class="form-control" id="txtGenero" name="FK_GENERO" type="number" value='5' required=""><br>
@@ -416,23 +429,30 @@
 
                             <br><br><br><br><br><br>
                         </div>
+
+                        @* Botón de cancelar *@
+                        <a href="BusquedaExpediente" class="btn btn-primary" id="btnCancelar">Cancelar</a>
+
+                        @* Botón de crear usuaria *@
+                        <a href="#" class="btn btn-primary" id="btnGuardarAtencionEnComunidad">Guardar</a>
+                        <br><br>
+
                     </form>
                 </div>
             </div>
 
-            <div id="tabHistoriaViolencia" class="tab-pane fade">
-                <h3>Historia de Violencia</h3>              
-            </div>
+
 
             <div id="tabAtenciones" class="tab-pane fade">
                 <h3>Atenciones</h3>
 
                 @* Pestaña Atenciones *@
 
-                <div class="row" id="tabAtenciones">
+                <div class="row" id="tabAtenciones" style="padding:5px">
 
                     <!--Formulario-->
-
+                    <div class="row" id="tabAtenciones">
+                    </div>
                 </div>
             </div>
 
