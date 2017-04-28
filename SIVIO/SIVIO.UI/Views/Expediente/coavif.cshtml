@@ -20,81 +20,7 @@
     $(document).ready(function () {
         $.LoadingOverlay("hide");
         debugger;
-        //$.ajax({
-        //    type: "POST",
-        //    url: '/sipamu/Seguridad/ListarUnidades',
-        //    dataType: "json",
-        //    contentType: "application/json",
-        //    processData: true,
-        //    success: function (resultado) {
-        //        debugger;
-
-        //        $.each(resultado.data, function (key, value) {
-        //            $('#cmbUnidad').append($("<option></option>", {
-        //                value: value.PKUNIDAD,
-        //                text: value.CODIGO + ' ' + value.DESCRIPCION
-        //            }));
-        //        });
-
-        //        $('#cmbUnidad').selectize({
-        //            create: false,
-        //            sortField: {
-        //                field: 'text',
-        //                direction: 'asc'
-        //            },
-        //            dropdownParent: 'body'
-        //        });
-
-
-        //    },
-        //    error: function (xhr, ajaxOptions, error) {
-        //        $("#contenedorBotones").show();
-        //        $("#contenedorEspera").hide();
-        //        $("#txtModalTitulo").css("color", "red");
-        //        $("#txtModalTitulo").text("Error al registrar");
-        //        $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
-        //        instMensajes.open();
-
-        //    }
-        //});
-        //$.ajax({
-        //    type: "POST",
-        //    url: '/sipamu/Seguridad/ListarRoles',
-        //    dataType: "json",
-        //    contentType: "application/json",
-        //    processData: true,
-        //    success: function (resultado) {
-        //        debugger;
-
-        //        $.each(resultado.data, function (key, value) {
-        //            $('#cmbRol').append($("<option></option>", {
-        //                value: value.PKROL,
-        //                text: value.NOMBRE
-        //            }));
-        //        });
-
-        //        $('#cmbRol').selectize({
-        //            create: false,
-        //            sortField: {
-        //                field: 'text',
-        //                direction: 'asc'
-        //            },
-        //            dropdownParent: 'body'
-        //        });
-
-
-        //    },
-        //    error: function (xhr, ajaxOptions, error) {
-        //        $("#contenedorBotones").show();
-        //        $("#contenedorEspera").hide();
-        //        $("#txtModalTitulo").css("color", "red");
-        //        $("#txtModalTitulo").text("Error al registrar");
-        //        $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
-        //        instMensajes.open();
-
-        //    }
-        //});
-        //PrevenirCaracteresInvalidos();
+        
         debugger;
         document.title = "SIVIO - Editar Persona Usuaria";
         InicializarOtrosEventos();
@@ -225,6 +151,7 @@
                             text: value.VC_VALOR1
                         }));
                     });
+
                 } else {
                     $("#contenedorBotones").show();
                     $("#contenedorEspera").hide();
@@ -306,13 +233,13 @@
 
     <div class="col-md-12 form-group">
         <div class="col-md-2 form-group">
-            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:50px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Expediente</button>
+            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Expediente</button>
 
             <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
 
-            <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="margin-bottom:100%; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
+            <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
     
-            <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; padding-top display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
+            <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
 
             <button type="button" id="btnCerrarCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Cerrar Caso</button>
         </div>
