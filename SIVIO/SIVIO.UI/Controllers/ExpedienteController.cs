@@ -81,12 +81,12 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult GridConsultas(int persona)
+        public ActionResult GridConsultas(Guid caso)
         {
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion))
             {
-                return View(_modelExpediente.ListarConsultas(persona));
+                return View(_modelExpediente.ListarConsultas(caso));
             }
             else if (!estadoSesion)
             {
