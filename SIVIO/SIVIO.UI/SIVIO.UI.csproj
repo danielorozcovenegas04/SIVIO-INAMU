@@ -352,11 +352,9 @@
     <Content Include="Views\Expediente\CrearCaso.cshtml" />
     <Content Include="Views\Expediente\FrmCrearUsuariaAT.cshtml" />
     <Content Include="Views\Expediente\Coavif.cshtml" />
-    <Content Include="Views\Expediente\CrearUsuaria_DatosUsuaria.cshtml" />
     <Content Include="Views\Expediente\GridDatosUsuaria.cshtml" />
     <Content Include="Views\Expediente\CrearUsuaria_DatosAdministrativos.cshtml" />
     <Content Include="Views\Expediente\MenuExpediente.cshtml" />
-    <Content Include="Views\Expediente\CrearUsuaria_DatosPerfil.cshtml" />
     <Content Include="Views\Expediente\Delegacion_Mujer.cshtml" />
   </ItemGroup>
   <ItemGroup>

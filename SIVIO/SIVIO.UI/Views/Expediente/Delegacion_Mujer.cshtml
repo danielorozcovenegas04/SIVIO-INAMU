@@ -101,7 +101,7 @@
     });
 </script>
 
-
+    
 <style>
     input, select, textarea {
         max-width: 100%;
@@ -110,6 +110,11 @@
 
     input {
         background-color: blue;
+    }
+
+    .inlineCheckBox{
+        display:inline-block;
+        vertical-align:middle;
     }
 </style>
 
@@ -369,8 +374,14 @@
 
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
-                                            <label>Tipificación de la violencia</label>
-                                            <!-- Checkbox con las tipificaciones de violencia -->
+                                            <div id="read-confirm-box">
+                                                <div class="inlineCheckBox">I Have read the above </div>
+                                                <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkbox" /></div>
+                                            </div>
+                                            <div id="read-confirm-box">
+                                                <div class="inlineCheckBox">I Have read the above </div>
+                                                <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkbox" /></div>
+                                            </div>
                                         </div>
                                         <div class="col-xs-6 form-group">
                                             <label>Vínculo con persona agresora</label>
