@@ -72,7 +72,9 @@ namespace SIVIO.Utilitarios
             OrientacionSexual = 67,
             TipoCEAAM = 76,
             TipoIngresoCEAAM = 77,
-            TipoEgresoCEAAM = 78
+            TipoEgresoCEAAM = 78,
+            ValoracionRiesgo = 81,
+            CondicionLegalIngreso = 82
         }
 
         public enum Roles
