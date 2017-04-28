@@ -475,44 +475,44 @@
                                                 <legend>Condiciones especiales de salud</legend>
                                                 <div class="col-xs-2" style="height:100%">
                                                     <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox">Física</div>
                                                         <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxFisica" /></div>
+                                                        <div class="inlineCheckBox">Física</div>
                                                     </div>
                                                     <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox">Cognitiva</div>
                                                         <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxCognitiva" /></div>
+                                                        <div class="inlineCheckBox">Cognitiva</div>
                                                     </div>
                                                     <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox">Mental</div>
                                                         <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxMental" /></div>
+                                                        <div class="inlineCheckBox">Mental</div>
                                                     </div>
                                                     <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox">Sensorial</div>
                                                         <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxSensorial" /></div>
+                                                        <div class="inlineCheckBox">Sensorial</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-2">
                                                     <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox">Padecimientos crónicos</div>
                                                         <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxPadecimientosCrónicos" /></div>
+                                                        <div class="inlineCheckBox">Padecimientos crónicos</div>
                                                     </div>
                                                     <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox">Condición Psiquiátrica</div>
                                                         <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxCondicionPsiquiatrica" /></div>
+                                                        <div class="inlineCheckBox">Condición Psiquiátrica</div>
                                                     </div>
                                                     <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox">Enfermedad terminal</div>
                                                         <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxEnfermedadTerminal" /></div>
+                                                        <div class="inlineCheckBox">Enfermedad terminal</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-2">
                                                     <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox">ITS</div>
                                                         <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxITS" /></div>
+                                                        <div class="inlineCheckBox">ITS</div>
                                                     </div>
                                                     <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox">VIH-SIDA</div>
                                                         <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxSIDA" /></div>
+                                                        <div class="inlineCheckBox">VIH-SIDA</div>
                                                     </div>
                                                 </div>
                                             </ng-form>
@@ -525,15 +525,30 @@
                                             <ng-form>
                                                 <legend>Adicciones</legend>
                                                 <div class="col-xs-2">
-                                                    <input style="display:inline-block;" id="ninguna" type="checkbox"> Ninguna
-                                                    <input style="display:inline-block;" id="drogas" type="checkbox"> Drogas
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxNinguna" /></div>
+                                                        <div class="inlineCheckBox">Ninguna</div>
+                                                    </div>
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxDrogas" /></div>
+                                                        <div class="inlineCheckBox">Drogas</div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-xs-2">
-                                                    <input style="display:inline-block;" id="medicamentos" type="checkbox"> Medicamentos
-                                                    <input style="display:inline-block;" id="juego" type="checkbox"> Juego
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxMedicamentos" /></div>
+                                                        <div class="inlineCheckBox">Medicamentos</div>
+                                                    </div>
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxJuego" /></div>
+                                                        <div class="inlineCheckBox">Juego</div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-xs-2">
-                                                    <input style="display:inline-block;" id="alcohol" type="checkbox"> Alcohol
+                                                    <div id="read-confirm-box">
+                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxAlcohol" /></div>
+                                                        <div class="inlineCheckBox">Alcohol</div>
+                                                    </div>
                                                 </div>
                                             </ng-form>
                                         </div>
@@ -541,14 +556,17 @@
                                     <!--Finaliza Adicciones-->
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <input style="display:inline-block;" id="checkRedesApoyo" type="checkbox"> Tiene redes de apoyo
+                                            <legend>Redes de apoyo de la usuaria</legend>
+                                            <div id="read-confirm-box" style="border-spacing:initial">
+                                                <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxRedesApoyo" /></div>
+                                                <div class="inlineCheckBox">Tiene redes de apoyo</div>
+                                            </div>
                                         </div>
                                     </div>
                                     <!--Inicia Redes de apoyo-->
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <ng-form>
-                                                <legend>Redes de apoyo de la usuaria</legend>
                                                 <div class="row">
                                                     <div class="col-xs-3">
                                                         <label>Primaria:</label>
@@ -609,20 +627,13 @@
                                         <div class="col-xs-12">
                                             <ng-form>
                                                 <legend>Composición familiar</legend>
-                                                <table class="display table-bordered dataTable no-footer" style="width:100%">
+                                                <table class="display table-bordered dataTable no-footer" style="width:80%; align-content:center; border-width:3px">
                                                     <tr>
                                                         <th>Nombre completo</th>
                                                         <th>Parentesco</th>
                                                         <th>Edad</th>
                                                         <th>Escolaridad</th>
                                                         <th>Ocupación</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Laura Meza Rojas</td>
-                                                        <td>Hermana</td>
-                                                        <td>27</td>
-                                                        <td>Secundaria completa</td>
-                                                        <td>Secretaria</td>
                                                     </tr>
                                                     <!--Falta un foreach-->
                                                 </table>
