@@ -71,7 +71,8 @@ namespace SIVIO.Utilitarios
             TipoServicio = 65,
             TipoCEAAM = 76,
             TipoIngresoCEEAM = 77,
-            TipoEgresoCEEAM = 78
+            TipoEgresoCEEAM = 78,
+            TipoDisponibilidad = 96
         }
 
         public enum Roles
