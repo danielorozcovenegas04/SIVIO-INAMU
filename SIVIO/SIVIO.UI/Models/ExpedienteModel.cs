@@ -10,19 +10,18 @@ namespace SIVIO.UI.Models
 {
     public class ExpedienteModel
     {
-        public List<TBL_CONSULTA> ListarConsultas(int persona)
+        public List<TBL_CONSULTA> ListarConsultas(Guid caso)
         {
             using (var entidades = new SIVIOEntities())
             {
 
                 try
                 {
-                    var personaConsulta = entidades.TBL_PERSONA.FirstOrDefault(p => p.PK_PERSONA == persona);
-                    if (personaConsulta != null)
+                    var casoConsulta = entidades.TBL_REGISTRO.FirstOrDefault(c => c.PK_REGISTRO == caso);
+                    if (casoConsulta != null)
                     {
-                        return personaConsulta
-                            .TBL_REGISTRO.Select(r => r.TBL_CONSULTA) // tomar las consultas de cada registro asociado a la persona
-                            .SelectMany(i => i) // aplanar la lista de lista de consultas
+                        return casoConsulta
+                            .TBL_CONSULTA // tomar consultas del caso
                             .ToList(); // convertirlo a una lista
                     }
                     else
