@@ -1137,3 +1137,6 @@ C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.UI\bin\Microsoft.Owin.Security.Micr
 C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.csprojResolveAssemblyReference.cache
 C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.dll
 C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.pdb
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.UI\bin\EFJson.dll
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.UI\bin\SIVIO.InamuComun.dll
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.UI\bin\SIVIO.InamuComun.pdb

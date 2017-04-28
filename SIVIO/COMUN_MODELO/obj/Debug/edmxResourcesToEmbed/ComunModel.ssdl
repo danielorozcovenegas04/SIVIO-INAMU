@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="INAMU_COMUNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CAT_CANTON">
+    <Key>
+      <PropertyRef Name="I_IDCANTON" />
+      <PropertyRef Name="I_IDPROVINCIA" />
+    </Key>
+    <Property Name="I_IDCANTON" Type="int" Nullable="false" />
+    <Property Name="I_IDPROVINCIA" Type="int" Nullable="false" />
+    <Property Name="VC_DESCRIPCION" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CAT_COMUNIDAD">
+    <Key>
+      <PropertyRef Name="I_IDCOMUNIDAD" />
+      <PropertyRef Name="I_IDDISTRITO" />
+      <PropertyRef Name="I_IDCANTON" />
+      <PropertyRef Name="I_IDPROVINCIA" />
+    </Key>
+    <Property Name="I_IDCOMUNIDAD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="I_IDDISTRITO" Type="int" Nullable="false" />
+    <Property Name="I_IDCANTON" Type="int" Nullable="false" />
+    <Property Name="I_IDPROVINCIA" Type="int" Nullable="false" />
+    <Property Name="VC_DESCRIPCION" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CAT_DISTRITO">
+    <Key>
+      <PropertyRef Name="I_IDDISTRITO" />
+      <PropertyRef Name="I_IDCANTON" />
+      <PropertyRef Name="I_IDPROVINCIA" />
+    </Key>
+    <Property Name="I_IDDISTRITO" Type="int" Nullable="false" />
+    <Property Name="I_IDCANTON" Type="int" Nullable="false" />
+    <Property Name="I_IDPROVINCIA" Type="int" Nullable="false" />
+    <Property Name="I_IDREGION" Type="int" />
+    <Property Name="VC_DESCRIPCION" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'INAMU_COMUN.dbo.CAT_PAIS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CAT_PAIS">
+    <Key>
+      <PropertyRef Name="I_IDPAIS" />
+      <PropertyRef Name="VC_DESCRIPCION" />
+    </Key>
+    <Property Name="I_IDPAIS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VC_DESCRIPCION" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CAT_PROVINCIA">
+    <Key>
+      <PropertyRef Name="I_IDPROVINCIA" />
+    </Key>
+    <Property Name="I_IDPROVINCIA" Type="int" Nullable="false" />
+    <Property Name="VC_DESCRIPCION" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CAT_REGION">
+    <Key>
+      <PropertyRef Name="I_IDREGION" />
+    </Key>
+    <Property Name="I_IDREGION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VC_DESCRIPCION" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK_CAT_CANT_REFERENCE_CAT_PROV">
+    <End Role="CAT_PROVINCIA" Type="Self.CAT_PROVINCIA" Multiplicity="1" />
+    <End Role="CAT_CANTON" Type="Self.CAT_CANTON" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAT_PROVINCIA">
+        <PropertyRef Name="I_IDPROVINCIA" />
+      </Principal>
+      <Dependent Role="CAT_CANTON">
+        <PropertyRef Name="I_IDPROVINCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CAT_COMU_REFERENCE_CAT_DIST">
+    <End Role="CAT_DISTRITO" Type="Self.CAT_DISTRITO" Multiplicity="1" />
+    <End Role="CAT_COMUNIDAD" Type="Self.CAT_COMUNIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAT_DISTRITO">
+        <PropertyRef Name="I_IDDISTRITO" />
+        <PropertyRef Name="I_IDCANTON" />
+        <PropertyRef Name="I_IDPROVINCIA" />
+      </Principal>
+      <Dependent Role="CAT_COMUNIDAD">
+        <PropertyRef Name="I_IDDISTRITO" />
+        <PropertyRef Name="I_IDCANTON" />
+        <PropertyRef Name="I_IDPROVINCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CAT_COMU_REFERENCE_CAT_REGI">
+    <End Role="CAT_REGION" Type="Self.CAT_REGION" Multiplicity="0..1" />
+    <End Role="CAT_DISTRITO" Type="Self.CAT_DISTRITO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAT_REGION">
+        <PropertyRef Name="I_IDREGION" />
+      </Principal>
+      <Dependent Role="CAT_DISTRITO">
+        <PropertyRef Name="I_IDREGION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CAT_DIST_REFERENCE_CAT_CANT">
+    <End Role="CAT_CANTON" Type="Self.CAT_CANTON" Multiplicity="1" />
+    <End Role="CAT_DISTRITO" Type="Self.CAT_DISTRITO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAT_CANTON">
+        <PropertyRef Name="I_IDCANTON" />
+        <PropertyRef Name="I_IDPROVINCIA" />
+      </Principal>
+      <Dependent Role="CAT_DISTRITO">
+        <PropertyRef Name="I_IDCANTON" />
+        <PropertyRef Name="I_IDPROVINCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="spConsultarPadron" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Cedula" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="INAMU_COMUNModelStoreContainer">
+    <EntitySet Name="CAT_CANTON" EntityType="Self.CAT_CANTON" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CAT_COMUNIDAD" EntityType="Self.CAT_COMUNIDAD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CAT_DISTRITO" EntityType="Self.CAT_DISTRITO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CAT_PROVINCIA" EntityType="Self.CAT_PROVINCIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CAT_REGION" EntityType="Self.CAT_REGION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CAT_PAIS" EntityType="Self.CAT_PAIS" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[CAT_PAIS].[I_IDPAIS] AS [I_IDPAIS], 
+[CAT_PAIS].[VC_DESCRIPCION] AS [VC_DESCRIPCION]
+FROM [dbo].[CAT_PAIS] AS [CAT_PAIS]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CAT_CANT_REFERENCE_CAT_PROV" Association="Self.FK_CAT_CANT_REFERENCE_CAT_PROV">
+      <End Role="CAT_PROVINCIA" EntitySet="CAT_PROVINCIA" />
+      <End Role="CAT_CANTON" EntitySet="CAT_CANTON" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CAT_COMU_REFERENCE_CAT_DIST" Association="Self.FK_CAT_COMU_REFERENCE_CAT_DIST">
+      <End Role="CAT_DISTRITO" EntitySet="CAT_DISTRITO" />
+      <End Role="CAT_COMUNIDAD" EntitySet="CAT_COMUNIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CAT_COMU_REFERENCE_CAT_REGI" Association="Self.FK_CAT_COMU_REFERENCE_CAT_REGI">
+      <End Role="CAT_REGION" EntitySet="CAT_REGION" />
+      <End Role="CAT_DISTRITO" EntitySet="CAT_DISTRITO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CAT_DIST_REFERENCE_CAT_CANT" Association="Self.FK_CAT_DIST_REFERENCE_CAT_CANT">
+      <End Role="CAT_CANTON" EntitySet="CAT_CANTON" />
+      <End Role="CAT_DISTRITO" EntitySet="CAT_DISTRITO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

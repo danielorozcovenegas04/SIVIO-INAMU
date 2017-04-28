@@ -3,6 +3,29 @@
 }
 <script type="text/javascript">
     $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("RetornarDivisionTerritorial", "Catalogos")',
+            // to get the right path to controller from TableRoutes of Asp.Net MVC
+            dataType: "json", //to work with json format
+            type: "POST", //to do a post request
+            contentType: 'application/json; charset=utf-8', //define a contentType of your request
+            cache: false, //avoid caching results
+            async: true,
+            data: {}, // here you can pass arguments to your request if you need
+            success: function (data) {
+                // data is your result from controller
+                localStorage.setItem('divisionTerritorial', JSON.stringify(data));
+
+            },
+            error: function (xhr) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Conexión Fallida");
+                $("#txtModalContenido").text("Fallo al cargar división territorial");
+                instMensajes.open();
+                $("#contenedorEsperaIndicadores").hide();
+                $("#pnlIndicadoresRegion").show();
+            }
+        });
         var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
         $('#btnCerrarSesion').click(function () {
             $.LoadingOverlay("show");

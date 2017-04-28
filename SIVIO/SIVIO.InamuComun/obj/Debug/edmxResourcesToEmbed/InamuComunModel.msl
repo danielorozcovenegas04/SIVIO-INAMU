@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="INAMU_COMUNModelStoreContainer" CdmEntityContainer="INAMU_COMUNEntities">
+    <EntitySetMapping Name="CAT_CANTON">
+      <EntityTypeMapping TypeName="INAMU_COMUNModel.CAT_CANTON">
+        <MappingFragment StoreEntitySet="CAT_CANTON">
+          <ScalarProperty Name="I_IDCANTON" ColumnName="I_IDCANTON" />
+          <ScalarProperty Name="I_IDPROVINCIA" ColumnName="I_IDPROVINCIA" />
+          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAT_COMUNIDAD">
+      <EntityTypeMapping TypeName="INAMU_COMUNModel.CAT_COMUNIDAD">
+        <MappingFragment StoreEntitySet="CAT_COMUNIDAD">
+          <ScalarProperty Name="I_IDCOMUNIDAD" ColumnName="I_IDCOMUNIDAD" />
+          <ScalarProperty Name="I_IDDISTRITO" ColumnName="I_IDDISTRITO" />
+          <ScalarProperty Name="I_IDCANTON" ColumnName="I_IDCANTON" />
+          <ScalarProperty Name="I_IDPROVINCIA" ColumnName="I_IDPROVINCIA" />
+          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAT_DISTRITO">
+      <EntityTypeMapping TypeName="INAMU_COMUNModel.CAT_DISTRITO">
+        <MappingFragment StoreEntitySet="CAT_DISTRITO">
+          <ScalarProperty Name="I_IDDISTRITO" ColumnName="I_IDDISTRITO" />
+          <ScalarProperty Name="I_IDCANTON" ColumnName="I_IDCANTON" />
+          <ScalarProperty Name="I_IDPROVINCIA" ColumnName="I_IDPROVINCIA" />
+          <ScalarProperty Name="I_IDREGION" ColumnName="I_IDREGION" />
+          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAT_PROVINCIA">
+      <EntityTypeMapping TypeName="INAMU_COMUNModel.CAT_PROVINCIA">
+        <MappingFragment StoreEntitySet="CAT_PROVINCIA">
+          <ScalarProperty Name="I_IDPROVINCIA" ColumnName="I_IDPROVINCIA" />
+          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAT_REGION">
+      <EntityTypeMapping TypeName="INAMU_COMUNModel.CAT_REGION">
+        <MappingFragment StoreEntitySet="CAT_REGION">
+          <ScalarProperty Name="I_IDREGION" ColumnName="I_IDREGION" />
+          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAT_PAIS">
+      <EntityTypeMapping TypeName="INAMU_COMUNModel.CAT_PAIS">
+        <MappingFragment StoreEntitySet="CAT_PAIS">
+          <ScalarProperty Name="I_IDPAIS" ColumnName="I_IDPAIS" />
+          <ScalarProperty Name="VC_DESCRIPCION" ColumnName="VC_DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,2253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SIVIOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="TBL_ACCION">
+    <Key>
+      <PropertyRef Name="PK_ACCION" />
+    </Key>
+    <Property Name="PK_ACCION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VC_CONTROLADOR" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="VC_ACCION" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="VC_DESCRIPCION" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="TBL_ADICCIONES">
+    <Key>
+      <PropertyRef Name="PK_ADICCION" />
+    </Key>
+    <Property Name="PK_ADICCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+    <Property Name="FK_TIPOADICCION" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_AGRESION">
+    <Key>
+      <PropertyRef Name="PK_AGRESION" />
+    </Key>
+    <Property Name="PK_AGRESION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_AGRESOR" Type="int" Nullable="false" />
+    <Property Name="DT_FECHAAGRESION" Type="datetime" Nullable="false" />
+    <Property Name="I_DURACION" Type="int" Nullable="false" />
+    <Property Name="TXT_RELATO" Type="text" Nullable="false" />
+    <Property Name="VC_CENTRODSALUDATENCION" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TBL_AGRESION_ATENCION_MEDICA">
+    <Key>
+      <PropertyRef Name="PK_ATENCION_MEDICA" />
+    </Key>
+    <Property Name="PK_ATENCION_MEDICA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_AGRESION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_TIPOATENCION" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_AGRESION_CATEGORIA_RIESGO">
+    <Key>
+      <PropertyRef Name="PK_AGRESIONVALORACIONRIESGO" />
+    </Key>
+    <Property Name="PK_AGRESIONVALORACIONRIESGO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_AGRESION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_TIPORESPUESTA" Type="int" Nullable="false" />
+    <Property Name="FK_OBSERVACION" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_AGRESION_CATEGORIZACION_RIESGO">
+    <Key>
+      <PropertyRef Name="PK_AGRESIONCATEGORIZACIONRIESGO" />
+    </Key>
+    <Property Name="PK_AGRESIONCATEGORIZACIONRIESGO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_AGRESION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DT_FECHA" Type="datetime" Nullable="false" />
+    <Property Name="FK_CATEGORIARIESGO" Type="int" Nullable="false" />
+    <Property Name="VC_PERSONAREPORTA" Type="varchar" MaxLength="300" />
+    <Property Name="VC_CORREOPERSONAREPORTA" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TBL_AGRESION_DETALLE_VIOLENCIA">
+    <Key>
+      <PropertyRef Name="PK_SITUACIONVIOLENCIA" />
+    </Key>
+    <Property Name="FK_AGRESIONVIOLENCIA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_SITUACIONVIOLENCIA" Type="int" Nullable="false" />
+    <Property Name="PK_SITUACIONVIOLENCIA" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_AGRESION_VIOLENCIA">
+    <Key>
+      <PropertyRef Name="PK_AGRESION_VIOLENCIA" />
+    </Key>
+    <Property Name="PK_AGRESION_VIOLENCIA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_AGRESION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_TIPOVIOLENCIA" Type="int" Nullable="false" />
+    <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="300" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_AGRESOR">
+    <Key>
+      <PropertyRef Name="PK_AGRESOR" />
+    </Key>
+    <Property Name="PK_AGRESOR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+    <Property Name="VC_IDENTIFICACION" Type="varchar" MaxLength="200" />
+    <Property Name="VC_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VC_APELLIDO1" Type="varchar" MaxLength="50" />
+    <Property Name="VC_APELLIDO2" Type="varchar" MaxLength="50" />
+    <Property Name="FK_TIPORELACION" Type="int" Nullable="false" />
+    <Property Name="DT_COMIENZORELACION" Type="datetime" Nullable="false" />
+    <Property Name="FK_GENERO" Type="int" Nullable="false" />
+    <Property Name="DT_FECHANACIMIENTO" Type="datetime" Nullable="false" />
+    <Property Name="FK_OCUPACION" Type="int" Nullable="false" />
+    <Property Name="FK_NIVELEDUCATIVO" Type="int" Nullable="false" />
+    <Property Name="B_DENUNCIAPENAL" Type="bit" Nullable="false" />
+    <Property Name="B_MEDIDASPROTECCION" Type="bit" />
+    <Property Name="DT_FECHAVENCIMIENTOPROTECCION" Type="datetime" />
+    <Property Name="VC_LUGARTRABAJO" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="I_SEPARACIONES" Type="int" Nullable="false" />
+    <Property Name="B_ANTECEDENTESLEGALES" Type="bit" />
+    <Property Name="VC_OBSERVACIONANTECEDESTESLEGALES" Type="varchar" MaxLength="500" />
+    <Property Name="B_ANTECEDENTESPSIQUIATRICOS" Type="bit" />
+    <Property Name="VC_OBSERVACIONANTPSIQUIATRICOS" Type="varchar" MaxLength="500" />
+    <Property Name="FK_NACIONALIDAD" Type="int" Nullable="false" />
+    <Property Name="VC_NUMEXPEDIENTEMP" Type="varchar" MaxLength="200" />
+    <Property Name="VC_NUMEXPEDIENTEDENUNCIA" Type="varchar" MaxLength="200" />
+    <Property Name="VC_SEDEJUDICIALDENUNCIA" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TBL_AGRESOR_MOTIVO_REGRESO">
+    <Key>
+      <PropertyRef Name="PK_MOTIVOREGRESO" />
+    </Key>
+    <Property Name="FK_AGRESOR" Type="int" Nullable="false" />
+    <Property Name="FK_MOTIVOREGRESO" Type="int" Nullable="false" />
+    <Property Name="PK_MOTIVOREGRESO" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ARCHIVO">
+    <Key>
+      <PropertyRef Name="PK_ARCHIVO" />
+    </Key>
+    <Property Name="PK_ARCHIVO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VC_ENLACE" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="VC_NOMBRE" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ATENCION">
+    <Key>
+      <PropertyRef Name="PK_ATENCION" />
+    </Key>
+    <Property Name="PK_ATENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_TIPOATENCION" Type="int" Nullable="false" />
+    <Property Name="DT_FECHAINICIO" Type="datetime" />
+    <Property Name="DT_FECHAFIN" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TBL_ATENCION_LEGAL">
+    <Key>
+      <PropertyRef Name="PK_ATENCIONLEGAL" />
+    </Key>
+    <Property Name="PK_ATENCIONLEGAL" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_ATENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="B_DESEARECIBIRATENCION" Type="bit" Nullable="false" />
+    <Property Name="DT_FECHASESION" Type="datetime" Nullable="false" />
+    <Property Name="VC_OBJETIVOSESION" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="VC_RESUMENSESION" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="VC_PLANSEGURIDAD" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="DT_FECHAASIGNACIONKITEMERGENCIA" Type="datetime" />
+    <Property Name="VC_PERSONARESPONSABLEKITEMERGENCIA" Type="varchar" MaxLength="300" />
+    <Property Name="VC_SEGUIMIENTOKITEMERGENCIA" Type="varchar" MaxLength="1000" />
+    <Property Name="B_KITEMERGENCIA" Type="bit" Nullable="false" />
+    <Property Name="B_REPRESENTACIONLEGAL" Type="bit" Nullable="false" />
+    <Property Name="VC_AUDIENCIA" Type="varchar" MaxLength="500" />
+    <Property Name="DT_FECHAAUDIENCIA" Type="datetime" />
+    <Property Name="VC_AUTORIDADJUDICIAL" Type="varchar" MaxLength="500" />
+    <Property Name="VC_SENTENCIA" Type="varchar" MaxLength="1000" />
+    <Property Name="VC_APELACON" Type="varchar" MaxLength="1000" />
+    <Property Name="VC_REVISIONEXPEDIENTE" Type="varchar" MaxLength="1000" />
+    <Property Name="VC_OBSERVACIONESPROCESO" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="TBL_ATENCION_LEGAL_DETALLE">
+    <Key>
+      <PropertyRef Name="PK_ATENCIONLEGALDETALLE" />
+    </Key>
+    <Property Name="PK_ATENCIONLEGALDETALLE" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_ATENCIONLEGAL" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_DETALLEATENCION" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ATENCION_PSICOLOGICA">
+    <Key>
+      <PropertyRef Name="PK_ATENCIONPSICOLOGICA" />
+    </Key>
+    <Property Name="PK_ATENCIONPSICOLOGICA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_ATENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="B_DESEARECIBIRATENCION" Type="bit" Nullable="false" />
+    <Property Name="DT_FECHASESION" Type="datetime" Nullable="false" />
+    <Property Name="VC_OBJETIVOSESION" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="VC_PLANINTERVENCION" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="VC_RESUMENSESION" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="VC_PLANSEGURIDAD" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="DT_FECHAASIGNACIONKITEMERGENCIA" Type="datetime" />
+    <Property Name="VC_PERSONARESPONSABLEKITEMERGENCIA" Type="varchar" MaxLength="300" />
+    <Property Name="VC_SEGUIMIENTOKITEMERGENCIA" Type="varchar" MaxLength="1000" />
+    <Property Name="B_KITEMERGENCIA" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ATENCION_PSICOLOGICA_DETALLE">
+    <Key>
+      <PropertyRef Name="PK_ATENCIONPSICOLOGICADETALLE" />
+    </Key>
+    <Property Name="PK_ATENCIONPSICOLOGICADETALLE" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_ATENCIONPSICOLOGICA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_DETALLEATENCION" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ATENCION_TRABAJOSOCIAL">
+    <Key>
+      <PropertyRef Name="PK_ATENCIONTRABAJOSOCIAL" />
+    </Key>
+    <Property Name="PK_ATENCIONTRABAJOSOCIAL" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_ATENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="B_DESEARECIBIRATENCION" Type="bit" Nullable="false" />
+    <Property Name="VC_OBSERVACIONREDESAPOYO" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="VC_OBSERVACIONINVESTIGACIONCAMPO" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="DT_FECHAASIGNACIONKITEMERGENCIA" Type="datetime" />
+    <Property Name="VC_PERSONARESPONSABLEKITEMERGENCIA" Type="varchar" MaxLength="300" />
+    <Property Name="VC_SEGUIMIENTOKITEMERGENCIA" Type="varchar" MaxLength="1000" />
+    <Property Name="B_KITEMERGENCIA" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ATENCION_TRABAJOSOCIAL_DETALLE">
+    <Key>
+      <PropertyRef Name="PK_ATENCIONTRABAJOSOCIALDETALLE" />
+    </Key>
+    <Property Name="PK_ATENCIONTRABAJOSOCIALDETALLE" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_ATENCIONTRABAJOSOCIAL" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_DETALLEATENCION" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_BITACORA">
+    <Key>
+      <PropertyRef Name="PK_BITACORA" />
+    </Key>
+    <Property Name="PK_BITACORA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DT_FECHAEVENTO" Type="datetime" Nullable="false" />
+    <Property Name="FK_TIPOEVENTO" Type="int" Nullable="false" />
+    <Property Name="FK_USUARIO" Type="int" Nullable="false" />
+    <Property Name="VC_DETALLE" Type="varchar" MaxLength="1000" />
+    <Property Name="VC_DIRECCIONIP" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TBL_CATALOGO">
+    <Key>
+      <PropertyRef Name="PK_CATALOGO" />
+    </Key>
+    <Property Name="PK_CATALOGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VC_NOMBRECATALOGO" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FK_CATALOGOPADRE" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_CONSULTA">
+    <Key>
+      <PropertyRef Name="PK_CONSULTA" />
+    </Key>
+    <Property Name="PK_CONSULTA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="B_INGRESOCEEAM" Type="bit" />
+    <Property Name="FK_RAZONRECHAZO" Type="int" />
+    <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="1000" />
+    <Property Name="B_REINGRESOCEEAM" Type="bit" />
+    <Property Name="FK_TIPOCEEAMREINGRESO" Type="int" />
+    <Property Name="FK_TIPOCEEAMINGRESO" Type="int" />
+    <Property Name="VC_CONTACTOCEEAM" Type="varchar" MaxLength="500" />
+    <Property Name="FK_ENTIDADTRASLADA" Type="int" />
+    <Property Name="TM_TRASLADOAPROX" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="TBL_DIRECCION">
+    <Key>
+      <PropertyRef Name="PK_DIRECCION" />
+    </Key>
+    <Property Name="PK_DIRECCION" Type="int" Nullable="false" />
+    <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+    <Property Name="VC_DETALLE" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="FK_TIPODIRECCION" Type="int" Nullable="false" />
+    <Property Name="FK_PROVINCIA" Type="int" Nullable="false" />
+    <Property Name="FK_CANTON" Type="int" Nullable="false" />
+    <Property Name="FK_DISTRITO" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_FAMILIAR_ACADEMICO">
+    <Key>
+      <PropertyRef Name="PK_FAMILIARACADEMICO" />
+    </Key>
+    <Property Name="FK_FAMILIAR" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_GRADOACADEMICO" Type="int" Nullable="false" />
+    <Property Name="PK_FAMILIARACADEMICO" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_FAMILIAR_SALUD">
+    <Key>
+      <PropertyRef Name="PK_FAMILIARSALUD" />
+    </Key>
+    <Property Name="FK_FAMILIAR" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_CONDICIONSALUD" Type="int" Nullable="false" />
+    <Property Name="PK_FAMILIARSALUD" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION">
+    <Key>
+      <PropertyRef Name="PK_INTERVENCION" />
+    </Key>
+    <Property Name="PK_INTERVENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_PERSONA" Type="int" />
+    <Property Name="FK_TIPOINTERVENCION" Type="int" Nullable="false" />
+    <Property Name="FK_PROFESIONALENCARGADO" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_ACOM_PROFESIONAL">
+    <Key>
+      <PropertyRef Name="PK_INTERVENCIONACOMPROFESIONAL" />
+    </Key>
+    <Property Name="PK_INTERVENCIONACOMPROFESIONAL" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_INTERVENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VC_TIPO" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="DT_FECHA" Type="datetime" Nullable="false" />
+    <Property Name="VC_LUGAR" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="VC_PERSONASPARTICIPANTES" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_COADYUVANCIA">
+    <Key>
+      <PropertyRef Name="PK_INTERVENCIONCOADYUVANCIA" />
+    </Key>
+    <Property Name="PK_INTERVENCIONCOADYUVANCIA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_TIPOSEDE" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_COADYUVANCIA_DETALLE">
+    <Key>
+      <PropertyRef Name="PK_COADYUVANCIADETALLE" />
+    </Key>
+    <Property Name="PK_COADYUVANCIADETALLE" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_COADYUVANCIA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_TIPODETALLECOADYUVANCIA" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL">
+    <Key>
+      <PropertyRef Name="PK_COORDINACIONINTERINSTITUCIONAL" />
+    </Key>
+    <Property Name="PK_COORDINACIONINTERINSTITUCIONAL" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_INTERVENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VC_FECHA" Type="datetime" Nullable="false" />
+    <Property Name="FK_INSTITUCION" Type="int" Nullable="false" />
+    <Property Name="VC_PERSONA" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="VC_TELEFONO" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="VC_CORREOELECTRONICO" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_CRITERIO_EXPERTO">
+    <Key>
+      <PropertyRef Name="PK_INTERVENCIONCRITERIOEXPERTO" />
+    </Key>
+    <Property Name="PK_INTERVENCIONCRITERIOEXPERTO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_INSTITUCIONREMITE" Type="int" Nullable="false" />
+    <Property Name="VC_PERSONAINFORME" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="DT_FECHAINFORME" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE">
+    <Key>
+      <PropertyRef Name="PK_CRITERIOEXPERTODETALLE" />
+    </Key>
+    <Property Name="PK_CRITERIOEXPERTODETALLE" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_TIPODETALLECRITERIOEXPERTO" Type="int" Nullable="false" />
+    <Property Name="FK_CRITERIOEXPERTO" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_INTERDISCIPLINARIA">
+    <Key>
+      <PropertyRef Name="PK_INTERDISCIPLINARIA" />
+    </Key>
+    <Property Name="PK_INTERDISCIPLINARIA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_INTERVENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DT_FECHA" Type="datetime" Nullable="false" />
+    <Property Name="VC_PERSONASPARTICIPAN" Type="varchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO">
+    <Key>
+      <PropertyRef Name="PK_PROCESOPS" />
+    </Key>
+    <Property Name="PK_PROCESOPS" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_INTERVENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VC_FECHA" Type="datetime" Nullable="false" />
+    <Property Name="VC_PERIODOPARTICIPACION" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_PROCESO_GRUPAL">
+    <Key>
+      <PropertyRef Name="PK_PROCESOGRUPAL" />
+    </Key>
+    <Property Name="PK_PROCESOGRUPAL" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_INTERVENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VC_FECHA" Type="datetime" Nullable="false" />
+    <Property Name="FK_TIPOGRUPO" Type="int" Nullable="false" />
+    <Property Name="VC_PERIODOPARTICIPACION" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="I_SESIONESASISTIDAS" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_RED_APOYO">
+    <Key>
+      <PropertyRef Name="PK_INTERVENCIONREDAPOYO" />
+    </Key>
+    <Property Name="PK_INTERVENCIONREDAPOYO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_INTERVENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DT_FECHA" Type="datetime" Nullable="false" />
+    <Property Name="VC_LUGAR" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="VC_TIPO" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_TALLER">
+    <Key>
+      <PropertyRef Name="PK_TALLER" />
+    </Key>
+    <Property Name="PK_TALLER" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_INTERVENCION" Type="uniqueidentifier" />
+    <Property Name="VC_TIPO" Type="varchar" MaxLength="200" />
+    <Property Name="VC_FECHA" Type="datetime" />
+    <Property Name="VC_PERIODOPARTICIPACION" Type="varchar" MaxLength="200" />
+    <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="TBL_INTERVENCION_TESTIMONIO_EXPERTO">
+    <Key>
+      <PropertyRef Name="PK_TESTIMONIOEXPERTO" />
+    </Key>
+    <Property Name="PK_TESTIMONIOEXPERTO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_INTERVENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VC_TIPO" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="VC_LUGARPROCESO" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_LABORAL">
+    <Key>
+      <PropertyRef Name="FK_PERSONA" />
+    </Key>
+    <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+    <Property Name="VC_NOMBRELUGARTRABAJO" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="500" />
+    <Property Name="I_ANNOSEXPERIENCIA" Type="int" Nullable="false" />
+    <Property Name="FK_CONDICIONLABORAL" Type="int" Nullable="false" />
+    <Property Name="VC_OCUPACION" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_PERSONA">
+    <Key>
+      <PropertyRef Name="PK_PERSONA" />
+    </Key>
+    <Property Name="PK_PERSONA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VC_IDENTIFICACION" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FK_TIPOIDENTIFICACION" Type="int" Nullable="false" />
+    <Property Name="FK_NACIONALIDAD" Type="int" Nullable="false" />
+    <Property Name="VC_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VC_APELLIDO1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VC_APELLIDO2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DT_FECHANACIMIENTO" Type="datetime" Nullable="false" />
+    <Property Name="FK_ESTADOCIVIL" Type="int" Nullable="false" />
+    <Property Name="FK_ESCOLARIDAD" Type="int" Nullable="false" />
+    <Property Name="FK_GENERO" Type="int" Nullable="false" />
+    <Property Name="FK_OCUPACION" Type="int" Nullable="false" />
+    <Property Name="FK_CONDICIONMIGRATORIA" Type="int" Nullable="false" />
+    <Property Name="FK_CONDICIONASEGURAMIENTO" Type="int" Nullable="false" />
+    <Property Name="FK_TIPOVIVIENDA" Type="int" Nullable="false" />
+    <Property Name="FK_TIPOFAMILIA" Type="int" Nullable="false" />
+    <Property Name="FK_ESTADOEMBARAZO" Type="int" Nullable="false" />
+    <Property Name="FK_CONDICIONSALUD" Type="int" Nullable="false" />
+    <Property Name="FK_ORIENTACIONSEXUAL" Type="int" Nullable="false" />
+    <Property Name="I_HIJOS" Type="int" Nullable="false" />
+    <Property Name="I_HIJOSCEEAM" Type="int" Nullable="false" />
+    <Property Name="I_HIJOSMAYORESDOCE" Type="int" Nullable="false" />
+    <Property Name="FK_PROVINCIAPROCEDENCIA" Type="int" Nullable="false" />
+    <Property Name="FK_CANTONPROCEDENCIA" Type="int" Nullable="false" />
+    <Property Name="FK_DISTRITOPROCEDENCIA" Type="int" Nullable="false" />
+    <Property Name="VC_CORREO" Type="varchar" MaxLength="200" />
+    <Property Name="FK_ETNIA" Type="int" />
+    <Property Name="FK_NACIONALIDAD2" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_PERSONA_APOYO">
+    <Key>
+      <PropertyRef Name="PK_PERSONAAPOYO" />
+    </Key>
+    <Property Name="PK_PERSONAAPOYO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+    <Property Name="FK_TIPOAPOYO" Type="int" Nullable="false" />
+    <Property Name="VC_NOMBRE" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="VC_MEDIOCONTACTO" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_PERSONA_CONDICIONESPECIAL">
+    <Key>
+      <PropertyRef Name="PK_CONDICIONESPECIAL" />
+    </Key>
+    <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+    <Property Name="FK_CONDICIONESPECIAL" Type="int" Nullable="false" />
+    <Property Name="PK_CONDICIONESPECIAL" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_PERSONA_FAMILIAR">
+    <Key>
+      <PropertyRef Name="PK_FAMILIAR" />
+    </Key>
+    <Property Name="PK_FAMILIAR" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PK_PERSONA" Type="int" />
+    <Property Name="VC_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VC_APELLIDO1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VC_APELLIDO2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FK_NACIONALIDAD" Type="int" Nullable="false" />
+    <Property Name="FK_PARENTESCOPERSONA" Type="int" Nullable="false" />
+    <Property Name="FK_PARENTESCOAGRESOR" Type="int" Nullable="false" />
+    <Property Name="B_ABUSOSEXUAL" Type="bit" Nullable="false" />
+    <Property Name="B_DENUNCIAABUSOSEXUAL" Type="bit" Nullable="false" />
+    <Property Name="DT_FECHANACIMIENTO" Type="datetime" Nullable="false" />
+    <Property Name="FK_OCUPACION" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_PERSONA_RED_APOYO">
+    <Key>
+      <PropertyRef Name="PK_RED_APOYO" />
+    </Key>
+    <Property Name="PK_RED_APOYO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+    <Property Name="VC_NOMBRE" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="FK_TIPOREDAPOYO" Type="int" Nullable="false" />
+    <Property Name="FK_INSTITUCION" Type="int" />
+    <Property Name="VC_TELEFONO" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="VC_RELACION" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="TBL_PERSONA_SALUD">
+    <Key>
+      <PropertyRef Name="PK_PERSONASALUD" />
+    </Key>
+    <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+    <Property Name="FK_CONDICIONSALUD" Type="int" Nullable="false" />
+    <Property Name="PK_PERSONASALUD" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_REFERENCIA">
+    <Key>
+      <PropertyRef Name="PK_REFERENCIA" />
+    </Key>
+    <Property Name="PK_REFERENCIA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_TIPOREFERENCIA" Type="int" Nullable="false" />
+    <Property Name="FK_REGISTRO" Type="uniqueidentifier" />
+    <Property Name="FK_INSTITUCIONORIGEN" Type="int" Nullable="false" />
+    <Property Name="FK_INSTITUCIONDESTINO" Type="int" Nullable="false" />
+    <Property Name="FK_INTERVENCION" Type="uniqueidentifier" />
+    <Property Name="DT_FECHAREFERENCIA" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_REFERENCIA_DETALLE">
+    <Key>
+      <PropertyRef Name="PK_REFERENCIADETALLE" />
+    </Key>
+    <Property Name="PK_REFERENCIADETALLE" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_REFERENCIA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VC_FUNCIONARIO" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="VC_CORREO" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="VC_TELEFONO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FK_INSTITUCION" Type="int" Nullable="false" />
+    <Property Name="FK_UNIDAD" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_REGISTRO">
+    <Key>
+      <PropertyRef Name="PK_REGISTRO" />
+    </Key>
+    <Property Name="PK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+    <Property Name="FK_USUARIOREGISTRA" Type="int" Nullable="false" />
+    <Property Name="DT_FECHAINICIO" Type="datetime" Nullable="false" />
+    <Property Name="DT_FECHAFIN" Type="datetime" Nullable="false" />
+    <Property Name="FK_TIPOSERVICIO" Type="int" Nullable="false" />
+    <Property Name="FK_TIPOREGISTRO" Type="int" Nullable="false" />
+    <Property Name="VC_OBSERVACIONES" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="TBL_REGISTRO_CEAAM">
+    <Key>
+      <PropertyRef Name="PK_REGISTRO_CEAAM" />
+    </Key>
+    <Property Name="PK_REGISTRO_CEAAM" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_TIPOINGRESO" Type="int" Nullable="false" />
+    <Property Name="VC_OBSERVACIONESINGRESO" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="DT_FECHAINGRESO" Type="datetime" Nullable="false" />
+    <Property Name="VC_PERSONARECIBE" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="VC_NUMEROFAMILIA" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DT_FECHAEGRESO" Type="datetime" />
+    <Property Name="FK_TIPOEGRESO" Type="int" />
+    <Property Name="VC_OBSERVACIONESEGRESO" Type="varchar" MaxLength="300" />
+    <Property Name="FK_PROVINCIA" Type="int" Nullable="false" />
+    <Property Name="FK_CANTON" Type="int" Nullable="false" />
+    <Property Name="FK_DISTRITO" Type="int" Nullable="false" />
+    <Property Name="VC_DESTINOEXTRANJERO" Type="varchar" MaxLength="300" />
+    <Property Name="B_KITEMERGENCIA" Type="bit" Nullable="false" />
+    <Property Name="FK_VALORACIONRIESGO" Type="int" Nullable="false" />
+    <Property Name="B_PROGRAMAOAPVD" Type="bit" Nullable="false" />
+    <Property Name="VC_JUSTIFICACION" Type="varchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_REGISTRO_COORDINACION">
+    <Key>
+      <PropertyRef Name="PK_COORDINACION" />
+    </Key>
+    <Property Name="PK_COORDINACION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_INSTITUCION" Type="int" Nullable="false" />
+    <Property Name="VC_PERSONACOORDINA" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="VC_TELEFONO" Type="varchar" MaxLength="50" />
+    <Property Name="VC_CORREO" Type="varchar" MaxLength="200" />
+    <Property Name="FK_TIPOCOORDINACION" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_ROL">
+    <Key>
+      <PropertyRef Name="PK_ROL" />
+    </Key>
+    <Property Name="PK_ROL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VC_NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="VC_DESCRIPCION" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FK_TIPOSERVICIO" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ROL_ACCION">
+    <Key>
+      <PropertyRef Name="PK_ROLACCION" />
+    </Key>
+    <Property Name="FK_ROL" Type="int" Nullable="false" />
+    <Property Name="FK_ACCION" Type="int" Nullable="false" />
+    <Property Name="PK_ROLACCION" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ROL_USUARIO">
+    <Key>
+      <PropertyRef Name="PK_ROLUSUAIO" />
+    </Key>
+    <Property Name="FK_USUARIO" Type="int" Nullable="false" />
+    <Property Name="FK_ROL" Type="int" Nullable="false" />
+    <Property Name="PK_ROLUSUAIO" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_TELEFONO">
+    <Key>
+      <PropertyRef Name="PK_TELEFONO" />
+    </Key>
+    <Property Name="PK_TELEFONO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_PERSONA" Type="int" Nullable="false" />
+    <Property Name="VC_NUMERO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FK_TIPOTELEFONO" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_UNIDAD">
+    <Key>
+      <PropertyRef Name="PK_UNIDAD" />
+    </Key>
+    <Property Name="PK_UNIDAD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VC_CODIGO" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="VC_DESCRIPCION" Type="nvarchar" MaxLength="100" />
+    <Property Name="VC_PREFIJO" Type="nvarchar" MaxLength="50" />
+    <Property Name="I_NUMERO" Type="int" />
+    <Property Name="I_ANNO" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_USUARIO">
+    <Key>
+      <PropertyRef Name="PK_USUARIO" />
+    </Key>
+    <Property Name="PK_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VC_USUARIO" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="DT_FECHAREGISTRO" Type="datetime" Nullable="false" />
+    <Property Name="VC_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VC_APELLIDO1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VC_APELLIDO2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VC_CORREO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IM_CLAVE" Type="varbinary" MaxLength="1000" Nullable="false" />
+    <Property Name="IM_SALT1" Type="varbinary" MaxLength="100" Nullable="false" />
+    <Property Name="IM_SALT2" Type="varbinary" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_VALOR_CATALOGO">
+    <Key>
+      <PropertyRef Name="PK_VALORCATALOGO" />
+    </Key>
+    <Property Name="PK_VALORCATALOGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_CATALOGO" Type="int" Nullable="false" />
+    <Property Name="VC_VALOR1" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="VC_VALOR2" Type="varchar" MaxLength="500" />
+    <Property Name="B_EDITABLE" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TBL_ADICCIONES_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+    <End Role="TBL_ADICCIONES" Type="Self.TBL_ADICCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_ADICCIONES">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ADICCIONES_TBL_VALORCATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_ADICCIONES" Type="Self.TBL_ADICCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_ADICCIONES">
+        <PropertyRef Name="FK_TIPOADICCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_ATENCION_MEDICA_TBL_AGRESION">
+    <End Role="TBL_AGRESION" Type="Self.TBL_AGRESION" Multiplicity="1" />
+    <End Role="TBL_AGRESION_ATENCION_MEDICA" Type="Self.TBL_AGRESION_ATENCION_MEDICA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_AGRESION">
+        <PropertyRef Name="PK_AGRESION" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_ATENCION_MEDICA">
+        <PropertyRef Name="FK_AGRESION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_ATENCION_MEDICA_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESION_ATENCION_MEDICA" Type="Self.TBL_AGRESION_ATENCION_MEDICA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_ATENCION_MEDICA">
+        <PropertyRef Name="FK_TIPOATENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_CATEGORIA_RIESGO_TBL_AGRESION">
+    <End Role="TBL_AGRESION" Type="Self.TBL_AGRESION" Multiplicity="1" />
+    <End Role="TBL_AGRESION_CATEGORIA_RIESGO" Type="Self.TBL_AGRESION_CATEGORIA_RIESGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_AGRESION">
+        <PropertyRef Name="PK_AGRESION" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_CATEGORIA_RIESGO">
+        <PropertyRef Name="FK_AGRESION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_CATEGORIA_RIESGO_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESION_CATEGORIA_RIESGO" Type="Self.TBL_AGRESION_CATEGORIA_RIESGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_CATEGORIA_RIESGO">
+        <PropertyRef Name="FK_TIPORESPUESTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_CATEGORIZACION_RIESGO_TBL_AGRESION">
+    <End Role="TBL_AGRESION" Type="Self.TBL_AGRESION" Multiplicity="1" />
+    <End Role="TBL_AGRESION_CATEGORIZACION_RIESGO" Type="Self.TBL_AGRESION_CATEGORIZACION_RIESGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_AGRESION">
+        <PropertyRef Name="PK_AGRESION" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_CATEGORIZACION_RIESGO">
+        <PropertyRef Name="FK_AGRESION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_CATEGORIZACION_RIESGO_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESION_CATEGORIZACION_RIESGO" Type="Self.TBL_AGRESION_CATEGORIZACION_RIESGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_CATEGORIZACION_RIESGO">
+        <PropertyRef Name="FK_CATEGORIARIESGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_DETALLE_VIOLENCIA_TBL_AGRESION_VIOLENCIA">
+    <End Role="TBL_AGRESION_VIOLENCIA" Type="Self.TBL_AGRESION_VIOLENCIA" Multiplicity="1" />
+    <End Role="TBL_AGRESION_DETALLE_VIOLENCIA" Type="Self.TBL_AGRESION_DETALLE_VIOLENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_AGRESION_VIOLENCIA">
+        <PropertyRef Name="PK_AGRESION_VIOLENCIA" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_DETALLE_VIOLENCIA">
+        <PropertyRef Name="FK_AGRESIONVIOLENCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_DETALLE_VIOLENCIA_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESION_DETALLE_VIOLENCIA" Type="Self.TBL_AGRESION_DETALLE_VIOLENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_DETALLE_VIOLENCIA">
+        <PropertyRef Name="FK_SITUACIONVIOLENCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_TBL_AGRESOR">
+    <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="1" />
+    <End Role="TBL_AGRESION" Type="Self.TBL_AGRESION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_AGRESOR">
+        <PropertyRef Name="PK_AGRESOR" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION">
+        <PropertyRef Name="FK_AGRESOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_VIOLENCIA_TBL_AGRESION">
+    <End Role="TBL_AGRESION" Type="Self.TBL_AGRESION" Multiplicity="1" />
+    <End Role="TBL_AGRESION_VIOLENCIA" Type="Self.TBL_AGRESION_VIOLENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_AGRESION">
+        <PropertyRef Name="PK_AGRESION" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_VIOLENCIA">
+        <PropertyRef Name="FK_AGRESION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_VIOLENCIA_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESION_VIOLENCIA" Type="Self.TBL_AGRESION_VIOLENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_VIOLENCIA">
+        <PropertyRef Name="FK_TIPOVIOLENCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_AGRESOR">
+    <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="1" />
+    <End Role="TBL_AGRESOR_MOTIVO_REGRESO" Type="Self.TBL_AGRESOR_MOTIVO_REGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_AGRESOR">
+        <PropertyRef Name="PK_AGRESOR" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR_MOTIVO_REGRESO">
+        <PropertyRef Name="FK_AGRESOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESOR_MOTIVO_REGRESO" Type="Self.TBL_AGRESOR_MOTIVO_REGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR_MOTIVO_REGRESO">
+        <PropertyRef Name="FK_MOTIVOREGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+    <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR">
+        <PropertyRef Name="FK_NACIONALIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR">
+        <PropertyRef Name="FK_TIPORELACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO1">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR">
+        <PropertyRef Name="FK_GENERO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO2">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR">
+        <PropertyRef Name="FK_OCUPACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO3">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR">
+        <PropertyRef Name="FK_NIVELEDUCATIVO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ARCHIVO_TBL_REGISTRO">
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="1" />
+    <End Role="TBL_ARCHIVO" Type="Self.TBL_ARCHIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_REGISTRO">
+        <PropertyRef Name="PK_REGISTRO" />
+      </Principal>
+      <Dependent Role="TBL_ARCHIVO">
+        <PropertyRef Name="FK_REGISTRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ATENCION_LEGAL_DETALLE_TBL_ATENCION_LEGAL">
+    <End Role="TBL_ATENCION_LEGAL" Type="Self.TBL_ATENCION_LEGAL" Multiplicity="1" />
+    <End Role="TBL_ATENCION_LEGAL_DETALLE" Type="Self.TBL_ATENCION_LEGAL_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ATENCION_LEGAL">
+        <PropertyRef Name="PK_ATENCIONLEGAL" />
+      </Principal>
+      <Dependent Role="TBL_ATENCION_LEGAL_DETALLE">
+        <PropertyRef Name="FK_ATENCIONLEGAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ATENCION_LEGAL_DETALLE_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_ATENCION_LEGAL_DETALLE" Type="Self.TBL_ATENCION_LEGAL_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_ATENCION_LEGAL_DETALLE">
+        <PropertyRef Name="FK_DETALLEATENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ATENCION_LEGAL_TBL_ATENCION">
+    <End Role="TBL_ATENCION" Type="Self.TBL_ATENCION" Multiplicity="1" />
+    <End Role="TBL_ATENCION_LEGAL" Type="Self.TBL_ATENCION_LEGAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ATENCION">
+        <PropertyRef Name="PK_ATENCION" />
+      </Principal>
+      <Dependent Role="TBL_ATENCION_LEGAL">
+        <PropertyRef Name="FK_ATENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ATENCION_PSICOLOGICA_DETALLE_TBL_ATENCION_PSICOLOGICA">
+    <End Role="TBL_ATENCION_PSICOLOGICA" Type="Self.TBL_ATENCION_PSICOLOGICA" Multiplicity="1" />
+    <End Role="TBL_ATENCION_PSICOLOGICA_DETALLE" Type="Self.TBL_ATENCION_PSICOLOGICA_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ATENCION_PSICOLOGICA">
+        <PropertyRef Name="PK_ATENCIONPSICOLOGICA" />
+      </Principal>
+      <Dependent Role="TBL_ATENCION_PSICOLOGICA_DETALLE">
+        <PropertyRef Name="FK_ATENCIONPSICOLOGICA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ATENCION_PSICOLOGICA_TBL_ATENCION">
+    <End Role="TBL_ATENCION" Type="Self.TBL_ATENCION" Multiplicity="1" />
+    <End Role="TBL_ATENCION_PSICOLOGICA" Type="Self.TBL_ATENCION_PSICOLOGICA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ATENCION">
+        <PropertyRef Name="PK_ATENCION" />
+      </Principal>
+      <Dependent Role="TBL_ATENCION_PSICOLOGICA">
+        <PropertyRef Name="FK_ATENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ATENCION_TBL_REGISTRO">
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="1" />
+    <End Role="TBL_CONSULTA" Type="Self.TBL_CONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_REGISTRO">
+        <PropertyRef Name="PK_REGISTRO" />
+      </Principal>
+      <Dependent Role="TBL_CONSULTA">
+        <PropertyRef Name="FK_REGISTRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ATENCION_TRABAJOSOCIAL_DETALLE_TBL_ATENCION_TRABAJOSOCIAL">
+    <End Role="TBL_ATENCION_TRABAJOSOCIAL" Type="Self.TBL_ATENCION_TRABAJOSOCIAL" Multiplicity="1" />
+    <End Role="TBL_ATENCION_TRABAJOSOCIAL_DETALLE" Type="Self.TBL_ATENCION_TRABAJOSOCIAL_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ATENCION_TRABAJOSOCIAL">
+        <PropertyRef Name="PK_ATENCIONTRABAJOSOCIAL" />
+      </Principal>
+      <Dependent Role="TBL_ATENCION_TRABAJOSOCIAL_DETALLE">
+        <PropertyRef Name="FK_ATENCIONTRABAJOSOCIAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ATENCION_TRABAJOSOCIAL_DETALLE_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_ATENCION_TRABAJOSOCIAL_DETALLE" Type="Self.TBL_ATENCION_TRABAJOSOCIAL_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_ATENCION_TRABAJOSOCIAL_DETALLE">
+        <PropertyRef Name="FK_DETALLEATENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ATENCION_TRABAJOSOCIAL_TBL_ATENCION">
+    <End Role="TBL_ATENCION" Type="Self.TBL_ATENCION" Multiplicity="1" />
+    <End Role="TBL_ATENCION_TRABAJOSOCIAL" Type="Self.TBL_ATENCION_TRABAJOSOCIAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ATENCION">
+        <PropertyRef Name="PK_ATENCION" />
+      </Principal>
+      <Dependent Role="TBL_ATENCION_TRABAJOSOCIAL">
+        <PropertyRef Name="FK_ATENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_BITACORA_TBL_VALORCATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_BITACORA" Type="Self.TBL_BITACORA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_BITACORA">
+        <PropertyRef Name="FK_TIPOEVENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_CONSULTA_TBL_REGISTRO">
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="1" />
+    <End Role="TBL_ATENCION" Type="Self.TBL_ATENCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_REGISTRO">
+        <PropertyRef Name="PK_REGISTRO" />
+      </Principal>
+      <Dependent Role="TBL_ATENCION">
+        <PropertyRef Name="FK_REGISTRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_DIRECCION_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+    <End Role="TBL_DIRECCION" Type="Self.TBL_DIRECCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_DIRECCION">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_DIRECCION_TBL_VALORCATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_DIRECCION" Type="Self.TBL_DIRECCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_DIRECCION">
+        <PropertyRef Name="FK_TIPODIRECCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_FAMILIAR_ACADEMICO_TBL_PERSONA_FAMILIAR">
+    <End Role="TBL_PERSONA_FAMILIAR" Type="Self.TBL_PERSONA_FAMILIAR" Multiplicity="1" />
+    <End Role="TBL_FAMILIAR_ACADEMICO" Type="Self.TBL_FAMILIAR_ACADEMICO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA_FAMILIAR">
+        <PropertyRef Name="PK_FAMILIAR" />
+      </Principal>
+      <Dependent Role="TBL_FAMILIAR_ACADEMICO">
+        <PropertyRef Name="FK_FAMILIAR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_FAMILIAR_ACADEMICO_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_FAMILIAR_ACADEMICO" Type="Self.TBL_FAMILIAR_ACADEMICO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_FAMILIAR_ACADEMICO">
+        <PropertyRef Name="FK_GRADOACADEMICO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_FAMILIAR_SALUD_TBL_PERSONA_FAMILIAR">
+    <End Role="TBL_PERSONA_FAMILIAR" Type="Self.TBL_PERSONA_FAMILIAR" Multiplicity="1" />
+    <End Role="TBL_FAMILIAR_SALUD" Type="Self.TBL_FAMILIAR_SALUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA_FAMILIAR">
+        <PropertyRef Name="PK_FAMILIAR" />
+      </Principal>
+      <Dependent Role="TBL_FAMILIAR_SALUD">
+        <PropertyRef Name="FK_FAMILIAR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_FAMILIAR_SALUD_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_FAMILIAR_SALUD" Type="Self.TBL_FAMILIAR_SALUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_FAMILIAR_SALUD">
+        <PropertyRef Name="FK_CONDICIONSALUD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_ACOM_PROFESIONAL_TBL_INTERVENCION">
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_ACOM_PROFESIONAL" Type="Self.TBL_INTERVENCION_ACOM_PROFESIONAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION">
+        <PropertyRef Name="PK_INTERVENCION" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_ACOM_PROFESIONAL">
+        <PropertyRef Name="FK_INTERVENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_INTERVENCION_COADYUVANCIA">
+    <End Role="TBL_INTERVENCION_COADYUVANCIA" Type="Self.TBL_INTERVENCION_COADYUVANCIA" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_COADYUVANCIA_DETALLE" Type="Self.TBL_INTERVENCION_COADYUVANCIA_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION_COADYUVANCIA">
+        <PropertyRef Name="PK_INTERVENCIONCOADYUVANCIA" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_COADYUVANCIA_DETALLE">
+        <PropertyRef Name="FK_COADYUVANCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_COADYUVANCIA_DETALLE" Type="Self.TBL_INTERVENCION_COADYUVANCIA_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_COADYUVANCIA_DETALLE">
+        <PropertyRef Name="FK_TIPODETALLECOADYUVANCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL_TBL_INTERVENCION">
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" Type="Self.TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION">
+        <PropertyRef Name="PK_INTERVENCION" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL">
+        <PropertyRef Name="FK_INTERVENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" Type="Self.TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL">
+        <PropertyRef Name="FK_INSTITUCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE">
+    <End Role="TBL_INTERVENCION_CRITERIO_EXPERTO" Type="Self.TBL_INTERVENCION_CRITERIO_EXPERTO" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" Type="Self.TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION_CRITERIO_EXPERTO">
+        <PropertyRef Name="PK_INTERVENCIONCRITERIOEXPERTO" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE">
+        <PropertyRef Name="FK_CRITERIOEXPERTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" Type="Self.TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE">
+        <PropertyRef Name="FK_TIPODETALLECRITERIOEXPERTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_CRITERIO_EXPERTO_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_CRITERIO_EXPERTO" Type="Self.TBL_INTERVENCION_CRITERIO_EXPERTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_CRITERIO_EXPERTO">
+        <PropertyRef Name="FK_INSTITUCIONREMITE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_INTERDISCIPLINARIA_TBL_INTERVENCION">
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_INTERDISCIPLINARIA" Type="Self.TBL_INTERVENCION_INTERDISCIPLINARIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION">
+        <PropertyRef Name="PK_INTERVENCION" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_INTERDISCIPLINARIA">
+        <PropertyRef Name="FK_INTERVENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO_TBL_INTERVENCION">
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO" Type="Self.TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION">
+        <PropertyRef Name="PK_INTERVENCION" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO">
+        <PropertyRef Name="FK_INTERVENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_PROCESO_GRUPAL_TBL_INTERVENCION">
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_PROCESO_GRUPAL" Type="Self.TBL_INTERVENCION_PROCESO_GRUPAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION">
+        <PropertyRef Name="PK_INTERVENCION" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_PROCESO_GRUPAL">
+        <PropertyRef Name="FK_INTERVENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_PROCESO_GRUPAL_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_PROCESO_GRUPAL" Type="Self.TBL_INTERVENCION_PROCESO_GRUPAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_PROCESO_GRUPAL">
+        <PropertyRef Name="FK_TIPOGRUPO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_RED_APOYO_TBL_INTERVENCION">
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_RED_APOYO" Type="Self.TBL_INTERVENCION_RED_APOYO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION">
+        <PropertyRef Name="PK_INTERVENCION" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_RED_APOYO">
+        <PropertyRef Name="FK_INTERVENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_TALLER_TBL_INTERVENCION1">
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="0..1" />
+    <End Role="TBL_INTERVENCION_TALLER" Type="Self.TBL_INTERVENCION_TALLER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION">
+        <PropertyRef Name="PK_INTERVENCION" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_TALLER">
+        <PropertyRef Name="FK_INTERVENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="0..1" />
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_TBL_USUARIO">
+    <End Role="TBL_USUARIO" Type="Self.TBL_USUARIO" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_USUARIO">
+        <PropertyRef Name="PK_USUARIO" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION">
+        <PropertyRef Name="FK_PROFESIONALENCARGADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION">
+        <PropertyRef Name="FK_TIPOINTERVENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_INTERVENCION_TESTIMONIO_EXPERTO_TBL_INTERVENCION">
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="1" />
+    <End Role="TBL_INTERVENCION_TESTIMONIO_EXPERTO" Type="Self.TBL_INTERVENCION_TESTIMONIO_EXPERTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION">
+        <PropertyRef Name="PK_INTERVENCION" />
+      </Principal>
+      <Dependent Role="TBL_INTERVENCION_TESTIMONIO_EXPERTO">
+        <PropertyRef Name="FK_INTERVENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_LABORAL_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+    <End Role="TBL_LABORAL" Type="Self.TBL_LABORAL" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_LABORAL">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_LABORAL_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_LABORAL" Type="Self.TBL_LABORAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_LABORAL">
+        <PropertyRef Name="FK_CONDICIONLABORAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONA_FAMILIAR_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_PERSONA_FAMILIAR" Type="Self.TBL_PERSONA_FAMILIAR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_FAMILIAR">
+        <PropertyRef Name="FK_OCUPACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONA_RED_APOYO_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+    <End Role="TBL_PERSONA_RED_APOYO" Type="Self.TBL_PERSONA_RED_APOYO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_RED_APOYO">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONA_RED_APOYO_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_PERSONA_RED_APOYO" Type="Self.TBL_PERSONA_RED_APOYO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_RED_APOYO">
+        <PropertyRef Name="FK_TIPOREDAPOYO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONA_RED_APOYO_TBL_VALOR_CATALOGO1">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+    <End Role="TBL_PERSONA_RED_APOYO" Type="Self.TBL_PERSONA_RED_APOYO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_RED_APOYO">
+        <PropertyRef Name="FK_INSTITUCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONA_SALUD_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+    <End Role="TBL_PERSONA_SALUD" Type="Self.TBL_PERSONA_SALUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_SALUD">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONA_SALUD_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_PERSONA_SALUD" Type="Self.TBL_PERSONA_SALUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_SALUD">
+        <PropertyRef Name="FK_CONDICIONSALUD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA">
+        <PropertyRef Name="FK_ETNIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO1">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA">
+        <PropertyRef Name="FK_NACIONALIDAD2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONA_TBL_VALORCATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA">
+        <PropertyRef Name="FK_ORIENTACIONSEXUAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONAAPOYO_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+    <End Role="TBL_PERSONA_APOYO" Type="Self.TBL_PERSONA_APOYO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_APOYO">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_PERSONA_APOYO" Type="Self.TBL_PERSONA_APOYO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_APOYO">
+        <PropertyRef Name="FK_TIPOAPOYO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONACONDICIONESPECIAL_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+    <End Role="TBL_PERSONA_CONDICIONESPECIAL" Type="Self.TBL_PERSONA_CONDICIONESPECIAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_CONDICIONESPECIAL">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_PERSONACONDICIONESPECIAL_TBL_VALORCATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_PERSONA_CONDICIONESPECIAL" Type="Self.TBL_PERSONA_CONDICIONESPECIAL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_CONDICIONESPECIAL">
+        <PropertyRef Name="FK_CONDICIONESPECIAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REFERENCIA_DETALLE_TBL_UNIDAD">
+    <End Role="TBL_UNIDAD" Type="Self.TBL_UNIDAD" Multiplicity="1" />
+    <End Role="TBL_REFERENCIA_DETALLE" Type="Self.TBL_REFERENCIA_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_UNIDAD">
+        <PropertyRef Name="PK_UNIDAD" />
+      </Principal>
+      <Dependent Role="TBL_REFERENCIA_DETALLE">
+        <PropertyRef Name="FK_UNIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REFERENCIA_DETALLE_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_REFERENCIA_DETALLE" Type="Self.TBL_REFERENCIA_DETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REFERENCIA_DETALLE">
+        <PropertyRef Name="FK_INSTITUCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REFERENCIA_TBL_REFERENCIA1">
+    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="0..1" />
+    <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INTERVENCION">
+        <PropertyRef Name="PK_INTERVENCION" />
+      </Principal>
+      <Dependent Role="TBL_REFERENCIA">
+        <PropertyRef Name="FK_INTERVENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REFERENCIA_TBL_REGISTRO">
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="0..1" />
+    <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_REGISTRO">
+        <PropertyRef Name="PK_REGISTRO" />
+      </Principal>
+      <Dependent Role="TBL_REFERENCIA">
+        <PropertyRef Name="FK_REGISTRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REFERENCIA">
+        <PropertyRef Name="FK_INSTITUCIONDESTINO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO1">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REFERENCIA">
+        <PropertyRef Name="FK_INSTITUCIONORIGEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_CEAAM_TBL_REGISTRO">
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="1" />
+    <End Role="TBL_REGISTRO_CEAAM" Type="Self.TBL_REGISTRO_CEAAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_REGISTRO">
+        <PropertyRef Name="PK_REGISTRO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO_CEAAM">
+        <PropertyRef Name="FK_REGISTRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_REGISTRO_CEAAM" Type="Self.TBL_REGISTRO_CEAAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO_CEAAM">
+        <PropertyRef Name="FK_TIPOINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO1">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+    <End Role="TBL_REGISTRO_CEAAM" Type="Self.TBL_REGISTRO_CEAAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO_CEAAM">
+        <PropertyRef Name="FK_TIPOEGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO2">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_REGISTRO_CEAAM" Type="Self.TBL_REGISTRO_CEAAM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO_CEAAM">
+        <PropertyRef Name="FK_VALORACIONRIESGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_COORDINACION_TBL_REGISTRO">
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="1" />
+    <End Role="TBL_REGISTRO_COORDINACION" Type="Self.TBL_REGISTRO_COORDINACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_REGISTRO">
+        <PropertyRef Name="PK_REGISTRO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO_COORDINACION">
+        <PropertyRef Name="FK_REGISTRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_REGISTRO_COORDINACION" Type="Self.TBL_REGISTRO_COORDINACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO_COORDINACION">
+        <PropertyRef Name="FK_INSTITUCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO1">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+    <End Role="TBL_REGISTRO_COORDINACION" Type="Self.TBL_REGISTRO_COORDINACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO_COORDINACION">
+        <PropertyRef Name="FK_TIPOCOORDINACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_TBL_USUARIO">
+    <End Role="TBL_USUARIO" Type="Self.TBL_USUARIO" Multiplicity="1" />
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_USUARIO">
+        <PropertyRef Name="PK_USUARIO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO">
+        <PropertyRef Name="FK_USUARIOREGISTRA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO">
+        <PropertyRef Name="FK_TIPOSERVICIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO1">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO">
+        <PropertyRef Name="FK_TIPOREGISTRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ROL_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_ROL">
+        <PropertyRef Name="FK_TIPOSERVICIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ROLACCION_TBL_ACCION">
+    <End Role="TBL_ACCION" Type="Self.TBL_ACCION" Multiplicity="1" />
+    <End Role="TBL_ROL_ACCION" Type="Self.TBL_ROL_ACCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ACCION">
+        <PropertyRef Name="PK_ACCION" />
+      </Principal>
+      <Dependent Role="TBL_ROL_ACCION">
+        <PropertyRef Name="FK_ACCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ROLACCION_TBL_ROL">
+    <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="1" />
+    <End Role="TBL_ROL_ACCION" Type="Self.TBL_ROL_ACCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ROL">
+        <PropertyRef Name="PK_ROL" />
+      </Principal>
+      <Dependent Role="TBL_ROL_ACCION">
+        <PropertyRef Name="FK_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ROLUSUARIO_TBL_ROL">
+    <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="1" />
+    <End Role="TBL_ROL_USUARIO" Type="Self.TBL_ROL_USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ROL">
+        <PropertyRef Name="PK_ROL" />
+      </Principal>
+      <Dependent Role="TBL_ROL_USUARIO">
+        <PropertyRef Name="FK_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ROLUSUARIO_TBL_USUARIO">
+    <End Role="TBL_USUARIO" Type="Self.TBL_USUARIO" Multiplicity="1" />
+    <End Role="TBL_ROL_USUARIO" Type="Self.TBL_ROL_USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_USUARIO">
+        <PropertyRef Name="PK_USUARIO" />
+      </Principal>
+      <Dependent Role="TBL_ROL_USUARIO">
+        <PropertyRef Name="FK_USUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_TELEFONO_TBL_PERSONA">
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
+    <End Role="TBL_TELEFONO" Type="Self.TBL_TELEFONO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PERSONA">
+        <PropertyRef Name="PK_PERSONA" />
+      </Principal>
+      <Dependent Role="TBL_TELEFONO">
+        <PropertyRef Name="FK_PERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_TELEFONO_TBL_VALORCATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_TELEFONO" Type="Self.TBL_TELEFONO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_TELEFONO">
+        <PropertyRef Name="FK_TIPOTELEFONO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_VALORCATALOGO_TBL_CATALOGO">
+    <End Role="TBL_CATALOGO" Type="Self.TBL_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_CATALOGO">
+        <PropertyRef Name="PK_CATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="FK_CATALOGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SIVIOModelStoreContainer">
+    <EntitySet Name="TBL_ACCION" EntityType="Self.TBL_ACCION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ADICCIONES" EntityType="Self.TBL_ADICCIONES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_AGRESION" EntityType="Self.TBL_AGRESION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_AGRESION_ATENCION_MEDICA" EntityType="Self.TBL_AGRESION_ATENCION_MEDICA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_AGRESION_CATEGORIA_RIESGO" EntityType="Self.TBL_AGRESION_CATEGORIA_RIESGO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_AGRESION_CATEGORIZACION_RIESGO" EntityType="Self.TBL_AGRESION_CATEGORIZACION_RIESGO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_AGRESION_DETALLE_VIOLENCIA" EntityType="Self.TBL_AGRESION_DETALLE_VIOLENCIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_AGRESION_VIOLENCIA" EntityType="Self.TBL_AGRESION_VIOLENCIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_AGRESOR" EntityType="Self.TBL_AGRESOR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_AGRESOR_MOTIVO_REGRESO" EntityType="Self.TBL_AGRESOR_MOTIVO_REGRESO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ARCHIVO" EntityType="Self.TBL_ARCHIVO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ATENCION" EntityType="Self.TBL_ATENCION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ATENCION_LEGAL" EntityType="Self.TBL_ATENCION_LEGAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ATENCION_LEGAL_DETALLE" EntityType="Self.TBL_ATENCION_LEGAL_DETALLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ATENCION_PSICOLOGICA" EntityType="Self.TBL_ATENCION_PSICOLOGICA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ATENCION_PSICOLOGICA_DETALLE" EntityType="Self.TBL_ATENCION_PSICOLOGICA_DETALLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ATENCION_TRABAJOSOCIAL" EntityType="Self.TBL_ATENCION_TRABAJOSOCIAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ATENCION_TRABAJOSOCIAL_DETALLE" EntityType="Self.TBL_ATENCION_TRABAJOSOCIAL_DETALLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_BITACORA" EntityType="Self.TBL_BITACORA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_CATALOGO" EntityType="Self.TBL_CATALOGO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_CONSULTA" EntityType="Self.TBL_CONSULTA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_DIRECCION" EntityType="Self.TBL_DIRECCION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_FAMILIAR_ACADEMICO" EntityType="Self.TBL_FAMILIAR_ACADEMICO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_FAMILIAR_SALUD" EntityType="Self.TBL_FAMILIAR_SALUD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION" EntityType="Self.TBL_INTERVENCION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_ACOM_PROFESIONAL" EntityType="Self.TBL_INTERVENCION_ACOM_PROFESIONAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_COADYUVANCIA" EntityType="Self.TBL_INTERVENCION_COADYUVANCIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_COADYUVANCIA_DETALLE" EntityType="Self.TBL_INTERVENCION_COADYUVANCIA_DETALLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" EntityType="Self.TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_CRITERIO_EXPERTO" EntityType="Self.TBL_INTERVENCION_CRITERIO_EXPERTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" EntityType="Self.TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_INTERDISCIPLINARIA" EntityType="Self.TBL_INTERVENCION_INTERDISCIPLINARIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO" EntityType="Self.TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_PROCESO_GRUPAL" EntityType="Self.TBL_INTERVENCION_PROCESO_GRUPAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_RED_APOYO" EntityType="Self.TBL_INTERVENCION_RED_APOYO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_TALLER" EntityType="Self.TBL_INTERVENCION_TALLER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_INTERVENCION_TESTIMONIO_EXPERTO" EntityType="Self.TBL_INTERVENCION_TESTIMONIO_EXPERTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_LABORAL" EntityType="Self.TBL_LABORAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_PERSONA" EntityType="Self.TBL_PERSONA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_PERSONA_APOYO" EntityType="Self.TBL_PERSONA_APOYO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_PERSONA_CONDICIONESPECIAL" EntityType="Self.TBL_PERSONA_CONDICIONESPECIAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_PERSONA_FAMILIAR" EntityType="Self.TBL_PERSONA_FAMILIAR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_PERSONA_RED_APOYO" EntityType="Self.TBL_PERSONA_RED_APOYO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_PERSONA_SALUD" EntityType="Self.TBL_PERSONA_SALUD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_REFERENCIA" EntityType="Self.TBL_REFERENCIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_REFERENCIA_DETALLE" EntityType="Self.TBL_REFERENCIA_DETALLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_REGISTRO" EntityType="Self.TBL_REGISTRO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_REGISTRO_CEAAM" EntityType="Self.TBL_REGISTRO_CEAAM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_REGISTRO_COORDINACION" EntityType="Self.TBL_REGISTRO_COORDINACION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ROL" EntityType="Self.TBL_ROL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ROL_ACCION" EntityType="Self.TBL_ROL_ACCION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ROL_USUARIO" EntityType="Self.TBL_ROL_USUARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_TELEFONO" EntityType="Self.TBL_TELEFONO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_UNIDAD" EntityType="Self.TBL_UNIDAD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_USUARIO" EntityType="Self.TBL_USUARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_VALOR_CATALOGO" EntityType="Self.TBL_VALOR_CATALOGO" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TBL_ADICCIONES_TBL_PERSONA" Association="Self.FK_TBL_ADICCIONES_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_ADICCIONES" EntitySet="TBL_ADICCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ADICCIONES_TBL_VALORCATALOGO" Association="Self.FK_TBL_ADICCIONES_TBL_VALORCATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_ADICCIONES" EntitySet="TBL_ADICCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_ATENCION_MEDICA_TBL_AGRESION" Association="Self.FK_TBL_AGRESION_ATENCION_MEDICA_TBL_AGRESION">
+      <End Role="TBL_AGRESION" EntitySet="TBL_AGRESION" />
+      <End Role="TBL_AGRESION_ATENCION_MEDICA" EntitySet="TBL_AGRESION_ATENCION_MEDICA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_ATENCION_MEDICA_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESION_ATENCION_MEDICA_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESION_ATENCION_MEDICA" EntitySet="TBL_AGRESION_ATENCION_MEDICA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_CATEGORIA_RIESGO_TBL_AGRESION" Association="Self.FK_TBL_AGRESION_CATEGORIA_RIESGO_TBL_AGRESION">
+      <End Role="TBL_AGRESION" EntitySet="TBL_AGRESION" />
+      <End Role="TBL_AGRESION_CATEGORIA_RIESGO" EntitySet="TBL_AGRESION_CATEGORIA_RIESGO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_CATEGORIA_RIESGO_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESION_CATEGORIA_RIESGO_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESION_CATEGORIA_RIESGO" EntitySet="TBL_AGRESION_CATEGORIA_RIESGO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_CATEGORIZACION_RIESGO_TBL_AGRESION" Association="Self.FK_TBL_AGRESION_CATEGORIZACION_RIESGO_TBL_AGRESION">
+      <End Role="TBL_AGRESION" EntitySet="TBL_AGRESION" />
+      <End Role="TBL_AGRESION_CATEGORIZACION_RIESGO" EntitySet="TBL_AGRESION_CATEGORIZACION_RIESGO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_CATEGORIZACION_RIESGO_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESION_CATEGORIZACION_RIESGO_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESION_CATEGORIZACION_RIESGO" EntitySet="TBL_AGRESION_CATEGORIZACION_RIESGO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_DETALLE_VIOLENCIA_TBL_AGRESION_VIOLENCIA" Association="Self.FK_TBL_AGRESION_DETALLE_VIOLENCIA_TBL_AGRESION_VIOLENCIA">
+      <End Role="TBL_AGRESION_VIOLENCIA" EntitySet="TBL_AGRESION_VIOLENCIA" />
+      <End Role="TBL_AGRESION_DETALLE_VIOLENCIA" EntitySet="TBL_AGRESION_DETALLE_VIOLENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_DETALLE_VIOLENCIA_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESION_DETALLE_VIOLENCIA_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESION_DETALLE_VIOLENCIA" EntitySet="TBL_AGRESION_DETALLE_VIOLENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_TBL_AGRESOR" Association="Self.FK_TBL_AGRESION_TBL_AGRESOR">
+      <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+      <End Role="TBL_AGRESION" EntitySet="TBL_AGRESION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_VIOLENCIA_TBL_AGRESION" Association="Self.FK_TBL_AGRESION_VIOLENCIA_TBL_AGRESION">
+      <End Role="TBL_AGRESION" EntitySet="TBL_AGRESION" />
+      <End Role="TBL_AGRESION_VIOLENCIA" EntitySet="TBL_AGRESION_VIOLENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_VIOLENCIA_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESION_VIOLENCIA_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESION_VIOLENCIA" EntitySet="TBL_AGRESION_VIOLENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_AGRESOR" Association="Self.FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_AGRESOR">
+      <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+      <End Role="TBL_AGRESOR_MOTIVO_REGRESO" EntitySet="TBL_AGRESOR_MOTIVO_REGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESOR_MOTIVO_REGRESO" EntitySet="TBL_AGRESOR_MOTIVO_REGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_TBL_PERSONA" Association="Self.FK_TBL_AGRESOR_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESOR_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO" Association="Self.FK_TBL_AGRESOR_TBL_VALORCATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO1" Association="Self.FK_TBL_AGRESOR_TBL_VALORCATALOGO1">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO2" Association="Self.FK_TBL_AGRESOR_TBL_VALORCATALOGO2">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_TBL_VALORCATALOGO3" Association="Self.FK_TBL_AGRESOR_TBL_VALORCATALOGO3">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ARCHIVO_TBL_REGISTRO" Association="Self.FK_TBL_ARCHIVO_TBL_REGISTRO">
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+      <End Role="TBL_ARCHIVO" EntitySet="TBL_ARCHIVO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ATENCION_LEGAL_DETALLE_TBL_ATENCION_LEGAL" Association="Self.FK_TBL_ATENCION_LEGAL_DETALLE_TBL_ATENCION_LEGAL">
+      <End Role="TBL_ATENCION_LEGAL" EntitySet="TBL_ATENCION_LEGAL" />
+      <End Role="TBL_ATENCION_LEGAL_DETALLE" EntitySet="TBL_ATENCION_LEGAL_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ATENCION_LEGAL_DETALLE_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_ATENCION_LEGAL_DETALLE_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_ATENCION_LEGAL_DETALLE" EntitySet="TBL_ATENCION_LEGAL_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ATENCION_LEGAL_TBL_ATENCION" Association="Self.FK_TBL_ATENCION_LEGAL_TBL_ATENCION">
+      <End Role="TBL_ATENCION" EntitySet="TBL_ATENCION" />
+      <End Role="TBL_ATENCION_LEGAL" EntitySet="TBL_ATENCION_LEGAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ATENCION_PSICOLOGICA_DETALLE_TBL_ATENCION_PSICOLOGICA" Association="Self.FK_TBL_ATENCION_PSICOLOGICA_DETALLE_TBL_ATENCION_PSICOLOGICA">
+      <End Role="TBL_ATENCION_PSICOLOGICA" EntitySet="TBL_ATENCION_PSICOLOGICA" />
+      <End Role="TBL_ATENCION_PSICOLOGICA_DETALLE" EntitySet="TBL_ATENCION_PSICOLOGICA_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ATENCION_PSICOLOGICA_TBL_ATENCION" Association="Self.FK_TBL_ATENCION_PSICOLOGICA_TBL_ATENCION">
+      <End Role="TBL_ATENCION" EntitySet="TBL_ATENCION" />
+      <End Role="TBL_ATENCION_PSICOLOGICA" EntitySet="TBL_ATENCION_PSICOLOGICA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ATENCION_TBL_REGISTRO" Association="Self.FK_TBL_ATENCION_TBL_REGISTRO">
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+      <End Role="TBL_CONSULTA" EntitySet="TBL_CONSULTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ATENCION_TRABAJOSOCIAL_DETALLE_TBL_ATENCION_TRABAJOSOCIAL" Association="Self.FK_TBL_ATENCION_TRABAJOSOCIAL_DETALLE_TBL_ATENCION_TRABAJOSOCIAL">
+      <End Role="TBL_ATENCION_TRABAJOSOCIAL" EntitySet="TBL_ATENCION_TRABAJOSOCIAL" />
+      <End Role="TBL_ATENCION_TRABAJOSOCIAL_DETALLE" EntitySet="TBL_ATENCION_TRABAJOSOCIAL_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ATENCION_TRABAJOSOCIAL_DETALLE_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_ATENCION_TRABAJOSOCIAL_DETALLE_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_ATENCION_TRABAJOSOCIAL_DETALLE" EntitySet="TBL_ATENCION_TRABAJOSOCIAL_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ATENCION_TRABAJOSOCIAL_TBL_ATENCION" Association="Self.FK_TBL_ATENCION_TRABAJOSOCIAL_TBL_ATENCION">
+      <End Role="TBL_ATENCION" EntitySet="TBL_ATENCION" />
+      <End Role="TBL_ATENCION_TRABAJOSOCIAL" EntitySet="TBL_ATENCION_TRABAJOSOCIAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_BITACORA_TBL_VALORCATALOGO" Association="Self.FK_TBL_BITACORA_TBL_VALORCATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_BITACORA" EntitySet="TBL_BITACORA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_CONSULTA_TBL_REGISTRO" Association="Self.FK_TBL_CONSULTA_TBL_REGISTRO">
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+      <End Role="TBL_ATENCION" EntitySet="TBL_ATENCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_DIRECCION_TBL_PERSONA" Association="Self.FK_TBL_DIRECCION_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_DIRECCION" EntitySet="TBL_DIRECCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_DIRECCION_TBL_VALORCATALOGO" Association="Self.FK_TBL_DIRECCION_TBL_VALORCATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_DIRECCION" EntitySet="TBL_DIRECCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_FAMILIAR_ACADEMICO_TBL_PERSONA_FAMILIAR" Association="Self.FK_TBL_FAMILIAR_ACADEMICO_TBL_PERSONA_FAMILIAR">
+      <End Role="TBL_PERSONA_FAMILIAR" EntitySet="TBL_PERSONA_FAMILIAR" />
+      <End Role="TBL_FAMILIAR_ACADEMICO" EntitySet="TBL_FAMILIAR_ACADEMICO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_FAMILIAR_ACADEMICO_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_FAMILIAR_ACADEMICO_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_FAMILIAR_ACADEMICO" EntitySet="TBL_FAMILIAR_ACADEMICO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_FAMILIAR_SALUD_TBL_PERSONA_FAMILIAR" Association="Self.FK_TBL_FAMILIAR_SALUD_TBL_PERSONA_FAMILIAR">
+      <End Role="TBL_PERSONA_FAMILIAR" EntitySet="TBL_PERSONA_FAMILIAR" />
+      <End Role="TBL_FAMILIAR_SALUD" EntitySet="TBL_FAMILIAR_SALUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_FAMILIAR_SALUD_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_FAMILIAR_SALUD_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_FAMILIAR_SALUD" EntitySet="TBL_FAMILIAR_SALUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_ACOM_PROFESIONAL_TBL_INTERVENCION" Association="Self.FK_TBL_INTERVENCION_ACOM_PROFESIONAL_TBL_INTERVENCION">
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+      <End Role="TBL_INTERVENCION_ACOM_PROFESIONAL" EntitySet="TBL_INTERVENCION_ACOM_PROFESIONAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_INTERVENCION_COADYUVANCIA" Association="Self.FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_INTERVENCION_COADYUVANCIA">
+      <End Role="TBL_INTERVENCION_COADYUVANCIA" EntitySet="TBL_INTERVENCION_COADYUVANCIA" />
+      <End Role="TBL_INTERVENCION_COADYUVANCIA_DETALLE" EntitySet="TBL_INTERVENCION_COADYUVANCIA_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_INTERVENCION_COADYUVANCIA_DETALLE" EntitySet="TBL_INTERVENCION_COADYUVANCIA_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL_TBL_INTERVENCION" Association="Self.FK_TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL_TBL_INTERVENCION">
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+      <End Role="TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" EntitySet="TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" EntitySet="TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" Association="Self.FK_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE">
+      <End Role="TBL_INTERVENCION_CRITERIO_EXPERTO" EntitySet="TBL_INTERVENCION_CRITERIO_EXPERTO" />
+      <End Role="TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" EntitySet="TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" EntitySet="TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_CRITERIO_EXPERTO_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_INTERVENCION_CRITERIO_EXPERTO_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_INTERVENCION_CRITERIO_EXPERTO" EntitySet="TBL_INTERVENCION_CRITERIO_EXPERTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_INTERDISCIPLINARIA_TBL_INTERVENCION" Association="Self.FK_TBL_INTERVENCION_INTERDISCIPLINARIA_TBL_INTERVENCION">
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+      <End Role="TBL_INTERVENCION_INTERDISCIPLINARIA" EntitySet="TBL_INTERVENCION_INTERDISCIPLINARIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO_TBL_INTERVENCION" Association="Self.FK_TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO_TBL_INTERVENCION">
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+      <End Role="TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO" EntitySet="TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_PROCESO_GRUPAL_TBL_INTERVENCION" Association="Self.FK_TBL_INTERVENCION_PROCESO_GRUPAL_TBL_INTERVENCION">
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+      <End Role="TBL_INTERVENCION_PROCESO_GRUPAL" EntitySet="TBL_INTERVENCION_PROCESO_GRUPAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_PROCESO_GRUPAL_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_INTERVENCION_PROCESO_GRUPAL_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_INTERVENCION_PROCESO_GRUPAL" EntitySet="TBL_INTERVENCION_PROCESO_GRUPAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_RED_APOYO_TBL_INTERVENCION" Association="Self.FK_TBL_INTERVENCION_RED_APOYO_TBL_INTERVENCION">
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+      <End Role="TBL_INTERVENCION_RED_APOYO" EntitySet="TBL_INTERVENCION_RED_APOYO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_TALLER_TBL_INTERVENCION1" Association="Self.FK_TBL_INTERVENCION_TALLER_TBL_INTERVENCION1">
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+      <End Role="TBL_INTERVENCION_TALLER" EntitySet="TBL_INTERVENCION_TALLER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_TBL_PERSONA" Association="Self.FK_TBL_INTERVENCION_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_TBL_USUARIO" Association="Self.FK_TBL_INTERVENCION_TBL_USUARIO">
+      <End Role="TBL_USUARIO" EntitySet="TBL_USUARIO" />
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_INTERVENCION_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_INTERVENCION_TESTIMONIO_EXPERTO_TBL_INTERVENCION" Association="Self.FK_TBL_INTERVENCION_TESTIMONIO_EXPERTO_TBL_INTERVENCION">
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+      <End Role="TBL_INTERVENCION_TESTIMONIO_EXPERTO" EntitySet="TBL_INTERVENCION_TESTIMONIO_EXPERTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_LABORAL_TBL_PERSONA" Association="Self.FK_TBL_LABORAL_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_LABORAL" EntitySet="TBL_LABORAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_LABORAL_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_LABORAL_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_LABORAL" EntitySet="TBL_LABORAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_FAMILIAR_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_PERSONA_FAMILIAR_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA_FAMILIAR" EntitySet="TBL_PERSONA_FAMILIAR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_RED_APOYO_TBL_PERSONA" Association="Self.FK_TBL_PERSONA_RED_APOYO_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_PERSONA_RED_APOYO" EntitySet="TBL_PERSONA_RED_APOYO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_RED_APOYO_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_PERSONA_RED_APOYO_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA_RED_APOYO" EntitySet="TBL_PERSONA_RED_APOYO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_RED_APOYO_TBL_VALOR_CATALOGO1" Association="Self.FK_TBL_PERSONA_RED_APOYO_TBL_VALOR_CATALOGO1">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA_RED_APOYO" EntitySet="TBL_PERSONA_RED_APOYO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_SALUD_TBL_PERSONA" Association="Self.FK_TBL_PERSONA_SALUD_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_PERSONA_SALUD" EntitySet="TBL_PERSONA_SALUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_SALUD_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_PERSONA_SALUD_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA_SALUD" EntitySet="TBL_PERSONA_SALUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_PERSONA_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO1" Association="Self.FK_TBL_PERSONA_TBL_VALOR_CATALOGO1">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_TBL_VALORCATALOGO" Association="Self.FK_TBL_PERSONA_TBL_VALORCATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONAAPOYO_TBL_PERSONA" Association="Self.FK_TBL_PERSONAAPOYO_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_PERSONA_APOYO" EntitySet="TBL_PERSONA_APOYO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO" Association="Self.FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA_APOYO" EntitySet="TBL_PERSONA_APOYO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONACONDICIONESPECIAL_TBL_PERSONA" Association="Self.FK_TBL_PERSONACONDICIONESPECIAL_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_PERSONA_CONDICIONESPECIAL" EntitySet="TBL_PERSONA_CONDICIONESPECIAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONACONDICIONESPECIAL_TBL_VALORCATALOGO" Association="Self.FK_TBL_PERSONACONDICIONESPECIAL_TBL_VALORCATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA_CONDICIONESPECIAL" EntitySet="TBL_PERSONA_CONDICIONESPECIAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REFERENCIA_DETALLE_TBL_UNIDAD" Association="Self.FK_TBL_REFERENCIA_DETALLE_TBL_UNIDAD">
+      <End Role="TBL_UNIDAD" EntitySet="TBL_UNIDAD" />
+      <End Role="TBL_REFERENCIA_DETALLE" EntitySet="TBL_REFERENCIA_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REFERENCIA_DETALLE_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_REFERENCIA_DETALLE_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REFERENCIA_DETALLE" EntitySet="TBL_REFERENCIA_DETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REFERENCIA_TBL_REFERENCIA1" Association="Self.FK_TBL_REFERENCIA_TBL_REFERENCIA1">
+      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
+      <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REFERENCIA_TBL_REGISTRO" Association="Self.FK_TBL_REFERENCIA_TBL_REGISTRO">
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+      <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO" Association="Self.FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO1" Association="Self.FK_TBL_REFERENCIA_TBL_VALORCATALOGO1">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_CEAAM_TBL_REGISTRO" Association="Self.FK_TBL_REGISTRO_CEAAM_TBL_REGISTRO">
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+      <End Role="TBL_REGISTRO_CEAAM" EntitySet="TBL_REGISTRO_CEAAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REGISTRO_CEAAM" EntitySet="TBL_REGISTRO_CEAAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO1" Association="Self.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO1">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REGISTRO_CEAAM" EntitySet="TBL_REGISTRO_CEAAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO2" Association="Self.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO2">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REGISTRO_CEAAM" EntitySet="TBL_REGISTRO_CEAAM" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_COORDINACION_TBL_REGISTRO" Association="Self.FK_TBL_REGISTRO_COORDINACION_TBL_REGISTRO">
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+      <End Role="TBL_REGISTRO_COORDINACION" EntitySet="TBL_REGISTRO_COORDINACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REGISTRO_COORDINACION" EntitySet="TBL_REGISTRO_COORDINACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO1" Association="Self.FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO1">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REGISTRO_COORDINACION" EntitySet="TBL_REGISTRO_COORDINACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_TBL_PERSONA" Association="Self.FK_TBL_REGISTRO_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_TBL_USUARIO" Association="Self.FK_TBL_REGISTRO_TBL_USUARIO">
+      <End Role="TBL_USUARIO" EntitySet="TBL_USUARIO" />
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO" Association="Self.FK_TBL_REGISTRO_TBL_VALORCATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO1" Association="Self.FK_TBL_REGISTRO_TBL_VALORCATALOGO1">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ROL_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_ROL_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ROLACCION_TBL_ACCION" Association="Self.FK_TBL_ROLACCION_TBL_ACCION">
+      <End Role="TBL_ACCION" EntitySet="TBL_ACCION" />
+      <End Role="TBL_ROL_ACCION" EntitySet="TBL_ROL_ACCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ROLACCION_TBL_ROL" Association="Self.FK_TBL_ROLACCION_TBL_ROL">
+      <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+      <End Role="TBL_ROL_ACCION" EntitySet="TBL_ROL_ACCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ROLUSUARIO_TBL_ROL" Association="Self.FK_TBL_ROLUSUARIO_TBL_ROL">
+      <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+      <End Role="TBL_ROL_USUARIO" EntitySet="TBL_ROL_USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ROLUSUARIO_TBL_USUARIO" Association="Self.FK_TBL_ROLUSUARIO_TBL_USUARIO">
+      <End Role="TBL_USUARIO" EntitySet="TBL_USUARIO" />
+      <End Role="TBL_ROL_USUARIO" EntitySet="TBL_ROL_USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_TELEFONO_TBL_PERSONA" Association="Self.FK_TBL_TELEFONO_TBL_PERSONA">
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+      <End Role="TBL_TELEFONO" EntitySet="TBL_TELEFONO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_TELEFONO_TBL_VALORCATALOGO" Association="Self.FK_TBL_TELEFONO_TBL_VALORCATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_TELEFONO" EntitySet="TBL_TELEFONO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_VALORCATALOGO_TBL_CATALOGO" Association="Self.FK_TBL_VALORCATALOGO_TBL_CATALOGO">
+      <End Role="TBL_CATALOGO" EntitySet="TBL_CATALOGO" />
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

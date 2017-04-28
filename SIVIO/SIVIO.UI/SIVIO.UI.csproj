@@ -52,6 +52,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EFJson">
+      <HintPath>..\packages\EFJson.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -201,6 +204,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CatalogosController.cs" />
     <Compile Include="Controllers\ExpedienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
@@ -360,6 +364,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Catalogos\" />
     <Folder Include="Views\DatPersonales\" />
     <Folder Include="Views\Reporte\" />
   </ItemGroup>
@@ -376,6 +381,10 @@
     <ProjectReference Include="..\SIVIO.Entidades\SIVIO.Entidades.csproj">
       <Project>{C6378732-DDDB-4348-A0A3-49811872203F}</Project>
       <Name>SIVIO.Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SIVIO.InamuComun\SIVIO.InamuComun.csproj">
+      <Project>{20bdf11f-fdde-4512-87a7-33b576a53fa8}</Project>
+      <Name>SIVIO.InamuComun</Name>
     </ProjectReference>
     <ProjectReference Include="..\SIVIO.Utilitarios\SIVIO.Utilitarios.csproj">
       <Project>{0371D611-6826-4965-903E-D43F9EDC71F7}</Project>

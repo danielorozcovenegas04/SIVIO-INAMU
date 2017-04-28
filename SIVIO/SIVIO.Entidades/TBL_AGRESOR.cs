@@ -43,6 +43,9 @@ namespace SIVIO.Entidades
         public Nullable<bool> B_ANTECEDENTESPSIQUIATRICOS { get; set; }
         public string VC_OBSERVACIONANTPSIQUIATRICOS { get; set; }
         public int FK_NACIONALIDAD { get; set; }
+        public string VC_NUMEXPEDIENTEMP { get; set; }
+        public string VC_NUMEXPEDIENTEDENUNCIA { get; set; }
+        public string VC_SEDEJUDICIALDENUNCIA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_AGRESION> TBL_AGRESION { get; set; }

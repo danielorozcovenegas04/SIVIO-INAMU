@@ -29,19 +29,39 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_ADICCIONES> TBL_ADICCIONES { get; set; }
         public virtual DbSet<TBL_AGRESION> TBL_AGRESION { get; set; }
         public virtual DbSet<TBL_AGRESION_ATENCION_MEDICA> TBL_AGRESION_ATENCION_MEDICA { get; set; }
+        public virtual DbSet<TBL_AGRESION_CATEGORIA_RIESGO> TBL_AGRESION_CATEGORIA_RIESGO { get; set; }
+        public virtual DbSet<TBL_AGRESION_CATEGORIZACION_RIESGO> TBL_AGRESION_CATEGORIZACION_RIESGO { get; set; }
         public virtual DbSet<TBL_AGRESION_DETALLE_VIOLENCIA> TBL_AGRESION_DETALLE_VIOLENCIA { get; set; }
         public virtual DbSet<TBL_AGRESION_VIOLENCIA> TBL_AGRESION_VIOLENCIA { get; set; }
         public virtual DbSet<TBL_AGRESOR> TBL_AGRESOR { get; set; }
         public virtual DbSet<TBL_AGRESOR_MOTIVO_REGRESO> TBL_AGRESOR_MOTIVO_REGRESO { get; set; }
         public virtual DbSet<TBL_ARCHIVO> TBL_ARCHIVO { get; set; }
         public virtual DbSet<TBL_ATENCION> TBL_ATENCION { get; set; }
-        public virtual DbSet<TBL_ATENCIONASESORIA> TBL_ATENCIONASESORIA { get; set; }
+        public virtual DbSet<TBL_ATENCION_LEGAL> TBL_ATENCION_LEGAL { get; set; }
+        public virtual DbSet<TBL_ATENCION_LEGAL_DETALLE> TBL_ATENCION_LEGAL_DETALLE { get; set; }
+        public virtual DbSet<TBL_ATENCION_PSICOLOGICA> TBL_ATENCION_PSICOLOGICA { get; set; }
+        public virtual DbSet<TBL_ATENCION_PSICOLOGICA_DETALLE> TBL_ATENCION_PSICOLOGICA_DETALLE { get; set; }
+        public virtual DbSet<TBL_ATENCION_TRABAJOSOCIAL> TBL_ATENCION_TRABAJOSOCIAL { get; set; }
+        public virtual DbSet<TBL_ATENCION_TRABAJOSOCIAL_DETALLE> TBL_ATENCION_TRABAJOSOCIAL_DETALLE { get; set; }
         public virtual DbSet<TBL_BITACORA> TBL_BITACORA { get; set; }
         public virtual DbSet<TBL_CATALOGO> TBL_CATALOGO { get; set; }
         public virtual DbSet<TBL_CONSULTA> TBL_CONSULTA { get; set; }
         public virtual DbSet<TBL_DIRECCION> TBL_DIRECCION { get; set; }
         public virtual DbSet<TBL_FAMILIAR_ACADEMICO> TBL_FAMILIAR_ACADEMICO { get; set; }
         public virtual DbSet<TBL_FAMILIAR_SALUD> TBL_FAMILIAR_SALUD { get; set; }
+        public virtual DbSet<TBL_INTERVENCION> TBL_INTERVENCION { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_ACOM_PROFESIONAL> TBL_INTERVENCION_ACOM_PROFESIONAL { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_COADYUVANCIA> TBL_INTERVENCION_COADYUVANCIA { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_COADYUVANCIA_DETALLE> TBL_INTERVENCION_COADYUVANCIA_DETALLE { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL> TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_CRITERIO_EXPERTO> TBL_INTERVENCION_CRITERIO_EXPERTO { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE> TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_INTERDISCIPLINARIA> TBL_INTERVENCION_INTERDISCIPLINARIA { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO> TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_PROCESO_GRUPAL> TBL_INTERVENCION_PROCESO_GRUPAL { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_RED_APOYO> TBL_INTERVENCION_RED_APOYO { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_TALLER> TBL_INTERVENCION_TALLER { get; set; }
+        public virtual DbSet<TBL_INTERVENCION_TESTIMONIO_EXPERTO> TBL_INTERVENCION_TESTIMONIO_EXPERTO { get; set; }
         public virtual DbSet<TBL_LABORAL> TBL_LABORAL { get; set; }
         public virtual DbSet<TBL_PERSONA> TBL_PERSONA { get; set; }
         public virtual DbSet<TBL_PERSONA_APOYO> TBL_PERSONA_APOYO { get; set; }
@@ -54,12 +74,12 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_REGISTRO> TBL_REGISTRO { get; set; }
         public virtual DbSet<TBL_REGISTRO_CEAAM> TBL_REGISTRO_CEAAM { get; set; }
         public virtual DbSet<TBL_REGISTRO_COORDINACION> TBL_REGISTRO_COORDINACION { get; set; }
+        public virtual DbSet<TBL_ROL> TBL_ROL { get; set; }
         public virtual DbSet<TBL_ROL_ACCION> TBL_ROL_ACCION { get; set; }
         public virtual DbSet<TBL_ROL_USUARIO> TBL_ROL_USUARIO { get; set; }
         public virtual DbSet<TBL_TELEFONO> TBL_TELEFONO { get; set; }
         public virtual DbSet<TBL_UNIDAD> TBL_UNIDAD { get; set; }
         public virtual DbSet<TBL_USUARIO> TBL_USUARIO { get; set; }
         public virtual DbSet<TBL_VALOR_CATALOGO> TBL_VALOR_CATALOGO { get; set; }
-        public virtual DbSet<TBL_ROL> TBL_ROL { get; set; }
     }
 }

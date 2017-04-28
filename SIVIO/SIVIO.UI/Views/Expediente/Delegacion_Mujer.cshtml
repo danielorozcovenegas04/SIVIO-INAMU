@@ -6,99 +6,233 @@
 }
 
 <script type="text/javascript">
-    $.ajax({
-        type: "POST",
-        url: '@Url.Action("CargarDropdowns")',
-        dataType: "json",
-        contentType: "application/json",
-        processData: true,
-        success: function (resultado) {
-            debugger;
-            var respuesta = JSON.parse(resultado);
-            if (respuesta.Mensaje.TipoMensaje === 1) {
-                $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                    $('#cmbPaisProcedencia').append($("<option/>", {
-                        value: value.PK_VALORCATALOGO,
-                        text: value.VC_VALOR1
-                    }));
-                });
-                $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                    $('#cmbNacionalidad').append($("<option/>", {
-                        value: value.PK_VALORCATALOGO,
-                        text: value.VC_VALOR1
-                    }));
-                });
-                $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                    $('#cmbOtraNacionalidad').append($("<option/>", {
-                        value: value.PK_VALORCATALOGO,
-                        text: value.VC_VALOR1
-                    }));
-                });
-                $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                    $('#cmbApatrida').append($("<option/>", {
-                        value: value.PK_VALORCATALOGO,
-                        text: value.VC_VALOR1
-                    }));
-                });
-                $.each(respuesta.CatalogoCondicionCivil, function (key, value) {
-                    $('#cmbCondicionCivil').append($("<option/>", {
-                        value: value.PK_VALORCATALOGO,
-                        text: value.VC_VALOR1
-                    }));
-                });
-                $.each(respuesta.CatalogoEscolaridad, function (key, value) {
-                    $('#cmbEscolaridad').append($("<option/>", {
-                        value: value.PK_VALORCATALOGO,
-                        text: value.VC_VALOR1
-                    }));
-                });
-                $.each(respuesta.CatalogoEmbarazo, function (key, value) {
-                    $('#cmbEmbarazo').append($("<option/>", {
-                        value: value.PK_VALORCATALOGO,
-                        text: value.VC_VALOR1
-                    }));
-                });
-                $.each(respuesta.CatalogoCondicionMigratoria, function (key, value) {
-                    $('#cmbCondicionMigratoria').append($("<option/>", {
-                        value: value.PK_VALORCATALOGO,
-                        text: value.VC_VALOR1
-                    }));
-                });
-                $.each(respuesta.CatalogoOcupacion, function (key, value) {
-                    $('#cmbOcupacion').append($("<option/>", {
-                        value: value.PK_VALORCATALOGO,
-                        text: value.VC_VALOR1
-                    }));
-                });
+    $(document).ready(function () {
+        PrevenirCaracteresInvalidos();
+        debugger;
+        document.title = "SIVIO - Delegación de la Mujer";
+        CargarDropdowns();
+        CargarDivisionTerritorial();
 
-                $('#btn-login').fadeIn();
-                $.LoadingOverlay("hide");
-            } else {
+    });
+    function CargarDropdowns() {
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CargarDropdowns")',
+            dataType: "json",
+            contentType: "application/json",
+            processData: true,
+            success: function (resultado) {
+                debugger;
+                var respuesta = JSON.parse(resultado);
+                if (respuesta.Mensaje.TipoMensaje === 1) {
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                        $('#cmbPaisProcedencia').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                        $('#cmbNacionalidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                        $('#cmbOtraNacionalidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                        $('#cmbApatrida').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoCondicionCivil, function (key, value) {
+                        $('#cmbCondicionCivil').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoEscolaridad, function (key, value) {
+                        $('#cmbEscolaridad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoEmbarazo, function (key, value) {
+                        $('#cmbEmbarazo').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoCondicionMigratoria, function (key, value) {
+                        $('#cmbCondicionMigratoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoOcupacion, function (key, value) {
+                        $('#cmbOcupacion').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
+                    $('#btn-login').fadeIn();
+                    $.LoadingOverlay("hide");
+                } else {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error");
+                    $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+
+                }
+
+
+
+            },
+            error: function (xhr, ajaxOptions, error) {
                 $("#contenedorBotones").show();
                 $("#contenedorEspera").hide();
                 $("#txtModalTitulo").css("color", "red");
-                $("#txtModalTitulo").text("Error");
-                $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
+                $("#txtModalTitulo").text("Error al registrar");
+                $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
                 instMensajes.open();
                 $.LoadingOverlay("hide");
 
+            }
+        });
+    }
 
+    function CargarDivisionTerritorial() {
+        var divisionTerritorial = JSON.parse(localStorage.getItem('divisionTerritorial'));
+        $("#cmbPersonaProvincia")
+            .change(function () {
+                debugger;
+                $('#cmbPersonaCanton').find('option').remove().end();
+                $('#cmbPersonaDistrito').find('option').remove().end();
+                var personaProvinciaSel = $("#cmbPersonaProvincia").val();
+                for (var j = 0; j < divisionTerritorial[1].Value.length; j++) {
+                    //console.log(data[0].Value[j].VC_DESCRIPCION);
+                    if (divisionTerritorial[1].Value[j].I_IDPROVINCIA == personaProvinciaSel) {
+                        $("#cmbPersonaCanton")
+                            .append($("<option />")
+                                .val(divisionTerritorial[1].Value[j].I_IDCANTON)
+                                .text(divisionTerritorial[1].Value[j].VC_DESCRIPCION));
+                    }
+
+                }
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    //console.log(data[0].Value[j].VC_DESCRIPCION);
+                    if (divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &
+                        divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel) {
+                        $("#cmbPersonaDistrito")
+                            .append($("<option />")
+                                .val(divisionTerritorial[2].Value[j].I_IDDISTRITO)
+                                .text(divisionTerritorial[2].Value[j].VC_DESCRIPCION));
+                    }
+                }
+                var personaDistritoSel = $("#cmbPersonaDistrito").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    if (divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel &&
+                        divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &&
+                        divisionTerritorial[2].Value[j].I_IDDISTRITO == personaDistritoSel) {
+                        var distritoSeleccionado = divisionTerritorial[2].Value[j];
+                        $("#cmbPersonaRegion").val(distritoSeleccionado.I_IDREGION);
+                    }
+                }
+
+            });
+        $("#cmbPersonaCanton")
+            .change(function () {
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                var personaProvinciaSel = $("#cmbPersonaProvincia").val();
+                $('#cmbPersonaDistrito').find('option').remove().end();
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    //console.log(data[0].Value[j].VC_DESCRIPCION);
+                    if (divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &
+                        divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel) {
+                        $("#cmbPersonaDistrito")
+                            .append($("<option />")
+                                .val(divisionTerritorial[2].Value[j].I_IDDISTRITO)
+                                .text(divisionTerritorial[2].Value[j].VC_DESCRIPCION));
+                    }
+                }
+                var personaDistritoSel = $("#cmbPersonaDistrito").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    if (divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel &&
+                        divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &&
+                        divisionTerritorial[2].Value[j].I_IDDISTRITO == personaDistritoSel) {
+                        var distritoSeleccionado = divisionTerritorial[2].Value[j];
+                        $("#cmbPersonaRegion").val(distritoSeleccionado.I_IDREGION);
+                    }
+                }
+
+            });
+        $("#cmbPersonaDistrito")
+            .change(function () {
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                var personaProvinciaSel = $("#cmbPersonaProvincia").val();
+                var personaDistritoSel = $("#cmbPersonaDistrito").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    if (divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel &&
+                        divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &&
+                        divisionTerritorial[2].Value[j].I_IDDISTRITO == personaDistritoSel) {
+                        var distritoSeleccionado = divisionTerritorial[2].Value[j];
+                        $("#cmbPersonaRegion").val(distritoSeleccionado.I_IDREGION);
+                    }
+                }
+
+            });
+
+
+        for (var j = 0; j < divisionTerritorial[0].Value.length; j++) {
+            //console.log(data[0].Value[j].VC_DESCRIPCION);
+            $("#cmbPersonaProvincia")
+                .append($("<option />")
+                    .val(divisionTerritorial[0].Value[j].I_IDPROVINCIA)
+                    .text(divisionTerritorial[0].Value[j].VC_DESCRIPCION));
+        }
+        var empresaProvinciaSel = $("#cmbPersonaProvincia").val();
+        for (var j = 0; j < divisionTerritorial[1].Value.length; j++) {
+            //console.log(data[0].Value[j].VC_DESCRIPCION);
+            if (divisionTerritorial[1].Value[j].I_IDPROVINCIA == empresaProvinciaSel) {
+                $("#cmbPersonaCanton")
+                    .append($("<option />")
+                        .val(divisionTerritorial[1].Value[j].I_IDCANTON)
+                        .text(divisionTerritorial[1].Value[j].VC_DESCRIPCION));
             }
 
+        }
 
 
-        },
-        error: function (xhr, ajaxOptions, error) {
-            $("#contenedorBotones").show();
-            $("#contenedorEspera").hide();
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Error al registrar");
-            $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
-            instMensajes.open();
-            $.LoadingOverlay("hide");
+        var empresaCantonSel = $("#cmbPersonaCanton").val();
+        for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+            //console.log(data[0].Value[j].VC_DESCRIPCION);
+            if (divisionTerritorial[2].Value[j].I_IDCANTON == empresaCantonSel &
+                divisionTerritorial[2].Value[j].I_IDPROVINCIA == empresaProvinciaSel) {
+                $("#cmbPersonaDistrito")
+                    .append($("<option />")
+                        .val(divisionTerritorial[2].Value[j].I_IDDISTRITO)
+                        .text(divisionTerritorial[2].Value[j].VC_DESCRIPCION));
+            }
 
         }
-    });
+
+        for (var j = 0; j < divisionTerritorial[3].Value.length; j++) {
+            $("#cmbPersonaRegion")
+                .append($("<option />").val(divisionTerritorial[3].Value[j].I_IDREGION).text(divisionTerritorial[3].Value[j].VC_DESCRIPCION));
+        }
+    }
 </script>
 
     
@@ -280,18 +414,21 @@
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Provincia</label>
-                                            <!-- Crear un dropdown con provincias -->
+                                            <select class="form-control" id="cmbPersonaProvincia" required>
+                                            </select>
                                         </div>
                                         <div class="col-xs-6 form-group">
                                             <label>Cantón</label>
-                                            <!-- Crear un dropdown con cantones -->
+                                            <select class="form-control" id="cmbPersonaCanton" required>
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Distrito</label>
-                                            <!-- Crear un dropdown con distritos -->
+                                            <select class="form-control" id="cmbPersonaDistrito" required>
+                                            </select>
                                         </div>
                                         <div class="col-xs-6 form-group">
                                             <label>País de procedencia</label>
@@ -503,7 +640,7 @@
                                     <div class="row" style="top:auto">
                                         <div class="col-xs-12">
                                             <ng-form>
-                                                <input type="button" style="margin:7px"></input>
+                                                <input type="button" style="margin:7px"/>
                                                 <legend>Condiciones especiales de salud</legend>
                                                 <div class="col-xs-2" style="height:100%">
                                                     <div id="read-confirm-box">

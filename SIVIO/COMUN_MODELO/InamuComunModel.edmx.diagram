@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0b4132d6f8c44b26996e7c59b823a7cb" Name="Diagram1">
+        <EntityTypeShape EntityType="INAMU_COMUNModel.CAT_CANTON" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="INAMU_COMUNModel.CAT_COMUNIDAD" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="INAMU_COMUNModel.CAT_DISTRITO" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="INAMU_COMUNModel.CAT_PROVINCIA" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="INAMU_COMUNModel.CAT_REGION" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="INAMU_COMUNModel.CAT_PAIS" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="INAMU_COMUNModel.FK_CAT_CANT_REFERENCE_CAT_PROV" ManuallyRouted="false" />
+        <AssociationConnector Association="INAMU_COMUNModel.FK_CAT_DIST_REFERENCE_CAT_CANT" ManuallyRouted="false" />
+        <AssociationConnector Association="INAMU_COMUNModel.FK_CAT_COMU_REFERENCE_CAT_DIST" ManuallyRouted="false" />
+        <AssociationConnector Association="INAMU_COMUNModel.FK_CAT_COMU_REFERENCE_CAT_REGI" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
