@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCION" Width="1.5" PointX="15.75" PointY="71" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCIONASESORIA" Width="1.5" PointX="5.25" PointY="41.375" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_BITACORA" Width="1.5" PointX="5.25" PointY="53.5" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_CATALOGO" Width="1.5" PointX="0.75" PointY="41.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_CATALOGO" Width="1.25" PointX="0.75" PointY="41.5" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_CONSULTA" Width="1.5" PointX="15.75" PointY="73.75" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_DIRECCION" Width="1.5" PointX="7.5" PointY="58.75" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_FAMILIAR_ACADEMICO" Width="1.5" PointX="5.25" PointY="38.375" />
@@ -33,7 +33,7 @@
         <EntityTypeShape EntityType="SIVIOModel.TBL_REFERENCIA_DETALLE" Width="1.5" PointX="21" PointY="45.5" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO" Width="1.5" PointX="13.5" PointY="57.875" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO_CEAAM" Width="1.5" PointX="15.75" PointY="47.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO_COORDINACION" Width="1.5" PointX="18.75" PointY="49" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO_COORDINACION" Width="1.5" PointX="18.75" PointY="49.125" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_ROL_ACCION" Width="1.5" PointX="3" PointY="3.75" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_ROL_USUARIO" Width="1.5" PointX="13.5" PointY="36.75" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_TELEFONO" Width="1.5" PointX="10.5" PointY="65" />

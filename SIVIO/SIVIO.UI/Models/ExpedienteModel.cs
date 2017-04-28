@@ -157,6 +157,22 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public List<TBL_ATENCION> ListarAtencion()
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<TBL_ATENCION> Atencion = entidades.TBL_ATENCION.ToList();
+                    return Atencion;
+                }
+                catch
+                {
+                    return new List<TBL_ATENCION>();
+                }
+            }
+        }
+
         public List<TBL_REGISTRO> ListarRegistro()
         {
 
@@ -165,21 +181,30 @@ namespace SIVIO.UI.Models
                 try
                 {
                     //List<TBL_REGISTRO> Registro = entidades.TBL_REGISTRO.ToList();
-                    //Registro
                     //return Registro;
                     List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
                     R.Add(new TBL_REGISTRO()
                     {
-                        //PK_REGISTRO = 2,
+                        PK_REGISTRO = Guid.NewGuid(),
                         FK_PERSONA = 5,
                         FK_USUARIOREGISTRA = 7,
                         DT_FECHAINICIO = DateTime.Now,
                         DT_FECHAFIN = DateTime.Now,
                         FK_TIPOSERVICIO = 4,
-                        FK_TIPOREGISTRO = 7,
+                        FK_TIPOREGISTRO = 549,
                         VC_OBSERVACIONES = "algo"
                     });
-
+                    R.Add(new TBL_REGISTRO()
+                    {
+                        PK_REGISTRO = Guid.NewGuid(),
+                        FK_PERSONA = 6,
+                        FK_USUARIOREGISTRA = 3,
+                        DT_FECHAINICIO = DateTime.Now,
+                        DT_FECHAFIN = DateTime.Now,
+                        FK_TIPOSERVICIO = 69,
+                        FK_TIPOREGISTRO = 550,
+                        VC_OBSERVACIONES = "algo"
+                    });
                     return R;
                 }
                 catch
@@ -194,31 +219,39 @@ namespace SIVIO.UI.Models
                         DT_FECHAINICIO = DateTime.Now,
                         DT_FECHAFIN = DateTime.Now,
                         FK_TIPOSERVICIO = 4,
-                        FK_TIPOREGISTRO = 7,
+                        FK_TIPOREGISTRO = 549,
+                        VC_OBSERVACIONES = "algo"
+                    });
+                    R.Add(new TBL_REGISTRO()
+                    {
+                        //PK_REGISTRO = 2,
+                        FK_PERSONA = 6,
+                        FK_USUARIOREGISTRA = 3,
+                        DT_FECHAINICIO = DateTime.Now,
+                        DT_FECHAFIN = DateTime.Now,
+                        FK_TIPOSERVICIO = 69,
+                        FK_TIPOREGISTRO = 550,
                         VC_OBSERVACIONES = "algo"
                     });
                     return R;
                 }
             }
         }
-        //public DatoAdministrativoModel llenarExpediente(int pkPersona)
-        //{
-        //    DatoAdministrativoModel resultado = new DatoAdministrativoModel();
-        //    using (var entidades = new SIVIOEntities())
-        //    {
-        //        try
-        //        {
-        //            resultado.persona = entidades.TBL_PERSONA.Where(m => m.PK_PERSONA == pkPersona).First();
-        //            var user = HttpContext.Current.User.Identity.Name;
-        //            resultado.usuario = entidades.TBL_USUARIO.Where(m => m.VC_USUARIO == user).First();
-        //            return resultado;
-        //        }
-        //        catch
-        //        {
-        //            return new DatoAdministrativoModel();
-        //        }
-        //    }
-        //}
+        public List<TBL_VALOR_CATALOGO> ListarCatalogo()
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<TBL_VALOR_CATALOGO> Catalogo = entidades.TBL_VALOR_CATALOGO.ToList();
+                    return Catalogo;
+                }
+                catch
+                {
+                    return new List<TBL_VALOR_CATALOGO>();
+                }
+            }
+        }
 
         #endregion
     }
