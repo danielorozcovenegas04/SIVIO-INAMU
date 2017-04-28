@@ -6,103 +6,112 @@
 }
 
 <script type="text/javascript">
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("CargarDropdowns")',
-            dataType: "json",
-            contentType: "application/json",
-            processData: true,
-            success: function (resultado) {
-                debugger;
-                var respuesta = JSON.parse(resultado);
-                if (respuesta.Mensaje.TipoMensaje === 1) {
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbPaisProcedencia').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-                    $.each(respuesta.CatalogoNacionalidad, function(key, value) {
-                        $('#cmbNacionalidad').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbOtraNacionalidad').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbApatrida').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-                    $.each(respuesta.CatalogoCondicionCivil, function (key, value) {
-                        $('#cmbCondicionCivil').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-                    $.each(respuesta.CatalogoEscolaridad, function (key, value) {
-                        $('#cmbEscolaridad').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-                    $.each(respuesta.CatalogoEmbarazo, function (key, value) {
-                        $('#cmbEmbarazo').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-                    $.each(respuesta.CatalogoCondicionMigratoria, function (key, value) {
-                        $('#cmbCondicionMigratoria').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-                    $.each(respuesta.CatalogoOcupacion, function (key, value) {
-                        $('#cmbOcupacion').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
+    $.ajax({
+        type: "POST",
+        url: '@Url.Action("CargarDropdowns")',
+        dataType: "json",
+        contentType: "application/json",
+        processData: true,
+        success: function (resultado) {
+            debugger;
+            var respuesta = JSON.parse(resultado);
+            if (respuesta.Mensaje.TipoMensaje === 1) {
+                $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                    $('#cmbPaisProcedencia').append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
+                });
+                $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                    $('#cmbNacionalidad').append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
+                });
+                $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                    $('#cmbOtraNacionalidad').append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
+                });
+                $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                    $('#cmbApatrida').append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
+                });
+                $.each(respuesta.CatalogoCondicionCivil, function (key, value) {
+                    $('#cmbCondicionCivil').append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
+                });
+                $.each(respuesta.CatalogoEscolaridad, function (key, value) {
+                    $('#cmbEscolaridad').append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
+                });
+                $.each(respuesta.CatalogoEmbarazo, function (key, value) {
+                    $('#cmbEmbarazo').append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
+                });
+                $.each(respuesta.CatalogoCondicionMigratoria, function (key, value) {
+                    $('#cmbCondicionMigratoria').append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
+                });
+                $.each(respuesta.CatalogoOcupacion, function (key, value) {
+                    $('#cmbOcupacion').append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
+                });
 
-                    $('#btn-login').fadeIn();
-                    $.LoadingOverlay("hide");
-                } else {
-                    $("#contenedorBotones").show();
-                    $("#contenedorEspera").hide();
-                    $("#txtModalTitulo").css("color", "red");
-                    $("#txtModalTitulo").text("Error");
-                    $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
-                    instMensajes.open();
-                    $.LoadingOverlay("hide");
-
-
-                }
-
-
-
-            },
-            error: function (xhr, ajaxOptions, error) {
+                $('#btn-login').fadeIn();
+                $.LoadingOverlay("hide");
+            } else {
                 $("#contenedorBotones").show();
                 $("#contenedorEspera").hide();
                 $("#txtModalTitulo").css("color", "red");
-                $("#txtModalTitulo").text("Error al registrar");
-                $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                $("#txtModalTitulo").text("Error");
+                $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
                 instMensajes.open();
                 $.LoadingOverlay("hide");
 
+
             }
-        });
+
+
+
+        },
+        error: function (xhr, ajaxOptions, error) {
+            $("#contenedorBotones").show();
+            $("#contenedorEspera").hide();
+            $("#txtModalTitulo").css("color", "red");
+            $("#txtModalTitulo").text("Error al registrar");
+            $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+            instMensajes.open();
+            $.LoadingOverlay("hide");
+
+        }
+    });
 </script>
 
 
+<style>
+    input, select, textarea {
+        max-width: 100%;
+        padding: 4px;
+    }
 
+    input {
+        background-color: blue;
+    }
+</style>
 
 
 <div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
@@ -120,7 +129,7 @@
         </div>
 
         <div class="col-md-10 form-group">
-            <form id="formCoavif" method="post">
+            <form id="formDelegacion" method="post">
                 <div style="margin-left:20px;">
                     @*<h2>Expediente de: @Model.persona.VC_NOMBRE @Model.persona.VC_APELLIDO1 @Model.persona.VC_APELLIDO2</h2>
                         <h4>Identificación: @Model.persona.VC_IDENTIFICACION <br /> Número de expediente: @Model.persona.PK_PERSONA</h4>*@
@@ -369,13 +378,14 @@
                                         </div>
                                     </div>
                                 </td>
-                              </table>
-                            </div>
+                            </table>
                         </div>
+                    </div>
+                    <!--Inicia pestaña Datos de perfil de usuaria-->
                     <div id="datPerfil" class="tab-pane">
                         <div class="row comunForm">
                             <table width="100%" border="0" cellspacing="100" align="right">
-                                <td style="top">
+                                <td>
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Identidad de género</label>
@@ -446,169 +456,195 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <ng-form>
-                                            <legend>Condiciones especiales de salud</legend>
-                                            <div class="col-xs-2">
-                                                <input type="checkbox" name="fisica">Física<br>
-                                                <input type="checkbox" name="cognitiva">Cognitiva<br>
-                                                <input type="checkbox" name="mental">Mental<br>
-                                                <input type="checkbox" name="sensorial">Sensorial<br>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <input type="checkbox" name="padecimientosCrónicos">Padecimientos crónicos<br>
-                                                <input type="checkbox" name="condicionPsiquiatrica">Condición Psiquiátrica<br>
-                                                <input type="checkbox" name="enfermedadTerminal">Enfermedad terminal<br>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <input type="checkbox" name="its">ITS<br>
-                                                <input type="checkbox" name="sida">VIH-SIDA<br>
-                                            </div>
-                                        </ng-form>
+                                    <!--Inicia Condiciones especiales de salud-->
+                                    <div class="row" style="top">
+                                        <div class="col-xs-12">
+                                            <ng-form>
+                                                <legend>Condiciones especiales de salud</legend>
+                                                <div class="col-xs-2" style="height:100%">
+                                                    <input style="display:inline-block;" id="fisica" type="checkbox"> Física
+                                                    <input style="display:inline-block;" id="cognitiva" type="checkbox"> Cognitiva
+                                                    <input style="display:inline-block;" id="mental" type="checkbox"> Mental
+                                                    <input style="display:inline-block;" id="sensorial" type="checkbox"> Sensorial
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <input style="display:inline-block;" id="padecimientosCrónicos" type="checkbox"> Padecimientos crónicos
+                                                    <input style="display:inline-block;" id="condicionPsiquiatrica" type="checkbox"> Condición Psiquiátrica
+                                                    <input style="display:inline-block;" id="enfermedadTerminal" type="checkbox"> Enfermedad terminal
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <input style="display:inline-block;" id="its" type="checkbox"> ITS
+                                                    <input style="display:inline-block;" id="sida" type="checkbox"> VIH-SIDA
+                                                </div>
+                                            </ng-form>
+                                        </div>
                                     </div>
-
+                                    <!--Finaliza Condiciones especiales de salud-->
+                                    <!--Inicia Adicciones-->
                                     <div class="row">
-                                        <ng-form>
-                                            <legend>Adicciones</legend>
-                                            <div class="col-xs-2">
-                                                <input type="checkbox" name="ninguna">Ninguna<br>
-                                                <input type="checkbox" name="drogas">Drogas<br>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <input type="checkbox" name="medicamentos">Medicamentos<br>
-                                                <input type="checkbox" name="juego">Juego<br>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <input type="checkbox" name="alcohol">Alcohol<br>
-                                            </div>
-                                        </ng-form>
+                                        <div class="col-xs-12">
+                                            <ng-form>
+                                                <legend>Adicciones</legend>
+                                                <div class="col-xs-2">
+                                                    <input style="display:inline-block;" id="ninguna" type="checkbox"> Ninguna
+                                                    <input style="display:inline-block;" id="drogas" type="checkbox"> Drogas
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <input style="display:inline-block;" id="medicamentos" type="checkbox"> Medicamentos
+                                                    <input style="display:inline-block;" id="juego" type="checkbox"> Juego
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <input style="display:inline-block;" id="alcohol" type="checkbox"> Alcohol
+                                                </div>
+                                            </ng-form>
+                                        </div>
                                     </div>
+                                    <!--Finaliza Adicciones-->
                                     <div class="row">
-                                        <input type="checkbox" name="redesApoyo">Tiene redes de apoyo<br>
+                                        <div class="col-xs-12">
+                                            <input style="display:inline-block;" id="checkRedesApoyo" type="checkbox"> Tiene redes de apoyo
+                                        </div>
                                     </div>
+                                    <!--Inicia Redes de apoyo-->
                                     <div class="row">
-                                        <ng-form>
-                                            <legend>Redes de apoyo de la usuaria</legend>
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <label>Primaria:</label>
+                                        <div class="col-xs-12">
+                                            <ng-form>
+                                                <legend>Redes de apoyo de la usuaria</legend>
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <label>Primaria:</label>
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <label>Nombre</label>
+                                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <label>Relación</label>
+                                                        <input class="form-control" placeholder="Nombre" id="txtRelacion" type="text" required="">
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <label>Teléfono</label>
+                                                        <input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required="">
+                                                    </div>
                                                 </div>
-                                                <div class="col-xs-3">
-                                                    <label>Nombre</label>
-                                                    <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <label>Secundaria:</label>
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <label>Nombre</label>
+                                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <label>Relación</label>
+                                                        <input class="form-control" placeholder="Nombre" id="txtRelacion" type="text" required="">
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <label>Teléfono</label>
+                                                        <input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required="">
+                                                    </div>
                                                 </div>
-                                                <div class="col-xs-3">
-                                                    <label>Relación</label>
-                                                    <input class="form-control" placeholder="Nombre" id="txtRelacion" type="text" required="">
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <label>Institucional/Organizacional:</label>
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <label>Nombre</label>
+                                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <label>Institución</label>
+                                                        <input class="form-control" placeholder="Nombre" id="txtRelacion" type="text" required="">
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <label>Teléfono</label>
+                                                        <input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required="">
+                                                    </div>
                                                 </div>
-                                                <div class="col-xs-3">
-                                                    <label>Teléfono</label>
-                                                    <input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required="">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <label>Secundaria:</label>
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <label>Nombre</label>
-                                                    <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <label>Relación</label>
-                                                    <input class="form-control" placeholder="Nombre" id="txtRelacion" type="text" required="">
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <label>Teléfono</label>
-                                                    <input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required="">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xs-3">
-                                                    <label>Institucional/Organizacional:</label>
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <label>Nombre</label>
-                                                    <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <label>Institución</label>
-                                                    <input class="form-control" placeholder="Nombre" id="txtRelacion" type="text" required="">
-                                                </div>
-                                                <div class="col-xs-3">
-                                                    <label>Teléfono</label>
-                                                    <input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required="">
-                                                </div>
-                                            </div>
-                                        </ng-form>
-                                        <ng-form>
-                                            <legend>Conposición familiar</legend>
-                                            <table>
-                                                <tr>
-                                                    <th>Nombre completo</th>
-                                                    <th>Parentesco</th>
-                                                    <th>Edad</th>
-                                                    <th>Escolaridad</th>
-                                                    <th>Ocupación</th>
-                                                </tr>
-                                                <!--Falta un foreach-->
-                                            </table>
-                                        </ng-form>
+                                            </ng-form>
+                                        </div>
                                     </div>
-
+                                    <!--Finaliza Redes de apoyo-->
+                                    <!--Inicia Composicion familiar-->
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <ng-form>
+                                                <legend>Composición familiar</legend>
+                                                <table class="display table-bordered dataTable no-footer"  style="width:100%">
+                                                    <tr>
+                                                        <th>Nombre completo</th>
+                                                        <th>Parentesco</th>
+                                                        <th>Edad</th>
+                                                        <th>Escolaridad</th>
+                                                        <th>Ocupación</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Laura Meza Rojas</td>
+                                                        <td>Hermana</td>
+                                                        <td>27</td>
+                                                        <td>Secundaria completa</td>
+                                                        <td>Secretaria</td>
+                                                    </tr>
+                                                    <!--Falta un foreach-->
+                                                </table>
+                                            </ng-form>
+                                        </div>
+                                    </div>
+                                    <!--Finaliza Composicion familiar-->
                                 </td>
-                            </table>
-                        </div>
-                    </div>
-                    <div id="historialViolencia" class="tab-pane">
-                        <div class="row comunForm">
+                    </table>
+                </div>
+        </div>
+        <!--Finaliza pestaña Datos de perfil de usuaria-->
+        <div id="historialViolencia" class="tab-pane">
+            <div class="row comunForm">
 
-                            <div class="row">
-                                <div class="col-md-4 form-group">
-                                    <label>Historial de violencia</label>
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label>Historial de violencia</label>
 
-                                    <input class="form-control" placeholder="Nombre" id="txtNombre3" type="date" required="">
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div id="atencion" class="tab-pane">
-                        <div class="row comunForm">
-
-                            <div class="row">
-                                <div class="col-md-4 form-group">
-                                    <label>Atención</label>
-
-                                    <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <div id="intervencion" class="tab-pane">
-                        <div class="row comunForm">
-
-                            <div class="row">
-                                <div class="col-md-4 form-group">
-                                    <label>Intervencion</label>
-
-                                    <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
-                                </div>
-
-                            </div>
-
-                        </div>
+                        <input class="form-control" placeholder="Nombre" id="txtNombre3" type="date" required="">
                     </div>
 
                 </div>
 
-
-
-            </form>
+            </div>
         </div>
+        <div id="atencion" class="tab-pane">
+            <div class="row comunForm">
+
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label>Atención</label>
+
+                        <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div id="intervencion" class="tab-pane">
+            <div class="row comunForm">
+
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label>Intervencion</label>
+
+                        <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    </form>
+</div>
     </div>
 </div>
 
