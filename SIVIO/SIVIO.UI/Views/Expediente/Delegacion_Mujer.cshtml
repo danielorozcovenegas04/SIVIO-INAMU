@@ -373,20 +373,52 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <div id="read-confirm-box">
-                                                <div class="inlineCheckBox">I Have read the above </div>
-                                                <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkbox" /></div>
+                                        <ng-form>
+                                            <legend></legend>
+                                            <div class="col-xs-6 form-group">
+                                                <label>Tipificación de la violencia</label>
+                                                <div id="read-confirm-box">
+                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaFisica" /></div>
+                                                    <div class="inlineCheckBox">Violencia física </div>
+                                                </div>
+                                                <div id="read-confirm-box">
+                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaSexual" /></div>
+                                                    <div class="inlineCheckBox">Violencia sexual </div>
+                                                </div>
+                                                <div id="read-confirm-box">
+                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaPatrimonial" /></div>
+                                                    <div class="inlineCheckBox">Violencia patrimonial </div>
+                                                </div>
+                                                <div id="read-confirm-box">
+                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaPsicologica" /></div>
+                                                    <div class="inlineCheckBox">Violencia psicológica </div>
+                                                </div>
+                                                <div id="read-confirm-box">
+                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxAcosoSexual" /></div>
+                                                    <div class="inlineCheckBox">Acoso sexual callejero </div>
+                                                </div>
+                                                <div id="read-confirm-box">
+                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxAcosoLaboral" /></div>
+                                                    <div class="inlineCheckBox">Acoso laboral </div>
+                                                </div>
+                                                <div id="read-confirm-box">
+                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxHostigamientoSexual" /></div>
+                                                    <div class="inlineCheckBox">Hostigamiento sexual </div>
+                                                </div>
+                                                <div id="read-confirm-box">
+                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxTrataPersonas" /></div>
+                                                    <div class="inlineCheckBox">Trata de personal </div>
+                                                </div>
+                                                <div id="read-confirm-box">
+                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaObstetrica" /></div>
+                                                    <div class="inlineCheckBox">Violencia obstétrica </div>
+                                                </div>
                                             </div>
-                                            <div id="read-confirm-box">
-                                                <div class="inlineCheckBox">I Have read the above </div>
-                                                <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkbox" /></div>
+                                            <div class="col-xs-6 form-group">
+                                                <label>Vínculo con persona agresora</label>
+                                                <input class="form-control" placeholder="Vínculo con persona agresora" id="txtPersonaAgresora" type="text" required="">
                                             </div>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Vínculo con persona agresora</label>
-                                            <input class="form-control" placeholder="Vínculo con persona agresora" id="txtPersonaAgresora" type="text" required="">
-                                        </div>
+                                        </ng-form>
                                     </div>
                                 </td>
                             </table>
