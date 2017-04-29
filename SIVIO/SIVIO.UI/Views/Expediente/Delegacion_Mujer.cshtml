@@ -166,6 +166,37 @@
                         }));
                     });
 
+
+
+                    //combobox Historia Violencia
+                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
+                        $('#cmbNacionalidadHistoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
+                    $.each(respuesta.CatalogoOcupacion, function (key, value) {
+                        $('#cmbOcupacionHistoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
+                    $.each(respuesta.CatalogoEscolaridad, function (key, value) {
+                        $('#cmbEscolaridadHistoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
+                    $.each(respuesta.CatalogoIdentidadGenero, function (key, value) {
+                        $('#cmbGeneroHistoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
                     $('#btn-login').fadeIn();
                     $.LoadingOverlay("hide");
                 } else {
@@ -963,8 +994,8 @@
                                         </div>
 
                                         <div class="col-xs-4 form-group">
-                                            <label>Ocupación de la persona agrespra:</label>
-                                            <input type="text" class="form-control" placeholder="." id="ocupacion" value="" />
+                                            <label>Ocupación de la persona agresora:</label>
+                                            <select id="cmbOcupacionHistoria" /> 
                                         </div>
                                     </div>
 
@@ -972,7 +1003,7 @@
                                     <div class="row">
                                         <div class="col-xs-4 form-group">
                                             <label>Sexo de la persona agresora:</label>
-                                            <input type="text" list="exampleList" id="sexo" />
+                                            <select id="cmbGeneroHistoria" /> 
                                             <datalist id="exampleList">
                                                 <option value="femenino">
                                                 <option value="masculino">
@@ -981,18 +1012,7 @@
                                         <div class="col-xs-4 form-group">
                                             <label>Escolaridad de la persona agresora:</label>
 
-                                            <input type="text" list="exampleList2" id="escolaridad" />
-                                            <datalist id="exampleList2">
-                                                <option value="primaria completa">
-                                                <option value="primaria incompleta">
-                                                <option value="secundaria completa ">
-                                                <option value="secundaria incompleta">
-                                                <option value="universitario/técnico">
-                                                <option value="universitaria completa ">
-                                                <option value="universitaria incompleta">
-                                                <option value="ningún grado">
-                                                <option value="Analfabeta">
-                                            </datalist>
+                                            <select  id="cmbEscolaridadHistoria" />                  
                                         </div>
                                     </div>
 
@@ -1003,16 +1023,20 @@
                                         </div>
                                         <div class="col-xs-4 form-group">
                                             <label>Nacionalidad de la persona agresora:</label>
-                                            <select class="form-control selectized" id="cmbnacionalidad" tabindex="-1" style="display: none;"><option value="3" selected="selected">nacionalidad</option></select><div class="selectize-control form-control single"><div class="selectize-input items full has-options has-items"><div class="item" data-value="3">nacionalidad</div><input type="text" autocomplete="off" tabindex="" style="width: 4px;"></div></div>
+                                            <select id="cmbNacionalidadHistoria" class="form-control"></select>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-4 form-group">
-                                            <input type="checkbox" id="MP"> Tiene MP<br>
+                                            <div class="inlineCheckBox">
+                                                <input type="checkbox" style="display:inline-block;" id="MP"> Tiene MP<br>
+                                            </div>
                                         </div>
 
                                         <div class="col-xs-4 form-group">
-                                            <input type="checkbox" id="denunciaPenal"> Tiene Denuncia Penal<br>
+                                            <div class="inlineCheckBox">
+                                                <input type="checkbox" style="display:inline-block;" id="denunciaPenal"> Tiene Denuncia Penal<br>
+                                            </div>
                                         </div>
                                     </div>
                                     <div id="datosMP" style="padding-top: 15px; padding-bottom: 11px; background-color: white; margin-bottom: 11px; margin-left: 0px; margin-right: 0px; border: 2px solid #808080; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
@@ -1061,7 +1085,7 @@
                                         <div class="col-xs-4 form-group">
                                             <div class="col-xs-4 form-group" style="">
                                                 <label>Relato hechos de violencia:</label>
-                                                <textarea rows="10" cols="60" id="txtRelato"></textarea>
+                                                <textarea rows="10" cols="60" id="txtRelato" style="width: 100%"></textarea>
                                             </div>
                                         </div>
 
