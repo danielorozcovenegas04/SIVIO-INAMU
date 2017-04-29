@@ -142,6 +142,21 @@ namespace SIVIO.UI.Models
                 }
             }
         }
+        public List<TBL_CONSULTA> ListarConsultas()
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<TBL_CONSULTA> Consulta = entidades.TBL_CONSULTA.ToList();
+                    return Consulta;
+                }
+                catch
+                {
+                    return new List<TBL_CONSULTA>();
+                }
+            }
+        }
 
         #endregion
 
