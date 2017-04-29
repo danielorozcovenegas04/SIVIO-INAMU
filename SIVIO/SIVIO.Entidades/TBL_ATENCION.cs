@@ -17,15 +17,23 @@ namespace SIVIO.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TBL_ATENCION()
         {
-            this.TBL_ATENCIONASESORIA = new HashSet<TBL_ATENCIONASESORIA>();
+            this.TBL_ATENCION_LEGAL = new HashSet<TBL_ATENCION_LEGAL>();
+            this.TBL_ATENCION_PSICOLOGICA = new HashSet<TBL_ATENCION_PSICOLOGICA>();
+            this.TBL_ATENCION_TRABAJOSOCIAL = new HashSet<TBL_ATENCION_TRABAJOSOCIAL>();
         }
     
         public System.Guid PK_ATENCION { get; set; }
         public System.Guid FK_REGISTRO { get; set; }
         public int FK_TIPOATENCION { get; set; }
+        public Nullable<System.DateTime> DT_FECHAINICIO { get; set; }
+        public Nullable<System.DateTime> DT_FECHAFIN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_ATENCIONASESORIA> TBL_ATENCIONASESORIA { get; set; }
+        public virtual ICollection<TBL_ATENCION_LEGAL> TBL_ATENCION_LEGAL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_ATENCION_PSICOLOGICA> TBL_ATENCION_PSICOLOGICA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_ATENCION_TRABAJOSOCIAL> TBL_ATENCION_TRABAJOSOCIAL { get; set; }
         public virtual TBL_REGISTRO TBL_REGISTRO { get; set; }
     }
 }

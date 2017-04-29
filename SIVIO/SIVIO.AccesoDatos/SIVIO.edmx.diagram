@@ -4,49 +4,74 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="261dc61a5dd54530aa949a6ace175809" Name="Diagram1" ZoomLevel="108">
-        <EntityTypeShape EntityType="SIVIOModel.TBL_ACCION" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_ADICCIONES" Width="1.5" PointX="10.5" PointY="59.125" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION" Width="1.5" PointX="9.75" PointY="49.5" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION_ATENCION_MEDICA" Width="1.5" PointX="8.25" PointY="38.375" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION_DETALLE_VIOLENCIA" Width="1.5" PointX="8.25" PointY="41.375" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION_VIOLENCIA" Width="1.5" PointX="8.25" PointY="44.25" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESOR" Width="1.5" PointX="7.5" PointY="50.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESOR_MOTIVO_REGRESO" Width="1.5" PointX="10.75" PointY="45.875" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_ARCHIVO" Width="1.5" PointX="15.75" PointY="68.25" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCION" Width="1.5" PointX="15.75" PointY="71" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCIONASESORIA" Width="1.5" PointX="5.25" PointY="41.375" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_BITACORA" Width="1.5" PointX="5.25" PointY="53.5" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_CATALOGO" Width="1.25" PointX="0.75" PointY="41.5" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_CONSULTA" Width="1.5" PointX="15.75" PointY="73.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_DIRECCION" Width="1.5" PointX="7.5" PointY="58.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_FAMILIAR_ACADEMICO" Width="1.5" PointX="5.25" PointY="38.375" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_FAMILIAR_SALUD" Width="1.5" PointX="5.25" PointY="44.375" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_LABORAL" Width="1.5" PointX="10.5" PointY="55.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA" Width="1.5" PointX="5.25" PointY="73.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA_APOYO" Width="1.5" PointX="13.5" PointY="53.875" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA_CONDICIONESPECIAL" Width="1.5" PointX="10.5" PointY="53.125" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA_FAMILIAR" Width="1.5" PointX="3" PointY="33.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA_RED_APOYO" Width="1.5" PointX="10.5" PointY="61.875" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA_SALUD" Width="1.5" PointX="7.5" PointY="63.125" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_REFERENCIA" Width="1.5" PointX="18.75" PointY="53" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_REFERENCIA_DETALLE" Width="1.5" PointX="21" PointY="45.5" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO" Width="1.5" PointX="13.5" PointY="57.875" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO_CEAAM" Width="1.5" PointX="15.75" PointY="47.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO_COORDINACION" Width="1.5" PointX="18.75" PointY="49.125" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_ROL_ACCION" Width="1.5" PointX="3" PointY="3.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_ROL_USUARIO" Width="1.5" PointX="13.5" PointY="36.75" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_TELEFONO" Width="1.5" PointX="10.5" PointY="65" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_UNIDAD" Width="1.5" PointX="18.75" PointY="45.875" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_USUARIO" Width="1.5" PointX="11.25" PointY="68.375" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_VALOR_CATALOGO" Width="1.5" PointX="3" PointY="38.375" />
+      <Diagram DiagramId="261dc61a5dd54530aa949a6ace175809" Name="Diagram1" ZoomLevel="10">
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ACCION" Width="1.5" PointX="5.25" PointY="136.75" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ADICCIONES" Width="1.5" PointX="10.5" PointY="117.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION" Width="1.5" PointX="15.75" PointY="115.375" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION_ATENCION_MEDICA" Width="1.5" PointX="5.25" PointY="76.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION_CATEGORIA_RIESGO" Width="1.5" PointX="5.25" PointY="73.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION_CATEGORIZACION_RIESGO" Width="1.5" PointX="11.25" PointY="76.375" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION_DETALLE_VIOLENCIA" Width="1.5" PointX="5.25" PointY="79.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION_VIOLENCIA" Width="1.5" PointX="8.25" PointY="79.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESOR" Width="1.5" PointX="13.5" PointY="110.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESOR_MOTIVO_REGRESO" Width="1.5" PointX="15.75" PointY="94" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ARCHIVO" Width="1.5" PointX="15.75" PointY="110.875" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCION" Width="1.5" PointX="15.75" PointY="125" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCION_LEGAL" Width="1.5" PointX="18" PointY="128" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCION_LEGAL_DETALLE" Width="1.5" PointX="8.25" PointY="76.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCION_PSICOLOGICA" Width="1.5" PointX="18" PointY="123.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCION_PSICOLOGICA_DETALLE" Width="1.5" PointX="20.25" PointY="124.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCION_TRABAJOSOCIAL" Width="1.5" PointX="18" PointY="119.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ATENCION_TRABAJOSOCIAL_DETALLE" Width="1.5" PointX="5.25" PointY="82.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_BITACORA" Width="1.5" PointX="5.25" PointY="107.875" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_CATALOGO" Width="1.5" PointX="0.75" PointY="76.75" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_CONSULTA" Width="1.5" PointX="15.75" PointY="106.875" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_DIRECCION" Width="1.5" PointX="10.5" PointY="112.875" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_FAMILIAR_ACADEMICO" Width="1.5" PointX="7.5" PointY="108.375" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_FAMILIAR_SALUD" Width="1.5" PointX="7.5" PointY="111.375" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION" Width="1.5" PointX="10.5" PointY="107.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_ACOM_PROFESIONAL" Width="1.5" PointX="12.75" PointY="134.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_COADYUVANCIA" Width="1.5" PointX="3" PointY="68.875" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_COADYUVANCIA_DETALLE" Width="1.5" PointX="5.25" PointY="70.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL" Width="1.5" PointX="12.75" PointY="94.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_CRITERIO_EXPERTO" Width="1.5" PointX="5.25" PointY="105" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" Width="1.5" PointX="7.5" PointY="88.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_INTERDISCIPLINARIA" Width="1.5" PointX="12.75" PointY="125.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO" Width="1.5" PointX="12.75" PointY="128.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_PROCESO_GRUPAL" Width="1.5" PointX="12.75" PointY="90.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_RED_APOYO" Width="1.5" PointX="12.75" PointY="122.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_TALLER" Width="1.5" PointX="12.75" PointY="131.125" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_INTERVENCION_TESTIMONIO_EXPERTO" Width="1.5" PointX="12.75" PointY="101.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_LABORAL" Width="1.5" PointX="7.5" PointY="115" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA" Width="1.5" PointX="5.25" PointY="147.375" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA_APOYO" Width="1.5" PointX="13.5" PointY="119.125" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA_CONDICIONESPECIAL" Width="1.5" PointX="7.5" PointY="122.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA_FAMILIAR" Width="1.5" PointX="5.25" PointY="142.625" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA_RED_APOYO" Width="1.5" PointX="10.5" PointY="120.75" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_PERSONA_SALUD" Width="1.5" PointX="7.5" PointY="105.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_REFERENCIA" Width="1.5" PointX="15.75" PointY="90.125" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_REFERENCIA_DETALLE" Width="1.5" PointX="8.25" PointY="72.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO" Width="1.5" PointX="13.5" PointY="105" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO_CEAAM" Width="1.5" PointX="18.75" PointY="89.25" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_REGISTRO_COORDINACION" Width="1.5" PointX="15.75" PointY="86.375" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ROL" Width="1.5" PointX="5.25" PointY="139.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ROL_ACCION" Width="1.5" PointX="7.5" PointY="136.75" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ROL_USUARIO" Width="1.5" PointX="7.5" PointY="139.75" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_TELEFONO" Width="1.5" PointX="7.5" PointY="119.125" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_UNIDAD" Width="1.5" PointX="6" PointY="67.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_USUARIO" Width="1.5" PointX="11.25" PointY="85.5" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_VALOR_CATALOGO" Width="1.5" PointX="3" PointY="72.125" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ROLACCION_TBL_ACCION" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ADICCIONES_TBL_PERSONA" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ADICCIONES_TBL_VALORCATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_ATENCION_MEDICA_TBL_AGRESION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_CATEGORIA_RIESGO_TBL_AGRESION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_CATEGORIZACION_RIESGO_TBL_AGRESION" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_TBL_AGRESOR" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_VIOLENCIA_TBL_AGRESION" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_ATENCION_MEDICA_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_CATEGORIA_RIESGO_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_CATEGORIZACION_RIESGO_TBL_VALOR_CATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_DETALLE_VIOLENCIA_TBL_AGRESION_VIOLENCIA" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_DETALLE_VIOLENCIA_TBL_VALOR_CATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_VIOLENCIA_TBL_VALOR_CATALOGO" />
@@ -59,9 +84,15 @@
         <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO3" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_VALOR_CATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ARCHIVO_TBL_REGISTRO" />
-        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCIONASESORIA_TBL_ATENCION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCION_LEGAL_TBL_ATENCION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCION_PSICOLOGICA_TBL_ATENCION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCION_TRABAJOSOCIAL_TBL_ATENCION" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_CONSULTA_TBL_REGISTRO" />
-        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCIONASESORIA_TBL_VALORCATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCION_LEGAL_DETALLE_TBL_ATENCION_LEGAL" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCION_LEGAL_DETALLE_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCION_PSICOLOGICA_DETALLE_TBL_ATENCION_PSICOLOGICA" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCION_TRABAJOSOCIAL_DETALLE_TBL_ATENCION_TRABAJOSOCIAL" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCION_TRABAJOSOCIAL_DETALLE_TBL_VALOR_CATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_BITACORA_TBL_VALORCATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_VALORCATALOGO_TBL_CATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ATENCION_TBL_REGISTRO" />
@@ -71,10 +102,31 @@
         <AssociationConnector Association="SIVIOModel.FK_TBL_FAMILIAR_ACADEMICO_TBL_VALOR_CATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_FAMILIAR_SALUD_TBL_PERSONA_FAMILIAR" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_FAMILIAR_SALUD_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_ACOM_PROFESIONAL_TBL_INTERVENCION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL_TBL_INTERVENCION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_INTERDISCIPLINARIA_TBL_INTERVENCION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_PRC_PSICOSCEDUCATIVO_TBL_INTERVENCION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_PROCESO_GRUPAL_TBL_INTERVENCION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_RED_APOYO_TBL_INTERVENCION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_TALLER_TBL_INTERVENCION1" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_TBL_PERSONA" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_TBL_USUARIO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_TESTIMONIO_EXPERTO_TBL_INTERVENCION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_REFERENCIA1" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_INTERVENCION_COADYUVANCIA" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_COORDINACION_INTERINSTITUCIONAL_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_CRITERIO_EXPERTO_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_INTERVENCION_PROCESO_GRUPAL_TBL_VALOR_CATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_LABORAL_TBL_PERSONA" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_LABORAL_TBL_VALOR_CATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_RED_APOYO_TBL_PERSONA" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_SALUD_TBL_PERSONA" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_TBL_VALOR_CATALOGO1" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_TBL_VALORCATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONAAPOYO_TBL_PERSONA" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONACONDICIONESPECIAL_TBL_PERSONA" />
@@ -82,9 +134,10 @@
         <AssociationConnector Association="SIVIOModel.FK_TBL_TELEFONO_TBL_PERSONA" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONAAPOYO_TBL_VALORCATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONACONDICIONESPECIAL_TBL_VALORCATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_FAMILIAR_TBL_VALOR_CATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_RED_APOYO_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_RED_APOYO_TBL_VALOR_CATALOGO1" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_SALUD_TBL_VALOR_CATALOGO" />
-        <AssociationConnector Association="SIVIOModel.FK_TBL_REFERENCIA_DETALLE_TBL_REFERENCIA" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_REGISTRO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO1" />
@@ -99,12 +152,12 @@
         <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO1" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO2" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO" />
-        <AssociationConnector Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_USUARIO" />
-        <AssociationConnector Association="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO" />
-        <EntityTypeShape EntityType="SIVIOModel.TBL_ROL" Width="1.5" PointX="5.25" PointY="47.375" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO1" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ROL_TBL_VALOR_CATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ROLACCION_TBL_ROL" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_USUARIO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

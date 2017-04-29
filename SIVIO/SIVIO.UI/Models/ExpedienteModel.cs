@@ -36,7 +36,7 @@ namespace SIVIO.UI.Models
                 }
             }
         }
-
+        
         public List<TBL_REGISTRO> ListarRegistros(int persona)
         {
             using (var entidades = new SIVIOEntities())
@@ -44,7 +44,7 @@ namespace SIVIO.UI.Models
                 try
                 {
                     var personaConsulta = entidades.TBL_PERSONA.Find(persona);
-                    if (personaConsulta != null)
+                    if(personaConsulta != null)
                     {
                         return personaConsulta.TBL_REGISTRO.ToList();
                     } else
@@ -72,6 +72,8 @@ namespace SIVIO.UI.Models
                 }
             }
         }
+        public DateTime fecha { get; set; }
+        public string hora { get; set; }
 
         #region COAVIF
         public List<TBL_PERSONA> ListarPersonas()
@@ -141,21 +143,26 @@ namespace SIVIO.UI.Models
             }
         }
 
-        public List<TBL_CONSULTA> ListarConsultas()
+        #endregion
+
+        #region DELEGACION
+        /* //Método RegistrarBitácora, vital para insertar usuario.
+        public static Mensaje RegistrarBitacora(TBL_BITACORA bitacora)
         {
             using (var entidades = new SIVIOEntities())
             {
                 try
                 {
-                    List<TBL_CONSULTA> Consulta = entidades.TBL_CONSULTA.ToList();
-                    return Consulta;
+                    entidades.TBL_BITACORA.Add(bitacora);
+                    entidades.SaveChanges();
+                    return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Bitacora Registrada exitosamente", string.Empty);
                 }
                 catch
                 {
-                    return new List<TBL_CONSULTA>();
+                    return new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Fallo al registrar bitacora", string.Empty);
                 }
             }
-        }
+        }*/
 
         public List<TBL_ATENCION> ListarAtencion()
         {

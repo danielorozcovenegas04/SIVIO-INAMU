@@ -56,6 +56,7 @@ namespace SIVIO.UI.Controllers
                     case (int)Utilitarios.Enumerados.TipoMenu.COAVIFEquipoEstrategico:
                         return View(viewName: "~/Views/Shared/Menu/MenuCoavif.cshtml");
                     case (int)Utilitarios.Enumerados.TipoMenu.DelegacionUnidadesRegionales:
+                        //return View(viewName: "~/Views/Expediente/CrearUsuaria_DelegacionMujer.cshtml");
                         return View(viewName: "~/Views/Shared/Menu/MenuDelegacion.cshtml");
                     default:
                         return View(viewName: "~/Views/Shared/Menu/MenuDefecto.cshtml");
@@ -93,7 +94,7 @@ namespace SIVIO.UI.Controllers
             //usuario.IM_SALT2 = salt2;
             //_modelSeguridad.InsertarUsuario(usuario);
             return View();
-        }
+            }
 
         [AllowAnonymous]
         public JsonResult AutenticarUsuario(string usuario, string clave, int tipoServicio)

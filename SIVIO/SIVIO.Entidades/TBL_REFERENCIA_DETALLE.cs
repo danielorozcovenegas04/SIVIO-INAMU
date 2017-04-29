@@ -22,7 +22,6 @@ namespace SIVIO.Entidades
         public int FK_INSTITUCION { get; set; }
         public int FK_UNIDAD { get; set; }
     
-        public virtual TBL_REFERENCIA TBL_REFERENCIA { get; set; }
         public virtual TBL_UNIDAD TBL_UNIDAD { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
     }

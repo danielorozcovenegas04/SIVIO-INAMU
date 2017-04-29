@@ -18,7 +18,7 @@ namespace SIVIO.Entidades
         public int FK_ROL { get; set; }
         public System.Guid PK_ROLUSUAIO { get; set; }
     
-        public virtual TBL_USUARIO TBL_USUARIO { get; set; }
         public virtual TBL_ROL TBL_ROL { get; set; }
+        public virtual TBL_USUARIO TBL_USUARIO { get; set; }
     }
 }

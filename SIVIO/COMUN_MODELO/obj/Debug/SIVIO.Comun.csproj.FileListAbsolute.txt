@@ -6,10 +6,19 @@ C:\Users\jgomez\Source\Workspaces\SIVIO\COMUN_MODELO\bin\Debug\EntityFramework.x
 C:\Users\jgomez\Source\Workspaces\SIVIO\COMUN_MODELO\obj\Debug\SIVIO.Comun.csprojResolveAssemblyReference.cache
 C:\Users\jgomez\Source\Workspaces\SIVIO\COMUN_MODELO\obj\Debug\COMUN_MODELO.dll
 C:\Users\jgomez\Source\Workspaces\SIVIO\COMUN_MODELO\obj\Debug\COMUN_MODELO.pdb
-C:\Users\b46671\Videos\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\COMUN_MODELO.dll.config
-C:\Users\b46671\Videos\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\COMUN_MODELO.dll
-C:\Users\b46671\Videos\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\COMUN_MODELO.pdb
-C:\Users\b46671\Videos\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\EntityFramework.dll
-C:\Users\b46671\Videos\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\EntityFramework.xml
-C:\Users\b46671\Videos\Proyecto\SIVIO\COMUN_MODELO\obj\Debug\COMUN_MODELO.dll
-C:\Users\b46671\Videos\Proyecto\SIVIO\COMUN_MODELO\obj\Debug\COMUN_MODELO.pdb
+C:\Users\b11882\Desktop\New folder\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\COMUN_MODELO.dll.config
+C:\Users\b11882\Desktop\New folder\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\COMUN_MODELO.dll
+C:\Users\b11882\Desktop\New folder\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\COMUN_MODELO.pdb
+C:\Users\b11882\Desktop\New folder\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\EntityFramework.dll
+C:\Users\b11882\Desktop\New folder\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\EntityFramework.xml
+C:\Users\b11882\Desktop\New folder\Proyecto\SIVIO\COMUN_MODELO\obj\Debug\SIVIO.Comun.csprojResolveAssemblyReference.cache
+C:\Users\b11882\Desktop\New folder\Proyecto\SIVIO\COMUN_MODELO\obj\Debug\COMUN_MODELO.dll
+C:\Users\b11882\Desktop\New folder\Proyecto\SIVIO\COMUN_MODELO\obj\Debug\COMUN_MODELO.pdb
+G:\GIT UCR\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\COMUN_MODELO.dll.config
+G:\GIT UCR\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\COMUN_MODELO.dll
+G:\GIT UCR\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\COMUN_MODELO.pdb
+G:\GIT UCR\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\EntityFramework.dll
+G:\GIT UCR\Proyecto\SIVIO\COMUN_MODELO\bin\Debug\EntityFramework.xml
+G:\GIT UCR\Proyecto\SIVIO\COMUN_MODELO\obj\Debug\SIVIO.Comun.csprojResolveAssemblyReference.cache
+G:\GIT UCR\Proyecto\SIVIO\COMUN_MODELO\obj\Debug\COMUN_MODELO.dll
+G:\GIT UCR\Proyecto\SIVIO\COMUN_MODELO\obj\Debug\COMUN_MODELO.pdb

@@ -7,3 +7,8 @@ C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Entidades\bin\Debug\SIVIO.Entidade
 C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.csprojResolveAssemblyReference.cache
 C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.dll
 C:\Users\jgomez\Source\Workspaces\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.pdb
+C:\Users\Daniel Orozco\Documents\GitHub\Proyecto\SIVIO Entrega INAMU\SIVIO.Entidades\bin\Debug\SIVIO.Entidades.dll
+C:\Users\Daniel Orozco\Documents\GitHub\Proyecto\SIVIO Entrega INAMU\SIVIO.Entidades\bin\Debug\SIVIO.Entidades.pdb
+C:\Users\Daniel Orozco\Documents\GitHub\Proyecto\SIVIO Entrega INAMU\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.csprojResolveAssemblyReference.cache
+C:\Users\Daniel Orozco\Documents\GitHub\Proyecto\SIVIO Entrega INAMU\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.dll
+C:\Users\Daniel Orozco\Documents\GitHub\Proyecto\SIVIO Entrega INAMU\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.pdb

@@ -58,6 +58,90 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
+        public ActionResult CrearUsuaria_DatosUsuaria()
+        {
+            /*
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+            */
+            return View(viewName: "~/Views/Expediente/CrearUsuaria_DatosUsuaria.cshtml");
+        }
+
+        [Authorize]
+        public ActionResult CrearUsuaria_DatosPerfil()
+        {
+            /*
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+            */
+            return View(viewName: "~/Views/Expediente/CrearUsuaria_DatosPerfil.cshtml");
+        }
+
+        [Authorize]
+        public ActionResult MenuExpediente()
+        {
+            /*
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+            */
+            return View(viewName: "~/Views/Expediente/MenuExpediente.cshtml");
+        }
+
+        public ActionResult CrearUsuaria_DatosAdministrativos()
+        {
+            _modelExpediente.fecha = DateTime.Now.Date;
+            /*
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+            */
+            return View(_modelExpediente); 
+        }
+
+        [Authorize]
         public ActionResult BusquedaExpediente(string palabra) {
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion)) {
@@ -254,13 +338,71 @@ namespace SIVIO.UI.Controllers
             }
             return View(listaRegistro);
         }
+        #endregion
 
+        #region Delegacion
         [Authorize]
-        public ActionResult ConsultaPersona()
+        public ActionResult Delegacion_Mujer()
         {
-
-            return View();
+            /*
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
+            }
+            */
+            return View(viewName: "~/Views/Expediente/Delegacion_Mujer.cshtml");
         }
+
+        public JsonResult CargarDropdowns()
+        {
+            dynamic objetoRetorno = new ExpandoObject();
+            try
+            {
+                objetoRetorno.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
+                objetoRetorno.CatalogoNacionalidad = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Nacionalidad).
+                    TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoCondicionCivil = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.EstadoCivil).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoEscolaridad = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.GradoAcademico).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoEmbarazo = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Embarazo).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoCondicionMigratoria = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.SituacionMigratoria).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoOcupacion = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Ocupacion).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoIdentidadGenero = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Genero).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoOrigenEtnico = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Etnia).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoCondicionLaboral = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.SituacionLaboral).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoTipoFamilia = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.TipoFamilia).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoTipoVivienda = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.TipoVivienda).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoParentesco = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Parentesco).
+                   TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+
+                return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objetoRetorno), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                objetoRetorno.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al cargar catálogos", string.Empty);
+                return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objetoRetorno), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
         #endregion
     }
 }

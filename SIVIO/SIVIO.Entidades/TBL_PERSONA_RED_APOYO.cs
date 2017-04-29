@@ -19,8 +19,12 @@ namespace SIVIO.Entidades
         public string VC_NOMBRE { get; set; }
         public string VC_OBSERVACIONES { get; set; }
         public int FK_TIPOREDAPOYO { get; set; }
+        public Nullable<int> FK_INSTITUCION { get; set; }
+        public string VC_TELEFONO { get; set; }
+        public string VC_RELACION { get; set; }
     
         public virtual TBL_PERSONA TBL_PERSONA { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO1 { get; set; }
     }
 }
