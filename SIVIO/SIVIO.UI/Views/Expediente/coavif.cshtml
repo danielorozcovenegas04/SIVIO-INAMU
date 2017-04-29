@@ -18,15 +18,134 @@
 
     var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
     $(document).ready(function () {
-        $.LoadingOverlay("hide");
-        debugger;
-        
-        debugger;
-        document.title = "SIVIO - Editar Persona Usuaria";
+        PrevenirCaracteresInvalidos();
+        document.title = "SIVIO - Coavif y Equipo Estrategico";
+        CargarDivisionTerritorial();
         InicializarOtrosEventos();
-        InicializarCamposObservaciones();
-
     });
+
+    function CargarDivisionTerritorial() {
+        var divisionTerritorial = JSON.parse(localStorage.getItem('divisionTerritorial'));
+        $("#cmbPersonaProvincia")
+            .change(function () {
+                debugger;
+                $('#cmbPersonaCanton').find('option').remove().end();
+                $('#cmbPersonaDistrito').find('option').remove().end();
+                var personaProvinciaSel = $("#cmbPersonaProvincia").val();
+                for (var j = 0; j < divisionTerritorial[1].Value.length; j++) {
+                        //console.log(data[0].Value[j].VC_DESCRIPCION);
+                    if (divisionTerritorial[1].Value[j].I_IDPROVINCIA == personaProvinciaSel) {
+                        $("#cmbPersonaCanton")
+                            .append($("<option />")
+                                .val(divisionTerritorial[1].Value[j].I_IDCANTON)
+                                .text(divisionTerritorial[1].Value[j].VC_DESCRIPCION));
+                    }
+
+                }
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                        //console.log(data[0].Value[j].VC_DESCRIPCION);
+                    if (divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &
+                        divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel) {
+                        $("#cmbPersonaDistrito")
+                            .append($("<option />")
+                                .val(divisionTerritorial[2].Value[j].I_IDDISTRITO)
+                                .text(divisionTerritorial[2].Value[j].VC_DESCRIPCION));
+                    }
+                }
+                var personaDistritoSel = $("#cmbPersonaDistrito").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    if (divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel &&
+                        divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &&
+                        divisionTerritorial[2].Value[j].I_IDDISTRITO == personaDistritoSel) {
+                        var distritoSeleccionado = divisionTerritorial[2].Value[j];
+                        $("#cmbPersonaRegion").val(distritoSeleccionado.I_IDREGION);
+                    }
+                }
+
+            });
+        $("#cmbPersonaCanton")
+            .change(function () {
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                var personaProvinciaSel = $("#cmbPersonaProvincia").val();
+                $('#cmbPersonaDistrito').find('option').remove().end();
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                        //console.log(data[0].Value[j].VC_DESCRIPCION);
+                    if (divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &
+                        divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel) {
+                        $("#cmbPersonaDistrito")
+                            .append($("<option />")
+                                .val(divisionTerritorial[2].Value[j].I_IDDISTRITO)
+                                .text(divisionTerritorial[2].Value[j].VC_DESCRIPCION));
+                    }
+                }
+                var personaDistritoSel = $("#cmbPersonaDistrito").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    if (divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel &&
+                        divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &&
+                        divisionTerritorial[2].Value[j].I_IDDISTRITO == personaDistritoSel) {
+                        var distritoSeleccionado = divisionTerritorial[2].Value[j];
+                        $("#cmbPersonaRegion").val(distritoSeleccionado.I_IDREGION);
+                    }
+                }
+
+            });
+        $("#cmbPersonaDistrito")
+            .change(function () {
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                var personaProvinciaSel = $("#cmbPersonaProvincia").val();
+                var personaDistritoSel = $("#cmbPersonaDistrito").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    if (divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel &&
+                        divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &&
+                        divisionTerritorial[2].Value[j].I_IDDISTRITO == personaDistritoSel) {
+                        var distritoSeleccionado = divisionTerritorial[2].Value[j];
+                        $("#cmbPersonaRegion").val(distritoSeleccionado.I_IDREGION);
+                    }
+                }
+
+            });
+
+
+        for (var j = 0; j < divisionTerritorial[0].Value.length; j++) {
+                //console.log(data[0].Value[j].VC_DESCRIPCION);
+            $("#cmbPersonaProvincia")
+                .append($("<option />")
+                    .val(divisionTerritorial[0].Value[j].I_IDPROVINCIA)
+                    .text(divisionTerritorial[0].Value[j].VC_DESCRIPCION));
+        }
+        var empresaProvinciaSel = $("#cmbPersonaProvincia").val();
+        for (var j = 0; j < divisionTerritorial[1].Value.length; j++) {
+                //console.log(data[0].Value[j].VC_DESCRIPCION);
+            if (divisionTerritorial[1].Value[j].I_IDPROVINCIA == empresaProvinciaSel) {
+                $("#cmbPersonaCanton")
+                    .append($("<option />")
+                        .val(divisionTerritorial[1].Value[j].I_IDCANTON)
+                        .text(divisionTerritorial[1].Value[j].VC_DESCRIPCION));
+            }
+
+        }
+
+
+        var empresaCantonSel = $("#cmbPersonaCanton").val();
+        for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                //console.log(data[0].Value[j].VC_DESCRIPCION);
+            if (divisionTerritorial[2].Value[j].I_IDCANTON == empresaCantonSel &
+                divisionTerritorial[2].Value[j].I_IDPROVINCIA == empresaProvinciaSel) {
+                $("#cmbPersonaDistrito")
+                    .append($("<option />")
+                        .val(divisionTerritorial[2].Value[j].I_IDDISTRITO)
+                        .text(divisionTerritorial[2].Value[j].VC_DESCRIPCION));
+            }
+
+        }
+
+        for (var j = 0; j < divisionTerritorial[3].Value.length; j++) {
+            $("#cmbPersonaRegion")
+                .append($("<option />").val(divisionTerritorial[3].Value[j].I_IDREGION).text(divisionTerritorial[3].Value[j].VC_DESCRIPCION));
+        }
+    }
 
     function InicializarOtrosEventos() {
         var d = new Date();
@@ -174,10 +293,6 @@
             }
         });
 
-        function volver() {
-            window.location.href = '/sipamu/';
-        }
-
     }
 
 </script>
@@ -238,7 +353,7 @@
             <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
 
             <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
-    
+
             <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
 
             <button type="button" id="btnCerrarCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Cerrar Caso</button>
@@ -248,7 +363,7 @@
             <form id="formCoavif" method="post">
                 <div style="margin-left:20px;">
                     @*<h2>Expediente de: @Model.persona.VC_NOMBRE @Model.persona.VC_APELLIDO1 @Model.persona.VC_APELLIDO2</h2>
-                    <h4>Identificación: @Model.persona.VC_IDENTIFICACION <br /> Número de expediente: @Model.persona.PK_PERSONA</h4>*@
+                        <h4>Identificación: @Model.persona.VC_IDENTIFICACION <br /> Número de expediente: @Model.persona.PK_PERSONA</h4>*@
                 </div>
                 <ul class="nav nav-tabs">
                     <li class="active">
@@ -281,8 +396,8 @@
                                 </div>
                                 <div class="col-md-2">
                                     @*<button class="botonCerrar danger" id="btnCerrarFrmDatosAdministrativos">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </button>*@
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>*@
                                 </div>
                             </div>
                             <div class="row">
@@ -405,15 +520,15 @@
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label>Provincia</label>
-                                        <select id="comProvincia" class="form-control"></select>
+                                        <select id="cmbPersonaProvincia" class="form-control" required></select>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label>Cantón</label>
-                                        <select id="comCanton" class="form-control"></select>
+                                        <select id="cmbPersonaCanton" class="form-control" required></select>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label>Distrito</label>
-                                        <select id="comDistrito" class="form-control"></select>
+                                        <select id="cmbPersonaDistrito" class="form-control" required></select>
                                     </div>
 
                                     <div class="col-md-12 form-group">
@@ -477,11 +592,11 @@
                     </div>
                 </div>
 
-        
+
 
             </form>
         </div>
-        </div>
+    </div>
 </div>
 
 

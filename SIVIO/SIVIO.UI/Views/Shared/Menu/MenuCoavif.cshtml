@@ -3,6 +3,29 @@
 }
 <script type="text/javascript">
     $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("RetornarDivisionTerritorial", "Catalogos")',
+            // to get the right path to controller from TableRoutes of Asp.Net MVC
+            dataType: "json", //to work with json format
+            type: "POST", //to do a post request
+            contentType: 'application/json; charset=utf-8', //define a contentType of your request
+            cache: false, //avoid caching results
+            async: true,
+            data: {}, // here you can pass arguments to your request if you need
+            success: function (data) {
+                // data is your result from controller
+                localStorage.setItem('divisionTerritorial', JSON.stringify(data));
+
+            },
+            error: function (xhr) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Conexión Fallida");
+                $("#txtModalContenido").text("Fallo al cargar división territorial");
+                instMensajes.open();
+                $("#contenedorEsperaIndicadores").hide();
+                $("#pnlIndicadoresRegion").show();
+            }
+        });
         var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
         $('#btnCerrarSesion').click(function () {
             $.LoadingOverlay("show");
@@ -30,87 +53,12 @@
             window.location.href = '@Url.Action("Index", "Home")';
         });
 
-
-        $('#btncoavif').click(function () {
+        $('#btnExpedientes').click(function () {
             debugger;
             $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("Coavif", "Expediente")',
-                async: true
-            }).done(function (data) {
-
-                $.LoadingOverlay("hide");
-                $('#contendorFrames').html(data);
-                $("#contenedorEspera").hide();
-                $('#contendorFrames').fadeIn();
-
-
-            }).fail(function (exception) {
-                $("#txtModalTitulo").css("color", "red");
-                $("#txtModalTitulo").text("Error de Sistema");
-                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-                $("#contenedorEspera").hide();
-                instMensajes.open();
-                $.LoadingOverlay("hide");
-            });
-        });
-
-        $('#btpRptConsultas').click(function () {
-            debugger;
-            $.LoadingOverlay("show");
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("GridConsultaCoavif", "Expediente")',
-                async: true
-            }).done(function (data) {
-
-                $.LoadingOverlay("hide");
-                $('#contendorFrames').html(data);
-                $("#contenedorEspera").hide();
-                $('#contendorFrames').fadeIn();
-
-
-            }).fail(function (exception) {
-                $("#txtModalTitulo").css("color", "red");
-                $("#txtModalTitulo").text("Error de Sistema");
-                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-                $("#contenedorEspera").hide();
-                instMensajes.open();
-                $.LoadingOverlay("hide");
-            });
-        });
-
-        $('#btnBuscarExpediente').click(function () {
-            debugger;
-            $.LoadingOverlay("show");
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("BusquedaExpediente", "Expediente")',
-                async: true
-            }).done(function (data) {
-
-                $.LoadingOverlay("hide");
-                $('#contendorFrames').html(data);
-                $("#contenedorEspera").hide();
-                $('#contendorFrames').fadeIn();
-
-
-            }).fail(function (exception) {
-                $("#txtModalTitulo").css("color", "red");
-                $("#txtModalTitulo").text("Error de Sistema");
-                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-                $("#contenedorEspera").hide();
-                instMensajes.open();
-                $.LoadingOverlay("hide");
-            });
-        });
-        $('#btpRptConsultas').click(function () {
-            debugger;
-            $.LoadingOverlay("show");
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("ConsultaCoavif", "Expediente")',
                 async: true
             }).done(function (data) {
 
@@ -147,13 +95,11 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li><img src="http://www.inamu.go.cr/tema_principal_interno-theme/images/main-logo.png" alt="logo" style="padding-left: 6px"></li>
-                @*<li style="padding-top: 5px;">
-                        <a href="#" id="btnPrincipal">
-                            <i class="pe-7s-home"></i>
-                            <span>Inicio</span>
-                        </a>
-                    </li>*@
+
+                <li>
+                    <img src="http://www.inamu.go.cr/tema_principal_interno-theme/images/main-logo.png" alt="logo" style="padding-left: 6px">
+                </li>
+
                 <li>
                     <a href="#" id="btnInicio">
                         <i class="pe-7s-home"></i>
@@ -162,54 +108,22 @@
 
                 </li>
 
-
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="pe-7s-note2" style="margin-right: 3px"></i>Expediente <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" id="btnBuscarExpediente">Buscar Expediente</a></li>
-                        <li><a href="#" id="btncoavif">vista COAVIF</a></li>
-                        <li><a href="#" id="btnBuscarPersona">Buscar Persona en el Padrón</a></li>
-                        <li><a href="#" id="btnSistemas">Buscar en Sistemas INAMU</a></li>
-
-
-                    </ul>
+                <li class="nav">
+                    <a href="#" id="btnExpedientes">Expedientes</a>
                 </li>
-                @*@if (Model)
-                    {
-                        <text>*@
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="pe-7s-settings" style="margin-right: 3px"></i>Referencias <span class="caret"></span>
-                    </a>
-                    <!--jose angel-->
-                    <ul class="dropdown-menu">
-                        <li><a href="#" id="btnBuscarReferencia">Buscar</a></li>
-                        <li><a href="#" id="btnReferir">Referir</a></li>
-                    </ul>
-                    <!--Jose angel-->
 
+                <li class="nav">
+                    <a href="#" id="btnAtenciones">Atenciones</a>
                 </li>
-                @*</text>
-                    }*@
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="pe-7s-news-paper" style="margin-right: 3px"></i>Reportes <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-header">Expedientes</li>
-                        <li><a href="#" id="btnRptAtenciones">Reporte de Expedientes</a></li>
-                        <li class="dropdown-header">Flujos de Trabajo</li>
-                        <li><a href="#" id="btpRptConsultas">Reporte de Consultas</a></li>
-                        <li><a href="#" id="btnRptAtenciones">Reporte de Atenciones</a></li>
-                        @*<li class="dropdown-header">Seguridad</li>
-                            <li class="dropdown-header">Otros</li>*@
-
-                    </ul>
+                <li class="nav">
+                    <a href="#" id="btnReferencias">Referencias</a>
                 </li>
+
+                <li class="nav">
+                    <a href="#" id="btnReportes">Reportes</a>
+                </li>
+
             </ul>
 
 
@@ -224,5 +138,5 @@
             </ul>
         </div><!--/.nav-collapse -->
     </div>
-</nav>
 
+</nav>
