@@ -56,15 +56,27 @@ C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFrame
 C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.csprojResolveAssemblyReference.cache
 C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.dll
 C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.pdb
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.dll.config
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.dll
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.pdb
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.dll
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.Entidades.dll
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.Entidades.pdb
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.xml
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.csprojResolveAssemblyReference.cache
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.dll
-C:\Users\b16802\Desktop\New folder\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.pdb
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.dll.config
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.dll
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.pdb
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.dll
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.Entidades.dll
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.Entidades.pdb
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.xml
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.csprojResolveAssemblyReference.cache
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.dll
+C:\Users\b16802\Desktop\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.pdb
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.dll.config
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.dll
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.AccesoDatos.pdb
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.dll
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.Entidades.dll
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\SIVIO.Entidades.pdb
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.xml
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.csprojResolveAssemblyReference.cache
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.dll
+C:\Users\b46671\Videos\Proyecto\SIVIO\SIVIO.AccesoDatos\obj\Debug\SIVIO.AccesoDatos.pdb

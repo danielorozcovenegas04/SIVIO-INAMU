@@ -52,9 +52,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EFJson">
-      <HintPath>..\..\..\EFJson.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -353,10 +350,9 @@
     <Content Include="Views\Expediente\GridRegistros.cshtml" />
     <Content Include="Views\Expediente\BusquedaExpediente.cshtml" />
     <Content Include="Views\Expediente\CrearCaso.cshtml" />
-    <Content Include="Views\Expediente\FrmCrearUsuariaAT.cshtml" />
     <Content Include="Views\Expediente\Coavif.cshtml" />
     <Content Include="Views\Expediente\ConsultaCoavif.cshtml" />
-    <Content Include="Views\Expediente\ConsultaPersona.cshtml" />
+    <Content Include="Views\Expediente\CrearUsuariaAtencionComunidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -370,10 +366,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\COMUN_MODELO\SIVIO.Comun.csproj">
-      <Project>{f61328bc-dd55-4f0c-bc99-15b35899c934}</Project>
-      <Name>SIVIO.Comun</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SIVIO.AccesoDatos\SIVIO.AccesoDatos.csproj">
       <Project>{AF6F3493-0F38-4449-8BF2-7D0AB1F9A5F0}</Project>
       <Name>SIVIO.AccesoDatos</Name>

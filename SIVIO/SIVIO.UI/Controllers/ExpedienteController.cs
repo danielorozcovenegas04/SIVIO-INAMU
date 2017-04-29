@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
-using COMUN_MODELO;
 using System.Web.Mvc;
 using static SIVIO.UI.Models.ExpedienteModel;
 
@@ -28,9 +27,26 @@ namespace SIVIO.UI.Controllers
         {
             return View();
         }
+        
+        [AllowAnonymous]
+        public JsonResult ListarCatalogosCrearCaso()
+        {
+            List<int> catalogos = new List<int>()
+            {
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoCEAAM,
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoIngresoCEEAM,
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoEgresoCEEAM,
+                (int)Utilitarios.Enumerados.EnumCatalogos.RespuestaSiNosponible,
+
+            };
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_modelCatalogos.llenarListaCatalogos(catalogos)), JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
         [Authorize]
-        public ActionResult FrmCrearUsuariaAT() {
+        public ActionResult CrearUsuariaAtencionComunidad() {
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion)) {
                 return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
@@ -95,7 +111,6 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult Coavif()
         {
-            //var catalogoServicios = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Nacionalidad);
             return View();
         }
         [AllowAnonymous]
