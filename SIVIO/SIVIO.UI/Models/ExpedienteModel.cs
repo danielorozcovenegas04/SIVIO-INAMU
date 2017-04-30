@@ -72,7 +72,8 @@ namespace SIVIO.UI.Models
             }
         }
 
-        public void InsertarPersonaConAgresor(TBL_PERSONA persona, TBL_AGRESOR agresor, TBL_LABORAL laboral, TBL_ADICCIONES adicciones)
+        public void InsertarPersonaConAgresor(TBL_PERSONA persona, TBL_AGRESOR agresor,
+            TBL_LABORAL laboral, TBL_ADICCIONES adicciones, TBL_PERSONA_RED_APOYO apoyo1)
         {
             using (var entidades = new SIVIOEntities())
             {
@@ -80,6 +81,7 @@ namespace SIVIO.UI.Models
                 entidades.Entry(persona).State = System.Data.Entity.EntityState.Added;
                 entidades.Entry(laboral).State = System.Data.Entity.EntityState.Added;
                 //entidades.Entry(adicciones).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(apoyo1).State = System.Data.Entity.EntityState.Added;
 
                 entidades.SaveChanges();
             }
