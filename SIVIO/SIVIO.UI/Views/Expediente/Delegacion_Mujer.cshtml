@@ -966,26 +966,26 @@
                     <!--Finaliza pestaña Datos de perfil de usuaria-->
                     <div id="historialViolencia" class="tab-pane">
 
-                        <div class="row comunForm">
-                            <ul class="nav nav-tabs">
-                                <li class="active">
-                                    <a data-toggle="tab" href="#perAgresora">
-                                        <i class="fa fa-file-text" aria-hidden="true"></i>Persona agresora
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#relHechos">
-                                        <i class="fa fa-address-card" aria-hidden="true"></i>Relato de los hechos
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#valRiesgo">
-                                        <i class="fa fa-address-card" aria-hidden="true"></i>Valoracion de riesgo
-                                    </a>
-                                </li>
-                            </ul>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#perAgresora">
+                                    <i class="fa fa-file-text" aria-hidden="true"></i>Persona Agresora
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#relHechos">
+                                    <i class="fa  fa-file-text" aria-hidden="true"></i>Relato de hechos
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#valRiesgo">
+                                    <i class="fa  fa-file-text" aria-hidden="true"></i>Valoración de riesgo
+                                </a>
+                            </li>
+                        </ul>
 
-                            <div id="perAgresora" class="tab-pane">
+                        <div class="tab-content">
+                            <div id="perAgresora" class="tab-pane fade in active">
                                 <div class="row comunForm">
                                     <div class="row">
                                         <div class="col-xs-4 form-group">
@@ -995,7 +995,7 @@
 
                                         <div class="col-xs-4 form-group">
                                             <label>Ocupación de la persona agresora:</label>
-                                            <select id="cmbOcupacionHistoria" /> 
+                                            <select id="cmbOcupacionHistoria" />
                                         </div>
                                     </div>
 
@@ -1003,7 +1003,7 @@
                                     <div class="row">
                                         <div class="col-xs-4 form-group">
                                             <label>Sexo de la persona agresora:</label>
-                                            <select id="cmbGeneroHistoria" /> 
+                                            <select id="cmbGeneroHistoria" />
                                             <datalist id="exampleList">
                                                 <option value="femenino">
                                                 <option value="masculino">
@@ -1012,7 +1012,7 @@
                                         <div class="col-xs-4 form-group">
                                             <label>Escolaridad de la persona agresora:</label>
 
-                                            <select  id="cmbEscolaridadHistoria" />                  
+                                            <select id="cmbEscolaridadHistoria" />
                                         </div>
                                     </div>
 
@@ -1075,31 +1075,31 @@
                                             <button type="button" id="guardar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                             <div id="relHechos" class="tab-pane">
                                 <div class="row comunForm">
-                                    <div class="row">
-                                        <div class="col-xs-4 form-group">
-                                            <div class="col-xs-4 form-group" style="">
-                                                <label>Relato hechos de violencia:</label>
-                                                <textarea rows="10" cols="60" id="txtRelato" style="width: 100%"></textarea>
+                                    <div class="row comunForm">
+                                        <div class="row">
+                                            <div class="col-xs-4 form-group">
+                                                <div class="col-xs-4 form-group" style="">
+                                                    <label>Relato hechos de violencia:</label>
+                                                    <textarea rows="10" cols="60" id="txtRelato" style="width: 100%"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-4 form-group">
+                                                <label>tiempo de la relación:</label>
+                                                <input type="text" class="form-control" placeholder="." id="txtTiempoRelacion" value="" />
+                                                <label>tiempo de la agresión:</label>
+                                                <input type="text" class="form-control" placeholder="." id="txtTiempoAgresion" value="" />
                                             </div>
                                         </div>
-
-                                        <div class="col-xs-4 form-group">
-                                            <label>tiempo de la relación:</label>
-                                            <input type="text" class="form-control" placeholder="." id="txtTiempoRelacion" value="" />
-                                            <label>tiempo de la agresión:</label>
-                                            <input type="text" class="form-control" placeholder="." id="txtTiempoAgresion" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="row" id="contenedorBotonesRelHechos">
-                                        <div class="col-xs-4 form-group">
-                                            <button type="button" id="cancelar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
-                                            <button type="button" id="guardar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                        <div class="row" id="contenedorBotonesRelHechos">
+                                            <div class="col-xs-4 form-group">
+                                                <button type="button" id="cancelar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                                <button type="button" id="guardar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1167,6 +1167,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
         <div id="atencion" class="tab-pane">
             <div class="row comunForm">
