@@ -67,12 +67,21 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult CrearUsuariaAtencionComunidadPost(TBL_PERSONA persona, TBL_AGRESOR agresor) {
+        public ActionResult CrearUsuariaAtencionComunidadPost(TBL_PERSONA persona, TBL_AGRESOR agresor, TBL_LABORAL laboral, TBL_ADICCIONES adicciones) {
             try {
                 var listaAgresor = new List<TBL_AGRESOR>();
                 listaAgresor.Add(agresor);
                 persona.TBL_AGRESOR = listaAgresor;
-                _modelExpediente.InsertarPersonaConAgresor(persona, agresor);
+
+                /*
+                var listaAdicciones = new List<TBL_ADICCIONES>();
+                listaAdicciones.Add(adicciones);
+                persona.TBL_ADICCIONES = listaAdicciones;
+                */
+
+                persona.TBL_LABORAL = laboral;
+
+                _modelExpediente.InsertarPersonaConAgresor(persona, agresor, laboral, adicciones);
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "true" }));
             } catch (Exception ex) {
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "false", error = ex.ToString() }));
