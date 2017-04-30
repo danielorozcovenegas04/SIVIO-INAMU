@@ -1,6 +1,7 @@
 ﻿using SIVIO.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
@@ -67,21 +68,24 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult CrearUsuariaAtencionComunidadPost(TBL_PERSONA persona, TBL_AGRESOR agresor, TBL_LABORAL laboral, TBL_ADICCIONES adicciones) {
+        public ActionResult CrearUsuariaAtencionComunidadPost(TBL_PERSONA persona, TBL_AGRESOR agresor,
+            TBL_LABORAL laboral, TBL_ADICCIONES adicciones, TBL_PERSONA_RED_APOYO apoyo1) {
             try {
                 var listaAgresor = new List<TBL_AGRESOR>();
                 listaAgresor.Add(agresor);
                 persona.TBL_AGRESOR = listaAgresor;
-
                 /*
                 var listaAdicciones = new List<TBL_ADICCIONES>();
                 listaAdicciones.Add(adicciones);
                 persona.TBL_ADICCIONES = listaAdicciones;
                 */
+                var listaApoyo1 = new List<TBL_PERSONA_RED_APOYO>();
+                listaApoyo1.Add(apoyo1);
+                persona.TBL_PERSONA_RED_APOYO = listaApoyo1;
 
                 persona.TBL_LABORAL = laboral;
 
-                _modelExpediente.InsertarPersonaConAgresor(persona, agresor, laboral, adicciones);
+                _modelExpediente.InsertarPersonaConAgresor(persona, agresor, laboral, adicciones, apoyo1);
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "true" }));
             } catch (Exception ex) {
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "false", error = ex.ToString() }));

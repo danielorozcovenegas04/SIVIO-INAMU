@@ -120,14 +120,16 @@
             var agresor = serializeArrayAObjeto($("#formagresor").serializeArray());
             var laboral = serializeArrayAObjeto($("#formlaboral").serializeArray());
             var adicciones = serializeArrayAObjeto($("#formadicciones").serializeArray());
+            var apoyo1 = serializeArrayAObjeto($("#formapoyo1").serializeArray());
 
             var objparapost = {
                 persona: persona,
                 agresor: agresor,
                 laboral: laboral,
-                adicciones: adicciones
+                adicciones: adicciones,
+                apoyo1: apoyo1
             }
-            console.log(adicciones);
+            console.log(apoyo1);
 
             $.ajax({
                 type: "POST",
@@ -164,13 +166,6 @@
             $('#btn-login').fadeIn();
             $.LoadingOverlay("hide");
         });
-
-
-
-
-
-
-
     });
 </script>
 
@@ -409,7 +404,7 @@
         <div id="tabPerfilUsuaria" class="tab-pane fade in active">
             <h3>Perfil</h3><br>
 
-            @* Pestaña Perfil de la Usuaria *@
+            @* Primera pestaña *@
             <div class="row" id="tabPerfilUsuaria">
 
                 <form id="formpersona" method="post">
@@ -540,7 +535,7 @@
                         <label>Condición laboral</label><br>
                         <div class="row">
                             <div class="col-xs-12">
-                                <select id="cmbCondicionLaboral" class="form-control" name="FK_CONDICIONLABORAL">
+                                <select id="cmbCondicionLaboral" class="form-control" name="FK_CONDICIONLABORAL" required>
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
@@ -584,46 +579,56 @@
 
                 @* Cuarta columna *@
                 <div class="col-xs-4 form-group">
-                    <h5>Primaria:</h5><br>
-                    <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><br>
-                    <label>Relación</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                    <form id="formapoyo1" method="post">
+                        <h5>Primaria:</h5><br>
+                        <label>Nombre</label>
+                        <input class="form-control" id="txtNombreApoyo1" name="VC_NOMBRE" type="text" value='Nombre Apoyo 1' required=""><br>
+                        <label>Relación</label>
+                        <input class="form-control" id="txtRelacionApoyo1" name="VC_RELACION" type="text" value='Relacion 1' required=""><br>
+                        <label>Teléfono</label>
+                        <input class="form-control" id="txtTelefonoApoyo1" name="VC_TELEFONO" type="text" value='24335335' required=""><br>
+                        <br><br>
+                        <input type="hidden" name="FK_TIPOREDAPOYO" value="613" /> @* 80=Tipo de red de apoyo *@
+                        <input type="hidden" name="VC_OBSERVACIONES" value="ninguna" />
+                    </form>
+
+                    <label>Nombre (otro)</label><input class="form-control" id="txtNombreApoyo2" name="VC_NOMBRE" type="text" value='Nombre Apoyo 2'><br>
+                    <label>Relación</label><input class="form-control" id="txtRelacionApoyo2" name="VC_RELACION" type="text" value='Relacion 2'><br>
+                    <label>Teléfono</label><input class="form-control" id="txtTelefonoApoyo2" type="text" value='Telefono Apoyo 2'><br>
                     <br><br>
-                    <label>Nombre (otro)</label><input class="form-control" id="txtRecApoyo" type="text"><br>
-                    <label>Relación</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                    <br><br>
-                    <label>Nombre (otro)</label><input class="form-control" id="txtRecApoyo" type="text"><br>
-                    <label>Relación</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                    <label>Nombre (otro)</label><input class="form-control" id="txtNombreApoyo3" name="VC_NOMBRE" type="text" value='Nombre Apoyo 3'><br>
+                    <label>Relación</label><input class="form-control" id="txtRelacionApoyo3" name="VC_RELACION" type="text" value='Relacion 3'><br>
+                    <label>Teléfono</label><input class="form-control" id="txtTelefonoApoyo3" type="text" value='Telefono Apoyo 3'><br>
+
                 </div>
 
                 @* Quinta columna *@
                 <div class="col-xs-4 form-group">
                     <h5>Secundaria:</h5><br>
-                    <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><br>
-                    <label>Relación</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                    <label>Nombre</label><input class="form-control" id="txtNombreSecApoyo1" type="text"><br>
+                    <label>Relación</label><input class="form-control" id="txtSecRelacionApoyo1" type="text"><br>
+                    <label>Teléfono</label><input class="form-control" id="txtSecTelefonoApoyo1" type="text"><br>
                     <br><br>
-                    <label>Nombre (otro)</label><input class="form-control" id="txtRecApoyo" type="text"><br>
-                    <label>Relación</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                    <label>Nombre (otro)</label><input class="form-control" id="txtNombreSecApoyo2" type="text"><br>
+                    <label>Relación</label><input class="form-control" id="txtSecRelacionApoyo2" type="text"><br>
+                    <label>Teléfono</label><input class="form-control" id="txtSecTelefonoApoyo2" type="text"><br>
                 </div>
 
                 @* Sexta columna *@
                 <div class="col-xs-4 form-group">
                     <h5>Institucional:</h5><br>
-                    <label>Nombre</label><input class="form-control" id="txtRecApoyo" type="text"><br>
-                    <label>Institución</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                    <label>Nombre</label><input class="form-control" id="txtNombreInstApoyo1" type="text"><br>
+                    <label>Institución</label><input class="form-control" id="txtInstApoyo1" type="text"><br>
+                    <label>Teléfono</label><input class="form-control" id="txtInstTelefonoApoyo1" type="text"><br>
                     <br><br>
-                    <label>Nombre (otro)</label><input class="form-control" id="txtRecApoyo" type="text"><br>
-                    <label>Institución</label><input class="form-control" id="txtRecApoyo" type="number"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtRecApoyo" type="number"><br>
+                    <label>Nombre (otro)</label><input class="form-control" id="txtNombreInstApoyo2" type="text"><br>
+                    <label>Institución</label><input class="form-control" id="txtInstApoyo2" type="text"><br>
+                    <label>Teléfono</label><input class="form-control" id="txtInstTelefonoApoyo2" type="text"><br>
                 </div>
             </div>
         </div>
 
+        @* Segunda pestaña *@
         <div id="tabHistoriaViolencia" class="tab-pane fade" style="padding:5px">
             <h3>Historia de Violencia</h3>
             <div class="row" id="tabHIstoriaViolencia">
