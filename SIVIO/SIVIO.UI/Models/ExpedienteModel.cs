@@ -10,19 +10,18 @@ namespace SIVIO.UI.Models
 {
     public class ExpedienteModel
     {
-        public List<TBL_CONSULTA> ListarConsultas(int persona)
+        public List<TBL_CONSULTA> ListarConsultas(Guid caso)
         {
             using (var entidades = new SIVIOEntities())
             {
 
                 try
                 {
-                    var personaConsulta = entidades.TBL_PERSONA.FirstOrDefault(p => p.PK_PERSONA == persona);
-                    if (personaConsulta != null)
+                    var casoConsulta = entidades.TBL_REGISTRO.FirstOrDefault(c => c.PK_REGISTRO == caso);
+                    if (casoConsulta != null)
                     {
-                        return personaConsulta
-                            .TBL_REGISTRO.Select(r => r.TBL_CONSULTA) // tomar las consultas de cada registro asociado a la persona
-                            .SelectMany(i => i) // aplanar la lista de lista de consultas
+                        return casoConsulta
+                            .TBL_CONSULTA // tomar consultas del caso
                             .ToList(); // convertirlo a una lista
                     }
                     else
@@ -70,6 +69,21 @@ namespace SIVIO.UI.Models
                 } catch {
                     return new List<TBL_PERSONA>();
                 }
+            }
+        }
+
+        public void InsertarPersonaConAgresor(TBL_PERSONA persona, TBL_AGRESOR agresor,
+            TBL_LABORAL laboral, TBL_ADICCIONES adicciones, TBL_PERSONA_RED_APOYO apoyo1)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                entidades.Entry(agresor).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(persona).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(laboral).State = System.Data.Entity.EntityState.Added;
+                //entidades.Entry(adicciones).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(apoyo1).State = System.Data.Entity.EntityState.Added;
+
+                entidades.SaveChanges();
             }
         }
 

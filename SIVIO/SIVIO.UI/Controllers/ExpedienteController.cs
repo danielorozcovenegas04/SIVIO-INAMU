@@ -1,6 +1,7 @@
 ﻿using SIVIO.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
@@ -45,14 +46,52 @@ namespace SIVIO.UI.Controllers
                 (int)Utilitarios.Enumerados.EnumCatalogos.SituacionMigratoria,
                 (int)Utilitarios.Enumerados.EnumCatalogos.SituacionLaboral,
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoVivienda,
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoDiscapacidad,
                 (int)Utilitarios.Enumerados.EnumCatalogos.Adiccion,
+                (int)Utilitarios.Enumerados.EnumCatalogos.Genero,
+                (int)Utilitarios.Enumerados.EnumCatalogos.NumeroSeparacionesAgresor,
+                (int)Utilitarios.Enumerados.EnumCatalogos.MotivoReanudarRelacionAgresor,
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoAtencionMedica,
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoViolencia,
+                (int)Utilitarios.Enumerados.EnumCatalogos.ImpactoProductoViolencia,
+                (int)Utilitarios.Enumerados.EnumCatalogos.ValoracionRiesgo,
+                (int)Utilitarios.Enumerados.EnumCatalogos.CondicionLegalIngreso,
+                (int)Utilitarios.Enumerados.EnumCatalogos.MedidaProteccion,
+                (int)Utilitarios.Enumerados.EnumCatalogos.SituacionViolenciaFisica,
+                (int)Utilitarios.Enumerados.EnumCatalogos.SituacionViolenciaPsicologica,
+                (int)Utilitarios.Enumerados.EnumCatalogos.SituacionViolenciaSexual,
+                (int)Utilitarios.Enumerados.EnumCatalogos.SituacionViolenciaPatrimonial,
                 (int)Utilitarios.Enumerados.EnumCatalogos.RespuestaSiNosponible,
 
             };
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_modelCatalogos.llenarListaCatalogos(catalogos)), JsonRequestBehavior.AllowGet);
         }
 
+        [Authorize]
+        public ActionResult CrearUsuariaAtencionComunidadPost(TBL_PERSONA persona, TBL_AGRESOR agresor,
+            TBL_LABORAL laboral, TBL_ADICCIONES adicciones, TBL_PERSONA_RED_APOYO apoyo1) {
+            try {
+                var listaAgresor = new List<TBL_AGRESOR>();
+                listaAgresor.Add(agresor);
+                persona.TBL_AGRESOR = listaAgresor;
+                /*
+                var listaAdicciones = new List<TBL_ADICCIONES>();
+                listaAdicciones.Add(adicciones);
+                persona.TBL_ADICCIONES = listaAdicciones;
+                */
+                var listaApoyo1 = new List<TBL_PERSONA_RED_APOYO>();
+                listaApoyo1.Add(apoyo1);
+                persona.TBL_PERSONA_RED_APOYO = listaApoyo1;
 
+                persona.TBL_LABORAL = laboral;
+
+                _modelExpediente.InsertarPersonaConAgresor(persona, agresor, laboral, adicciones, apoyo1);
+                return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "true" }));
+            } catch (Exception ex) {
+                return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "false", error = ex.ToString() }));
+            }
+
+        }
 
 
         [Authorize]
@@ -81,12 +120,12 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult GridConsultas(int persona)
+        public ActionResult GridConsultas(Guid caso)
         {
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion))
             {
-                return View(_modelExpediente.ListarConsultas(persona));
+                return View(_modelExpediente.ListarConsultas(caso));
             }
             else if (!estadoSesion)
             {
