@@ -68,8 +68,12 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult CrearUsuariaAtencionComunidadPost(TBL_PERSONA persona, TBL_AGRESOR agresor,
-            TBL_LABORAL laboral, TBL_ADICCIONES adicciones, TBL_PERSONA_RED_APOYO apoyo1) {
+        public ActionResult CrearUsuariaAtencionComunidadPost(
+            TBL_PERSONA persona,            TBL_AGRESOR agresor,
+            TBL_LABORAL laboral,            TBL_ADICCIONES adicciones,
+            TBL_PERSONA_RED_APOYO apoyo1,   TBL_AGRESION agresion,
+            TBL_AGRESOR_MOTIVO_REGRESO agresorMotivoRegreso, TBL_AGRESION_ATENCION_MEDICA agresionAtencionMedica,
+            TBL_AGRESION_VIOLENCIA agresionViolencia) {
             try {
                 var listaAgresor = new List<TBL_AGRESOR>();
                 listaAgresor.Add(agresor);
@@ -78,14 +82,32 @@ namespace SIVIO.UI.Controllers
                 var listaAdicciones = new List<TBL_ADICCIONES>();
                 listaAdicciones.Add(adicciones);
                 persona.TBL_ADICCIONES = listaAdicciones;
-                */
+                
                 var listaApoyo1 = new List<TBL_PERSONA_RED_APOYO>();
                 listaApoyo1.Add(apoyo1);
                 persona.TBL_PERSONA_RED_APOYO = listaApoyo1;
+                
+                var listaAgresion = new List<TBL_AGRESION>();
+                listaAgresion.Add(agresion);
+                agresor.TBL_AGRESION = listaAgresion;
+                
+                var listaAgresorMotivoRegreso = new List<TBL_AGRESOR_MOTIVO_REGRESO>();
+                listaAgresorMotivoRegreso.Add(agresorMotivoRegreso);
+                agresor.TBL_AGRESOR_MOTIVO_REGRESO = listaAgresorMotivoRegreso;
+                
+                var listaAgresionAtencionMedica = new List<TBL_AGRESION_ATENCION_MEDICA>();
+                listaAgresionAtencionMedica.Add(agresionAtencionMedica);
+                agresion.TBL_AGRESION_ATENCION_MEDICA = listaAgresionAtencionMedica;
+
+                var listaAgresionViolencia = new List<TBL_AGRESION_VIOLENCIA>();
+                listaAgresionViolencia.Add(agresionViolencia);
+                agresion.TBL_AGRESION_VIOLENCIA = listaAgresionViolencia;
+                */
 
                 persona.TBL_LABORAL = laboral;
 
-                _modelExpediente.InsertarPersonaConAgresor(persona, agresor, laboral, adicciones, apoyo1);
+                _modelExpediente.InsertarPersonaConAgresor(persona, agresor, laboral, adicciones,
+                    apoyo1, agresion, agresorMotivoRegreso, agresionAtencionMedica);
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "true" }));
             } catch (Exception ex) {
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "false", error = ex.ToString() }));
