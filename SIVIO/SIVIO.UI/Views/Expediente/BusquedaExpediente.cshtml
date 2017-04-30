@@ -1,6 +1,35 @@
 ﻿@{
     Layout = null;
 }
+@using SIVIO.Entidades
+@model List<TBL_PERSONA>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnBusquedaExpediente").click(function () {
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("BusquedaExpediente", "Expediente")' + "?" + $("#frmBusqueda").serialize(),
+                async: true,
+            }).done(function (data) {
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        });
+    });
+
+</script>
+
 <style>
     .jumbotron {
         padding-left: 5px !important;
@@ -12,389 +41,283 @@
         padding-right: 5px !important;
     }
 </style>
-<script src="https://www.google.com/cloudprint/client/cpgadget.js">
-</script>
-<script type="text/javascript">
-    $("#btnCerrarFrmUsuarios").click(function (e) {
-        e.preventDefault();
-        $("#btnUsuarios").trigger("click");
-    });
-    var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
-    $(document).ready(function () {
-        $.LoadingOverlay("hide");
-        debugger;
-        //$.ajax({
-        //    type: "POST",
-        //    url: '/sipamu/Seguridad/ListarUnidades',
-        //    dataType: "json",
-        //    contentType: "application/json",
-        //    processData: true,
-        //    success: function (resultado) {
-        //        debugger;
-
-        //        $.each(resultado.data, function (key, value) {
-        //            $('#cmbUnidad').append($("<option></option>", {
-        //                value: value.PKUNIDAD,
-        //                text: value.CODIGO + ' ' + value.DESCRIPCION
-        //            }));
-        //        });
-
-        //        $('#cmbUnidad').selectize({
-        //            create: false,
-        //            sortField: {
-        //                field: 'text',
-        //                direction: 'asc'
-        //            },
-        //            dropdownParent: 'body'
-        //        });
-
-
-        //    },
-        //    error: function (xhr, ajaxOptions, error) {
-        //        $("#contenedorBotones").show();
-        //        $("#contenedorEspera").hide();
-        //        $("#txtModalTitulo").css("color", "red");
-        //        $("#txtModalTitulo").text("Error al registrar");
-        //        $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
-        //        instMensajes.open();
-
-        //    }
-        //});
-        //$.ajax({
-        //    type: "POST",
-        //    url: '/sipamu/Seguridad/ListarRoles',
-        //    dataType: "json",
-        //    contentType: "application/json",
-        //    processData: true,
-        //    success: function (resultado) {
-        //        debugger;
-
-        //        $.each(resultado.data, function (key, value) {
-        //            $('#cmbRol').append($("<option></option>", {
-        //                value: value.PKROL,
-        //                text: value.NOMBRE
-        //            }));
-        //        });
-
-        //        $('#cmbRol').selectize({
-        //            create: false,
-        //            sortField: {
-        //                field: 'text',
-        //                direction: 'asc'
-        //            },
-        //            dropdownParent: 'body'
-        //        });
-
-
-        //    },
-        //    error: function (xhr, ajaxOptions, error) {
-        //        $("#contenedorBotones").show();
-        //        $("#contenedorEspera").hide();
-        //        $("#txtModalTitulo").css("color", "red");
-        //        $("#txtModalTitulo").text("Error al registrar");
-        //        $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
-        //        instMensajes.open();
-
-        //    }
-        //});
-        //PrevenirCaracteresInvalidos();
-        debugger;
-        document.title = "SIVIO - Editar Persona Usuaria";
-        InicializarOtrosEventos();
-        InicializarCamposObservaciones();
-
-    });
-
-    function InicializarOtrosEventos() {
-        var d = new Date();
-
-        var month = d.getMonth() + 1;
-        var day = d.getDate();
-        var fechaHoy = (day < 10 ? '0' : '') + day + '/' +
-            (month < 10 ? '0' : '') + month + '/' +
-            d.getFullYear();
-
-        $("#txtFechaAplicacion").val(fechaHoy);
-        $('#txtFechaAplicacion').css("background-color", "#f2f2f2");
-        $("#txtFechaAplicacion").prop("readonly", true);
-
-
-
-        $("#btnEnviarFormulario").click(function () {
-
-            RegistroUsuario();
-            $('#formagregarUsuarios').find('input:text').val('');
-            $('textarea:text').val('');
-
-
-        });
-
-        $("#btnCerrarFrmUsuario").click(function (e) {
-
-            e.preventDefault();
-            $("#btnUsuarios").trigger("click");
-        });
-
-        $("#btnTerminar").click(function () {
-
-            window.location.href = '/sipamu/';
-            setTimeout(volver(), 1000);
-
-        });
-
-        function volver() {
-            window.location.href = '/sipamu/';
+<div class="container-fluid">
+    <style>
+        .buttons-excel {
+            background-color: green;
+            color: white;
         }
 
-    }
-
-
-    function InicializarCamposObservaciones() { }
-
-    function RegistroUsuario() {
-        debugger;
-        $('#contenedorPrincipal').hide();
-        $('#contenedorEspera').fadeIn();
-        var resultadoValidacion = $('#formagregarUsuarios').parsley().validate();
-        if (resultadoValidacion === true) {
-            var formularioAgregarUsuario = $();
-
-
-
-
-            formularioAgregarUsuario.Nombre = $("#txtNombre").val();
-            formularioAgregarUsuario.PrimerApellido = $("#txtApellido1").val();
-            formularioAgregarUsuario.SegundoApellido = $("#txtApellido2").val();
-            formularioAgregarUsuario.NombreUsuario = $("#txtUsuario").val();
-            formularioAgregarUsuario.FkUnidad = $("#cmbUnidad").val();
-            formularioAgregarUsuario.Rol = $("#cmbRol").val();
-            formularioAgregarUsuario.Clave = $("#txtContrasena").val();
-            formularioAgregarUsuario.ValidarContrasena = $("#txtValidarContrasena").val();
-            formularioAgregarUsuario.Correo = $("txtCorreo").val();
-
-            if (formularioAgregarUsuario.Clave !== formularioAgregarUsuario.ValidarContrasena) {
-                $("#contenedorBotones").show();
-                $("#contenedorEspera").hide();
-                $("#txtModalTitulo").css("color", "red");
-                $("#txtModalTitulo").text("Error");
-                $("#txtModalContenido").text("Las contraseñas digitadas con coinciden");
-                instMensajes.open();
-
-            } else {
-                $.ajax({
-                    type: "POST",
-                    url: '/sipamu/Seguridad/AgregarPersonaUsuaria',
-                    dataType: "json",
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                        objUsuarios: formularioAgregarUsuario
-                    }),
-                    processData: true,
-                    success: function (data) {
-                        if (data.TipoMensaje === 1) {
-
-                            $("#contenedorBotones").show();
-                            $("#contenedorEspera").hide();
-                            $("#txtModalTitulo").css("color", "green");
-                            $("#txtModalTitulo").text("Operación Exitosa");
-                            $("#txtModalContenido").text(data.ContenidoMensaje);
-                            instMensajes.open();
-
-
-
-
-
-                        } else {
-                            $("#contenedorBotones").show();
-                            $("#contenedorEspera").hide();
-                            $("#txtModalTitulo").css("color", "red");
-                            $("#txtModalTitulo").text("Error al registrar");
-                            $("#txtModalContenido").text(data.ContenidoMensaje);
-                            instMensajes.open();
-                        }
-
-                    },
-                    error: function (xhr, ajaxOptions, error) {
-                        $("#contenedorBotones").show();
-                        $("#contenedorEspera").hide();
-                        $("#txtModalTitulo").css("color", "red");
-                        $("#txtModalTitulo").text("Error al registrar");
-                        $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
-                        instMensajes.open();
-
-                    }
-                });
-            }
-
-
-
-            debugger;
-
-
-
-        } else {
-            $("#txtModalTitulo").css("color", "red");
-            $("#txtModalTitulo").text("Información Incompleta");
-            $("#txtModalContenido").text("El formulario todavía tiene campos pendientes de llenar.");
-            instMensajes.open();
+        .buttons-pdf {
+            background-color: red;
+            color: white;
         }
-        $('#contenedorEspera').fadeOut();
-        $('#contenedorPrincipal').fadeIn();
+
+        .paginate_button {
+            padding: 0px !important;
+        }
+        /*.paginate_button active {
+            padding: 0px !important;
 
 
-    }
+        }*/
+    </style>
+    <style>
+        .pad {
+            padding-bottom: 3px;
+            margin-bottom: 3px;
+        }
 
+        .parsley-required {
+            color: red;
+            font-weight: bold;
+        }
 
+        .checkNoSpace {
+            padding-left: 0px !important;
+        }
 
-</script>
-<style>
-    .pad {
-        padding-bottom: 3px;
-        margin-bottom: 3px;
-    }
+        ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+            color: white;
+        }
 
-    .parsley-required {
-        color: red;
-        font-weight: bold;
-    }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color: white;
+            opacity: 1;
+        }
 
-    .checkNoSpace {
-        padding-left: 0px !important;
-    }
+        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color: white;
+            opacity: 1;
+        }
 
-    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-        color: white;
-    }
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: white;
+        }
+    </style>
 
-    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color: white;
-        opacity: 1;
-    }
+    <style>
+        input, select, textarea {
+            max-width: 100%;
+            padding: 4px;
+        }
+    </style>
+    
 
-    ::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color: white;
-        opacity: 1;
-    }
-
-    :-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color: white;
-    }
-</style>
-
-<style>
-    input, select, textarea {
-        max-width: 100%;
-        padding: 4px;
-    }
-
-    input {
-        background-color: blue;
-    }
-</style>
-<div class="container-fluid" id="contenedorPrincipal">
-
-
-
-
-
-
-
-
-    <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
-        <ul class="nav nav-tabs">
-            <li class="active">
-                <a data-toggle="tab" href="#home">
-                    <i class="fa fa-user" aria-hidden="true"></i>Información de Persona Usuaria
-                </a>
-            </li>
-        </ul>
-
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-                <div class="row comunForm">
-                    <div class="row">
-                        <div class="col-xs-10">
-                        </div>
-                        <div class="col-xs-2">
-                            <button class="botonCerrar danger" id="btnCerrarFrmUsuarios">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="col-xs-4 form-group">
-                            <label>Nombre de Persona Usuaria</label>
-
-                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                        </div>
-
-                        <div class="col-xs-4 form-group">
-                            <label>Primer Apellido</label>
-
-                            <input class="form-control" placeholder="Primer Apellido" id="txtApellido1" type="text" required="">
-                        </div>
-
-                        <div class="col-xs-4 form-group">
-                            <label>Segundo Apellido</label>
-
-                            <input class="form-control" placeholder="Segundo Apellido" id="txtApellido2" type="text" required="">
-                        </div>
-
-
-                    </div>
-
-
-
-                    <div class="row">
-                        <div class="col-xs-4 form-group">
-
-                            <label>Usuario</label>
-                            <input class="form-control" placeholder="nombre@inamu.go.cr" id="txtUsuario" type="email" required="">
-
-                        </div>
-                        <div class="col-xs-4 form-group">
-
-                            <label>Contraseña</label>
-                            <input class="form-control" placeholder="Contraseña" id="txtContrasena" type="password" required="">
-
-                        </div>
-                        <div class="col-xs-4 form-group">
-
-                            <label>Verificar Contraseña</label>
-                            <input class="form-control" placeholder="Verifique su Contraseña" id="txtValidarContrasena" type="password" required="">
-
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>Rol de Persona Usuaria</label>
-                            <select class="form-control selectized" id="cmbRol" tabindex="-1" style="display: none;"><option value="3" selected="selected">Persona Administradora</option></select><div class="selectize-control form-control single"><div class="selectize-input items full has-options has-items"><div class="item" data-value="3">Persona Administradora</div><input type="text" autocomplete="off" tabindex="" style="width: 4px;"></div></div>
-                        </div>
-
-                    </div>
-
-                    <div class="row" id="contenedorBotones">
-                        <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                            <button type="button" id="btnEnviarFormulario" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Registrar Nueva Persona Usuaria</button>
-
-
-                        </div>
-                    </div>
-                </div>
+    <!-- Campo de búsqueda -->
+    <div id="busquedaExpediente" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px; border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
+        <div class="row" style="margin-left: 10px; margin-bottom: 10px">
+            <div class="col-md-12">
+                <br /><b>Digite el nombre o identificación:</b><br />
             </div>
         </div>
+        <form id="frmBusqueda" name="frmBusqueda">
+            <div class="row" style="margin-left: 10px">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Nombre..." name="palabra" value="" />
+                </div>
+                <div class="col-md-1">
+                    <a href="#" id="btnBusquedaExpediente" class="btn btn-default">Buscar</a>
+                </div>
+            </div>
+        </form>
+        <br><br><br>
+
+        @if (@Request.QueryString["palabra"] != "" & @Request.QueryString["palabra"] != null)
+        {
+            if (Model.Any())
+            {
+                <script src="~/Scripts/INAMU.datatables.min.js"></script>
+                <script>
+
+        var tablaBusquedaExpediente = $('#tblBusquedaExpediente').DataTable({
+            responsive: true,
+            dom: 'fBrtlp<"clear">',
+            select: true,
+            buttons: [
+
+        {
+            extend: 'excelHtml5',
+            text: '<i class="fa fa-file-excel-o"></i>',
+            titleAttr: 'Excel'
+        },
+        {
+            extend: 'pdfHtml5',
+            text: '<i class="fa fa-file-pdf-o"></i>',
+            titleAttr: 'PDF'
+        }, {
+            text: '<i class="fa fa-pencil-square-o"></i>',
+            titleAttr: 'Editar Persona Usuaria',
+                action: function (e, dt, node, config) {
+                    debugger;
+
+                    var contSeleccionados = tablaBusquedaExpediente.rows({ selected: true }).count();
+                    var filaSeleccionada = tablaBusquedaExpediente.rows({ selected: true }).data();
+                    @*if (contSeleccionados > 0) {
+
+                        $("#contenedorGrid").hide();
+                        $("#contenedorRoles").fadeIn();
+                        $("#contenedorEspera").show();
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("FrmBusquedaExpediente", "Seguridad")',
+                            data: { pkUsuario: filaSeleccionada[0].PKUSUARIO },
+                            async: true
+                        }).done(function (data) {
+
+
+                            $('#contenedorBusquedaExpediente').html(data);
+                            $("#contenedorEspera").hide();
+                            $('#contenedorBusquedaExpediente').fadeIn();
+
+
+                        }).fail(function (exception) {
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("Error");
+                            $("#txtModalContenido").text(exception);
+                            instMensajes.open();
+                        });
+                    } else {
+                        $("#txtModalTitulo").css("color", "red");
+                        $("#txtModalTitulo").text("No se seleccionaron roles");
+                        $("#txtModalContenido").text("Seleccione un rol para continuar");
+                        instMensajes.open();
+                    }*@
+
+                    debugger;
+                }
+        }
+
+            ],
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            "processing": true, // for show progress bar
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            tableTools: {
+                "sRowSelect": "single"
+            },
+                        //<th>Nombre</th>
+                        //<th>Identificación</th>
+                        //<th>Fecha de última atención</th>
+                        //<th>Servicio que brindó la atención</th>
+                        //<th>Egreso técnico</th>
+                        //<th>CLAIS</th>
+            "columns": [
+                { "data": "PKPERSONA", "name": "PKPERSONA", "autoWidth": true, "visible":false},
+                { "data": "NOMBRE", "name": "NOMBRE", "autoWidth": true},
+                { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
+                { "data": "FECHA", "name": "FECHA", "autoWidth": true },
+                { "data": "SERVICIO", "name": "SERVICIO", "autoWidth": true },
+                { "data": "EGRESOTECNICO", "name": "EGRESOTECNICO", "autoWidth": true },
+                { "data": "CLAIS", "name": "CLAIS", "autoWidth": true }
+
+            ]
+
+        });
+        $('#tblBusquedaExpediente tbody').on('click', 'tr', function () {
+            debugger;
+            if ($(this).hasClass('selected')) {
 
 
 
 
+                $("#tblBusquedaExpediente tr").removeClass("selectedDT");
+                $("#tblBusquedaExpediente tr").removeClass("selected");
+                $(this).addClass('selected');
+                $(this).addClass('selectedDT');
+            }
+            else {
+                $(this).removeClass('selectedDT');
+
+            }
+        });
+        $(document).ready(function () {
+            document.title = "CEAAM - Buscar Expediente";
+            var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+
+            //$("#contenedorBusquedaExpediente").hide();
 
 
+        });
 
+        function refrescarGrid() { tablaBusquedaExpediente.ajax.reload() }
+                </script>
+                <div class="row" id="contenedorBusquedaExpediente" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
+                                                                                                                                                                                                                                                background-color: #FFFFFF;
+                                                                                                                                                                                                                                                 border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
+                    <div class="col-md-12" >
+                        <table id="tblBusquedaExpediente" class="display table-bordered" cellspacing="0" style="width: 100%">
 
+                            <caption> <b>Resultados para "@Request.QueryString["palabra"]" :</b><br><br></caption>
 
-    </form>
+                            <thead>
+                                <tr>
+                                    <th>PKPERSONA</th>
+                                    <th>Nombre</th>
+                                    <th>Identificación</th>
+                                    <th>Fecha de última atención</th>
+                                    <th>Servicio que brindó la atención</th>
+                                    <th>Egreso técnico</th>
+                                    <th>CLAIS</th>
+                                </tr>
+                            </thead>
 
-</div>
+                            <tbody>
+                                @foreach (TBL_PERSONA expediente in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.Raw(expediente.PK_PERSONA)
+                                        </td>
+                                        <td>
+                                            @Html.Raw(expediente.VC_NOMBRE + " " + expediente.VC_APELLIDO1 + " " + expediente.VC_APELLIDO2)
+                                        </td>
+                                        <td>@Html.Raw(expediente.VC_IDENTIFICACION)</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <b>No se ha encontrado ningún resultado con la palabra clave "@Request.QueryString["palabra"]"</b><br><br>
+            }
+            <br>
+
+            <div class="row" style="margin-left: 10px">
+                <a href="#" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Crear usuaria (atención en comunidad)</a>
+            </div>
+          }
+            </div>
+        <script src="~/Scripts/INAMU.datatables.min.js"></script>
+    </div>
 
