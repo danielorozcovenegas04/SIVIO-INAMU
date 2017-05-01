@@ -28,6 +28,12 @@ namespace SIVIO.UI.Controllers
             return View();
         }
 
+       
+        public ActionResult DetalleUsuaria()
+        {
+            return View();
+        }
+
         [Authorize]
         public ActionResult FrmCrearUsuariaAT() {
             bool estadoSesion = true;

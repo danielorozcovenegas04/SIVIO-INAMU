@@ -116,7 +116,7 @@
     <form id="frmBusqueda" name="frmBusqueda">
         <div class="row" style="margin-left: 10px">
             <div class="col-md-3">
-                <input type="text" class="form-control" placeholder="Nombre de la usuaria..." name="palabra" value="@Request.QueryString["palabra"]" id="searchText" />
+                <input type="text" class="form-control" placeholder="Nombre de la usuaria..." name="palabra" id="searchText" />
             </div>
             <div class="col-md-1">
                 <a href="#" id="btnBusquedaExpediente"  style="margin-left:1.2em;color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px" class="btn btn-default">Buscar</a>
@@ -155,14 +155,15 @@
 
                         var contSeleccionados = tablaBusquedaExpediente.rows({ selected: true }).count();
                         var filaSeleccionada = tablaBusquedaExpediente.rows({ selected: true }).data();
-                                    @*if (contSeleccionados > 0) {
-
+                        if (contSeleccionados > 0) {
+                            debugger;
+                                      
                                         $("#contenedorGrid").hide();
                                         $("#contenedorRoles").fadeIn();
                                         $("#contenedorEspera").show();
                                         $.ajax({
                                             type: "POST",
-                                            url: '@Url.Action("FrmBusquedaExpediente", "Seguridad")',
+                                            url: '@Url.Action("DetalleUsuaria", "Expediente")',
                                             data: { pkUsuario: filaSeleccionada[0].PKUSUARIO },
                                             async: true
                                         }).done(function (data) {
@@ -184,7 +185,7 @@
                                         $("#txtModalTitulo").text("No se seleccionaron roles");
                                         $("#txtModalContenido").text("Seleccione un rol para continuar");
                                         instMensajes.open();
-                                    }*@
+                                    }
 
                     debugger;
                                 }
@@ -294,11 +295,20 @@
                                         <td>
                                             @Html.Raw(expediente.VC_NOMBRE + " " + expediente.VC_APELLIDO1 + " " + expediente.VC_APELLIDO2)
                                         </td>
-                                        <td>@Html.Raw(expediente.VC_IDENTIFICACION)</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>@Html.Raw(expediente.VC_IDENTIFICACION)
+                                        </td>
+                                        <td>
+                                            @Html.Raw(expediente.VC_IDENTIFICACION)
+                                         </td>
+                                        <td>
+                                            @Html.Raw(expediente.VC_IDENTIFICACION)
+                                        </td>
+                                        <td>
+                                            @Html.Raw(expediente.VC_IDENTIFICACION)
+                                         </td>
+                                        <td>
+                                            @Html.Raw(expediente.VC_IDENTIFICACION)
+                                        </td>
                                     </tr>
                                 }
                             </tbody>

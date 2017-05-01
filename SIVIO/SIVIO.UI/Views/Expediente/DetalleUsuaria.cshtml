@@ -1,0 +1,164 @@
+﻿
+@{
+    Layout = null;
+}
+<style>
+    .jumbotron {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+
+    .container {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+</style>
+<script src="https://www.google.com/cloudprint/client/cpgadget.js">
+</script>
+<script type="text/javascript">
+    $("#btnCerrarFrmUsuarios").click(function (e) {
+        e.preventDefault();
+        $("#btnUsuarios").trigger("click");
+    });
+    var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+    $(document).ready(function () {
+        $.LoadingOverlay("hide");
+        debugger;
+        document.title = "SIVIO - Editar Persona Usuaria";
+        InicializarOtrosEventos();
+        InicializarCamposObservaciones();
+
+    });
+</script>
+<style>
+    .pad {
+        padding-bottom: 3px;
+        margin-bottom: 3px;
+    }
+
+    .parsley-required {
+        color: red;
+        font-weight: bold;
+    }
+
+    .checkNoSpace {
+        padding-left: 0px !important;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: white;
+    }
+
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: white;
+        opacity: 1;
+    }
+
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: white;
+        opacity: 1;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: white;
+    }
+</style>
+
+<style>
+    input, select, textarea {
+        max-width: 100%;
+        padding: 4px;
+    }
+
+    input {
+        background-color: blue;
+    }
+</style>
+
+<div class="container-fluid" id="contenedorPrincipal">
+    <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <div class="row comunForm">
+                    <div class="row">
+                        <div class="col-xs-4 form-group">
+                            <label>Nombre</label>
+                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" readonly>
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Primer Apellido</label>
+                            <input class="form-control" placeholder="Primer Apellido" id="txtApellido1" type="text" readonly>
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Segundo Apellido</label>
+                            <input class="form-control" placeholder="Segundo Apellido" id="txtApellido2" type="text" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-xs-4 form-group">
+                            <label>Cedula</label>
+                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" readonly>
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Telefono</label>
+                            <input class="form-control" placeholder="Primer Apellido" id="txtApellido1" type="text" readonly>
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Fecha ultimo egreso</label>
+                            <input class="form-control" placeholder="Segundo Apellido" id="txtApellido2" type="text" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 form-group">
+                            <label>Provincia</label>
+                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" readonly>
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Canton</label>
+                            <input class="form-control" placeholder="Primer Apellido" id="txtApellido1" type="text" readonly>
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Entrega del kit de emercencia</label>
+                            <input class="form-control" placeholder="Segundo Apellido" id="txtApellido2" type="text" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Justificacion</label>
+                            <input class="form-control" placeholder="Segundo Apellido" id="txtApellido2" type="text" required="">
+                         </div>
+
+                    </div>
+
+
+                    <div class="row" id="contenedorBotones">
+                        <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                            <button type="button" id="btnEnviarFormulario" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Aceptar</button>
+                    </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </form>
+
+</div>
+
