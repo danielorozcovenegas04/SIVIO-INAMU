@@ -16,18 +16,30 @@
 <script src="https://www.google.com/cloudprint/client/cpgadget.js">
 </script>
 <script type="text/javascript">
-    $("#btnCerrarFrmUsuarios").click(function (e) {
-        e.preventDefault();
-        $("#btnUsuarios").trigger("click");
-    });
-    var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+
     $(document).ready(function () {
         $.LoadingOverlay("hide");
-        debugger;
-        document.title = "SIVIO - Editar Persona Usuaria";
-        InicializarOtrosEventos();
-        InicializarCamposObservaciones();
-
+        document.title = "SIVIO - Expediente";
+        $("#btnEnviarFormulario").click(function () {
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                 url: '@Url.Action("Delegacion_Mujer", "Expediente")',
+                async: true,
+            }).done(function (data) {
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+               $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        });
     });
 </script>
 <style>
@@ -83,80 +95,69 @@
                     <div class="row">
                         <div class="col-xs-4 form-group">
                             <label>Nombre</label>
-                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" readonly>
+                            <input class="form-control" placeholder="Zocorro" id="txtNombre" type="text" readonly>
                         </div>
 
                         <div class="col-xs-4 form-group">
                             <label>Primer Apellido</label>
-                            <input class="form-control" placeholder="Primer Apellido" id="txtApellido1" type="text" readonly>
+                            <input class="form-control" placeholder="Huye" id="txtApellido1" type="text" readonly>
                         </div>
 
                         <div class="col-xs-4 form-group">
                             <label>Segundo Apellido</label>
-                            <input class="form-control" placeholder="Segundo Apellido" id="txtApellido2" type="text" readonly>
+                            <input class="form-control" placeholder="Rapido" id="txtApellido2" type="text" readonly>
                         </div>
                     </div>
                     <div class="row">
                         
                         <div class="col-xs-4 form-group">
                             <label>Cedula</label>
-                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" readonly>
+                            <input class="form-control" placeholder="1121212121" id="txtNombre" type="text" readonly>
                         </div>
 
                         <div class="col-xs-4 form-group">
                             <label>Telefono</label>
-                            <input class="form-control" placeholder="Primer Apellido" id="txtApellido1" type="text" readonly>
+                            <input class="form-control" placeholder="8888-1212" id="txtApellido1" type="text" readonly>
                         </div>
 
                         <div class="col-xs-4 form-group">
                             <label>Fecha ultimo egreso</label>
-                            <input class="form-control" placeholder="Segundo Apellido" id="txtApellido2" type="text" readonly>
+                            <input class="form-control" placeholder="16/12/15" id="txtApellido2" type="text" readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4 form-group">
                             <label>Provincia</label>
-                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" readonly>
+                            <input class="form-control" placeholder="San Jose" id="txtNombre" type="text" readonly>
                         </div>
 
                         <div class="col-xs-4 form-group">
                             <label>Canton</label>
-                            <input class="form-control" placeholder="Primer Apellido" id="txtApellido1" type="text" readonly>
+                            <input class="form-control" placeholder="Sabana" id="txtApellido1" type="text" readonly>
                         </div>
 
                         <div class="col-xs-4 form-group">
                             <label>Entrega del kit de emercencia</label>
-                            <input class="form-control" placeholder="Segundo Apellido" id="txtApellido2" type="text" readonly>
+                            <input class="form-control" placeholder="Si" id="txtApellido2" type="text" readonly>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label>Justificacion</label>
-                            <input class="form-control" placeholder="Segundo Apellido" id="txtApellido2" type="text" required="">
+                            <input class="form-control" placeholder="" id="txtApellido2" type="text" required>
                          </div>
-
-                    </div>
-
+                      </div>
 
                     <div class="row" id="contenedorBotones">
                         <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                            <button type="button" id="btnEnviarFormulario" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Aceptar</button>
+                            <button type="button" id="btnEnviarFormulario" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Continuar</button>
                     </div>
-
 
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
 
     </form>
 
