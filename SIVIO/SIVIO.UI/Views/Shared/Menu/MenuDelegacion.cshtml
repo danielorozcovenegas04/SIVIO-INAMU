@@ -3,6 +3,9 @@
 }
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $('[data-toggle="tooltip"]').tooltip();
+        document.title = "SIVIO - Delegacion de la hembra";
         $.ajax({
             url: '@Url.Action("RetornarDivisionTerritorial", "Catalogos")',
             // to get the right path to controller from TableRoutes of Asp.Net MVC
@@ -49,10 +52,9 @@
             });
         });
 
-        $('#btnInicio').click(function () {
-            window.location.href = '@Url.Action("Index", "Home")';
-        });
-
+        $('#btnInicio').click(showSearchDisplay);
+        showSearchDisplay ();
+        
         $('#btnExpedientes').click(function () {
             debugger;
             $.LoadingOverlay("show");
@@ -78,6 +80,32 @@
             });
         });
     });
+
+    function showSearchDisplay() {
+            debugger;
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("BusquedaExpediente", "Expediente")',
+                async: true
+            }).done(function (data) {
+
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+
+
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        }
+
 </script>
 <nav class="navbar navbar-default navbar-static-top borde" style="margin-top: 5px; padding-bottom: 5px !important; background-color: white !important">
 

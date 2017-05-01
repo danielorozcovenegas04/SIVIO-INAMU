@@ -253,20 +253,21 @@ namespace SIVIO.UI.Models
         /// <returns></returns>
         public bool ValidarPermisoAccion(string controlador, string accion, TBL_USUARIO usuarioObj)
         {
-            using (var entidades = new SIVIOEntities())
-            {
-                usuarioObj.TBL_ROL_USUARIO = usuarioObj.TBL_ROL_USUARIO;
-                foreach (var rol in usuarioObj.TBL_ROL_USUARIO)
-                {
-                    var listaAccionesCoinciden =
-                        rol.TBL_ROL.TBL_ROL_ACCION.Where(m => m.TBL_ACCION.VC_CONTROLADOR == controlador && m.TBL_ACCION.VC_ACCION == accion);
-                    if (listaAccionesCoinciden.Any())
-                        return true;
-                }
+            /* using (var entidades = new SIVIOEntities())
+             {
+                 usuarioObj.TBL_ROL_USUARIO = usuarioObj.TBL_ROL_USUARIO;
+                 foreach (var rol in usuarioObj.TBL_ROL_USUARIO)
+                 {
+                     var listaAccionesCoinciden =
+                         rol.TBL_ROL.TBL_ROL_ACCION.Where(m => m.TBL_ACCION.VC_CONTROLADOR == controlador && m.TBL_ACCION.VC_ACCION == accion);
+                     if (listaAccionesCoinciden.Any())
+                         return true;
+                 }
 
 
-            }
-            return false;
+             }
+             return false;*/
+            return true;
         }
 
         #endregion
