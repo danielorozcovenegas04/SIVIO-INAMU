@@ -193,10 +193,30 @@ namespace SIVIO.UI.Controllers
 
         #region Coavif
         [Authorize]
-        public ActionResult Coavif()
+        public ActionResult Coavif(int pkUsuario)
         {
-            return View();
+            return View(_modelExpediente.BuscarPersona(pkUsuario));
         }
+
+        [Authorize]
+        public ActionResult BusquedaExpedienteCoavif(string palabra)
+        {
+            //bool estadoSesion = true;
+            //if (ComprobarPermisosAcccion(out estadoSesion))
+            //{
+            return View(_modelExpediente.ListarPersonas(palabra));
+
+            //}
+            //else if (!estadoSesion)
+            //{
+            //    return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            //}
+            //else
+            //{
+            //    return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+            //}
+        }
+
         [AllowAnonymous]
         public JsonResult CargarPersonas() {
             dynamic objeto = new ExpandoObject();
@@ -205,15 +225,9 @@ namespace SIVIO.UI.Controllers
                 {
                     objeto.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
                     var persona = entidades.TBL_PERSONA.Where(m => m.PK_PERSONA == 1).First();
-                    objeto.personaNombre = persona.VC_NOMBRE;
-                    objeto.personaApellido1 = persona.VC_APELLIDO1;
-                    objeto.personaApellido2 = persona.VC_APELLIDO2;
-                    objeto.personaCorreo = persona.VC_CORREO;
-                    if (persona.TBL_TELEFONO.Count > 0)
-                    {
+                    if (persona.TBL_TELEFONO.Count > 0) {
                         objeto.personaTelefono = persona.TBL_TELEFONO.First().VC_NUMERO;
-                    }
-                    else {
+                    } else {
                         objeto.personaTelefono = "";
                     }                    
                     var user = HttpContext.User.Identity.Name;
@@ -221,6 +235,7 @@ namespace SIVIO.UI.Controllers
                     objeto.usuarioNombre = usuario.VC_NOMBRE;
                     objeto.usuarioApellido1 = usuario.VC_APELLIDO1;
                     objeto.usuarioApellido2 = usuario.VC_APELLIDO2;
+                    objeto.usuarioRol = usuario.TBL_ROL_USUARIO.First().FK_ROL;
                     return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objeto), JsonRequestBehavior.AllowGet);
 
                 }
@@ -253,6 +268,39 @@ namespace SIVIO.UI.Controllers
                 objetoRetorno.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Error,"Error al cargar catalogos", string.Empty);
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objetoRetorno), JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [AllowAnonymous]
+        public Mensaje guardarDatoAdministrativo(FormCollection objUsuarios)
+        {//parametro que recibe de la vista            
+            using (var entidades = new SIVIOEntities())
+            {
+                var fecha = objUsuarios["Fecha"];
+                var hora = objUsuarios["HoraInicio"];
+                var pers = objUsuarios["Persona"];
+                var disp = objUsuarios["TipoDisponibilidad"];
+
+                var user = HttpContext.User.Identity.Name;
+                TBL_USUARIO usuario = entidades.TBL_USUARIO.Where(m => m.VC_USUARIO == user).First();
+
+                DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm",
+                                           System.Globalization.CultureInfo.InvariantCulture);
+                DateTime fechaFin = DateTime.Now;
+                int idPersona;
+                int disponibilidad = 0;
+                bool bol = Int32.TryParse(pers, out idPersona);
+                bol = Int32.TryParse(disp, out disponibilidad);
+                TBL_REGISTRO registro = new TBL_REGISTRO();
+                registro.PK_REGISTRO = Guid.NewGuid();
+                registro.FK_PERSONA = idPersona;
+                registro.FK_USUARIOREGISTRA = usuario.PK_USUARIO;
+                registro.DT_FECHAINICIO = fechaInicio;
+                registro.DT_FECHAFIN = fechaFin;
+                registro.FK_TIPOSERVICIO = usuario.TBL_ROL_USUARIO.First().TBL_ROL.PK_ROL;
+                registro.FK_TIPOREGISTRO = 549;
+                return _modelExpediente.InsertarDatosAdministrativos(registro);
+            }
+
         }
 
         [Authorize]

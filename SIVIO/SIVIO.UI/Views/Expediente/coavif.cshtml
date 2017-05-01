@@ -1,6 +1,8 @@
 ﻿@{
     Layout = null;
 }
+@using SIVIO.Entidades;
+@model TBL_PERSONA
 <style>
     .jumbotron {
         padding-left: 5px !important;
@@ -19,9 +21,9 @@
     var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
     $(document).ready(function () {
         PrevenirCaracteresInvalidos();
-        document.title = "SIVIO - Coavif y Equipo Estrategico";
-        CargarDivisionTerritorial();
+        document.title = "SIVIO - COAVIF y Equipo Estrategico";
         InicializarOtrosEventos();
+        CargarDivisionTerritorial();        
     });
 
     function CargarDivisionTerritorial() {
@@ -165,16 +167,26 @@
         $("#txtFecha").prop("readonly", true);
 
         var hora = d.getHours();
-        var jornada = (hora > 12 ? 'PM' : 'AM');
+        //var jornada = (hora > 12 ? 'PM' : 'AM');
         var minutos = d.getMinutes();
-        var inicio = (hora > 12 ? '0' + hora - 12 : hora) + ':' + (minutos > 9 ? '' : '0') + minutos + ' ' + jornada;
+        //var inicio = (hora > 12 ? '0' + hora - 12 : hora) + ':' + (minutos > 9 ? '' : '0') + minutos + ' ' + jornada;
+        var inicio = hora + ':' + (minutos > 9 ? '' : '0') + minutos;
 
         $("#txtHoraInicio").val(inicio);
         $('#txtHoraInicio').css("background-color", "#f2f2f2");
         $("#txtHoraInicio").prop("readonly", true);
         $('#txtHoraFinalizacion').css("background-color", "#f2f2f2");
         $("#txtHoraFinalizacion").prop("readonly", true);
+        //----------------------------------------------------
+        var personaRefiere = "@Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2";
+        $("#txtPersonaQuienRefiere").val(personaRefiere);
+        $('#txtPersonaQuienRefiere').css("background-color", "#f2f2f2");
+        $("#txtPersonaQuienRefiere").prop("readonly", true);
 
+        $("#txtCorreoPersona").val("@Model.VC_CORREO");
+        $('#txtCorreoPersona').css("background-color", "#f2f2f2");
+        $("#txtCorreoPersona").prop("readonly", true);
+        //----------------------------------------------------
         $("#txtInstitucion").val("INAMU");
         $('#txtInstitucion').css("background-color", "#f2f2f2");
         $("#txtInstitucion").prop("readonly", true);
@@ -182,8 +194,12 @@
         $.ajax({
             type: "POST",
             url: '@Url.Action("CargarPersonas")',
+            data: {
+                id: "@Model.PK_PERSONA"
+            },
             datatype: "json",
-            contentType: "application/json",
+            //contentType: "application/json",
+            async: true,
             processData: true,
             success: function (resultado) {
                 var respuesta = JSON.parse(resultado);
@@ -193,19 +209,14 @@
                     $('#txtPersonaAtiende').css("background-color", "#f2f2f2");
                     $("#txtPersonaAtiende").prop("readonly", true);
 
-                    var personaRefiere = respuesta.personaNombre + ' ' + respuesta.personaApellido1 + ' ' + respuesta.personaApellido2;
-                    $("#txtPersonaQuienRefiere").val(personaRefiere);
-                    $('#txtPersonaQuienRefiere').css("background-color", "#f2f2f2");
-                    $("#txtPersonaQuienRefiere").prop("readonly", true);
-
                     var telefonoPersona = respuesta.personaTelefono;
                     $("#txtTelefonoPersona").val(telefonoPersona)
                     $('#txtTelefonoPersona').css("background-color", "#f2f2f2");
                     $("#txtTelefonoPersona").prop("readonly", true);
 
-                    $("#txtCorreoPersona").val(respuesta.personaCorreo);
-                    $('#txtCorreoPersona').css("background-color", "#f2f2f2");
-                    $("#txtCorreoPersona").prop("readonly", true);
+                    if (respuesta.usuarioRol != 27) {
+                        $("#cmbTipoDisponibilidad").prop("disabled", true);
+                    }
                 } else {
                     $("#txtModalTitulo").css("color", "red");
                     $("#txtModalTitulo").text("Error");
@@ -293,6 +304,60 @@
             }
         });
 
+        $('#btnCancelarDatosAdministrativos').click(function () {
+            //window.location.href = 'Url.Action("Index", "Home")';
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("BusquedaExpedienteCoavif", "Expediente")',
+                async: true
+            }).done(function (data) {
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        });
+
+        $("#btnGuardarDatosAdministrativos").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("guardarDatoAdministrativo", "Expediente")',
+                data: {
+                    Fecha: $("#txtFecha").val(),
+                    HoraInicio: $("#txtHoraInicio").val(),
+                    Persona: "@Model.PK_PERSONA",
+                    TipoDisponibilidad: $("#cmbTipoDisponibilidad").val()
+                },
+                datatype: "json",
+                processData: true,
+                success: function (resultado) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "green");
+                    $("#txtModalTitulo").text("Exito");
+                    $("#txtModalContenido").text("-----");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                }, error: function (xhr, ajaxOptions, error) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error al registrar");
+                    $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+                }
+            });
+        });
     }
 
 </script>

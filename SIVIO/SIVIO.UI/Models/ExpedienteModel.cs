@@ -158,6 +158,39 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public TBL_PERSONA BuscarPersona(int idPersona)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    TBL_PERSONA persona = entidades.TBL_PERSONA.Find(idPersona);
+                    return persona;
+                }
+                catch (Exception e)
+                {
+                    return new TBL_PERSONA();
+                }
+            }
+        }
+
+        public Mensaje InsertarDatosAdministrativos(TBL_REGISTRO registro)
+        {//parametro que recibe de la vista
+            try
+            {
+                using (var entidades = new SIVIOEntities())
+                {
+                    entidades.TBL_REGISTRO.Add(registro);
+                    entidades.SaveChanges();
+                }
+                return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
+            }
+            catch (Exception e)
+            {
+                return new Mensaje((int)Mensaje.CatTipoMensaje.Error, string.Empty, string.Empty);
+            }
+        }
+
         #endregion
 
         #region DELEGACION
