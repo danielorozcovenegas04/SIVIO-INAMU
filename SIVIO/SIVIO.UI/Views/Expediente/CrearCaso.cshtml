@@ -69,9 +69,10 @@
             .then(llenarComboBox("Nacionalidad", "#cmbOtraNacionalidad"))
             .then(llenarComboBox("Situación Migratoria", "#cmbCondicionMigratoria"))
             .then(llenarComboBox("Situación Laboral", "#cmbCondicionLaboral"))
+            .then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbExperienciaLaboral"))
             //.then(llenarComboBox("", "#cmbCondicionAseguramiento"))
             .then(llenarComboBox("Tipo de vivienda", "#cmbVivienda"))
-            .then(llenarComboBox("Tipo de Discapacidad", "#cmbDiscapacidades"))
+            .then(llenarComboBox("Tipo de Discapacidad", "#cmbDiscapacidad"))
             .then(llenarComboBox("Adicción", "#cmbAdicciones"))
             .then(llenarComboBox("Género", "#cmbGenero"))
             .then(llenarComboBox("Nacionalidad", "#cmbNacionalidadHV"))
@@ -554,7 +555,7 @@
             </div>
             <div class="col-xs-4 form-group">
                 <label>Condición laboral</label><br>
-                <select id="cmbCondicionLaborarl" class="form-control"></select>
+                <select id="cmbCondicionLaboral" class="form-control"></select>
             </div>
         </div>
 
@@ -583,12 +584,13 @@
                 
                 <label>Condiciones especiales y de salud</label><br />
                 <label>Discapacidad</label>
-                <select id="cmbDiscapacidad" class="form-control"></select>
+                <select id="cmbDiscapacidad" class="form-control" multiple></select>
             </div>
+
             <div class="col-xs-4 form-group">
                 <label> </label><br>
                 <label>Adicciones</label><br>
-                <select id="cmbAdicciones" class="form-control"></select>
+                <select id="cmbAdicciones" class="form-control" multiple></select>
             </div>
         </div>
         <label>Redes de Apoyo o Recursos con los que cuenta la usuaria  </label><label><input type="checkbox" id="checkRedesApoyo" value="No tiene"> No tiene</label><br>
