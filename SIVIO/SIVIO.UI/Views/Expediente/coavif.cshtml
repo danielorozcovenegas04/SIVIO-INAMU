@@ -406,6 +406,17 @@
     }
 </style>
 <div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+    <div class="col-md-2 form-group"></div>
+    <div class="col-md-10 form-group">
+        <div class="row" style="margin-left:20px;margin-right:20px;">
+            <h2>Expediente de: @Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2</h2>
+            <h4>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h4>
+        </div>
+    </div>
+    @*<div class="row" style="margin-left:60px;margin-right:60px;">
+        <h2>Expediente de: @Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2</h2>
+        <h4>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h4>
+    </div>*@
         <div class="col-md-2 form-group">
             <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Expediente</button>
 
@@ -419,11 +430,7 @@
         </div>
 
         <div class="col-md-10 form-group">
-            <form id="formCoavif" method="post">
-                <div style="margin-left:20px;">
-                    @*<h2>Expediente de: @Model.persona.VC_NOMBRE @Model.persona.VC_APELLIDO1 @Model.persona.VC_APELLIDO2</h2>
-                        <h4>Identificación: @Model.persona.VC_IDENTIFICACION <br /> Número de expediente: @Model.persona.PK_PERSONA</h4>*@
-                </div>
+            <form id="formCoavif" method="post">                
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a data-toggle="tab" href="#datAdministrativos">
@@ -507,8 +514,8 @@
                             </div>
                             <div class="row" id="contenedorBotones">
                                 <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
-                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; display:none;">Guardar</button>
+                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; display:none">Cancelar</button>
                                 </div>
                             </div>
                         </div>
