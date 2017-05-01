@@ -6,6 +6,7 @@
 @model List<TBL_PERSONA>
 
 <script type="text/javascript">
+  
     $(document).ready(function () {
         $("#btnBusquedaExpediente").click(function () {
             $.LoadingOverlay("show");
@@ -115,10 +116,10 @@
     <form id="frmBusqueda" name="frmBusqueda">
         <div class="row" style="margin-left: 10px">
             <div class="col-md-3">
-                <input type="text" class="form-control" placeholder="Nombre de la usuaria..." name="palabra" value="" />
+                <input type="text" class="form-control" placeholder="Nombre de la usuaria..." name="palabra" value="@Request.QueryString["palabra"]" id="searchText" />
             </div>
             <div class="col-md-1">
-                <a href="#" id="btnBusquedaExpediente" class="btn btn-default">Buscar</a>
+                <a href="#" id="btnBusquedaExpediente"  style="margin-left:1.2em;color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px" class="btn btn-default">Buscar</a>
             </div>
         </div>
     </form>
@@ -307,7 +308,7 @@
         }
         else
         {
-                <b style="padding-left:2em">No se ha encontrado ningún resultado con la identificacion de la hembra "@Request.QueryString["palabra"]"</b><br><br>
+                <b style="padding-left:2em">No se ha encontrado ningún resultado con la identificacion de la usuaria "@Request.QueryString["palabra"]"</b><br><br>
         }
         <br>
 
