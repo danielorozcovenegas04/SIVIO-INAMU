@@ -24,6 +24,9 @@
         document.title = "SIVIO - COAVIF y Equipo Estrategico";
         InicializarOtrosEventos();
         CargarDivisionTerritorial();
+        $('#cmbPersonaProvincia').val(@Model.FK_PROVINCIAPROCEDENCIA);
+        $('#cmbPersonaCanton').val(@Model.FK_CANTONPROCEDENCIA);
+        $('#cmbPersonaDistrito').val(@Model.FK_DISTRITOPROCEDENCIA);
     });
 
     function CargarDivisionTerritorial() {
@@ -147,6 +150,7 @@
             $("#cmbPersonaRegion")
                 .append($("<option />").val(divisionTerritorial[3].Value[j].I_IDREGION).text(divisionTerritorial[3].Value[j].VC_DESCRIPCION));
         }
+
     }
 
     function InicializarOtrosEventos() {
@@ -261,6 +265,8 @@
                         }));
                     });
 
+                    $('#comOtraNacionalidad').val(@Model.FK_NACIONALIDAD2);
+
                     $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#comNacionalidad').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
@@ -268,12 +274,16 @@
                         }));
                     });
 
+                    $('#comNacionalidad').val(@Model.FK_NACIONALIDAD);
+
                     $.each(respuesta.CatalogoCondicionMigratoria, function (key, value) {
                         $('#comMigratoria').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
+
+                    $('#comMigratoria').val(@Model.FK_CONDICIONMIGRATORIA);
 
                     $.each(respuesta.CatalogoDiscapasidades, function (key, value) {
                         $('#comDiscapacidad').append($("<option/>", {
@@ -589,17 +599,17 @@
                                 <div class="col-md-6 form-group">
                                     <div class="col-md-4 form-group">
                                         <label>Nombre</label>
-                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="" value=@Model.VC_NOMBRE>
                                     </div>
 
                                     <div class="col-md-4 form-group">
                                         <label>Primer Apellido</label>
-                                        <input class="form-control" placeholder="Apellido" id="txtApellido1" type="text" required="">
+                                        <input class="form-control" placeholder="Apellido" id="txtApellido1" type="text" required="" value=@Model.VC_APELLIDO1>
                                     </div>
 
                                     <div class="col-md-4 form-group">
                                         <label>Segundo Apellido</label>
-                                        <input class="form-control" placeholder="Apellido" id="txtApellido2" type="text" required="">
+                                        <input class="form-control" placeholder="Apellido" id="txtApellido2" type="text" required="" value=@Model.VC_APELLIDO2>
                                     </div>
 
                                     <div class="col-md-12 form-group">
@@ -614,7 +624,7 @@
 
                                     <div class="col-md-12 form-group">
                                         <label>Teléfono</label>
-                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="">
+                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="" @*@value=@Model.TBL_TELEFONO.First().VC_NUMERO *@>
                                     </div>
 
                                     <div class="col-md-12 form-group">
@@ -631,18 +641,19 @@
 
                                     <div class="col-md-12 form-group">
                                         <label>Numero de Hijos</label>
-                                        <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
+                                        <input class="form-control" placeholder="Número de Hijos" value=@Model.I_HIJOS min="0" id="intHijos" type="number" required="">
                                     </div>
 
                                     <div class="col-md-12 form-group">
-                                        <label>
-                                            <input style="display:inline-block;" id="checkMayorDoce" type="checkbox"> Hijo mayor de 12 años
-                                        </label>
+                                        <label> Hijo mayor de 12 años</label>
+                                        <input class="form-control" placeholder="Número de Hijos mayores de 12" value=@Model.I_HIJOSMAYORESDOCE min="0" id="intHijosMayores" type="number" required="">
                                     </div>
 
                                     <div class="col-md-12 form-group">
                                         <label>Discapacidades en hijos/hijas</label>
-                                        <select id="comDiscapacidad" class="form-control"></select>
+                                        <select id="comDiscapacidad" class="form-control">
+                                            <option value=""></option>
+                                        </select>
                                     </div>
 
                                 </div>
@@ -650,7 +661,7 @@
                                 <div class="col-md-6 form-group">
                                     <div class="col-md-12 form-group">
                                         <label>Número Documento de identificación</label>
-                                        <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="">
+                                        <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="" value=@Model.VC_IDENTIFICACION>
                                     </div>
 
                                     <div class="col-md-12 form-group">
@@ -658,15 +669,21 @@
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label>Provincia</label>
-                                        <select id="cmbPersonaProvincia" class="form-control" required></select>
+                                        <select id="cmbPersonaProvincia" class="form-control" required>
+                                            @*<option value=""></option>*@
+                                        </select>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label>Cantón</label>
-                                        <select id="cmbPersonaCanton" class="form-control" required></select>
+                                        <select id="cmbPersonaCanton" class="form-control" required>
+                                            @*<option value=""></option>*@
+                                        </select>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label>Distrito</label>
-                                        <select id="cmbPersonaDistrito" class="form-control" required></select>
+                                        <select id="cmbPersonaDistrito" class="form-control" required>
+                                            @*<option value=""></option>*@
+                                        </select>
                                     </div>
 
                                     <div class="col-md-12 form-group">
