@@ -23,7 +23,7 @@
         PrevenirCaracteresInvalidos();
         document.title = "SIVIO - COAVIF y Equipo Estrategico";
         InicializarOtrosEventos();
-        CargarDivisionTerritorial();        
+        CargarDivisionTerritorial();
     });
 
     function CargarDivisionTerritorial() {
@@ -357,6 +357,69 @@
 
                 }
             });
+        });
+
+        $("#btnCrearCaso").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CrearNuevoCaso", "Expediente")',
+                data: {
+                    id: "@Model.PK_PERSONA"
+                },
+                //datatype: "json",
+                //contentType: "application/json",
+                async: true,
+                processData: true,
+                success: function (resultado) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "green");
+                    $("#txtModalTitulo").text("Exito");
+                    $("#txtModalContenido").text("CREAR CASO");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                }, error: function (xhr, ajaxOptions, error) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error al registrar");
+                    $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+                }
+            })
+        });
+        $("#btnCerrarCaso").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CerrarCaso", "Expediente")',
+                data: {
+                    id: "@Model.PK_PERSONA"
+                },
+                datatype: "json",
+                //contentType: "application/json",
+                async: true,
+                processData: true,
+                success: function (resultado) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "green");
+                    $("#txtModalTitulo").text("Exito");
+                    $("#txtModalContenido").text("CERRAR CASO");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                }, error: function (xhr, ajaxOptions, error) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error al registrar");
+                    $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+                }
+            })
         });
     }
 

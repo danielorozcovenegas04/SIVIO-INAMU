@@ -291,14 +291,61 @@ namespace SIVIO.UI.Controllers
         }
 
         [AllowAnonymous]
-        public Mensaje CrearNuevoCaso()
+        public Mensaje CrearNuevoCaso(int id)
         {
-            return null;
+            using (var entidades = new SIVIOEntities())
+            {
+                TBL_ATENCION caso = new TBL_ATENCION();
+                caso.PK_ATENCION = Guid.NewGuid();
+                caso.DT_FECHAINICIO = DateTime.Now;
+                caso.DT_FECHAFIN = new DateTime().AddYears(1980);
+                caso.FK_TIPOATENCION = 573;
+                var lista = entidades.TBL_REGISTRO.ToList();
+                DateTime date = new DateTime();
+                TBL_REGISTRO registro = new TBL_REGISTRO();
+                foreach (var r in lista)
+                {
+                    if (r.FK_PERSONA == id && r.DT_FECHAINICIO > date)
+                    {
+                        date = r.DT_FECHAINICIO;
+                        registro = r;
+                    }
+                }
+                caso.FK_REGISTRO = registro.PK_REGISTRO;
+                entidades.TBL_ATENCION.Add(caso);
+                entidades.SaveChanges();
+            }
+            return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
         }
         [AllowAnonymous]
-        public Mensaje CerrarCaso()
+        public Mensaje CerrarCaso(int id)
         {
-            return null;
+            using (var entidades = new SIVIOEntities())
+            {
+                var listaRegistros = entidades.TBL_REGISTRO.ToList();
+                DateTime date = new DateTime();
+                TBL_REGISTRO registro = new TBL_REGISTRO();
+                foreach (var r in listaRegistros)
+                {
+                    if (r.FK_PERSONA == id && r.DT_FECHAINICIO > date)
+                    {
+                        date = r.DT_FECHAINICIO;
+                        registro = r;
+                    }
+                }
+                var listaCasos = entidades.TBL_ATENCION.ToList();
+                TBL_ATENCION caso = new TBL_ATENCION();
+                foreach (var c in listaCasos)
+                {
+                    if (c.FK_REGISTRO == registro.PK_REGISTRO && c.DT_FECHAFIN == new DateTime().AddYears(1980))
+                    {
+                        caso = entidades.TBL_ATENCION.Find(c.PK_ATENCION);
+                    }
+                }
+                caso.DT_FECHAFIN = DateTime.Now;
+                entidades.SaveChanges();
+            }
+            return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
         }
 
         [Authorize]
