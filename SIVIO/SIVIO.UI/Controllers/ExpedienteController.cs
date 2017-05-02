@@ -24,9 +24,41 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult CrearCaso()
+        public ActionResult CrearCaso(string ValorPersona)
         {
-            return View();
+           // bool estadoSesion = true;
+            /* if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                if (String.IsNullOrEmpty(pk_persona))
+                {
+                    return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+                }
+
+                var persona = _modelExpediente.ListarRegistros(Int32.Parse(pk_persona));
+
+                return View();
+
+            }*/
+
+            if (String.IsNullOrEmpty(ValorPersona))
+            {
+                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+            }
+
+            TBL_PERSONA persona = _modelExpediente.ObtenerPersona(ValorPersona);
+
+            return View(persona);
+
+            
+           /* else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+            }*/
+            
         }
         
         [AllowAnonymous]

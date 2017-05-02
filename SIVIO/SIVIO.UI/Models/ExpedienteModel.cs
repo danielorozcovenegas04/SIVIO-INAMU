@@ -72,6 +72,24 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public TBL_PERSONA ObtenerPersona(string persona)
+        {
+           
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    TBL_PERSONA personaConsulta = (TBL_PERSONA)entidades.TBL_PERSONA.Find(Int32.Parse(persona)); //Where(m => m.PK_PERSONA == Int32.Parse(persona));// .Where(m => m.PK_PERSONA == Int32.Parse(persona));
+                    personaConsulta.
+                    return personaConsulta;
+                }
+                catch (Exception ex)
+                {
+                    return new TBL_PERSONA();
+                }
+            }
+        }
+
         public void InsertarPersonaConAgresor(
             TBL_PERSONA persona,            TBL_AGRESOR agresor,
             TBL_LABORAL laboral,            TBL_ADICCIONES adicciones,
