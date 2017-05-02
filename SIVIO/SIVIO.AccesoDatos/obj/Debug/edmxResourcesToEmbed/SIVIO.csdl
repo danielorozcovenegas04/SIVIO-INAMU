@@ -265,10 +265,6 @@
       <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
       <End Role="TBL_INTERVENCION_TESTIMONIO_EXPERTO" EntitySet="TBL_INTERVENCION_TESTIMONIO_EXPERTO" />
     </AssociationSet>
-    <AssociationSet Name="FK_TBL_REFERENCIA_TBL_REFERENCIA1" Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_REFERENCIA1">
-      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
-      <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
-    </AssociationSet>
     <AssociationSet Name="FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_INTERVENCION_COADYUVANCIA" Association="SIVIOModel.FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_INTERVENCION_COADYUVANCIA">
       <End Role="TBL_INTERVENCION_COADYUVANCIA" EntitySet="TBL_INTERVENCION_COADYUVANCIA" />
       <End Role="TBL_INTERVENCION_COADYUVANCIA_DETALLE" EntitySet="TBL_INTERVENCION_COADYUVANCIA_DETALLE" />
@@ -364,10 +360,6 @@
     <AssociationSet Name="FK_TBL_PERSONA_SALUD_TBL_VALOR_CATALOGO" Association="SIVIOModel.FK_TBL_PERSONA_SALUD_TBL_VALOR_CATALOGO">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_PERSONA_SALUD" EntitySet="TBL_PERSONA_SALUD" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TBL_REFERENCIA_TBL_REGISTRO" Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_REGISTRO">
-      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
-      <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
     </AssociationSet>
     <AssociationSet Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO" Association="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
@@ -791,7 +783,6 @@
     <NavigationProperty Name="TBL_USUARIO" Relationship="SIVIOModel.FK_TBL_INTERVENCION_TBL_USUARIO" FromRole="TBL_INTERVENCION" ToRole="TBL_USUARIO" />
     <NavigationProperty Name="TBL_VALOR_CATALOGO" Relationship="SIVIOModel.FK_TBL_INTERVENCION_TBL_VALOR_CATALOGO" FromRole="TBL_INTERVENCION" ToRole="TBL_VALOR_CATALOGO" />
     <NavigationProperty Name="TBL_INTERVENCION_TESTIMONIO_EXPERTO" Relationship="SIVIOModel.FK_TBL_INTERVENCION_TESTIMONIO_EXPERTO_TBL_INTERVENCION" FromRole="TBL_INTERVENCION" ToRole="TBL_INTERVENCION_TESTIMONIO_EXPERTO" />
-    <NavigationProperty Name="TBL_REFERENCIA" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_REFERENCIA1" FromRole="TBL_INTERVENCION" ToRole="TBL_REFERENCIA" />
   </EntityType>
   <EntityType Name="TBL_INTERVENCION_ACOM_PROFESIONAL">
     <Key>
@@ -951,7 +942,7 @@
     <Property Name="VC_NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="VC_APELLIDO1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="VC_APELLIDO2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="DT_FECHANACIMIENTO" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DT_FECHANACIMIENTO" Type="DateTime" Precision="3" />
     <Property Name="FK_ESTADOCIVIL" Type="Int32" Nullable="false" />
     <Property Name="FK_ESCOLARIDAD" Type="Int32" Nullable="false" />
     <Property Name="FK_GENERO" Type="Int32" Nullable="false" />
@@ -972,6 +963,8 @@
     <Property Name="VC_CORREO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="FK_ETNIA" Type="Int32" />
     <Property Name="FK_NACIONALIDAD2" Type="Int32" />
+    <Property Name="I_EDAD" Type="Int32" />
+    <Property Name="B_CONOCEFECHANACIMIENTO" Type="Boolean" />
     <NavigationProperty Name="TBL_ADICCIONES" Relationship="SIVIOModel.FK_TBL_ADICCIONES_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_ADICCIONES" />
     <NavigationProperty Name="TBL_AGRESOR" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_AGRESOR" />
     <NavigationProperty Name="TBL_DIRECCION" Relationship="SIVIOModel.FK_TBL_DIRECCION_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_DIRECCION" />
@@ -1066,8 +1059,6 @@
     <Property Name="FK_INSTITUCIONDESTINO" Type="Int32" Nullable="false" />
     <Property Name="FK_INTERVENCION" Type="Guid" />
     <Property Name="DT_FECHAREFERENCIA" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="TBL_INTERVENCION" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_REFERENCIA1" FromRole="TBL_REFERENCIA" ToRole="TBL_INTERVENCION" />
-    <NavigationProperty Name="TBL_REGISTRO" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_REGISTRO" FromRole="TBL_REFERENCIA" ToRole="TBL_REGISTRO" />
     <NavigationProperty Name="TBL_VALOR_CATALOGO" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO" FromRole="TBL_REFERENCIA" ToRole="TBL_VALOR_CATALOGO" />
     <NavigationProperty Name="TBL_VALOR_CATALOGO1" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_VALORCATALOGO1" FromRole="TBL_REFERENCIA" ToRole="TBL_VALOR_CATALOGO" />
   </EntityType>
@@ -1101,7 +1092,6 @@
     <NavigationProperty Name="TBL_ATENCION" Relationship="SIVIOModel.FK_TBL_CONSULTA_TBL_REGISTRO" FromRole="TBL_REGISTRO" ToRole="TBL_ATENCION" />
     <NavigationProperty Name="TBL_CONSULTA" Relationship="SIVIOModel.FK_TBL_ATENCION_TBL_REGISTRO" FromRole="TBL_REGISTRO" ToRole="TBL_CONSULTA" />
     <NavigationProperty Name="TBL_PERSONA" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_PERSONA" FromRole="TBL_REGISTRO" ToRole="TBL_PERSONA" />
-    <NavigationProperty Name="TBL_REFERENCIA" Relationship="SIVIOModel.FK_TBL_REFERENCIA_TBL_REGISTRO" FromRole="TBL_REGISTRO" ToRole="TBL_REFERENCIA" />
     <NavigationProperty Name="TBL_REGISTRO_CEAAM" Relationship="SIVIOModel.FK_TBL_REGISTRO_CEAAM_TBL_REGISTRO" FromRole="TBL_REGISTRO" ToRole="TBL_REGISTRO_CEAAM" />
     <NavigationProperty Name="TBL_REGISTRO_COORDINACION" Relationship="SIVIOModel.FK_TBL_REGISTRO_COORDINACION_TBL_REGISTRO" FromRole="TBL_REGISTRO" ToRole="TBL_REGISTRO_COORDINACION" />
     <NavigationProperty Name="TBL_USUARIO" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_USUARIO" FromRole="TBL_REGISTRO" ToRole="TBL_USUARIO" />
@@ -1904,18 +1894,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TBL_REFERENCIA_TBL_REFERENCIA1">
-    <End Type="SIVIOModel.TBL_INTERVENCION" Role="TBL_INTERVENCION" Multiplicity="0..1" />
-    <End Type="SIVIOModel.TBL_REFERENCIA" Role="TBL_REFERENCIA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TBL_INTERVENCION">
-        <PropertyRef Name="PK_INTERVENCION" />
-      </Principal>
-      <Dependent Role="TBL_REFERENCIA">
-        <PropertyRef Name="FK_INTERVENCION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TBL_INTERVENCION_COADYUVANCIA_DETALLE_TBL_INTERVENCION_COADYUVANCIA">
     <End Type="SIVIOModel.TBL_INTERVENCION_COADYUVANCIA" Role="TBL_INTERVENCION_COADYUVANCIA" Multiplicity="1" />
     <End Type="SIVIOModel.TBL_INTERVENCION_COADYUVANCIA_DETALLE" Role="TBL_INTERVENCION_COADYUVANCIA_DETALLE" Multiplicity="*" />
@@ -2201,18 +2179,6 @@
       </Principal>
       <Dependent Role="TBL_PERSONA_SALUD">
         <PropertyRef Name="FK_CONDICIONSALUD" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TBL_REFERENCIA_TBL_REGISTRO">
-    <End Type="SIVIOModel.TBL_REGISTRO" Role="TBL_REGISTRO" Multiplicity="0..1" />
-    <End Type="SIVIOModel.TBL_REFERENCIA" Role="TBL_REFERENCIA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TBL_REGISTRO">
-        <PropertyRef Name="PK_REGISTRO" />
-      </Principal>
-      <Dependent Role="TBL_REFERENCIA">
-        <PropertyRef Name="FK_REGISTRO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

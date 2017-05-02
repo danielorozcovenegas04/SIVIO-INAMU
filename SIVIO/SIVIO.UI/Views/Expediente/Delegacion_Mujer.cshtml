@@ -201,6 +201,15 @@
                             text: value.VC_VALOR1
                         }));
                     });
+                    $.each(respuesta.CatalogoViolencia, function (key, value) {
+                        $('#cmbTipoViolencia').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $('#cmbTipoViolencia').selectize({
+                        sortField: 'text'
+                    });
 
                     $('#btn-login').fadeIn();
                     $.LoadingOverlay("hide");
@@ -385,9 +394,9 @@
 
             <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
 
-            <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="margin-bottom:100%; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
+            <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
 
-            <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; padding-top display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
+            <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px;display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
 
             <button type="button" id="btnCerrarCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Cerrar Caso</button>
         </div>
@@ -503,8 +512,6 @@
                     </div>
                     <div id="datUsuaria" class="tab-pane">
                         <div class="row comunForm">
-                            <table width="100%" border="0" cellspacing="100" align="right">
-                                <td style="top">
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Nombre</label>
@@ -530,7 +537,7 @@
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Fecha de nacimiento</label>
-                                            <input type="date" id="txtFechaNacimiento">
+                                            <input type="date" id="txtFechaNacimiento" style="background-color:transparent" class="form-control">
                                             <!-- Buscar manera de que el label se ubique SOBRE el calendario -->
                                         </div>
                                         <div class="col-xs-6 form-group">
@@ -633,62 +640,17 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-xs-6 form-group">
+                                        <div class="col-md-6 form-group">
                                             <label>Ocupación</label>
                                             <select id="cmbOcupacion" class="form-control"></select>
                                         </div>
+                                    
+                                        <div class="col-md-6 form-group">
+                                            <label>Tipificación de violencia</label>
+                                            <select id="cmbTipoViolencia" class="form-control" multiple></select>
+                                        </div>
                                     </div>
 
-                                    <div class="row">
-                                        <ng-form>
-                                            <legend></legend>
-                                            <div class="col-xs-6 form-group">
-                                                <label>Tipificación de la violencia</label>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaFisica" /></div>
-                                                    <div class="inlineCheckBox">Violencia física </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaSexual" /></div>
-                                                    <div class="inlineCheckBox">Violencia sexual </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaPatrimonial" /></div>
-                                                    <div class="inlineCheckBox">Violencia patrimonial </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaPsicologica" /></div>
-                                                    <div class="inlineCheckBox">Violencia psicológica </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxAcosoSexual" /></div>
-                                                    <div class="inlineCheckBox">Acoso sexual callejero </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxAcosoLaboral" /></div>
-                                                    <div class="inlineCheckBox">Acoso laboral </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxHostigamientoSexual" /></div>
-                                                    <div class="inlineCheckBox">Hostigamiento sexual </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxTrataPersonas" /></div>
-                                                    <div class="inlineCheckBox">Trata de personal </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaObstetrica" /></div>
-                                                    <div class="inlineCheckBox">Violencia obstétrica </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6 form-group">
-                                                <label>Vínculo con persona agresora</label>
-                                                <input class="form-control" placeholder="Vínculo con persona agresora" id="txtPersonaAgresora" type="text" required="">
-                                            </div>
-                                        </ng-form>
-                                    </div>
-                                </td>
-                            </table>
                         </div>
                     </div>
                     <!--Inicia pestaña Datos de perfil de usuaria-->

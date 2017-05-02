@@ -451,6 +451,8 @@
     <EntitySetMapping Name="TBL_PERSONA">
       <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA">
         <MappingFragment StoreEntitySet="TBL_PERSONA">
+          <ScalarProperty Name="B_CONOCEFECHANACIMIENTO" ColumnName="B_CONOCEFECHANACIMIENTO" />
+          <ScalarProperty Name="I_EDAD" ColumnName="I_EDAD" />
           <ScalarProperty Name="FK_NACIONALIDAD2" ColumnName="FK_NACIONALIDAD2" />
           <ScalarProperty Name="FK_ETNIA" ColumnName="FK_ETNIA" />
           <ScalarProperty Name="VC_CORREO" ColumnName="VC_CORREO" />

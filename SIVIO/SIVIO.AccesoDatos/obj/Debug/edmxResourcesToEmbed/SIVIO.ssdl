@@ -420,7 +420,7 @@
     <Property Name="VC_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="VC_APELLIDO1" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="VC_APELLIDO2" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="DT_FECHANACIMIENTO" Type="datetime" Nullable="false" />
+    <Property Name="DT_FECHANACIMIENTO" Type="datetime" />
     <Property Name="FK_ESTADOCIVIL" Type="int" Nullable="false" />
     <Property Name="FK_ESCOLARIDAD" Type="int" Nullable="false" />
     <Property Name="FK_GENERO" Type="int" Nullable="false" />
@@ -441,6 +441,8 @@
     <Property Name="VC_CORREO" Type="varchar" MaxLength="200" />
     <Property Name="FK_ETNIA" Type="int" />
     <Property Name="FK_NACIONALIDAD2" Type="int" />
+    <Property Name="I_EDAD" Type="int" />
+    <Property Name="B_CONOCEFECHANACIMIENTO" Type="bit" />
   </EntityType>
   <EntityType Name="TBL_PERSONA_APOYO">
     <Key>
@@ -1528,30 +1530,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TBL_REFERENCIA_TBL_REFERENCIA1">
-    <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="0..1" />
-    <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TBL_INTERVENCION">
-        <PropertyRef Name="PK_INTERVENCION" />
-      </Principal>
-      <Dependent Role="TBL_REFERENCIA">
-        <PropertyRef Name="FK_INTERVENCION" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TBL_REFERENCIA_TBL_REGISTRO">
-    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="0..1" />
-    <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TBL_REGISTRO">
-        <PropertyRef Name="PK_REGISTRO" />
-      </Principal>
-      <Dependent Role="TBL_REFERENCIA">
-        <PropertyRef Name="FK_REGISTRO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
     <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
     <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
@@ -2156,14 +2134,6 @@
     <AssociationSet Name="FK_TBL_REFERENCIA_DETALLE_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_REFERENCIA_DETALLE_TBL_VALOR_CATALOGO">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_REFERENCIA_DETALLE" EntitySet="TBL_REFERENCIA_DETALLE" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TBL_REFERENCIA_TBL_REFERENCIA1" Association="Self.FK_TBL_REFERENCIA_TBL_REFERENCIA1">
-      <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
-      <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TBL_REFERENCIA_TBL_REGISTRO" Association="Self.FK_TBL_REFERENCIA_TBL_REGISTRO">
-      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
-      <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
     </AssociationSet>
     <AssociationSet Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO" Association="Self.FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
