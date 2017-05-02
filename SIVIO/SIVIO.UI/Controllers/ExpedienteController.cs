@@ -201,20 +201,7 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult BusquedaExpedienteCoavif(string palabra)
         {
-            //bool estadoSesion = true;
-            //if (ComprobarPermisosAcccion(out estadoSesion))
-            //{
-            return View(_modelExpediente.ListarPersonas(palabra));
-
-            //}
-            //else if (!estadoSesion)
-            //{
-            //    return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
-            //}
-            //else
-            //{
-            //    return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
-            //}
+            return View(_modelExpediente.ListarPersonas(palabra));            
         }
 
         [AllowAnonymous]
@@ -237,7 +224,6 @@ namespace SIVIO.UI.Controllers
                     objeto.usuarioApellido2 = usuario.VC_APELLIDO2;
                     objeto.usuarioRol = usuario.TBL_ROL_USUARIO.First().FK_ROL;
                     return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objeto), JsonRequestBehavior.AllowGet);
-
                 }
                 catch (Exception e) {
                     objeto.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al cargar persona", string.Empty);
@@ -283,9 +269,9 @@ namespace SIVIO.UI.Controllers
                 var user = HttpContext.User.Identity.Name;
                 TBL_USUARIO usuario = entidades.TBL_USUARIO.Where(m => m.VC_USUARIO == user).First();
 
-                DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm",
-                                           System.Globalization.CultureInfo.InvariantCulture);
+                DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime fechaFin = DateTime.Now;
+
                 int idPersona;
                 int disponibilidad = 0;
                 bool bol = Int32.TryParse(pers, out idPersona);

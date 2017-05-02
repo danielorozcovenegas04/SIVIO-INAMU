@@ -106,22 +106,25 @@
 
     <!-- Campo de búsqueda -->
     <div id="busquedaExpediente" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px; border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
-        <div class="row" style="margin-left: 10px; margin-bottom: 10px">
-            <div class="col-md-12">
-                <br /><b>Digite el nombre o identificación:</b><br />
+        <div id="busqueda">
+            <div class="row" style="margin-left: 10px; margin-bottom: 10px">
+                <div class="col-md-12">
+                    <br /><b>Digite el nombre o identificación:</b><br />
+                </div>
             </div>
+            <form id="frmBusqueda" name="frmBusqueda">
+                <div class="row" style="margin-left: 10px; margin-right:10px">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" placeholder="Nombre..." name="palabra" value="" style="margin-bottom:5px;" />
+                    </div>
+                    <div class="col-md-1">
+                        <a href="#" id="btnBusquedaExpediente" class="btn btn-default">Buscar</a>
+                    </div>
+                </div>
+            </form>
+            <br><br><br>
         </div>
-        <form id="frmBusqueda" name="frmBusqueda">
-            <div class="row" style="margin-left: 10px">
-                <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="Nombre..." name="palabra" value="" />
-                </div>
-                <div class="col-md-1">
-                    <a href="#" id="btnBusquedaExpediente" class="btn btn-default">Buscar</a>
-                </div>
-            </div>
-        </form>
-        <br><br><br>
+        
 
         @if (@Request.QueryString["palabra"] != "" & @Request.QueryString["palabra"] != null)
         {
@@ -160,9 +163,12 @@
                             data: { pkUsuario: filaSeleccionada[0].PKPERSONA },
                             async: true
                         }).done(function (data) {
+                            $("#botonCrear").hide();
+                            $("#busqueda").hide();
                             $('#contenedorBusquedaExpediente').html(data);
                             $("#contenedorEspera").hide();
-                            $('#contenedorBusquedaExpediente').fadeIn();
+                            $('#contenedorBusquedaExpediente').fadeIn();                            
+                            $("#botonCrear").hide();
                         }).fail(function (exception) {
                             $("#txtModalTitulo").css("color", "red");
                             $("#txtModalTitulo").text("Error");
@@ -273,10 +279,7 @@
         });
         $(document).ready(function () {
             document.title = "COAVIF - Buscar Expediente";
-            var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
-
-            //$("#contenedorBusquedaExpediente").hide();
-
+            var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();            
 
         });
 
