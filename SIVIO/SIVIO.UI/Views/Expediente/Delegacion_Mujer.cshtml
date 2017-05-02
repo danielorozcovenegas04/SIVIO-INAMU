@@ -166,7 +166,12 @@
                         }));
                     });
 
-
+                    $.each(respuesta.CatalogoTipoAtencion, function (key, value) {
+                        $('#txtTipoAten').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
 
                     //combobox Historia Violencia
                     $.each(respuesta.CatalogoNacionalidad, function (key, value) {
@@ -453,10 +458,8 @@
                             <div class="row">
                                 <div class="col-xs-6 form-group">
                                     <label>Tipo de atención</label>
-                                   <select class="form-control">
-                                        <option value="atension 1">atension 1</option>
-                                        <option value="atension 2">atension 2</option>
-                                    </select>
+                                   <select class="form-control" id="txtTipoAten">
+                                   </select>
                                 </div>
                                 <div class="col-xs-6 form-group">
                                     <label>Profesional</label>
