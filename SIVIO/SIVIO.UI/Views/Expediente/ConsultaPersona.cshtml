@@ -245,50 +245,64 @@
         
         function refrescarGrid() { tablaConsultas.ajax.reload() }
     </script>
+
     <div class="row" id="contenedorGrid" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
                                                                                                                                                                                                                                                 background-color: #FFFFFF;
                                                                                                                                                                                                                                                 border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
         <div class="col-md-12">
-          
+          @if(Model!=null){
+            
+            <text>Nombre de la persona usuaria: </text>
+            <text>Numero de expediente de la persona usuaria: </text>
             <table id="tblListadoConsultas" class="display table-bordered" cellspacing="0" style="width: 100%">
                 <caption><div class="comunForm" style="text-align: center; color: #c31618; border-color: #c31618 !important;"><i class="fa fa-bell" style="margin-right: 2px"></i>Lista de Consultas Existentes</div></caption>
                 <thead>
                     <tr>
-                        <th> </th>
+                        
                         <th>Nombre de la usuaria</th>
                         <th>Identificación</th>
                         <th>Fecha de atención</th>
-                        <th>Tipo de atención</th>
-                        <th>Servicio que realiza la atención</th>
-                        <th>Persona que realiza la atención</th>
+                        <th>Estado de la atencion a la persona</th>
+                        <th>Administracion de caso</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var consulta in Model)
                     {
-                        
-                            <tr>
-                                <td></td>
-                                <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
-                                <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
-                                <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
-                                <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO.VC_VALOR1)</td>
-                                <td> Consulta </td>
-                                <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
-                            </tr>
-                        
+
+                    <tr>
+                        <td></td>
+<td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
+                        <td>@Html.Raw(consulta.TBL_USUARIO.VC_USUARIO)</td>
+                        <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
+                        @if(consulta.DT_FECHAINICIO!=null){
+                            <td>Caso Cerrado</td>
+                            
+                        }else{
+                            <td>Caso Abierto</td>
+                            
+                        }
+                    </tr>
+
                     }
                 </tbody>
             </table>
 
+            }
+            
 
 
         </div>
-        
+        <div class="col-md-2 form-group">
+
+            <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
+
+            
+        </div>
     </div>
     <div id="contenedorConsultas">
-
-
+       
+    
     </div>
 
 

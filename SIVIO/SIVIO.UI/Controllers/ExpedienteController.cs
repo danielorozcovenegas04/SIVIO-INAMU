@@ -338,9 +338,98 @@ namespace SIVIO.UI.Controllers
             }
             return View(listaRegistro);
         }
+
+        [Authorize]
+        public ActionResult ConsultaPersona()
+        {
+            int t = 0;
+            string persona = "Juliana Trump Beckenbauer";
+            var listaPersonas = _modelExpediente.ListarPersonas();
+            var listaUsuarios = _modelExpediente.ListarUSuarios();
+            var listaConsulta = _modelExpediente.ListarConsultas();
+            var listaRegistro = _modelExpediente.ListarRegistro();
+            var listaCatalogo = _modelExpediente.ListarCatalogo();
+            var listaAtencion = _modelExpediente.ListarAtencion();
+            var infopersona = new List<TBL_REGISTRO>();
+            foreach (var p in listaPersonas) {
+                var nombre = p.VC_NOMBRE + " " + p.VC_APELLIDO1 + " " + p.VC_APELLIDO2;
+                if (persona.CompareTo(nombre) == 0) {
+                    foreach (var r in listaRegistro) {
+                        if (r.TBL_PERSONA == null) {
+                            r.TBL_PERSONA = new TBL_PERSONA();
+                            r.TBL_PERSONA.VC_NOMBRE = p.VC_NOMBRE;
+                            r.TBL_PERSONA.VC_APELLIDO1 = p.VC_APELLIDO1;
+                            r.TBL_PERSONA.VC_APELLIDO2 = p.VC_APELLIDO2;
+                        }
+                        if (r.FK_PERSONA == p.PK_PERSONA) {
+                            infopersona.Add(r);
+                        }
+                    }
+                }
+            }
+            foreach (var ip in infopersona) {
+                foreach (var u in listaUsuarios)
+                {
+                    if (ip.FK_USUARIOREGISTRA == u.PK_USUARIO)
+                    {
+                        ip.TBL_USUARIO = new TBL_USUARIO();
+                        ip.TBL_USUARIO.PK_USUARIO = u.PK_USUARIO;
+                        ip.TBL_USUARIO.VC_APELLIDO1 = u.VC_APELLIDO1;
+                        ip.TBL_USUARIO.VC_APELLIDO2 = u.VC_APELLIDO2;
+                        ip.TBL_USUARIO.VC_NOMBRE = u.VC_NOMBRE;
+                        ip.TBL_USUARIO.VC_USUARIO = u.VC_USUARIO;
+                    }
+                }
+                foreach (var c in listaCatalogo)
+                {
+                    if (ip.TBL_VALOR_CATALOGO == null)
+                    {
+                        ip.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
+                        ip.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
+                    }
+                    if (ip.FK_TIPOSERVICIO == c.FK_CATALOGO)
+                    {
+                        ip.TBL_VALOR_CATALOGO.FK_CATALOGO = c.FK_CATALOGO;
+                        ip.TBL_VALOR_CATALOGO.VC_VALOR1 = c.VC_VALOR1;
+
+                    }
+                    if (ip.FK_TIPOREGISTRO == c.FK_CATALOGO)
+                    {
+                        ip.TBL_VALOR_CATALOGO1.FK_CATALOGO = c.FK_CATALOGO;
+                        ip.TBL_VALOR_CATALOGO1.VC_VALOR1 = c.VC_VALOR1;
+
+                    }
+                }
+                foreach (var c in listaConsulta)
+                {
+                    if (ip.PK_REGISTRO == c.FK_REGISTRO)
+                    {
+                        ip.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
+                    }
+                }
+                foreach (var a in listaAtencion)
+                {
+                    if (ip.PK_REGISTRO == a.FK_REGISTRO)
+                    {
+                        ip.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
+                    }
+                }
+                //SOLO PARA PRUEBAS ELIMINAR
+                if (t == 0)
+                {
+                    ip.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
+                }
+                if (t == 1)
+                {
+                    ip.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
+                }
+                t++;
+            }
+            return View(infopersona);
+        }
         #endregion
 
-        #region Delegacion
+            #region Delegacion
         [Authorize]
         public ActionResult Delegacion_Mujer()
         {
