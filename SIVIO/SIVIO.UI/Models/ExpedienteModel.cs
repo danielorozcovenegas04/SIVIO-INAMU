@@ -235,9 +235,9 @@ namespace SIVIO.UI.Models
             {
                 try
                 {
-                    //List<TBL_REGISTRO> Registro = entidades.TBL_REGISTRO.ToList();
-                    //return Registro;
-                    List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
+                    List<TBL_REGISTRO> Registro = entidades.TBL_REGISTRO.ToList();
+                    return Registro;
+                   /* List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
                     R.Add(new TBL_REGISTRO()
                     {
                         PK_REGISTRO = Guid.NewGuid(),
@@ -260,12 +260,12 @@ namespace SIVIO.UI.Models
                         FK_TIPOREGISTRO = 550,
                         VC_OBSERVACIONES = "algo"
                     });
-                    return R;
+                    return R;*/
                 }
                 catch
                 {
-                    //return new List<TBL_REGISTRO>();
-                    List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
+                    return new List<TBL_REGISTRO>();
+                   /* List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
                     R.Add(new TBL_REGISTRO()
                     {
                         //PK_REGISTRO = 2,
@@ -288,7 +288,7 @@ namespace SIVIO.UI.Models
                         FK_TIPOREGISTRO = 69,
                         VC_OBSERVACIONES = "algo"
                     });
-                    return R;
+                    return R;*/
                 }
             }
         }

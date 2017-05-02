@@ -207,12 +207,12 @@
                         //<th>Entidad Trasladada</th>
                         //<th>Fecha de Traslado</th>
             "columns": [
-                { "data": "INGRESOCEAAM", "name": "INGRESOCEAAM", "autoWidth": true, "visible": false },
-                { "data": "OBSERVACIONES", "name": "OBSERVACIONES", "autoWidth": true },
-                { "data": "REINGRESOCEAAM", "name": "REINGRESOCEAAM", "autoWidth": true },
-                { "data": "CONTACTOCEEAM", "name": "CONTACTOCEEAM", "autoWidth": true },
-                { "data": "ENTIDADTRASLADA", "name": "ENTIDADTRASLADA", "autoWidth": true },
-                { "data": "TRASLADOAPROX", "name": "TRASLADOAPROX", "autoWidth": true },
+                { "data": "NOMBREDEUSUARIA", "name": "NOMBREDEUSUARIA", "autoWidth": true, "visible": false },
+                { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
+                { "data": "FECHADEATENCION", "name": "FECHADEATENCION", "autoWidth": true },
+                { "data": "ATENCIONDELAATENCION", "name": "ATENCIONDELAATENCION", "autoWidth": true },
+                { "data": "ADMINISTACIONDECASO", "name": "ADMINISTACIONDECASO", "autoWidth": true },
+               
 
             ]
 
@@ -246,14 +246,16 @@
         function refrescarGrid() { tablaConsultas.ajax.reload() }
     </script>
 
-    <div class="row" id="contenedorGrid" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
-                                                                                                                                                                                                                                                background-color: #FFFFFF;
-                                                                                                                                                                                                                                                border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
+    <div class="row" id="contenedorGrid" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;                                                                                                                                                                                                                                             border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
         <div class="col-md-12">
           @if(Model!=null){
+            <div class="col-md-10 form-group">
+                <div class="row" style="margin-left:20px;margin-right:20px;">
+                    <h2>Expediente de:  @ViewBag.NombrePersona</h2>
+                    <h4>Identificación:  @ViewBag.IdPersona  <br /> Número de expediente: @ViewBag.Expediente</h4>
+                </div>
+            </div>
             
-            <text>Nombre de la persona usuaria: </text>
-            <text>Numero de expediente de la persona usuaria: </text>
             <table id="tblListadoConsultas" class="display table-bordered" cellspacing="0" style="width: 100%">
                 <caption><div class="comunForm" style="text-align: center; color: #c31618; border-color: #c31618 !important;"><i class="fa fa-bell" style="margin-right: 2px"></i>Lista de Consultas Existentes</div></caption>
                 <thead>
@@ -271,8 +273,8 @@
                     {
 
                     <tr>
-                        <td></td>
-<td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
+                        
+                        <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
                         <td>@Html.Raw(consulta.TBL_USUARIO.VC_USUARIO)</td>
                         <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
                         @if(consulta.DT_FECHAINICIO!=null){

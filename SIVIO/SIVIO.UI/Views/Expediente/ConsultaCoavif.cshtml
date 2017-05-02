@@ -424,15 +424,51 @@
 
             });
 
+
+            $('#btnBuscarPersona').click(function () {
+                debugger;
+                $.LoadingOverlay("show");
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("ConsultaPersona", "Expediente")',
+                    async: true
+                }).done(function (data) {
+
+                    $.LoadingOverlay("hide");
+                    $('#contendorFrames').html(data);
+                    $("#contenedorEspera").hide();
+                    $('#contendorFrames').fadeIn();
+
+
+                }).fail(function (exception) {
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error de Sistema");
+                    $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                    $("#contenedorEspera").hide();
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                });
+            });
             function refrescarGrid() { tablaAtenciones.ajax.reload() }
             function refrescarGrid() { tablaConsultas.ajax.reload() }
         </script>
+        <div class="row" id="buscador" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
+                                                                                                                                                                                                                                          background-color: #FFFFFF;
+                                                                                                                                                                                                                                                border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
+            <div class="col-md-10">
+                <h6>Buscar</h6>@Html.TextBox("Nombre", "Digite el nombre de la persona", new { @class = "form-control" })
+                <button type="button" id="btnBuscarPersona" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 20%; color: white; background-color: #FA8258; border-color: #FA8258;">Buscar</button>
+            </div>
+        </div>
+        
         <div class="tab-content">
+           
             <div id="consulta" class="tab-pane fade in">
 
                 <div class="row" id="contenedorGrid" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
-                                                                                                                                                                                                                                                background-color: #FFFFFF;
+                                                                                                                                                                                                                                          background-color: #FFFFFF;
                                                                                                                                                                                                                                                 border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
+                       
                     <div class="col-md-12">
                         <table id="tblListadoConsultas" class="display table-bordered" cellspacing="0" style="width: 100%">
                             <caption><div class="comunForm" style="text-align: center; color: #c31618; border-color: #c31618 !important;"><i class="fa fa-bell" style="margin-right: 2px"></i>Lista de Consultas Existentes</div></caption>

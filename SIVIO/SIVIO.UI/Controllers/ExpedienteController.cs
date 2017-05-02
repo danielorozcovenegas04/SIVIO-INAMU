@@ -388,17 +388,21 @@ namespace SIVIO.UI.Controllers
                 }
                 foreach (var c in listaCatalogo)
                 {
-                    if (r.TBL_VALOR_CATALOGO==null) {
+//if (r.TBL_VALOR_CATALOGO==null) {
+                        
+                       
+                  //  }
+                    if (r.FK_TIPOSERVICIO == c.FK_CATALOGO) {
                         r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
                         r.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
-                    }
-                    if (r.FK_TIPOSERVICIO == c.FK_CATALOGO) {
                         r.TBL_VALOR_CATALOGO.FK_CATALOGO = c.FK_CATALOGO;
                         r.TBL_VALOR_CATALOGO.VC_VALOR1 = c.VC_VALOR1;
-                       
+                        r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "0";
+
                     }
                     if (r.FK_TIPOREGISTRO == c.FK_CATALOGO)
                     {
+                       
                         r.TBL_VALOR_CATALOGO1.FK_CATALOGO = c.FK_CATALOGO;
                         r.TBL_VALOR_CATALOGO1.VC_VALOR1 = c.VC_VALOR1;
                         
@@ -418,7 +422,7 @@ namespace SIVIO.UI.Controllers
                     }
                 }
                 //SOLO PARA PRUEBAS ELIMINAR
-                if (t == 0)
+              /* if (t == 0)
                 {
                     r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
                 }
@@ -426,7 +430,7 @@ namespace SIVIO.UI.Controllers
                 {
                     r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
                 }
-                t++;
+                t++;*/
                 //SOLO PARA PRUEBAS ELIMINAR
             }
             return View(listaRegistro);
@@ -453,6 +457,9 @@ namespace SIVIO.UI.Controllers
                             r.TBL_PERSONA.VC_NOMBRE = p.VC_NOMBRE;
                             r.TBL_PERSONA.VC_APELLIDO1 = p.VC_APELLIDO1;
                             r.TBL_PERSONA.VC_APELLIDO2 = p.VC_APELLIDO2;
+                            ViewBag.NombrePersona= p.VC_NOMBRE + " " + p.VC_APELLIDO1 + " " + p.VC_APELLIDO2;
+                            ViewBag.IdPersona = p.VC_IDENTIFICACION;
+                            ViewBag.Expediente = p.PK_PERSONA;
                         }
                         if (r.FK_PERSONA == p.PK_PERSONA) {
                             infopersona.Add(r);
@@ -508,7 +515,7 @@ namespace SIVIO.UI.Controllers
                     }
                 }
                 //SOLO PARA PRUEBAS ELIMINAR
-                if (t == 0)
+                /*if (t == 0)
                 {
                     ip.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
                 }
@@ -516,7 +523,7 @@ namespace SIVIO.UI.Controllers
                 {
                     ip.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
                 }
-                t++;
+                t++;*/
             }
             return View(infopersona);
         }
