@@ -35,11 +35,36 @@ namespace SIVIO.UI.Controllers
             return View();
         }
 
+        public ActionResult TestCrear()
+        {
+            return View();
+        }
 
         public ActionResult TestQueryView()
         {
             return View();
         }
+
+
+        [HttpPost]
+        public Mensaje CrearUsuaria(FormCollection userParams)
+        {
+            using (var entities = new SIVIOEntities())
+            {
+                var name = userParams["name"];
+                var lastName1 = userParams["lastName1"];
+                var lastName2 = userParams["lastName2"];
+                var mail = userParams["mail"];
+                TBL_USUARIO user = new TBL_USUARIO();
+                user.VC_NOMBRE = name;
+                user.VC_NOMBRE = lastName1;
+                user.VC_NOMBRE = lastName2;
+                user.VC_NOMBRE = mail;
+                return _modelExpediente.InsertarUsuario(user);
+            }
+           
+        }
+
         // GET: Seguridad
         [Authorize]
         public ActionResult TestGridUsers()

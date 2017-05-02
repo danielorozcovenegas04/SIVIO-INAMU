@@ -121,6 +121,7 @@ namespace SIVIO.UI.Models
         }
 
 
+
         #region COAVIF
         public List<TBL_PERSONA> ListarPersonas() {
 
@@ -210,7 +211,7 @@ namespace SIVIO.UI.Models
         }*/
 
 
-        /*
+
         public Mensaje InsertarUsuario(TBL_USUARIO usuario)
         {
             //return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "contenido", "valor");
@@ -223,31 +224,15 @@ namespace SIVIO.UI.Models
                     usuario.DT_FECHAREGISTRO = DateTime.Now;
                     entidades.SaveChanges();
 
-                    RegistrarBitacora(new TBL_BITACORA
-                    {
-                        DT_FECHAEVENTO = DateTime.Now,
-                        FK_TIPOEVENTO = (int)Enumerados.TiposEventoBitacora.CreacionUsuario,
-                        FK_USUARIO = usuarioActual.PK_USUARIO,
-                        VC_DETALLE = usuario.PK_USUARIO.ToString(),
-                        VC_DIRECCIONIP = string.Empty
-                    });
                     return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Usuario Registrado Correctamente", "valor");
                 }
                 catch (Exception e)
                 {
-                    RegistrarBitacora(new TBL_BITACORA
-                    {
-                        DT_FECHAEVENTO = DateTime.Now,
-                        FK_TIPOEVENTO = (int)Enumerados.TiposEventoBitacora.ErrorCapaAccesoDatos,
-                        FK_USUARIO = usuarioActual.PK_USUARIO,
-                        VC_DETALLE = e.Message.ToString(),
-                        VC_DIRECCIONIP = string.Empty
-                    });
-                    return new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al registrar usuario", "valor");
+                   return new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al registrar usuario", "valor");
                 }
 
             }
-        } */
+        } 
         #endregion
     }
 }

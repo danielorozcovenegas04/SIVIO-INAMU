@@ -118,7 +118,7 @@
             $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("GridUsuarios", "Seguridad")',
+                url: '@Url.Action("TestCrear", "Expediente")',
                 async: true
             }).done(function (data) {
 
@@ -172,7 +172,7 @@
             $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("TestQueryView", "Expediente")',
+                url: '@Url.Action("FrmAgregarUsuario", "Seguridad")',
                 async: true
             }).done(function (data) {
 

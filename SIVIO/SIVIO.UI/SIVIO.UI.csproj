@@ -365,6 +365,7 @@
     <Content Include="Views\Expediente\DetalleUsuaria.cshtml" />
     <Content Include="Views\Expediente\TestQueryView.cshtml" />
     <Content Include="Views\Expediente\TestGridUsers.cshtml" />
+    <Content Include="Views\Expediente\TestCrear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
