@@ -28,13 +28,15 @@
              $.ajax({
                  type: "POST",
                  url: '@Url.Action("CrearUsuaria", "Expediente")',
-                 dataType: "json",
-                 contentType: "application/json",
-
-                data: JSON.stringify({
-                    parametros: formagregarUsuarios
-                }),
-
+                 data: {
+                     Fecha: "1212",
+                     HoraInicio: "1212",
+                     Persona: "ASAS",
+                     TipoDisponibilidad: "ASAS"
+                 },
+                 datatype: "json",
+                 //contentType: "application/json",
+                 async: true,
                  processData: true,
                  success: function (data) {
                      if (data.TipoMensaje === 1) {
