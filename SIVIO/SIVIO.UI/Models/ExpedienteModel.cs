@@ -75,6 +75,26 @@ namespace SIVIO.UI.Models
         public DateTime fecha { get; set; }
         public string hora { get; set; }
 
+
+        public List<TBL_VALOR_CATALOGO> BuscarValorCatalogo(int valorCatalogo)
+        {
+            System.Diagnostics.Debug.WriteLine("El valor recibido es" + valorCatalogo);
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<TBL_VALOR_CATALOGO> valoresCatalogo = entidades.TBL_VALOR_CATALOGO
+                        .Where(m => (m.FK_CATALOGO == valorCatalogo)).ToList();
+                    return valoresCatalogo;
+                }
+                catch
+                {
+                    return new List<TBL_VALOR_CATALOGO>();
+                }
+            }
+        }
+
+
         #region COAVIF
         public List<TBL_PERSONA> ListarPersonas() {
 

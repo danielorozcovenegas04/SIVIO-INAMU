@@ -34,6 +34,13 @@ namespace SIVIO.UI.Controllers
             return View();
         }
 
+
+        public ActionResult TestQueryView()
+        {
+            return View();
+        }
+
+
         [Authorize]
         public ActionResult FrmCrearUsuariaAT() {
             bool estadoSesion = true;
@@ -142,6 +149,27 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
             }
         }
+
+
+        [Authorize]
+        public ActionResult BusquedaValorCatalogo(int valor)
+        {
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View(_modelExpediente.BuscarValorCatalogo(valor));
+
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+            }
+        }
+
 
         [Authorize]
         public ActionResult GridConsultas(int persona)
