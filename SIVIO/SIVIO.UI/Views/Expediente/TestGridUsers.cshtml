@@ -211,6 +211,8 @@
                 { "data": "PKVALORCATALOGO", "name": "PKVALORCATALOGO", "autoWidth": true, "visible": false },
                 { "data": "VCVALOR1", "name": "VCVALOR1", "autoWidth": true },
                 { "data": "VCVALOR1", "name": "VCVALOR1", "autoWidth": true },
+                { "data": "VCVALOR1", "name": "VCVALOR1", "autoWidth": true },
+                { "data": "VCVALOR1", "name": "VCVALOR1", "autoWidth": true },
                 { "data": "VCVALOR1", "name": "VCVALOR1", "autoWidth": true }
 
             ]
@@ -253,11 +255,11 @@
                 <thead>
                     <tr>
                         <th>PKUSUARIO</th>
-                        <th>USUARIO</th>
-                        <th>NOMBRE</th>
-                        <th>PRIMER APELLIDO</th>
-                        <th>OBSERVACIONES</th>
-
+                        <th>Criterio</th>
+                        <th>Si</th>
+                        <th>No</th>
+                        <th>Se desconoce</th>
+                        <th>Observaciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -265,6 +267,8 @@
                     {
                         <tr>
                             <td>@Html.Raw(usuario.PK_VALORCATALOGO)</td>
+                            <td>@Html.Raw(usuario.VC_VALOR1)</td>
+                            <td>@Html.Raw(usuario.VC_VALOR1)</td>
                             <td>@Html.Raw(usuario.VC_VALOR1)</td>
                             <td>@Html.Raw(usuario.VC_VALOR1)</td>
                             <td>@Html.Raw(usuario.VC_VALOR1)</td>
