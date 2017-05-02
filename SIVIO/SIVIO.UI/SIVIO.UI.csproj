@@ -364,6 +364,7 @@
     <Content Include="Views\Expediente\Delegacion_Mujer.cshtml" />
     <Content Include="Views\Expediente\DetalleUsuaria.cshtml" />
     <Content Include="Views\Expediente\TestQueryView.cshtml" />
+    <Content Include="Views\Expediente\TestGridUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

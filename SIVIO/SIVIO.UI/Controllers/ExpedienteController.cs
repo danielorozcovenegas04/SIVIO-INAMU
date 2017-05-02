@@ -14,6 +14,7 @@ namespace SIVIO.UI.Controllers
         #region Modelos
         SIVIO.UI.Models.ExpedienteModel _modelExpediente = new Models.ExpedienteModel();
         SIVIO.UI.Models.CatalogosModel _modelCatalogos = new Models.CatalogosModel();
+        SIVIO.UI.Models.SeguridadModel _modelSeguridad = new Models.SeguridadModel();
         #endregion
 
         // GET: Expediente
@@ -39,6 +40,44 @@ namespace SIVIO.UI.Controllers
         {
             return View();
         }
+        // GET: Seguridad
+        [Authorize]
+        public ActionResult TestGridUsers()
+        {
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View(_modelExpediente.BusqueseEsta());
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+            }
+        }
+
+
+        /*
+        public ActionResult TestGridUsers()
+        {
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View(_modelExpediente.ListarPersonas());
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+            }
+        }
+        */
 
 
         [Authorize]
@@ -169,6 +208,28 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
             }
         }
+
+
+
+        [Authorize]
+        public ActionResult BusquedaValorCatalogo67()
+        {
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View(_modelExpediente.BuscarValorCatalogo(67));
+
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+            }
+        }
+
 
 
         [Authorize]

@@ -98,6 +98,28 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public List<TBL_VALOR_CATALOGO> BusqueseEsta()
+        {
+            System.Diagnostics.Debug.WriteLine("Estoy buscandosela");
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<TBL_VALOR_CATALOGO> valoresCatalogo = entidades.TBL_VALOR_CATALOGO
+                        .Where(m => (m.FK_CATALOGO == 63)).ToList();
+                    if (valoresCatalogo.Count > 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Mae si hay catalogos!");
+                    }
+                    return valoresCatalogo;
+                }
+                catch
+                {
+                    return new List<TBL_VALOR_CATALOGO>();
+                }
+            }
+        }
+
 
         #region COAVIF
         public List<TBL_PERSONA> ListarPersonas() {

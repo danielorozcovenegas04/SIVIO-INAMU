@@ -37,12 +37,10 @@
                     $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
                     instMensajes.open();
                     $.LoadingOverlay("hide");
-                    
 
                 }
 
-
-
+                
             },
             error: function (xhr, ajaxOptions, error) {
                 $("#contenedorBotones").show();
