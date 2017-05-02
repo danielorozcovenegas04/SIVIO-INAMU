@@ -1324,3 +1324,6 @@ C:\Users\Konrad\Documents\Delegacion\Proyecto\SIVIO\SIVIO.UI\bin\Microsoft.Owin.
 C:\Users\Konrad\Documents\Delegacion\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.csprojResolveAssemblyReference.cache
 C:\Users\Konrad\Documents\Delegacion\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.dll
 C:\Users\Konrad\Documents\Delegacion\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.pdb
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.UI\bin\EFJson.dll
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.UI\bin\SIVIO.InamuComun.dll
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.UI\bin\SIVIO.InamuComun.pdb

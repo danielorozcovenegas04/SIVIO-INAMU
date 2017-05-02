@@ -28,11 +28,11 @@ namespace SIVIO.UI.Controllers
         {
             return View();
         }
-
-       
-        public ActionResult DetalleUsuaria()
+        
+        [Authorize]
+        public ActionResult DetalleUsuaria(int pkUsuario)
         {
-            return View();
+            return View(_modelExpediente.BuscarPersona(pkUsuario));
         }
 
         public ActionResult TestCrear()
@@ -293,8 +293,7 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
             }
         }
-
-        #region Coavif
+        
         [Authorize]
         public ActionResult Coavif()
         {
@@ -308,9 +307,7 @@ namespace SIVIO.UI.Controllers
             var listaUsuarios = _modelExpediente.ListarPersonas();
             return View(_modelExpediente.ListarPersonas());
         }
-        #endregion
 
-        #region Delegacion
         [Authorize]
         public ActionResult Delegacion_Mujer()
         {
@@ -371,8 +368,6 @@ namespace SIVIO.UI.Controllers
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objetoRetorno), JsonRequestBehavior.AllowGet);
             }
         }
-
-
-        #endregion
+        
     }
 }

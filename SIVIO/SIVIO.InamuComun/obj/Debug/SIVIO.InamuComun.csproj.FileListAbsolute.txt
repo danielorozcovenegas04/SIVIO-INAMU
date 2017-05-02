@@ -18,3 +18,13 @@ C:\Users\Konrad\Documents\Delegacion\Proyecto\SIVIO\SIVIO.InamuComun\bin\Debug\E
 C:\Users\Konrad\Documents\Delegacion\Proyecto\SIVIO\SIVIO.InamuComun\obj\Debug\SIVIO.InamuComun.csprojResolveAssemblyReference.cache
 C:\Users\Konrad\Documents\Delegacion\Proyecto\SIVIO\SIVIO.InamuComun\obj\Debug\SIVIO.InamuComun.dll
 C:\Users\Konrad\Documents\Delegacion\Proyecto\SIVIO\SIVIO.InamuComun\obj\Debug\SIVIO.InamuComun.pdb
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.InamuComun\bin\Debug\SIVIO.InamuComun.dll.config
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.InamuComun\bin\Debug\SIVIO.InamuComun.dll
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.InamuComun\bin\Debug\SIVIO.InamuComun.pdb
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.InamuComun\bin\Debug\EntityFramework.dll
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.InamuComun\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.InamuComun\bin\Debug\EntityFramework.xml
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.InamuComun\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.InamuComun\obj\Debug\SIVIO.InamuComun.csprojResolveAssemblyReference.cache
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.InamuComun\obj\Debug\SIVIO.InamuComun.dll
+C:\Users\b25965\Desktop\Proyecto\SIVIO\SIVIO.InamuComun\obj\Debug\SIVIO.InamuComun.pdb

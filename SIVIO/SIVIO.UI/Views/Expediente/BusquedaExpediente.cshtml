@@ -133,41 +133,39 @@
                 <script>
 
                     var tablaBusquedaExpediente = $('#tblBusquedaExpediente').DataTable({
-            responsive: true,
+                        responsive: true,
                         dom: 'fBrtlp<"clear">',
                         select: true,
                         buttons: [
 
                             {
-                extend: 'excelHtml5',
+                                extend: 'excelHtml5',
                                 text: '<i class="fa fa-file-excel-o"></i>',
                                 titleAttr: 'Excel'
                             },
                             {
-                extend: 'pdfHtml5',
+                                extend: 'pdfHtml5',
                                 text: '<i class="fa fa-file-pdf-o"></i>',
                                 titleAttr: 'PDF'
                             }, {
-                text: '<i class="fa fa-pencil-square-o"></i>',
+                                text: '<i class="fa fa-pencil-square-o"></i>',
                                 titleAttr: 'Editar Persona Usuaria',
                                 action: function (e, dt, node, config) {
-                        debugger;
+                                    debugger;
 
-                        var contSeleccionados = tablaBusquedaExpediente.rows({ selected: true }).count();
-                        var filaSeleccionada = tablaBusquedaExpediente.rows({ selected: true }).data();
-                        if (contSeleccionados > 0) {
-                            debugger;
-                                      
+                                    var contSeleccionados = tablaBusquedaExpediente.rows({ selected: true }).count();
+                                    var filaSeleccionada = tablaBusquedaExpediente.rows({ selected: true }).data();
+                                    if (contSeleccionados > 0) {
                                         $("#contenedorGrid").hide();
                                         $("#contenedorRoles").fadeIn();
                                         $("#contenedorEspera").show();
                                         $.ajax({
                                             type: "POST",
                                             url: '@Url.Action("DetalleUsuaria", "Expediente")',
-                                            data: { pkUsuario: filaSeleccionada[0].PKUSUARIO },
+                                          data: { pkUsuario: filaSeleccionada[0].PKPERSONA },
+                                         @* data: { pkUsuario: "2" },*@
                                             async: true
                                         }).done(function (data) {
-
 
                                             $('#contenedorBusquedaExpediente').html(data);
                                             $("#contenedorEspera").hide();
@@ -187,7 +185,7 @@
                                         instMensajes.open();
                                     }
 
-                    debugger;
+                                    debugger;
                                 }
                             }
 

@@ -98,6 +98,23 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public TBL_PERSONA BuscarPersona(int idPersona)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    TBL_PERSONA persona = entidades.TBL_PERSONA.Find(idPersona);
+                    return persona;
+                }
+                catch (Exception e)
+                {
+                    return new TBL_PERSONA();
+                }
+            }
+        }
+
+
         public List<TBL_VALOR_CATALOGO> BusqueseEsta()
         {
             System.Diagnostics.Debug.WriteLine("Estoy buscandosela");
@@ -121,8 +138,7 @@ namespace SIVIO.UI.Models
         }
 
 
-
-        #region COAVIF
+        
         public List<TBL_PERSONA> ListarPersonas() {
 
             using (var entidades = new SIVIOEntities())
@@ -138,6 +154,7 @@ namespace SIVIO.UI.Models
                 }
             }
         }
+
         public List<TBL_USUARIO> ListarUSuarios()
         {
 
@@ -188,10 +205,7 @@ namespace SIVIO.UI.Models
                 }
             }
         }
-
-        #endregion
-
-        #region DELEGACION
+        
         /* //Método RegistrarBitácora, vital para insertar usuario.
         public static Mensaje RegistrarBitacora(TBL_BITACORA bitacora)
         {
@@ -233,6 +247,5 @@ namespace SIVIO.UI.Models
 
             }
         } 
-        #endregion
     }
 }
