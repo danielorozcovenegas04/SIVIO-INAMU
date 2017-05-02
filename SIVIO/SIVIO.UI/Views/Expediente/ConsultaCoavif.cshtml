@@ -19,14 +19,14 @@
 
     <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
         <ul class="nav nav-tabs">
-            <li class="active">
+            <li class="deactivate">
                 <a data-toggle="tab" href="#consulta">
-                    <i class="fa fa-user" aria-hidden="true"></i>Consulta de Persona
+                    <i class="fa fa-user" aria-hidden="false"></i>Consulta de Persona
                 </a>
             </li>
             <li class="deactivate">
                 <a data-toggle="tab" href="#atencion">
-                    <i class="fa fa-user" aria-hidden="true"></i>Atenciones de Persona
+                    <i class="fa fa-user" aria-hidden="false"></i>Atenciones de Persona
                 </a>
             </li>
         </ul>
@@ -222,12 +222,12 @@
                 //<th>Entidad Trasladada</th>
                 //<th>Fecha de Traslado</th>
                 "columns": [
-                    { "data": "INGRESOCEAAM", "name": "INGRESOCEAAM", "autoWidth": true, "visible": false },
-                    { "data": "OBSERVACIONES", "name": "OBSERVACIONES", "autoWidth": true },
-                    { "data": "REINGRESOCEAAM", "name": "REINGRESOCEAAM", "autoWidth": true },
-                    { "data": "CONTACTOCEEAM", "name": "CONTACTOCEEAM", "autoWidth": true },
-                    { "data": "ENTIDADTRASLADA", "name": "ENTIDADTRASLADA", "autoWidth": true },
-                    { "data": "TRASLADOAPROX", "name": "TRASLADOAPROX", "autoWidth": true },
+                    { "data": "NOMBREDELAUSUARIA", "name": "NOMBREDELAUSUARIA", "autoWidth": true, "visible": false },
+                    { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
+                    { "data": "FECHADEATENCION", "name": "FECHADEATENCION", "autoWidth": true },
+                    { "data": "TIPODEATENCION", "name": "TIPODEATENCION", "autoWidth": true },
+                    { "data": "SERVICIOQUEREALIZALAATENCION", "name": "SERVICIOQUEREALIZALAATENCION", "autoWidth": true },
+                    { "data": "PERSONAQUEREALIZALAATENCION", "name": "PERSONAQUEREALIZALAATENCION", "autoWidth": true },
 
                 ]
 
@@ -258,6 +258,173 @@
 
             });
 
+
+            var tablaAtencion = $('#tblListadoAtencion').DataTable({
+                responsive: true,
+                dom: 'fBrtlp<"clear">',
+                select: true,
+                buttons: [
+
+            {
+                extend: 'excelHtml5',
+                text: '<i class="fa fa-file-excel-o"></i>',
+                titleAttr: 'Excel'
+            },
+            {
+                extend: 'pdfHtml5',
+                text: '<i class="fa fa-file-pdf-o"></i>',
+                titleAttr: 'PDF'
+            }, {
+                text: '<i class="fa fa-pencil-square-o"></i>',
+                titleAttr: 'Editar Persona',
+                action: function (e, dt, node, config) {
+                    debugger;
+
+                    var contSeleccionados = tablaAtencion.rows({ selected: true }).count();
+                    var filaSeleccionada = tablaAtencion.rows({ selected: true }).data();
+                    if (contSeleccionados > 0) {
+
+                        $("#contenedorGrid").hide();
+                        $("#contenedorRoles").fadeIn();
+                        $("#contenedorEspera").show();
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("FrmConsultas", "Seguridad")',
+                            data: { pkUsuario: filaSeleccionada[0].PKUSUARIO },
+                            async: true
+                        }).done(function (data) {
+
+
+                            $('#contenedorAtencion').html(data);
+                            $("#contenedorEspera").hide();
+                            $('#contenedorAtencion').fadeIn();
+
+
+                        }).fail(function (exception) {
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("Error");
+                            $("#txtModalContenido").text(exception);
+                            instMensajes.open();
+                        });
+                    } else {
+                        $("#txtModalTitulo").css("color", "red");
+                        $("#txtModalTitulo").text("No se seleccionaron roles");
+                        $("#txtModalContenido").text("Seleccione un rol para continuar");
+                        instMensajes.open();
+                    }
+
+                    debugger;
+                }
+            }, {
+                //extend: 'plusHtml5',
+                text: '<i class="fa fa-plus-square"></i>',
+                titleAttr: 'Agregar un nueva Persona',
+                action: function (e, dt, node, config) {
+                    debugger;
+
+                    $("#contenedorGrid").hide();
+                    $("#contenedorAtencion").fadeIn();
+                    $("#contenedorEspera").show();
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("FrmAgregarConsultas", "Seguridad")',
+                        async: true
+                    }).done(function (data) {
+
+
+                        $('#contenedorAtencion').html(data);
+                        $("#contenedorEspera").hide();
+                        $('#contenedorAtencion').fadeIn();
+
+
+                    }).fail(function (exception) {
+                        $("#txtModalTitulo").css("color", "red");
+                        $("#txtModalTitulo").text("Error");
+                        $("#txtModalContenido").text(exception);
+                        instMensajes.open();
+                    });
+
+
+
+                    debugger;
+                }
+            }
+
+                ],
+                "language": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
+                "processing": true, // for show progress bar
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                tableTools: {
+                    "sRowSelect": "single"
+                },
+                //            <th>Ingreso CEAAM</th>
+                //<th>Observaciones</th>
+                //<th>Reingreso CEAAM</th>
+                //<th>Contacto CEAAM</th>
+                //<th>Entidad Trasladada</th>
+                //<th>Fecha de Traslado</th>
+                "columns": [
+                    { "data": "NOMBREDELAUSUARIA", "name": "NOMBREDELAUSUARIA", "autoWidth": true, "visible": false },
+                    { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
+                    { "data": "FECHADEATENCION", "name": "FECHADEATENCION", "autoWidth": true },
+                    { "data": "TIPODEATENCION", "name": "TIPODEATENCION", "autoWidth": true },
+                    { "data": "SERVICIOQUEREALIZALAATENCION", "name": "SERVICIOQUEREALIZALAATENCION", "autoWidth": true },
+                    { "data": "PERSONAQUEREALIZALAATENCION", "name": "PERSONAQUEREALIZALAATENCION", "autoWidth": true },
+
+                ]
+
+            });
+            $('#tblListadoAtenciones tbody').on('click', 'tr', function () {
+                debugger;
+                if ($(this).hasClass('selected')) {
+
+
+
+
+                    $("#tblListadoAtencion tr").removeClass("selectedDT");
+                    $("#tblListadoAtencion tr").removeClass("selected");
+                    $(this).addClass('selected');
+                    $(this).addClass('selectedDT');
+                }
+                else {
+                    $(this).removeClass('selectedDT');
+
+                }
+            });
+            $(document).ready(function () {
+                document.title = "SIPAMU - Seguridad";
+                var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+
+                $("#contenedorAtencion").hide();
+
+
+            });
+
+            function refrescarGrid() { tablaAtenciones.ajax.reload() }
             function refrescarGrid() { tablaConsultas.ajax.reload() }
         </script>
         <div class="tab-content">
@@ -271,7 +438,7 @@
                             <caption><div class="comunForm" style="text-align: center; color: #c31618; border-color: #c31618 !important;"><i class="fa fa-bell" style="margin-right: 2px"></i>Lista de Consultas Existentes</div></caption>
                             <thead>
                                 <tr>
-                                    <th> </th>
+                                    
                                     <th>Nombre de la usuaria</th>
                                     <th>Identificación</th>
                                     <th>Fecha de atención</th>
@@ -285,7 +452,7 @@
                                 {
                                     if (consulta.TBL_VALOR_CATALOGO1.VC_VALOR2.CompareTo("1")==0) {
                                     <tr>
-                                        <td></td>
+                                       
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
                                         <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
@@ -313,11 +480,11 @@
                                                                                                                                                                                                                                                 background-color: #FFFFFF;
                                                                                                                                                                                                                                                 border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
                     <div class="col-md-12">
-                        <table id="tblListadoConsultas" class="display table-bordered" cellspacing="0" style="width: 100%">
+                        <table id="tblListadoAtencion" class="display table-bordered" cellspacing="0" style="width: 100%">
                             <caption><div class="comunForm" style="text-align: center; color: #c31618; border-color: #c31618 !important;"><i class="fa fa-bell" style="margin-right: 2px"></i>Lista de Consultas Existentes</div></caption>
                             <thead>
                                 <tr>
-                                    <th> </th>
+                                    
                                     <th>Nombre de la usuaria</th>
                                     <th>Identificación</th>
                                     <th>Fecha de atención</th>
@@ -331,7 +498,7 @@
                                 {
                                     if (consulta.TBL_VALOR_CATALOGO1.VC_VALOR2.CompareTo("2") == 0){
                                     <tr>
-                                        <td></td>
+                                        
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
                                         <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
@@ -345,7 +512,7 @@
                         </table>
                     </div>
                 </div>
-                <div id="contenedorConsultas">
+                <div id="contenedorAtencion">
 
 
                 </div>

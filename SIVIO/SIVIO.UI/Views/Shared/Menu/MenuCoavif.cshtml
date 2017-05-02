@@ -103,7 +103,7 @@
             $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("ConsultaPersona", "Expediente")',
+                url: '@Url.Action("ConsultaCoavif", "Expediente")',
                 async: true
             }).done(function (data) {
 
