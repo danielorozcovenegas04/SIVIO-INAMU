@@ -30,12 +30,13 @@
             window.location.href = '@Url.Action("Index", "Home")';
         });
 
-        $('#btnUsuarios').click(function () {
+
+        $('#btncoavif').click(function () {
             debugger;
             $.LoadingOverlay("show");
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("GridUsuarios", "Seguridad")',
+                url: '@Url.Action("Coavif", "Expediente")',
                 async: true
             }).done(function (data) {
 
@@ -61,6 +62,55 @@
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("GridConsultaCoavif", "Expediente")',
+                async: true
+            }).done(function (data) {
+
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+
+
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        });
+
+        $('#btnBuscarExpediente').click(function () {
+            debugger;
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("BusquedaExpediente", "Expediente")',
+                async: true
+            }).done(function (data) {
+
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+
+
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        });
+        $('#btpRptConsultas').click(function () {
+            debugger;
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ConsultaCoavif", "Expediente")',
                 async: true
             }).done(function (data) {
 
@@ -120,7 +170,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#" id="btnBuscarExpediente">Buscar Expediente</a></li>
-                        <li><a href="#" id="btnDatosAdministrativos">Registrar Datos Administrativos</a></li>
+                        <li><a href="#" id="btncoavif">vista COAVIF</a></li>
                         <li><a href="#" id="btnBuscarPersona">Buscar Persona en el Padrón</a></li>
                         <li><a href="#" id="btnSistemas">Buscar en Sistemas INAMU</a></li>
 
