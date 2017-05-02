@@ -72,8 +72,6 @@ namespace SIVIO.UI.Models
                 }
             }
         }
-        public DateTime fecha { get; set; }
-        public string hora { get; set; }
 
         #region COAVIF
         public List<TBL_PERSONA> ListarPersonas() {
@@ -202,6 +200,14 @@ namespace SIVIO.UI.Models
 
             }
         } */
+        public DateTime fecha { get; set; }
+        public string horaInicio { get; set; }
+        public string horaFinal { get; set; }
+        public string institucionRefiere { get; set; }
+        public string personaRefiere { get; set; }
+        public string telefono { get; set; }
+        public string correo { get; set; }
+        public string tipoAtension { get; set; }
         #endregion
     }
 }

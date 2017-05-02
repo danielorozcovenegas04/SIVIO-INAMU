@@ -439,54 +439,60 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>Fecha del incidente</label>
-                                    <input class="form-control" id="txtFecha" type="text" required="">
+                                <div class="col-xs-6 form-group">
+                                    <label>Fecha de Registro</label>
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.fecha, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
                                 </div>
-                                <div class="col-md-3 form-group">
-                                    <label>Hora inicio</label>
-                                    <input class="form-control" id="txtHoraInicio" type="text" required="">
-                                </div>
-                                <div class="col-md-3 form-group">
-                                    <label>Hora finalización</label>
-                                    <input class="form-control" placeholder="--:-- --" id="txtHoraFinalización" type="text" readonly="readonly">
+
+                                <div class="col-xs-6 form-group">
+                                    <label>Hora de inicio de registro</label>
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.horaInicio, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>Persona que atiende</label>
-                                    <input class="form-control" id="txtPersonaAtiende" type="text" required="">
+                                <div class="col-xs-6 form-group">
+                                    <label>Tipo de atención</label>
+                                   <select class="form-control">
+                                        <option value="atension 1">atension 1</option>
+                                        <option value="atension 2">atension 2</option>
+                                    </select>
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Tipo de disponibilidad</label>
-                                    <select class="form-control" id="cmbTipoDisponibilidad" type="">
-                                        <option value=""></option>
+                                <div class="col-xs-6 form-group">
+                                    <label>Profesional</label>
+                                    <select class="form-control">
+                                        <option value="atension 1">Profesional 1</option>
+                                        <option value="atension 2">Profesional 2</option>
                                     </select>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>Institucion que refiere</label>
-                                    <input class="form-control" id="txtInstitucion" type="text" required="">
+                                <div class="col-xs-6 form-group">
+                                    <label>Institusión que refiere</label>
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.institucionRefiere, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre Institusión" } })
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Nombre de quien refiere</label>
-                                    <input class="form-control" id="txtPersonaQuienRefiere" type="text" required="">
+
+                                <div class="col-xs-6 form-group">
+                                    <label>Persona que refiere</label>
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.personaRefiere, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre y apellido" } })
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-6 form-group">
+                                <div class="col-xs-6 form-group">
                                     <label>Telefono</label>
-                                    <input class="form-control" id="txtTelefonoPersona" type="text" required="">
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.telefono, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero de telefono", @type = "number" } })
                                 </div>
-                                <div class="col-md-6 form-group">
+
+                                <div class="col-xs-6 form-group">
                                     <label>Correo</label>
-                                    <input class="form-control" id="txtCorreoPersona" type="text" required="">
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.correo, new { htmlAttributes = new { @class = "form-control", @placeholder = "ejemplo@ejemplo.com", @type = "email" } })
                                 </div>
-                            </div>
+                            </div>  
                             <div class="row" id="contenedorBotones">
                                 <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                    <button type="button"  class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Siguiente</button>
                                     <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
                                 </div>
                             </div>
@@ -720,22 +726,22 @@
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Experiencia laboral</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtExperienciaLaboral" type="text" required="">
+                                            <input class="form-control" placeholder="Tiempo en años/meses" id="txtExperienciaLaboral" type="text" required="">
                                         </div>
                                         <div class="col-xs-6 form-group">
                                             <label>Lugar de trabajo</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtLugarTrabajo" type="text" required="">
+                                            <input class="form-control" placeholder="Nombre del lugar" id="txtLugarTrabajo" type="text" required="">
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-xs-6 form-group">
                                             <label>Puesto que desempeña</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtPuestoTrabajo" type="text" required="">
+                                            <input class="form-control" placeholder="Puesto de trabajo" id="txtPuestoTrabajo" type="text" required="">
                                         </div>
                                         <div class="col-xs-6 form-group">
                                             <label>Direccion de lugar de trabajo</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtDireccionLugarTrabajo" type="text" required="">
+                                            <input class="form-control" placeholder="Direccion" id="txtDireccionLugarTrabajo" type="text" required="">
                                         </div>
                                     </div>
 
