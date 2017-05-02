@@ -205,18 +205,18 @@ namespace SIVIO.UI.Controllers
         }
 
         [AllowAnonymous]
-        public JsonResult CargarPersonas() {
+       public JsonResult CargarPersonas(int id) {
             dynamic objeto = new ExpandoObject();
             using (var entidades = new SIVIOEntities()) {
                 try
                 {
                     objeto.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
-                    var persona = entidades.TBL_PERSONA.Where(m => m.PK_PERSONA == 1).First();
+                    var persona = entidades.TBL_PERSONA.Where(m => m.PK_PERSONA == id).First();
                     if (persona.TBL_TELEFONO.Count > 0) {
                         objeto.personaTelefono = persona.TBL_TELEFONO.First().VC_NUMERO;
                     } else {
                         objeto.personaTelefono = "";
-                    }                    
+                    }
                     var user = HttpContext.User.Identity.Name;
                     var usuario = entidades.TBL_USUARIO.Where(m => m.VC_USUARIO == user).First();
                     objeto.usuarioNombre = usuario.VC_NOMBRE;
@@ -224,12 +224,13 @@ namespace SIVIO.UI.Controllers
                     objeto.usuarioApellido2 = usuario.VC_APELLIDO2;
                     objeto.usuarioRol = usuario.TBL_ROL_USUARIO.First().FK_ROL;
                     return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objeto), JsonRequestBehavior.AllowGet);
+
                 }
                 catch (Exception e) {
                     objeto.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al cargar persona", string.Empty);
                     return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objeto), JsonRequestBehavior.AllowGet);
                 }
-            }                
+            }
         }
 
         [AllowAnonymous]
@@ -287,6 +288,17 @@ namespace SIVIO.UI.Controllers
                 return _modelExpediente.InsertarDatosAdministrativos(registro);
             }
 
+        }
+
+        [AllowAnonymous]
+        public Mensaje CrearNuevoCaso()
+        {
+            return null;
+        }
+        [AllowAnonymous]
+        public Mensaje CerrarCaso()
+        {
+            return null;
         }
 
         [Authorize]
