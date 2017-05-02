@@ -18,7 +18,8 @@
                 $.LoadingOverlay("hide");
                 $('#contendorFrames').html(data);
                $("#contenedorEspera").hide();
-                $('#contendorFrames').fadeIn();
+               $('#contendorFrames').fadeIn();
+               $.LoadingOverlay("hide");
             }).fail(function (exception) {
                 $("#txtModalTitulo").css("color", "red");
                 $("#txtModalTitulo").text("Error de Sistema");
@@ -136,7 +137,62 @@
             responsive: true,
                         dom: 'fBrtlp<"clear">',
                         select: true,
-                       
+                        buttons: [
+
+                            {
+                extend: 'excelHtml5',
+                                text: '<i class="fa fa-file-excel-o"></i>',
+                                titleAttr: 'Excel'
+                            },
+                            {
+                extend: 'pdfHtml5',
+                                text: '<i class="fa fa-file-pdf-o"></i>',
+                                titleAttr: 'PDF'
+                            }, {
+                text: '<i class="fa fa-pencil-square-o"></i>',
+                                titleAttr: 'Editar Persona Usuaria',
+                                action: function (e, dt, node, config) {
+                        debugger;
+
+                        var contSeleccionados = tablaBusquedaExpediente.rows({ selected: true }).count();
+                        var filaSeleccionada = tablaBusquedaExpediente.rows({ selected: true }).data();
+                        if (contSeleccionados > 0) {
+                            debugger;
+
+                                        $("#contenedorGrid").hide();
+                                        $("#contenedorRoles").fadeIn();
+                                        $("#contenedorEspera").show();
+                                        $.ajax({
+                                            type: "POST",
+                                            url: '@Url.Action("DetalleUsuaria", "Expediente")',
+                                            data: { pkUsuario: filaSeleccionada[0].PKUSUARIO },
+                                            async: true
+                                        }).done(function (data) {
+
+
+                                            $('#contenedorBusquedaExpediente').html(data);
+                                            $("#contenedorEspera").hide();
+                                            $('#contenedorBusquedaExpediente').fadeIn();
+
+
+                                        }).fail(function (exception) {
+                                            $("#txtModalTitulo").css("color", "red");
+                                            $("#txtModalTitulo").text("Error");
+                                            $("#txtModalContenido").text(exception);
+                                            instMensajes.open();
+                                        });
+                                    } else {
+                                        $("#txtModalTitulo").css("color", "red");
+                                        $("#txtModalTitulo").text("No se seleccionaron roles");
+                                        $("#txtModalContenido").text("Seleccione un rol para continuar");
+                                        instMensajes.open();
+                                    }
+
+                    debugger;
+                                }
+                            }
+
+                        ],
                         "language": {
                             "sProcessing": "Procesando...",
                             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -174,9 +230,13 @@
                         //<th>Egreso técnico</th>
                         //<th>CLAIS</th>
                         "columns": [
-                            { "data": "PK_VALORCATALOGO", "name": "PK_VALORCATALOGO", "autoWidth": true, "visible": false },
-                            { "data": "VC_VALOR1", "name": "VC_VALOR1", "autoWidth": true },
-                            { "data": "VC_VALOR1", "name": "VC_VALOR1", "autoWidth": true }
+                            { "data": "PKVALORCATALOGO", "name": "PKPERSONA", "autoWidth": true, "visible": false },
+                            { "data": "NOMBRE", "name": "NOMBRE", "autoWidth": true },
+                            { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
+                            { "data": "FECHA", "name": "FECHA", "autoWidth": true },
+                            { "data": "SERVICIO", "name": "SERVICIO", "autoWidth": true },
+                            { "data": "EGRESOTECNICO", "name": "EGRESOTECNICO", "autoWidth": true },
+                            { "data": "CLAIS", "name": "CLAIS", "autoWidth": true }
 
                         ]
 
@@ -195,7 +255,7 @@
                         }
                     });
                     $(document).ready(function () {
-                        document.title = "CEAAM - Buscar Catalogo";
+                        document.title = "CEAAM - Buscar Expediente";
                         var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
 
                         //$("#contenedorBusquedaExpediente").hide();
@@ -216,9 +276,13 @@
                             <caption> <b>Resultados para "@Request.QueryString["palabra"]" :</b><br><br></caption>
                             <thead>
                                 <tr>
-                                    <th>PK_VALORCATALOGO</th>
-                                    <th>VC_VALOR1</th>
-                                    <th>VC_VALOR2</th>
+                                    <th>PKPERSONA</th>
+                                    <th>Nombre</th>
+                                    <th>Identificación</th>
+                                    <th>Fecha de última atención</th>
+                                    <th>Servicio que brindó la atención</th>
+                                    <th>Egreso técnico</th>
+                                    <th>CLAIS</th>
                                 </tr>
                             </thead>
 
@@ -231,9 +295,21 @@
                                         </td>
                                         <td>
                                             @Html.Raw(expediente.VC_VALOR1)
-                                        </td>
+                                           </td>
                                         <td>
-                                            @Html.Raw(expediente.VC_VALOR2)
+                                            @Html.Raw(expediente.VC_VALOR1)
+                                    </td>
+                                    <td>
+                                        @Html.Raw(expediente.VC_VALOR1)
+                                    </td>
+                                    <td>
+                                        @Html.Raw(expediente.VC_VALOR1)
+                                    </td>
+                                    <td>
+                                        @Html.Raw(expediente.VC_VALOR1)
+                                    </td>
+                                    <td>
+                                        @Html.Raw(expediente.VC_VALOR1)
                                     </td>
                                 </tr>
                                 }

@@ -205,6 +205,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CatalogosController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\ExpedienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
@@ -316,6 +317,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\responsiveslides.min.js" />
+    <Content Include="Scripts\searchDelegacion.js" />
     <Content Include="Scripts\selectize.bootstrap3.css" />
     <Content Include="Scripts\selectize.min.js" />
     <Content Include="Scripts\Sortable.min.js" />
@@ -360,13 +362,18 @@
     <Content Include="Views\Expediente\CrearUsuaria_DatosAdministrativos.cshtml" />
     <Content Include="Views\Expediente\MenuExpediente.cshtml" />
     <Content Include="Views\Expediente\Delegacion_Mujer.cshtml" />
+    <Content Include="Views\Expediente\DetalleUsuaria.cshtml" />
+    <Content Include="Views\Expediente\TestQueryView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Catalogos\" />
     <Folder Include="Views\DatPersonales\" />
+    <Folder Include="Views\Default\" />
     <Folder Include="Views\Reporte\" />
+    <Folder Include="Views\Search\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

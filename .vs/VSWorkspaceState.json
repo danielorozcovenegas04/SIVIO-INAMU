@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\SIVIO",
+    "\\SIVIO\\SIVIO.UI",
+    "\\SIVIO\\SIVIO.UI\\Controllers",
+    "\\SIVIO\\SIVIO.UI\\Views",
+    "\\SIVIO\\SIVIO.UI\\Views\\Expediente",
+    "\\SIVIO\\SIVIO.UI\\Views\\Home",
+    "\\SIVIO\\SIVIO.UI\\Views\\Search",
+    "\\SIVIO\\SIVIO.UI\\Views\\Shared",
+    "\\SIVIO\\SIVIO.UI\\Views\\Shared\\Menu"
+  ],
+  "SelectedNode": "\\SIVIO\\SIVIO.UI\\Controllers\\ExpedienteController.cs",
+  "PreviewInSolutionExplorer": false
+}

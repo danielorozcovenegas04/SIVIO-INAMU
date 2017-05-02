@@ -78,13 +78,17 @@ namespace SIVIO.UI.Models
 
         public List<TBL_VALOR_CATALOGO> BuscarValorCatalogo(int valorCatalogo)
         {
-            System.Diagnostics.Debug.WriteLine("El valor recibido es" + valorCatalogo);
+            System.Diagnostics.Debug.WriteLine("El valor recibido es " + valorCatalogo);
             using (var entidades = new SIVIOEntities())
             {
                 try
                 {
                     List<TBL_VALOR_CATALOGO> valoresCatalogo = entidades.TBL_VALOR_CATALOGO
                         .Where(m => (m.FK_CATALOGO == valorCatalogo)).ToList();
+                    if (valoresCatalogo.Count > 0)
+                    {
+                            System.Diagnostics.Debug.WriteLine("Mae si hay catalogos!" + valorCatalogo);
+                        }
                     return valoresCatalogo;
                 }
                 catch

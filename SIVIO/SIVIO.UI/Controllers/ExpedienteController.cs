@@ -152,12 +152,12 @@ namespace SIVIO.UI.Controllers
 
 
         [Authorize]
-        public ActionResult BusquedaValorCatalogo(int valor)
-        {
+        public ActionResult BusquedaValorCatalogo(string palabra)
+            {
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion))
             {
-                return View(_modelExpediente.BuscarValorCatalogo(valor));
+                return View(_modelExpediente.BuscarValorCatalogo(67));
 
             }
             else if (!estadoSesion)
