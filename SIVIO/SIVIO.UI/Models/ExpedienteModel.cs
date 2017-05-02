@@ -80,7 +80,20 @@ namespace SIVIO.UI.Models
                 try
                 {
                     TBL_PERSONA personaConsulta = (TBL_PERSONA)entidades.TBL_PERSONA.Find(Int32.Parse(persona)); //Where(m => m.PK_PERSONA == Int32.Parse(persona));// .Where(m => m.PK_PERSONA == Int32.Parse(persona));
-                    personaConsulta.
+
+                  /*  TBL_ADICCIONES adiciones                        = entidades.TBL_ADICCIONES.Find(personaConsulta.PK_PERSONA);
+                    TBL_AGRESOR agresor                             = entidades.TBL_AGRESOR.Find(personaConsulta.PK_PERSONA);
+                    TBL_DIRECCION direccion                         = entidades.TBL_DIRECCION.Find(personaConsulta.PK_PERSONA);
+                    TBL_LABORAL laboral                             = entidades.TBL_LABORAL.Find(personaConsulta.PK_PERSONA); 
+                    TBL_PERSONA_APOYO apoyo                         = entidades.TBL_PERSONA_APOYO.Find(personaConsulta.PK_PERSONA); 
+                    TBL_PERSONA_CONDICIONESPECIAL condicionEspecial = entidades.TBL_PERSONA_CONDICIONESPECIAL.Find(personaConsulta.PK_PERSONA); 
+                    TBL_PERSONA_RED_APOYO redApoyo                  = entidades.TBL_PERSONA_RED_APOYO.Find(personaConsulta.PK_PERSONA); 
+                    TBL_PERSONA_SALUD salud                         = entidades.TBL_PERSONA_SALUD.Find(personaConsulta.PK_PERSONA); 
+                    TBL_REGISTRO registro                           = entidades.TBL_REGISTRO.Find(personaConsulta.PK_PERSONA); 
+                    TBL_TELEFONO telefono                           = entidades.TBL_TELEFONO.Find(personaConsulta.PK_PERSONA); 
+
+                    personaConsulta.TBL_ADICCIONES = (TBL_PERSONA)adiciones;*/
+
                     return personaConsulta;
                 }
                 catch (Exception ex)

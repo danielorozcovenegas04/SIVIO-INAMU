@@ -45,8 +45,8 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
             }
 
-            TBL_PERSONA persona = _modelExpediente.ObtenerPersona(ValorPersona);
-
+             TBL_PERSONA persona = _modelExpediente.ObtenerPersona(ValorPersona);
+            
             return View(persona);
 
             
