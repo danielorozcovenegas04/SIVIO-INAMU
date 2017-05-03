@@ -425,7 +425,7 @@
           <Property Name="VC_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="VC_APELLIDO1" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="VC_APELLIDO2" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DT_FECHANACIMIENTO" Type="datetime" Nullable="false" />
+          <Property Name="DT_FECHANACIMIENTO" Type="datetime" />
           <Property Name="FK_ESTADOCIVIL" Type="int" Nullable="false" />
           <Property Name="FK_ESCOLARIDAD" Type="int" Nullable="false" />
           <Property Name="FK_GENERO" Type="int" Nullable="false" />
@@ -446,6 +446,8 @@
           <Property Name="VC_CORREO" Type="varchar" MaxLength="200" />
           <Property Name="FK_ETNIA" Type="int" />
           <Property Name="FK_NACIONALIDAD2" Type="int" />
+          <Property Name="I_EDAD" Type="int" />
+          <Property Name="B_CONOCEFECHANACIMIENTO" Type="bit" />
         </EntityType>
         <EntityType Name="TBL_PERSONA_APOYO">
           <Key>
@@ -481,6 +483,7 @@
           <Property Name="B_DENUNCIAABUSOSEXUAL" Type="bit" Nullable="false" />
           <Property Name="DT_FECHANACIMIENTO" Type="datetime" Nullable="false" />
           <Property Name="FK_OCUPACION" Type="int" Nullable="false" />
+          <Property Name="FK_ESCOLARIDAD" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TBL_PERSONA_RED_APOYO">
           <Key>
@@ -645,6 +648,18 @@
           <Property Name="VC_VALOR2" Type="varchar" MaxLength="500" />
           <Property Name="B_EDITABLE" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK__TBL_PERSO__FK_ES__7BB05806">
+          <End Role="TBL_CATALOGO" Type="Self.TBL_CATALOGO" Multiplicity="1" />
+          <End Role="TBL_PERSONA_FAMILIAR" Type="Self.TBL_PERSONA_FAMILIAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CATALOGO">
+              <PropertyRef Name="PK_CATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_PERSONA_FAMILIAR">
+              <PropertyRef Name="FK_ESCOLARIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TBL_ADICCIONES_TBL_PERSONA">
           <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
           <End Role="TBL_ADICCIONES" Type="Self.TBL_ADICCIONES" Multiplicity="*" />
@@ -1533,30 +1548,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TBL_REFERENCIA_TBL_REFERENCIA1">
-          <End Role="TBL_INTERVENCION" Type="Self.TBL_INTERVENCION" Multiplicity="0..1" />
-          <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_INTERVENCION">
-              <PropertyRef Name="PK_INTERVENCION" />
-            </Principal>
-            <Dependent Role="TBL_REFERENCIA">
-              <PropertyRef Name="FK_INTERVENCION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TBL_REFERENCIA_TBL_REGISTRO">
-          <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="0..1" />
-          <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TBL_REGISTRO">
-              <PropertyRef Name="PK_REGISTRO" />
-            </Principal>
-            <Dependent Role="TBL_REFERENCIA">
-              <PropertyRef Name="FK_REGISTRO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
           <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
           <End Role="TBL_REFERENCIA" Type="Self.TBL_REFERENCIA" Multiplicity="*" />
@@ -1866,6 +1857,10 @@
           <EntitySet Name="TBL_UNIDAD" EntityType="Self.TBL_UNIDAD" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_USUARIO" EntityType="Self.TBL_USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_VALOR_CATALOGO" EntityType="Self.TBL_VALOR_CATALOGO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TBL_PERSO__FK_ES__7BB05806" Association="Self.FK__TBL_PERSO__FK_ES__7BB05806">
+            <End Role="TBL_CATALOGO" EntitySet="TBL_CATALOGO" />
+            <End Role="TBL_PERSONA_FAMILIAR" EntitySet="TBL_PERSONA_FAMILIAR" />
+          </AssociationSet>
           <AssociationSet Name="FK_TBL_ADICCIONES_TBL_PERSONA" Association="Self.FK_TBL_ADICCIONES_TBL_PERSONA">
             <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
             <End Role="TBL_ADICCIONES" EntitySet="TBL_ADICCIONES" />
@@ -2161,14 +2156,6 @@
           <AssociationSet Name="FK_TBL_REFERENCIA_DETALLE_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_REFERENCIA_DETALLE_TBL_VALOR_CATALOGO">
             <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
             <End Role="TBL_REFERENCIA_DETALLE" EntitySet="TBL_REFERENCIA_DETALLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TBL_REFERENCIA_TBL_REFERENCIA1" Association="Self.FK_TBL_REFERENCIA_TBL_REFERENCIA1">
-            <End Role="TBL_INTERVENCION" EntitySet="TBL_INTERVENCION" />
-            <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TBL_REFERENCIA_TBL_REGISTRO" Association="Self.FK_TBL_REFERENCIA_TBL_REGISTRO">
-            <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
-            <End Role="TBL_REFERENCIA" EntitySet="TBL_REFERENCIA" />
           </AssociationSet>
           <AssociationSet Name="FK_TBL_REFERENCIA_TBL_VALORCATALOGO" Association="Self.FK_TBL_REFERENCIA_TBL_VALORCATALOGO">
             <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
@@ -2704,6 +2691,10 @@
             <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
             <End Role="TBL_TELEFONO" EntitySet="TBL_TELEFONO" />
           </AssociationSet>
+          <AssociationSet Name="FK__TBL_PERSO__FK_ES__7BB05806" Association="SIVIOModel.FK__TBL_PERSO__FK_ES__7BB05806">
+            <End Role="TBL_CATALOGO" EntitySet="TBL_CATALOGO" />
+            <End Role="TBL_PERSONA_FAMILIAR" EntitySet="TBL_PERSONA_FAMILIAR" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="TBL_ACCION">
           <Key>
@@ -2979,6 +2970,7 @@
           <Property Name="VC_NOMBRECATALOGO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FK_CATALOGOPADRE" Type="Int32" />
           <NavigationProperty Name="TBL_VALOR_CATALOGO" Relationship="SIVIOModel.FK_TBL_VALORCATALOGO_TBL_CATALOGO" FromRole="TBL_CATALOGO" ToRole="TBL_VALOR_CATALOGO" />
+          <NavigationProperty Name="TBL_PERSONA_FAMILIAR" Relationship="SIVIOModel.FK__TBL_PERSO__FK_ES__7BB05806" FromRole="TBL_CATALOGO" ToRole="TBL_PERSONA_FAMILIAR" />
         </EntityType>
         <EntityType Name="TBL_CONSULTA">
           <Key>
@@ -3210,7 +3202,7 @@
           <Property Name="VC_NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VC_APELLIDO1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VC_APELLIDO2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DT_FECHANACIMIENTO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DT_FECHANACIMIENTO" Type="DateTime" Precision="3" />
           <Property Name="FK_ESTADOCIVIL" Type="Int32" Nullable="false" />
           <Property Name="FK_ESCOLARIDAD" Type="Int32" Nullable="false" />
           <Property Name="FK_GENERO" Type="Int32" Nullable="false" />
@@ -3245,6 +3237,8 @@
           <NavigationProperty Name="TBL_PERSONA_CONDICIONESPECIAL" Relationship="SIVIOModel.FK_TBL_PERSONACONDICIONESPECIAL_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_PERSONA_CONDICIONESPECIAL" />
           <NavigationProperty Name="TBL_REGISTRO" Relationship="SIVIOModel.FK_TBL_REGISTRO_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_REGISTRO" />
           <NavigationProperty Name="TBL_TELEFONO" Relationship="SIVIOModel.FK_TBL_TELEFONO_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_TELEFONO" />
+          <Property Name="I_EDAD" Type="Int32" />
+          <Property Name="B_CONOCEFECHANACIMIENTO" Type="Boolean" />
         </EntityType>
         <EntityType Name="TBL_PERSONA_APOYO">
           <Key>
@@ -3287,6 +3281,8 @@
           <NavigationProperty Name="TBL_FAMILIAR_ACADEMICO" Relationship="SIVIOModel.FK_TBL_FAMILIAR_ACADEMICO_TBL_PERSONA_FAMILIAR" FromRole="TBL_PERSONA_FAMILIAR" ToRole="TBL_FAMILIAR_ACADEMICO" />
           <NavigationProperty Name="TBL_FAMILIAR_SALUD" Relationship="SIVIOModel.FK_TBL_FAMILIAR_SALUD_TBL_PERSONA_FAMILIAR" FromRole="TBL_PERSONA_FAMILIAR" ToRole="TBL_FAMILIAR_SALUD" />
           <NavigationProperty Name="TBL_VALOR_CATALOGO" Relationship="SIVIOModel.FK_TBL_PERSONA_FAMILIAR_TBL_VALOR_CATALOGO" FromRole="TBL_PERSONA_FAMILIAR" ToRole="TBL_VALOR_CATALOGO" />
+          <Property Name="FK_ESCOLARIDAD" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBL_CATALOGO" Relationship="SIVIOModel.FK__TBL_PERSO__FK_ES__7BB05806" FromRole="TBL_PERSONA_FAMILIAR" ToRole="TBL_CATALOGO" />
         </EntityType>
         <EntityType Name="TBL_PERSONA_RED_APOYO">
           <Key>
@@ -4703,6 +4699,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__TBL_PERSO__FK_ES__7BB05806">
+          <End Type="SIVIOModel.TBL_CATALOGO" Role="TBL_CATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_PERSONA_FAMILIAR" Role="TBL_PERSONA_FAMILIAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CATALOGO">
+              <PropertyRef Name="PK_CATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_PERSONA_FAMILIAR">
+              <PropertyRef Name="FK_ESCOLARIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5159,6 +5167,8 @@
           <EntitySetMapping Name="TBL_PERSONA">
             <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA">
               <MappingFragment StoreEntitySet="TBL_PERSONA">
+                <ScalarProperty Name="B_CONOCEFECHANACIMIENTO" ColumnName="B_CONOCEFECHANACIMIENTO" />
+                <ScalarProperty Name="I_EDAD" ColumnName="I_EDAD" />
                 <ScalarProperty Name="FK_NACIONALIDAD2" ColumnName="FK_NACIONALIDAD2" />
                 <ScalarProperty Name="FK_ETNIA" ColumnName="FK_ETNIA" />
                 <ScalarProperty Name="VC_CORREO" ColumnName="VC_CORREO" />
@@ -5213,6 +5223,7 @@
           <EntitySetMapping Name="TBL_PERSONA_FAMILIAR">
             <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA_FAMILIAR">
               <MappingFragment StoreEntitySet="TBL_PERSONA_FAMILIAR">
+                <ScalarProperty Name="FK_ESCOLARIDAD" ColumnName="FK_ESCOLARIDAD" />
                 <ScalarProperty Name="FK_OCUPACION" ColumnName="FK_OCUPACION" />
                 <ScalarProperty Name="DT_FECHANACIMIENTO" ColumnName="DT_FECHANACIMIENTO" />
                 <ScalarProperty Name="B_DENUNCIAABUSOSEXUAL" ColumnName="B_DENUNCIAABUSOSEXUAL" />

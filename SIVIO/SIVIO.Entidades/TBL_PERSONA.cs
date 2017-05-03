@@ -36,7 +36,7 @@ namespace SIVIO.Entidades
         public string VC_NOMBRE { get; set; }
         public string VC_APELLIDO1 { get; set; }
         public string VC_APELLIDO2 { get; set; }
-        public System.DateTime DT_FECHANACIMIENTO { get; set; }
+        public Nullable<System.DateTime> DT_FECHANACIMIENTO { get; set; }
         public int FK_ESTADOCIVIL { get; set; }
         public int FK_ESCOLARIDAD { get; set; }
         public int FK_GENERO { get; set; }
@@ -57,6 +57,8 @@ namespace SIVIO.Entidades
         public string VC_CORREO { get; set; }
         public Nullable<int> FK_ETNIA { get; set; }
         public Nullable<int> FK_NACIONALIDAD2 { get; set; }
+        public Nullable<int> I_EDAD { get; set; }
+        public Nullable<bool> B_CONOCEFECHANACIMIENTO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_ADICCIONES> TBL_ADICCIONES { get; set; }

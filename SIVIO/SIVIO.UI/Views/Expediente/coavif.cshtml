@@ -24,6 +24,18 @@
         document.title = "SIVIO - COAVIF y Equipo Estrategico";
         InicializarOtrosEventos();
         CargarDivisionTerritorial();
+       
+        $('#fechaNacimiento').hide();
+        $('#checkFecha').change(function () {
+            if ($(this).is(':checked')) {
+                $('#fechaNacimiento').show();
+                $('#edad').hide();
+            } else {
+                $('#fechaNacimiento').hide();
+                $('#edad').show();
+            }
+        });
+
         $('#meses').hide();
         $('#checkEmbarazo').click( function () {
             if ($(this).is(':checked')) {
@@ -33,6 +45,10 @@
                 $('#intEmbarazo').val("0");
             }
         });
+
+        if (true) {
+            $('#checkFecha').prop('checked', true).change();
+        };
         $('#cmbPersonaProvincia').val(@Model.FK_PROVINCIAPROCEDENCIA);
         $('#cmbPersonaCanton').val(@Model.FK_CANTONPROCEDENCIA);
         $('#cmbPersonaDistrito').val(@Model.FK_DISTRITOPROCEDENCIA);
@@ -629,8 +645,19 @@
                                     </div>
 
                                     <div class="col-md-12 form-group">
+                                        <label>
+                                            <input style="display:inline-block;" id="checkFecha" type="checkbox"> Conoce Fecha de Nacimiento
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-12 form-group" id="fechaNacimiento">
+                                        <label>Fecha Nacimiento</label>
+                                        <input class="form-control" placeholder="Fecha nacimiento" id="intEdad" value=@Model.DT_FECHANACIMIENTO type="datetime" required="" min="0">
+                                    </div>
+
+                                    <div class="col-md-12 form-group" id="edad">
                                         <label>Edad</label>
-                                        <input class="form-control" placeholder="Edad" id="intEdad" type="number" required="" min="0">
+                                        <input class="form-control" placeholder="Edad" id="intEdad" value=@Model. type="number" required="" min="0">
                                     </div>
 
                                     <div class="col-md-12 form-group">
@@ -684,7 +711,7 @@
 
                                     <div class="col-md-12 form-group">
                                         <label>Teléfono</label>
-                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="" @*@value=@Model.TBL_TELEFONO.First().VC_NUMERO *@>
+                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="" value=@*Model.TBL_TELEFONO.ElementAt(0).VC_NUMERO*@>
                                     </div>
 
                                     <div class="col-md-12 form-group">

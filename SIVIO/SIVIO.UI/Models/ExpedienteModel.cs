@@ -165,7 +165,8 @@ namespace SIVIO.UI.Models
                 try
                 {
                     TBL_PERSONA persona = entidades.TBL_PERSONA.Find(idPersona);
-                    return persona;
+                        var p = persona;
+                    return p;
                 }
                 catch (Exception e)
                 {

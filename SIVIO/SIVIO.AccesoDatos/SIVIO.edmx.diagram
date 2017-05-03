@@ -158,6 +158,7 @@
         <AssociationConnector Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_USUARIO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK__TBL_PERSO__FK_ES__7BB05806" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
