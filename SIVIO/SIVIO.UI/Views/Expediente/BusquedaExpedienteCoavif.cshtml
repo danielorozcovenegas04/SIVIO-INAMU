@@ -262,16 +262,16 @@
         });
         $('#tblBusquedaExpediente tbody').on('click', 'tr', function () {
             debugger;
-            //if ($(this).hasClass('selected')) {
-            //    $("#tblBusquedaExpediente tr").removeClass("selectedDT");
-            //    $("#tblBusquedaExpediente tr").removeClass("selected");
-            //    $(this).addClass('selected');
-            //    $(this).addClass('selectedDT');
-            //}
-            //else {
-            //    $(this).removeClass('selectedDT');
+            if ($(this).hasClass('selected')) {
+                $("#tblBusquedaExpediente tr").removeClass("selectedDT");
+                $("#tblBusquedaExpediente tr").removeClass("selected");
+                $(this).addClass('selected');
+                $(this).addClass('selectedDT');
+            }
+            else {
+                $(this).removeClass('selectedDT');
 
-            //}
+            }
         });
 
         $('#tblBusquedaExpediente tbody').on('dblclick', 'tr', function () {
