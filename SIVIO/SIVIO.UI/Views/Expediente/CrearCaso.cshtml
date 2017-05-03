@@ -10,12 +10,8 @@
     function llenarComboBox(nombreCatalogo, nombreComboBox) {
         return function (respuesta) {
             var catalogo = respuesta[nombreCatalogo];
-
-            console.log(catalogo);
-            debugger;
             if (catalogo.Mensaje.TipoMensaje === 1) {
                 $.each(catalogo.Catalogo, function (key, value) {
-                    console.log($(nombreComboBox));
                     $(nombreComboBox).append($("<option/>", {
                         value: value.PK_VALORCATALOGO,
                         text: value.VC_VALOR1
@@ -34,6 +30,18 @@
 
             return respuesta
 
+        }
+    }
+
+    function comboMultiple(nombreComboBox) {
+        return () => {
+            //$('#btn-login').fadeIn();
+            $(nombreComboBox).selectize({
+                sortField: 'text',
+                create: false,
+                placeholder: "Tipo de CEAAM",
+            });
+            $.LoadingOverlay("hide");
         }
     }
 
@@ -85,11 +93,11 @@
             .then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbAntecedentesLegales"))
             .then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbAntecedentesPsiquiatricos"))
             .then(llenarComboBox("Tipo de Atención Médica", "#cmbAtencionMedicaProductoDeAgresion"))
-            .then(llenarComboBox("Situación Enfrentada", "#cmbTipoViolencia"))
+            //.then(llenarComboBox("Situación Enfrentada", "#cmbTipoViolencia"))
             .then(llenarComboBox("Impacto producto de violencia", "#cmbImpactoViolencia"))
             .then(llenarComboBox("Valoracion de riesgo", "#cmbValoracionRiesgo"))
             .then(llenarComboBox("Condicion legal al ingreso", "#cmbCondicionLegalIngreso"))
-            .then(llenarComboBox("Medida de Protección", "#cmbMedidasProteccion"))
+            //.then(llenarComboBox("Medida de Protección", "#cmbMedidasProteccion"))
             //.then(llenarComboBox("", "#cmbEncuentraEnProgramaOAPVD"))
             .then(llenarComboBox("Situación de Violencia Física", "#cmbViolenciaFisica"))
             .then(llenarComboBox("Situación de Violencia Psicológica", "#cmbViolenciaPsicologica"))
@@ -97,15 +105,8 @@
             .then(llenarComboBox("Situación de Violencia Patrimonial", "#cmbViolenciaPatrimonial"))
 
             //.then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbRespuestaSiNosponible"))
-            /*.then(() => {
-                $('#btn-login').fadeIn();
-                $('#cmbTipoCEAAM').selectize({
-                    sortField: 'text',
-                    create: false,
-                    placeholder: "Tipo de CEAAM",
-                });
-                $.LoadingOverlay("hide");
-            });*/
+            .then(comboMultiple("#cmbDiscapacidad"))
+            .then(comboMultiple("#cmbAdicciones"));
 
 
 
@@ -548,8 +549,10 @@
                         <select id="cmbOtraNacionalidad" class="form-control"></select>
                     </div>
                     <div class="col-xs-4 form-group">
-                        <label><input type="checkbox" id="checkApatrida" value="Apatrida"> Apátrida</label>
+                        <label>Apátrida</label><br />
+                        <input type="checkbox" style="display:inline" />
                     </div>
+                    
                 </div>
 
                 <div class="row">
@@ -783,7 +786,7 @@
 
 
 
-@*
+@**@
     <div id="tabHistoriaViolencia" class="tab-pane fade" style="padding:5px">
         <h3>Historia de Violencia</h3>
         @* Pestaña Historia de violencia
