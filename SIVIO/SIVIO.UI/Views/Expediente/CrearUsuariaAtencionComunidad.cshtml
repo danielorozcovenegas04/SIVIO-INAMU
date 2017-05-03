@@ -415,18 +415,35 @@
             @* Primera pestaña *@
             <div class="row" id="tabPerfilUsuaria">
 
-                <form id="formPersona" method="post">
-                    @* Primera columna *@
+                <form id="formPersona" method="post"> @* Form de TBL_Persona *@
+                    
                     <div class="col-xs-4 form-group">
-                        <label>Nombre</label><br>
-                        <input class="form-control" id="txtNombre" name="VC_NOMBRE" type="text" value='Nombre' required=""><br>
-                        <label>Primer apellido</label><br>
-                        <input class="form-control" id="txtApellido1" name="VC_APELLIDO1" type="text" value='Apellido1' required=""><br>
-                        <label>Segundo apellido</label><br>
-                        <input class="form-control" id="txtApellido2" name="VC_APELLIDO2" type="text" value='Apellido2' required=""><br>
-                        <label>Fecha de nacimiento</label><br>
-                        <input class="form-control" id="txtFecha" name="DT_FECHANACIMIENTO" type="date" value='1900-01-01' required=""><br>
+                        <label>Identificación</label>
+                        <input class="form-control" id="txtIdentificacion" name="VC_IDENTIFICACION" type="text" value='12345' required="">
+                    </div>
+                    <div class="col-xs-4 form-group"> <br><br><br><br> </div>
+                    <div class="col-xs-4 form-group"> <br><br><br><br> </div>
+                    <div class="col-xs-4 form-group">
+                        <label>Nombre</label>
+                        <input class="form-control" id="txtNombre" name="VC_NOMBRE" type="text" value='Nombre' required="">
+                    </div>
 
+                    <div class="col-xs-4 form-group">
+                        <label>Primer apellido</label>
+                        <input class="form-control" id="txtApellido1" name="VC_APELLIDO1" type="text" value='Apellido1' required="">
+                    </div>
+
+                    <div class="col-xs-4 form-group">
+                        <label>Segundo apellido</label>
+                        <input class="form-control" id="txtApellido2" name="VC_APELLIDO2" type="text" value='Apellido2' required="">
+                    </div>
+
+                    <div class="col-xs-4 form-group">
+                        <label>Fecha de nacimiento</label><br>
+                        <input class="form-control" id="txtFecha" name="DT_FECHANACIMIENTO" type="date" value='1900-01-01' required="">
+                    </div>
+
+                    <div class="col-xs-4 form-group">
                         <label>Orientación sexual:</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -434,8 +451,10 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
+                        </div>
+                    </div>
 
+                    <div class="col-xs-4 form-group">
                         <label>Origen Étnico:</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -443,8 +462,9 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Condición civil</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -452,8 +472,9 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Escolaridad</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -461,14 +482,13 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
+                        </div>
                     </div>
-
-                    @* Segunda columna *@
                     <div class="col-xs-4 form-group">
                         <label>Número total de hijos</label><br>
-                        <input class="form-control" id="txtHijos" name="I_HIJOS" type="number" value='3' required=""><br>
-
+                        <input class="form-control" id="txtHijos" name="I_HIJOS" type="number" value='3' required="">
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Tipo de familia</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -476,8 +496,11 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group"> <br><br><br><br> </div>
+                    <div class="col-xs-4 form-group"> <br><br><br><br> </div>
+                    <div class="col-xs-4 form-group">
                         <label>Nacionalidad</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -485,8 +508,9 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Otra nacionalidad</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -496,7 +520,9 @@
                             </div>
                         </div>
                         <input type="radio" name="radioApatrida" value="Apatrida"> Ápatrida <br><br><br>
-
+                    </div>
+                    <div class="col-xs-4 form-group"> <br><br><br><br><br><br><br><br><br> </div>
+                    <div class="col-xs-4 form-group">
                         <label>Condición migratoria</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -504,11 +530,14 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Condición de aseguramiento (falta combo)</label><br>
-                        <input class="form-control" id="txtCondicionAseguramiento" type="number" name="FK_CONDICIONASEGURAMIENTO" value='5' required=""><br>
+                        <input class="form-control" id="txtCondicionAseguramiento" type="number" name="FK_CONDICIONASEGURAMIENTO" value='5' required="">
+                    </div>
 
+                    <div class="col-xs-4 form-group">
                         <label>Vivienda</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -516,11 +545,10 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
+                        </div>
                     </div>
 
                     @* Datos no encontrados (TBL_PERSONA) *@
-                    <input type="hidden" name="VC_IDENTIFICACION" value="12345" />
                     <input type="hidden" name="FK_TIPOIDENTIFICACION" value="1" />
                     <input type="hidden" name="FK_GENERO" value="1" />
                     <input type="hidden" name="I_HIJOSCEEAM" value="1" />
@@ -533,13 +561,12 @@
                     <input type="hidden" name="FK_CONDICIONSALUD" value="1" />
                     
                 </form>
-
-                @* Tercera columna *@
-                <div class="col-xs-4 form-group">
-                    <form id="formLaboral" method="post">
+                <form id="formLaboral" method="post">
+                    <div class="col-xs-4 form-group">
                         <label>Ocupación</label><br>
-                        <input class="form-control" id="txtOcupacion" name="VC_OCUPACION" type="text" value='Ama de casa' required=""><br>
-
+                        <input class="form-control" id="txtOcupacion" name="VC_OCUPACION" type="text" value='Ama de casa' required="">
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Condición laboral</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -547,17 +574,22 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Experiencia Laboral</label><br>
-                        <input class="form-control" id="txtAnosExperiencia" name="I_ANNOSEXPERIENCIA" type="number" value='2' required=""><br>
-
+                        <input class="form-control" id="txtAnosExperiencia" name="I_ANNOSEXPERIENCIA" type="number" value='2' required="">
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Lugar de trabajo</label><br>
-                        <input class="form-control" id="txtHijos" name="VC_NOMBRELUGARTRABAJO" type="text" value='Los Pollos Hermanos' required=""><br>
-                        
-                        <input type="hidden" name="VC_OBSERVACIONES" value="ninguna" />
-                    </form>
+                        <input class="form-control" id="txtHijos" name="VC_NOMBRELUGARTRABAJO" type="text" value='Los Pollos Hermanos' required="">
+                    </div>
 
+                    <input type="hidden" name="VC_OBSERVACIONES" value="ninguna" />
+                    
+                </form>
+
+                <div class="col-xs-4 form-group">
                     <label>Discapacidades:</label><br>
                     <div class="row">
                         <div class="col-xs-12">
@@ -565,8 +597,9 @@
                                 @*<option selected disabled>Seleccione una opcion</option>*@
                             </select>
                         </div>
-                    </div><br>
-
+                    </div>
+                </div>
+                <div class="col-xs-4 form-group">
                     <form id="formAdicciones" method="post">
                         <label>Adicciones</label><br>
                         <div class="row">
@@ -578,6 +611,7 @@
                         </div><br>
                     </form>
                 </div>
+
 
                 @* Columna intermedia*@
                 <div class="col-xs-9 form-group">
