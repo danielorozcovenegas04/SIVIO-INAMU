@@ -1,4 +1,5 @@
 ﻿using SIVIO.Entidades;
+using SIVIO.InamuComun;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -44,27 +45,6 @@ namespace SIVIO.UI.Controllers
             } else {
                 return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
             }
-        }
-
-        [Authorize]
-        public ActionResult CrearUsuaria_DatosUsuaria()
-        {
-            /*
-            bool estadoSesion = true;
-            if (ComprobarPermisosAcccion(out estadoSesion))
-            {
-                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
-            }
-            else if (!estadoSesion)
-            {
-                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
-            }
-            else
-            {
-                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
-            }
-            */
-            return View(viewName: "~/Views/Expediente/CrearUsuaria_DatosUsuaria.cshtml");
         }
 
         [Authorize]
@@ -197,25 +177,54 @@ namespace SIVIO.UI.Controllers
         #endregion
 
         #region Delegacion
+
+        [HttpPost]
+        public Mensaje CrearUsuaria_DatosUsuaria(FormCollection datosForm)
+        {
+            using (var entities = new SIVIOEntities())
+            {
+                //  var name = datosForm["name"];
+                //   var lastName1 = datosForm["lastName1"];
+                //  var lastName2 = datosForm["lastName2"];
+                //  var mail = datosForm["mail"];
+
+                TBL_PERSONA user = new TBL_PERSONA();
+                user.VC_NOMBRE = datosForm["Nombre"];
+                user.VC_APELLIDO1 = datosForm["Apellido1"];
+                user.VC_APELLIDO2 = datosForm["Apellido2"];
+                user.VC_IDENTIFICACION = datosForm["Identificacion"];
+                user.DT_FECHANACIMIENTO = DateTime.Parse(datosForm["FechaNacimiento"]);
+                // ¿EDAD?
+                //   user.FK_PROVINCIAPROCEDENCIA = datosForm["ProvinciaPersona"]; // Es un int, se requiere el valor.
+                /*
+                var context = new INAMU_COMUNEntities();
+                var pk_provincia = from I_IDPROVINCIA in context.CAT_PROVINCIA
+                                 where I_IDPROVINCIA.CAT_CANTON.Any(r => r.VC_DESCRIPCION == datosForm["ProvinciaPersona"])
+                                   select I_IDPROVINCIA;
+
+                Console.WriteLine(pk_provincia);
+                //usuario.TBL_ROL_USUARIO.Select(m => m.TBL_ROL.VC_NOMBRE)
+
+                //        user.FK_CANTONPROCEDENCIA = pk_provincia;
+
+
+                //      user.IM_CLAVE = StrToByteArray("mae");
+                //      user.IM_SALT1 = StrToByteArray("mae");
+                //      user.IM_SALT2 = StrToByteArray("mae");
+
+                //  return _modelExpediente.InsertarUsuaria(user);*/
+                return null;
+            }
+
+        }
+
+
+
         [Authorize]
         public ActionResult Delegacion_Mujer()
         {
-            /*
-            bool estadoSesion = true;
-            if (ComprobarPermisosAcccion(out estadoSesion))
-            {
-                return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
-            }
-            else if (!estadoSesion)
-            {
-                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
-            }
-            else
-            {
-                return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
-            }
-            */
-            return View(viewName: "~/Views/Expediente/Delegacion_Mujer.cshtml");
+     
+            return View();
         }
 
         public JsonResult CargarDropdowns()
