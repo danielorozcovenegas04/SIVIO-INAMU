@@ -262,6 +262,12 @@
                             text: value.VC_VALOR1
                         }));
                     });
+                    $.each(respuesta.CatalogoIntitucion, function (key, value) {
+                        $('#cmbInstitucionRefiere').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
                     $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#comPais').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
@@ -570,14 +576,15 @@
                                 <div class="col-md-6 form-group">
                                     <label id="lblDisponibilidad">Tipo de disponibilidad</label>
                                     <select class="form-control" id="cmbTipoDisponibilidad" type="">
-                                        <option value=""></option>
+                                        @*<option value=""></option>*@
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label>Institucion que refiere</label>
-                                    <input class="form-control" id="txtInstitucion" type="text" required="">
+                                    <select class="form-control" id="cmbInstitucionRefiere" type="">
+                                    </select>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Nombre de quien refiere</label>
