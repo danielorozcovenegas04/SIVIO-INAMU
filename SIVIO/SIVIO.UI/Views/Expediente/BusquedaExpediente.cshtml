@@ -173,10 +173,11 @@
             titleAttr: 'Editar Persona Usuaria',
                 action: function (e, dt, node, config) {
                     debugger;
-                    $.LoadingOverlay("show");
+                    
                     var contSeleccionados = tablaBusquedaExpediente.rows({ selected: true }).count();
                     var filaSeleccionada = tablaBusquedaExpediente.rows({ selected: true }).data();
                     if (contSeleccionados > 0) {
+                        $.LoadingOverlay("show");
                         $("#contenedorEspera").show();
                         $.ajax({
                             type: "POST",
