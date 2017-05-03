@@ -219,7 +219,9 @@
                     $("#txtTelefonoPersona").prop("readonly", true);
 
                     if (respuesta.usuarioRol != 27) {
-                        $("#cmbTipoDisponibilidad").prop("disabled", true);
+                        //$("#cmbTipoDisponibilidad").prop("disabled", true);
+                        $("#cmbTipoDisponibilidad").hide(); 
+                        $("#lblDisponibilidad").hide();
                     }
                 } else {
                     $("#txtModalTitulo").css("color", "red");
@@ -479,19 +481,15 @@
     }
 </style>
 <div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
-    <div class="col-md-2 form-group"></div>
-    <div class="col-md-10 form-group">
+    @*<div class="col-md-2 form-group"></div>*@
+    <div class="col-md-12 form-group">
         <div class="row" style="margin-left:20px;margin-right:20px;">
-            <h2>Expediente de: @Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2</h2>
-            <h4>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h4>
+            <h3>Expediente de: @Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2</h3>
+            <h5>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h5>
         </div>
-    </div>
-    @*<div class="row" style="margin-left:60px;margin-right:60px;">
-        <h2>Expediente de: @Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2</h2>
-        <h4>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h4>
-    </div>*@
+    </div>    
         <div class="col-md-2 form-group">
-            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Expediente</button>
+            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;" >Expediente</button>
 
             <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
 
@@ -559,7 +557,7 @@
                                     <input class="form-control" id="txtPersonaAtiende" type="text" required="">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label>Tipo de disponibilidad</label>
+                                    <label id="lblDisponibilidad">Tipo de disponibilidad</label>
                                     <select class="form-control" id="cmbTipoDisponibilidad" type="">
                                         <option value=""></option>
                                     </select>
@@ -587,8 +585,8 @@
                             </div>
                             <div class="row" id="contenedorBotones">
                                 <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; display:none;">Guardar</button>
-                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; display:none">Cancelar</button>
+                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px;">Guardar</button>
+                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px;">Cancelar</button>
                                 </div>
                             </div>
                         </div>
