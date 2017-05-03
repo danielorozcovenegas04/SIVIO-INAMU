@@ -11,9 +11,9 @@
         $("#btnGuardar").click(function () {
             $.ajax(
             {
-                type: "POST", //HTTP POST Method  
-                url: '@Url.Action("Delegacion_Mujer")', // Controller/View   
-                data: { //Passing data  
+                type: "POST", //HTTP POST Method
+                url: '@Url.Action("Delegacion_Mujer")', // Controller/View
+                data: { //Passing data
                     Nombre: $("#txtName").val(), //Reading text box values using Jquery   MODIFICAR DE LA FORMA objInstrumentoA: formularioInstrumentoA POSTERIORMENTE
                     Apellido1: $("#txtApellido1").val(),
                     Apellido2: $("#txtApellido2").val(),
@@ -61,6 +61,7 @@
         CargarDropdowns();
         CargarDivisionTerritorial();
         CargarEditorRedesApoyo();
+        CargarEditorComposicionFamiliar();
 
     });
     function CargarDropdowns() {
@@ -255,13 +256,21 @@
                             text: value.VC_VALOR1
                         }));
                     });
+
+                    $.each(respuesta.TipoRedApoyo, function (key, value) {
+                        $('#cmbTipoRedApoyo2').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
                     $.each(respuesta.Institucion, function (key, value) {
                         $('#cmbInstitucionRedApoyo').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
-                    
+
 
                     $('#btn-login').fadeIn();
                     $.LoadingOverlay("hide");
@@ -660,6 +669,251 @@
         });
     }
 
+    function CargarEditorComposicionFamiliar() {
+        $("#cmbTipoRedApoyo2").change(function () {
+            debugger;
+            var idTipoRed = $("#cmbTipoRedApoyo2").val();
+            if (idTipoRed === "717") {
+                $("#contenedorRelacion2").hide();
+                $("#contenedorInstitucion2").show();
+            }
+            else {
+
+                $("#contenedorRelacion2").show();
+                $("#contenedorInstitucion2").hide();
+
+            }
+
+        });
+        $("#cmbTipoRedApoyo2").val("717").trigger('change');
+        var tablaComposicionFamiliar = $('#tblComposicionFamiliar').DataTable({
+            responsive: true,
+            dom: 'Brtlp<"clear">',
+            select: true,
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fa fa-file-excel-o"></i>',
+                    titleAttr: 'Excel'
+                }, {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fa fa-file-pdf-o"></i>',
+                    titleAttr: 'PDF'
+                }, {
+                    text: '<i class="fa fa-plus-circle btnBlanco" aria-hidden="true"></i>',
+                    titleAttr: 'Agregar una red de Apoyo',
+                    className: 'botonEstandar',
+                    action: function (e, dt, node, config) {
+
+                        //$("#txtMiebroHogarNombre").css("border-color", "#cacaca");
+                        //$("#txtMiebroHogarEdad").css("border-color", "#cacaca");
+                        //$("#txtMiebroHogarNombre").val("");
+                        //$("#txtMiebroHogarEdad").val("");
+                        $("#frmEditorComposicionFamiliar").fadeIn();
+
+                    }
+                }, {
+                    text: '<i class="fa fa-minus-circle btnBlanco" aria-hidden="true"></i>',
+                    titleAttr: 'Eliminar una red de Apoyo',
+                    className: 'botonEstandar',
+                    action: function (e, dt, node, config) {
+                        debugger;
+
+                        var contSeleccionados = tablaMiebrosHogar.rows({
+                            selected: true
+                        }).count();
+                        var filaSeleccionada = tablaMiebrosHogar.rows({
+                            selected: true
+                        }).data();
+                        if (contSeleccionados > 0) {
+
+                            tablaMiebrosHogar.row('.selected').remove().draw();
+                        } else {
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("No se seleccionaron redes de apoyo");
+                            $("#txtModalContenido").text("Seleccione una red de apyo para continuar");
+                            instMensajes.open();
+                        }
+
+                        debugger;
+                    }
+                }
+            ],
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            "processing": true, // for show progress bar
+            "serverSide": false, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            tableTools: {
+                "sRowSelect": "single"
+            },
+            "columns": [
+                {
+                    "data": "PK_REDAPOYO",
+                    "name": "PK_REDAPOYO",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "FK_INSTITUCION",
+                    "name": "FK_INSTITUCION",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "FK_TIPORED",
+                    "name": "FK_TIPORED",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "NOMBRE",
+                    "name": "NOMBRE",
+                    "autoWidth": true,
+                    "visible": true
+                }, {
+                    "data": "RELACION",
+                    "name": "RELACION",
+                    "autoWidth": true,
+                    "visible": true
+                }, {
+                    "data": "TELEFONO",
+                    "name": "TELEFONO",
+                    "autoWidth": true
+                }, {
+                    "data": "TIPORED",
+                    "name": "TIPORED",
+                    "autoWidth": true
+                }
+            ]
+
+        });
+        $('#tblComposicionFamiliar tbody').on('click', 'tr', function () {
+            debugger;
+            if ($(this).hasClass('selected')) {
+
+
+                //$("tr").removeClass("selectedDT");
+                $("#tblComposicionFamiliar tr").removeClass("selectedDT");
+                $("#tblComposicionFamiliar tr").removeClass("selected");
+                $(this).addClass('selected');
+                $(this).addClass('selectedDT');
+            } else {
+                $(this).removeClass('selectedDT');
+
+            }
+        });
+        $("#btnMiembroHogarGuardar").click(function () {
+            //var selO = document.getElementById('cmbMiebroHogarCondEspecial');
+            //var sel1 = document.getElementById('cmbMiebroHogaBeneficios');
+            //if ($("#txtMiebroHogarNombre").val() !== '' && $("#txtMiebroHogarEdad").val() !== '' && selO.length > 0 && sel1.length > 0) {
+            //    var condicionesEspecialesIds = '';
+            //    var condicionesEspecialesTexto = '';
+            //    var beneficiosIds = '';
+            //    var beneficiosTexto = '';
+            //    debugger;
+
+
+            //    for (i = 0; i < selO.length; i++) {
+            //        if (selO.options[i].selected) {
+            //            condicionesEspecialesIds = condicionesEspecialesIds + selO.options[i].value;
+            //            condicionesEspecialesTexto = condicionesEspecialesTexto + selO.options[i].text;
+            //            if (i < (selO.length - 1)) {
+            //                condicionesEspecialesIds = condicionesEspecialesIds + ",";
+            //                condicionesEspecialesTexto = condicionesEspecialesTexto + ",";
+            //            }
+
+            //        }
+            //    }
+            //    for (i = 0; i < sel1.length; i++) {
+            //        if (sel1.options[i].selected) {
+            //            beneficiosIds = beneficiosIds + sel1.options[i].value;
+            //            beneficiosTexto = beneficiosTexto + sel1.options[i].text;
+            //            if (i < (sel1.length - 1)) {
+            //                beneficiosIds = beneficiosIds + ",";
+            //                beneficiosTexto = beneficiosTexto + ",";
+            //            }
+
+            //        }
+            //    }
+            //    tablaMiebrosHogar.row.add({
+            //        "FKGENERO": $("#cmbMiebroHogarGenero").val(),
+            //        "FKPARENTESCO": $("#cmbMiebroHogarParentesco").val(),
+            //        "BDEPENDENCIAECONOMICA": $("#cmbMiebroHogarDepEconomica").val(),
+            //        "FKTIPOSEGURO": $("#cmbMiebroHogarTipoSeguro").val(),
+            //        "FKCONDICIONESPECIAL": condicionesEspecialesIds,
+            //        "FKBENEFICIO": beneficiosIds,
+            //        "NOMBRE": $("#txtMiebroHogarNombre").val(),
+            //        "EDAD": $("#txtMiebroHogarEdad").val(),
+            //        "GENERO": $("#cmbMiebroHogarGenero option:selected").text(),
+            //        "PARENTESCO": $("#cmbMiebroHogarParentesco option:selected").text(),
+            //        "DEPENDENCIAECONOMICA": $("#cmbMiebroHogarDepEconomica option:selected").text(),
+            //        "TIPOSEGURO": $("#cmbMiebroHogarTipoSeguro option:selected").text(),
+            //        "CONDICIONESPECIAL": condicionesEspecialesTexto,
+            //        "BENEFICIO": beneficiosTexto
+
+            //    }).draw();
+
+
+            //    $("#txtMiebroHogarNombre").css("border-color", "#cacaca");
+            //    $("#txtMiebroHogarEdad").css("border-color", "#cacaca");
+            //    $("#txtMiebroHogarNombre").val("");
+            //    $("#txtMiebroHogarEdad").val("");
+            //} else {
+
+
+            //    $("#txtModalTitulo").css("color", "red");
+            //    $("#txtModalTitulo").text("Error al registrar persona");
+            //    if ($("#txtMiebroHogarNombre").val() === '') {
+
+            //        $("#txtModalContenido").text("(Miembro del nucleo familiar - Nombre) Favor especifique un valor");
+            //        $("#txtMiebroHogarNombre").css("border-color", "red");
+
+
+            //    }
+            //    if ($("#txtMiebroHogarEdad").val() === '') {
+            //        $("#txtModalContenido").text("(Miembro del nucleo familiar - Edad) Favor especifique un valor");
+            //        $("#txtMiebroHogarEdad").css("border-color", "red");
+
+            //    }
+            //    if (selO.length === 0) {
+            //        $("#txtModalContenido").text("(Condiciones Especiales) Favor especifique un valor");
+            //        $("#txtMiebroHogarEdad").css("border-color", "red");
+            //    }
+            //    if (sel1.length === 0) {
+            //        $("#txtModalContenido").text("(Beneficios) Favor especifique un valor");
+            //        $("#txtMiebroHogarEdad").css("border-color", "red");
+            //    }
+            //    instMensajes.open();
+
+            //}
+
+
+        });
+    }
+
+    
+
 </script>
 
     
@@ -1038,6 +1292,7 @@
                                         </div>
 
                                     </div>
+                                    <!--Inicia Redes de apoyo-->
                                     <div class="row">
                                         <div class="container">
                                             <div class="row">
@@ -1094,7 +1349,66 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--Finaliza Adicciones-->
+                                    <!--Finaliza Redes de apoyo-->
+
+                                    <!--Inicia Composición familiar-->
+                                    <div class="row">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <table id="tblComposicionFamiliar" class="display table-bordered" cellspacing="0" style="width: 100%">
+                                                        <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Composición familiar</div></caption>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>PK_REDAPOYO</th>
+                                                                <th>FK_INSTITUCION</th>
+                                                                <th>FK_TIPORED</th>
+                                                                <th>Nombre</th>
+                                                                <th>Relacion</th>
+                                                                <th>Telefono</th>
+                                                                <th>Tipo de Red</th>
+
+
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row comunForm" id="frmEditorComposicionFamiliar">
+
+                                                <div class="col-md-12">
+                                                    <div class="row">
+
+                                                        <div class="col-md-6 form-group">
+                                                            <label>Tipo</label>
+                                                            <select id="cmbTipoRedApoyo2" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-md-6 form-group">
+                                                            <label>Nombre</label>
+                                                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-6 form-group" id="contenedorInstitucion2">
+                                                            <label>Institución</label>
+                                                            <select id="cmbInstitucionRedApoyo2" class="form-control"></select>
+                                                        </div>
+                                                        <div class="col-xs-6 form-group" id="contenedorRelacion2">
+                                                            <label>Relación</label>
+                                                            <input class="form-control" placeholder="Nombre" id="txtRelacion2" type="text" required="">
+                                                        </div>
+                                                        <div class="col-md-6 form-group">
+                                                            <label>Teléfono</label>
+                                                            <input class="form-control" placeholder="Nombre" id="txtTelefono2" type="text" required="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Finaliza Composición familiar-->
 
                             <div class="row" id="contenedorBotones">
                                 <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
