@@ -6,14 +6,21 @@
 }
 
 <script type="text/javascript">
+    var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
     $(document).ready(function () {
-        //function will be called on button click having id btnsave
+        PrevenirCaracteresInvalidos();
+        debugger;
+        document.title = "SIVIO - Delegación de la Mujer";
+
+        CargarDropdowns();
+        CargarDivisionTerritorial();
+        CargarEditorRedesApoyo();
         $("#btnGuardar").click(function () {
             $.ajax(
             {
-                type: "POST", //HTTP POST Method  
-                url: '@Url.Action("Delegacion_Mujer")', // Controller/View   
-                data: { //Passing data  
+                type: "POST", //HTTP POST Method
+                url: '@Url.Action("Delegacion_Mujer")', // Controller/View
+                data: { //Passing data
                     Nombre: $("#txtName").val(), //Reading text box values using Jquery   MODIFICAR DE LA FORMA objInstrumentoA: formularioInstrumentoA POSTERIORMENTE
                     Apellido1: $("#txtApellido1").val(),
                     Apellido2: $("#txtApellido2").val(),
@@ -52,17 +59,9 @@
             });
 
         });
-    });
-
-    $(document).ready(function () {
-        PrevenirCaracteresInvalidos();
-        debugger;
-        document.title = "SIVIO - Delegación de la Mujer";
-        CargarDropdowns();
-        CargarDivisionTerritorial();
-        CargarEditorRedesApoyo();
 
     });
+
     function CargarDropdowns() {
 
         $.ajax({
@@ -246,7 +245,7 @@
                             text: value.VC_VALOR1
                         }));
                     });
-                    
+
 
                     $('#btn-login').fadeIn();
                     $.LoadingOverlay("hide");
@@ -403,6 +402,9 @@
 
 
     function CargarEditorRedesApoyo() {
+        $("select option").prop("selected", false);
+        $("#frmEditorRedesApoyo").hide();
+
         $("#cmdTipoRedApoyo").change(function () {
             debugger;
             var idTipoRed = $("#cmdTipoRedApoyo").val();
@@ -418,6 +420,16 @@
             }
 
         });
+        $("#btnOcultarCampoRedApoyo").click(function (event) {
+            debugger;
+            event.preventDefault();
+            $("#frmEditorRedesApoyo").hide();
+        });
+        $("#cmdTipoRedApoyo").val([]);
+        $("#txtNombre").val("");
+        $("#cmdInstitucionRedApoyo").val([]);
+        $("#contenedorRelacion").val("");
+        $("#txtTelefono").val("");
         $("#cmdTipoRedApoyo").val("717").trigger('change');
         var tablaRedesApoyo = $('#tblRedesApoyo').DataTable({
             responsive: true,
@@ -438,10 +450,8 @@
                     className: 'botonEstandar',
                     action: function (e, dt, node, config) {
 
-                        //$("#txtMiebroHogarNombre").css("border-color", "#cacaca");
-                        //$("#txtMiebroHogarEdad").css("border-color", "#cacaca");
-                        //$("#txtMiebroHogarNombre").val("");
-                        //$("#txtMiebroHogarEdad").val("");
+                        $('.redApoyo').val('');
+
                         $("#frmEditorRedesApoyo").fadeIn();
 
                     }
@@ -452,19 +462,19 @@
                     action: function (e, dt, node, config) {
                         debugger;
 
-                        var contSeleccionados = tablaMiebrosHogar.rows({
+                        var contSeleccionados = tablaRedesApoyo.rows({
                             selected: true
                         }).count();
-                        var filaSeleccionada = tablaMiebrosHogar.rows({
+                        var filaSeleccionada = tablaRedesApoyo.rows({
                             selected: true
                         }).data();
                         if (contSeleccionados > 0) {
 
-                            tablaMiebrosHogar.row('.selected').remove().draw();
+                            tablaRedesApoyo.row('.selected').remove().draw();
                         } else {
                             $("#txtModalTitulo").css("color", "red");
                             $("#txtModalTitulo").text("No se seleccionaron redes de apoyo");
-                            $("#txtModalContenido").text("Seleccione una red de apyo para continuar");
+                            $("#txtModalContenido").text("Seleccione una red de apoyo para continuar");
                             instMensajes.open();
                         }
 
@@ -537,6 +547,10 @@
                     "data": "TIPORED",
                     "name": "TIPORED",
                     "autoWidth": true
+                }, {
+                    "data": "INSTITUCION",
+                    "name": "INSTITUION",
+                    "autoWidth": true
                 }
             ]
 
@@ -556,90 +570,35 @@
 
             }
         });
-        $("#btnMiembroHogarGuardar").click(function () {
-            //var selO = document.getElementById('cmbMiebroHogarCondEspecial');
-            //var sel1 = document.getElementById('cmbMiebroHogaBeneficios');
-            //if ($("#txtMiebroHogarNombre").val() !== '' && $("#txtMiebroHogarEdad").val() !== '' && selO.length > 0 && sel1.length > 0) {
-            //    var condicionesEspecialesIds = '';
-            //    var condicionesEspecialesTexto = '';
-            //    var beneficiosIds = '';
-            //    var beneficiosTexto = '';
-            //    debugger;
+        $("#btnGuardarRedApoyo").click(function () {
+            debugger;
+            var algo = $("#cmdTipoRedApoyo").val();
+            if ($("#cmdTipoRedApoyo").val() !== ''
+                && $("#txtNombreRedApoyo").length > 0
+                && $("#txtTelefonoRedApoyo").length > 0) {
+
+                tablaRedesApoyo.row.add({
+                    "PK_REDAPOYO": '',
+                    "FK_INSTITUCION": $("#cmdInstitucionRedApoyo").val(),
+                    "FK_TIPORED": $("#cmdTipoRedApoyo").val(),
+                    "NOMBRE": $("#txtNombreRedApoyo").val(),
+                    "RELACION": $("#txtRelacionRedApoyo").val(),
+                    "TELEFONO": $("#txtTelefonoRedApoyo").val(),
+                    "TIPORED": $("#cmdTipoRedApoyo option:selected").text(),
+                    "INSTITUCION": $("#cmdInstitucionRedApoyo option:selected").text()
+
+                }).draw();
+                $('.redApoyo').val('');
+
+            } else {
 
 
-            //    for (i = 0; i < selO.length; i++) {
-            //        if (selO.options[i].selected) {
-            //            condicionesEspecialesIds = condicionesEspecialesIds + selO.options[i].value;
-            //            condicionesEspecialesTexto = condicionesEspecialesTexto + selO.options[i].text;
-            //            if (i < (selO.length - 1)) {
-            //                condicionesEspecialesIds = condicionesEspecialesIds + ",";
-            //                condicionesEspecialesTexto = condicionesEspecialesTexto + ",";
-            //            }
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error al registrar red de Apoyo");
+                $("#txtModalContenido").text("El formulario se encuentra incompleto");
+                instMensajes.open();
 
-            //        }
-            //    }
-            //    for (i = 0; i < sel1.length; i++) {
-            //        if (sel1.options[i].selected) {
-            //            beneficiosIds = beneficiosIds + sel1.options[i].value;
-            //            beneficiosTexto = beneficiosTexto + sel1.options[i].text;
-            //            if (i < (sel1.length - 1)) {
-            //                beneficiosIds = beneficiosIds + ",";
-            //                beneficiosTexto = beneficiosTexto + ",";
-            //            }
-
-            //        }
-            //    }
-            //    tablaMiebrosHogar.row.add({
-            //        "FKGENERO": $("#cmbMiebroHogarGenero").val(),
-            //        "FKPARENTESCO": $("#cmbMiebroHogarParentesco").val(),
-            //        "BDEPENDENCIAECONOMICA": $("#cmbMiebroHogarDepEconomica").val(),
-            //        "FKTIPOSEGURO": $("#cmbMiebroHogarTipoSeguro").val(),
-            //        "FKCONDICIONESPECIAL": condicionesEspecialesIds,
-            //        "FKBENEFICIO": beneficiosIds,
-            //        "NOMBRE": $("#txtMiebroHogarNombre").val(),
-            //        "EDAD": $("#txtMiebroHogarEdad").val(),
-            //        "GENERO": $("#cmbMiebroHogarGenero option:selected").text(),
-            //        "PARENTESCO": $("#cmbMiebroHogarParentesco option:selected").text(),
-            //        "DEPENDENCIAECONOMICA": $("#cmbMiebroHogarDepEconomica option:selected").text(),
-            //        "TIPOSEGURO": $("#cmbMiebroHogarTipoSeguro option:selected").text(),
-            //        "CONDICIONESPECIAL": condicionesEspecialesTexto,
-            //        "BENEFICIO": beneficiosTexto
-
-            //    }).draw();
-
-
-            //    $("#txtMiebroHogarNombre").css("border-color", "#cacaca");
-            //    $("#txtMiebroHogarEdad").css("border-color", "#cacaca");
-            //    $("#txtMiebroHogarNombre").val("");
-            //    $("#txtMiebroHogarEdad").val("");
-            //} else {
-
-
-            //    $("#txtModalTitulo").css("color", "red");
-            //    $("#txtModalTitulo").text("Error al registrar persona");
-            //    if ($("#txtMiebroHogarNombre").val() === '') {
-
-            //        $("#txtModalContenido").text("(Miembro del nucleo familiar - Nombre) Favor especifique un valor");
-            //        $("#txtMiebroHogarNombre").css("border-color", "red");
-
-
-            //    }
-            //    if ($("#txtMiebroHogarEdad").val() === '') {
-            //        $("#txtModalContenido").text("(Miembro del nucleo familiar - Edad) Favor especifique un valor");
-            //        $("#txtMiebroHogarEdad").css("border-color", "red");
-
-            //    }
-            //    if (selO.length === 0) {
-            //        $("#txtModalContenido").text("(Condiciones Especiales) Favor especifique un valor");
-            //        $("#txtMiebroHogarEdad").css("border-color", "red");
-            //    }
-            //    if (sel1.length === 0) {
-            //        $("#txtModalContenido").text("(Beneficios) Favor especifique un valor");
-            //        $("#txtMiebroHogarEdad").css("border-color", "red");
-            //    }
-            //    instMensajes.open();
-
-            //}
+            }
 
 
         });
@@ -647,7 +606,7 @@
 
 </script>
 
-    
+
 <style>
     input, select, textarea {
         max-width: 100%;
@@ -658,9 +617,9 @@
         background-color: blue;
     }
 
-    .inlineCheckBox{
-        display:inline-block;
-        vertical-align:middle;
+    .inlineCheckBox {
+        display: inline-block;
+        vertical-align: middle;
     }
 </style>
 
@@ -745,8 +704,7 @@
                             <div class="row">
                                 <div class="col-xs-6 form-group">
                                     <label>Tipo de atención</label>
-                                   <select class="form-control" id="txtTipoAten">
-                                   </select>
+                                    <select class="form-control" id="txtTipoAten"></select>
                                 </div>
                                 <div class="col-xs-6 form-group">
                                     <label>Profesional</label>
@@ -779,10 +737,10 @@
                                     <label>Correo</label>
                                     @Html.EditorFor(ExpedienteModel => ExpedienteModel.correo, new { htmlAttributes = new { @class = "form-control", @placeholder = "ejemplo@ejemplo.com", @type = "email" } })
                                 </div>
-                            </div>  
+                            </div>
                             <div class="row" id="contenedorBotones">
                                 <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                    <button type="button"  class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Siguiente</button>
+                                    <button type="button" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Siguiente</button>
                                     <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
                                 </div>
                             </div>
@@ -790,296 +748,311 @@
                     </div>
                     <div id="datUsuaria" class="tab-pane">
                         <div class="row comunForm">
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Nombre</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Primer apellido</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtApellido1" type="text" required="">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Nombre</label>
+                                    <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Primer apellido</label>
+                                    <input class="form-control" placeholder="Nombre" id="txtApellido1" type="text" required="">
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Segundo apellido</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtApellido2" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Identificación</label>
-                                            <input class="form-control" placeholder="Número de identificación" id="txtIdentificacion" type="text" required="">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Segundo apellido</label>
+                                    <input class="form-control" placeholder="Nombre" id="txtApellido2" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Identificación</label>
+                                    <input class="form-control" placeholder="Número de identificación" id="txtIdentificacion" type="text" required="">
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Fecha de nacimiento</label>
-                                            <input type="date" id="txtFechaNacimiento" style="background-color:transparent" class="form-control">
-                                            <!-- Buscar manera de que el label se ubique SOBRE el calendario -->
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Edad</label>
-                                            <input class="form-control" placeholder="Edad en años cumplidos" id="txtEdad" type="text" required="">
-                                            <!-- Ocultar si se toca el calendario -->
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Fecha de nacimiento</label>
+                                    <input type="date" id="txtFechaNacimiento" style="background-color:transparent" class="form-control">
+                                    <!-- Buscar manera de que el label se ubique SOBRE el calendario -->
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Edad</label>
+                                    <input class="form-control" placeholder="Edad en años cumplidos" id="txtEdad" type="text" required="">
+                                    <!-- Ocultar si se toca el calendario -->
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Provincia</label>
-                                            <select class="form-control" id="cmbPersonaProvincia" required>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Cantón</label>
-                                            <select class="form-control" id="cmbPersonaCanton" required>
-                                            </select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Provincia</label>
+                                    <select class="form-control" id="cmbPersonaProvincia" required></select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Cantón</label>
+                                    <select class="form-control" id="cmbPersonaCanton" required></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Distrito</label>
-                                            <select class="form-control" id="cmbPersonaDistrito" required>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>País de procedencia</label>
-                                            <select id="cmbPaisProcedencia" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Distrito</label>
+                                    <select class="form-control" id="cmbPersonaDistrito" required></select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>País de procedencia</label>
+                                    <select id="cmbPaisProcedencia" class="form-control"></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Dirección exacta de domicilio</label>
-                                            <input class="form-control" placeholder="Dirección exacta de domicilio" id="txtDireccionDomicilio" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Dirección para notificaciones</label>
-                                            <input class="form-control" placeholder="Dirección para notificaciones" id="txtDireccionNotificaciones" type="text" required="">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Dirección exacta de domicilio</label>
+                                    <input class="form-control" placeholder="Dirección exacta de domicilio" id="txtDireccionDomicilio" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Dirección para notificaciones</label>
+                                    <input class="form-control" placeholder="Dirección para notificaciones" id="txtDireccionNotificaciones" type="text" required="">
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Correo electrónico</label>
-                                            <input class="form-control" placeholder="Dirección de correo electrónico" id="txtCorreoElectronico" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Teléfono</label>
-                                            <input class="form-control" placeholder="Número de teléfono" id="txtTelefono" type="text" required="">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Correo electrónico</label>
+                                    <input class="form-control" placeholder="Dirección de correo electrónico" id="txtCorreoElectronico" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Teléfono</label>
+                                    <input class="form-control" placeholder="Número de teléfono" id="txtTelefono" type="text" required="">
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Condición civil</label>
-                                            <select id="cmbCondicionCivil" class="form-control"></select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Escolaridad</label>
-                                            <select id="cmbEscolaridad" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Condición civil</label>
+                                    <select id="cmbCondicionCivil" class="form-control"></select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Escolaridad</label>
+                                    <select id="cmbEscolaridad" class="form-control"></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Número de hijas/os</label>
-                                            <input class="form-control" placeholder="Número de hijas/os" id="txtNumeroHijos" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Embarazo (meses)</label>
-                                            <select id="cmbEmbarazo" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Número de hijas/os</label>
+                                    <input class="form-control" placeholder="Número de hijas/os" id="txtNumeroHijos" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Embarazo (meses)</label>
+                                    <select id="cmbEmbarazo" class="form-control"></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Nacionalidad</label>
-                                            <select id="cmbNacionalidad" class="form-control"></select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Ora nacionalidad</label>
-                                            <select id="cmbOtraNacionalidad" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Nacionalidad</label>
+                                    <select id="cmbNacionalidad" class="form-control"></select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Otra nacionalidad</label>
+                                    <select id="cmbOtraNacionalidad" class="form-control"></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Apátrida de</label>
-                                            <select id="cmbApatrida" class="form-control"></select>
-                                            <!-- Corregir - Apátrida es que no tiene nacionalidad -->
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Condición migratoria</label>
-                                            <select id="cmbCondicionMigratoria" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Apátrida de</label>
+                                    <select id="cmbApatrida" class="form-control"></select>
+                                    <!-- Corregir - Apátrida es que no tiene nacionalidad -->
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Condición migratoria</label>
+                                    <select id="cmbCondicionMigratoria" class="form-control"></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <label>Ocupación</label>
-                                            <select id="cmbOcupacion" class="form-control"></select>
-                                        </div>
-                                    
-                                        <div class="col-md-6 form-group">
-                                            <label>Tipificación de violencia</label>
-                                            <select id="cmbTipoViolencia" class="form-control" multiple></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>Ocupación</label>
+                                    <select id="cmbOcupacion" class="form-control"></select>
+                                </div>
+
+                                <div class="col-md-6 form-group">
+                                    <label>Tipificación de violencia</label>
+                                    <select id="cmbTipoViolencia" class="form-control" multiple></select>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
                     <!--Inicia pestaña Datos de perfil de usuaria-->
                     <div id="datPerfil" class="tab-pane">
                         <div class="row comunForm">
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Identidad de género</label>
-                                            <select id="cmbIdentidadGenero" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Orientacion sexual</label>
-                                            <select id="cmbOrientacionSexual" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Identidad de género</label>
+                                    <select id="cmbIdentidadGenero" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Orientacion sexual</label>
+                                    <select id="cmbOrientacionSexual" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Origen étnico</label>
+                                    <select id="cmbOrigenEtnico" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Condición laboral</label>
+                                    <select id="cmbCondicionLaboral" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Experiencia laboral</label>
+                                    <input class="form-control" placeholder="Tiempo en años/meses" id="txtExperienciaLaboral" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Lugar de trabajo</label>
+                                    <input class="form-control" placeholder="Nombre del lugar" id="txtLugarTrabajo" type="text" required="">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Puesto que desempeña</label>
+                                    <input class="form-control" placeholder="Puesto de trabajo" id="txtPuestoTrabajo" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Direccion de lugar de trabajo</label>
+                                    <input class="form-control" placeholder="Direccion" id="txtDireccionLugarTrabajo" type="text" required="">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Tipo de familia</label>
+                                    <select id="cmbTipoFamilia" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xs-6 form-group">
+                                    <label>Condición de aseguramiento</label>
+                                    <select id="cmbCondicionAseguramiento" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Tipo de vivienda</label>
+                                    <select id="cmbTipoVivienda" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Condiciones de Salud</label>
+                                    <select id="cmbCondSalud" class="form-control" multiple>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Adicciones</label>
+                                    <select id="cmdAdicciones" class="form-control" multiple>
+                                        <option></option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                                <div class="row">
+                                <div class="col-md-12">
+                                        <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
+                                            <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
+                                            <thead>
+                                                <tr>
+                                                    <th>PK_REDAPOYO</th>
+                                                    <th>FK_INSTITUCION</th>
+                                                    <th>FK_TIPORED</th>
+                                                    <th>Nombre</th>
+                                                    <th>Relacion</th>
+                                                    <th>Telefono</th>
+                                                    <th>Tipo de Red</th>
+                                                    <th>Institución</th>
+
+
+                                                </tr>
+                                            </thead>
+                                        </table>
                                     </div>
+                                </div>
+                                <div class="row comunForm" id="frmEditorRedesApoyo">
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Origen étnico</label>
-                                            <select id="cmbOrigenEtnico" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Condición laboral</label>
-                                            <select id="cmbCondicionLaboral" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Experiencia laboral</label>
-                                            <input class="form-control" placeholder="Tiempo en años/meses" id="txtExperienciaLaboral" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Lugar de trabajo</label>
-                                            <input class="form-control" placeholder="Nombre del lugar" id="txtLugarTrabajo" type="text" required="">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Puesto que desempeña</label>
-                                            <input class="form-control" placeholder="Puesto de trabajo" id="txtPuestoTrabajo" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Direccion de lugar de trabajo</label>
-                                            <input class="form-control" placeholder="Direccion" id="txtDireccionLugarTrabajo" type="text" required="">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Tipo de familia</label>
-                                            <select id="cmbTipoFamilia" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-xs-6 form-group">
-                                            <label>Condición de aseguramiento</label>
-                                            <select id="cmbCondicionAseguramiento" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4 form-group">
-                                            <label>Tipo de vivienda</label>
-                                            <select id="cmbTipoVivienda" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <label>Condiciones de Salud</label>
-                                            <select id="cmbCondSalud" class="form-control" multiple>
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <label>Adicciones</label>
-                                            <select id="cmdAdicciones" class="form-control" multiple>
-                                                <option></option>
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
-                                                        <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>PK_REDAPOYO</th>
-                                                                <th>FK_INSTITUCION</th>
-                                                                <th>FK_TIPORED</th>
-                                                                <th>Nombre</th>
-                                                                <th>Relacion</th>
-                                                                <th>Telefono</th>
-                                                                <th>Tipo de Red</th>
-
-
-                                                            </tr>
-                                                        </thead>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="row comunForm" id="frmEditorRedesApoyo">
-
-                                                <div class="col-md-12">
-                                                    <div class="row">
-
-                                                        <div class="col-md-6 form-group">
-                                                            <label>Tipo</label>
-                                                            <select id="cmdTipoRedApoyo" class="form-control"></select>
-                                                        </div>
-                                                        <div class="col-md-6 form-group">
-                                                            <label>Nombre</label>
-                                                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                                                        </div>
-
-
-                                                    </div>
-                                                        <div class="row">
-                                                            <div class="col-xs-6 form-group" id="contenedorInstitucion">
-                                                                <label>Institución</label>
-                                                                <select id="cmdInstitucionRedApoyo" class="form-control"></select>
-                                                            </div>
-                                                            <div class="col-xs-6 form-group" id="contenedorRelacion">
-                                                                <label>Relación</label>
-                                                                <input class="form-control" placeholder="Nombre" id="txtRelacion" type="text" required="">
-                                                            </div>
-                                                            <div class="col-md-6 form-group">
-                                                                <label>Teléfono</label>
-                                                                <input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-xs-9"></div>
+                                            <div class="col-xs-3">
+                                                <button class="botonCerrar danger" id="btnOcultarCampoRedApoyo">
+                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                </button>
                                             </div>
                                         </div>
+                                        <div class="row">
+
+                                            <div class="col-md-6 form-group">
+                                                <label>Tipo</label>
+                                                <select id="cmdTipoRedApoyo" class="form-control redApoyo"></select>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label>Nombre</label>
+                                                <input class="form-control redApoyo" placeholder="Nombre" id="txtNombreRedApoyo" type="text" required="">
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 form-group" id="contenedorInstitucion">
+                                                <label>Institución</label>
+                                                <select id="cmdInstitucionRedApoyo" class="form-control redApoyo"></select>
+                                            </div>
+                                            <div class="col-md-6 form-group" id="contenedorRelacion">
+                                                <label>Relación</label>
+                                                <input class="form-control redApoyo" placeholder="Relación" id="txtRelacionRedApoyo" type="text" required="">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label>Teléfono</label>
+                                                <input class="form-control redApoyo" placeholder="Teléfono" id="txtTelefonoRedApoyo" type="text" required="">
+                                            </div>
+                                        </div>
+                                        @*<div class="row" style="text-align:center">
+                                            <div class="col-md-12">
+                                                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Guardar Red</button>
+                                            </div>
+                                        </div>*@
+                                        <div class="row">
+                                            <div class="col-md-12" style="text-align: center">
+                                                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!--Finaliza Adicciones-->
+                                </div>
+
+
+                            <!--Finaliza Adicciones-->
 
                             <div class="row" id="contenedorBotones">
                                 <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
@@ -1189,7 +1162,7 @@
                                             </div>
 
                                             <div class="col-xs-4 form-group">
-                                                <label>numero Expediente:</label>
+                                                <label>Número Expediente:</label>
                                                 <input type="text" class="form-control" placeholder="." id="DenunciaExpediente" value="" />
                                             </div>
                                         </div>
@@ -1208,9 +1181,9 @@
                                     <div class="row comunForm">
                                         <div class="row">
                                             <div class="col-xs-6 form-group">
-                                                
-                                                    <label>Relato hechos de violencia:</label>
-                                                    <textarea rows="10" cols="20" id="txtRelato" style="width: 100%"></textarea>
+
+                                                <label>Relato hechos de violencia:</label>
+                                                <textarea rows="10" cols="20" id="txtRelato" style="width: 100%"></textarea>
                                             </div>
 
                                             <div class="col-xs-2 form-group">
@@ -1294,41 +1267,41 @@
                         </div>
 
                     </div>
-        <div id="atencion" class="tab-pane">
-            <div class="row comunForm">
+                    <div id="atencion" class="tab-pane">
+                        <div class="row comunForm">
 
-                <div class="row">
-                    <div class="col-md-4 form-group">
-                        <label>Atención</label>
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Atención</label>
 
-                        <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
+                                    <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="intervencion" class="tab-pane">
+                        <div class="row comunForm">
+
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Intervencion</label>
+
+                                    <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>
 
-            </div>
+
+
+            </form>
         </div>
-        <div id="intervencion" class="tab-pane">
-            <div class="row comunForm">
-
-                <div class="row">
-                    <div class="col-md-4 form-group">
-                        <label>Intervencion</label>
-
-                        <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-
-
-    </form>
-</div>
     </div>
 </div>
 
