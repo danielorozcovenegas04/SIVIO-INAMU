@@ -14,6 +14,29 @@
                 async: true,
             }).done(function (data) {
                 $.LoadingOverlay("hide");
+                $('#contendorFrames').empty();
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        });
+
+        $("#btnCrearUsuariaAtencionComunidad").click(function () {
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CrearUsuariaAtencionComunidad", "Expediente")',
+                async: true,
+            }).done(function (data) {
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').empty();
                 $('#contendorFrames').html(data);
                 $("#contenedorEspera").hide();
                 $('#contendorFrames').fadeIn();
@@ -150,27 +173,22 @@
             titleAttr: 'Editar Persona Usuaria',
                 action: function (e, dt, node, config) {
                     debugger;
-
+                    $.LoadingOverlay("show");
                     var contSeleccionados = tablaBusquedaExpediente.rows({ selected: true }).count();
                     var filaSeleccionada = tablaBusquedaExpediente.rows({ selected: true }).data();
-                    @*if (contSeleccionados > 0) {
-
-                        $("#contenedorGrid").hide();
-                        $("#contenedorRoles").fadeIn();
+                    if (contSeleccionados > 0) {
                         $("#contenedorEspera").show();
                         $.ajax({
                             type: "POST",
-                            url: '@Url.Action("FrmBusquedaExpediente", "Seguridad")',
-                            data: { pkUsuario: filaSeleccionada[0].PKUSUARIO },
+                            url: '@Url.Action("CrearCaso", "Expediente")',
+                            data: { valorpersona: filaSeleccionada[0].PKPERSONA },
                             async: true
                         }).done(function (data) {
-
-
-                            $('#contenedorBusquedaExpediente').html(data);
+                            $.LoadingOverlay("hide");
+                            $('#contendorFrames').empty();
+                            $('#contendorFrames').html(data);
                             $("#contenedorEspera").hide();
-                            $('#contenedorBusquedaExpediente').fadeIn();
-
-
+                            $('#contendorFrames').fadeIn();
                         }).fail(function (exception) {
                             $("#txtModalTitulo").css("color", "red");
                             $("#txtModalTitulo").text("Error");
@@ -182,7 +200,7 @@
                         $("#txtModalTitulo").text("No se seleccionaron roles");
                         $("#txtModalContenido").text("Seleccione un rol para continuar");
                         instMensajes.open();
-                    }*@
+                    }
 
                     debugger;
                 }
@@ -314,7 +332,7 @@
             <br>
 
             <div class="row" style="margin-left: 10px">
-                <a href="#" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Crear usuaria (atención en comunidad)</a>
+                <a href="#" id="btnCrearUsuariaAtencionComunidad" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Crear usuaria (atención en comunidad)</a>
             </div>
           }
             </div>
