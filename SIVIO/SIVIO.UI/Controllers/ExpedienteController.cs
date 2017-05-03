@@ -57,12 +57,24 @@ namespace SIVIO.UI.Controllers
                 var mail = userParams["mail"];
                 TBL_USUARIO user = new TBL_USUARIO();
                 user.VC_NOMBRE = name;
-                user.VC_NOMBRE = lastName1;
-                user.VC_NOMBRE = lastName2;
-                user.VC_NOMBRE = mail;
+                user.VC_APELLIDO1 = lastName1;
+                user.VC_APELLIDO2 = lastName2;
+                user.VC_USUARIO = mail;
+                user.VC_CORREO = mail;
+                user.IM_CLAVE = StrToByteArray("mae");
+                user.IM_SALT1 = StrToByteArray("mae");
+                user.IM_SALT2 = StrToByteArray("mae");
+
                 return _modelExpediente.InsertarUsuario(user);
             }
            
+        }
+
+
+        public static byte[] StrToByteArray(string str)
+        {
+            System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+            return encoding.GetBytes(str);
         }
 
         // GET: Seguridad

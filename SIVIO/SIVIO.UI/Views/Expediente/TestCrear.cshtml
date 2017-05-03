@@ -24,15 +24,14 @@
      $(document).ready(function () {
          $("#btnEnviarFormulario").click(function () {
              $.LoadingOverlay("show");
-
              $.ajax({
                  type: "POST",
                  url: '@Url.Action("CrearUsuaria", "Expediente")',
                  data: {
-                     Fecha: "1212",
-                     HoraInicio: "1212",
-                     Persona: "ASAS",
-                     TipoDisponibilidad: "ASAS"
+                     name: "Banano",
+                     lastName1: "Ap1",
+                     lastName2: "Ap1",
+                     mail: "banano@banano.com"
                  },
                  datatype: "json",
                  //contentType: "application/json",
@@ -40,7 +39,7 @@
                  processData: true,
                  success: function (data) {
                      if (data.TipoMensaje === 1) {
-
+                         $.LoadingOverlay("show");
                          $("#contenedorBotones").show();
                          $("#contenedorEspera").hide();
                          $("#txtModalTitulo").css("color", "green");
@@ -49,6 +48,7 @@
                          instMensajes.open();
 
                      } else {
+                         $.LoadingOverlay("show");
                          $("#contenedorBotones").show();
                          $("#contenedorEspera").hide();
                          $("#txtModalTitulo").css("color", "red");
@@ -198,13 +198,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
 
 
     </form>

@@ -5,6 +5,7 @@ using System.Web;
 using SIVIO.Entidades;
 using SIVIO.Utilitarios;
 using System.Data;
+using System.Data.Entity.Validation;
 
 namespace SIVIO.UI.Models
 {
@@ -240,9 +241,21 @@ namespace SIVIO.UI.Models
 
                     return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Usuario Registrado Correctamente", "valor");
                 }
-                catch (Exception e)
+
+                 catch (DbEntityValidationException e)
                 {
-                   return new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al registrar usuario", "valor");
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                //    throw;
+                    return new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al registrar usuario", "valor");
                 }
 
             }
