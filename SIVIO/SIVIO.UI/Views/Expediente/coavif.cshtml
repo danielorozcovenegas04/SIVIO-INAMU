@@ -24,6 +24,15 @@
         document.title = "SIVIO - COAVIF y Equipo Estrategico";
         InicializarOtrosEventos();
         CargarDivisionTerritorial();
+        $('#meses').hide();
+        $('#checkEmbarazo').click( function () {
+            if ($(this).is(':checked')) {
+                $('#meses').show();
+            } else {
+                $('#meses').hide();
+                $('#intEmbarazo').val("0");
+            }
+        });
         $('#cmbPersonaProvincia').val(@Model.FK_PROVINCIAPROCEDENCIA);
         $('#cmbPersonaCanton').val(@Model.FK_CANTONPROCEDENCIA);
         $('#cmbPersonaDistrito').val(@Model.FK_DISTRITOPROCEDENCIA);
@@ -315,6 +324,8 @@
 
             }
         });
+
+
 
         $('#btnCancelarDatosAdministrativos').click(function () {
             //window.location.href = 'Url.Action("Index", "Home")';
@@ -620,12 +631,14 @@
                                         <select id="comPais" class="form-control"></select>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
-                                        <label>Teléfono</label>
-                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="" @*@value=@Model.TBL_TELEFONO.First().VC_NUMERO *@>
+                                    <div class="col-md-6 form-group">
+                                        <label>Nacionalidad</label>
+                                        <select id="comNacionalidad" class="form-control">
+                                            <option value=""></option>
+                                        </select>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
+                                    <div class="col-md-6 form-group">
                                         <label>Otra Nacionalidad</label>
                                         <select id="comOtraNacionalidad" class="form-control">
                                             <option value=""></option>
@@ -663,6 +676,11 @@
                                     </div>
 
                                     <div class="col-md-12 form-group">
+                                        <label>Teléfono</label>
+                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="" @*@value=@Model.TBL_TELEFONO.First().VC_NUMERO *@>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
                                         <label>Lugar de Procedencia</label>
                                     </div>
                                     <div class="col-md-4 form-group">
@@ -684,10 +702,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
-                                        <label>Nacionalidad</label>
-                                        <select id="comNacionalidad" class="form-control"></select>
-                                    </div>
+                                    
 
                                     <div class="col-md-12 form-group">
                                         <label>
@@ -700,13 +715,13 @@
                                         <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
                                     </div>
 
-                                    <div class="col-md-4 form-group">
+                                    <div class="col-md-12 form-group">
                                         <label>
                                             <input style="display:inline-block;" id="checkEmbarazo" type="checkbox"> Embarazo
                                         </label>
                                     </div>
 
-                                    <div class="col-md-8 form-group">
+                                    <div class="col-md-12 form-group" id="meses">
                                         <label>Meses de embarazo</label>
                                         <input class="form-control" placeholder="Meses de embarazo" id="intEmbarazo" type="number" required="" min="0">
                                     </div>
