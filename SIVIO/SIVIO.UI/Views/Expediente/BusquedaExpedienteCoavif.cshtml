@@ -263,10 +263,6 @@
         $('#tblBusquedaExpediente tbody').on('click', 'tr', function () {
             debugger;
             if ($(this).hasClass('selected')) {
-
-
-
-
                 $("#tblBusquedaExpediente tr").removeClass("selectedDT");
                 $("#tblBusquedaExpediente tr").removeClass("selected");
                 $(this).addClass('selected');
@@ -277,6 +273,49 @@
 
             }
         });
+
+        $('#tblBusquedaExpediente tbody').on('dblclick', 'tr', function () {
+            debugger;
+            if ($(this).hasClass('selected')) {
+                $("#tblBusquedaExpediente tr").removeClass("selectedDT");
+                $("#tblBusquedaExpediente tr").removeClass("selected");
+                $(this).addClass('selected');
+                $(this).addClass('selectedDT');
+                var contSeleccionados = tablaBusquedaExpediente.rows({ selected: true }).count();
+                var filaSeleccionada = tablaBusquedaExpediente.rows({ selected: true }).data();
+                if (contSeleccionados > 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Coavif", "Expediente")',
+                        data: { pkUsuario: filaSeleccionada[0].PKPERSONA },
+                        async: true
+                    }).done(function (data) {
+                        $("#botonCrear").hide();
+                        $("#busqueda").hide();
+                        $('#contenedorBusquedaExpediente').html(data);
+                        $("#contenedorEspera").hide();
+                        $('#contenedorBusquedaExpediente').fadeIn();                            
+                        $("#botonCrear").hide();
+                    }).fail(function (exception) {
+                        $("#txtModalTitulo").css("color", "red");
+                        $("#txtModalTitulo").text("Error");
+                        $("#txtModalContenido").text(exception);
+                        instMensajes.open();
+                    });
+                } else {
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("No se seleccionó ninguna usuaria");
+                    $("#txtModalContenido").text("Seleccione una usuaria para continuar");
+                    instMensajes.open();
+                }
+            }
+            else {
+                $(this).removeClass('selectedDT');
+
+            }
+        });
+
+
         $(document).ready(function () {
             document.title = "COAVIF - Buscar Expediente";
             var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();            

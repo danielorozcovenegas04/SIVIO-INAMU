@@ -174,10 +174,10 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" id="btnCerrarSesion">
-
-                        <span>Salir (@string.Concat(HttpContext.Current.User.Identity.Name))</span>
-                        <i class="pe-7s-close"></i>
+                    <a href="#" id="btnCerrarSesion" style="padding: 10px 20px; color:white; background-color:#2862bf; margin-right:20px; border-radius:7px;">
+                        <i class="fa fa-sign-out" aria-hidden="true" style="color:#42bcf4"></i>
+                        <span>Salir @*(@string.Concat(HttpContext.Current.User.Identity.Name))*@</span>
+                        
                     </a>
                 </li>
             </ul>

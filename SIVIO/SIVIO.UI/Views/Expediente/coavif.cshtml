@@ -24,6 +24,15 @@
         document.title = "SIVIO - COAVIF y Equipo Estrategico";
         InicializarOtrosEventos();
         CargarDivisionTerritorial();
+        $('#meses').hide();
+        $('#checkEmbarazo').click( function () {
+            if ($(this).is(':checked')) {
+                $('#meses').show();
+            } else {
+                $('#meses').hide();
+                $('#intEmbarazo').val("0");
+            }
+        });
         $('#cmbPersonaProvincia').val(@Model.FK_PROVINCIAPROCEDENCIA);
         $('#cmbPersonaCanton').val(@Model.FK_CANTONPROCEDENCIA);
         $('#cmbPersonaDistrito').val(@Model.FK_DISTRITOPROCEDENCIA);
@@ -219,7 +228,9 @@
                     $("#txtTelefonoPersona").prop("readonly", true);
 
                     if (respuesta.usuarioRol != 27) {
-                        $("#cmbTipoDisponibilidad").prop("disabled", true);
+                        //$("#cmbTipoDisponibilidad").prop("disabled", true);
+                        $("#cmbTipoDisponibilidad").hide(); 
+                        $("#lblDisponibilidad").hide();
                     }
                 } else {
                     $("#txtModalTitulo").css("color", "red");
@@ -247,6 +258,12 @@
                 if (respuesta.Mensaje.TipoMensaje === 1) {
                     $.each(respuesta.CatalogoTiposDisponibilidad, function (key, value) {
                         $('#cmbTipoDisponibilidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $.each(respuesta.CatalogoIntitucion, function (key, value) {
+                        $('#cmbInstitucionRefiere').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -313,6 +330,8 @@
 
             }
         });
+
+
 
         $('#btnCancelarDatosAdministrativos').click(function () {
             //window.location.href = 'Url.Action("Index", "Home")';
@@ -479,19 +498,15 @@
     }
 </style>
 <div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
-    <div class="col-md-2 form-group"></div>
-    <div class="col-md-10 form-group">
+    @*<div class="col-md-2 form-group"></div>*@
+    <div class="col-md-12 form-group">
         <div class="row" style="margin-left:20px;margin-right:20px;">
-            <h2>Expediente de: @Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2</h2>
-            <h4>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h4>
+            <h3>Expediente de: @Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2</h3>
+            <h5>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h5>
         </div>
-    </div>
-    @*<div class="row" style="margin-left:60px;margin-right:60px;">
-        <h2>Expediente de: @Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2</h2>
-        <h4>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h4>
-    </div>*@
+    </div>    
         <div class="col-md-2 form-group">
-            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Expediente</button>
+            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;" >Expediente</button>
 
             <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
 
@@ -559,16 +574,17 @@
                                     <input class="form-control" id="txtPersonaAtiende" type="text" required="">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label>Tipo de disponibilidad</label>
+                                    <label id="lblDisponibilidad">Tipo de disponibilidad</label>
                                     <select class="form-control" id="cmbTipoDisponibilidad" type="">
-                                        <option value=""></option>
+                                        @*<option value=""></option>*@
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label>Institucion que refiere</label>
-                                    <input class="form-control" id="txtInstitucion" type="text" required="">
+                                    <select class="form-control" id="cmbInstitucionRefiere" type="">
+                                    </select>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Nombre de quien refiere</label>
@@ -587,8 +603,8 @@
                             </div>
                             <div class="row" id="contenedorBotones">
                                 <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; display:none;">Guardar</button>
-                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; display:none">Cancelar</button>
+                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px;">Guardar</button>
+                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px;">Cancelar</button>
                                 </div>
                             </div>
                         </div>
@@ -622,12 +638,14 @@
                                         <select id="comPais" class="form-control"></select>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
-                                        <label>Teléfono</label>
-                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="" @*@value=@Model.TBL_TELEFONO.First().VC_NUMERO *@>
+                                    <div class="col-md-6 form-group">
+                                        <label>Nacionalidad</label>
+                                        <select id="comNacionalidad" class="form-control">
+                                            <option value=""></option>
+                                        </select>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
+                                    <div class="col-md-6 form-group">
                                         <label>Otra Nacionalidad</label>
                                         <select id="comOtraNacionalidad" class="form-control">
                                             <option value=""></option>
@@ -665,6 +683,11 @@
                                     </div>
 
                                     <div class="col-md-12 form-group">
+                                        <label>Teléfono</label>
+                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="" @*@value=@Model.TBL_TELEFONO.First().VC_NUMERO *@>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
                                         <label>Lugar de Procedencia</label>
                                     </div>
                                     <div class="col-md-4 form-group">
@@ -686,10 +709,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
-                                        <label>Nacionalidad</label>
-                                        <select id="comNacionalidad" class="form-control"></select>
-                                    </div>
+                                    
 
                                     <div class="col-md-12 form-group">
                                         <label>
@@ -702,13 +722,13 @@
                                         <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
                                     </div>
 
-                                    <div class="col-md-4 form-group">
+                                    <div class="col-md-12 form-group">
                                         <label>
                                             <input style="display:inline-block;" id="checkEmbarazo" type="checkbox"> Embarazo
                                         </label>
                                     </div>
 
-                                    <div class="col-md-8 form-group">
+                                    <div class="col-md-12 form-group" id="meses">
                                         <label>Meses de embarazo</label>
                                         <input class="form-control" placeholder="Meses de embarazo" id="intEmbarazo" type="number" required="" min="0">
                                     </div>
