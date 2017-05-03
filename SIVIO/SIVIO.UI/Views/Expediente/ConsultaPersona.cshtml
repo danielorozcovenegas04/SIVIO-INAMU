@@ -1,8 +1,8 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 @using SIVIO.Entidades
-@model List<TBL_CONSULTA>
+
 
 <style>
     .jumbotron {
@@ -78,7 +78,6 @@
     </style>
     <script src="~/Scripts/INAMU.datatables.min.js"></script>
     <script>
-        $(document).ready(function () {
         var tablaConsultas = $('#tblListadoConsultas').DataTable({
             responsive: true,
             dom: 'fBrtlp<"clear">',
@@ -235,50 +234,58 @@
 
             }
         });
-        
-            document.title = "SIPAMU - Consultas";
+        $(document).ready(function () {
+            document.title = "SIPAMU - Seguridad";
             var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
 
             $("#contenedorConsultas").hide();
 
 
         });
-
+        
         function refrescarGrid() { tablaConsultas.ajax.reload() }
     </script>
     <div class="row" id="contenedorGrid" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
                                                                                                                                                                                                                                                 background-color: #FFFFFF;
                                                                                                                                                                                                                                                 border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
         <div class="col-md-12">
+          
             <table id="tblListadoConsultas" class="display table-bordered" cellspacing="0" style="width: 100%">
                 <caption><div class="comunForm" style="text-align: center; color: #c31618; border-color: #c31618 !important;"><i class="fa fa-bell" style="margin-right: 2px"></i>Lista de Consultas Existentes</div></caption>
                 <thead>
                     <tr>
-                        <th>Ingreso CEAAM</th>
-                        <th>Observaciones</th>
-                        <th>Reingreso CEAAM</th>
-                        <th>Contacto CEAAM</th>
-                        <th>Entidad Trasladada</th>
-                        <th>Fecha de Traslado</th>
-
+                        <th> </th>
+                        <th>Nombre de la usuaria</th>
+                        <th>Identificación</th>
+                        <th>Fecha de atención</th>
+                        <th>Tipo de atención</th>
+                        <th>Servicio que realiza la atención</th>
+                        <th>Persona que realiza la atención</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var consulta in Model)
                     {
-                        <tr>
-                            <td>@Html.Raw(consulta.B_INGRESOCEEAM)</td>
-                            <td>@Html.Raw(consulta.VC_OBSERVACIONES)</td>
-                            <td>@Html.Raw(consulta.B_REINGRESOCEEAM)</td>
-                            <td>@Html.Raw(consulta.VC_CONTACTOCEEAM)</td>
-                            <td>@Html.Raw(consulta.FK_ENTIDADTRASLADA)</td>
-                            <td>@Html.Raw(consulta.TM_TRASLADOAPROX)td>
-
-                        </tr>
+                        if (consulta.FK_TIPOREGISTRO == 549)
+                        {
+                            <tr>
+                                <td></td>
+                                <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
+                                <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
+                                <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
+                                <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO.VC_VALOR1)</td>
+                                <td> Consulta </td>
+                                <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>
+
+
+
         </div>
+        
     </div>
     <div id="contenedorConsultas">
 

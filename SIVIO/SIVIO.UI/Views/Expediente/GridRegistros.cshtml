@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using SIVIO.Entidades
 @model List<TBL_REGISTRO>
@@ -78,6 +78,7 @@
     </style>
     <script src="~/Scripts/INAMU.datatables.min.js"></script>
     <script>
+        $(document).ready(function () {
         var tablaRegistros = $('#tblListadoRegistros').DataTable({
             responsive: true,
             dom: 'fBrtlp<"clear">',
@@ -234,8 +235,8 @@
 
             }
         });
-        $(document).ready(function () {
-            document.title = "SIPAMU - Seguridad";
+        
+            document.title = "SIPAMU - Registros";
             var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
 
             $("#contenedorRegistros").hide();

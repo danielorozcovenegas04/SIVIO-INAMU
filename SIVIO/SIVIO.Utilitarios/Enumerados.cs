@@ -74,7 +74,8 @@ namespace SIVIO.Utilitarios
             TipoIngresoCEAAM = 77,
             TipoEgresoCEAAM = 78,
             ValoracionRiesgo = 81,
-            CondicionLegalIngreso = 82
+            CondicionLegalIngreso = 82,
+            TipoDisponibilidad = 96
         }
 
         public enum Roles
