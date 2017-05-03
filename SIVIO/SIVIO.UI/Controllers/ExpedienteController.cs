@@ -179,7 +179,7 @@ namespace SIVIO.UI.Controllers
         #region Delegacion
 
         [HttpPost]
-        public Mensaje CrearUsuaria_DatosUsuaria(FormCollection datosForm)
+        public Mensaje CrearUsuaria_DatosUsuaria(TBL_PERSONA objDatosUsuaria)
         {
             using (var entities = new SIVIOEntities())
             {
@@ -188,12 +188,12 @@ namespace SIVIO.UI.Controllers
                 //  var lastName2 = datosForm["lastName2"];
                 //  var mail = datosForm["mail"];
 
-                TBL_PERSONA user = new TBL_PERSONA();
-                user.VC_NOMBRE = datosForm["Nombre"];
-                user.VC_APELLIDO1 = datosForm["Apellido1"];
-                user.VC_APELLIDO2 = datosForm["Apellido2"];
-                user.VC_IDENTIFICACION = datosForm["Identificacion"];
-                user.DT_FECHANACIMIENTO = DateTime.Parse(datosForm["FechaNacimiento"]);
+                //TBL_PERSONA user = new TBL_PERSONA();
+                //user.VC_NOMBRE = datosForm["Nombre"];
+                //user.VC_APELLIDO1 = datosForm["Apellido1"];
+                //user.VC_APELLIDO2 = datosForm["Apellido2"];
+                //user.VC_IDENTIFICACION = datosForm["Identificacion"];
+                //user.DT_FECHANACIMIENTO = DateTime.Parse(datosForm["FechaNacimiento"]);
                 // ¿EDAD?
                 //   user.FK_PROVINCIAPROCEDENCIA = datosForm["ProvinciaPersona"]; // Es un int, se requiere el valor.
                 /*

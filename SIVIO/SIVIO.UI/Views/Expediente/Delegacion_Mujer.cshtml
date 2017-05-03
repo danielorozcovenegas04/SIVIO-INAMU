@@ -15,46 +15,18 @@
         CargarDropdowns();
         CargarDivisionTerritorial();
         CargarEditorRedesApoyo();
-        $("#btnGuardar").click(function () {
+        $("#btnGuardarDatosUsuaria").click(function () {
+            var objDatosUsuaria = $();
+            objDatosUsuaria.VC_NOMBRE = "nombre";
             $.ajax(
             {
-                type: "POST", //HTTP POST Method
-                url: '@Url.Action("Delegacion_Mujer")', // Controller/View
-                data: { //Passing data
-                    Nombre: $("#txtName").val(), //Reading text box values using Jquery   MODIFICAR DE LA FORMA objInstrumentoA: formularioInstrumentoA POSTERIORMENTE
-                    Apellido1: $("#txtApellido1").val(),
-                    Apellido2: $("#txtApellido2").val(),
-                    Identificacion: $("#txtIdentificacion").val(),
-                    FechaNacimiento: $("#txtFechaNacimiento").val(),
-                    Edad: $("#txtEdad").val(),
-                    ProvinciaPersona: $("#cmbPersonaProvincia").val(),
-                    CantonPersona: $("#cmbPersonaCanton").val(),
-                    DistritoPersona: $("#cmbPersonaDistrito").val(),
-                    PaisProcedencia: $("#cmbPaisProcedencia").val(),
-                    DireccionDomicilio: $("#txtDireccionDomicilio").val(),
-                    DireccionNotificaciones: $("#txtDireccionNotificaciones").val(),
-                    CorreoElectronico: $("#txtCorreoElectronico").val(),
-                    Telefono: $("#txtTelefono").val(),
-                    CondicionCivil: $("#cmbCondicionCivil").val(),
-                    Escolaridad: $("#cmbEscolaridad").val(),
-                    NumeroHijos: $("#txtNumeroHijos").val(),
-                    Embarazo: $("#cmbEmbarazo").val(),
-                    Nacionalidad: $("#cmbNacionalidad").val(),
-                    OtraNacionalidad: $("#cmbOtraNacionalidad").val(),
-                    Apatrida: $("#cmbApatrida").val(),
-                    CondicionMigratoria: $("#cmbCondicionMigratoria").val(),
-                    Ocupacion: $("#cmbOcupacion").val(),
-                    ViolenciaFisica: $("#chbxViolenciaFisica").val(),
-                    ViolenciaSexual: $("#chbxViolenciaSexual").val(),
-                    ViolenciaPatrimonial: $("#chbxViolenciaPatrimonial").val(),
-                    ViolenciaPsicologica: $("#chbxViolenciaPsicologica").val(),
-                    AcosoSexual: $("#chbxAcosoSexual").val(),
-                    AcosoLaboral: $("#chbxAcosoLaboral").val(),
-                    HostigamientoSexual: $("#chbxHostigamientoSexual").val(),
-                    TrataPersonal: $("#chbxTrataPersonas").val(),
-                    ViolenciaObstetrica: $("#chbxViolenciaObstetrica").val(),
-                    PersonaAgresora: $("#txtPersonaAgresora").val()
-                }
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: '@Url.Action("CrearUsuaria_DatosUsuaria")', // Controller/View
+                data: JSON.stringify({
+                    objDatosUsuaria: objDatosUsuaria
+                }),
 
             });
 
@@ -881,6 +853,12 @@
                                 <div class="col-md-6 form-group">
                                     <label>Tipificación de violencia</label>
                                     <select id="cmbTipoViolencia" class="form-control" multiple></select>
+                                </div>
+                            </div>
+
+                            <div class="row" id="contenedorBotones">
+                                <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                                    <button type="button" id="btnGuardarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Siguiente</button>
                                 </div>
                             </div>
 
