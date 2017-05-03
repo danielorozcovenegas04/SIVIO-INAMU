@@ -1,0 +1,108 @@
+﻿<h3>Ingreso y Egreso</h3>
+@* Pestaña Ingreso y egreso *@
+
+<div class="row">
+
+    <div class="col-xs-4 form-group">
+        <label>CEAAM al que ingresa:</label><br>
+        <select id="cmbTipoCEAAM" class="form-control">
+            @*<option selected disabled>Seleccione una opcion</option>*@
+        </select>
+    </div>
+
+
+    <div class="col-xs-4 form-group">
+        <label>Tipo de ingreso:</label><br>
+        <select id="cmbTipoIngreso" class="form-control">
+            @*/*<option selected disabled>Seleccione una opcion</option>*/*@
+        </select>
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label>Fecha de ingreso actual:</label>
+        <input class="form-control" id="txtFechaIngresoActual" type="date" required="">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Fecha de ingreso anterior:</label>
+        <input class="form-control" id="txtFechaIngresoAnterior" type="date" required="">
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label>Hora de ingreso:</label>
+        <input class="form-control" id="txtHoraIngreso" type="time" required="">
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label>Nombre de la persona que recibe el ingreso:</label>
+        <input class="form-control" id="txtNombrePersonaIngreso" type="text" required="">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Número de familia:</label>
+        <input class="form-control" id="txtNumeroFamilia" type="number" required="">
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label>Fecha de egreso:</label>
+        <input class="form-control" id="txtFechaEgreso" type="date" required="">
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label>Tipo de egreso:</label><br>
+        <select id="cmbTipoEgreso" class="form-control"></select>
+    </div>
+</div>
+
+<label>Lugar de destino:</label><br>
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Provincia:</label>
+        <input class="form-control" id="txtProvinciaDestino" type="text" required="">
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Cantón:</label>
+        <input class="form-control" id="txtCantonDestino" type="text" required="">
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Distrito:</label>
+        <input class="form-control" id="txtDistritoDestino" type="text" required="">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Telefono:</label>
+        <input class="form-control" id="txtTelefonoDestino" type="text" required="">
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label>Destino fuera de Costa Rica:</label>
+        <input class="form-control" id="txtApellido2" type="text" required="">
+        <input type="radio" name="radioDestino" value="No indica / Confidencial"> No indica / Confidencial
+    </div>
+
+    <div class="col-xs-4 form-group">
+        <label>Entrega del kit de emergencia:</label><br>
+
+        <input type="radio" name="radioKit" value="Sí"> Sí<br>
+        <input type="radio" name="radioKit" value="No"> No<br>
+        <input type="radio" name="radioKit" value="Rechaza el kit"> Rechaza el kit<br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-6 form-group">
+        <label>Fecha de asignación:</label>
+        <input class="form-control" id="txtFechaAsignacion" type="date" required="">
+    </div>
+    <div class="col-xs-6 form-group">
+        <label>Persona responsable:</label>
+        <input class="form-control" id="txtPersonaResponsable" type="text" required="">
+    </div>
+
+</div>
