@@ -5,6 +5,7 @@ using System.Web;
 using SIVIO.Entidades;
 using SIVIO.Utilitarios;
 using System.Data;
+using System.Data.Entity.Validation;
 
 namespace SIVIO.UI.Models
 {
@@ -143,63 +144,40 @@ namespace SIVIO.UI.Models
         #endregion
 
         #region DELEGACION
-        /* //Método RegistrarBitácora, vital para insertar usuario.
-        public static Mensaje RegistrarBitacora(TBL_BITACORA bitacora)
-        {
-            using (var entidades = new SIVIOEntities())
-            {
-                try
-                {
-                    entidades.TBL_BITACORA.Add(bitacora);
-                    entidades.SaveChanges();
-                    return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Bitacora Registrada exitosamente", string.Empty);
-                }
-                catch
-                {
-                    return new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Fallo al registrar bitacora", string.Empty);
-                }
-            }
-        }*/
-
-
-        /*
-        public Mensaje InsertarUsuario(TBL_USUARIO usuario)
+        public Mensaje InsertarUsuaria(TBL_PERSONA usuaria)
         {
             //return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "contenido", "valor");
             using (var entidades = new SIVIOEntities())
             {
-                TBL_USUARIO usuarioActual = (TBL_USUARIO)HttpContext.Current.Application["usuarioActual"];
+                TBL_PERSONA usuarioActual = (TBL_PERSONA)HttpContext.Current.Application["usuarioActual"];
                 try
                 {
-                    entidades.TBL_USUARIO.Add(usuario);
-                    usuario.DT_FECHAREGISTRO = DateTime.Now;
+                    entidades.TBL_PERSONA.Add(usuaria);
+                    //  usuaria.DT_FECHAREGISTRO = DateTime.Now;   // CONSULTAR 
                     entidades.SaveChanges();
 
-                    RegistrarBitacora(new TBL_BITACORA
-                    {
-                        DT_FECHAEVENTO = DateTime.Now,
-                        FK_TIPOEVENTO = (int)Enumerados.TiposEventoBitacora.CreacionUsuario,
-                        FK_USUARIO = usuarioActual.PK_USUARIO,
-                        VC_DETALLE = usuario.PK_USUARIO.ToString(),
-                        VC_DIRECCIONIP = string.Empty
-                    });
-                    return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Usuario Registrado Correctamente", "valor");
+                    return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Usuaria Registrada Correctamente", "valor");
                 }
-                catch (Exception e)
+
+                catch (DbEntityValidationException e)
                 {
-                    RegistrarBitacora(new TBL_BITACORA
+                    foreach (var eve in e.EntityValidationErrors)
                     {
-                        DT_FECHAEVENTO = DateTime.Now,
-                        FK_TIPOEVENTO = (int)Enumerados.TiposEventoBitacora.ErrorCapaAccesoDatos,
-                        FK_USUARIO = usuarioActual.PK_USUARIO,
-                        VC_DETALLE = e.Message.ToString(),
-                        VC_DIRECCIONIP = string.Empty
-                    });
-                    return new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al registrar usuario", "valor");
+                        System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    //    throw;
+                    return new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al registrar usuaria", "valor");
                 }
 
             }
-        } */
+        }
+
         public DateTime fecha { get; set; }
         public string horaInicio { get; set; }
         public string horaFinal { get; set; }
