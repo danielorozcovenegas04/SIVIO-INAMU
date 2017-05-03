@@ -93,7 +93,7 @@ namespace SIVIO.UI.Controllers
             //usuario.IM_SALT1 = salt1;
             //usuario.IM_SALT2 = salt2;
             //_modelSeguridad.InsertarUsuario(usuario);
-            return View();
+           return View();
             }
 
         [AllowAnonymous]

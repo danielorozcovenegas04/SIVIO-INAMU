@@ -437,10 +437,10 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult ConsultaPersona()
+        public ActionResult ConsultaPersona(string persona)
         {
             int t = 0;
-            string persona = "Juliana Trump Beckenbauer";
+           // string persona = "Juliana Trump Beckenbauer";
             var listaPersonas = _modelExpediente.ListarPersonas();
             var listaUsuarios = _modelExpediente.ListarUSuarios();
             var listaConsulta = _modelExpediente.ListarConsultas();

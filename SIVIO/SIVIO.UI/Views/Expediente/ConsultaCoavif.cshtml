@@ -19,12 +19,12 @@
 
     <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
         <ul class="nav nav-tabs">
-            <li class="deactivate">
+            <li class="activate">
                 <a data-toggle="tab" href="#consulta">
                     <i class="fa fa-user" aria-hidden="false"></i>Consulta de Persona
                 </a>
             </li>
-            <li class="deactivate">
+            <li >
                 <a data-toggle="tab" href="#atencion">
                     <i class="fa fa-user" aria-hidden="false"></i>Atenciones de Persona
                 </a>
@@ -232,6 +232,8 @@
                 ]
 
             });
+
+
             $('#tblListadoConsultas tbody').on('click', 'tr', function () {
                 debugger;
                 if ($(this).hasClass('selected')) {
@@ -259,179 +261,18 @@
             });
 
 
-            var tablaAtencion = $('#tblListadoAtencion').DataTable({
-                responsive: true,
-                dom: 'fBrtlp<"clear">',
-                select: true,
-                buttons: [
-
-            {
-                extend: 'excelHtml5',
-                text: '<i class="fa fa-file-excel-o"></i>',
-                titleAttr: 'Excel'
-            },
-            {
-                extend: 'pdfHtml5',
-                text: '<i class="fa fa-file-pdf-o"></i>',
-                titleAttr: 'PDF'
-            }, {
-                text: '<i class="fa fa-pencil-square-o"></i>',
-                titleAttr: 'Editar Persona',
-                action: function (e, dt, node, config) {
-                    debugger;
-
-                    var contSeleccionados = tablaAtencion.rows({ selected: true }).count();
-                    var filaSeleccionada = tablaAtencion.rows({ selected: true }).data();
-                    if (contSeleccionados > 0) {
-
-                        $("#contenedorGrid").hide();
-                        $("#contenedorRoles").fadeIn();
-                        $("#contenedorEspera").show();
-                        $.ajax({
-                            type: "POST",
-                            url: '@Url.Action("FrmConsultas", "Seguridad")',
-                            data: { pkUsuario: filaSeleccionada[0].PKUSUARIO },
-                            async: true
-                        }).done(function (data) {
-
-
-                            $('#contenedorAtencion').html(data);
-                            $("#contenedorEspera").hide();
-                            $('#contenedorAtencion').fadeIn();
-
-
-                        }).fail(function (exception) {
-                            $("#txtModalTitulo").css("color", "red");
-                            $("#txtModalTitulo").text("Error");
-                            $("#txtModalContenido").text(exception);
-                            instMensajes.open();
-                        });
-                    } else {
-                        $("#txtModalTitulo").css("color", "red");
-                        $("#txtModalTitulo").text("No se seleccionaron roles");
-                        $("#txtModalContenido").text("Seleccione un rol para continuar");
-                        instMensajes.open();
-                    }
-
-                    debugger;
-                }
-            }, {
-                //extend: 'plusHtml5',
-                text: '<i class="fa fa-plus-square"></i>',
-                titleAttr: 'Agregar un nueva Persona',
-                action: function (e, dt, node, config) {
-                    debugger;
-
-                    $("#contenedorGrid").hide();
-                    $("#contenedorAtencion").fadeIn();
-                    $("#contenedorEspera").show();
-                    $.ajax({
-                        type: "POST",
-                        url: '@Url.Action("FrmAgregarConsultas", "Seguridad")',
-                        async: true
-                    }).done(function (data) {
-
-
-                        $('#contenedorAtencion').html(data);
-                        $("#contenedorEspera").hide();
-                        $('#contenedorAtencion').fadeIn();
-
-
-                    }).fail(function (exception) {
-                        $("#txtModalTitulo").css("color", "red");
-                        $("#txtModalTitulo").text("Error");
-                        $("#txtModalContenido").text(exception);
-                        instMensajes.open();
-                    });
-
-
-
-                    debugger;
-                }
-            }
-
-                ],
-                "language": {
-                    "sProcessing": "Procesando...",
-                    "sLengthMenu": "Mostrar _MENU_ registros",
-                    "sZeroRecords": "No se encontraron resultados",
-                    "sEmptyTable": "Ningún dato disponible en esta tabla",
-                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "sInfoPostFix": "",
-                    "sSearch": "Buscar:",
-                    "sUrl": "",
-                    "sInfoThousands": ",",
-                    "sLoadingRecords": "Cargando...",
-                    "oPaginate": {
-                        "sFirst": "Primero",
-                        "sLast": "Último",
-                        "sNext": "Siguiente",
-                        "sPrevious": "Anterior"
-                    },
-                    "oAria": {
-                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    }
-                },
-                "processing": true, // for show progress bar
-                "filter": true, // this is for disable filter (search box)
-                "orderMulti": false, // for disable multiple column at once
-                tableTools: {
-                    "sRowSelect": "single"
-                },
-                //            <th>Ingreso CEAAM</th>
-                //<th>Observaciones</th>
-                //<th>Reingreso CEAAM</th>
-                //<th>Contacto CEAAM</th>
-                //<th>Entidad Trasladada</th>
-                //<th>Fecha de Traslado</th>
-                "columns": [
-                    { "data": "NOMBREDELAUSUARIA", "name": "NOMBREDELAUSUARIA", "autoWidth": true, "visible": false },
-                    { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
-                    { "data": "FECHADEATENCION", "name": "FECHADEATENCION", "autoWidth": true },
-                    { "data": "TIPODEATENCION", "name": "TIPODEATENCION", "autoWidth": true },
-                    { "data": "SERVICIOQUEREALIZALAATENCION", "name": "SERVICIOQUEREALIZALAATENCION", "autoWidth": true },
-                    { "data": "PERSONAQUEREALIZALAATENCION", "name": "PERSONAQUEREALIZALAATENCION", "autoWidth": true },
-
-                ]
-
-            });
-            $('#tblListadoAtenciones tbody').on('click', 'tr', function () {
-                debugger;
-                if ($(this).hasClass('selected')) {
-
-
-
-
-                    $("#tblListadoAtencion tr").removeClass("selectedDT");
-                    $("#tblListadoAtencion tr").removeClass("selected");
-                    $(this).addClass('selected');
-                    $(this).addClass('selectedDT');
-                }
-                else {
-                    $(this).removeClass('selectedDT');
-
-                }
-            });
-            $(document).ready(function () {
-                document.title = "SIPAMU - Seguridad";
-                var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
-
-                $("#contenedorAtencion").hide();
-
-
-            });
+            
 
 
             $('#btnBuscarPersona').click(function () {
-                debugger;
-                $.LoadingOverlay("show");
                 $.ajax({
                     type: "POST",
                     url: '@Url.Action("ConsultaPersona", "Expediente")',
-                    async: true
+                    data: {
+                        persona: $("#txtPersona").val()
+                    },
+                    datatype: "json",
+                    processData: true,
                 }).done(function (data) {
 
                     $.LoadingOverlay("hide");
@@ -449,21 +290,21 @@
                     $.LoadingOverlay("hide");
                 });
             });
-            function refrescarGrid() { tablaAtenciones.ajax.reload() }
+           
             function refrescarGrid() { tablaConsultas.ajax.reload() }
         </script>
         <div class="row" id="buscador" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
                                                                                                                                                                                                                                           background-color: #FFFFFF;
                                                                                                                                                                                                                                                 border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
-            <div class="col-md-10">
-                <h6>Buscar</h6>@Html.TextBox("Nombre", "Digite el nombre de la persona", new { @class = "form-control" })
-                <button type="button" id="btnBuscarPersona" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 20%; color: white; background-color: #FA8258; border-color: #FA8258;">Buscar</button>
-            </div>
+                <div class="col-md-6 form-group">
+                    <label>Buscar Persona</label>
+                    <button type="button" id="btnBuscarPersona" class="btn btn-default btn-responsive" style="color: red; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; display:none;">Guardar</button>
+                    <input class="form-control" id="txtPersona" type="text"> 
+                    <a href="#" id="btnBuscarPersona" class="btn btn-default">Buscar</a>            
+                </div>   
         </div>
-        
         <div class="tab-content">
-           
-            <div id="consulta" class="tab-pane fade in">
+            <div id="consulta" class="tab-pane fade in active">
 
                 <div class="row" id="contenedorGrid" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
                                                                                                                                                                                                                                           background-color: #FFFFFF;
@@ -474,7 +315,7 @@
                             <caption><div class="comunForm" style="text-align: center; color: #c31618; border-color: #c31618 !important;"><i class="fa fa-bell" style="margin-right: 2px"></i>Lista de Consultas Existentes</div></caption>
                             <thead>
                                 <tr>
-                                    
+                                    <th></th>
                                     <th>Nombre de la usuaria</th>
                                     <th>Identificación</th>
                                     <th>Fecha de atención</th>
@@ -488,7 +329,7 @@
                                 {
                                     if (consulta.TBL_VALOR_CATALOGO1.VC_VALOR2.CompareTo("1")==0) {
                                     <tr>
-                                       
+                                        <td></td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
                                         <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
                                         <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
@@ -503,16 +344,166 @@
                     </div>
                 </div>
                 <div id="contenedorConsultas">
-
-
                 </div>
-
             </div>
-        </div>
-        <div class="tab-content">
-            <div id="atencion" class="tab-pane fade in">
+            <script>
+                var tablaAtencion = $('#tblListadoAtencion').DataTable({
+                    responsive: true,
+                    dom: 'fBrtlp<"clear">',
+                    select: true,
+                    buttons: [
 
-                <div class="row" id="contenedorGrid" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fa fa-file-excel-o"></i>',
+                    titleAttr: 'Excel'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fa fa-file-pdf-o"></i>',
+                    titleAttr: 'PDF'
+                }, {
+                    text: '<i class="fa fa-pencil-square-o"></i>',
+                    titleAttr: 'Editar Persona',
+                    action: function (e, dt, node, config) {
+                        debugger;
+
+                        var contSeleccionados = tablaAtencion.rows({ selected: true }).count();
+                        var filaSeleccionada = tablaAtencion.rows({ selected: true }).data();
+                        if (contSeleccionados > 0) {
+
+                            $("#contenedorGrid2").hide();
+                            $("#contenedorRoles").fadeIn();
+                            $("#contenedorEspera").show();
+                            $.ajax({
+                                type: "POST",
+                                url: '@Url.Action("FrmConsultas", "Seguridad")',
+                                data: { pkUsuario: filaSeleccionada[0].PKUSUARIO },
+                                async: true
+                            }).done(function (data) {
+
+
+                                $('#contenedorAtencion').html(data);
+                                $("#contenedorEspera").hide();
+                                $('#contenedorAtencion').fadeIn();
+
+
+                            }).fail(function (exception) {
+                                $("#txtModalTitulo").css("color", "red");
+                                $("#txtModalTitulo").text("Error");
+                                $("#txtModalContenido").text(exception);
+                                instMensajes.open();
+                            });
+                        } else {
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("No se seleccionaron roles");
+                            $("#txtModalContenido").text("Seleccione un rol para continuar");
+                            instMensajes.open();
+                        }
+
+                        debugger;
+                    }
+                }, {
+                    //extend: 'plusHtml5',
+                    text: '<i class="fa fa-plus-square"></i>',
+                    titleAttr: 'Agregar un nueva Persona',
+                    action: function (e, dt, node, config) {
+                        debugger;
+
+                        $("#contenedorGrid2").hide();
+                        $("#contenedorAtencion").fadeIn();
+                        $("#contenedorEspera").show();
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("FrmAgregarConsultas", "Seguridad")',
+                            async: true
+                        }).done(function (data) {
+                            $('#contenedorAtencion').html(data);
+                            $("#contenedorEspera").hide();
+                            $('#contenedorAtencion').fadeIn();
+                        }).fail(function (exception) {
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("Error");
+                            $("#txtModalContenido").text(exception);
+                            instMensajes.open();
+                        });
+
+
+
+                        debugger;
+                    }
+                }
+                    ],
+                    "language": {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    },
+                    "processing": true, // for show progress bar
+                    "filter": true, // this is for disable filter (search box)
+                    "orderMulti": false, // for disable multiple column at once
+                    tableTools: {
+                        "sRowSelect": "single"
+                    },
+                    //            <th>Ingreso CEAAM</th>
+                    //<th>Observaciones</th>
+                    //<th>Reingreso CEAAM</th>
+                    //<th>Contacto CEAAM</th>
+                    //<th>Entidad Trasladada</th>
+                    //<th>Fecha de Traslado</th>
+                    "columns": [
+                        { "data": "NOMBREDELAUSUARIA", "name": "NOMBREDELAUSUARIA", "autoWidth": true, "visible": false },
+                        { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
+                        { "data": "FECHADEATENCION", "name": "FECHADEATENCION", "autoWidth": true },
+                        { "data": "TIPODEATENCION", "name": "TIPODEATENCION", "autoWidth": true },
+                        { "data": "SERVICIOQUEREALIZALAATENCION", "name": "SERVICIOQUEREALIZALAATENCION", "autoWidth": true },
+                        { "data": "PERSONAQUEREALIZALAATENCION", "name": "PERSONAQUEREALIZALAATENCION", "autoWidth": true },
+                    ]
+                });
+                $('#tblListadoAtencion tbody').on('click', 'tr', function () {
+                    debugger;
+                    if ($(this).hasClass('selected')) {
+                        $("#tblListadoAtencion tr").removeClass("selectedDT");
+                        $("#tblListadoAtencion tr").removeClass("selected");
+                        $(this).addClass('selected');
+                        $(this).addClass('selectedDT');
+                    }
+                    else {
+                        $(this).removeClass('selectedDT');
+
+                    }
+                });
+                $(document).ready(function () {
+                    document.title = "SIPAMU - Seguridad";
+                    var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+
+                    $("#contenedorAtencion").hide();
+                });
+
+                function refrescarGrid2() { tablaAtencion.ajax.reload() }
+
+            </script>
+            <div id="atencion" class="tab-pane ">       
+                <div class="row" id="contenedorGrid2" style="padding-top: 10px; padding-bottom: 6px; background-color: white; margin-bottom: 6px; margin-left: 0px; margin-right: 0px;
                                                                                                                                                                                                                                                 background-color: #FFFFFF;
                                                                                                                                                                                                                                                 border: 1px solid #E3E3E3; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
                     <div class="col-md-12">
@@ -520,7 +511,7 @@
                             <caption><div class="comunForm" style="text-align: center; color: #c31618; border-color: #c31618 !important;"><i class="fa fa-bell" style="margin-right: 2px"></i>Lista de Consultas Existentes</div></caption>
                             <thead>
                                 <tr>
-                                    
+                                    <th></th>
                                     <th>Nombre de la usuaria</th>
                                     <th>Identificación</th>
                                     <th>Fecha de atención</th>
@@ -532,31 +523,26 @@
                             <tbody>
                                 @foreach (var consulta in Model)
                                 {
-                                    if (consulta.TBL_VALOR_CATALOGO1.VC_VALOR2.CompareTo("2") == 0){
-                                    <tr>
-                                        
-                                        <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
-                                        <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
-                                        <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
-                                        <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO.VC_VALOR1)</td>
-                                        <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO1.VC_VALOR1) </td>
-                                        <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
-                                    </tr>
-                                    }
+                                if (consulta.TBL_VALOR_CATALOGO1.VC_VALOR2.CompareTo("2") == 0){
+                                <tr>
+                                    <td></td>
+                                    <td>@Html.Raw(consulta.TBL_PERSONA.VC_NOMBRE) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO1) @Html.Raw(consulta.TBL_PERSONA.VC_APELLIDO2)</td>
+                                    <td>@Html.Raw(consulta.TBL_PERSONA.VC_IDENTIFICACION)</td>
+                                    <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
+                                    <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO.VC_VALOR1)</td>
+                                    <td>@Html.Raw(consulta.TBL_VALOR_CATALOGO1.VC_VALOR1) </td>
+                                    <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
+                                </tr>
+                                }
                                 }
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div id="contenedorAtencion">
-
-
-                </div>
                 </div>
             </div>
+        </div>           
     </form>
-
-
-
 </div>
 
