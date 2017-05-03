@@ -136,6 +136,21 @@
                             text: value.VC_VALOR1
                         }));
                     });
+
+                    $.each(respuesta.CatalogoOrientacionSexual, function (key, value) {
+                        $('#cmbOrientacionSexual').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
+                    $.each(respuesta.CatalogoCondicionAseguramiento, function (key, value) {
+                        $('#cmbCondicionAseguramiento').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
                     $.each(respuesta.CatalogoOrigenEtnico, function (key, value) {
                         $('#cmbOrigenEtnico').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
@@ -224,24 +239,24 @@
                     });
 
                     $.each(respuesta.Adicciones, function (key, value) {
-                        $('#cmdAdicciones').append($("<option/>", {
+                        $('#cmbAdicciones').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
 
-                    $('#cmdAdicciones').selectize({
+                    $('#cmbAdicciones').selectize({
                         sortField: 'text'
                     });
 
                     $.each(respuesta.TipoRedApoyo, function (key, value) {
-                        $('#cmdTipoRedApoyo').append($("<option/>", {
+                        $('#cmbTipoRedApoyo').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
                     $.each(respuesta.Institucion, function (key, value) {
-                        $('#cmdInstitucionRedApoyo').append($("<option/>", {
+                        $('#cmbInstitucionRedApoyo').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -403,9 +418,9 @@
 
 
     function CargarEditorRedesApoyo() {
-        $("#cmdTipoRedApoyo").change(function () {
+        $("#cmbTipoRedApoyo").change(function () {
             debugger;
-            var idTipoRed = $("#cmdTipoRedApoyo").val();
+            var idTipoRed = $("#cmbTipoRedApoyo").val();
             if (idTipoRed === "717") {
                 $("#contenedorRelacion").hide();
                 $("#contenedorInstitucion").show();
@@ -418,7 +433,7 @@
             }
 
         });
-        $("#cmdTipoRedApoyo").val("717").trigger('change');
+        $("#cmbTipoRedApoyo").val("717").trigger('change');
         var tablaRedesApoyo = $('#tblRedesApoyo').DataTable({
             responsive: true,
             dom: 'Brtlp<"clear">',
@@ -1017,7 +1032,7 @@
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label>Adicciones</label>
-                                            <select id="cmdAdicciones" class="form-control" multiple>
+                                            <select id="cmbAdicciones" class="form-control" multiple>
                                                 <option></option>
                                             </select>
                                         </div>
@@ -1052,7 +1067,7 @@
 
                                                         <div class="col-md-6 form-group">
                                                             <label>Tipo</label>
-                                                            <select id="cmdTipoRedApoyo" class="form-control"></select>
+                                                            <select id="cmbTipoRedApoyo" class="form-control"></select>
                                                         </div>
                                                         <div class="col-md-6 form-group">
                                                             <label>Nombre</label>
@@ -1064,7 +1079,7 @@
                                                         <div class="row">
                                                             <div class="col-xs-6 form-group" id="contenedorInstitucion">
                                                                 <label>Institución</label>
-                                                                <select id="cmdInstitucionRedApoyo" class="form-control"></select>
+                                                                <select id="cmbInstitucionRedApoyo" class="form-control"></select>
                                                             </div>
                                                             <div class="col-xs-6 form-group" id="contenedorRelacion">
                                                                 <label>Relación</label>
@@ -1115,7 +1130,7 @@
                                 <div class="row comunForm">
                                     <div class="row">
                                         <div class="col-xs-4 form-group">
-                                            <label>Nombre de la Persona agresora:</label>
+                                            <label>Nombre de la persona agresora:</label>
                                             <input type="text" class="form-control" placeholder="" id="nombre" value="" />
                                         </div>
 
@@ -1169,12 +1184,12 @@
                                         <label>MP</label>
                                         <div class="row">
                                             <div class="col-xs-4 form-group">
-                                                <label>Fecha de Vencimiento:</label>
+                                                <label>Fecha de vencimiento:</label>
                                                 <input type="text" class="form-control" placeholder="" id="MPvencimiento" value="" />
                                             </div>
 
                                             <div class="col-xs-4 form-group">
-                                                <label>numero Expediente:</label>
+                                                <label>Numero expediente:</label>
                                                 <input type="text" class="form-control" placeholder="." id="MPExpediente" value="" />
                                             </div>
                                         </div>
@@ -1184,12 +1199,12 @@
                                         <label>Denuncia Penal</label>
                                         <div class="row">
                                             <div class="col-xs-4 form-group">
-                                                <label>Fecha de Vencimiento:</label>
+                                                <label>Fecha de vencimiento:</label>
                                                 <input type="text" class="form-control" placeholder="" id="Denunciavencimiento" value="" />
                                             </div>
 
                                             <div class="col-xs-4 form-group">
-                                                <label>numero Expediente:</label>
+                                                <label>Numero expediente:</label>
                                                 <input type="text" class="form-control" placeholder="." id="DenunciaExpediente" value="" />
                                             </div>
                                         </div>
