@@ -1,0 +1,182 @@
+﻿@{
+    Layout = null;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('[data-toggle="tooltip"]').tooltip();
+        document.title = "SIVIO - Delegacion de la mujer";
+        $.ajax({
+            url: '@Url.Action("RetornarDivisionTerritorial", "Catalogos")',
+            // to get the right path to controller from TableRoutes of Asp.Net MVC
+            dataType: "json", //to work with json format
+            type: "POST", //to do a post request
+            contentType: 'application/json; charset=utf-8', //define a contentType of your request
+            cache: false, //avoid caching results
+            async: true,
+            data: {}, // here you can pass arguments to your request if you need
+            success: function (data) {
+                // data is your result from controller
+                localStorage.setItem('divisionTerritorial', JSON.stringify(data));
+
+            },
+            error: function (xhr) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Conexión Fallida");
+                $("#txtModalContenido").text("Fallo al cargar división territorial");
+                instMensajes.open();
+                $("#contenedorEsperaIndicadores").hide();
+                $("#pnlIndicadoresRegion").show();
+            }
+        });
+        var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+        $('#btnCerrarSesion').click(function () {
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CerrarSesion","Seguridad")',
+                processData: true,
+                success: function (data) {
+
+                    $.LoadingOverlay("hide");
+                    window.location.href = '@Url.Action("Ingreso", "Home")';
+                },
+                error: function (xhr, ajaxOptions, error) {
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error de Sistema");
+                    $("#txtModalContenido").text("Fallo al cerrar sesión, contacte a la persona administradora de SIVIO");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+                }
+            });
+        });
+
+        $('#btnInicio').click(showSearchDisplay);
+        showSearchDisplay ();
+        
+        $('#btnExpedientes').click(function () {
+            debugger;
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Delegacion_Mujer", "Expediente")',
+                async: true
+            }).done(function (data) {
+
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+
+
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        });
+    });
+
+    function showSearchDisplay() {
+            debugger;
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("BusquedaExpediente", "Expediente")',
+                async: true
+            }).done(function (data) {
+
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+
+
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        }
+
+</script>
+<nav class="navbar navbar-default navbar-static-top borde" style="margin-top: 5px; padding-bottom: 5px !important; background-color: white !important">
+
+    <div class="container" style="width: 100%; padding-left: 15px; padding-right: 15px;">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapse" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                
+                <li>
+                    <img src="http://www.inamu.go.cr/tema_principal_interno-theme/images/main-logo.png" alt="logo" style="padding-left: 6px">
+                </li>
+
+                <li>
+                    <a href="#" id="btnInicio">
+                        <i class="pe-7s-home"></i>
+                        <span>Inicio</span>
+                    </a>
+
+                </li>
+
+                <li class="nav">
+                    <a href="#" id="btnExpedientes">Expedientes</a>
+                </li>
+
+                <li class="nav">
+                    <a href="#" id="btnAtenciones">Atenciones</a>
+                </li>
+
+                <li class="nav">
+                    <a href="#" id="btnIntervenciones">Intervenciones</a>
+                </li>
+
+                <li class="nav">
+                    <a href="#" id="btnReferencias">Referencias</a>
+                </li>
+
+                <li class="nav">
+                    <a href="#" id="btnCapacitaciones">Capacitaciones</a>
+                </li>
+
+                <li class="nav">
+                    <a href="#" id="btnSupervisionEstudiantes">Supervisiones a estudiantes</a>
+                </li>
+
+                <li class="nav">
+                    <a href="#" id="btnReportes">Reportes</a>
+                </li>
+
+            </ul>
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" id="btnCerrarSesion">
+
+                        <span>Salir (@string.Concat(HttpContext.Current.User.Identity.Name))</span>
+                        <i class="pe-7s-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+
+</nav>

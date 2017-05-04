@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Principal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model int
+<!-- Static navbar -->
+<style>
+    .cerrar {
+        width: 100%;
+        margin-bottom: 3px;
+        color: white;
+        background: red;
+        border: red;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        document.title = "SIVIO - Principal";
+        debugger;
+        @*$("#contenedorEspera").hide();
+        $.LoadingOverlay("show");
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("RetornarTipoMenu", "Home")',
+            async: true
+        }).done(function (data) {
+            
+            $.LoadingOverlay("hide");
+            $('#contenedorMenu').html(data);
+
+
+
+        }).fail(function (exception) {
+            $.LoadingOverlay("hide");
+            $("#txtModalTitulo").css("color", "red");
+            $("#txtModalTitulo").text("Error de Sistema");
+            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+            $("#contenedorEspera").hide();
+            instMensajes.open();
+        });*@
+
+        @*$.ajax({
+            type: "POST",
+            url: '@Url.Action("RetornarCatalogos", "Home")',
+            async: true,
+            success: function (data) {
+
+                localStorage.setItem('catalogos', JSON.stringify(data));
+
+
+            },
+            error: function (xhr, ajaxOptions, error) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar catálogos, contacte a la persona administradora de SIPAMU");
+                instMensajes.open();
+
+            }
+        });*@
+
+
+    });
+
+</script>
+
+
+
+<div class="remodal" style="background-color: white;" data-remodal-id="modalDialogo"
+     data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
+
+    <button data-remodal-action="close" class="remodal-close"></button>
+    <h3 id="txtModalTitulo">Sistema para la Atención y Prevención de la Violencia contra las Mujeres</h3>
+    <p>
+        <span id="txtModalContenido"></span>
+    </p>
+</div>
+@{ @Html.Action("RetornarMenuPrincipal", "Home", new { tipoServicio = Model }) }
+
+<div class="container" id="contendorFrames" style="width: 100% !important;">
+    @*<div class="row" style="margin-right: 0 !important; margin-left: 0 !important; padding-left: 3px !important; padding-right: 3px !important">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Dashboard</li>
+                </ol>
+            </div>
+
+        </div>*@
+
+
+
+</div> <!-- /container -->
+

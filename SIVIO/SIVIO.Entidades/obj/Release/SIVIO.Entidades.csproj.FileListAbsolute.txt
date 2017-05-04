@@ -1,0 +1,5 @@
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Entidades\bin\Release\SIVIO.Entidades.dll
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Entidades\bin\Release\SIVIO.Entidades.pdb
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Entidades\obj\Release\SIVIO.Entidades.csprojResolveAssemblyReference.cache
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Entidades\obj\Release\SIVIO.Entidades.dll
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Entidades\obj\Release\SIVIO.Entidades.pdb

@@ -1,0 +1,5 @@
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Utilitarios\bin\Release\SIVIO.Utilitarios.dll
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Utilitarios\bin\Release\SIVIO.Utilitarios.pdb
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Utilitarios\obj\Release\SIVIO.Utilitarios.csprojResolveAssemblyReference.cache
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Utilitarios\obj\Release\SIVIO.Utilitarios.dll
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Utilitarios\obj\Release\SIVIO.Utilitarios.pdb
