@@ -110,31 +110,37 @@ namespace SIVIO.UI.Controllers
                 var listaAgresor = new List<TBL_AGRESOR>();
                 listaAgresor.Add(agresor);
                 persona.TBL_AGRESOR = listaAgresor;
-                /*
+
+                adicciones.PK_ADICCION = Guid.NewGuid();
                 var listaAdicciones = new List<TBL_ADICCIONES>();
                 listaAdicciones.Add(adicciones);
                 persona.TBL_ADICCIONES = listaAdicciones;
-                
+                /*
                 var listaApoyo1 = new List<TBL_PERSONA_RED_APOYO>();
                 listaApoyo1.Add(apoyo1);
                 persona.TBL_PERSONA_RED_APOYO = listaApoyo1;
-                
+                */
+
+                agresion.PK_AGRESION = Guid.NewGuid();
                 var listaAgresion = new List<TBL_AGRESION>();
                 listaAgresion.Add(agresion);
                 agresor.TBL_AGRESION = listaAgresion;
-                
+
+                agresorMotivoRegreso.PK_MOTIVOREGRESO = Guid.NewGuid();
                 var listaAgresorMotivoRegreso = new List<TBL_AGRESOR_MOTIVO_REGRESO>();
                 listaAgresorMotivoRegreso.Add(agresorMotivoRegreso);
                 agresor.TBL_AGRESOR_MOTIVO_REGRESO = listaAgresorMotivoRegreso;
-                
+
+                agresionAtencionMedica.PK_ATENCION_MEDICA = Guid.NewGuid();
                 var listaAgresionAtencionMedica = new List<TBL_AGRESION_ATENCION_MEDICA>();
                 listaAgresionAtencionMedica.Add(agresionAtencionMedica);
                 agresion.TBL_AGRESION_ATENCION_MEDICA = listaAgresionAtencionMedica;
 
+                agresionViolencia.PK_AGRESION_VIOLENCIA = Guid.NewGuid();
                 var listaAgresionViolencia = new List<TBL_AGRESION_VIOLENCIA>();
                 listaAgresionViolencia.Add(agresionViolencia);
                 agresion.TBL_AGRESION_VIOLENCIA = listaAgresionViolencia;
-                */
+                
 
                 persona.TBL_LABORAL = laboral;
 
