@@ -80,7 +80,7 @@ namespace SIVIO.UI.Models
                 try
                 {
                     TBL_PERSONA personaConsulta = (TBL_PERSONA)entidades.TBL_PERSONA.Find(Int32.Parse(persona)); //Where(m => m.PK_PERSONA == Int32.Parse(persona));// .Where(m => m.PK_PERSONA == Int32.Parse(persona));
-
+                    //TBL_REGISTRO_CEAAM = 
                   /*  TBL_ADICCIONES adiciones                        = entidades.TBL_ADICCIONES.Find(personaConsulta.PK_PERSONA);
                     TBL_AGRESOR agresor                             = entidades.TBL_AGRESOR.Find(personaConsulta.PK_PERSONA);
                     TBL_DIRECCION direccion                         = entidades.TBL_DIRECCION.Find(personaConsulta.PK_PERSONA);

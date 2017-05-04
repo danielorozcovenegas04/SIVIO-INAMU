@@ -7,7 +7,7 @@
 
 
 <script type="text/javascript">
-    function llenarComboBox(nombreCatalogo, nombreComboBox) {
+    function llenarComboBox(nombreCatalogo, nombreComboBox, valorComboBox) {
         return function (respuesta) {
             var catalogo = respuesta[nombreCatalogo];
             if (catalogo.Mensaje.TipoMensaje === 1) {
@@ -18,6 +18,10 @@
                     }));
 
                 });
+                
+                if (valorComboBox) {
+                    $(nombreComboBox).val(valorComboBox);
+                }
             } else {
                 $("#contenedorBotones").show();
                 $("#contenedorEspera").hide();
@@ -70,10 +74,10 @@
         }).then(llenarComboBox("CEEAM", "#cmbTipoCEAAM"))
             .then(llenarComboBox("Tipo de Ingreso CEEAM", "#cmbTipoIngreso"))
             .then(llenarComboBox("Tipo de Egreso CEEAM", "#cmbTipoEgreso"))
-            .then(llenarComboBox("Orientación Sexual", "#cmbOrientacionSexual"))
+            .then(llenarComboBox("Orientación Sexual", "#cmbOrientacionSexual", @Html.Raw(Model.FK_ORIENTACIONSEXUAL)))
             .then(llenarComboBox("Etnia", "#cmbOrigenEtnico"))
             .then(llenarComboBox("Estado Civil", "#cmbCondicionCivil"))
-            .then(llenarComboBox("Grado Académico", "#cmbEscolaridad"))
+            .then(llenarComboBox("Grado Académico", "#cmbEscolaridad", @Html.Raw(Model.FK_ESCOLARIDAD)))
             .then(llenarComboBox("Tipo de Familia", "#cmbTipoFamilia"))
             .then(llenarComboBox("Nacionalidad", "#cmbNacionalidad"))
             .then(llenarComboBox("Nacionalidad", "#cmbOtraNacionalidad"))
@@ -106,7 +110,7 @@
 
             //.then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbRespuestaSiNosponible"))
             .then(comboMultiple("#cmbDiscapacidad"))
-            .then(comboMultiple("#cmbAdicciones"));
+            .then(comboMultiple("#cmbAdicciones"))
 
 
 
