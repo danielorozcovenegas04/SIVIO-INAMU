@@ -71,8 +71,8 @@ namespace SIVIO.Utilitarios
             TipoServicio = 65,
             TipoRedApoyo = 97,
             Institucion = 98,
-            OrientacionSexual = 99,
-            CondicionAseguramiento = 67
+            OrientacionSexual = 67,
+            CondicionAseguramiento = 99
 
         }
 

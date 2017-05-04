@@ -131,6 +131,18 @@
                             text: value.VC_VALOR1
                         }));
                     });
+					$.each(respuesta.CatalogoOrientacionSexual, function (key, value) {
+                        $('#cmbOrientacionSexual').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+					$.each(respuesta.CatalogoCondicionAseguramiento, function (key, value) {
+                        $('#cmbCondicionAseguramiento').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
                     $.each(respuesta.CatalogoParentesco, function (key, value) {
                         $('#cmbComposicionFamiliarParentesco').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
