@@ -409,7 +409,7 @@
     </ul>
 
     <div class="tab-content">
-        <div id="tabPerfilUsuaria" class="tab-pane fade in active">
+        <div id="tabPerfilUsuaria" class="tab-pane fade in active" style="padding:5px">
             <h3>Perfil</h3><br>
 
             @* Primera pestaña *@
@@ -418,7 +418,7 @@
                 <form id="formPersona" method="post"> @* Form de TBL_Persona *@
                     
                     <div class="col-xs-4 form-group">
-                        <label>Identificación</label>
+                        <label>Documento de identificación</label>
                         <input class="form-control" id="txtIdentificacion" name="VC_IDENTIFICACION" type="text" value='12345' required="">
                     </div>
                     <div class="col-xs-4 form-group"> <br><br><br><br> </div>
@@ -444,18 +444,7 @@
                     </div>
 
                     <div class="col-xs-4 form-group">
-                        <label>Orientación sexual:</label><br>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <select id="cmbOrientacionSexual" class="form-control" name="FK_ORIENTACIONSEXUAL">
-                                    <option selected disabled>Seleccione una opcion</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 form-group">
-                        <label>Origen Étnico:</label><br>
+                        <label>Origen étnico:</label><br>
                         <div class="row">
                             <div class="col-xs-12">
                                 <select id="cmbOrigenEtnico" class="form-control" name="FK_ETNIA">
@@ -485,7 +474,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4 form-group">
-                        <label>Número total de hijos</label><br>
+                        <label>Cantidad de hijos</label><br>
                         <input class="form-control" id="txtHijos" name="I_HIJOS" type="number" value='3' required="">
                     </div>
                     <div class="col-xs-4 form-group">
@@ -498,7 +487,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-4 form-group"> <br><br><br><br> </div>
+                    <div class="col-xs-4 form-group">
+                        <label>Territorio</label><br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @* ESTO ES TEMPORAL *@
+                                <select id="cmbTerritorio" class="form-control" name="FK_PUEBLOINDIGENA">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                    <option value="89">Ninguno</option>
+                                    <option value="90">Cabécar</option>
+                                    <option value="91">Maleku</option>
+                                    <option value="92">Bribrí</option>
+                                    <option value="93">Boruca</option>
+                                    <option value="94">Chorotega</option>
+                                    <option value="95">Huetar</option>
+                                    <option value="96">Ngöbe</option>
+                                    <option value="97">Teribe</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
+                        <label>Comunidad</label><br>
+                        <input class="form-control" id="txtHijos" type="number" required="" disabled>
+                    </div>
                     <div class="col-xs-4 form-group"> <br><br><br><br> </div>
                     <div class="col-xs-4 form-group">
                         <label>Nacionalidad</label><br>
@@ -549,6 +561,7 @@
                     </div>
 
                     @* Datos no encontrados (TBL_PERSONA) *@
+                    <input type="hidden" name="FK_ORIENTACIONSEXUAL" value="1" />
                     <input type="hidden" name="FK_TIPOIDENTIFICACION" value="1" />
                     <input type="hidden" name="FK_GENERO" value="1" />
                     <input type="hidden" name="I_HIJOSCEEAM" value="1" />
@@ -556,7 +569,6 @@
                     <input type="hidden" name="FK_PROVINCIAPROCEDENCIA" value="1" />
                     <input type="hidden" name="FK_CANTONPROCEDENCIA" value="1" />
                     <input type="hidden" name="FK_DISTRITOPROCEDENCIA" value="1" />
-                    <input type="hidden" name="VC_CORREO" value="ejemplo@gmail.com" />
                     <input type="hidden" name="FK_ESTADOEMBARAZO" value="1" />
                     <input type="hidden" name="FK_CONDICIONSALUD" value="1" />
                     
@@ -619,54 +631,7 @@
                     <input type="radio" name="radioApoyo" value="No tiene"> No tiene<br>
                 </div>
 
-                @* Cuarta columna *@
-                <div class="col-xs-4 form-group">
-                    <form id="formApoyo1" method="post">
-                        <h5>Primaria:</h5><br>
-                        <label>Nombre</label>
-                        <input class="form-control" id="txtNombreApoyo1" name="VC_NOMBRE" type="text" value='Nombre Apoyo 1' required=""><br>
-                        <label>Relación</label>
-                        <input class="form-control" id="txtRelacionApoyo1" name="VC_RELACION" type="text" value='Relacion 1' required=""><br>
-                        <label>Teléfono</label>
-                        <input class="form-control" id="txtTelefonoApoyo1" name="VC_TELEFONO" type="text" value='24335335' required=""><br>
-                        <br><br>
-                        <input type="hidden" name="FK_TIPOREDAPOYO" value="613" /> @* 80=Tipo de red de apoyo *@
-                        <input type="hidden" name="VC_OBSERVACIONES" value="ninguna" />
-                    </form>
-
-                    <label>Nombre (otro)</label><input class="form-control" id="txtNombreApoyo2" name="VC_NOMBRE" type="text" value='Nombre Apoyo 2'><br>
-                    <label>Relación</label><input class="form-control" id="txtRelacionApoyo2" name="VC_RELACION" type="text" value='Relacion 2'><br>
-                    <label>Teléfono</label><input class="form-control" id="txtTelefonoApoyo2" type="text" value='Telefono Apoyo 2'><br>
-                    <br><br>
-                    <label>Nombre (otro)</label><input class="form-control" id="txtNombreApoyo3" name="VC_NOMBRE" type="text" value='Nombre Apoyo 3'><br>
-                    <label>Relación</label><input class="form-control" id="txtRelacionApoyo3" name="VC_RELACION" type="text" value='Relacion 3'><br>
-                    <label>Teléfono</label><input class="form-control" id="txtTelefonoApoyo3" type="text" value='Telefono Apoyo 3'><br>
-
-                </div>
-
-                @* Quinta columna *@
-                <div class="col-xs-4 form-group">
-                    <h5>Secundaria:</h5><br>
-                    <label>Nombre</label><input class="form-control" id="txtNombreSecApoyo1" type="text"><br>
-                    <label>Relación</label><input class="form-control" id="txtSecRelacionApoyo1" type="text"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtSecTelefonoApoyo1" type="text"><br>
-                    <br><br>
-                    <label>Nombre (otro)</label><input class="form-control" id="txtNombreSecApoyo2" type="text"><br>
-                    <label>Relación</label><input class="form-control" id="txtSecRelacionApoyo2" type="text"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtSecTelefonoApoyo2" type="text"><br>
-                </div>
-
-                @* Sexta columna *@
-                <div class="col-xs-4 form-group">
-                    <h5>Institucional:</h5><br>
-                    <label>Nombre</label><input class="form-control" id="txtNombreInstApoyo1" type="text"><br>
-                    <label>Institución</label><input class="form-control" id="txtInstApoyo1" type="text"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtInstTelefonoApoyo1" type="text"><br>
-                    <br><br>
-                    <label>Nombre (otro)</label><input class="form-control" id="txtNombreInstApoyo2" type="text"><br>
-                    <label>Institución</label><input class="form-control" id="txtInstApoyo2" type="text"><br>
-                    <label>Teléfono</label><input class="form-control" id="txtInstTelefonoApoyo2" type="text"><br>
-                </div>
+                
             </div>
         </div>
 
@@ -675,17 +640,23 @@
             <h3>Historia de violencia</h3><br>
             <div class="row" id="tabHIstoriaViolencia">
                 <form id="formAgresor" method="post"> @* Form para TBL_AGRESOR *@
-                    @* Primera columna *@
                     <div class="col-xs-4 form-group">
                         <label>Nombre persona agresora</label><br>
-                        <input class="form-control" id="txtNombre2" type="text" name="VC_NOMBRE" value='Nombre Agresor' required=""><br>
+                        <input class="form-control" id="txtNombre2" type="text" name="VC_NOMBRE" value='Nombre Agresor' required="">
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Primer apellido</label><br>
-                        <input class="form-control" id="txtApellido1" type="text" name="VC_APELLIDO1" value='Apellido Agresor' required=""><br>
+                        <input class="form-control" id="txtApellido1" type="text" name="VC_APELLIDO1" value='Apellido Agresor' required="">
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Segundo apellido</label><br>
-                        <input class="form-control" id="txtApellido2" type="text" name="VC_APELLIDO2" value='Apellido2 Agresor' required=""><br>
+                        <input class="form-control" id="txtApellido2" type="text" name="VC_APELLIDO2" value='Apellido2 Agresor' required="">
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Fecha de nacimiento</label><br>
-                        <input class="form-control" id="txtFechaNacAgresor" type="date" name="DT_FECHANACIMIENTO" value='1966-10-10' required=""><br>
-
+                        <input class="form-control" id="txtFechaNacAgresor" type="date" name="DT_FECHANACIMIENTO" value='1966-10-10' required="">
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Género</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -693,9 +664,9 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-                        
-
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Nacionalidad</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -703,40 +674,35 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
-                        <label>Escolaridad (Nivel educativo)</label><br>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
+                        <label>Escolaridad</label><br>
                         <div class="row">
                             <div class="col-xs-12">
                                 <select id="cmbEscolaridadHV" class="form-control" name="FK_NIVELEDUCATIVO" required>
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
-                        <label>Ocupación (falta combo)</label><br>
-                        <input class="form-control" id="txtOcupacionAgresor" type="number" name="FK_OCUPACION" value='5' required=""><br>
-
-                        <label>Lugar trabajo</label><br>
-                        <input class="form-control" id="txtLugarTrabajoAgresor" type="text" name="VC_LUGARTRABAJO" value='Club de agresores' required=""><br>
-
-                        <label>Adicciones (No encontrado)</label><br>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <select id="cmbAdiccionesHV" class="form-control" multiple disabled>
-                                    <option selected disabled>Seleccione una opcion</option>
-                                </select>
-                            </div>
-                        </div><br>
+                        </div>
                     </div>
-
-                    @* Segunda columna *@
+                    <div class="col-xs-4 form-group">
+                        <label>Ocupación (falta combo)</label><br>
+                        <input class="form-control" id="txtOcupacionAgresor" type="number" name="FK_OCUPACION" value='5' required="">
+                    </div>
+                    <div class="col-xs-4 form-group">
+                        <label>Lugar trabajo</label><br>
+                        <input class="form-control" id="txtLugarTrabajoAgresor" type="text" name="VC_LUGARTRABAJO" value='Club de agresores' required="">
+                    </div>
                     <div class="col-xs-4 form-group">
                         <label>Vínculo con la usuaria (Tipo de relación)(falta combo)</label><br>
-                        <input class="form-control" id="txtTipoTipoRelacion" type="number" name="FK_TIPORELACION" value='5' required=""><br>
-                        <label>Tiempo de la relación (Fecha comienzo relación)</label><br>
-                        <input class="form-control" id="txtComienzoRelacion" type="date" name="DT_COMIENZORELACION" value='1966-10-10' required=""><br>
-
+                        <input class="form-control" id="txtTipoTipoRelacion" type="number" name="FK_TIPORELACION" value='5' required="">
+                    </div>
+                    <div class="col-xs-4 form-group">
+                        <label>Fecha de comienzo de la relación</label><br>
+                        <input class="form-control" id="txtComienzoRelacion" type="date" name="DT_COMIENZORELACION" value='1966-10-10' required="">
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Número de separaciones de la persona agresora</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -744,8 +710,9 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Antecedentes legales</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -753,8 +720,9 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Antecedentes psiquiátricos</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -762,8 +730,9 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
+                        </div>
+                    </div>
+                    <div class="col-xs-4 form-group">
                         <label>Impacto de la violencia (no encontrado)</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -771,37 +740,35 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-
-                        <label>Medidas de protección(falta combo)</label><br>
-                        <input class="form-control" id="txtTipoTipoRelacion" type="number" name="B_MEDIDASPROTECCION" value='1' required=""><br>
-
-                        @* No encontrados (tabla agresor) *@
-                        <input type="hidden" name="VC_IDENTIFICACION" value="123" />
-                        <input type="hidden" name="VC_OBSERVACIONANTECEDESTESLEGALES" value="ninguna" />
-                        <input type="hidden" name="VC_OBSERVACIONANTPSIQUIATRICOS" value="ninguna" />
-                        <input type="hidden" name="B_DENUNCIAPENAL" value="0" />
-                        <input type="hidden" name="DT_FECHAVENCIMIENTOPROTECCION" value="2000-01-01" />
-                        <input type="hidden" name="VC_NUMEXPEDIENTEMP" value="1" />
-                        <input type="hidden" name="VC_NUMEXPEDIENTEDENUNCIA" value="1" />
-                        <input type="hidden" name="VC_SEDEJUDICIALDENUNCIA" value="1" />
+                        </div>
                     </div>
+                    <div class="col-xs-4 form-group">
+                        <label>Medidas de protección(falta combo)</label><br>
+                        <input class="form-control" id="txtTipoTipoRelacion" type="number" name="B_MEDIDASPROTECCION" value='1' required="">
+                    </div>
+                    @* No encontrados (tabla agresor) *@
+                    <input type="hidden" name="VC_IDENTIFICACION" value="123" />
+                    <input type="hidden" name="VC_OBSERVACIONANTECEDESTESLEGALES" value="ninguna" />
+                    <input type="hidden" name="VC_OBSERVACIONANTPSIQUIATRICOS" value="ninguna" />
+                    <input type="hidden" name="B_DENUNCIAPENAL" value="0" />
+                    <input type="hidden" name="DT_FECHAVENCIMIENTOPROTECCION" value="2000-01-01" />
+                    <input type="hidden" name="VC_NUMEXPEDIENTEMP" value="1" />
+                    <input type="hidden" name="VC_NUMEXPEDIENTEDENUNCIA" value="1" />
+                    <input type="hidden" name="VC_SEDEJUDICIALDENUNCIA" value="1" />
                 </form>
 
-                @* Tercera columna *@
-                <div class="col-xs-4 form-group">
-                    <form id="formAgresion" method="post"> @* Form para TBL_AGRESION *@
-                        <label>Tiempo de la agresión (Fecha de la agresión)</label><br>
-                        <input class="form-control" id="txtTiempoAgresion" type="date" name="DT_FECHAAGRESION" value='2017-01-05' required=""><br>
+                <form id="formAgresion" method="post"> @* Form para TBL_AGRESION *@
+                    <div class="col-xs-4 form-group">
+                        <label>Fecha de la agresión</label><br>
+                        <input class="form-control" id="txtTiempoAgresion" type="date" name="DT_FECHAAGRESION" value='2017-01-05' required="">
+                    </div>
 
-                        <label>Nombre del centro de salud</label><br>
-                        <input class="form-control" id="txtNombreCentroSalud" type="text" name="VC_CENTRODSALUDATENCION" value='Centro de salud' required><br>
-
-                        <input type="hidden" name="I_DURACION" value="1" />
-                        <input type="hidden" name="TXT_RELATO" value="nada" />
-                    </form>
-
-                    <form id="formAgresorMotivoRegreso" method="post"> @* Form para TBL_AGRESOR_MOTIVO_REGRESO *@
+                    <input type="hidden" name="VC_CENTRODSALUDATENCION" value="Nada" />
+                    <input type="hidden" name="I_DURACION" value="1" />
+                    <input type="hidden" name="TXT_RELATO" value="Nada" />
+                </form>
+                <form id="formAgresorMotivoRegreso" method="post"> @* Form para TBL_AGRESOR_MOTIVO_REGRESO *@
+                    <div class="col-xs-4 form-group">
                         <label>Motivos para regresar</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -809,9 +776,11 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-                    </form>
-                    <form id="formAgresionAtencionMedica" method="post"> @* Form para TBL_AGRESION_ATENCION_MEDICA *@
+                        </div>
+                    </div>
+                </form>
+                <form id="formAgresionAtencionMedica" method="post"> @* Form para TBL_AGRESION_ATENCION_MEDICA *@
+                    <div class="col-xs-4 form-group">
                         <label>Atención médica producto de la agresión</label><br>
                         <div class="row">
                             <div class="col-xs-12">
@@ -819,41 +788,38 @@
                                     <option selected disabled>Seleccione una opcion</option>
                                 </select>
                             </div>
-                        </div><br>
-                    </form>
+                        </div>
+                    </div>
+                </form>
 
-                    <form id="formAgresionViolencia" method="post"> @* Form para TBL_AGRESION_VIOLENCIA *@
+                <form id="formAgresionViolencia" method="post"> @* Form para TBL_AGRESION_VIOLENCIA *@
+                    <div class="col-xs-4 form-group">
                         <label>Tipo de violencia (falta combo)</label><br>
-                        <input class="form-control" id="txtCondicionAseguramiento" type="number" name="FK_TIPOVIOLENCIA" value='1' required=""><br>
+                        <input class="form-control" id="txtCondicionAseguramiento" type="number" name="FK_TIPOVIOLENCIA" value='1' required="">
+                    </div>
+                   
+                    <input type="hidden" name="VC_OBSERVACIONES" value="ninguna" />
+                </form>
 
-                        <input type="hidden" name="VC_OBSERVACIONES" value="ninguna" />
-                    </form>
-
-                    <form id="formAgresionCategoriaRiesgo" method="post"> @* Form para TBL_AGRESION_CATEGORIA_RIESGO *@
+                <form id="formAgresionCategoriaRiesgo" method="post"> @* Form para TBL_AGRESION_CATEGORIA_RIESGO *@
+                    <div class="col-xs-4 form-group">
                         <label>Valoración de riesgo (falta combo)</label><br>
                         <input class="form-control" id="txtCondicionAseguramiento" type="number" name="FK_TIPORESPUESTA" value='1' required=""><br>
-
-                        <input type="hidden" name="FK_OBSERVACION" value="ninguna" />
-                    </form>
-
-                    <label>Condición legal al ingreso (no encontrado)</label><br>
+                    </div>
+                    
+                    <input type="hidden" name="FK_OBSERVACION" value="ninguna" />
+                </form>
+                
+                <div class="col-xs-4 form-group">
+                    <label>Adicciones (No encontrado)</label><br>
                     <div class="row">
                         <div class="col-xs-12">
-                            <select id="cmbCondicionLegalIngreso" class="form-control" disabled>
+                            <select id="cmbAdiccionesHV" class="form-control" multiple disabled>
                                 <option selected disabled>Seleccione una opcion</option>
                             </select>
                         </div>
-                    </div><br>
-
-                    <label>Se encuentra con el programa OAPVD (no encontrado)</label><br>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <select id="cmbEncuentraEnProgramaOAPVD" class="form-control" required disabled>
-                                <option selected disabled>Seleccione una opcion</option>
-                            </select>
-                        </div>
-                    </div><br>
-                </div> 
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -861,7 +827,9 @@
         <div id="tabAtenciones" class="tab-pane fade" style="padding:5px">
             <h3>Atenciones</h3><br>
             <div class="row" id="tabAtenciones">
-                Reservado para el segundo sprint
+                <div class="col-xs-12">
+                    Reservado para el segundo sprint. <br><br>
+                </div>
             </div>
         </div>
 
