@@ -345,58 +345,77 @@
         background-color: blue;
     }
 </style>
-<div class="container-fluid" id="contenedorPrincipal">
+<div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+    <div class="col-md-2 form-group" style="padding-left:15px;padding-right:1px">
+       <br />
+        <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Expediente</button>
 
-    <form id="crearcaso" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+        <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
 
+        <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
 
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#tabIngresoEgreso">Ingreso y Egreso</a></li>
-            <li><a data-toggle="tab" href="#tabPerfilUsuaria">Perfil de Usuaria</a></li>
-            <li><a data-toggle="tab" href="#tabHistoriaViolencia">Historia de Violencia</a></li>
-            <li><a data-toggle="tab" href="#tabAtenciones">Atenciones</a></li>
-            <li><a data-toggle="tab" href="#tabHijosHijas">Hijos e Hijas</a></li>
-            <li><a data-toggle="tab" href="#tabSeguimientos">Seguimientos</a></li>
-        </ul>
+        <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
 
-        <div class="tab-content">
-            <div id="tabIngresoEgreso" class="tab-pane fade in active" style="padding:5px">
-                @Html.Partial("CrearCasoIngresoEgreso")
-            </div>@*tab ingreso y egreso*@
-
-
-
-
-
-            <div id="tabPerfilUsuaria" class="tab-pane fade" style="padding:5px">
-                @Html.Partial("CrearCasoPerfilUsuaria")
-            </div>@*perfil de usuaria*@
-
-            <div id="tabHistoriaViolencia" class="tab-pane fade" style="padding:5px">
-                @Html.Partial("CrearCasoHistoriaViolencia");
-            </div>
-
-            <div id="tabAtenciones" class="tab-pane fade" style="padding:5px">
-                @Html.Partial("CrearCasoAtenciones");
-            </div>
-
-            <div id="tabHijosHijas" class="tab-pane fade" style="padding:5px">
-                
-            </div>
-
-            <div id="tabSeguimientos" class="tab-pane fade" style="padding:5px">
-                
-            </div>
+        <button type="button" id="btnCerrarCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Cerrar Caso</button>
+    <br />
     </div>
+    <div class="col-md-10 form-group">
+        <div class="container-fluid" id="contenedorPrincipal">
 
-    @* Botón de cancelar *@
-    <a href="CrearCaso" class="btn btn-primary" id="btnCancelar">Cancelar</a>
+            <form id="crearcaso" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
 
-    @* Botón de crear usuaria *@
-    <a href="#" class="btn btn-primary" form="crearcaso" id="btnGuardarCrearCaso">Guardar</a>
-    <br><br>
-</form>
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tabIngresoEgreso">Ingreso y Egreso</a></li>
+                    <li><a data-toggle="tab" href="#tabPerfilUsuaria">Perfil de Usuaria</a></li>
+                    <li><a data-toggle="tab" href="#tabHistoriaViolencia">Historia de Violencia</a></li>
+                    <li><a data-toggle="tab" href="#tabAtenciones">Atenciones</a></li>
+                    <li><a data-toggle="tab" href="#tabHijosHijas">Hijos e Hijas</a></li>
+                    <li><a data-toggle="tab" href="#tabSeguimientos">Seguimientos</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="tabIngresoEgreso" class="tab-pane fade in active" style="padding:5px">
+                        @Html.Partial("CrearCasoIngresoEgreso")
+                    </div>@*tab ingreso y egreso*@
+
+
+
+
+
+                    <div id="tabPerfilUsuaria" class="tab-pane fade" style="padding:5px">
+                        @Html.Partial("CrearCasoPerfilUsuaria")
+                    </div>@*perfil de usuaria*@
+
+                    <div id="tabHistoriaViolencia" class="tab-pane fade" style="padding:5px">
+                        @Html.Partial("CrearCasoHistoriaViolencia");
+                    </div>
+
+                    <div id="tabAtenciones" class="tab-pane fade" style="padding:5px">
+                        @Html.Partial("CrearCasoAtenciones");
+                    </div>
+
+                    <div id="tabHijosHijas" class="tab-pane fade" style="padding:5px">
+
+                    </div>
+
+                    <div id="tabSeguimientos" class="tab-pane fade" style="padding:5px">
+
+                    </div>
+                </div>
+
+                @* Botón de cancelar *@
+                <a href="CrearCaso" class="btn btn-primary" id="btnCancelar">Cancelar</a>
+
+                @* Botón de crear usuaria *@
+                <a href="#" class="btn btn-primary" form="crearcaso" id="btnGuardarCrearCaso">Guardar</a>
+                <br><br>
+            </form>
+        </div>
+
+    </div>
 </div>
+
 
 
 
