@@ -15,6 +15,7 @@
         CargarDropdowns();
         CargarDivisionTerritorial();
         CargarEditorRedesApoyo();
+        CargarEditorComposicionFamiliar();
         $("#btnGuardarDatosUsuaria").click(function () {
             var objDatosUsuaria = $();
             objDatosUsuaria.VC_NOMBRE = "nombre";
@@ -46,26 +47,25 @@
                 debugger;
                 var respuesta = JSON.parse(resultado);
                 if (respuesta.Mensaje.TipoMensaje === 1) {
+      
                     $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbPaisProcedencia').append($("<option/>", {
+                        $('#cmbApatrida').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
-                    });
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbNacionalidad').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#cmbOtraNacionalidad').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
-                    });
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbApatrida').append($("<option/>", {
+                        $('#cmbNacionalidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbPaisProcedencia').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbNacionalidadHistoria').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -78,6 +78,14 @@
                     });
                     $.each(respuesta.CatalogoEscolaridad, function (key, value) {
                         $('#cmbEscolaridad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbEscolaridadHistoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbEscolaridadFamiliar').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -99,10 +107,22 @@
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
+                        $('#cmbOcupacionHistoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbOcupacionFamiliar').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
                     });
 
                     $.each(respuesta.CatalogoIdentidadGenero, function (key, value) {
                         $('#cmbIdentidadGenero').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbGeneroHistoria').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -144,7 +164,7 @@
                         }));
                     });
                     $.each(respuesta.CatalogoParentesco, function (key, value) {
-                        $('#cmbComposicionFamiliarParentesco').append($("<option/>", {
+                        $('#cmbParentescoFamiliar').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -157,34 +177,6 @@
                         }));
                     });
 
-                    //combobox Historia Violencia
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbNacionalidadHistoria').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-
-                    $.each(respuesta.CatalogoOcupacion, function (key, value) {
-                        $('#cmbOcupacionHistoria').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-
-                    $.each(respuesta.CatalogoEscolaridad, function (key, value) {
-                        $('#cmbEscolaridadHistoria').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-
-                    $.each(respuesta.CatalogoIdentidadGenero, function (key, value) {
-                        $('#cmbGeneroHistoria').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
                     $.each(respuesta.CatalogoViolencia, function (key, value) {
                         $('#cmbTipoViolencia').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
@@ -579,6 +571,206 @@
 
                 $("#txtModalTitulo").css("color", "red");
                 $("#txtModalTitulo").text("Error al registrar red de Apoyo");
+                $("#txtModalContenido").text("El formulario se encuentra incompleto");
+                instMensajes.open();
+
+            }
+
+
+        });
+    }
+
+    function CargarEditorComposicionFamiliar() {
+        $("select option").prop("selected", false);
+        $("#frmEditorComposicionFamiliar").hide();
+        $("#btnOcultarCampoComposicionFamiliar").click(function (event) {
+            debugger;
+            event.preventDefault();
+            $("#frmEditorComposicionFamiliar").hide();
+        });
+        $("#txtNombreFamiliar").val("");
+        $("#cmbParentescoFamiliar").val([]);
+        $("#txtEdadFamiliar").val("");
+        $("#cmbEscolaridadFamiliar").val([]);
+        $("#cmbOcupacionFamiliar").val([]);
+        var tablaComposicionFamiliar = $('#tblComposicionFamiliar').DataTable({
+            responsive: true,
+            dom: 'Brtlp<"clear">',
+            select: true,
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fa fa-file-excel-o"></i>',
+                    titleAttr: 'Excel'
+                }, {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fa fa-file-pdf-o"></i>',
+                    titleAttr: 'PDF'
+                }, {
+                    text: '<i class="fa fa-plus-circle btnBlanco" aria-hidden="true"></i>',
+                    titleAttr: 'Agregar un familiar',
+                    className: 'botonEstandar',
+                    action: function (e, dt, node, config) {
+
+                        $('.composicionFamiliar').val('');
+
+                        $("#frmEditorComposicionFamiliar").fadeIn();
+
+                    }
+                }, {
+                    text: '<i class="fa fa-minus-circle btnBlanco" aria-hidden="true"></i>',
+                    titleAttr: 'Eliminar un familiar',
+                    className: 'botonEstandar',
+                    action: function (e, dt, node, config) {
+                        debugger;
+
+                        var contSeleccionados = tablaComposicionFamiliar.rows({
+                            selected: true
+                        }).count();
+                        var filaSeleccionada = tablaComposicionFamiliar.rows({
+                            selected: true
+                        }).data();
+                        if (contSeleccionados > 0) {
+
+                            tablaComposicionFamiliar.row('.selected').remove().draw();
+                        } else {
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("No se seleccionaron familiares");
+                            $("#txtModalContenido").text("Seleccione un familiar para continuar");
+                            instMensajes.open();
+                        }
+
+                        debugger;
+                    }
+                }
+            ],
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            "processing": true, // for show progress bar
+            "serverSide": false, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            tableTools: {
+                "sRowSelect": "single"
+            },
+            "columns": [
+                {
+                    "data": "PK_FAMILIAR",
+                    "name": "PK_FAMILIAR",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "PK_PERSONA",
+                    "name": "PK_PERSONA",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "FK_PARENTESCO_PERSONA",
+                    "name": "FK_PARENTESCO_PERSONA",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "FK_ESCOLARIDAD",
+                    "name": "FK_ESCOLARIDAD",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "FK_OCUPACION",
+                    "name": "FK_OCUPACION",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "Nombre",
+                    "name": "Nombre",
+                    "autoWidth": true,
+                    "visible": true
+                }, {
+                    "data": "Parentesco",
+                    "name": "Parentesco",
+                    "autoWidth": true,
+                    "visible": true
+                }, {
+                    "data": "Edad",
+                    "name": "Edad",
+                    "autoWidth": true,
+                    "visible": true
+                }, {
+                    "data": "Escolaridad",
+                    "name": "Escolaridad",
+                    "autoWidth": true
+                }, {
+                    "data": "Ocupación",
+                    "name": "Ocupación",
+                    "autoWidth": true,
+                    "visible": true
+                }
+            ]
+
+        });
+        $('#tblComposicionFamiliar tbody').on('click', 'tr', function () {
+            debugger;
+            if ($(this).hasClass('selected')) {
+
+
+                //$("tr").removeClass("selectedDT");
+                $("#tblComposicionFamiliar tr").removeClass("selectedDT");
+                $("#tblComposicionFamiliar tr").removeClass("selected");
+                $(this).addClass('selected');
+                $(this).addClass('selectedDT');
+            } else {
+                $(this).removeClass('selectedDT');
+
+            }
+        });
+        $("#btnGuardarComposicionFamiliar").click(function () {
+            debugger;
+            if ($("#cmbParentescoFamiliar").val() !== ''
+                && $("#txtNombreFamiliar").length > 0
+                && $("#cmbOcupacionFamiliar").val() !== ''
+                && $("#txtEdadFamiliar").length > 0
+                && $("#cmbEscolaridadFamiliar").val !== '') {
+
+                tablaComposicionFamiliar.row.add({
+                    "PK_FAMILIAR": '',
+                    "PK_PERSONA": '',
+                    "FK_PARENTESCO_PERSONA": $("#cmbParentescoFamiliar").val(),
+                    "FK_ESCOLARIDAD": $("#cmbEscolaridadFamiliar").val(),
+                    "FK_OCUPACION": $("#cmbOcupacionFamiliar").val(),
+                    "Nombre": $("#txtNombreFamiliar").val(),
+                    "Parentesco": $("#cmbParentescoFamiliar option:selected").text(),
+                    "Edad": $("#txtEdadFamiliar").val(),
+                    "Escolaridad": $("#cmbEscolaridadFamiliar option:selected").text(),
+                    "Ocupación": $("#cmbOcupacionFamiliar option:selected").text()
+                }).draw();
+                $('.composicionFamiliar').val('');
+
+            } else {
+
+
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error al registrar familiar");
                 $("#txtModalContenido").text("El formulario se encuentra incompleto");
                 instMensajes.open();
 
@@ -1040,6 +1232,78 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!--Composición familiar-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="tblComposicionFamiliar" class="display table-bordered" cellspacing="0" style="width: 100%">
+                                        <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-users" style="margin-right: 2px;"></i>Composición Familiar</div></caption>
+                                        <thead>
+                                            <tr>
+                                                <th>PK_FAMILIAR</th>
+                                                <th>PK_PERSONA</th>
+                                                <th>FK_PARENTESCO_PERSONA</th>
+                                                <th>FK_ESCOLARIDAD</th>
+                                                <th>FK_OCUPACION</th>
+                                                <th>Nombre</th>
+                                                <th>Parentesco</th>
+                                                <th>Edad</th>
+                                                <th>Escolaridad</th>
+                                                <th>Ocupación</th>
+
+
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row comunForm" id="frmEditorComposicionFamiliar">
+
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-xs-9"></div>
+                                        <div class="col-xs-3">
+                                            <button class="botonCerrar danger" id="btnOcultarCampoComposicionFamiliar">
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Nombre completo</label>
+                                            <input class="form-control composicionFamiliar" placeholder="Nombre completo" id="txtNombreFamiliar" type="text" required="">
+                                        </div>
+                                        
+                                        <div class="col-md-6 form-group">
+                                            <label>Parentesco</label>
+                                            <select id="cmbParentescoFamiliar" class="form-control composicionFamiliar"></select>
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Edad</label>
+                                            <input class="form-control composicionFamiliar" placeholder="Edad" id="txtEdadFamiliar" type="text" required="">
+                                        </div>
+                                        
+                                        <div class="col-md-6 form-group">
+                                            <label>Escolaridad</label>
+                                            <select id="cmbEscolaridadFamiliar" class="form-control composicionFamiliar"></select>
+                                        </div>
+                                        
+                                        <div class="col-md-6 form-group">
+                                            <label>Ocupación</label>
+                                            <select id="cmbOcupacionFamiliar" class="form-control composicionFamiliar"></select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12" style="text-align: center">
+                                            <button type="button" id="btnGuardarComposicionFamiliar" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
                             <!--Finaliza Adicciones-->
