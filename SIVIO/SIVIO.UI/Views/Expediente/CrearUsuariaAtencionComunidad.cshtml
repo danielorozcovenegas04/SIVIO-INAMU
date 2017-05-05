@@ -1,23 +1,22 @@
-﻿
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript">
-    function llenarComboBox(nombreCatalogo, nombreComboBox) {
+    function llenarComboBox(nombreCatalogo, nombreComboBox, valorComboBox) {
         return function (respuesta) {
             var catalogo = respuesta[nombreCatalogo];
-
-            console.log(catalogo);
-            //debugger;
             if (catalogo.Mensaje.TipoMensaje === 1) {
                 $.each(catalogo.Catalogo, function (key, value) {
-                    console.log($(nombreComboBox));
                     $(nombreComboBox).append($("<option/>", {
                         value: value.PK_VALORCATALOGO,
                         text: value.VC_VALOR1
                     }));
 
                 });
+
+                if (valorComboBox) {
+                    $(nombreComboBox).val(valorComboBox);
+                }
             } else {
                 $("#contenedorBotones").show();
                 $("#contenedorEspera").hide();
@@ -30,6 +29,18 @@
 
             return respuesta
 
+        }
+    }
+
+    function comboMultiple(nombreComboBox) {
+        return () => {
+            //$('#btn-login').fadeIn();
+            $(nombreComboBox).selectize({
+                sortField: 'text',
+                create: false,
+                placeholder: "Tipo de CEAAM",
+            });
+            $.LoadingOverlay("hide");
         }
     }
 
@@ -67,9 +78,10 @@
             .then(llenarComboBox("Nacionalidad", "#cmbOtraNacionalidad"))
             .then(llenarComboBox("Situación Migratoria", "#cmbCondicionMigratoria"))
             .then(llenarComboBox("Situación Laboral", "#cmbCondicionLaboral"))
+            .then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbExperienciaLaboral"))
             //.then(llenarComboBox("", "#cmbCondicionAseguramiento"))
             .then(llenarComboBox("Tipo de vivienda", "#cmbVivienda"))
-            .then(llenarComboBox("Tipo de Discapacidad", "#cmbDiscapacidades"))
+            .then(llenarComboBox("Tipo de Discapacidad", "#cmbDiscapacidad"))
             .then(llenarComboBox("Adicción", "#cmbAdicciones"))
             .then(llenarComboBox("Género", "#cmbGenero"))
             .then(llenarComboBox("Nacionalidad", "#cmbNacionalidadHV"))
@@ -80,33 +92,22 @@
             .then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbAntecedentesLegales"))
             .then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbAntecedentesPsiquiatricos"))
             .then(llenarComboBox("Tipo de Atención Médica", "#cmbAtencionMedicaProductoDeAgresion"))
-            .then(llenarComboBox("Situación Enfrentada", "#cmbTipoViolencia"))
+            //.then(llenarComboBox("Situación Enfrentada", "#cmbTipoViolencia"))
             .then(llenarComboBox("Impacto producto de violencia", "#cmbImpactoViolencia"))
             .then(llenarComboBox("Valoracion de riesgo", "#cmbValoracionRiesgo"))
             .then(llenarComboBox("Condicion legal al ingreso", "#cmbCondicionLegalIngreso"))
-            .then(llenarComboBox("Medida de Protección", "#cmbMedidasProteccion"))
+            //.then(llenarComboBox("Medida de Protección", "#cmbMedidasProteccion"))
             //.then(llenarComboBox("", "#cmbEncuentraEnProgramaOAPVD"))
             .then(llenarComboBox("Situación de Violencia Física", "#cmbViolenciaFisica"))
             .then(llenarComboBox("Situación de Violencia Psicológica", "#cmbViolenciaPsicologica"))
             .then(llenarComboBox("Situación de Violencia Sexual", "#cmbViolenciaSexual"))
             .then(llenarComboBox("Situación de Violencia Patrimonial", "#cmbViolenciaPatrimonial"))
+
             //.then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbRespuestaSiNosponible"))
-            .then(() => {
-                $('#btn-login').fadeIn();
-                $('#cmbTipoCEAAM').selectize({
-                    sortField: 'text',
-                    create: false,
-                    placeholder: "Tipo de CEAAM",
-                });
-                $.LoadingOverlay("hide");
-        });
-
-
-
-
-
-
-
+            .then(comboMultiple("#cmbDiscapacidad"))
+            .then(comboMultiple("#cmbAdicciones"))
+            .then(comboMultiple("#cmbAdiccionesHV"))
+            .then(comboMultiple("#cmbImpactoViolencia"))
     });
 </script>
 
@@ -531,9 +532,12 @@
                                 </select>
                             </div>
                         </div>
-                        <input type="radio" name="radioApatrida" value="Apatrida"> Ápatrida <br><br><br>
                     </div>
-                    <div class="col-xs-4 form-group"> <br><br><br><br><br><br><br><br><br> </div>
+                    <div class="col-xs-4 form-group">
+                        <br><br>
+                        <input type="radio" name="radioApatrida" value="Apatrida"> Ápatrida <br><br><br>
+
+                    </div>
                     <div class="col-xs-4 form-group">
                         <label>Condición migratoria</label><br>
                         <div class="row">
@@ -589,7 +593,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4 form-group">
-                        <label>Experiencia Laboral</label><br>
+                        <label>Experiencia laboral</label><br>
                         <input class="form-control" id="txtAnosExperiencia" name="I_ANNOSEXPERIENCIA" type="number" value='2' required="">
                     </div>
                     <div class="col-xs-4 form-group">
@@ -605,7 +609,7 @@
                     <label>Discapacidades:</label><br>
                     <div class="row">
                         <div class="col-xs-12">
-                            <select id="cmbDiscapacidades" class="form-control" multiple>
+                            <select id="cmbDiscapacidad" class="form-control" multiple>
                                 @*<option selected disabled>Seleccione una opcion</option>*@
                             </select>
                         </div>
@@ -614,21 +618,14 @@
                 <div class="col-xs-4 form-group">
                     <form id="formAdicciones" method="post">
                         <label>Adicciones</label><br>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <select id="cmbAdicciones" class="form-control" name="FK_TIPOADICCION" multiple>
-                                    <option selected disabled>Seleccione una opcion</option>
-                                </select>
-                            </div>
-                        </div><br>
+                        <select id="cmbAdicciones" class="form-control" name="FK_TIPOADICCION" multiple></select>                        
                     </form>
                 </div>
 
 
                 @* Columna intermedia*@
                 <div class="col-xs-9 form-group">
-                    <br><h4>Redes o recursos de apoyo con los que cuenta la usuaria</h4>
-                    <input type="radio" name="radioApoyo" value="No tiene"> No tiene<br>
+                    <br><h4>Redes o recursos de apoyo con los que cuenta la usuaria (Pendiente)</h4>
                 </div>
 
                 
@@ -733,15 +730,10 @@
                         </div>
                     </div>
                     <div class="col-xs-4 form-group">
-                        <label>Impacto de la violencia (no encontrado)</label><br>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <select id="cmbImpactoViolencia" class="form-control" multiple disabled>
-                                    <option selected disabled>Seleccione una opcion</option>
-                                </select>
-                            </div>
-                        </div>
+                        <label>Impacto de la violencia (No encontrado)</label><br>
+                        <select id="cmbImpactoViolencia" class="form-control" multiple></select>
                     </div>
+
                     <div class="col-xs-4 form-group">
                         <label>Medidas de protección(falta combo)</label><br>
                         <input class="form-control" id="txtTipoTipoRelacion" type="number" name="B_MEDIDASPROTECCION" value='1' required="">
@@ -769,7 +761,7 @@
                 </form>
                 <form id="formAgresorMotivoRegreso" method="post"> @* Form para TBL_AGRESOR_MOTIVO_REGRESO *@
                     <div class="col-xs-4 form-group">
-                        <label>Motivos para regresar</label><br>
+                        <label>Motivo para regresar</label><br>
                         <div class="row">
                             <div class="col-xs-12">
                                 <select id="cmbMotivosRegresar" class="form-control" name="FK_MOTIVOREGRESO" required>
@@ -809,16 +801,12 @@
                     
                     <input type="hidden" name="FK_OBSERVACION" value="ninguna" />
                 </form>
-                
+
                 <div class="col-xs-4 form-group">
-                    <label>Adicciones (No encontrado)</label><br>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <select id="cmbAdiccionesHV" class="form-control" multiple disabled>
-                                <option selected disabled>Seleccione una opcion</option>
-                            </select>
-                        </div>
-                    </div>
+                    <form id="formAdicciones" method="post">
+                        <label>Adicciones (No encontrado)</label><br>
+                        <select id="cmbAdiccionesHV" class="form-control" multiple></select>
+                    </form>
                 </div>
             </div>
         </div>
