@@ -16,6 +16,8 @@
         CargarDivisionTerritorial();
         CargarEditorRedesApoyo();
         CargarEditorComposicionFamiliar();
+        fechaHoy();
+        mostrarHora();
         $("#btnGuardarDatosUsuaria").click(function () {
             var objDatosUsuaria = $();
             objDatosUsuaria.VC_NOMBRE = "nombre";
@@ -779,6 +781,36 @@
 
         });
     }
+    function fechaHoy() {
+        var hoy = new Date();
+        var dd = hoy.getDate();
+        var mm = hoy.getMonth() + 1; //hoy es 0!
+        var yyyy = hoy.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        hoy = mm + '/' + dd + '/' + yyyy;
+        $("#txtFechaHoy").val(hoy);
+    }
+    function mostrarHora() {
+        var f = new Date();
+        minutos = f.getMinutes();
+        temp = minutos;
+        if (minutos < 10) {
+            temp = "0" + temp;
+        }
+        cad = f.getHours() + ":" + temp;
+        window.status = cad;
+        setTimeout("mostrarhora()", 1000);
+        $("#txtHoraInicio").val(cad);
+    }
+
 
 </script>
 
@@ -865,15 +897,16 @@
                                         </button>*@
                                 </div>
                             </div>
+                            @*       -----------------          Inicio datos administrativos        --------------         *@
                             <div class="row">
                                 <div class="col-xs-6 form-group">
                                     <label>Fecha de Registro</label>
-                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.fecha, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                    <input type="text" id="txtFechaHoy" style="background-color:transparent" class="form-control" value="" readonly>
                                 </div>
 
                                 <div class="col-xs-6 form-group">
                                     <label>Hora de inicio de registro</label>
-                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.horaInicio, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                    <input type="time" id="txtHoraInicio" style="background-color:transparent" class="form-control" value="" readonly>
                                 </div>
                             </div>
 
@@ -884,42 +917,43 @@
                                 </div>
                                 <div class="col-xs-6 form-group">
                                     <label>Profesional</label>
-                                    <select class="form-control">
-                                        <option value="atension 1">Profesional 1</option>
-                                        <option value="atension 2">Profesional 2</option>
-                                    </select>
+                                    <select class="form-control" id="txtProfesional"></select>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-xs-6 form-group">
-                                    <label>Institusión que refiere</label>
-                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.institucionRefiere, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre Institusión" } })
+                                    <label>institución que refiere</label>
+                                    <input class="form-control" placeholder="Nombre institución" id="txtinstitucionRefiere" type="text" required="">
                                 </div>
 
                                 <div class="col-xs-6 form-group">
                                     <label>Persona que refiere</label>
-                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.personaRefiere, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre y apellido" } })
+                                    <input class="form-control" placeholder="Nombre y Apellidos" id="txtPersonaRefiere" type="text" required="">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-xs-6 form-group">
-                                    <label>Telefono</label>
-                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.telefono, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero de telefono", @type = "number" } })
+                                    <label>Teléfono Persona que refiere</label>
+                                    <input class="form-control" placeholder="numero de teléfono" id="txtTelefonoRefiere" type="number" required="">
                                 </div>
 
                                 <div class="col-xs-6 form-group">
                                     <label>Correo</label>
-                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.correo, new { htmlAttributes = new { @class = "form-control", @placeholder = "ejemplo@ejemplo.com", @type = "email" } })
+                                    <input class="form-control" placeholder="ejemplo@ejemplo.com" id="txtCorreo" type="email" required="">
                                 </div>
                             </div>
-                            <div class="row" id="contenedorBotones">
-                                <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                    <button type="button" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Siguiente</button>
-                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                           @*
+                                 <div class="row" id="contenedorBotones">
+                                    <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                                        <button onclick="" type="button" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; "data-toggle="tab" href="#datUsuaria">
+                                            <i  aria-hidden="true"></i>Siguiente
+                                        </button>
+                                        <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                    </div>
                                 </div>
-                            </div>
+                        *@
                         </div>
                     </div>
                     <div id="datUsuaria" class="tab-pane">
