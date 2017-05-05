@@ -17,6 +17,7 @@ namespace SIVIO.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TBL_ROL()
         {
+            this.TBL_ROL_TIPO_ATENCION = new HashSet<TBL_ROL_TIPO_ATENCION>();
             this.TBL_ROL_ACCION = new HashSet<TBL_ROL_ACCION>();
             this.TBL_ROL_USUARIO = new HashSet<TBL_ROL_USUARIO>();
         }
@@ -27,6 +28,8 @@ namespace SIVIO.Entidades
         public int FK_TIPOSERVICIO { get; set; }
     
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_ROL_TIPO_ATENCION> TBL_ROL_TIPO_ATENCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_ROL_ACCION> TBL_ROL_ACCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

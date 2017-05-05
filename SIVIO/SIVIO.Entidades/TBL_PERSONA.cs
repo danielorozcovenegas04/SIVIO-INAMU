@@ -20,6 +20,7 @@ namespace SIVIO.Entidades
             this.TBL_ADICCIONES = new HashSet<TBL_ADICCIONES>();
             this.TBL_AGRESOR = new HashSet<TBL_AGRESOR>();
             this.TBL_DIRECCION = new HashSet<TBL_DIRECCION>();
+            this.TBL_INTERVENCION = new HashSet<TBL_INTERVENCION>();
             this.TBL_PERSONA_RED_APOYO = new HashSet<TBL_PERSONA_RED_APOYO>();
             this.TBL_PERSONA_SALUD = new HashSet<TBL_PERSONA_SALUD>();
             this.TBL_PERSONA_APOYO = new HashSet<TBL_PERSONA_APOYO>();
@@ -35,7 +36,7 @@ namespace SIVIO.Entidades
         public string VC_NOMBRE { get; set; }
         public string VC_APELLIDO1 { get; set; }
         public string VC_APELLIDO2 { get; set; }
-        public System.DateTime DT_FECHANACIMIENTO { get; set; }
+        public Nullable<System.DateTime> DT_FECHANACIMIENTO { get; set; }
         public int FK_ESTADOCIVIL { get; set; }
         public int FK_ESCOLARIDAD { get; set; }
         public int FK_GENERO { get; set; }
@@ -54,6 +55,11 @@ namespace SIVIO.Entidades
         public int FK_CANTONPROCEDENCIA { get; set; }
         public int FK_DISTRITOPROCEDENCIA { get; set; }
         public string VC_CORREO { get; set; }
+        public Nullable<int> FK_ETNIA { get; set; }
+        public Nullable<int> FK_NACIONALIDAD2 { get; set; }
+        public Nullable<int> I_EDAD { get; set; }
+        public Nullable<bool> B_CONOCEFECHANACIMIENTO { get; set; }
+        public Nullable<int> FK_PUEBLOINDIGENA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_ADICCIONES> TBL_ADICCIONES { get; set; }
@@ -61,12 +67,17 @@ namespace SIVIO.Entidades
         public virtual ICollection<TBL_AGRESOR> TBL_AGRESOR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_DIRECCION> TBL_DIRECCION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_INTERVENCION> TBL_INTERVENCION { get; set; }
         public virtual TBL_LABORAL TBL_LABORAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_PERSONA_RED_APOYO> TBL_PERSONA_RED_APOYO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_PERSONA_SALUD> TBL_PERSONA_SALUD { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO1 { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO2 { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_PERSONA_APOYO> TBL_PERSONA_APOYO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
