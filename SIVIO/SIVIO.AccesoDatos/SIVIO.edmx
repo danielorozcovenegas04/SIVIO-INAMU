@@ -107,6 +107,7 @@
           <Property Name="VC_NUMEXPEDIENTEMP" Type="varchar" MaxLength="200" />
           <Property Name="VC_NUMEXPEDIENTEDENUNCIA" Type="varchar" MaxLength="200" />
           <Property Name="VC_SEDEJUDICIALDENUNCIA" Type="varchar" MaxLength="200" />
+          <Property Name="FK_CASOCLAIS" Type="int" />
         </EntityType>
         <EntityType Name="TBL_AGRESOR_MOTIVO_REGRESO">
           <Key>
@@ -448,6 +449,7 @@
           <Property Name="FK_NACIONALIDAD2" Type="int" />
           <Property Name="I_EDAD" Type="int" />
           <Property Name="B_CONOCEFECHANACIMIENTO" Type="bit" />
+          <Property Name="FK_PUEBLOINDIGENA" Type="int" />
         </EntityType>
         <EntityType Name="TBL_PERSONA_APOYO">
           <Key>
@@ -565,6 +567,7 @@
           <Property Name="FK_VALORACIONRIESGO" Type="int" Nullable="false" />
           <Property Name="B_PROGRAMAOAPVD" Type="bit" Nullable="false" />
           <Property Name="VC_JUSTIFICACION" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="B_CASOACTIVO" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TBL_REGISTRO_COORDINACION">
           <Key>
@@ -594,6 +597,14 @@
           <Property Name="FK_ROL" Type="int" Nullable="false" />
           <Property Name="FK_ACCION" Type="int" Nullable="false" />
           <Property Name="PK_ROLACCION" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_ROL_TIPO_ATENCION">
+          <Key>
+            <PropertyRef Name="PK_ROLTIPOATENCION" />
+          </Key>
+          <Property Name="PK_ROLTIPOATENCION" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_ROL" Type="int" Nullable="false" />
+          <Property Name="FK_TIPOATENCION" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TBL_ROL_USUARIO">
           <Key>
@@ -813,6 +824,18 @@
             </Principal>
             <Dependent Role="TBL_AGRESION_VIOLENCIA">
               <PropertyRef Name="FK_TIPOVIOLENCIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_AGRESOR_CASOCLAIS">
+          <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+          <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALOR_CATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_CASOCLAIS" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1464,6 +1487,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO2">
+          <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+          <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALOR_CATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_PERSONA">
+              <PropertyRef Name="FK_PUEBLOINDIGENA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TBL_PERSONA_TBL_VALORCATALOGO">
           <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
           <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="*" />
@@ -1716,6 +1751,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TBL_ROL_TIPO_ATENCION_TBL_ROL">
+          <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="1" />
+          <End Role="TBL_ROL_TIPO_ATENCION" Type="Self.TBL_ROL_TIPO_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ROL">
+              <PropertyRef Name="PK_ROL" />
+            </Principal>
+            <Dependent Role="TBL_ROL_TIPO_ATENCION">
+              <PropertyRef Name="FK_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO">
+          <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+          <End Role="TBL_ROL_TIPO_ATENCION" Type="Self.TBL_ROL_TIPO_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALOR_CATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_ROL_TIPO_ATENCION">
+              <PropertyRef Name="FK_TIPOATENCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TBL_ROLACCION_TBL_ACCION">
           <End Role="TBL_ACCION" Type="Self.TBL_ACCION" Multiplicity="1" />
           <End Role="TBL_ROL_ACCION" Type="Self.TBL_ROL_ACCION" Multiplicity="*" />
@@ -1800,6 +1859,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="SP_BUSCAR_EXPEDIENTE_CEEAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VC_TERMINOBUSQUEDA" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_LISTAR_ATENCIONES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="SIVIOModelStoreContainer">
           <EntitySet Name="TBL_ACCION" EntityType="Self.TBL_ACCION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_ADICCIONES" EntityType="Self.TBL_ADICCIONES" Schema="dbo" store:Type="Tables" />
@@ -1852,6 +1946,7 @@
           <EntitySet Name="TBL_REGISTRO_COORDINACION" EntityType="Self.TBL_REGISTRO_COORDINACION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_ROL" EntityType="Self.TBL_ROL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_ROL_ACCION" EntityType="Self.TBL_ROL_ACCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ROL_TIPO_ATENCION" EntityType="Self.TBL_ROL_TIPO_ATENCION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_ROL_USUARIO" EntityType="Self.TBL_ROL_USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_TELEFONO" EntityType="Self.TBL_TELEFONO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TBL_UNIDAD" EntityType="Self.TBL_UNIDAD" Schema="dbo" store:Type="Tables" />
@@ -1912,6 +2007,10 @@
           <AssociationSet Name="FK_TBL_AGRESION_VIOLENCIA_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESION_VIOLENCIA_TBL_VALOR_CATALOGO">
             <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
             <End Role="TBL_AGRESION_VIOLENCIA" EntitySet="TBL_AGRESION_VIOLENCIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_CASOCLAIS" Association="Self.FK_TBL_AGRESOR_CASOCLAIS">
+            <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
           </AssociationSet>
           <AssociationSet Name="FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_AGRESOR" Association="Self.FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_AGRESOR">
             <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
@@ -2129,6 +2228,10 @@
             <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
             <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
           </AssociationSet>
+          <AssociationSet Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO2" Association="Self.FK_TBL_PERSONA_TBL_VALOR_CATALOGO2">
+            <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+          </AssociationSet>
           <AssociationSet Name="FK_TBL_PERSONA_TBL_VALORCATALOGO" Association="Self.FK_TBL_PERSONA_TBL_VALORCATALOGO">
             <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
             <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
@@ -2212,6 +2315,14 @@
           <AssociationSet Name="FK_TBL_ROL_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_ROL_TBL_VALOR_CATALOGO">
             <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
             <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ROL_TIPO_ATENCION_TBL_ROL" Association="Self.FK_TBL_ROL_TIPO_ATENCION_TBL_ROL">
+            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+            <End Role="TBL_ROL_TIPO_ATENCION" EntitySet="TBL_ROL_TIPO_ATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO">
+            <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+            <End Role="TBL_ROL_TIPO_ATENCION" EntitySet="TBL_ROL_TIPO_ATENCION" />
           </AssociationSet>
           <AssociationSet Name="FK_TBL_ROLACCION_TBL_ACCION" Association="Self.FK_TBL_ROLACCION_TBL_ACCION">
             <End Role="TBL_ACCION" EntitySet="TBL_ACCION" />
@@ -2695,6 +2806,57 @@
             <End Role="TBL_CATALOGO" EntitySet="TBL_CATALOGO" />
             <End Role="TBL_PERSONA_FAMILIAR" EntitySet="TBL_PERSONA_FAMILIAR" />
           </AssociationSet>
+          <AssociationSet Name="FK_TBL_AGRESOR_CASOCLAIS" Association="SIVIOModel.FK_TBL_AGRESOR_CASOCLAIS">
+            <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+            <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO2" Association="SIVIOModel.FK_TBL_PERSONA_TBL_VALOR_CATALOGO2">
+            <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+            <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+          </AssociationSet>
+          <EntitySet Name="TBL_ROL_TIPO_ATENCION" EntityType="SIVIOModel.TBL_ROL_TIPO_ATENCION" />
+          <AssociationSet Name="FK_TBL_ROL_TIPO_ATENCION_TBL_ROL" Association="SIVIOModel.FK_TBL_ROL_TIPO_ATENCION_TBL_ROL">
+            <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+            <End Role="TBL_ROL_TIPO_ATENCION" EntitySet="TBL_ROL_TIPO_ATENCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO" Association="SIVIOModel.FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO">
+            <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+            <End Role="TBL_ROL_TIPO_ATENCION" EntitySet="TBL_ROL_TIPO_ATENCION" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="SP_BUSCAR_EXPEDIENTE_CEEAM" ReturnType="Collection(SIVIOModel.SP_BUSCAR_EXPEDIENTE_CEEAM_Result)">
+            <Parameter Name="VC_TERMINOBUSQUEDA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SIVIOModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SIVIOModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_LISTAR_ATENCIONES" ReturnType="Collection(SIVIOModel.SP_LISTAR_ATENCIONES_Result)" />
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <EntityType Name="TBL_ACCION">
           <Key>
@@ -2825,6 +2987,8 @@
           <NavigationProperty Name="TBL_VALOR_CATALOGO2" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO1" FromRole="TBL_AGRESOR" ToRole="TBL_VALOR_CATALOGO" />
           <NavigationProperty Name="TBL_VALOR_CATALOGO3" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO2" FromRole="TBL_AGRESOR" ToRole="TBL_VALOR_CATALOGO" />
           <NavigationProperty Name="TBL_VALOR_CATALOGO4" Relationship="SIVIOModel.FK_TBL_AGRESOR_TBL_VALORCATALOGO3" FromRole="TBL_AGRESOR" ToRole="TBL_VALOR_CATALOGO" />
+          <Property Name="FK_CASOCLAIS" Type="Int32" />
+          <NavigationProperty Name="TBL_VALOR_CATALOGO5" Relationship="SIVIOModel.FK_TBL_AGRESOR_CASOCLAIS" FromRole="TBL_AGRESOR" ToRole="TBL_VALOR_CATALOGO" />
         </EntityType>
         <EntityType Name="TBL_AGRESOR_MOTIVO_REGRESO">
           <Key>
@@ -3239,6 +3403,8 @@
           <NavigationProperty Name="TBL_TELEFONO" Relationship="SIVIOModel.FK_TBL_TELEFONO_TBL_PERSONA" FromRole="TBL_PERSONA" ToRole="TBL_TELEFONO" />
           <Property Name="I_EDAD" Type="Int32" />
           <Property Name="B_CONOCEFECHANACIMIENTO" Type="Boolean" />
+          <Property Name="FK_PUEBLOINDIGENA" Type="Int32" />
+          <NavigationProperty Name="TBL_VALOR_CATALOGO21" Relationship="SIVIOModel.FK_TBL_PERSONA_TBL_VALOR_CATALOGO2" FromRole="TBL_PERSONA" ToRole="TBL_VALOR_CATALOGO" />
         </EntityType>
         <EntityType Name="TBL_PERSONA_APOYO">
           <Key>
@@ -3389,6 +3555,7 @@
           <NavigationProperty Name="TBL_VALOR_CATALOGO" Relationship="SIVIOModel.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO" FromRole="TBL_REGISTRO_CEAAM" ToRole="TBL_VALOR_CATALOGO" />
           <NavigationProperty Name="TBL_VALOR_CATALOGO1" Relationship="SIVIOModel.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO1" FromRole="TBL_REGISTRO_CEAAM" ToRole="TBL_VALOR_CATALOGO" />
           <NavigationProperty Name="TBL_VALOR_CATALOGO2" Relationship="SIVIOModel.FK_TBL_REGISTRO_CEAAM_TBL_VALOR_CATALOGO2" FromRole="TBL_REGISTRO_CEAAM" ToRole="TBL_VALOR_CATALOGO" />
+          <Property Name="B_CASOACTIVO" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TBL_REGISTRO_COORDINACION">
           <Key>
@@ -3416,6 +3583,7 @@
           <NavigationProperty Name="TBL_VALOR_CATALOGO" Relationship="SIVIOModel.FK_TBL_ROL_TBL_VALOR_CATALOGO" FromRole="TBL_ROL" ToRole="TBL_VALOR_CATALOGO" />
           <NavigationProperty Name="TBL_ROL_ACCION" Relationship="SIVIOModel.FK_TBL_ROLACCION_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_ROL_ACCION" />
           <NavigationProperty Name="TBL_ROL_USUARIO" Relationship="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_ROL_USUARIO" />
+          <NavigationProperty Name="TBL_ROL_TIPO_ATENCION" Relationship="SIVIOModel.FK_TBL_ROL_TIPO_ATENCION_TBL_ROL" FromRole="TBL_ROL" ToRole="TBL_ROL_TIPO_ATENCION" />
         </EntityType>
         <EntityType Name="TBL_ROL_ACCION">
           <Key>
@@ -3534,6 +3702,9 @@
           <NavigationProperty Name="TBL_REGISTRO_COORDINACION1" Relationship="SIVIOModel.FK_TBL_REGISTRO_COORDINACION_TBL_VALOR_CATALOGO1" FromRole="TBL_VALOR_CATALOGO" ToRole="TBL_REGISTRO_COORDINACION" />
           <NavigationProperty Name="TBL_ROL" Relationship="SIVIOModel.FK_TBL_ROL_TBL_VALOR_CATALOGO" FromRole="TBL_VALOR_CATALOGO" ToRole="TBL_ROL" />
           <NavigationProperty Name="TBL_TELEFONO" Relationship="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO" FromRole="TBL_VALOR_CATALOGO" ToRole="TBL_TELEFONO" />
+          <NavigationProperty Name="TBL_AGRESOR5" Relationship="SIVIOModel.FK_TBL_AGRESOR_CASOCLAIS" FromRole="TBL_VALOR_CATALOGO" ToRole="TBL_AGRESOR" />
+          <NavigationProperty Name="TBL_PERSONA21" Relationship="SIVIOModel.FK_TBL_PERSONA_TBL_VALOR_CATALOGO2" FromRole="TBL_VALOR_CATALOGO" ToRole="TBL_PERSONA" />
+          <NavigationProperty Name="TBL_ROL_TIPO_ATENCION" Relationship="SIVIOModel.FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO" FromRole="TBL_VALOR_CATALOGO" ToRole="TBL_ROL_TIPO_ATENCION" />
         </EntityType>
         <Association Name="FK_TBL_ROLACCION_TBL_ACCION">
           <End Type="SIVIOModel.TBL_ACCION" Role="TBL_ACCION" Multiplicity="1" />
@@ -4711,6 +4882,94 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TBL_AGRESOR_CASOCLAIS">
+          <End Type="SIVIOModel.TBL_VALOR_CATALOGO" Role="TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+          <End Type="SIVIOModel.TBL_AGRESOR" Role="TBL_AGRESOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALOR_CATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_AGRESOR">
+              <PropertyRef Name="FK_CASOCLAIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO2">
+          <End Type="SIVIOModel.TBL_VALOR_CATALOGO" Role="TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+          <End Type="SIVIOModel.TBL_PERSONA" Role="TBL_PERSONA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALOR_CATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_PERSONA">
+              <PropertyRef Name="FK_PUEBLOINDIGENA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TBL_ROL_TIPO_ATENCION">
+          <Key>
+            <PropertyRef Name="PK_ROLTIPOATENCION" />
+          </Key>
+          <Property Name="PK_ROLTIPOATENCION" Type="Guid" Nullable="false" />
+          <Property Name="FK_ROL" Type="Int32" Nullable="false" />
+          <Property Name="FK_TIPOATENCION" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBL_ROL" Relationship="SIVIOModel.FK_TBL_ROL_TIPO_ATENCION_TBL_ROL" FromRole="TBL_ROL_TIPO_ATENCION" ToRole="TBL_ROL" />
+          <NavigationProperty Name="TBL_VALOR_CATALOGO" Relationship="SIVIOModel.FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO" FromRole="TBL_ROL_TIPO_ATENCION" ToRole="TBL_VALOR_CATALOGO" />
+        </EntityType>
+        <Association Name="FK_TBL_ROL_TIPO_ATENCION_TBL_ROL">
+          <End Type="SIVIOModel.TBL_ROL" Role="TBL_ROL" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_ROL_TIPO_ATENCION" Role="TBL_ROL_TIPO_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ROL">
+              <PropertyRef Name="PK_ROL" />
+            </Principal>
+            <Dependent Role="TBL_ROL_TIPO_ATENCION">
+              <PropertyRef Name="FK_ROL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO">
+          <End Type="SIVIOModel.TBL_VALOR_CATALOGO" Role="TBL_VALOR_CATALOGO" Multiplicity="1" />
+          <End Type="SIVIOModel.TBL_ROL_TIPO_ATENCION" Role="TBL_ROL_TIPO_ATENCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_VALOR_CATALOGO">
+              <PropertyRef Name="PK_VALORCATALOGO" />
+            </Principal>
+            <Dependent Role="TBL_ROL_TIPO_ATENCION">
+              <PropertyRef Name="FK_TIPOATENCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_BUSCAR_EXPEDIENTE_CEEAM_Result">
+          <Property Type="Int32" Name="PK_PERSONA" Nullable="false" />
+          <Property Type="String" Name="VC_IDENTIFICACION" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="VC_NOMBRE" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="VC_APELLIDO1" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="VC_APELLIDO2" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DT_EGRESO_TECNICO" Nullable="true" Precision="23" />
+          <Property Type="String" Name="VC_CASO_CLAIS" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="VC_SERVICIO" Nullable="true" MaxLength="300" />
+          <Property Type="DateTime" Name="DT_ULTIMAATENCION" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_LISTAR_ATENCIONES_Result">
+          <Property Type="Guid" Name="PK_REGISTRO" Nullable="false" />
+          <Property Type="String" Name="EXPEDIENTE" Nullable="false" MaxLength="205" />
+          <Property Type="Int32" Name="ID_EXPEDIENTE" Nullable="false" />
+          <Property Type="String" Name="VC_USUARIO" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="TIPO_DE_SERVICIO" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="TIPO_DE_ATENCION" Nullable="false" MaxLength="300" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4801,6 +5060,7 @@
           <EntitySetMapping Name="TBL_AGRESOR">
             <EntityTypeMapping TypeName="SIVIOModel.TBL_AGRESOR">
               <MappingFragment StoreEntitySet="TBL_AGRESOR">
+                <ScalarProperty Name="FK_CASOCLAIS" ColumnName="FK_CASOCLAIS" />
                 <ScalarProperty Name="VC_SEDEJUDICIALDENUNCIA" ColumnName="VC_SEDEJUDICIALDENUNCIA" />
                 <ScalarProperty Name="VC_NUMEXPEDIENTEDENUNCIA" ColumnName="VC_NUMEXPEDIENTEDENUNCIA" />
                 <ScalarProperty Name="VC_NUMEXPEDIENTEMP" ColumnName="VC_NUMEXPEDIENTEMP" />
@@ -5167,6 +5427,7 @@
           <EntitySetMapping Name="TBL_PERSONA">
             <EntityTypeMapping TypeName="SIVIOModel.TBL_PERSONA">
               <MappingFragment StoreEntitySet="TBL_PERSONA">
+                <ScalarProperty Name="FK_PUEBLOINDIGENA" ColumnName="FK_PUEBLOINDIGENA" />
                 <ScalarProperty Name="B_CONOCEFECHANACIMIENTO" ColumnName="B_CONOCEFECHANACIMIENTO" />
                 <ScalarProperty Name="I_EDAD" ColumnName="I_EDAD" />
                 <ScalarProperty Name="FK_NACIONALIDAD2" ColumnName="FK_NACIONALIDAD2" />
@@ -5305,6 +5566,7 @@
           <EntitySetMapping Name="TBL_REGISTRO_CEAAM">
             <EntityTypeMapping TypeName="SIVIOModel.TBL_REGISTRO_CEAAM">
               <MappingFragment StoreEntitySet="TBL_REGISTRO_CEAAM">
+                <ScalarProperty Name="B_CASOACTIVO" ColumnName="B_CASOACTIVO" />
                 <ScalarProperty Name="VC_JUSTIFICACION" ColumnName="VC_JUSTIFICACION" />
                 <ScalarProperty Name="B_PROGRAMAOAPVD" ColumnName="B_PROGRAMAOAPVD" />
                 <ScalarProperty Name="FK_VALORACIONRIESGO" ColumnName="FK_VALORACIONRIESGO" />
@@ -5416,6 +5678,66 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ROL_TIPO_ATENCION">
+            <EntityTypeMapping TypeName="SIVIOModel.TBL_ROL_TIPO_ATENCION">
+              <MappingFragment StoreEntitySet="TBL_ROL_TIPO_ATENCION">
+                <ScalarProperty Name="FK_TIPOATENCION" ColumnName="FK_TIPOATENCION" />
+                <ScalarProperty Name="FK_ROL" ColumnName="FK_ROL" />
+                <ScalarProperty Name="PK_ROLTIPOATENCION" ColumnName="PK_ROLTIPOATENCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SIVIOModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="SP_BUSCAR_EXPEDIENTE_CEEAM" FunctionName="SIVIOModel.Store.SP_BUSCAR_EXPEDIENTE_CEEAM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIVIOModel.SP_BUSCAR_EXPEDIENTE_CEEAM_Result">
+                <ScalarProperty Name="PK_PERSONA" ColumnName="PK_PERSONA" />
+                <ScalarProperty Name="VC_IDENTIFICACION" ColumnName="VC_IDENTIFICACION" />
+                <ScalarProperty Name="VC_NOMBRE" ColumnName="VC_NOMBRE" />
+                <ScalarProperty Name="VC_APELLIDO1" ColumnName="VC_APELLIDO1" />
+                <ScalarProperty Name="VC_APELLIDO2" ColumnName="VC_APELLIDO2" />
+                <ScalarProperty Name="DT_EGRESO_TECNICO" ColumnName="DT_EGRESO_TECNICO" />
+                <ScalarProperty Name="VC_CASO_CLAIS" ColumnName="VC_CASO_CLAIS" />
+                <ScalarProperty Name="VC_SERVICIO" ColumnName="VC_SERVICIO" />
+                <ScalarProperty Name="DT_ULTIMAATENCION" ColumnName="DT_ULTIMAATENCION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SIVIOModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SIVIOModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SIVIOModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIVIOModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SIVIOModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIVIOModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_LISTAR_ATENCIONES" FunctionName="SIVIOModel.Store.SP_LISTAR_ATENCIONES">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIVIOModel.SP_LISTAR_ATENCIONES_Result">
+                <ScalarProperty Name="PK_REGISTRO" ColumnName="PK_REGISTRO" />
+                <ScalarProperty Name="EXPEDIENTE" ColumnName="EXPEDIENTE" />
+                <ScalarProperty Name="ID_EXPEDIENTE" ColumnName="ID_EXPEDIENTE" />
+                <ScalarProperty Name="VC_USUARIO" ColumnName="VC_USUARIO" />
+                <ScalarProperty Name="TIPO_DE_SERVICIO" ColumnName="TIPO DE SERVICIO" />
+                <ScalarProperty Name="TIPO_DE_ATENCION" ColumnName="TIPO DE ATENCION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SIVIOModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SIVIOModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

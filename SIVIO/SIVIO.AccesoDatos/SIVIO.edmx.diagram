@@ -159,6 +159,11 @@
         <AssociationConnector Association="SIVIOModel.FK_TBL_ROLUSUARIO_TBL_USUARIO" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_TELEFONO_TBL_VALORCATALOGO" />
         <AssociationConnector Association="SIVIOModel.FK__TBL_PERSO__FK_ES__7BB05806" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESOR_CASOCLAIS" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_PERSONA_TBL_VALOR_CATALOGO2" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_ROL_TIPO_ATENCION" Width="1.5" PointX="10.5" PointY="104.125" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ROL_TIPO_ATENCION_TBL_ROL" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

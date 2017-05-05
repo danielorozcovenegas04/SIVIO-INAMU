@@ -58,6 +58,12 @@
     <Compile Include="SP_BUSCAR_EXPEDIENTE_CEEAM_Result.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_LISTAR_ATENCIONES_Result.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
