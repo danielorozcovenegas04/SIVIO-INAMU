@@ -31,10 +31,15 @@ namespace SIVIO.Entidades
         public int FK_PARENTESCOAGRESOR { get; set; }
         public bool B_ABUSOSEXUAL { get; set; }
         public bool B_DENUNCIAABUSOSEXUAL { get; set; }
+        public System.DateTime DT_FECHANACIMIENTO { get; set; }
+        public int FK_OCUPACION { get; set; }
+        public int FK_ESCOLARIDAD { get; set; }
     
+        public virtual TBL_CATALOGO TBL_CATALOGO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_FAMILIAR_ACADEMICO> TBL_FAMILIAR_ACADEMICO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_FAMILIAR_SALUD> TBL_FAMILIAR_SALUD { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
     }
 }

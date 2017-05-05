@@ -31,6 +31,8 @@ namespace SIVIO.Entidades
         public bool B_KITEMERGENCIA { get; set; }
         public int FK_VALORACIONRIESGO { get; set; }
         public bool B_PROGRAMAOAPVD { get; set; }
+        public string VC_JUSTIFICACION { get; set; }
+        public bool B_CASOACTIVO { get; set; }
     
         public virtual TBL_REGISTRO TBL_REGISTRO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }

@@ -54,6 +54,27 @@
                 $.LoadingOverlay("hide");
             });
         });
+        $.LoadingOverlay("show");
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("BusquedaExpedienteCEAAM", "Expediente")',
+            async: true
+        }).done(function (data) {
+
+            $.LoadingOverlay("hide");
+            $('#contendorFrames').html(data);
+            $("#contenedorEspera").hide();
+            $('#contendorFrames').fadeIn();
+
+
+        }).fail(function (exception) {
+            $("#txtModalTitulo").css("color", "red");
+            $("#txtModalTitulo").text("Error de Sistema");
+            $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+            $("#contenedorEspera").hide();
+            instMensajes.open();
+            $.LoadingOverlay("hide");
+        });
     });
 </script>
 <nav class="navbar navbar-default navbar-static-top borde" style="margin-top: 5px; padding-bottom: 5px !important; background-color: white !important">
@@ -88,7 +109,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="pe-7s-note2" style="margin-right: 3px"></i>Expediente <span class="caret"></span>
+                        <i class="pe-7s-note2" style="margin-right: 3px"></i>Expediente<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#" id="btnBuscarExpediente">Buscar Expediente</a></li>

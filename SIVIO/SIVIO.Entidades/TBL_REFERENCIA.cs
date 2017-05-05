@@ -14,21 +14,14 @@ namespace SIVIO.Entidades
     
     public partial class TBL_REFERENCIA
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TBL_REFERENCIA()
-        {
-            this.TBL_REFERENCIA_DETALLE = new HashSet<TBL_REFERENCIA_DETALLE>();
-        }
-    
         public System.Guid PK_REFERENCIA { get; set; }
         public int FK_TIPOREFERENCIA { get; set; }
-        public System.Guid FK_REGISTRO { get; set; }
+        public Nullable<System.Guid> FK_REGISTRO { get; set; }
         public int FK_INSTITUCIONORIGEN { get; set; }
         public int FK_INSTITUCIONDESTINO { get; set; }
+        public Nullable<System.Guid> FK_INTERVENCION { get; set; }
+        public System.DateTime DT_FECHAREFERENCIA { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_REFERENCIA_DETALLE> TBL_REFERENCIA_DETALLE { get; set; }
-        public virtual TBL_REGISTRO TBL_REGISTRO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO1 { get; set; }
     }

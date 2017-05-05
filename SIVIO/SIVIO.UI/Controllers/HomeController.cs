@@ -79,15 +79,15 @@ namespace SIVIO.UI.Controllers
         public ActionResult Ingreso()
         {
             //var usuario = new TBL_USUARIO();
-            //usuario.VC_NOMBRE = "ANA";
-            //usuario.VC_APELLIDO1 = "COTO";
-            //usuario.VC_APELLIDO2 = "COTO";
-            //usuario.VC_CORREO = "adminsivio@inamu.go.cr";
-            //usuario.VC_USUARIO = "adminsivio@inamu.go.cr";
+            //usuario.VC_NOMBRE = "ANA1";
+            //usuario.VC_APELLIDO1 = "COTO1";
+            //usuario.VC_APELLIDO2 = "COTO1";
+            //usuario.VC_CORREO = "adminceeam@inamu.go.cr";
+            //usuario.VC_USUARIO = "adminceeam@inamu.go.cr";
 
             //var salt1 = Guid.NewGuid().ToByteArray();
             //var salt2 = Guid.NewGuid().ToByteArray();
-            //var clave = SIVIO.Utilitarios.Util.GenerarClave(usuario.VC_USUARIO, "rosebud", 2, salt1, salt2);
+            //var clave = SIVIO.Utilitarios.Util.GenerarClave(usuario.VC_USUARIO, "memes", 2, salt1, salt2);
             //usuario.IM_CLAVE = clave;
             //usuario.IM_SALT1 = salt1;
             //usuario.IM_SALT2 = salt2;
