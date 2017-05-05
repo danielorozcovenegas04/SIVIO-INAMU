@@ -122,8 +122,26 @@
                 $.LoadingOverlay("hide");
             });
         });
+
+        $("#nav_bar li").click(function (e) {
+            $("#nav_bar li").removeClass("selected");
+            $(this).addClass("selected");
+            e.preventDefault();
+        });
     });
 </script>
+<style>
+    .selected {
+        background: #eaedf2;
+    }
+    #btnCerrarSesion {
+        padding: 10px 20px;
+        color:white;
+        background-color:#2862bf;
+        margin-right:20px;
+        border-radius:7px;
+    }
+</style>
 <nav class="navbar navbar-default navbar-static-top borde" style="margin-top: 5px; padding-bottom: 5px !important; background-color: white !important">
 
     <div class="container" style="width: 100%; padding-left: 15px; padding-right: 15px;">
@@ -139,7 +157,7 @@
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-left">
+            <ul class="nav navbar-nav navbar-left" id="nav_bar">
 
                 <li>
                     <img src="http://www.inamu.go.cr/tema_principal_interno-theme/images/main-logo.png" alt="logo" style="padding-left: 6px">
@@ -174,7 +192,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" id="btnCerrarSesion" style="padding: 10px 20px; color:white; background-color:#2862bf; margin-right:20px; border-radius:7px;">
+                    <a href="#" id="btnCerrarSesion">
                         <i class="fa fa-sign-out" aria-hidden="true" style="color:#42bcf4"></i>
                         <span>Salir @*(@string.Concat(HttpContext.Current.User.Identity.Name))*@</span>
                         

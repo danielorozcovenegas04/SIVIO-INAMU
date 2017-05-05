@@ -525,6 +525,11 @@
                 }
             })
         });
+        $("#botones_perfil button").click(function (e) {
+            $("#botones_perfil button").removeClass("selected2");
+            $(this).addClass("selected2");
+            e.preventDefault();
+        });
     }
 
 </script>
@@ -571,6 +576,16 @@
     input {
         background-color: blue;
     }
+    .selected2 {
+        margin-bottom:5px;
+        margin-top:5px;
+        display: block;
+        width: 100%;
+        color: white;
+        background-color: #1d4c99;
+        border-color: #1d4c99;
+        font-weight:600;
+    }
 </style>
 <div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
     @*<div class="col-md-2 form-group"></div>*@
@@ -580,8 +595,8 @@
             <h5>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h5>
         </div>
     </div>    
-        <div class="col-md-2 form-group">
-            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;" >Expediente</button>
+        <div class="col-md-2 form-group" id="botones_perfil">
+            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive selected2" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;" >Expediente</button>
 
             <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
 
