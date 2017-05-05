@@ -5,6 +5,7 @@ using System.Web;
 using SIVIO.Entidades;
 using SIVIO.Utilitarios;
 using System.Data;
+using System.Data.Entity.Validation;
 
 namespace SIVIO.UI.Models
 {
@@ -140,7 +141,6 @@ namespace SIVIO.UI.Models
 
         public DateTime fecha { get; set; }
         public string hora { get; set; }
-
         #region COAVIF
         public List<TBL_PERSONA> ListarPersonas()
         {
@@ -281,24 +281,18 @@ namespace SIVIO.UI.Models
             }
         }*/
 
-        public List<TBL_ATENCION> ListarAtencion()
-        {
-            using (var entidades = new SIVIOEntities())
-            {
-                try
-                {
-                    List<TBL_ATENCION> Atencion = entidades.TBL_ATENCION.ToList();
-                    return Atencion;
-                }
-                catch
-                {
-                    return new List<TBL_ATENCION>();
-                }
-            }
-        }
-
-        public List<TBL_REGISTRO> ListarRegistro()
-        {
+        
+        public List<TBL_ATENCION> ListarAtencion() 
+		{
+			try
+			{
+				List<TBL_ATENCION> Atencion = entidades.TBL_ATENCION.ToList();
+				return Atencion;
+			}
+			catch
+			{
+				return new List<TBL_ATENCION>();
+			}
 
             using (var entidades = new SIVIOEntities())
             {
@@ -361,6 +355,7 @@ namespace SIVIO.UI.Models
                 }
             }
         }
+		
         public List<TBL_VALOR_CATALOGO> ListarCatalogo()
         {
             using (var entidades = new SIVIOEntities())
@@ -373,10 +368,50 @@ namespace SIVIO.UI.Models
                 catch
                 {
                     return new List<TBL_VALOR_CATALOGO>();
+				}
+			}
+		}
+		
+		public Mensaje InsertarUsuaria(TBL_PERSONA usuaria)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                TBL_PERSONA usuarioActual = (TBL_PERSONA)HttpContext.Current.Application["usuarioActual"];
+                try
+                {
+                    entidades.TBL_PERSONA.Add(usuaria);
+                    //  usuaria.DT_FECHAREGISTRO = DateTime.Now;   // CONSULTAR 
+                    entidades.SaveChanges();
+
+                    return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Usuaria Registrada Correctamente", "valor");
+                }
+
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    //    throw;
+                    return new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al registrar usuaria", "valor");
                 }
             }
         }
 
+        public DateTime fecha { get; set; }
+        public string horaInicio { get; set; }
+        public string horaFinal { get; set; }
+        public string institucionRefiere { get; set; }
+        public string personaRefiere { get; set; }
+        public string telefono { get; set; }
+        public string correo { get; set; }
+        public string tipoAtension { get; set; }
         #endregion
     }
 }

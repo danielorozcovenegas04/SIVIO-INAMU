@@ -64,7 +64,7 @@
                     $.ajax({
                         type: "POST",
                         url: '@Url.Action("AutenticarUsuario")',
-                        data: {
+                        data: { 
                             usuario: $('#txtLogin').val(),
                             clave: $('#txtClave').val(),
                             tipoServicio: $("#cmbTipoServicio").val()

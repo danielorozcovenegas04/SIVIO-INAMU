@@ -6,62 +6,35 @@
 }
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        //function will be called on button click having id btnsave
-        $("#btnGuardar").click(function () {
-            $.ajax(
-            {
-                type: "POST", //HTTP POST Method  
-                url: '@Url.Action("Delegacion_Mujer")', // Controller/View   
-                data: { //Passing data  
-                    Nombre: $("#txtName").val(), //Reading text box values using Jquery   MODIFICAR DE LA FORMA objInstrumentoA: formularioInstrumentoA POSTERIORMENTE
-                    Apellido1: $("#txtApellido1").val(),
-                    Apellido2: $("#txtApellido2").val(),
-                    Identificacion: $("#txtIdentificacion").val(),
-                    FechaNacimiento: $("#txtFechaNacimiento").val(),
-                    Edad: $("#txtEdad").val(),
-                    ProvinciaPersona: $("#cmbPersonaProvincia").val(),
-                    CantonPersona: $("#cmbPersonaCanton").val(),
-                    DistritoPersona: $("#cmbPersonaDistrito").val(),
-                    PaisProcedencia: $("#cmbPaisProcedencia").val(),
-                    DireccionDomicilio: $("#txtDireccionDomicilio").val(),
-                    DireccionNotificaciones: $("#txtDireccionNotificaciones").val(),
-                    CorreoElectronico: $("#txtCorreoElectronico").val(),
-                    Telefono: $("#txtTelefono").val(),
-                    CondicionCivil: $("#cmbCondicionCivil").val(),
-                    Escolaridad: $("#cmbEscolaridad").val(),
-                    NumeroHijos: $("#txtNumeroHijos").val(),
-                    Embarazo: $("#cmbEmbarazo").val(),
-                    Nacionalidad: $("#cmbNacionalidad").val(),
-                    OtraNacionalidad: $("#cmbOtraNacionalidad").val(),
-                    Apatrida: $("#cmbApatrida").val(),
-                    CondicionMigratoria: $("#cmbCondicionMigratoria").val(),
-                    Ocupacion: $("#cmbOcupacion").val(),
-                    ViolenciaFisica: $("#chbxViolenciaFisica").val(),
-                    ViolenciaSexual: $("#chbxViolenciaSexual").val(),
-                    ViolenciaPatrimonial: $("#chbxViolenciaPatrimonial").val(),
-                    ViolenciaPsicologica: $("#chbxViolenciaPsicologica").val(),
-                    AcosoSexual: $("#chbxAcosoSexual").val(),
-                    AcosoLaboral: $("#chbxAcosoLaboral").val(),
-                    HostigamientoSexual: $("#chbxHostigamientoSexual").val(),
-                    TrataPersonal: $("#chbxTrataPersonas").val(),
-                    ViolenciaObstetrica: $("#chbxViolenciaObstetrica").val(),
-                    PersonaAgresora: $("#txtPersonaAgresora").val()
-                }
-
-            });
-
-        });
-    });
-
+    var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
     $(document).ready(function () {
         PrevenirCaracteresInvalidos();
         debugger;
         document.title = "SIVIO - Delegación de la Mujer";
+
         CargarDropdowns();
         CargarDivisionTerritorial();
+        CargarEditorRedesApoyo();
+        CargarEditorComposicionFamiliar();
+        $("#btnGuardarDatosUsuaria").click(function () {
+            var objDatosUsuaria = $();
+            objDatosUsuaria.VC_NOMBRE = "nombre";
+            $.ajax(
+            {
+                type: "POST",
+                dataType: "json",
+                contentType: "application/json",
+                url: '@Url.Action("CrearUsuaria_DatosUsuaria")', // Controller/View
+                data: JSON.stringify({
+                    objDatosUsuaria: objDatosUsuaria
+                }),
+
+            });
+
+        });
 
     });
+
     function CargarDropdowns() {
 
         $.ajax({
@@ -74,26 +47,25 @@
                 debugger;
                 var respuesta = JSON.parse(resultado);
                 if (respuesta.Mensaje.TipoMensaje === 1) {
+      
                     $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbPaisProcedencia').append($("<option/>", {
+                        $('#cmbApatrida').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
-                    });
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbNacionalidad').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#cmbOtraNacionalidad').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
-                    });
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbApatrida').append($("<option/>", {
+                        $('#cmbNacionalidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbPaisProcedencia').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbNacionalidadHistoria').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -106,6 +78,14 @@
                     });
                     $.each(respuesta.CatalogoEscolaridad, function (key, value) {
                         $('#cmbEscolaridad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbEscolaridadHistoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbEscolaridadFamiliar').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -127,10 +107,22 @@
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
+                        $('#cmbOcupacionHistoria').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbOcupacionFamiliar').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
                     });
 
                     $.each(respuesta.CatalogoIdentidadGenero, function (key, value) {
                         $('#cmbIdentidadGenero').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                        $('#cmbGeneroHistoria').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -159,43 +151,77 @@
                             text: value.VC_VALOR1
                         }));
                     });
+					$.each(respuesta.CatalogoOrientacionSexual, function (key, value) {
+                        $('#cmbOrientacionSexual').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+					$.each(respuesta.CatalogoCondicionAseguramiento, function (key, value) {
+                        $('#cmbCondicionAseguramiento').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
                     $.each(respuesta.CatalogoParentesco, function (key, value) {
-                        $('#cmbComposicionFamiliarParentesco').append($("<option/>", {
+                        $('#cmbParentescoFamiliar').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
 
-
-
-                    //combobox Historia Violencia
-                    $.each(respuesta.CatalogoNacionalidad, function (key, value) {
-                        $('#cmbNacionalidadHistoria').append($("<option/>", {
+                    $.each(respuesta.CatalogoTipoAtencion, function (key, value) {
+                        $('#txtTipoAten').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
 
-                    $.each(respuesta.CatalogoOcupacion, function (key, value) {
-                        $('#cmbOcupacionHistoria').append($("<option/>", {
+                    $.each(respuesta.CatalogoViolencia, function (key, value) {
+                        $('#cmbTipoViolencia').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+                    $('#cmbTipoViolencia').selectize({
+                        sortField: 'text'
+                    });
+
+                    $.each(respuesta.Padecimientos, function (key, value) {
+                        $('#cmbCondSalud').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
 
-                    $.each(respuesta.CatalogoEscolaridad, function (key, value) {
-                        $('#cmbEscolaridadHistoria').append($("<option/>", {
+                    $('#cmbCondSalud').selectize({
+                        sortField: 'text'
+                    });
+
+                    $.each(respuesta.Adicciones, function (key, value) {
+                        $('#cmdAdicciones').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
 
-                    $.each(respuesta.CatalogoIdentidadGenero, function (key, value) {
-                        $('#cmbGeneroHistoria').append($("<option/>", {
+                    $('#cmdAdicciones').selectize({
+                        sortField: 'text'
+                    });
+
+                    $.each(respuesta.TipoRedApoyo, function (key, value) {
+                        $('#cmdTipoRedApoyo').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
                     });
+                    $.each(respuesta.Institucion, function (key, value) {
+                        $('#cmdInstitucionRedApoyo').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
 
                     $('#btn-login').fadeIn();
                     $.LoadingOverlay("hide");
@@ -351,11 +377,412 @@
     }
 
 
+    function CargarEditorRedesApoyo() {
+        $("select option").prop("selected", false);
+        $("#frmEditorRedesApoyo").hide();
 
+        $("#cmdTipoRedApoyo").change(function () {
+            debugger;
+            var idTipoRed = $("#cmdTipoRedApoyo").val();
+            if (idTipoRed === "717") {
+                $("#contenedorRelacion").hide();
+                $("#contenedorInstitucion").show();
+            }
+            else {
+
+                $("#contenedorRelacion").show();
+                $("#contenedorInstitucion").hide();
+
+            }
+
+        });
+        $("#btnOcultarCampoRedApoyo").click(function (event) {
+            debugger;
+            event.preventDefault();
+            $("#frmEditorRedesApoyo").hide();
+        });
+        $("#cmdTipoRedApoyo").val([]);
+        $("#txtNombre").val("");
+        $("#cmdInstitucionRedApoyo").val([]);
+        $("#contenedorRelacion").val("");
+        $("#txtTelefono").val("");
+        $("#cmdTipoRedApoyo").val("717").trigger('change');
+        var tablaRedesApoyo = $('#tblRedesApoyo').DataTable({
+            responsive: true,
+            dom: 'Brtlp<"clear">',
+            select: true,
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fa fa-file-excel-o"></i>',
+                    titleAttr: 'Excel'
+                }, {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fa fa-file-pdf-o"></i>',
+                    titleAttr: 'PDF'
+                }, {
+                    text: '<i class="fa fa-plus-circle btnBlanco" aria-hidden="true"></i>',
+                    titleAttr: 'Agregar una red de Apoyo',
+                    className: 'botonEstandar',
+                    action: function (e, dt, node, config) {
+
+                        $('.redApoyo').val('');
+
+                        $("#frmEditorRedesApoyo").fadeIn();
+
+                    }
+                }, {
+                    text: '<i class="fa fa-minus-circle btnBlanco" aria-hidden="true"></i>',
+                    titleAttr: 'Eliminar una red de Apoyo',
+                    className: 'botonEstandar',
+                    action: function (e, dt, node, config) {
+                        debugger;
+
+                        var contSeleccionados = tablaRedesApoyo.rows({
+                            selected: true
+                        }).count();
+                        var filaSeleccionada = tablaRedesApoyo.rows({
+                            selected: true
+                        }).data();
+                        if (contSeleccionados > 0) {
+
+                            tablaRedesApoyo.row('.selected').remove().draw();
+                        } else {
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("No se seleccionaron redes de apoyo");
+                            $("#txtModalContenido").text("Seleccione una red de apoyo para continuar");
+                            instMensajes.open();
+                        }
+
+                        debugger;
+                    }
+                }
+            ],
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            "processing": true, // for show progress bar
+            "serverSide": false, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            tableTools: {
+                "sRowSelect": "single"
+            },
+            "columns": [
+                {
+                    "data": "PK_REDAPOYO",
+                    "name": "PK_REDAPOYO",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "FK_INSTITUCION",
+                    "name": "FK_INSTITUCION",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "FK_TIPORED",
+                    "name": "FK_TIPORED",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "NOMBRE",
+                    "name": "NOMBRE",
+                    "autoWidth": true,
+                    "visible": true
+                }, {
+                    "data": "RELACION",
+                    "name": "RELACION",
+                    "autoWidth": true,
+                    "visible": true
+                }, {
+                    "data": "TELEFONO",
+                    "name": "TELEFONO",
+                    "autoWidth": true
+                }, {
+                    "data": "TIPORED",
+                    "name": "TIPORED",
+                    "autoWidth": true
+                }, {
+                    "data": "INSTITUCION",
+                    "name": "INSTITUION",
+                    "autoWidth": true
+                }
+            ]
+
+        });
+        $('#tblRedesApoyo tbody').on('click', 'tr', function () {
+            debugger;
+            if ($(this).hasClass('selected')) {
+
+
+                //$("tr").removeClass("selectedDT");
+                $("#tblRedesApoyo tr").removeClass("selectedDT");
+                $("#tblRedesApoyo tr").removeClass("selected");
+                $(this).addClass('selected');
+                $(this).addClass('selectedDT');
+            } else {
+                $(this).removeClass('selectedDT');
+
+            }
+        });
+        $("#btnGuardarRedApoyo").click(function () {
+            debugger;
+            var algo = $("#cmdTipoRedApoyo").val();
+            if ($("#cmdTipoRedApoyo").val() !== ''
+                && $("#txtNombreRedApoyo").length > 0
+                && $("#txtTelefonoRedApoyo").length > 0) {
+
+                tablaRedesApoyo.row.add({
+                    "PK_REDAPOYO": '',
+                    "FK_INSTITUCION": $("#cmdInstitucionRedApoyo").val(),
+                    "FK_TIPORED": $("#cmdTipoRedApoyo").val(),
+                    "NOMBRE": $("#txtNombreRedApoyo").val(),
+                    "RELACION": $("#txtRelacionRedApoyo").val(),
+                    "TELEFONO": $("#txtTelefonoRedApoyo").val(),
+                    "TIPORED": $("#cmdTipoRedApoyo option:selected").text(),
+                    "INSTITUCION": $("#cmdInstitucionRedApoyo option:selected").text()
+
+                }).draw();
+                $('.redApoyo').val('');
+
+            } else {
+
+
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error al registrar red de Apoyo");
+                $("#txtModalContenido").text("El formulario se encuentra incompleto");
+                instMensajes.open();
+
+            }
+
+
+        });
+    }
+
+    function CargarEditorComposicionFamiliar() {
+        $("select option").prop("selected", false);
+        $("#frmEditorComposicionFamiliar").hide();
+        $("#btnOcultarCampoComposicionFamiliar").click(function (event) {
+            debugger;
+            event.preventDefault();
+            $("#frmEditorComposicionFamiliar").hide();
+        });
+        $("#txtNombreFamiliar").val("");
+        $("#cmbParentescoFamiliar").val([]);
+        $("#txtEdadFamiliar").val("");
+        $("#cmbEscolaridadFamiliar").val([]);
+        $("#cmbOcupacionFamiliar").val([]);
+        var tablaComposicionFamiliar = $('#tblComposicionFamiliar').DataTable({
+            responsive: true,
+            dom: 'Brtlp<"clear">',
+            select: true,
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fa fa-file-excel-o"></i>',
+                    titleAttr: 'Excel'
+                }, {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fa fa-file-pdf-o"></i>',
+                    titleAttr: 'PDF'
+                }, {
+                    text: '<i class="fa fa-plus-circle btnBlanco" aria-hidden="true"></i>',
+                    titleAttr: 'Agregar un familiar',
+                    className: 'botonEstandar',
+                    action: function (e, dt, node, config) {
+
+                        $('.composicionFamiliar').val('');
+
+                        $("#frmEditorComposicionFamiliar").fadeIn();
+
+                    }
+                }, {
+                    text: '<i class="fa fa-minus-circle btnBlanco" aria-hidden="true"></i>',
+                    titleAttr: 'Eliminar un familiar',
+                    className: 'botonEstandar',
+                    action: function (e, dt, node, config) {
+                        debugger;
+
+                        var contSeleccionados = tablaComposicionFamiliar.rows({
+                            selected: true
+                        }).count();
+                        var filaSeleccionada = tablaComposicionFamiliar.rows({
+                            selected: true
+                        }).data();
+                        if (contSeleccionados > 0) {
+
+                            tablaComposicionFamiliar.row('.selected').remove().draw();
+                        } else {
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("No se seleccionaron familiares");
+                            $("#txtModalContenido").text("Seleccione un familiar para continuar");
+                            instMensajes.open();
+                        }
+
+                        debugger;
+                    }
+                }
+            ],
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            "processing": true, // for show progress bar
+            "serverSide": false, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            tableTools: {
+                "sRowSelect": "single"
+            },
+            "columns": [
+                {
+                    "data": "PK_FAMILIAR",
+                    "name": "PK_FAMILIAR",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "PK_PERSONA",
+                    "name": "PK_PERSONA",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "FK_PARENTESCO_PERSONA",
+                    "name": "FK_PARENTESCO_PERSONA",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "FK_ESCOLARIDAD",
+                    "name": "FK_ESCOLARIDAD",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "FK_OCUPACION",
+                    "name": "FK_OCUPACION",
+                    "autoWidth": true,
+                    "visible": false
+                }, {
+                    "data": "Nombre",
+                    "name": "Nombre",
+                    "autoWidth": true,
+                    "visible": true
+                }, {
+                    "data": "Parentesco",
+                    "name": "Parentesco",
+                    "autoWidth": true,
+                    "visible": true
+                }, {
+                    "data": "Edad",
+                    "name": "Edad",
+                    "autoWidth": true,
+                    "visible": true
+                }, {
+                    "data": "Escolaridad",
+                    "name": "Escolaridad",
+                    "autoWidth": true
+                }, {
+                    "data": "Ocupación",
+                    "name": "Ocupación",
+                    "autoWidth": true,
+                    "visible": true
+                }
+            ]
+
+        });
+        $('#tblComposicionFamiliar tbody').on('click', 'tr', function () {
+            debugger;
+            if ($(this).hasClass('selected')) {
+
+
+                //$("tr").removeClass("selectedDT");
+                $("#tblComposicionFamiliar tr").removeClass("selectedDT");
+                $("#tblComposicionFamiliar tr").removeClass("selected");
+                $(this).addClass('selected');
+                $(this).addClass('selectedDT');
+            } else {
+                $(this).removeClass('selectedDT');
+
+            }
+        });
+        $("#btnGuardarComposicionFamiliar").click(function () {
+            debugger;
+            if ($("#cmbParentescoFamiliar").val() !== ''
+                && $("#txtNombreFamiliar").length > 0
+                && $("#cmbOcupacionFamiliar").val() !== ''
+                && $("#txtEdadFamiliar").length > 0
+                && $("#cmbEscolaridadFamiliar").val !== '') {
+
+                tablaComposicionFamiliar.row.add({
+                    "PK_FAMILIAR": '',
+                    "PK_PERSONA": '',
+                    "FK_PARENTESCO_PERSONA": $("#cmbParentescoFamiliar").val(),
+                    "FK_ESCOLARIDAD": $("#cmbEscolaridadFamiliar").val(),
+                    "FK_OCUPACION": $("#cmbOcupacionFamiliar").val(),
+                    "Nombre": $("#txtNombreFamiliar").val(),
+                    "Parentesco": $("#cmbParentescoFamiliar option:selected").text(),
+                    "Edad": $("#txtEdadFamiliar").val(),
+                    "Escolaridad": $("#cmbEscolaridadFamiliar option:selected").text(),
+                    "Ocupación": $("#cmbOcupacionFamiliar option:selected").text()
+                }).draw();
+                $('.composicionFamiliar').val('');
+
+            } else {
+
+
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error al registrar familiar");
+                $("#txtModalContenido").text("El formulario se encuentra incompleto");
+                instMensajes.open();
+
+            }
+
+
+        });
+    }
 
 </script>
 
-    
+
 <style>
     input, select, textarea {
         max-width: 100%;
@@ -366,9 +793,9 @@
         background-color: blue;
     }
 
-    .inlineCheckBox{
-        display:inline-block;
-        vertical-align:middle;
+    .inlineCheckBox {
+        display: inline-block;
+        vertical-align: middle;
     }
 </style>
 
@@ -376,15 +803,15 @@
 <div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
     <div class="col-md-12 form-group">
         <div class="col-md-2 form-group">
-            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:50px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Expediente</button>
+            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="text-align:center; margin-bottom:5px; margin-top:50px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Expediente</button>
 
-            <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
+            <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="text-align:center; margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
 
-            <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="margin-bottom:100%; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
+            <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="text-align:center; margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
 
-            <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; padding-top display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
+            <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="text-align:center; margin-bottom:5px;display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
 
-            <button type="button" id="btnCerrarCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Cerrar Caso</button>
+            <button type="button" id="btnCerrarCaso" class="btn btn-default btn-responsive" style="text-align:center; margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Cerrar Caso</button>
         </div>
 
         <div class="col-md-10 form-group">
@@ -439,54 +866,57 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>Fecha del incidente</label>
-                                    <input class="form-control" id="txtFecha" type="text" required="">
+                                <div class="col-xs-6 form-group">
+                                    <label>Fecha de Registro</label>
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.fecha, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
                                 </div>
-                                <div class="col-md-3 form-group">
-                                    <label>Hora inicio</label>
-                                    <input class="form-control" id="txtHoraInicio" type="text" required="">
-                                </div>
-                                <div class="col-md-3 form-group">
-                                    <label>Hora finalización</label>
-                                    <input class="form-control" placeholder="--:-- --" id="txtHoraFinalización" type="text" readonly="readonly">
+
+                                <div class="col-xs-6 form-group">
+                                    <label>Hora de inicio de registro</label>
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.horaInicio, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>Persona que atiende</label>
-                                    <input class="form-control" id="txtPersonaAtiende" type="text" required="">
+                                <div class="col-xs-6 form-group">
+                                    <label>Tipo de atención</label>
+                                    <select class="form-control" id="txtTipoAten"></select>
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Tipo de disponibilidad</label>
-                                    <select class="form-control" id="cmbTipoDisponibilidad" type="">
-                                        <option value=""></option>
+                                <div class="col-xs-6 form-group">
+                                    <label>Profesional</label>
+                                    <select class="form-control">
+                                        <option value="atension 1">Profesional 1</option>
+                                        <option value="atension 2">Profesional 2</option>
                                     </select>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>Institucion que refiere</label>
-                                    <input class="form-control" id="txtInstitucion" type="text" required="">
+                                <div class="col-xs-6 form-group">
+                                    <label>Institusión que refiere</label>
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.institucionRefiere, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre Institusión" } })
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Nombre de quien refiere</label>
-                                    <input class="form-control" id="txtPersonaQuienRefiere" type="text" required="">
+
+                                <div class="col-xs-6 form-group">
+                                    <label>Persona que refiere</label>
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.personaRefiere, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nombre y apellido" } })
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-6 form-group">
+                                <div class="col-xs-6 form-group">
                                     <label>Telefono</label>
-                                    <input class="form-control" id="txtTelefonoPersona" type="text" required="">
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.telefono, new { htmlAttributes = new { @class = "form-control", @placeholder = "Numero de telefono", @type = "number" } })
                                 </div>
-                                <div class="col-md-6 form-group">
+
+                                <div class="col-xs-6 form-group">
                                     <label>Correo</label>
-                                    <input class="form-control" id="txtCorreoPersona" type="text" required="">
+                                    @Html.EditorFor(ExpedienteModel => ExpedienteModel.correo, new { htmlAttributes = new { @class = "form-control", @placeholder = "ejemplo@ejemplo.com", @type = "email" } })
                                 </div>
                             </div>
                             <div class="row" id="contenedorBotones">
                                 <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                    <button type="button" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Siguiente</button>
                                     <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
                                 </div>
                             </div>
@@ -494,467 +924,390 @@
                     </div>
                     <div id="datUsuaria" class="tab-pane">
                         <div class="row comunForm">
-                            <table width="100%" border="0" cellspacing="100" align="right">
-                                <td style="top">
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Nombre</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Primer apellido</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtApellido1" type="text" required="">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Nombre</label>
+                                    <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Primer apellido</label>
+                                    <input class="form-control" placeholder="Nombre" id="txtApellido1" type="text" required="">
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Segundo apellido</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtApellido2" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Identificación</label>
-                                            <input class="form-control" placeholder="Número de identificación" id="txtIdentificacion" type="text" required="">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Segundo apellido</label>
+                                    <input class="form-control" placeholder="Nombre" id="txtApellido2" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Identificación</label>
+                                    <input class="form-control" placeholder="Número de identificación" id="txtIdentificacion" type="text" required="">
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Fecha de nacimiento</label>
-                                            <input type="date" id="txtFechaNacimiento">
-                                            <!-- Buscar manera de que el label se ubique SOBRE el calendario -->
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Edad</label>
-                                            <input class="form-control" placeholder="Edad en años cumplidos" id="txtEdad" type="text" required="">
-                                            <!-- Ocultar si se toca el calendario -->
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Fecha de nacimiento</label>
+                                    <input type="date" id="txtFechaNacimiento" style="background-color:transparent" class="form-control">
+                                    <!-- Buscar manera de que el label se ubique SOBRE el calendario -->
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Edad</label>
+                                    <input class="form-control" placeholder="Edad en años cumplidos" id="txtEdad" type="text" required="">
+                                    <!-- Ocultar si se toca el calendario -->
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Provincia</label>
-                                            <select class="form-control" id="cmbPersonaProvincia" required>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Cantón</label>
-                                            <select class="form-control" id="cmbPersonaCanton" required>
-                                            </select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Provincia</label>
+                                    <select class="form-control" id="cmbPersonaProvincia" required></select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Cantón</label>
+                                    <select class="form-control" id="cmbPersonaCanton" required></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Distrito</label>
-                                            <select class="form-control" id="cmbPersonaDistrito" required>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>País de procedencia</label>
-                                            <select id="cmbPaisProcedencia" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Distrito</label>
+                                    <select class="form-control" id="cmbPersonaDistrito" required></select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>País de procedencia</label>
+                                    <select id="cmbPaisProcedencia" class="form-control"></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Dirección exacta de domicilio</label>
-                                            <input class="form-control" placeholder="Dirección exacta de domicilio" id="txtDireccionDomicilio" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Dirección para notificaciones</label>
-                                            <input class="form-control" placeholder="Dirección para notificaciones" id="txtDireccionNotificaciones" type="text" required="">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Dirección exacta de domicilio</label>
+                                    <input class="form-control" placeholder="Dirección exacta de domicilio" id="txtDireccionDomicilio" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Dirección para notificaciones</label>
+                                    <input class="form-control" placeholder="Dirección para notificaciones" id="txtDireccionNotificaciones" type="text" required="">
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Correo electrónico</label>
-                                            <input class="form-control" placeholder="Dirección de correo electrónico" id="txtCorreoElectronico" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Teléfono</label>
-                                            <input class="form-control" placeholder="Número de teléfono" id="txtTelefono" type="text" required="">
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Correo electrónico</label>
+                                    <input class="form-control" placeholder="Dirección de correo electrónico" id="txtCorreoElectronico" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Teléfono</label>
+                                    <input class="form-control" placeholder="Número de teléfono" id="txtTelefono" type="text" required="">
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Condición civil</label>
-                                            <select id="cmbCondicionCivil" class="form-control"></select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Escolaridad</label>
-                                            <select id="cmbEscolaridad" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Condición civil</label>
+                                    <select id="cmbCondicionCivil" class="form-control"></select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Escolaridad</label>
+                                    <select id="cmbEscolaridad" class="form-control"></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Número de hijas/os</label>
-                                            <input class="form-control" placeholder="Número de hijas/os" id="txtNumeroHijos" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Embarazo (meses)</label>
-                                            <select id="cmbEmbarazo" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Número de hijas/os</label>
+                                    <input class="form-control" placeholder="Número de hijas/os" id="txtNumeroHijos" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Embarazo (meses)</label>
+                                    <select id="cmbEmbarazo" class="form-control"></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Nacionalidad</label>
-                                            <select id="cmbNacionalidad" class="form-control"></select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Ora nacionalidad</label>
-                                            <select id="cmbOtraNacionalidad" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Nacionalidad</label>
+                                    <select id="cmbNacionalidad" class="form-control"></select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Otra nacionalidad</label>
+                                    <select id="cmbOtraNacionalidad" class="form-control"></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Apátrida de</label>
-                                            <select id="cmbApatrida" class="form-control"></select>
-                                            <!-- Corregir - Apátrida es que no tiene nacionalidad -->
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Condición migratoria</label>
-                                            <select id="cmbCondicionMigratoria" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Apátrida de</label>
+                                    <select id="cmbApatrida" class="form-control"></select>
+                                    <!-- Corregir - Apátrida es que no tiene nacionalidad -->
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Condición migratoria</label>
+                                    <select id="cmbCondicionMigratoria" class="form-control"></select>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Ocupación</label>
-                                            <select id="cmbOcupacion" class="form-control"></select>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>Ocupación</label>
+                                    <select id="cmbOcupacion" class="form-control"></select>
+                                </div>
 
-                                    <div class="row">
-                                        <ng-form>
-                                            <legend></legend>
-                                            <div class="col-xs-6 form-group">
-                                                <label>Tipificación de la violencia</label>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaFisica" /></div>
-                                                    <div class="inlineCheckBox">Violencia física </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaSexual" /></div>
-                                                    <div class="inlineCheckBox">Violencia sexual </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaPatrimonial" /></div>
-                                                    <div class="inlineCheckBox">Violencia patrimonial </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaPsicologica" /></div>
-                                                    <div class="inlineCheckBox">Violencia psicológica </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxAcosoSexual" /></div>
-                                                    <div class="inlineCheckBox">Acoso sexual callejero </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxAcosoLaboral" /></div>
-                                                    <div class="inlineCheckBox">Acoso laboral </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxHostigamientoSexual" /></div>
-                                                    <div class="inlineCheckBox">Hostigamiento sexual </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxTrataPersonas" /></div>
-                                                    <div class="inlineCheckBox">Trata de personal </div>
-                                                </div>
-                                                <div id="read-confirm-box">
-                                                    <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="chbxViolenciaObstetrica" /></div>
-                                                    <div class="inlineCheckBox">Violencia obstétrica </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6 form-group">
-                                                <label>Vínculo con persona agresora</label>
-                                                <input class="form-control" placeholder="Vínculo con persona agresora" id="txtPersonaAgresora" type="text" required="">
-                                            </div>
-                                        </ng-form>
-                                    </div>
-                                </td>
-                            </table>
+                                <div class="col-md-6 form-group">
+                                    <label>Tipificación de violencia</label>
+                                    <select id="cmbTipoViolencia" class="form-control" multiple></select>
+                                </div>
+                            </div>
+
+                            <div class="row" id="contenedorBotones">
+                                <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                                    <button type="button" id="btnGuardarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Siguiente</button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <!--Inicia pestaña Datos de perfil de usuaria-->
                     <div id="datPerfil" class="tab-pane">
                         <div class="row comunForm">
-                            <table width="100%" border="0" cellspacing="100" align="right">
-                                <td>
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Identidad de género</label>
+                                    <select id="cmbIdentidadGenero" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Orientacion sexual</label>
+                                    <select id="cmbOrientacionSexual" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Origen étnico</label>
+                                    <select id="cmbOrigenEtnico" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Condición laboral</label>
+                                    <select id="cmbCondicionLaboral" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Experiencia laboral</label>
+                                    <input class="form-control" placeholder="Tiempo en años/meses" id="txtExperienciaLaboral" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Lugar de trabajo</label>
+                                    <input class="form-control" placeholder="Nombre del lugar" id="txtLugarTrabajo" type="text" required="">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Puesto que desempeña</label>
+                                    <input class="form-control" placeholder="Puesto de trabajo" id="txtPuestoTrabajo" type="text" required="">
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Direccion de lugar de trabajo</label>
+                                    <input class="form-control" placeholder="Direccion" id="txtDireccionLugarTrabajo" type="text" required="">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 form-group">
+                                    <label>Tipo de familia</label>
+                                    <select id="cmbTipoFamilia" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xs-6 form-group">
+                                    <label>Condición de aseguramiento</label>
+                                    <select id="cmbCondicionAseguramiento" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Tipo de vivienda</label>
+                                    <select id="cmbTipoVivienda" class="form-control">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Condiciones de Salud</label>
+                                    <select id="cmbCondSalud" class="form-control" multiple>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Adicciones</label>
+                                    <select id="cmdAdicciones" class="form-control" multiple>
+                                        <option></option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                                <div class="row">
+                                <div class="col-md-12">
+                                        <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
+                                            <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
+                                            <thead>
+                                                <tr>
+                                                    <th>PK_REDAPOYO</th>
+                                                    <th>FK_INSTITUCION</th>
+                                                    <th>FK_TIPORED</th>
+                                                    <th>Nombre</th>
+                                                    <th>Relacion</th>
+                                                    <th>Telefono</th>
+                                                    <th>Tipo de Red</th>
+                                                    <th>Institución</th>
+
+
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row comunForm" id="frmEditorRedesApoyo">
+
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-xs-9"></div>
+                                            <div class="col-xs-3">
+                                                <button class="botonCerrar danger" id="btnOcultarCampoRedApoyo">
+                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-md-6 form-group">
+                                                <label>Tipo</label>
+                                                <select id="cmdTipoRedApoyo" class="form-control redApoyo"></select>
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label>Nombre</label>
+                                                <input class="form-control redApoyo" placeholder="Nombre" id="txtNombreRedApoyo" type="text" required="">
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 form-group" id="contenedorInstitucion">
+                                                <label>Institución</label>
+                                                <select id="cmdInstitucionRedApoyo" class="form-control redApoyo"></select>
+                                            </div>
+                                            <div class="col-md-6 form-group" id="contenedorRelacion">
+                                                <label>Relación</label>
+                                                <input class="form-control redApoyo" placeholder="Relación" id="txtRelacionRedApoyo" type="text" required="">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label>Teléfono</label>
+                                                <input class="form-control redApoyo" placeholder="Teléfono" id="txtTelefonoRedApoyo" type="text" required="">
+                                            </div>
+                                        </div>
+                                        @*<div class="row" style="text-align:center">
+                                            <div class="col-md-12">
+                                                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Guardar Red</button>
+                                            </div>
+                                        </div>*@
+                                        <div class="row">
+                                            <div class="col-md-12" style="text-align: center">
+                                                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Composición familiar-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="tblComposicionFamiliar" class="display table-bordered" cellspacing="0" style="width: 100%">
+                                        <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-users" style="margin-right: 2px;"></i>Composición Familiar</div></caption>
+                                        <thead>
+                                            <tr>
+                                                <th>PK_FAMILIAR</th>
+                                                <th>PK_PERSONA</th>
+                                                <th>FK_PARENTESCO_PERSONA</th>
+                                                <th>FK_ESCOLARIDAD</th>
+                                                <th>FK_OCUPACION</th>
+                                                <th>Nombre</th>
+                                                <th>Parentesco</th>
+                                                <th>Edad</th>
+                                                <th>Escolaridad</th>
+                                                <th>Ocupación</th>
+
+
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row comunForm" id="frmEditorComposicionFamiliar">
+
+                                <div class="col-md-12">
                                     <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Identidad de género</label>
-                                            <select id="cmbIdentidadGenero" class="form-control">
-                                                <option></option>
-                                            </select>
+                                        <div class="col-xs-9"></div>
+                                        <div class="col-xs-3">
+                                            <button class="botonCerrar danger" id="btnOcultarCampoComposicionFamiliar">
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
                                         </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Orientacion sexual</label>
-                                            <select id="cmbOrientacionSexual" class="form-control">
-                                                <option></option>
-                                            </select>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Nombre completo</label>
+                                            <input class="form-control composicionFamiliar" placeholder="Nombre completo" id="txtNombreFamiliar" type="text" required="">
                                         </div>
+                                        
+                                        <div class="col-md-6 form-group">
+                                            <label>Parentesco</label>
+                                            <select id="cmbParentescoFamiliar" class="form-control composicionFamiliar"></select>
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <label>Edad</label>
+                                            <input class="form-control composicionFamiliar" placeholder="Edad" id="txtEdadFamiliar" type="text" required="">
+                                        </div>
+                                        
+                                        <div class="col-md-6 form-group">
+                                            <label>Escolaridad</label>
+                                            <select id="cmbEscolaridadFamiliar" class="form-control composicionFamiliar"></select>
+                                        </div>
+                                        
+                                        <div class="col-md-6 form-group">
+                                            <label>Ocupación</label>
+                                            <select id="cmbOcupacionFamiliar" class="form-control composicionFamiliar"></select>
+                                        </div>
+
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Origen étnico</label>
-                                            <select id="cmbOrigenEtnico" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Condición laboral</label>
-                                            <select id="cmbCondicionLaboral" class="form-control">
-                                                <option></option>
-                                            </select>
+                                        <div class="col-md-12" style="text-align: center">
+                                            <button type="button" id="btnGuardarComposicionFamiliar" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Experiencia laboral</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtExperienciaLaboral" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Lugar de trabajo</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtLugarTrabajo" type="text" required="">
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Puesto que desempeña</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtPuestoTrabajo" type="text" required="">
-                                        </div>
-                                        <div class="col-xs-6 form-group">
-                                            <label>Direccion de lugar de trabajo</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtDireccionLugarTrabajo" type="text" required="">
-                                        </div>
-                                    </div>
+                            <!--Finaliza Adicciones-->
 
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Tipo de familia</label>
-                                            <select id="cmbTipoFamilia" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-xs-6 form-group">
-                                            <label>Condición de aseguramiento</label>
-                                            <select id="cmbCondicionAseguramiento" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-xs-6 form-group">
-                                            <label>Tipo de vivienda</label>
-                                            <select id="cmbTipoVivienda" class="form-control">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <!--Inicia Condiciones especiales de salud-->
-                                    <div class="row" style="top:auto">
-                                        <div class="col-xs-12">
-                                            <ng-form>
-                                                <legend>Condiciones especiales de salud</legend>
-                                                <div class="col-xs-2" style="height:100%">
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxFisica" /></div>
-                                                        <div class="inlineCheckBox">Física</div>
-                                                    </div>
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxCognitiva" /></div>
-                                                        <div class="inlineCheckBox">Cognitiva</div>
-                                                    </div>
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxMental" /></div>
-                                                        <div class="inlineCheckBox">Mental</div>
-                                                    </div>
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxSensorial" /></div>
-                                                        <div class="inlineCheckBox">Sensorial</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxPadecimientosCrónicos" /></div>
-                                                        <div class="inlineCheckBox">Padecimientos crónicos</div>
-                                                    </div>
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxCondicionPsiquiatrica" /></div>
-                                                        <div class="inlineCheckBox">Condición Psiquiátrica</div>
-                                                    </div>
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxEnfermedadTerminal" /></div>
-                                                        <div class="inlineCheckBox">Enfermedad terminal</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxITS" /></div>
-                                                        <div class="inlineCheckBox">ITS</div>
-                                                    </div>
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxSIDA" /></div>
-                                                        <div class="inlineCheckBox">VIH-SIDA</div>
-                                                    </div>
-                                                </div>
-                                            </ng-form>
-                                        </div>
-                                    </div>
-                                    <!--Finaliza Condiciones especiales de salud-->
-                                    <!--Inicia Adicciones-->
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <ng-form>
-                                                <legend>Adicciones</legend>
-                                                <div class="col-xs-2">
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxNinguna" /></div>
-                                                        <div class="inlineCheckBox">Ninguna</div>
-                                                    </div>
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxDrogas" /></div>
-                                                        <div class="inlineCheckBox">Drogas</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxMedicamentos" /></div>
-                                                        <div class="inlineCheckBox">Medicamentos</div>
-                                                    </div>
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxJuego" /></div>
-                                                        <div class="inlineCheckBox">Juego</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-2">
-                                                    <div id="read-confirm-box">
-                                                        <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="checkboxAlcohol" /></div>
-                                                        <div class="inlineCheckBox">Alcohol</div>
-                                                    </div>
-                                                </div>
-                                            </ng-form>
-                                        </div>
-                                    </div>
-                                    <!--Finaliza Adicciones-->
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <legend>Redes de apoyo de la usuaria</legend>
-                                            <div class="inlineCheckBox"><input style="display:inline-block;" type="checkbox" id="ocultarMostrarFormRedesApoyo" onchange="ocultarMostrarRedesApoyo()" /></div>
-                                        </div>
-                                    </div>
-                                    <!--Inicia Redes de apoyo-->
-                                    <div id="containerRedesApoyo" style="display:none;">
-                                        <div class="col-xs-12">
-                                            <ng-form>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <label>Primaria:</label>
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Nombre</label>
-                                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Relación</label>
-                                                        <input class="form-control" placeholder="Nombre" id="txtRelacion" type="text" required="">
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Teléfono</label>
-                                                        <input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <label>Secundaria:</label>
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Nombre</label>
-                                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Relación</label>
-                                                        <input class="form-control" placeholder="Nombre" id="txtRelacion" type="text" required="">
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Teléfono</label>
-                                                        <input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-3">
-                                                        <label>Institucional/Organizacional:</label>
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Nombre</label>
-                                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Institución</label>
-                                                        <input class="form-control" placeholder="Nombre" id="txtRelacion" type="text" required="">
-                                                    </div>
-                                                    <div class="col-xs-3">
-                                                        <label>Teléfono</label>
-                                                        <input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required="">
-                                                    </div>
-                                                </div>
-                                            </ng-form>
-                                        </div>
-                                    </div>
-                                    <!--Finaliza Redes de apoyo-->
-                                    <!--Inicia Composicion familiar-->
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <ng-form>
-                                                <legend>Composición familiar</legend>
-                                                <table class="display table-bordered dataTable no-footer" style="width:80%; align-content:center; border-width:3px">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Nombre completo</th>
-                                                            <th>Parentesco</th>
-                                                            <th>Edad</th>
-                                                            <th>Escolaridad</th>
-                                                            <th>Ocupación</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Laura Brenes</td>
-                                                            <td>
-                                                                <select id="cmbComposicionFamiliarParentesco" class="form-control">
-                                                                    <option></option>
-                                                                </select>
-                                                            </td>
-                                                            <td></td>
-                                                            <td>
-                                                                <select id="cmbComposicionFamiliarEscolaridad" class="form-control">
-                                                                    <option></option>
-                                                                </select>
-                                                            </td>
-                                                            <td>Secretaria</td>
-                                                        </tr>
-                                                    </tbody>
-                                                    <!--Falta un foreach-->
-                                                </table>
-                                            </ng-form>
-                                        </div>
-                                    </div>
-                                    <!--Finaliza Composicion familiar-->
-                                </td>
-                            </table>
                             <div class="row" id="contenedorBotones">
                                 <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
                                     <button type="button" id="btnGuardarDatosPerfil" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
@@ -966,140 +1319,144 @@
                     <!--Finaliza pestaña Datos de perfil de usuaria-->
                     <div id="historialViolencia" class="tab-pane">
 
-                        <div class="row comunForm">
-                            <ul class="nav nav-tabs">
-                                <li class="active">
-                                    <a data-toggle="tab" href="#perAgresora">
-                                        <i class="fa fa-file-text" aria-hidden="true"></i>Persona agresora
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#relHechos">
-                                        <i class="fa fa-address-card" aria-hidden="true"></i>Relato de los hechos
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#valRiesgo">
-                                        <i class="fa fa-address-card" aria-hidden="true"></i>Valoracion de riesgo
-                                    </a>
-                                </li>
-                            </ul>
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a data-toggle="tab" href="#perAgresora">
+                                    <i class="fa fa-file-text" aria-hidden="true"></i>Persona Agresora
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#relHechos">
+                                    <i class="fa  fa-file-text" aria-hidden="true"></i>Relato de hechos
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#valRiesgo">
+                                    <i class="fa  fa-file-text" aria-hidden="true"></i>Valoración de riesgo
+                                </a>
+                            </li>
+                        </ul>
 
-                            <div id="perAgresora" class="tab-pane">
+                        <div class="tab-content">
+                            <div id="perAgresora" class="tab-pane fade in active">
                                 <div class="row comunForm">
                                     <div class="row">
-                                        <div class="col-xs-4 form-group">
+                                        <div class="col-md-6 form-group">
                                             <label>Nombre de la Persona agresora:</label>
                                             <input type="text" class="form-control" placeholder="" id="nombre" value="" />
                                         </div>
 
-                                        <div class="col-xs-4 form-group">
+                                        <div class="col-md-6 form-group">
                                             <label>Ocupación de la persona agresora:</label>
-                                            <select id="cmbOcupacionHistoria" /> 
+                                            <select id="cmbOcupacionHistoria" class="form-control"/>
                                         </div>
                                     </div>
 
 
                                     <div class="row">
-                                        <div class="col-xs-4 form-group">
+                                        <div class="col-md-6 form-group">
                                             <label>Sexo de la persona agresora:</label>
-                                            <select id="cmbGeneroHistoria" /> 
-                                            <datalist id="exampleList">
-                                                <option value="femenino">
-                                                <option value="masculino">
-                                            </datalist>
+                                            <select id="cmbGeneroHistoria" class="form-control"/>
+
                                         </div>
-                                        <div class="col-xs-4 form-group">
+                                        <div class="col-md-6 form-group">
                                             <label>Escolaridad de la persona agresora:</label>
 
-                                            <select  id="cmbEscolaridadHistoria" />                  
+                                            <select id="cmbEscolaridadHistoria" class="form-control"/>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-xs-4 form-group">
+                                        <div class="col-md-6 form-group">
                                             <label>Edad de la persona agresora:</label>
-                                            <input type="text" class="form-control" placeholder="." id="edad" value="" />
+                                            <input type="number" class="form-control" placeholder="Solamente números" id="txtEedad"/>
                                         </div>
-                                        <div class="col-xs-4 form-group">
+                                        <div class="col-md-6 form-group">
                                             <label>Nacionalidad de la persona agresora:</label>
                                             <select id="cmbNacionalidadHistoria" class="form-control"></select>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-4 form-group">
+                                        <div class="col-xs-6 form-group">
                                             <div class="inlineCheckBox">
-                                                <input type="checkbox" style="display:inline-block;" id="MP"> Tiene MP<br>
+                                                <input type="checkbox" style="display:inline-block;"  id="MP"> Tiene MP<br>
                                             </div>
                                         </div>
 
-                                        <div class="col-xs-4 form-group">
+                                        <div class="col-xs-6 form-group">
                                             <div class="inlineCheckBox">
-                                                <input type="checkbox" style="display:inline-block;" id="denunciaPenal"> Tiene Denuncia Penal<br>
+                                                <input type="checkbox" style="display:inline-block;"  id="denunciaPenal"> Tiene Denuncia Penal<br>
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="datosMP" style="padding-top: 15px; padding-bottom: 11px; background-color: white; margin-bottom: 11px; margin-left: 0px; margin-right: 0px; border: 2px solid #808080; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
-                                        <label>MP</label>
-                                        <div class="row">
-                                            <div class="col-xs-4 form-group">
-                                                <label>Fecha de Vencimiento:</label>
-                                                <input type="text" class="form-control" placeholder="" id="MPvencimiento" value="" />
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div id="datosMP" class="comunForm">
+                                                <label>MP</label>
+                                                <div class="row">
+                                                    <div class="col-md-6 form-group">
+                                                        <label>Fecha de Vencimiento:</label>
+                                                        <input type="text" class="form-control" placeholder="" id="MPvencimiento" value="" />
+                                                    </div>
 
-                                            <div class="col-xs-4 form-group">
-                                                <label>numero Expediente:</label>
-                                                <input type="text" class="form-control" placeholder="." id="MPExpediente" value="" />
+                                                    <div class="col-md-6 form-group">
+                                                        <label>Número Expediente:</label>
+                                                        <input type="text" class="form-control" placeholder="." id="MPExpediente" value="" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div id="datosDenuncia" class="comunForm">
+                                                <label>Denuncia Penal</label>
+                                                <div class="row">
+                                                    <div class="col-md-6 form-group">
+                                                        <label>Fecha de Vencimiento:</label>
+                                                        <input type="text" class="form-control" placeholder="" id="Denunciavencimiento" value="" />
+                                                    </div>
+
+                                                    <div class="col-md-6 form-group">
+                                                        <label>Número Expediente:</label>
+                                                        <input type="text" class="form-control" placeholder="." id="DenunciaExpediente" value="" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div id="datosDenuncia" style="padding-top: 15px; padding-bottom: 11px; background-color: white; margin-bottom: 11px; margin-left: 0px; margin-right: 0px; border: 2px solid #808080; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none;">
-                                        <label>Denuncia Penal</label>
-                                        <div class="row">
-                                            <div class="col-xs-4 form-group">
-                                                <label>Fecha de Vencimiento:</label>
-                                                <input type="text" class="form-control" placeholder="" id="Denunciavencimiento" value="" />
-                                            </div>
 
-                                            <div class="col-xs-4 form-group">
-                                                <label>numero Expediente:</label>
-                                                <input type="text" class="form-control" placeholder="." id="DenunciaExpediente" value="" />
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="row" id="contenedorBotones">
-                                        <div class="col-xs-4 form-group">
+
+                                    <div class="row" id="contenedorBotones" style="text-align:center; margin-top:5px">
+                                        <div class="col-xs-12 form-group">
                                             <button type="button" id="cancelar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
                                             <button type="button" id="guardar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                             <div id="relHechos" class="tab-pane">
                                 <div class="row comunForm">
-                                    <div class="row">
-                                        <div class="col-xs-4 form-group">
-                                            <div class="col-xs-4 form-group" style="">
+                                    <div class="row comunForm">
+                                        <div class="row">
+                                            <div class="col-xs-6 form-group">
+
                                                 <label>Relato hechos de violencia:</label>
-                                                <textarea rows="10" cols="60" id="txtRelato" style="width: 100%"></textarea>
+                                                <textarea rows="10" cols="20" id="txtRelato" style="width: 100%"></textarea>
+                                            </div>
+
+                                            <div class="col-xs-2 form-group">
+                                                <label>tiempo de la relación:</label>
+                                                <input type="text" class="form-control" placeholder="." id="txtTiempoRelacion" value="" />
+                                                <label>tiempo de la agresión:</label>
+                                                <input type="text" class="form-control" placeholder="." id="txtTiempoAgresion" value="" />
                                             </div>
                                         </div>
-
-                                        <div class="col-xs-4 form-group">
-                                            <label>tiempo de la relación:</label>
-                                            <input type="text" class="form-control" placeholder="." id="txtTiempoRelacion" value="" />
-                                            <label>tiempo de la agresión:</label>
-                                            <input type="text" class="form-control" placeholder="." id="txtTiempoAgresion" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="row" id="contenedorBotonesRelHechos">
-                                        <div class="col-xs-4 form-group">
-                                            <button type="button" id="cancelar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
-                                            <button type="button" id="guardar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                        <div class="row" id="contenedorBotonesRelHechos">
+                                            <div class="col-xs-4 form-group">
+                                                <button type="button" id="cancelar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                                <button type="button" id="guardar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1167,42 +1524,43 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
-        <div id="atencion" class="tab-pane">
-            <div class="row comunForm">
+                    <div id="atencion" class="tab-pane">
+                        <div class="row comunForm">
 
-                <div class="row">
-                    <div class="col-md-4 form-group">
-                        <label>Atención</label>
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Atención</label>
 
-                        <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
+                                    <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="intervencion" class="tab-pane">
+                        <div class="row comunForm">
+
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label>Intervencion</label>
+
+                                    <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>
 
-            </div>
+
+
+            </form>
         </div>
-        <div id="intervencion" class="tab-pane">
-            <div class="row comunForm">
-
-                <div class="row">
-                    <div class="col-md-4 form-group">
-                        <label>Intervencion</label>
-
-                        <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-
-
-    </form>
-</div>
     </div>
 </div>
 

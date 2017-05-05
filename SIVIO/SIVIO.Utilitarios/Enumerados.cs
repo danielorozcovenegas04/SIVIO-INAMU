@@ -69,13 +69,16 @@ namespace SIVIO.Utilitarios
             SituacionRiesgo = 63,
             CategoriaRiesgo = 64,
             TipoServicio = 65,
-            OrientacionSexual = 67,
-            TipoCEAAM = 103,
+            OrientacionSexual = 67, 
             TipoIngresoCEAAM = 77,
             TipoEgresoCEAAM = 78,
             ValoracionRiesgo = 81,
             CondicionLegalIngreso = 82,
             TipoDisponibilidad = 96
+            TipoRedApoyo = 97,
+            Institucion = 98,
+            CondicionAseguramiento = 99,
+			TipoCEAAM = 103
         }
 
         public enum Roles
