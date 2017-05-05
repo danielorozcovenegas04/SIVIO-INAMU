@@ -160,18 +160,20 @@ namespace SIVIO.UI.Models
 
         public TBL_PERSONA BuscarPersona(int idPersona)
         {
-            using (var entidades = new SIVIOEntities())
+            var entidades = new SIVIOEntities();
+
+            try
             {
-                try
-                {
-                    TBL_PERSONA persona = entidades.TBL_PERSONA.Find(idPersona);
-                        var p = persona;
-                    return p;
-                }
-                catch (Exception e)
-                {
-                    return new TBL_PERSONA();
-                }
+                var p = new TBL_PERSONA();
+                TBL_PERSONA persona = entidades.TBL_PERSONA.Find(idPersona);
+                if(persona != null)
+                return persona;
+                else
+                return new TBL_PERSONA();
+            }
+            catch (Exception e)
+            {
+                return new TBL_PERSONA();
             }
         }
 

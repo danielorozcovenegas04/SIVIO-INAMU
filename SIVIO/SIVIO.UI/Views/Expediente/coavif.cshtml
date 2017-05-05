@@ -24,7 +24,6 @@
         document.title = "SIVIO - COAVIF y Equipo Estrategico";
         InicializarOtrosEventos();
         CargarDivisionTerritorial();
-       
         $('#fechaNacimiento').hide();
         $('#checkFecha').change(function () {
             if ($(this).is(':checked')) {
@@ -37,7 +36,7 @@
         });
 
         $('#meses').hide();
-        $('#checkEmbarazo').click( function () {
+        $('#checkEmbarazo').change(function () {
             if ($(this).is(':checked')) {
                 $('#meses').show();
             } else {
@@ -45,14 +44,32 @@
                 $('#intEmbarazo').val("0");
             }
         });
+            inicializarCampos();
+    });
 
-        if (true) {
+    function inicializarCampos() {
+
+        if ('@Model.B_CONOCEFECHANACIMIENTO' == 'True'){
             $('#checkFecha').prop('checked', true).change();
-        };
+        }
         $('#cmbPersonaProvincia').val(@Model.FK_PROVINCIAPROCEDENCIA);
         $('#cmbPersonaCanton').val(@Model.FK_CANTONPROCEDENCIA);
         $('#cmbPersonaDistrito').val(@Model.FK_DISTRITOPROCEDENCIA);
-    });
+        $('#comOtraNacionalidad').val(@Model.FK_NACIONALIDAD2);
+        $('#comNacionalidad').val(@Model.FK_NACIONALIDAD);
+        $('#comMigratoria').val(@Model.FK_CONDICIONMIGRATORIA);
+        $('#txtNombre').val('@Model.VC_NOMBRE');
+        $('#txtApellido1').val('@Model.VC_APELLIDO1');
+
+        $('#txtApellido2').val('@Model.VC_APELLIDO2');
+        $('#dateNacimiento').val('@Model.DT_FECHANACIMIENTO');
+        $('#intEdad').val(@Model.I_EDAD);
+
+        $('#intHijos').val(@Model.I_HIJOS);
+        $('#intHijosMayores').val(@Model.I_HIJOSMAYORESDOCE);
+        $('#txtDocId').val('@Model.VC_IDENTIFICACION');
+        $('#txtTelefono').val('@Model.TBL_TELEFONO.Select(m => m.VC_NUMERO).FirstOrDefault()');
+    }
 
     function CargarDivisionTerritorial() {
         var divisionTerritorial = JSON.parse(localStorage.getItem('divisionTerritorial'));
@@ -179,6 +196,55 @@
     }
 
     function InicializarOtrosEventos() {
+
+        $("#btnGuardarDatosUsuaria").click(function () {
+            $.ajax(
+                {
+                    type: "POST",
+                url: '@Url.Action("IsertarDatosUsuaria", "Expediente")',
+                data: {
+                    Nombre: $("#txtNombre").val(),
+                    Apellido1: $("#txtApellido1").val(),
+                    Apellido2: $("#txtApellido2").val(),
+                    Edad: $("#intEdad").val(),
+                    PaisProcedencia: $("#comPais").val(),
+                    Telefono: $("#txtTelefono").val(),
+                    OtraNacionalidad: $("#comOtraNacionalidad").val(),
+                    CondicionMigratoria: $("#comMigratoria").val(),
+                    NumeroHijos: $("#intHijos").val(),
+                    MayorDoce: $("#intMayorDoce").val(),
+                    Discapasidades: $("#comDiscapacidad").val(),
+                    Identificacion: $("#txtDocId").val(),
+                    ProvinciaPersona: $("#cmbPersonaProvincia").val(),
+                    CantonPersona: $("#cmbPersonaCanton").val(),
+                    DistritoPersona: $("#cmbPersonaDistrito").val(),
+                    Nacionalidad: $("#comNacionalidad").val(),
+                    Apatrida: $("#checkApatrida").val(),
+                    LugarTrabajo: $("#txtLugarTrabajo").val(),
+                    MesesEmbarazo: $("#intEmbarazo").val()
+                },
+                dataType: JSON,
+                processData: true,
+                success: function (resultado) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "green");
+                    $("#txtModalTitulo").text("Operación Exitosa");
+                    $("#txtModalContenido").text("Exito");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                },
+                error: function (xhr, ajaxOptions, error) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error al registrar");
+                    $("#txtModalContenido").text("Error");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                }
+                });
+        });
         var d = new Date();
 
         var month = d.getMonth() + 1;
@@ -223,9 +289,6 @@
         $.ajax({
             type: "POST",
             url: '@Url.Action("CargarPersonas")',
-            data: {
-                id: "@Model.PK_PERSONA"
-            },
             datatype: "json",
             //contentType: "application/json",
             async: true,
@@ -239,13 +302,13 @@
                     $("#txtPersonaAtiende").prop("readonly", true);
 
                     var telefonoPersona = respuesta.personaTelefono;
-                    $("#txtTelefonoPersona").val(telefonoPersona)
+                    $("#txtTelefonoPersona").val('@Model.TBL_TELEFONO.Select(m => m.VC_NUMERO).FirstOrDefault()');
                     $('#txtTelefonoPersona').css("background-color", "#f2f2f2");
                     $("#txtTelefonoPersona").prop("readonly", true);
 
                     if (respuesta.usuarioRol != 27) {
                         //$("#cmbTipoDisponibilidad").prop("disabled", true);
-                        $("#cmbTipoDisponibilidad").hide(); 
+                        $("#cmbTipoDisponibilidad").hide();
                         $("#lblDisponibilidad").hide();
                     }
                 } else {
@@ -298,7 +361,6 @@
                         }));
                     });
 
-                    $('#comOtraNacionalidad').val(@Model.FK_NACIONALIDAD2);
 
                     $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#comNacionalidad').append($("<option/>", {
@@ -307,8 +369,6 @@
                         }));
                     });
 
-                    $('#comNacionalidad').val(@Model.FK_NACIONALIDAD);
-
                     $.each(respuesta.CatalogoCondicionMigratoria, function (key, value) {
                         $('#comMigratoria').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
@@ -316,7 +376,6 @@
                         }));
                     });
 
-                    $('#comMigratoria').val(@Model.FK_CONDICIONMIGRATORIA);
 
                     $.each(respuesta.CatalogoDiscapasidades, function (key, value) {
                         $('#comDiscapacidad').append($("<option/>", {
@@ -631,17 +690,17 @@
                                 <div class="col-md-6 form-group">
                                     <div class="col-md-4 form-group">
                                         <label>Nombre</label>
-                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="" value=@Model.VC_NOMBRE>
+                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
                                     </div>
 
                                     <div class="col-md-4 form-group">
                                         <label>Primer Apellido</label>
-                                        <input class="form-control" placeholder="Apellido" id="txtApellido1" type="text" required="" value=@Model.VC_APELLIDO1>
+                                        <input class="form-control" placeholder="Apellido" id="txtApellido1" type="text" required="">
                                     </div>
 
                                     <div class="col-md-4 form-group">
                                         <label>Segundo Apellido</label>
-                                        <input class="form-control" placeholder="Apellido" id="txtApellido2" type="text" required="" value=@Model.VC_APELLIDO2>
+                                        <input class="form-control" placeholder="Apellido" id="txtApellido2" type="text" required="">
                                     </div>
 
                                     <div class="col-md-12 form-group">
@@ -652,12 +711,12 @@
 
                                     <div class="col-md-12 form-group" id="fechaNacimiento">
                                         <label>Fecha Nacimiento</label>
-                                        <input class="form-control" placeholder="Fecha nacimiento" id="intEdad" value=@Model.DT_FECHANACIMIENTO type="datetime" required="" min="0">
+                                        <input class="form-control" placeholder="Fecha nacimiento" id="dateNacimiento" type="datetime" required="" min="0">
                                     </div>
 
                                     <div class="col-md-12 form-group" id="edad">
                                         <label>Edad</label>
-                                        <input class="form-control" placeholder="Edad" id="intEdad" value=@Model. type="number" required="" min="0">
+                                        <input class="form-control" placeholder="Edad" id="intEdad" type="number" required="" min="0">
                                     </div>
 
                                     <div class="col-md-12 form-group">
@@ -686,12 +745,12 @@
 
                                     <div class="col-md-12 form-group">
                                         <label>Numero de Hijos</label>
-                                        <input class="form-control" placeholder="Número de Hijos" value=@Model.I_HIJOS min="0" id="intHijos" type="number" required="">
+                                        <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
                                     </div>
 
                                     <div class="col-md-12 form-group">
                                         <label> Hijo mayor de 12 años</label>
-                                        <input class="form-control" placeholder="Número de Hijos mayores de 12" value=@Model.I_HIJOSMAYORESDOCE min="0" id="intHijosMayores" type="number" required="">
+                                        <input class="form-control" placeholder="Número de Hijos mayores de 12" min="0" id="intHijosMayores" type="number" required="">
                                     </div>
 
                                     <div class="col-md-12 form-group">
@@ -706,12 +765,12 @@
                                 <div class="col-md-6 form-group">
                                     <div class="col-md-12 form-group">
                                         <label>Número Documento de identificación</label>
-                                        <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="" value=@Model.VC_IDENTIFICACION>
+                                        <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="">
                                     </div>
 
                                     <div class="col-md-12 form-group">
                                         <label>Teléfono</label>
-                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="" value=@*Model.TBL_TELEFONO.ElementAt(0).VC_NUMERO*@>
+                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="" >
                                     </div>
 
                                     <div class="col-md-12 form-group">

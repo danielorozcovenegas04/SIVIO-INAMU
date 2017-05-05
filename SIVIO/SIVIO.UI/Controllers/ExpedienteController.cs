@@ -198,6 +198,12 @@ namespace SIVIO.UI.Controllers
             return View(_modelExpediente.BuscarPersona(pkUsuario));
         }
 
+        //[Authorize]
+        //public ActionResult Coavif()
+        //{
+        //    return View(new TBL_PERSONA());
+        //}
+
         [Authorize]
         public ActionResult BusquedaExpedienteCoavif(string palabra)
         {
@@ -205,18 +211,12 @@ namespace SIVIO.UI.Controllers
         }
 
         [AllowAnonymous]
-       public JsonResult CargarPersonas(int id) {
+       public JsonResult CargarPersonas() {
             dynamic objeto = new ExpandoObject();
             using (var entidades = new SIVIOEntities()) {
                 try
                 {
                     objeto.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
-                    var persona = entidades.TBL_PERSONA.Where(m => m.PK_PERSONA == id).First();
-                    if (persona.TBL_TELEFONO.Count > 0) {
-                        objeto.personaTelefono = persona.TBL_TELEFONO.First().VC_NUMERO;
-                    } else {
-                        objeto.personaTelefono = "";
-                    }
                     var user = HttpContext.User.Identity.Name;
                     var usuario = entidades.TBL_USUARIO.Where(m => m.VC_USUARIO == user).First();
                     objeto.usuarioNombre = usuario.VC_NOMBRE;

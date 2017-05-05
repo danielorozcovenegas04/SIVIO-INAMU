@@ -6,6 +6,29 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+
+        $('#btnNuevo').click(function () {
+            debugger;
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Coavif", "Expediente")',
+                data: { pkUsuario: -1},
+                async: true
+            }).done(function (data) {
+                $("#botonCrear").hide();
+                $("#busqueda").hide();
+                $('#contenedorBusquedaExpediente').html(data);
+                $("#contenedorEspera").hide();
+                $('#contenedorBusquedaExpediente').fadeIn();                            
+                $("#botonCrear").hide();
+                }).fail(function (exception) {
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error");
+                    $("#txtModalContenido").text(exception);
+                    instMensajes.open();
+                });
+        });
         $("#btnBusquedaExpediente").click(function () {
             $.LoadingOverlay("show");
             $.ajax({
@@ -373,7 +396,7 @@
             <br>
 
             <div class="row" style="margin-left: 10px" id="botonCrear">
-                <a href="#" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Usuaria no encontrada, crear una nueva</a>
+                <button type="button" id="btnNuevo" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Usuaria no encontrada, crear una nueva</button>
             </div>
         }
     </div>
