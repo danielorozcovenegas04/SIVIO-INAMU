@@ -32,7 +32,10 @@ namespace SIVIO.Entidades
         public int FK_VALORACIONRIESGO { get; set; }
         public bool B_PROGRAMAOAPVD { get; set; }
         public string VC_JUSTIFICACION { get; set; }
+<<<<<<< HEAD
         public bool B_CASOACTIVO { get; set; }
+=======
+>>>>>>> origin/coavif_ee
     
         public virtual TBL_REGISTRO TBL_REGISTRO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }

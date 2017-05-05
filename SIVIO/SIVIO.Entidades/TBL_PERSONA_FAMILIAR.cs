@@ -41,5 +41,9 @@ namespace SIVIO.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_FAMILIAR_SALUD> TBL_FAMILIAR_SALUD { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
+<<<<<<< HEAD
+=======
+        public virtual TBL_CATALOGO TBL_CATALOGO { get; set; }
+>>>>>>> origin/coavif_ee
     }
 }

@@ -25,6 +25,10 @@ namespace SIVIO.Entidades
             this.TBL_INTERVENCION_RED_APOYO = new HashSet<TBL_INTERVENCION_RED_APOYO>();
             this.TBL_INTERVENCION_TALLER = new HashSet<TBL_INTERVENCION_TALLER>();
             this.TBL_INTERVENCION_TESTIMONIO_EXPERTO = new HashSet<TBL_INTERVENCION_TESTIMONIO_EXPERTO>();
+<<<<<<< HEAD
+=======
+            this.TBL_REFERENCIA = new HashSet<TBL_REFERENCIA>();
+>>>>>>> origin/coavif_ee
         }
     
         public System.Guid PK_INTERVENCION { get; set; }
@@ -51,5 +55,10 @@ namespace SIVIO.Entidades
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_INTERVENCION_TESTIMONIO_EXPERTO> TBL_INTERVENCION_TESTIMONIO_EXPERTO { get; set; }
+<<<<<<< HEAD
+=======
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_REFERENCIA> TBL_REFERENCIA { get; set; }
+>>>>>>> origin/coavif_ee
     }
 }

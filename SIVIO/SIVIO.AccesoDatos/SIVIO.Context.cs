@@ -84,7 +84,6 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_UNIDAD> TBL_UNIDAD { get; set; }
         public virtual DbSet<TBL_USUARIO> TBL_USUARIO { get; set; }
         public virtual DbSet<TBL_VALOR_CATALOGO> TBL_VALOR_CATALOGO { get; set; }
-    
         public virtual ObjectResult<SP_LISTAR_ATENCIONES_Result> SP_LISTAR_ATENCIONES()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LISTAR_ATENCIONES_Result>("SP_LISTAR_ATENCIONES");

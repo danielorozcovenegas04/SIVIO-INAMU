@@ -22,6 +22,11 @@ namespace SIVIO.Entidades
         public Nullable<System.Guid> FK_INTERVENCION { get; set; }
         public System.DateTime DT_FECHAREFERENCIA { get; set; }
     
+<<<<<<< HEAD
+=======
+        public virtual TBL_INTERVENCION TBL_INTERVENCION { get; set; }
+        public virtual TBL_REGISTRO TBL_REGISTRO { get; set; }
+>>>>>>> origin/coavif_ee
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO1 { get; set; }
     }
