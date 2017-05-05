@@ -35,7 +35,7 @@ namespace SIVIO.UI.Models
                 }
             }
         }
-
+        
         public List<TBL_REGISTRO> ListarRegistros(int persona)
         {
             using (var entidades = new SIVIOEntities())
@@ -43,7 +43,7 @@ namespace SIVIO.UI.Models
                 try
                 {
                     var personaConsulta = entidades.TBL_PERSONA.Find(persona);
-                    if (personaConsulta != null)
+                    if(personaConsulta != null)
                     {
                         return personaConsulta.TBL_REGISTRO.ToList();
                     } else
@@ -72,6 +72,20 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public List<SP_BUSCAR_EXPEDIENTE_CEEAM_Result> BuscarExpedienteCEAAM(string frase)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    return entidades.SP_BUSCAR_EXPEDIENTE_CEEAM(frase).ToList();
+                }
+                catch
+                {
+                    return new List<SP_BUSCAR_EXPEDIENTE_CEEAM_Result>();
+                }
+            }
+        }
         public TBL_PERSONA ObtenerPersona(string persona)
         {
            
@@ -80,7 +94,7 @@ namespace SIVIO.UI.Models
                 try
                 {
                     TBL_PERSONA personaConsulta = (TBL_PERSONA)entidades.TBL_PERSONA.Find(Int32.Parse(persona)); //Where(m => m.PK_PERSONA == Int32.Parse(persona));// .Where(m => m.PK_PERSONA == Int32.Parse(persona));
-
+                    //TBL_REGISTRO_CEAAM = 
                   /*  TBL_ADICCIONES adiciones                        = entidades.TBL_ADICCIONES.Find(personaConsulta.PK_PERSONA);
                     TBL_AGRESOR agresor                             = entidades.TBL_AGRESOR.Find(personaConsulta.PK_PERSONA);
                     TBL_DIRECCION direccion                         = entidades.TBL_DIRECCION.Find(personaConsulta.PK_PERSONA);
@@ -114,15 +128,18 @@ namespace SIVIO.UI.Models
                 entidades.Entry(agresor).State = System.Data.Entity.EntityState.Added;
                 entidades.Entry(persona).State = System.Data.Entity.EntityState.Added;
                 entidades.Entry(laboral).State = System.Data.Entity.EntityState.Added;
-                //entidades.Entry(adicciones).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(adicciones).State = System.Data.Entity.EntityState.Added;
                 //entidades.Entry(apoyo1).State = System.Data.Entity.EntityState.Added;
-                //entidades.Entry(agresion).State = System.Data.Entity.EntityState.Added;
-                //entidades.Entry(agresorMotivoRegreso).State = System.Data.Entity.EntityState.Added;
-                //entidades.Entry(agresionAtencionMedica).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(agresion).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(agresorMotivoRegreso).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(agresionAtencionMedica).State = System.Data.Entity.EntityState.Added;
 
                 entidades.SaveChanges();
             }
         }
+
+        public DateTime fecha { get; set; }
+        public string hora { get; set; }
 
         #region COAVIF
         public List<TBL_PERSONA> ListarPersonas()
@@ -191,7 +208,6 @@ namespace SIVIO.UI.Models
                 }
             }
         }
-
         public List<TBL_CONSULTA> ListarConsultas()
         {
             using (var entidades = new SIVIOEntities())
@@ -207,6 +223,63 @@ namespace SIVIO.UI.Models
                 }
             }
         }
+
+        public TBL_PERSONA BuscarPersona(int idPersona)
+        {
+            var entidades = new SIVIOEntities();
+
+            try
+            {
+                var p = new TBL_PERSONA();
+                TBL_PERSONA persona = entidades.TBL_PERSONA.Find(idPersona);
+                if(persona != null)
+                return persona;
+                else
+                return new TBL_PERSONA();
+            }
+            catch (Exception e)
+            {
+                return new TBL_PERSONA();
+            }
+        }
+
+        public Mensaje InsertarDatosAdministrativos(TBL_REGISTRO registro)
+        {//parametro que recibe de la vista
+            try
+            {
+                using (var entidades = new SIVIOEntities())
+                {
+                    entidades.TBL_REGISTRO.Add(registro);
+                    entidades.SaveChanges();
+                }
+                return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
+            }
+            catch (Exception e)
+            {
+                return new Mensaje((int)Mensaje.CatTipoMensaje.Error, string.Empty, string.Empty);
+            }
+        }
+
+        #endregion
+
+        #region DELEGACION
+        /* //Método RegistrarBitácora, vital para insertar usuario.
+        public static Mensaje RegistrarBitacora(TBL_BITACORA bitacora)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    entidades.TBL_BITACORA.Add(bitacora);
+                    entidades.SaveChanges();
+                    return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Bitacora Registrada exitosamente", string.Empty);
+                }
+                catch
+                {
+                    return new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Fallo al registrar bitacora", string.Empty);
+                }
+            }
+        }*/
 
         public List<TBL_ATENCION> ListarAtencion()
         {
@@ -231,9 +304,9 @@ namespace SIVIO.UI.Models
             {
                 try
                 {
-                    //List<TBL_REGISTRO> Registro = entidades.TBL_REGISTRO.ToList();
-                    //return Registro;
-                    List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
+                    List<TBL_REGISTRO> Registro = entidades.TBL_REGISTRO.ToList();
+                    return Registro;
+                   /* List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
                     R.Add(new TBL_REGISTRO()
                     {
                         PK_REGISTRO = Guid.NewGuid(),
@@ -256,12 +329,12 @@ namespace SIVIO.UI.Models
                         FK_TIPOREGISTRO = 550,
                         VC_OBSERVACIONES = "algo"
                     });
-                    return R;
+                    return R;*/
                 }
                 catch
                 {
-                    //return new List<TBL_REGISTRO>();
-                    List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
+                    return new List<TBL_REGISTRO>();
+                   /* List<TBL_REGISTRO> R = new List<TBL_REGISTRO>();
                     R.Add(new TBL_REGISTRO()
                     {
                         //PK_REGISTRO = 2,
@@ -270,7 +343,7 @@ namespace SIVIO.UI.Models
                         DT_FECHAINICIO = DateTime.Now,
                         DT_FECHAFIN = DateTime.Now,
                         FK_TIPOSERVICIO = 4,
-                        FK_TIPOREGISTRO = 549,
+                        FK_TIPOREGISTRO = 47,
                         VC_OBSERVACIONES = "algo"
                     });
                     R.Add(new TBL_REGISTRO()
@@ -281,10 +354,10 @@ namespace SIVIO.UI.Models
                         DT_FECHAINICIO = DateTime.Now,
                         DT_FECHAFIN = DateTime.Now,
                         FK_TIPOSERVICIO = 69,
-                        FK_TIPOREGISTRO = 550,
+                        FK_TIPOREGISTRO = 69,
                         VC_OBSERVACIONES = "algo"
                     });
-                    return R;
+                    return R;*/
                 }
             }
         }

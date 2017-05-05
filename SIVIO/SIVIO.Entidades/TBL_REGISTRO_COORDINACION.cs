@@ -20,8 +20,10 @@ namespace SIVIO.Entidades
         public string VC_PERSONACOORDINA { get; set; }
         public string VC_TELEFONO { get; set; }
         public string VC_CORREO { get; set; }
+        public Nullable<int> FK_TIPOCOORDINACION { get; set; }
     
         public virtual TBL_REGISTRO TBL_REGISTRO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO1 { get; set; }
     }
 }

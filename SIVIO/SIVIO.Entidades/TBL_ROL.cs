@@ -19,6 +19,7 @@ namespace SIVIO.Entidades
         {
             this.TBL_ROL_ACCION = new HashSet<TBL_ROL_ACCION>();
             this.TBL_ROL_USUARIO = new HashSet<TBL_ROL_USUARIO>();
+            this.TBL_ROL_TIPO_ATENCION = new HashSet<TBL_ROL_TIPO_ATENCION>();
         }
     
         public int PK_ROL { get; set; }
@@ -31,5 +32,7 @@ namespace SIVIO.Entidades
         public virtual ICollection<TBL_ROL_ACCION> TBL_ROL_ACCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_ROL_USUARIO> TBL_ROL_USUARIO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_ROL_TIPO_ATENCION> TBL_ROL_TIPO_ATENCION { get; set; }
     }
 }

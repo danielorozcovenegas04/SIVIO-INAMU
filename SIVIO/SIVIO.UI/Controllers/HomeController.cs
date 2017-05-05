@@ -56,6 +56,7 @@ namespace SIVIO.UI.Controllers
                     case (int)Utilitarios.Enumerados.TipoMenu.COAVIFEquipoEstrategico:
                         return View(viewName: "~/Views/Shared/Menu/MenuCoavif.cshtml");
                     case (int)Utilitarios.Enumerados.TipoMenu.DelegacionUnidadesRegionales:
+                        //return View(viewName: "~/Views/Expediente/CrearUsuaria_DelegacionMujer.cshtml");
                         return View(viewName: "~/Views/Shared/Menu/MenuDelegacion.cshtml");
                     default:
                         return View(viewName: "~/Views/Shared/Menu/MenuDefecto.cshtml");
@@ -79,21 +80,21 @@ namespace SIVIO.UI.Controllers
         public ActionResult Ingreso()
         {
             //var usuario = new TBL_USUARIO();
-            //usuario.VC_NOMBRE = "ANA";
-            //usuario.VC_APELLIDO1 = "COTO";
-            //usuario.VC_APELLIDO2 = "COTO";
-            //usuario.VC_CORREO = "adminsivio@inamu.go.cr";
-            //usuario.VC_USUARIO = "adminsivio@inamu.go.cr";
+            //usuario.VC_NOMBRE = "ANA1";
+            //usuario.VC_APELLIDO1 = "COTO1";
+            //usuario.VC_APELLIDO2 = "COTO1";
+            //usuario.VC_CORREO = "adminceeam@inamu.go.cr";
+            //usuario.VC_USUARIO = "adminceeam@inamu.go.cr";
 
             //var salt1 = Guid.NewGuid().ToByteArray();
             //var salt2 = Guid.NewGuid().ToByteArray();
-            //var clave = SIVIO.Utilitarios.Util.GenerarClave(usuario.VC_USUARIO, "rosebud", 2, salt1, salt2);
+            //var clave = SIVIO.Utilitarios.Util.GenerarClave(usuario.VC_USUARIO, "memes", 2, salt1, salt2);
             //usuario.IM_CLAVE = clave;
             //usuario.IM_SALT1 = salt1;
             //usuario.IM_SALT2 = salt2;
             //_modelSeguridad.InsertarUsuario(usuario);
-            return View();
-        }
+           return View();
+            }
 
         [AllowAnonymous]
         public JsonResult AutenticarUsuario(string usuario, string clave, int tipoServicio)

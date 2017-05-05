@@ -1,6 +1,8 @@
 ﻿@{
     Layout = null;
 }
+@using SIVIO.Entidades;
+@model TBL_PERSONA
 <style>
     .jumbotron {
         padding-left: 5px !important;
@@ -18,17 +20,231 @@
 
     var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
     $(document).ready(function () {
-        $.LoadingOverlay("hide");
-        debugger;
-        
-        debugger;
-        document.title = "SIVIO - Editar Persona Usuaria";
+        PrevenirCaracteresInvalidos();
+        document.title = "SIVIO - COAVIF y Equipo Estrategico";
         InicializarOtrosEventos();
-        InicializarCamposObservaciones();
+        CargarDivisionTerritorial();
+        $('#fechaNacimiento').hide();
+        $('#checkFecha').change(function () {
+            if ($(this).is(':checked')) {
+                $('#fechaNacimiento').show();
+                $('#edad').hide();
+            } else {
+                $('#fechaNacimiento').hide();
+                $('#edad').show();
+            }
+        });
 
+        $('#meses').hide();
+        $('#checkEmbarazo').change(function () {
+            if ($(this).is(':checked')) {
+                $('#meses').show();
+            } else {
+                $('#meses').hide();
+                $('#intEmbarazo').val("0");
+            }
+        });
+            inicializarCampos();
     });
 
+    function inicializarCampos() {
+
+        if ('@Model.B_CONOCEFECHANACIMIENTO' == 'True'){
+            $('#checkFecha').prop('checked', true).change();
+        }
+        $('#cmbPersonaProvincia').val(@Model.FK_PROVINCIAPROCEDENCIA);
+        $('#cmbPersonaCanton').val(@Model.FK_CANTONPROCEDENCIA);
+        $('#cmbPersonaDistrito').val(@Model.FK_DISTRITOPROCEDENCIA);
+        $('#comOtraNacionalidad').val(@Model.FK_NACIONALIDAD2);
+        $('#comNacionalidad').val(@Model.FK_NACIONALIDAD);
+        $('#comMigratoria').val(@Model.FK_CONDICIONMIGRATORIA);
+        $('#txtNombre').val('@Model.VC_NOMBRE');
+        $('#txtApellido1').val('@Model.VC_APELLIDO1');
+
+        $('#txtApellido2').val('@Model.VC_APELLIDO2');
+        $('#dateNacimiento').val('@Model.DT_FECHANACIMIENTO');
+        $('#intEdad').val(@Model.I_EDAD);
+
+        $('#intHijos').val(@Model.I_HIJOS);
+        $('#intHijosMayores').val(@Model.I_HIJOSMAYORESDOCE);
+        $('#txtDocId').val('@Model.VC_IDENTIFICACION');
+        $('#txtTelefono').val('@Model.TBL_TELEFONO.Select(m => m.VC_NUMERO).FirstOrDefault()');
+    }
+
+    function CargarDivisionTerritorial() {
+        var divisionTerritorial = JSON.parse(localStorage.getItem('divisionTerritorial'));
+        $("#cmbPersonaProvincia")
+            .change(function () {
+                debugger;
+                $('#cmbPersonaCanton').find('option').remove().end();
+                $('#cmbPersonaDistrito').find('option').remove().end();
+                var personaProvinciaSel = $("#cmbPersonaProvincia").val();
+                for (var j = 0; j < divisionTerritorial[1].Value.length; j++) {
+                        //console.log(data[0].Value[j].VC_DESCRIPCION);
+                    if (divisionTerritorial[1].Value[j].I_IDPROVINCIA == personaProvinciaSel) {
+                        $("#cmbPersonaCanton")
+                            .append($("<option />")
+                                .val(divisionTerritorial[1].Value[j].I_IDCANTON)
+                                .text(divisionTerritorial[1].Value[j].VC_DESCRIPCION));
+                    }
+
+                }
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                        //console.log(data[0].Value[j].VC_DESCRIPCION);
+                    if (divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &
+                        divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel) {
+                        $("#cmbPersonaDistrito")
+                            .append($("<option />")
+                                .val(divisionTerritorial[2].Value[j].I_IDDISTRITO)
+                                .text(divisionTerritorial[2].Value[j].VC_DESCRIPCION));
+                    }
+                }
+                var personaDistritoSel = $("#cmbPersonaDistrito").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    if (divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel &&
+                        divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &&
+                        divisionTerritorial[2].Value[j].I_IDDISTRITO == personaDistritoSel) {
+                        var distritoSeleccionado = divisionTerritorial[2].Value[j];
+                        $("#cmbPersonaRegion").val(distritoSeleccionado.I_IDREGION);
+                    }
+                }
+
+            });
+        $("#cmbPersonaCanton")
+            .change(function () {
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                var personaProvinciaSel = $("#cmbPersonaProvincia").val();
+                $('#cmbPersonaDistrito').find('option').remove().end();
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                        //console.log(data[0].Value[j].VC_DESCRIPCION);
+                    if (divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &
+                        divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel) {
+                        $("#cmbPersonaDistrito")
+                            .append($("<option />")
+                                .val(divisionTerritorial[2].Value[j].I_IDDISTRITO)
+                                .text(divisionTerritorial[2].Value[j].VC_DESCRIPCION));
+                    }
+                }
+                var personaDistritoSel = $("#cmbPersonaDistrito").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    if (divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel &&
+                        divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &&
+                        divisionTerritorial[2].Value[j].I_IDDISTRITO == personaDistritoSel) {
+                        var distritoSeleccionado = divisionTerritorial[2].Value[j];
+                        $("#cmbPersonaRegion").val(distritoSeleccionado.I_IDREGION);
+                    }
+                }
+
+            });
+        $("#cmbPersonaDistrito")
+            .change(function () {
+                var personaCantonSel = $("#cmbPersonaCanton").val();
+                var personaProvinciaSel = $("#cmbPersonaProvincia").val();
+                var personaDistritoSel = $("#cmbPersonaDistrito").val();
+                for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                    if (divisionTerritorial[2].Value[j].I_IDPROVINCIA == personaProvinciaSel &&
+                        divisionTerritorial[2].Value[j].I_IDCANTON == personaCantonSel &&
+                        divisionTerritorial[2].Value[j].I_IDDISTRITO == personaDistritoSel) {
+                        var distritoSeleccionado = divisionTerritorial[2].Value[j];
+                        $("#cmbPersonaRegion").val(distritoSeleccionado.I_IDREGION);
+                    }
+                }
+
+            });
+
+
+        for (var j = 0; j < divisionTerritorial[0].Value.length; j++) {
+                //console.log(data[0].Value[j].VC_DESCRIPCION);
+            $("#cmbPersonaProvincia")
+                .append($("<option />")
+                    .val(divisionTerritorial[0].Value[j].I_IDPROVINCIA)
+                    .text(divisionTerritorial[0].Value[j].VC_DESCRIPCION));
+        }
+        var empresaProvinciaSel = $("#cmbPersonaProvincia").val();
+        for (var j = 0; j < divisionTerritorial[1].Value.length; j++) {
+                //console.log(data[0].Value[j].VC_DESCRIPCION);
+            if (divisionTerritorial[1].Value[j].I_IDPROVINCIA == empresaProvinciaSel) {
+                $("#cmbPersonaCanton")
+                    .append($("<option />")
+                        .val(divisionTerritorial[1].Value[j].I_IDCANTON)
+                        .text(divisionTerritorial[1].Value[j].VC_DESCRIPCION));
+            }
+
+        }
+
+
+        var empresaCantonSel = $("#cmbPersonaCanton").val();
+        for (var j = 0; j < divisionTerritorial[2].Value.length; j++) {
+                //console.log(data[0].Value[j].VC_DESCRIPCION);
+            if (divisionTerritorial[2].Value[j].I_IDCANTON == empresaCantonSel &
+                divisionTerritorial[2].Value[j].I_IDPROVINCIA == empresaProvinciaSel) {
+                $("#cmbPersonaDistrito")
+                    .append($("<option />")
+                        .val(divisionTerritorial[2].Value[j].I_IDDISTRITO)
+                        .text(divisionTerritorial[2].Value[j].VC_DESCRIPCION));
+            }
+
+        }
+
+        for (var j = 0; j < divisionTerritorial[3].Value.length; j++) {
+            $("#cmbPersonaRegion")
+                .append($("<option />").val(divisionTerritorial[3].Value[j].I_IDREGION).text(divisionTerritorial[3].Value[j].VC_DESCRIPCION));
+        }
+
+    }
+
     function InicializarOtrosEventos() {
+
+        $("#btnGuardarDatosUsuaria").click(function () {
+            $.ajax(
+                {
+                    type: "POST",
+                url: '@Url.Action("IsertarDatosUsuaria", "Expediente")',
+                data: {
+                    Nombre: $("#txtNombre").val(),
+                    Apellido1: $("#txtApellido1").val(),
+                    Apellido2: $("#txtApellido2").val(),
+                    Edad: $("#intEdad").val(),
+                    PaisProcedencia: $("#comPais").val(),
+                    Telefono: $("#txtTelefono").val(),
+                    OtraNacionalidad: $("#comOtraNacionalidad").val(),
+                    CondicionMigratoria: $("#comMigratoria").val(),
+                    NumeroHijos: $("#intHijos").val(),
+                    MayorDoce: $("#intMayorDoce").val(),
+                    Discapasidades: $("#comDiscapacidad").val(),
+                    Identificacion: $("#txtDocId").val(),
+                    ProvinciaPersona: $("#cmbPersonaProvincia").val(),
+                    CantonPersona: $("#cmbPersonaCanton").val(),
+                    DistritoPersona: $("#cmbPersonaDistrito").val(),
+                    Nacionalidad: $("#comNacionalidad").val(),
+                    Apatrida: $("#checkApatrida").val(),
+                    LugarTrabajo: $("#txtLugarTrabajo").val(),
+                    MesesEmbarazo: $("#intEmbarazo").val()
+                },
+                dataType: JSON,
+                processData: true,
+                success: function (resultado) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "green");
+                    $("#txtModalTitulo").text("Operación Exitosa");
+                    $("#txtModalContenido").text("Exito");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                },
+                error: function (xhr, ajaxOptions, error) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error al registrar");
+                    $("#txtModalContenido").text("Error");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                }
+                });
+        });
         var d = new Date();
 
         var month = d.getMonth() + 1;
@@ -46,16 +262,26 @@
         $("#txtFecha").prop("readonly", true);
 
         var hora = d.getHours();
-        var jornada = (hora > 12 ? 'PM' : 'AM');
+        //var jornada = (hora > 12 ? 'PM' : 'AM');
         var minutos = d.getMinutes();
-        var inicio = (hora > 12 ? '0' + hora - 12 : hora) + ':' + (minutos > 9 ? '' : '0') + minutos + ' ' + jornada;
+        //var inicio = (hora > 12 ? '0' + hora - 12 : hora) + ':' + (minutos > 9 ? '' : '0') + minutos + ' ' + jornada;
+        var inicio = hora + ':' + (minutos > 9 ? '' : '0') + minutos;
 
         $("#txtHoraInicio").val(inicio);
         $('#txtHoraInicio').css("background-color", "#f2f2f2");
         $("#txtHoraInicio").prop("readonly", true);
         $('#txtHoraFinalizacion').css("background-color", "#f2f2f2");
         $("#txtHoraFinalizacion").prop("readonly", true);
+        //----------------------------------------------------
+        var personaRefiere = "@Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2";
+        $("#txtPersonaQuienRefiere").val(personaRefiere);
+        $('#txtPersonaQuienRefiere').css("background-color", "#f2f2f2");
+        $("#txtPersonaQuienRefiere").prop("readonly", true);
 
+        $("#txtCorreoPersona").val("@Model.VC_CORREO");
+        $('#txtCorreoPersona').css("background-color", "#f2f2f2");
+        $("#txtCorreoPersona").prop("readonly", true);
+        //----------------------------------------------------
         $("#txtInstitucion").val("INAMU");
         $('#txtInstitucion').css("background-color", "#f2f2f2");
         $("#txtInstitucion").prop("readonly", true);
@@ -64,7 +290,8 @@
             type: "POST",
             url: '@Url.Action("CargarPersonas")',
             datatype: "json",
-            contentType: "application/json",
+            //contentType: "application/json",
+            async: true,
             processData: true,
             success: function (resultado) {
                 var respuesta = JSON.parse(resultado);
@@ -74,19 +301,16 @@
                     $('#txtPersonaAtiende').css("background-color", "#f2f2f2");
                     $("#txtPersonaAtiende").prop("readonly", true);
 
-                    var personaRefiere = respuesta.personaNombre + ' ' + respuesta.personaApellido1 + ' ' + respuesta.personaApellido2;
-                    $("#txtPersonaQuienRefiere").val(personaRefiere);
-                    $('#txtPersonaQuienRefiere').css("background-color", "#f2f2f2");
-                    $("#txtPersonaQuienRefiere").prop("readonly", true);
-
                     var telefonoPersona = respuesta.personaTelefono;
-                    $("#txtTelefonoPersona").val(telefonoPersona)
+                    $("#txtTelefonoPersona").val('@Model.TBL_TELEFONO.Select(m => m.VC_NUMERO).FirstOrDefault()');
                     $('#txtTelefonoPersona').css("background-color", "#f2f2f2");
                     $("#txtTelefonoPersona").prop("readonly", true);
 
-                    $("#txtCorreoPersona").val(respuesta.personaCorreo);
-                    $('#txtCorreoPersona').css("background-color", "#f2f2f2");
-                    $("#txtCorreoPersona").prop("readonly", true);
+                    if (respuesta.usuarioRol != 27) {
+                        //$("#cmbTipoDisponibilidad").prop("disabled", true);
+                        $("#cmbTipoDisponibilidad").hide();
+                        $("#lblDisponibilidad").hide();
+                    }
                 } else {
                     $("#txtModalTitulo").css("color", "red");
                     $("#txtModalTitulo").text("Error");
@@ -117,6 +341,12 @@
                             text: value.VC_VALOR1
                         }));
                     });
+                    $.each(respuesta.CatalogoIntitucion, function (key, value) {
+                        $('#cmbInstitucionRefiere').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
                     $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#comPais').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
@@ -131,6 +361,7 @@
                         }));
                     });
 
+
                     $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#comNacionalidad').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
@@ -144,6 +375,7 @@
                             text: value.VC_VALOR1
                         }));
                     });
+
 
                     $.each(respuesta.CatalogoDiscapasidades, function (key, value) {
                         $('#comDiscapacidad').append($("<option/>", {
@@ -174,10 +406,130 @@
             }
         });
 
-        function volver() {
-            window.location.href = '/sipamu/';
-        }
 
+
+        $('#btnCancelarDatosAdministrativos').click(function () {
+            //window.location.href = 'Url.Action("Index", "Home")';
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("BusquedaExpedienteCoavif", "Expediente")',
+                async: true
+            }).done(function (data) {
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+                $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            });
+        });
+
+        $("#btnGuardarDatosAdministrativos").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("guardarDatoAdministrativo", "Expediente")',
+                data: {
+                    Fecha: $("#txtFecha").val(),
+                    HoraInicio: $("#txtHoraInicio").val(),
+                    Persona: "@Model.PK_PERSONA",
+                    TipoDisponibilidad: $("#cmbTipoDisponibilidad").val()
+                },
+                datatype: "json",
+                processData: true,
+                success: function (resultado) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "green");
+                    $("#txtModalTitulo").text("Exito");
+                    $("#txtModalContenido").text("-----");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                }, error: function (xhr, ajaxOptions, error) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error al registrar");
+                    $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+                }
+            });
+        });
+
+        $("#btnCrearCaso").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CrearNuevoCaso", "Expediente")',
+                data: {
+                    id: "@Model.PK_PERSONA"
+                },
+                //datatype: "json",
+                //contentType: "application/json",
+                async: true,
+                processData: true,
+                success: function (resultado) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "green");
+                    $("#txtModalTitulo").text("Exito");
+                    $("#txtModalContenido").text("CREAR CASO");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                }, error: function (xhr, ajaxOptions, error) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error al registrar");
+                    $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+                }
+            })
+        });
+        $("#btnCerrarCaso").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CerrarCaso", "Expediente")',
+                data: {
+                    id: "@Model.PK_PERSONA"
+                },
+                datatype: "json",
+                //contentType: "application/json",
+                async: true,
+                processData: true,
+                success: function (resultado) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "green");
+                    $("#txtModalTitulo").text("Exito");
+                    $("#txtModalContenido").text("CERRAR CASO");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                }, error: function (xhr, ajaxOptions, error) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error al registrar");
+                    $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+                }
+            })
+        });
+        $("#botones_perfil button").click(function (e) {
+            $("#botones_perfil button").removeClass("selected2");
+            $(this).addClass("selected2");
+            e.preventDefault();
+        });
     }
 
 </script>
@@ -224,32 +576,39 @@
     input {
         background-color: blue;
     }
+    .selected2 {
+        margin-bottom:5px;
+        margin-top:5px;
+        display: block;
+        width: 100%;
+        color: white;
+        background-color: #1d4c99;
+        border-color: #1d4c99;
+        font-weight:600;
+    }
 </style>
 <div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
-
-
-
-
-
+    @*<div class="col-md-2 form-group"></div>*@
     <div class="col-md-12 form-group">
-        <div class="col-md-2 form-group">
-            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Expediente</button>
+        <div class="row" style="margin-left:20px;margin-right:20px;">
+            <h3>Expediente de: @Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2</h3>
+            <h5>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h5>
+        </div>
+    </div>    
+        <div class="col-md-2 form-group" id="botones_perfil">
+            <button type="button" id="btnExpediente" class="btn btn-default btn-responsive selected2" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;" >Expediente</button>
 
             <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
 
             <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
-    
+
             <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
 
             <button type="button" id="btnCerrarCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Cerrar Caso</button>
         </div>
 
         <div class="col-md-10 form-group">
-            <form id="formCoavif" method="post">
-                <div style="margin-left:20px;">
-                    @*<h2>Expediente de: @Model.persona.VC_NOMBRE @Model.persona.VC_APELLIDO1 @Model.persona.VC_APELLIDO2</h2>
-                    <h4>Identificación: @Model.persona.VC_IDENTIFICACION <br /> Número de expediente: @Model.persona.PK_PERSONA</h4>*@
-                </div>
+            <form id="formCoavif" method="post">                
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a data-toggle="tab" href="#datAdministrativos">
@@ -281,8 +640,8 @@
                                 </div>
                                 <div class="col-md-2">
                                     @*<button class="botonCerrar danger" id="btnCerrarFrmDatosAdministrativos">
-                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                    </button>*@
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>*@
                                 </div>
                             </div>
                             <div class="row">
@@ -305,16 +664,17 @@
                                     <input class="form-control" id="txtPersonaAtiende" type="text" required="">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <label>Tipo de disponibilidad</label>
+                                    <label id="lblDisponibilidad">Tipo de disponibilidad</label>
                                     <select class="form-control" id="cmbTipoDisponibilidad" type="">
-                                        <option value=""></option>
+                                        @*<option value=""></option>*@
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label>Institucion que refiere</label>
-                                    <input class="form-control" id="txtInstitucion" type="text" required="">
+                                    <select class="form-control" id="cmbInstitucionRefiere" type="">
+                                    </select>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>Nombre de quien refiere</label>
@@ -333,8 +693,8 @@
                             </div>
                             <div class="row" id="contenedorBotones">
                                 <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
-                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px;">Guardar</button>
+                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px;">Cancelar</button>
                                 </div>
                             </div>
                         </div>
@@ -343,13 +703,33 @@
                         <div class="row comunForm">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <div class="col-md-12 form-group">
+                                    <div class="col-md-4 form-group">
                                         <label>Nombre</label>
                                         <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
                                     </div>
 
+                                    <div class="col-md-4 form-group">
+                                        <label>Primer Apellido</label>
+                                        <input class="form-control" placeholder="Apellido" id="txtApellido1" type="text" required="">
+                                    </div>
 
-                                    <div class="col-md-6 form-group">
+                                    <div class="col-md-4 form-group">
+                                        <label>Segundo Apellido</label>
+                                        <input class="form-control" placeholder="Apellido" id="txtApellido2" type="text" required="">
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <label>
+                                            <input style="display:inline-block;" id="checkFecha" type="checkbox"> Conoce Fecha de Nacimiento
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-12 form-group" id="fechaNacimiento">
+                                        <label>Fecha Nacimiento</label>
+                                        <input class="form-control" placeholder="Fecha nacimiento" id="dateNacimiento" type="datetime" required="" min="0">
+                                    </div>
+
+                                    <div class="col-md-12 form-group" id="edad">
                                         <label>Edad</label>
                                         <input class="form-control" placeholder="Edad" id="intEdad" type="number" required="" min="0">
                                     </div>
@@ -359,12 +739,14 @@
                                         <select id="comPais" class="form-control"></select>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
-                                        <label>Teléfono</label>
-                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="">
+                                    <div class="col-md-6 form-group">
+                                        <label>Nacionalidad</label>
+                                        <select id="comNacionalidad" class="form-control">
+                                            <option value=""></option>
+                                        </select>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
+                                    <div class="col-md-6 form-group">
                                         <label>Otra Nacionalidad</label>
                                         <select id="comOtraNacionalidad" class="form-control">
                                             <option value=""></option>
@@ -382,14 +764,15 @@
                                     </div>
 
                                     <div class="col-md-12 form-group">
-                                        <label>
-                                            <input style="display:inline-block;" id="checkMayorDoce" type="checkbox"> Hijo mayor de 12 años
-                                        </label>
+                                        <label> Hijo mayor de 12 años</label>
+                                        <input class="form-control" placeholder="Número de Hijos mayores de 12" min="0" id="intHijosMayores" type="number" required="">
                                     </div>
 
                                     <div class="col-md-12 form-group">
                                         <label>Discapacidades en hijos/hijas</label>
-                                        <select id="comDiscapacidad" class="form-control"></select>
+                                        <select id="comDiscapacidad" class="form-control">
+                                            <option value=""></option>
+                                        </select>
                                     </div>
 
                                 </div>
@@ -401,25 +784,33 @@
                                     </div>
 
                                     <div class="col-md-12 form-group">
+                                        <label>Teléfono</label>
+                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="" >
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
                                         <label>Lugar de Procedencia</label>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label>Provincia</label>
-                                        <select id="comProvincia" class="form-control"></select>
+                                        <select id="cmbPersonaProvincia" class="form-control" required>
+                                            @*<option value=""></option>*@
+                                        </select>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label>Cantón</label>
-                                        <select id="comCanton" class="form-control"></select>
+                                        <select id="cmbPersonaCanton" class="form-control" required>
+                                            @*<option value=""></option>*@
+                                        </select>
                                     </div>
                                     <div class="col-md-4 form-group">
                                         <label>Distrito</label>
-                                        <select id="comDistrito" class="form-control"></select>
+                                        <select id="cmbPersonaDistrito" class="form-control" required>
+                                            @*<option value=""></option>*@
+                                        </select>
                                     </div>
 
-                                    <div class="col-md-12 form-group">
-                                        <label>Nacionalidad</label>
-                                        <select id="comNacionalidad" class="form-control"></select>
-                                    </div>
+                                    
 
                                     <div class="col-md-12 form-group">
                                         <label>
@@ -432,18 +823,25 @@
                                         <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
                                     </div>
 
-                                    <div class="col-md-4 form-group">
+                                    <div class="col-md-12 form-group">
                                         <label>
                                             <input style="display:inline-block;" id="checkEmbarazo" type="checkbox"> Embarazo
                                         </label>
                                     </div>
 
-                                    <div class="col-md-8 form-group">
+                                    <div class="col-md-12 form-group" id="meses">
                                         <label>Meses de embarazo</label>
                                         <input class="form-control" placeholder="Meses de embarazo" id="intEmbarazo" type="number" required="" min="0">
                                     </div>
 
                                 </div>
+
+                            <div class="row" id="contenedorBotones">
+                                <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                                    <button type="button" id="btnGuardarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                    <button type="button" id="btnCancelarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -477,10 +875,9 @@
                     </div>
                 </div>
 
-        
+
 
             </form>
-        </div>
         </div>
 </div>
 

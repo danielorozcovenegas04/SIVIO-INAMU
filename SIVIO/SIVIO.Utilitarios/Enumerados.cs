@@ -70,7 +70,7 @@ namespace SIVIO.Utilitarios
             CategoriaRiesgo = 64,
             TipoServicio = 65,
             OrientacionSexual = 67,
-            TipoCEAAM = 76,
+            TipoCEAAM = 103,
             TipoIngresoCEAAM = 77,
             TipoEgresoCEAAM = 78,
             ValoracionRiesgo = 81,
