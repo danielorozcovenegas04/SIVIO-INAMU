@@ -16,9 +16,10 @@
                 data: { pkUsuario: -1},
                 async: true
             }).done(function (data) {
+                $.LoadingOverlay("show");
                 $("#botonCrear").hide();
                 $("#busqueda").hide();
-                $('#contenedorBusquedaExpediente').html(data);
+                $('#busquedaExpediente').html(data);
                 $("#contenedorEspera").hide();
                 $('#contenedorBusquedaExpediente').fadeIn();                            
                 $("#botonCrear").hide();
@@ -27,7 +28,10 @@
                     $("#txtModalTitulo").text("Error");
                     $("#txtModalContenido").text(exception);
                     instMensajes.open();
+                    $.LoadingOverlay("hide");
                 });
+            $.LoadingOverlay("hide");
+
         });
         $("#btnBusquedaExpediente").click(function () {
             $.LoadingOverlay("show");
@@ -41,12 +45,12 @@
                 $("#contenedorEspera").hide();
                 $('#contendorFrames').fadeIn();
             }).fail(function (exception) {
+                $.LoadingOverlay("hide");
                 $("#txtModalTitulo").css("color", "red");
                 $("#txtModalTitulo").text("Error de Sistema");
                 $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
                 $("#contenedorEspera").hide();
                 instMensajes.open();
-                $.LoadingOverlay("hide");
             });
         });
     });
