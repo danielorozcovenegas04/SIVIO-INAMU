@@ -151,7 +151,7 @@ namespace SIVIO.UI.Controllers
             }
             catch (Exception e)
             {
-                objetoRetorno.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Error,"Error al cargar tipos de servicio", string.Empty);
+                objetoRetorno.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Error,"Error al cargar tipos de servicio", e.ToString());
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objetoRetorno), JsonRequestBehavior.AllowGet);
             }
         }

@@ -67,6 +67,9 @@
     <Compile Include="SP_LISTAR_ATENCIONES_Result.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_LISTAR_PROFESIONALES_Result.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="TBL_ACCION.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>

@@ -74,7 +74,7 @@ namespace SIVIO.Utilitarios
             TipoEgresoCEAAM = 78,
             ValoracionRiesgo = 81,
             CondicionLegalIngreso = 82,
-            TipoDisponibilidad = 96
+            TipoDisponibilidad = 96,
             TipoRedApoyo = 97,
             Institucion = 98,
             CondicionAseguramiento = 99,

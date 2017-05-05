@@ -201,5 +201,10 @@ namespace SIVIO.Entidades
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        public virtual ObjectResult<SP_LISTAR_PROFESIONALES_Result> SP_LISTAR_PROFESIONALES()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LISTAR_PROFESIONALES_Result>("SP_LISTAR_PROFESIONALES");
+        }
     }
 }

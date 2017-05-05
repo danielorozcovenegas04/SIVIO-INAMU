@@ -1888,6 +1888,7 @@
           <Parameter Name="owner_id" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_LISTAR_ATENCIONES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_LISTAR_PROFESIONALES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -2830,7 +2831,7 @@
             <Parameter Name="definition" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="SP_BUSCAR_EXPEDIENTE_CEEAM" ReturnType="Collection(SIVIOModel.SP_BUSCAR_EXPEDIENTE_CEEAM_Result)">
-            <Parameter Name="VC_TERMINOBUSQUEDA" Mode="In" Type="String" />
+          <Parameter Name="VC_TERMINOBUSQUEDA" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_creatediagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -2857,6 +2858,7 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="SP_LISTAR_PROFESIONALES" ReturnType="Collection(SIVIOModel.SP_LISTAR_PROFESIONALES_Result)" />
         </EntityContainer>
         <EntityType Name="TBL_ACCION">
           <Key>
@@ -4970,6 +4972,12 @@
           <Property Type="String" Name="TIPO_DE_SERVICIO" Nullable="false" MaxLength="300" />
           <Property Type="String" Name="TIPO_DE_ATENCION" Nullable="false" MaxLength="300" />
         </ComplexType>
+        <ComplexType Name="SP_LISTAR_PROFESIONALES_Result">
+          <Property Type="Int32" Name="PK_ROL" Nullable="false" />
+          <Property Type="String" Name="VC_NOMBREROL" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="PK_USUARIO" Nullable="false" />
+          <Property Type="String" Name="VC_NOMBREUSUARIO" Nullable="false" MaxLength="152" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5738,6 +5746,16 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SIVIOModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SIVIOModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="SP_LISTAR_PROFESIONALES" FunctionName="SIVIOModel.Store.SP_LISTAR_PROFESIONALES">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIVIOModel.SP_LISTAR_PROFESIONALES_Result">
+                <ScalarProperty Name="PK_ROL" ColumnName="PK_ROL" />
+                <ScalarProperty Name="VC_NOMBREROL" ColumnName="VC_NOMBREROL" />
+                <ScalarProperty Name="PK_USUARIO" ColumnName="PK_USUARIO" />
+                <ScalarProperty Name="VC_NOMBREUSUARIO" ColumnName="VC_NOMBREUSUARIO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
