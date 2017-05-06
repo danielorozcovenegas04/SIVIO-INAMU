@@ -298,7 +298,21 @@ namespace SIVIO.UI.Models
                 }
             }
         }
-
+        public List<SP_LISTAR_ATENCIONES_Result> ListarAtencionesGrid()
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<SP_LISTAR_ATENCIONES_Result> Atencion = entidades.SP_LISTAR_ATENCIONES().ToList();
+                    return Atencion;
+                }
+                catch
+                {
+                    return new List<SP_LISTAR_ATENCIONES_Result>();
+                }
+            }
+        }
         public List<TBL_REGISTRO> ListarRegistro()
         {
             using (var entidades = new SIVIOEntities())
