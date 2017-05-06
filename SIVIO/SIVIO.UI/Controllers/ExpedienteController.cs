@@ -529,9 +529,36 @@ namespace SIVIO.UI.Controllers
             }
             return View(infopersona);
         }
+
+        [AllowAnonymous]
+        public JsonResult IsertarDatosUsuaria(FormCollection datos)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                TBL_PERSONA persona = new TBL_PERSONA();
+                TBL_TELEFONO tel = new TBL_TELEFONO();
+                persona.VC_NOMBRE = datos["Nombre"];
+                persona.VC_APELLIDO1 = datos["Apellido1"];
+                persona.VC_APELLIDO2 = datos["Apellido2"];
+                persona.FK_NACIONALIDAD = Int32.Parse(datos["Nacionalidad"]);
+                persona.FK_NACIONALIDAD2 = Int32.Parse(datos["OtraNacionalidad"]);
+                persona.FK_CONDICIONMIGRATORIA = Int32.Parse(datos["CondicionMigratoria"]);
+                persona.I_HIJOS = Int32.Parse(datos["NumeroHijos"]);
+                persona.I_HIJOSMAYORESDOCE = Int32.Parse(datos["MayorDoce"]);
+                persona.FK_DISTRITOPROCEDENCIA = Int32.Parse(datos["DistritoPersona"]);
+                persona.FK_CANTONPROCEDENCIA = Int32.Parse(datos["CantonPersona"]);
+                persona.FK_PROVINCIAPROCEDENCIA = Int32.Parse(datos["ProvinciaPersona"]);
+                persona.FK_ESTADOEMBARAZO = Int32.Parse(datos["MesesEmbarazo"]);
+                persona.VC_IDENTIFICACION = datos["Identificacion"];
+                persona.DT_FECHANACIMIENTO = Convert.ToDateTime(datos["Fechanacimiento"]);
+                entidades.TBL_PERSONA.Add(persona);
+                entidades.SaveChanges();
+                return Json(new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Registro Exitoso", "valor"), JsonRequestBehavior.AllowGet);
+            }
+        }
         #endregion
 
-            #region Delegacion
+        #region Delegacion
         [Authorize]
         public ActionResult Delegacion_Mujer()
         {
