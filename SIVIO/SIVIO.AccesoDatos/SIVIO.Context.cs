@@ -12,6 +12,8 @@ namespace SIVIO.Entidades
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SIVIOEntities : DbContext
     {
@@ -32,8 +34,10 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_AGRESION_CATEGORIA_RIESGO> TBL_AGRESION_CATEGORIA_RIESGO { get; set; }
         public virtual DbSet<TBL_AGRESION_CATEGORIZACION_RIESGO> TBL_AGRESION_CATEGORIZACION_RIESGO { get; set; }
         public virtual DbSet<TBL_AGRESION_DETALLE_VIOLENCIA> TBL_AGRESION_DETALLE_VIOLENCIA { get; set; }
+        public virtual DbSet<TBL_AGRESION_IMPACTO_VIOLENCIA> TBL_AGRESION_IMPACTO_VIOLENCIA { get; set; }
         public virtual DbSet<TBL_AGRESION_VIOLENCIA> TBL_AGRESION_VIOLENCIA { get; set; }
         public virtual DbSet<TBL_AGRESOR> TBL_AGRESOR { get; set; }
+        public virtual DbSet<TBL_AGRESOR_ADICCIONES> TBL_AGRESOR_ADICCIONES { get; set; }
         public virtual DbSet<TBL_AGRESOR_MOTIVO_REGRESO> TBL_AGRESOR_MOTIVO_REGRESO { get; set; }
         public virtual DbSet<TBL_ARCHIVO> TBL_ARCHIVO { get; set; }
         public virtual DbSet<TBL_ATENCION> TBL_ATENCION { get; set; }
@@ -76,10 +80,35 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_REGISTRO_COORDINACION> TBL_REGISTRO_COORDINACION { get; set; }
         public virtual DbSet<TBL_ROL> TBL_ROL { get; set; }
         public virtual DbSet<TBL_ROL_ACCION> TBL_ROL_ACCION { get; set; }
+        public virtual DbSet<TBL_ROL_TIPO_ATENCION> TBL_ROL_TIPO_ATENCION { get; set; }
         public virtual DbSet<TBL_ROL_USUARIO> TBL_ROL_USUARIO { get; set; }
         public virtual DbSet<TBL_TELEFONO> TBL_TELEFONO { get; set; }
         public virtual DbSet<TBL_UNIDAD> TBL_UNIDAD { get; set; }
         public virtual DbSet<TBL_USUARIO> TBL_USUARIO { get; set; }
         public virtual DbSet<TBL_VALOR_CATALOGO> TBL_VALOR_CATALOGO { get; set; }
+    
+        public virtual ObjectResult<SP_BUSCAR_EXPEDIENTE_CEEAM_Result> SP_BUSCAR_EXPEDIENTE_CEEAM(string vC_TERMINOBUSQUEDA)
+        {
+            var vC_TERMINOBUSQUEDAParameter = vC_TERMINOBUSQUEDA != null ?
+                new ObjectParameter("VC_TERMINOBUSQUEDA", vC_TERMINOBUSQUEDA) :
+                new ObjectParameter("VC_TERMINOBUSQUEDA", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_BUSCAR_EXPEDIENTE_CEEAM_Result>("SP_BUSCAR_EXPEDIENTE_CEEAM", vC_TERMINOBUSQUEDAParameter);
+        }
+    
+        public virtual ObjectResult<SP_LISTAR_ATENCIONES_Result> SP_LISTAR_ATENCIONES()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LISTAR_ATENCIONES_Result>("SP_LISTAR_ATENCIONES");
+        }
+    
+        public virtual ObjectResult<SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO_Result> SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO_Result>("SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO");
+        }
+    
+        public virtual ObjectResult<SP_LISTAR_PROFESIONALES_Result> SP_LISTAR_PROFESIONALES()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LISTAR_PROFESIONALES_Result>("SP_LISTAR_PROFESIONALES");
+        }
     }
 }

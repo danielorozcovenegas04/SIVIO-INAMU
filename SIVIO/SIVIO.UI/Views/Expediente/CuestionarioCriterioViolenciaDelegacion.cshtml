@@ -1,0 +1,109 @@
+﻿@model List<SIVIO.Entidades.SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO_Result>
+@{
+    Layout = null;
+}
+<style>
+    .group {
+    background-color:cornflowerblue !important;
+    color:white;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        var table = $('#tblCuestionarioViolenciaCriterios').DataTable({
+            "columnDefs": [
+                { "visible": false, "targets": 1 }
+            ],
+            tableTools: {
+                "sRowSelect": "single"
+            },
+            "filter": true, // this is for disable filter (search box)
+            "dom": 'frtlp<"clear">',
+            "responsive": true,
+            "select":true,
+            "ordering": false,
+            "order": [[1, 'asc']],
+            "displayLength": 100,
+            "drawCallback": function (settings) {
+                var api = this.api();
+                var rows = api.rows({ page: 'current' }).nodes();
+                var last = null;
+
+                api.column(1, { page: 'current' }).data().each(function (group, i) {
+                    if (last !== group) {
+                        $(rows).eq(i).before(
+                            '<tr class="group"><td colspan="5">' + group + '</td></tr>'
+                        );
+
+                        last = group;
+                    }
+                });
+            },
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            }
+        });
+
+        // Order by the grouping
+        $('#tblCuestionarioViolenciaCriterios tbody').on('click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if (currentOrder[0] === 1 && currentOrder[1] === 'asc') {
+                table.order([1, 'desc']).draw();
+            }
+            else {
+                table.order([1, 'asc']).draw();
+            }
+        });
+    });
+</script>
+    <table id="tblCuestionarioViolenciaCriterios" class="table-bordered" style="width:auto">
+        <thead>
+            <tr>
+                <th>Criterio</th>
+                <th>Tipo</th>
+                <th>Si</th>
+                <th>No</th>
+                <th>NR</th>
+                <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+
+                foreach (var criterio in Model)
+                {
+                    <tr style="text-align:center">
+                        <td>@criterio.VC_CRITERIO</td>
+                        <td>@criterio.VC_CATRIESGO</td>
+                        <td><div class="form-group"><input class="form-control" type="checkbox" style="display:flex" id="@("S" + criterio.PK_CRITERIO.ToString())" /></div></td>
+                        <td><div class="form-group"><input class="form-control" type="checkbox" style="display:flex" id="@("N" + criterio.PK_CRITERIO.ToString())" /></div></td>
+                        <td><div class="form-group"><input class="form-control" type="checkbox" style="display:flex" id="@("NR" + criterio.PK_CRITERIO.ToString())" /></div></td>
+                        <td><div class="form-group"><textarea class="OBS form-control" id="@("OBS" + criterio.PK_CRITERIO.ToString())"></textarea></div></td>
+                    </tr>
+
+                }
+
+            }
+        </tbody>
+    </table>

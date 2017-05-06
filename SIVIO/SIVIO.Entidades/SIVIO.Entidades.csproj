@@ -55,6 +55,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="SP_BUSCAR_EXPEDIENTE_CEEAM_Result.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_LISTAR_ATENCIONES_Result.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO_Result.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_LISTAR_PROFESIONALES_Result.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="TBL_ACCION.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
@@ -76,10 +88,16 @@
     <Compile Include="TBL_AGRESION_DETALLE_VIOLENCIA.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="TBL_AGRESION_IMPACTO_VIOLENCIA.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="TBL_AGRESION_VIOLENCIA.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_AGRESOR.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_AGRESOR_ADICCIONES.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_AGRESOR_MOTIVO_REGRESO.cs">
@@ -206,6 +224,9 @@
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_ROL_ACCION.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_ROL_TIPO_ATENCION.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_ROL_USUARIO.cs">

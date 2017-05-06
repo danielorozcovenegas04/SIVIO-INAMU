@@ -60,6 +60,21 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public List<SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO_Result> ListarCategoriasViolenciaCuestionario()
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    return entidades.SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO().ToList();
+                }
+                catch
+                {
+                    return new List<SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO_Result>();
+                }
+            }
+        }
+
         public List<TBL_PERSONA> ListarPersonas(string palabra) {
             System.Diagnostics.Debug.WriteLine(palabra);
             using (var entidades = new SIVIOEntities()) {

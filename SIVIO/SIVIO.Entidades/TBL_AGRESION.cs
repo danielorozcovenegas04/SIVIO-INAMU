@@ -20,6 +20,7 @@ namespace SIVIO.Entidades
             this.TBL_AGRESION_ATENCION_MEDICA = new HashSet<TBL_AGRESION_ATENCION_MEDICA>();
             this.TBL_AGRESION_CATEGORIA_RIESGO = new HashSet<TBL_AGRESION_CATEGORIA_RIESGO>();
             this.TBL_AGRESION_CATEGORIZACION_RIESGO = new HashSet<TBL_AGRESION_CATEGORIZACION_RIESGO>();
+            this.TBL_AGRESION_IMPACTO_VIOLENCIA = new HashSet<TBL_AGRESION_IMPACTO_VIOLENCIA>();
             this.TBL_AGRESION_VIOLENCIA = new HashSet<TBL_AGRESION_VIOLENCIA>();
         }
     
@@ -36,6 +37,8 @@ namespace SIVIO.Entidades
         public virtual ICollection<TBL_AGRESION_CATEGORIA_RIESGO> TBL_AGRESION_CATEGORIA_RIESGO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_AGRESION_CATEGORIZACION_RIESGO> TBL_AGRESION_CATEGORIZACION_RIESGO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_AGRESION_IMPACTO_VIOLENCIA> TBL_AGRESION_IMPACTO_VIOLENCIA { get; set; }
         public virtual TBL_AGRESOR TBL_AGRESOR { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_AGRESION_VIOLENCIA> TBL_AGRESION_VIOLENCIA { get; set; }

@@ -17,7 +17,8 @@
         CargarEditorRedesApoyo();
         CargarEditorComposicionFamiliar();
         fechaHoy();
-        mostrarHora();
+        //mostrarHora();
+        InicializarCategoriasRiesgo();
         $("#btnGuardarDatosUsuaria").click(function () {
             var objDatosUsuaria = $();
             objDatosUsuaria.VC_NOMBRE = "nombre";
@@ -36,7 +37,11 @@
         });
 
     });
-
+    function InicializarCategoriasRiesgo() {
+        $("#dvCatPrec").show();
+        $("#dvCatSevRiesgo").hide();
+        $("#dvCatAltoRiesgo").hide();
+    }
     function CargarDropdowns() {
 
         $.ajax({
@@ -1471,89 +1476,61 @@
                             </div>
                             <div id="relHechos" class="tab-pane">
                                 <div class="row comunForm">
-                                    <div class="row comunForm">
+
                                         <div class="row">
-                                            <div class="col-xs-6 form-group">
+                                            <div class="col-md-6 form-group">
+                                                <label>Tiempo de la relación:</label>
+                                                <input type="text" class="form-control" placeholder="Años" id="txtTiempoRelación" value="" />
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label>Tiempo de la agresión:</label>
+                                                <input type="text" class="form-control" placeholder="Minutos" id="txtTiempoAgresion" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-xs-12 form-group">
 
                                                 <label>Relato hechos de violencia:</label>
                                                 <textarea rows="10" cols="20" id="txtRelato" style="width: 100%"></textarea>
                                             </div>
-
-                                            <div class="col-xs-2 form-group">
-                                                <label>tiempo de la relación:</label>
-                                                <input type="text" class="form-control" placeholder="." id="txtTiempoRelacion" value="" />
-                                                <label>tiempo de la agresión:</label>
-                                                <input type="text" class="form-control" placeholder="." id="txtTiempoAgresion" value="" />
-                                            </div>
                                         </div>
-                                        <div class="row" id="contenedorBotonesRelHechos">
-                                            <div class="col-xs-4 form-group">
+
+                                        <div class="row" id="contenedorBotonesRelHechos" style="text-align:center">
+                                            <div class="col-xs-12 form-group">
                                                 <button type="button" id="cancelar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
                                                 <button type="button" id="guardar" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
                                             </div>
                                         </div>
-                                    </div>
+
                                 </div>
                             </div>
                             <div id="valRiesgo" class="tab-pane">
                                 <div class="row comunForm">
-                                    <style>
-                                        table, th, td {
-                                            border: 1px solid gray;
-                                        }
-                                    </style>
-                                    <div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
-                                        <div class="row">
-                                            <label>Valoración de riesgo: </label>
-                                            <input type="text" class="form-control" placeholder="." id="txtValoracion" value="" style="width: 20%;" />
-                                            <button type="button" id="btnValoracion" class="btn btn-default btn-responsive" style="margin-bottom:5px; margin-top:0%; margin-left:93%; display: block; width: 5%; color: white; background-color: #368DE9; border-color: #368DE9; ">+</button>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="row" style="padding-left:15px;padding-right:15px" id="dvCatAltoRiesgo">
+                                                <div class="btn btn-responsive btn-default" style="color:white;background-color:red;border-color:red;width:100%">
+                                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Categoría de Alto Riesgo
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-left:15px;padding-right:15px" id="dvCatSevRiesgo">
+                                                <div class="btn btn-responsive btn-default" style="color:white;background-color:darkorange;border-color:darkorange;width:100%">
+                                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Categoría de Riesgo Severo
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-left:15px;padding-right:15px" id="dvCatPrec">
+                                                <div class="btn btn-responsive btn-default" style="color:black;background-color:yellow;border-color:black;width:100%">
+                                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>Categoría de Precaución
+                                                </div>
+                                            </div>
                                         </div>
-                                        <table style="margin-bottom:5px; margin-top:5px; margin-left:5px; margin-right: 5px" id="tblFormularioValoracion">
-                                            <tr>
-                                                <th>Criterio</th>
-                                                <th>Si       </th>
-                                                <th>No       </th>
-                                                <th>Se desconoce</th>
-                                                <th>Observaciones</th>
-                                            </tr>
-                                            <tr>
-                                                <td>¿Han habido agresiones físicas garaves que causaron lesiones a la víctima o ameritaron una intervención médica?</td>
-                                                <form action="" id="fila1">
-                                                    <td><input type="radio" name="radio1" value=1><br></td>
-                                                    <td><input type="radio" name="radio1" value=-1><br></td>
-                                                    <td><input type="radio" name="radio1" value=0></td>
-                                                    <td><textarea rows="5" cols="15" id="txtObservaciones1"></textarea></td>
-                                                </form>
-                                            </tr>
-                                            <tr>
-                                                <form action="" id="fila2">
-                                                    <td>¿Ha usado o amenazado con usar un arma de fuego, cuchillo y otra arma letal contra la víctima?</td>
-                                                    <td><input type="radio" name="radio2" value=1><checkbox> </td>
-                                                    <td><input type="radio" name="radio2" value=-1><checkbox></td>
-                                                    <td><input type="radio" name="radio2" value=0><checkbox></td>
-                                                    <td><textarea rows="5" cols="15" id="txtObservaciones1"></textarea></td>
-                                                </form>
-                                            </tr>
-
-                                        </table>
-                                        <div class="row">
-                                            <table style="margin-bottom:5px; margin-top:5px; margin-left:5px; margin-right: 5px">
-                                                <tr>
-                                                    <th>Valoración de riesgo</th>
-                                                    <th>Fecha</th>
-                                                    <th>Responsable de valorar</th>
-                                                </tr>
-
-                                                <tr>
-                                                    <th><input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required=""></th>
-                                                    <th><input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required=""></th>
-                                                    <th><input class="form-control" placeholder="Nombre" id="txtTelefono" type="text" required=""></th>
-                                                </tr>
-                                            </table>
-                                            <button type="button" id="btnEnviar" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Enviar por correo</button>
-
-                                            <button type="button" id="btnEliminar" class="btn btn-default btn-responsive" style="display: block; width: 5%; color: white; background-color: #ff0000; border-color: #ff0000;">x</button>
+                                    </div>
+                                    <div class="row" style="padding-top:10px">
+                                        <div class="col-md-12">
+                                            @Html.Action("CuestionarioCriterioViolenciaDelegacion", "Expediente")
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

@@ -18,6 +18,7 @@ namespace SIVIO.Entidades
         public TBL_AGRESOR()
         {
             this.TBL_AGRESION = new HashSet<TBL_AGRESION>();
+            this.TBL_AGRESOR_ADICCIONES = new HashSet<TBL_AGRESOR_ADICCIONES>();
             this.TBL_AGRESOR_MOTIVO_REGRESO = new HashSet<TBL_AGRESOR_MOTIVO_REGRESO>();
         }
     
@@ -46,16 +47,20 @@ namespace SIVIO.Entidades
         public string VC_NUMEXPEDIENTEMP { get; set; }
         public string VC_NUMEXPEDIENTEDENUNCIA { get; set; }
         public string VC_SEDEJUDICIALDENUNCIA { get; set; }
+        public Nullable<int> FK_CASOCLAIS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_AGRESION> TBL_AGRESION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_AGRESOR_ADICCIONES> TBL_AGRESOR_ADICCIONES { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_AGRESOR_MOTIVO_REGRESO> TBL_AGRESOR_MOTIVO_REGRESO { get; set; }
         public virtual TBL_PERSONA TBL_PERSONA { get; set; }
-        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO1 { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO2 { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO3 { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO4 { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO5 { get; set; }
     }
 }

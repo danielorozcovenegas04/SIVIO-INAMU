@@ -124,6 +124,18 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
+        public List<SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO_Result> ListarCategoriasViolenciaCuestionario()
+        {
+            return _modelExpediente.ListarCategoriasViolenciaCuestionario();
+        }
+
+        [ChildActionOnly]
+        public PartialViewResult CuestionarioCriterioViolenciaDelegacion()
+        {
+            return PartialView(_modelExpediente.ListarCategoriasViolenciaCuestionario());
+        }
+
+        [Authorize]
         public ActionResult GridConsultas(int persona)
         {
             bool estadoSesion = true;

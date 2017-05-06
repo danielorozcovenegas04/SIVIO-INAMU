@@ -34,5 +34,6 @@ C:\Users\b11882\Desktop\New folder\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVI
 C:\Users\b11882\Desktop\New folder\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.pdb
 G:\GIT UCR\Proyecto\SIVIO\SIVIO.Entidades\bin\Debug\SIVIO.Entidades.dll
 G:\GIT UCR\Proyecto\SIVIO\SIVIO.Entidades\bin\Debug\SIVIO.Entidades.pdb
+G:\GIT UCR\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.csprojResolveAssemblyReference.cache
 G:\GIT UCR\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.dll
 G:\GIT UCR\Proyecto\SIVIO\SIVIO.Entidades\obj\Debug\SIVIO.Entidades.pdb

@@ -59,6 +59,7 @@ namespace SIVIO.Entidades
         public Nullable<int> FK_NACIONALIDAD2 { get; set; }
         public Nullable<int> I_EDAD { get; set; }
         public Nullable<bool> B_CONOCEFECHANACIMIENTO { get; set; }
+        public Nullable<int> FK_PUEBLOINDIGENA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_ADICCIONES> TBL_ADICCIONES { get; set; }
@@ -76,6 +77,7 @@ namespace SIVIO.Entidades
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO1 { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO2 { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO3 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_PERSONA_APOYO> TBL_PERSONA_APOYO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -64,6 +64,14 @@
     <Property Name="FK_SITUACIONVIOLENCIA" Type="int" Nullable="false" />
     <Property Name="PK_SITUACIONVIOLENCIA" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
+  <EntityType Name="TBL_AGRESION_IMPACTO_VIOLENCIA">
+    <Key>
+      <PropertyRef Name="PK_IMPACTOVIOLENCIA" />
+    </Key>
+    <Property Name="PK_IMPACTOVIOLENCIA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_AGRESION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_IMPACTOVIOLENCIA" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="TBL_AGRESION_VIOLENCIA">
     <Key>
       <PropertyRef Name="PK_AGRESION_VIOLENCIA" />
@@ -102,6 +110,15 @@
     <Property Name="VC_NUMEXPEDIENTEMP" Type="varchar" MaxLength="200" />
     <Property Name="VC_NUMEXPEDIENTEDENUNCIA" Type="varchar" MaxLength="200" />
     <Property Name="VC_SEDEJUDICIALDENUNCIA" Type="varchar" MaxLength="200" />
+    <Property Name="FK_CASOCLAIS" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_AGRESOR_ADICCIONES">
+    <Key>
+      <PropertyRef Name="PK_AGRESORADICION" />
+    </Key>
+    <Property Name="PK_AGRESORADICION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_AGRESOR" Type="int" Nullable="false" />
+    <Property Name="FK_ADICCION" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TBL_AGRESOR_MOTIVO_REGRESO">
     <Key>
@@ -443,6 +460,7 @@
     <Property Name="FK_NACIONALIDAD2" Type="int" />
     <Property Name="I_EDAD" Type="int" />
     <Property Name="B_CONOCEFECHANACIMIENTO" Type="bit" />
+    <Property Name="FK_PUEBLOINDIGENA" Type="int" />
   </EntityType>
   <EntityType Name="TBL_PERSONA_APOYO">
     <Key>
@@ -478,6 +496,7 @@
     <Property Name="B_DENUNCIAABUSOSEXUAL" Type="bit" Nullable="false" />
     <Property Name="DT_FECHANACIMIENTO" Type="datetime" Nullable="false" />
     <Property Name="FK_OCUPACION" Type="int" Nullable="false" />
+    <Property Name="FK_ESCOLARIDAD" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TBL_PERSONA_RED_APOYO">
     <Key>
@@ -559,6 +578,7 @@
     <Property Name="FK_VALORACIONRIESGO" Type="int" Nullable="false" />
     <Property Name="B_PROGRAMAOAPVD" Type="bit" Nullable="false" />
     <Property Name="VC_JUSTIFICACION" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="B_CASOACTIVO" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TBL_REGISTRO_COORDINACION">
     <Key>
@@ -588,6 +608,14 @@
     <Property Name="FK_ROL" Type="int" Nullable="false" />
     <Property Name="FK_ACCION" Type="int" Nullable="false" />
     <Property Name="PK_ROLACCION" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ROL_TIPO_ATENCION">
+    <Key>
+      <PropertyRef Name="PK_ROLTIPOATENCION" />
+    </Key>
+    <Property Name="PK_ROLTIPOATENCION" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_ROL" Type="int" Nullable="false" />
+    <Property Name="FK_TIPOATENCION" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TBL_ROL_USUARIO">
     <Key>
@@ -642,6 +670,18 @@
     <Property Name="VC_VALOR2" Type="varchar" MaxLength="500" />
     <Property Name="B_EDITABLE" Type="bit" Nullable="false" />
   </EntityType>
+  <Association Name="FK__TBL_PERSO__FK_ES__7BB05806">
+    <End Role="TBL_CATALOGO" Type="Self.TBL_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_PERSONA_FAMILIAR" Type="Self.TBL_PERSONA_FAMILIAR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_CATALOGO">
+        <PropertyRef Name="PK_CATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA_FAMILIAR">
+        <PropertyRef Name="FK_ESCOLARIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TBL_ADICCIONES_TBL_PERSONA">
     <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="1" />
     <End Role="TBL_ADICCIONES" Type="Self.TBL_ADICCIONES" Multiplicity="*" />
@@ -762,6 +802,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TBL_AGRESION_IMPACTO_VIOLENCIA_TBL_AGRESION">
+    <End Role="TBL_AGRESION" Type="Self.TBL_AGRESION" Multiplicity="1" />
+    <End Role="TBL_AGRESION_IMPACTO_VIOLENCIA" Type="Self.TBL_AGRESION_IMPACTO_VIOLENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_AGRESION">
+        <PropertyRef Name="PK_AGRESION" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_IMPACTO_VIOLENCIA">
+        <PropertyRef Name="FK_AGRESION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESION_IMPACTO_VIOLENCIA_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESION_IMPACTO_VIOLENCIA" Type="Self.TBL_AGRESION_IMPACTO_VIOLENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESION_IMPACTO_VIOLENCIA">
+        <PropertyRef Name="FK_IMPACTOVIOLENCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TBL_AGRESION_TBL_AGRESOR">
     <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="1" />
     <End Role="TBL_AGRESION" Type="Self.TBL_AGRESION" Multiplicity="*" />
@@ -795,6 +859,42 @@
       </Principal>
       <Dependent Role="TBL_AGRESION_VIOLENCIA">
         <PropertyRef Name="FK_TIPOVIOLENCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_ADICCIONES_TBL_AGRESOR">
+    <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="1" />
+    <End Role="TBL_AGRESOR_ADICCIONES" Type="Self.TBL_AGRESOR_ADICCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_AGRESOR">
+        <PropertyRef Name="PK_AGRESOR" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR_ADICCIONES">
+        <PropertyRef Name="FK_AGRESOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_ADICCIONES_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_AGRESOR_ADICCIONES" Type="Self.TBL_AGRESOR_ADICCIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR_ADICCIONES">
+        <PropertyRef Name="FK_ADICCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_AGRESOR_CASOCLAIS">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+    <End Role="TBL_AGRESOR" Type="Self.TBL_AGRESOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_AGRESOR">
+        <PropertyRef Name="FK_CASOCLAIS" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1446,6 +1546,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO2">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA">
+        <PropertyRef Name="FK_PUEBLOINDIGENA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TBL_PERSONA_TBL_VALORCATALOGO">
     <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
     <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="*" />
@@ -1698,6 +1810,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TBL_ROL_TIPO_ATENCION_TBL_ROL">
+    <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="1" />
+    <End Role="TBL_ROL_TIPO_ATENCION" Type="Self.TBL_ROL_TIPO_ATENCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_ROL">
+        <PropertyRef Name="PK_ROL" />
+      </Principal>
+      <Dependent Role="TBL_ROL_TIPO_ATENCION">
+        <PropertyRef Name="FK_ROL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_ROL_TIPO_ATENCION" Type="Self.TBL_ROL_TIPO_ATENCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_ROL_TIPO_ATENCION">
+        <PropertyRef Name="FK_TIPOATENCION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TBL_ROLACCION_TBL_ACCION">
     <End Role="TBL_ACCION" Type="Self.TBL_ACCION" Multiplicity="1" />
     <End Role="TBL_ROL_ACCION" Type="Self.TBL_ROL_ACCION" Multiplicity="*" />
@@ -1782,6 +1918,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_BUSCAR_EXPEDIENTE_CEEAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="VC_TERMINOBUSQUEDA" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_LISTAR_ATENCIONES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_LISTAR_PROFESIONALES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="SIVIOModelStoreContainer">
     <EntitySet Name="TBL_ACCION" EntityType="Self.TBL_ACCION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_ADICCIONES" EntityType="Self.TBL_ADICCIONES" Schema="dbo" store:Type="Tables" />
@@ -1790,8 +1932,10 @@
     <EntitySet Name="TBL_AGRESION_CATEGORIA_RIESGO" EntityType="Self.TBL_AGRESION_CATEGORIA_RIESGO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_AGRESION_CATEGORIZACION_RIESGO" EntityType="Self.TBL_AGRESION_CATEGORIZACION_RIESGO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_AGRESION_DETALLE_VIOLENCIA" EntityType="Self.TBL_AGRESION_DETALLE_VIOLENCIA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_AGRESION_IMPACTO_VIOLENCIA" EntityType="Self.TBL_AGRESION_IMPACTO_VIOLENCIA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_AGRESION_VIOLENCIA" EntityType="Self.TBL_AGRESION_VIOLENCIA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_AGRESOR" EntityType="Self.TBL_AGRESOR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_AGRESOR_ADICCIONES" EntityType="Self.TBL_AGRESOR_ADICCIONES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_AGRESOR_MOTIVO_REGRESO" EntityType="Self.TBL_AGRESOR_MOTIVO_REGRESO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_ARCHIVO" EntityType="Self.TBL_ARCHIVO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_ATENCION" EntityType="Self.TBL_ATENCION" Schema="dbo" store:Type="Tables" />
@@ -1834,11 +1978,16 @@
     <EntitySet Name="TBL_REGISTRO_COORDINACION" EntityType="Self.TBL_REGISTRO_COORDINACION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_ROL" EntityType="Self.TBL_ROL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_ROL_ACCION" EntityType="Self.TBL_ROL_ACCION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ROL_TIPO_ATENCION" EntityType="Self.TBL_ROL_TIPO_ATENCION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_ROL_USUARIO" EntityType="Self.TBL_ROL_USUARIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_TELEFONO" EntityType="Self.TBL_TELEFONO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_UNIDAD" EntityType="Self.TBL_UNIDAD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_USUARIO" EntityType="Self.TBL_USUARIO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_VALOR_CATALOGO" EntityType="Self.TBL_VALOR_CATALOGO" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__TBL_PERSO__FK_ES__7BB05806" Association="Self.FK__TBL_PERSO__FK_ES__7BB05806">
+      <End Role="TBL_CATALOGO" EntitySet="TBL_CATALOGO" />
+      <End Role="TBL_PERSONA_FAMILIAR" EntitySet="TBL_PERSONA_FAMILIAR" />
+    </AssociationSet>
     <AssociationSet Name="FK_TBL_ADICCIONES_TBL_PERSONA" Association="Self.FK_TBL_ADICCIONES_TBL_PERSONA">
       <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
       <End Role="TBL_ADICCIONES" EntitySet="TBL_ADICCIONES" />
@@ -1879,6 +2028,14 @@
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_AGRESION_DETALLE_VIOLENCIA" EntitySet="TBL_AGRESION_DETALLE_VIOLENCIA" />
     </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_IMPACTO_VIOLENCIA_TBL_AGRESION" Association="Self.FK_TBL_AGRESION_IMPACTO_VIOLENCIA_TBL_AGRESION">
+      <End Role="TBL_AGRESION" EntitySet="TBL_AGRESION" />
+      <End Role="TBL_AGRESION_IMPACTO_VIOLENCIA" EntitySet="TBL_AGRESION_IMPACTO_VIOLENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESION_IMPACTO_VIOLENCIA_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESION_IMPACTO_VIOLENCIA_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESION_IMPACTO_VIOLENCIA" EntitySet="TBL_AGRESION_IMPACTO_VIOLENCIA" />
+    </AssociationSet>
     <AssociationSet Name="FK_TBL_AGRESION_TBL_AGRESOR" Association="Self.FK_TBL_AGRESION_TBL_AGRESOR">
       <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
       <End Role="TBL_AGRESION" EntitySet="TBL_AGRESION" />
@@ -1890,6 +2047,18 @@
     <AssociationSet Name="FK_TBL_AGRESION_VIOLENCIA_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESION_VIOLENCIA_TBL_VALOR_CATALOGO">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_AGRESION_VIOLENCIA" EntitySet="TBL_AGRESION_VIOLENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_ADICCIONES_TBL_AGRESOR" Association="Self.FK_TBL_AGRESOR_ADICCIONES_TBL_AGRESOR">
+      <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
+      <End Role="TBL_AGRESOR_ADICCIONES" EntitySet="TBL_AGRESOR_ADICCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_ADICCIONES_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_AGRESOR_ADICCIONES_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESOR_ADICCIONES" EntitySet="TBL_AGRESOR_ADICCIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_AGRESOR_CASOCLAIS" Association="Self.FK_TBL_AGRESOR_CASOCLAIS">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
     </AssociationSet>
     <AssociationSet Name="FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_AGRESOR" Association="Self.FK_TBL_AGRESOR_MOTIVO_REGRESO_TBL_AGRESOR">
       <End Role="TBL_AGRESOR" EntitySet="TBL_AGRESOR" />
@@ -2107,6 +2276,10 @@
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
     </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO2" Association="Self.FK_TBL_PERSONA_TBL_VALOR_CATALOGO2">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+    </AssociationSet>
     <AssociationSet Name="FK_TBL_PERSONA_TBL_VALORCATALOGO" Association="Self.FK_TBL_PERSONA_TBL_VALORCATALOGO">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
@@ -2190,6 +2363,14 @@
     <AssociationSet Name="FK_TBL_ROL_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_ROL_TBL_VALOR_CATALOGO">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ROL_TIPO_ATENCION_TBL_ROL" Association="Self.FK_TBL_ROL_TIPO_ATENCION_TBL_ROL">
+      <End Role="TBL_ROL" EntitySet="TBL_ROL" />
+      <End Role="TBL_ROL_TIPO_ATENCION" EntitySet="TBL_ROL_TIPO_ATENCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_ROL_TIPO_ATENCION" EntitySet="TBL_ROL_TIPO_ATENCION" />
     </AssociationSet>
     <AssociationSet Name="FK_TBL_ROLACCION_TBL_ACCION" Association="Self.FK_TBL_ROLACCION_TBL_ACCION">
       <End Role="TBL_ACCION" EntitySet="TBL_ACCION" />
