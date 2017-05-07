@@ -1,6 +1,7 @@
 ﻿using SIVIO.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
@@ -533,28 +534,40 @@ namespace SIVIO.UI.Controllers
         [AllowAnonymous]
         public JsonResult IsertarDatosUsuaria(FormCollection datos)
         {
-            using (var entidades = new SIVIOEntities())
-            {
-                TBL_PERSONA persona = new TBL_PERSONA();
-                TBL_TELEFONO tel = new TBL_TELEFONO();
-                persona.VC_NOMBRE = datos["Nombre"];
-                persona.VC_APELLIDO1 = datos["Apellido1"];
-                persona.VC_APELLIDO2 = datos["Apellido2"];
+            var entidades = new SIVIOEntities();
+            TBL_PERSONA persona = new TBL_PERSONA();
+            TBL_TELEFONO tel = new TBL_TELEFONO();
+            persona.VC_NOMBRE = datos["Nombre"];
+            persona.VC_APELLIDO1 = datos["Apellido1"];
+            persona.VC_APELLIDO2 = datos["Apellido2"];
+            if (datos["Nacionalidad"] != "")
                 persona.FK_NACIONALIDAD = Int32.Parse(datos["Nacionalidad"]);
+            if (datos["Nacionalidad2"] != "")
                 persona.FK_NACIONALIDAD2 = Int32.Parse(datos["OtraNacionalidad"]);
-                persona.FK_CONDICIONMIGRATORIA = Int32.Parse(datos["CondicionMigratoria"]);
+            persona.FK_CONDICIONMIGRATORIA = Int32.Parse(datos["CondicionMigratoria"]);
+            if (datos["NumeroHijos"] != "")
                 persona.I_HIJOS = Int32.Parse(datos["NumeroHijos"]);
+            if (datos["MayorDoce"] != "")
                 persona.I_HIJOSMAYORESDOCE = Int32.Parse(datos["MayorDoce"]);
-                persona.FK_DISTRITOPROCEDENCIA = Int32.Parse(datos["DistritoPersona"]);
-                persona.FK_CANTONPROCEDENCIA = Int32.Parse(datos["CantonPersona"]);
-                persona.FK_PROVINCIAPROCEDENCIA = Int32.Parse(datos["ProvinciaPersona"]);
+            persona.FK_DISTRITOPROCEDENCIA = Int32.Parse(datos["DistritoPersona"]);
+            persona.FK_CANTONPROCEDENCIA = Int32.Parse(datos["CantonPersona"]);
+            persona.FK_PROVINCIAPROCEDENCIA = Int32.Parse(datos["ProvinciaPersona"]);
+            if (datos["MesesEmbarazo"] != "")
                 persona.FK_ESTADOEMBARAZO = Int32.Parse(datos["MesesEmbarazo"]);
-                persona.VC_IDENTIFICACION = datos["Identificacion"];
-                persona.DT_FECHANACIMIENTO = Convert.ToDateTime(datos["Fechanacimiento"]);
-                entidades.TBL_PERSONA.Add(persona);
-                entidades.SaveChanges();
-                return Json(new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Registro Exitoso", "valor"), JsonRequestBehavior.AllowGet);
+            persona.VC_IDENTIFICACION = datos["Identificacion"];
+            if (datos["FechaNacimiento"] != "")
+            {
+                persona.DT_FECHANACIMIENTO = Convert.ToDateTime(datos["FechaNacimiento"]);
+                persona.B_CONOCEFECHANACIMIENTO = true;
             }
+            if (datos["Edad"] != "")
+            {
+                persona.I_EDAD = Int32.Parse(datos["Edad"]);
+                persona.B_CONOCEFECHANACIMIENTO = false;
+            }
+            entidades.TBL_PERSONA.Add(persona);
+            entidades.SaveChanges();
+            return Json(new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Registro Exitoso", "valor"), JsonRequestBehavior.AllowGet);
         }
         #endregion
 

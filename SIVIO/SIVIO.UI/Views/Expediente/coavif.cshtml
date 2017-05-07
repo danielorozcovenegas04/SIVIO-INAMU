@@ -41,7 +41,6 @@
                 $('#meses').show();
             } else {
                 $('#meses').hide();
-                $('#intEmbarazo').val("0");
             }
         });
 
@@ -258,53 +257,66 @@
 
 
         $("#btnGuardarDatosUsuaria").click(function () {
-            $.ajax(
-                {
-                    type: "POST",
-                    url: '@Url.Action("IsertarDatosUsuaria", "Expediente")',
-                    data: {
-                        Nombre: $("#txtNombre").val(),
-                        Apellido1: $("#txtApellido1").val(),
-                        Apellido2: $("#txtApellido2").val(),
-                        Edad: $("#intEdad").val(),
-                        FechaNacimiento: $("#dateNacimiento").val(),
-                        PaisProcedencia: $("#comPais").val(),
-                        Telefono: $("#txtTelefono").val(),
-                        OtraNacionalidad: $("#comOtraNacionalidad").val(),
-                        CondicionMigratoria: $("#comMigratoria").val(),
-                        NumeroHijos: $("#intHijos").val(),
-                        MayorDoce: $("#intHijosMayores").val(),
-                        Discapasidades: $("#comDiscapacidad").val(),
-                        Identificacion: $("#txtDocId").val(),
-                        ProvinciaPersona: $("#cmbPersonaProvincia").val(),
-                        CantonPersona: $("#cmbPersonaCanton").val(),
-                        DistritoPersona: $("#cmbPersonaDistrito").val(),
-                        Nacionalidad: $("#comNacionalidad").val(),
-                        Apatrida: $("#checkApatrida").val(),
-                        LugarTrabajo: $("#txtLugarTrabajo").val(),
-                        MesesEmbarazo: $("#intEmbarazo").val()
-                    },
-                    dataType: JSON,
-                    processData: true,
-                    success: function (resultado) {
-                        $("#contenedorBotones").show();
-                        $("#contenedorEspera").hide();
-                        $("#txtModalTitulo").css("color", "green");
-                        $("#txtModalTitulo").text("Operación Exitosa");
-                        $("#txtModalContenido").text("Exito");
-                        instMensajes.open();
-                        $.LoadingOverlay("hide");
-                    },
-                    error: function (xhr, ajaxOptions, error) {
-                        $("#contenedorBotones").show();
-                        $("#contenedorEspera").hide();
-                        $("#txtModalTitulo").css("color", "red");
-                        $("#txtModalTitulo").text("Error al registrar");
-                        $("#txtModalContenido").text("Error");
-                        instMensajes.open();
-                        $.LoadingOverlay("hide");
-                    }
-                });
+            var validacion = $('#datosUsuariaForm').parsley().validate();
+            var edadPersona = $('#checkFecha').is(':checked') ? '' : $("#intEdad").val();
+            var fechaPersona = $('#checkFecha').is(':checked') ? $("#dateNacimiento").val()  : '';
+            var nacionalidadPersona = $('#checkApatrida').is(':checked') ? '' :$("#comNacionalidad").val();
+            var nacionalidadPersona2 = $('#checkApatrida').is(':checked') ? '' :$("#comNacionalidad2").val();
+            var embarazoPersona = $('#checkEmbarazo').is(':checked') ? $("#intEmbarazo").val() : '';
+            if (validacion === true) {
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: '@Url.Action("IsertarDatosUsuaria", "Expediente")',
+                        data: {
+                            Nombre: $("#txtNombre").val(),
+                            Apellido1: $("#txtApellido1").val(),
+                            Apellido2: $("#txtApellido2").val(),
+                            Edad: edadPersona,
+                            FechaNacimiento: fechaPersona, 
+                            PaisProcedencia: $("#comPais").val(),
+                            Telefono: $("#txtTelefono").val(),
+                            OtraNacionalidad: $("#comOtraNacionalidad").val(),
+                            CondicionMigratoria: $("#comMigratoria").val(),
+                            NumeroHijos: $("#intHijos").val(),
+                            MayorDoce: $("#intHijosMayores").val(),
+                            Discapasidades: $("#comDiscapacidad").val(),
+                            Identificacion: $("#txtDocId").val(),
+                            ProvinciaPersona: $("#cmbPersonaProvincia").val(),
+                            CantonPersona: $("#cmbPersonaCanton").val(),
+                            DistritoPersona: $("#cmbPersonaDistrito").val(),
+                            Nacionalidad: nacionalidadPersona,
+                            Apatrida: $("#checkApatrida").val(),
+                            LugarTrabajo: $("#txtLugarTrabajo").val(),
+                            MesesEmbarazo: embarazoPersona 
+                        },
+                        dataType: JSON,
+                        processData: true,
+                        success: function (resultado) {
+                            $("#contenedorBotones").show();
+                            $("#contenedorEspera").hide();
+                            $("#txtModalTitulo").css("color", "green");
+                            $("#txtModalTitulo").text("Operación Exitosa");
+                            $("#txtModalContenido").text("Exito");
+                            instMensajes.open();
+                            $.LoadingOverlay("hide");
+                        },
+                        error: function (xhr, ajaxOptions, error) {
+                            $("#contenedorBotones").show();
+                            $("#contenedorEspera").hide();
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("Error al registrar");
+                            $("#txtModalContenido").text("Error");
+                            instMensajes.open();
+                            $.LoadingOverlay("hide");
+                        }
+                    });
+            } else {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Información Incompleta");
+                $("#txtModalContenido").text("El formulario todavía tiene campos pendientes de llenar.");
+                instMensajes.open();
+            }
         });
 
         $.ajax({
@@ -625,7 +637,6 @@
         </div>
 
         <div class="col-md-10 form-group">
-            <form id="formCoavif" method="post">                
                 <ul class="nav nav-tabs">
                     <li class="active">
                         <a data-toggle="tab" href="#datAdministrativos">
@@ -716,152 +727,156 @@
                             </div>
                         </div>
                     </div>
-                    <div id="datUsuaria" class="tab-pane">
-                        <div class="row comunForm">
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <div class="col-md-4 form-group">
-                                        <label>Nombre</label>
-                                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                                    </div>
 
-                                    <div class="col-md-4 form-group">
-                                        <label>Primer Apellido</label>
-                                        <input class="form-control" placeholder="Apellido" id="txtApellido1" type="text" required="">
-                                    </div>
-
-                                    <div class="col-md-4 form-group">
-                                        <label>Segundo Apellido</label>
-                                        <input class="form-control" placeholder="Apellido" id="txtApellido2" type="text" required="">
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <label>
-                                            <input style="display:inline-block;" id="checkFecha" type="checkbox"> Conoce Fecha de Nacimiento
-                                        </label>
-                                    </div>
-
-                                    <div class="col-md-12 form-group" id="fechaNacimiento">
-                                        <label>Fecha Nacimiento</label>
-                                        <input class="form-control" placeholder="Fecha nacimiento" id="dateNacimiento" type="date" required="" min="0">
-                                    </div>
-
-                                    <div class="col-md-12 form-group" id="edad">
-                                        <label>Edad</label>
-                                        <input class="form-control" placeholder="Edad" id="intEdad" type="number" required="" min="0">
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <label>País de Procedencia</label>
-                                        <select id="comPais" class="form-control"></select>
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <label>
-                                            <input style="display:inline-block;" id="checkApatrida" type="checkbox"> Apátrida
-                                        </label>
-                                    </div>
-
-                                    <div id="nacionalidades">
+                        <div id="datUsuaria" class="tab-pane">
+                    <form id="datosUsuariaForm" method="post">
+                            <div class="row comunForm">
+                                <div class="row">
                                     <div class="col-md-6 form-group">
-                                        <label>Nacionalidad</label>
-                                        <select id="comNacionalidad" class="form-control">
-                                            <option value=""></option>
-                                        </select>
+                                        <div class="col-md-4 form-group">
+                                            <label>Nombre</label>
+                                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                                        </div>
+
+                                        <div class="col-md-4 form-group">
+                                            <label>Primer Apellido</label>
+                                            <input class="form-control" placeholder="Apellido" id="txtApellido1" type="text" required="">
+                                        </div>
+
+                                        <div class="col-md-4 form-group">
+                                            <label>Segundo Apellido</label>
+                                            <input class="form-control" placeholder="Apellido" id="txtApellido2" type="text" required="">
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>
+                                                <input style="display:inline-block;" id="checkFecha" type="checkbox"> Conoce Fecha de Nacimiento
+                                            </label>
+                                        </div>
+
+                                        <div class="col-md-12 form-group" id="fechaNacimiento">
+                                            <label>Fecha Nacimiento</label>
+                                            <input class="form-control" placeholder="Fecha nacimiento" id="dateNacimiento" type="date" min="0">
+                                        </div>
+
+                                        <div class="col-md-12 form-group" id="edad">
+                                            <label>Edad</label>
+                                            <input class="form-control" placeholder="Edad" id="intEdad" type="number" min="0">
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>País de Procedencia</label>
+                                            <select id="comPais" class="form-control"></select>
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>
+                                                <input style="display:inline-block;" id="checkApatrida" type="checkbox"> Apátrida
+                                            </label>
+                                        </div>
+
+                                        <div id="nacionalidades">
+                                            <div class="col-md-6 form-group">
+                                                <label>Nacionalidad</label>
+                                                <select id="comNacionalidad" class="form-control">
+                                                    <option value=0></option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-6 form-group">
+                                                <label>Otra Nacionalidad</label>
+                                                <select id="comOtraNacionalidad" class="form-control">
+                                                    <option value=0></option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>Condición Migratoria</label>
+                                            <select id="comMigratoria" class="form-control"></select>
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>Numero de Hijos</label>
+                                            <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label> Hijo mayor de 12 años</label>
+                                            <input class="form-control" placeholder="Número de Hijos mayores de 12" min="0" id="intHijosMayores" type="number" required="">
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>Discapacidades en hijos/hijas</label>
+                                            <select id="comDiscapacidad" class="form-control">
+                                                <option value=0>Ninguna</option>
+                                            </select>
+                                        </div>
+
                                     </div>
 
                                     <div class="col-md-6 form-group">
-                                        <label>Otra Nacionalidad</label>
-                                        <select id="comOtraNacionalidad" class="form-control">
-                                            <option value=""></option>
-                                        </select>
-                                    </div>
+                                        <div class="col-md-12 form-group">
+                                            <label>Número Documento de identificación</label>
+                                            <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="">
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>Lugar de Procedencia</label>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>Provincia</label>
+                                            <select id="cmbPersonaProvincia" class="form-control" required>
+                                                @*<option value=""></option>*@
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>Cantón</label>
+                                            <select id="cmbPersonaCanton" class="form-control" required>
+                                                @*<option value=""></option>*@
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>Distrito</label>
+                                            <select id="cmbPersonaDistrito" class="form-control" required>
+                                                @*<option value=""></option>*@
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>Lugar de Trabajo</label>
+                                            <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>
+                                                <input style="display:inline-block;" id="checkEmbarazo" type="checkbox"> Embarazo
+                                            </label>
+                                        </div>
+
+                                        <div class="col-md-12 form-group" id="meses">
+                                            <label>Meses de embarazo</label>
+                                            <input class="form-control" placeholder="Meses de embarazo" id="intEmbarazo" type="number" required="" min="0">
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>Teléfono</label>
+                                            <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="">
+                                        </div>
+
                                     </div>
 
-                                    <div class="col-md-12 form-group">
-                                        <label>Condición Migratoria</label>
-                                        <select id="comMigratoria" class="form-control"></select>
+                                    <div class="row" id="contenedorBotones">
+                                        <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                                            <button type="button" id="btnGuardarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                                            <button type="button" id="btnCancelarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                                        </div>
                                     </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <label>Numero de Hijos</label>
-                                        <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <label> Hijo mayor de 12 años</label>
-                                        <input class="form-control" placeholder="Número de Hijos mayores de 12" min="0" id="intHijosMayores" type="number" required="">
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <label>Discapacidades en hijos/hijas</label>
-                                        <select id="comDiscapacidad" class="form-control">
-                                            <option value=""></option>
-                                        </select>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-6 form-group">
-                                    <div class="col-md-12 form-group">
-                                        <label>Número Documento de identificación</label>
-                                        <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="">
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <label>Lugar de Procedencia</label>
-                                    </div>
-                                    <div class="col-md-4 form-group">
-                                        <label>Provincia</label>
-                                        <select id="cmbPersonaProvincia" class="form-control" required>
-                                            @*<option value=""></option>*@
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 form-group">
-                                        <label>Cantón</label>
-                                        <select id="cmbPersonaCanton" class="form-control" required>
-                                            @*<option value=""></option>*@
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 form-group">
-                                        <label>Distrito</label>
-                                        <select id="cmbPersonaDistrito" class="form-control" required>
-                                            @*<option value=""></option>*@
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <label>Lugar de Trabajo</label>
-                                        <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <label>
-                                            <input style="display:inline-block;" id="checkEmbarazo" type="checkbox"> Embarazo
-                                        </label>
-                                    </div>
-
-                                    <div class="col-md-12 form-group" id="meses">
-                                        <label>Meses de embarazo</label>
-                                        <input class="form-control" placeholder="Meses de embarazo" id="intEmbarazo" type="number" required="" min="0">
-                                    </div>
-
-                                    <div class="col-md-12 form-group">
-                                        <label>Teléfono</label>
-                                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="">
-                                    </div>
-
-                                </div>
-
-                            <div class="row" id="contenedorBotones">
-                                <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                    <button type="button" id="btnGuardarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
-                                    <button type="button" id="btnCancelarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
                                 </div>
                             </div>
-                            </div>
+                    </form>
                         </div>
-                    </div>
+                    
                     <div id="valoracion" class="tab-pane">
                         <div class="row comunForm">
 
@@ -894,7 +909,6 @@
 
 
 
-            </form>
         </div>
 </div>
 
