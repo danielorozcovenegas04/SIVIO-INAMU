@@ -77,6 +77,7 @@ namespace SIVIO.UI.Controllers
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoFamilia,
                 (int)Utilitarios.Enumerados.EnumCatalogos.Nacionalidad,
                 (int)Utilitarios.Enumerados.EnumCatalogos.SituacionMigratoria,
+                (int)Utilitarios.Enumerados.EnumCatalogos.Ocupacion,
                 (int)Utilitarios.Enumerados.EnumCatalogos.SituacionLaboral,
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoVivienda,
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoDiscapacidad,
