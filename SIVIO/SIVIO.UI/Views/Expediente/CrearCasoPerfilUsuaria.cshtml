@@ -134,6 +134,80 @@
         <select id="cmbAdicciones" class="form-control" multiple></select>
     </div>
 </div>
+@*Redes de apoyo*@
+<div class="row">
+    <div class="col-md-12">
+        <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
+            <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
+            <thead>
+                <tr>
+                    <th>PK_REDAPOYO</th>
+                    <th>FK_INSTITUCION</th>
+                    <th>FK_TIPORED</th>
+                    <th>Nombre</th>
+                    <th>Relacion</th>
+                    <th>Telefono</th>
+                    <th>Tipo de Red</th>
+                    <th>Institución</th>
+
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div class="row comunForm" id="frmEditorRedesApoyo">
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-xs-9"></div>
+            <div class="col-xs-3">
+                <button class="botonCerrar danger" id="btnOcultarCampoRedApoyo">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 form-group">
+                <label>Tipo</label>
+                <select id="cmdTipoRedApoyo" class="form-control redApoyo"></select>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Nombre</label>
+                <input class="form-control redApoyo" placeholder="Nombre" id="txtNombreRedApoyo" type="text" required="">
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group" id="contenedorInstitucion">
+                <label>Institución</label>
+                <select id="cmdInstitucionRedApoyo" class="form-control redApoyo"></select>
+            </div>
+            <div class="col-md-6 form-group" id="contenedorRelacion">
+                <label>Relación</label>
+                <input class="form-control redApoyo" placeholder="Relación" id="txtRelacionRedApoyo" type="text" required="">
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Teléfono</label>
+                <input class="form-control redApoyo" placeholder="Teléfono" id="txtTelefonoRedApoyo" type="text" required="">
+            </div>
+        </div>
+        @*<div class="row" style="text-align:center">
+            <div class="col-md-12">
+                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Guardar Red</button>
+            </div>
+        </div>*@
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
 <label>Redes de Apoyo o Recursos con los que cuenta la usuaria  </label><label><input type="checkbox" id="checkRedesApoyo" value="No tiene"> No tiene</label><br>
 <label>Primaria</label>
 <div class="row">
@@ -286,4 +360,4 @@
         <input class="form-control" id="txtTeléfonoRedApoyo8" type="text" required="">
     </div>
 
-</div>
+</div>-->
