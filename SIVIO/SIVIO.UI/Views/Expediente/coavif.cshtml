@@ -313,7 +313,7 @@
                     var usuario = respuesta.usuarioNombre + ' ' + respuesta.usuarioApellido1 + ' ' + respuesta.usuarioApellido2;
                     $("#txtPersonaAtiende").val(usuario);
                     $('#txtPersonaAtiende').css("background-color", "#f2f2f2");
-                    $("#txtPersonaAtiende").prop("readonly", true);                    
+                    $("#txtPersonaAtiende").prop("readonly", true);
 
                     $("#txtCorreoUsuario").val("@HttpContext.Current.User.Identity.Name");
                     $('#txtCorreoUsuario').css("background-color", "#f2f2f2");
@@ -443,36 +443,46 @@
 
         $("#btnGuardarDatosAdministrativos").click(function () {
             if(@Model.PK_PERSONA != 0){
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("guardarDatoAdministrativo", "Expediente")',
-                    data: {
-                        Fecha: $("#txtFecha").val(),
-                        HoraInicio: $("#txtHoraInicio").val(),
-                        Persona: "@Model.PK_PERSONA",
-                        TipoDisponibilidad: $("#cmbTipoDisponibilidad").val()
-                    },
-                    datatype: "json",
-                    processData: true,
-                    success: function (resultado) {
-                        $("#contenedorBotones").show();
-                        $("#contenedorEspera").hide();
-                        $("#txtModalTitulo").css("color", "green");
-                        $("#txtModalTitulo").text("Exito");
-                        $("#txtModalContenido").text("-----");
-                        instMensajes.open();
-                        $.LoadingOverlay("hide");
-                    }, error: function (xhr, ajaxOptions, error) {
-                        $("#contenedorBotones").show();
-                        $("#contenedorEspera").hide();
-                        $("#txtModalTitulo").css("color", "red");
-                        $("#txtModalTitulo").text("Error al registrar");
-                        $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
-                        instMensajes.open();
-                        $.LoadingOverlay("hide");
+                if($("#txtTelefonoUsuario").val() == ""){
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("No ha ingresado telefono");
+                    $("#txtModalContenido").text("No se ha ingresado el telefono utilizado por la usuaria que atiende");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+                }else{
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("guardarDatoAdministrativo", "Expediente")',
+                        data: {
+                            Fecha: $("#txtFecha").val(),
+                            HoraInicio: $("#txtHoraInicio").val(),
+                            Persona: "@Model.PK_PERSONA",
+                            TipoDisponibilidad: $("#cmbTipoDisponibilidad").val()
+                        },
+                        datatype: "json",
+                        processData: true,
+                        success: function (resultado) {
+                            $("#contenedorBotones").show();
+                            $("#contenedorEspera").hide();
+                            $("#txtModalTitulo").css("color", "green");
+                            $("#txtModalTitulo").text("Exito");
+                            $("#txtModalContenido").text("Registro de datos administrativos guardado exitósamente");
+                            instMensajes.open();
+                            $.LoadingOverlay("hide");
+                        }, error: function (xhr, ajaxOptions, error) {
+                            $("#contenedorBotones").show();
+                            $("#contenedorEspera").hide();
+                            $("#txtModalTitulo").css("color", "red");
+                            $("#txtModalTitulo").text("Error al registrar");
+                            $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                            instMensajes.open();
+                            $.LoadingOverlay("hide");
 
-                    }
-                });
+                        }
+                    });
+                }
             }else{
                 $("#contenedorBotones").show();
                 $("#contenedorEspera").hide();
@@ -611,7 +621,22 @@
 </style>
 <div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
     @*<div class="col-md-2 form-group"></div>*@
-
+    <div class="col-md-12 form-group">
+        @if (Model.PK_PERSONA != 0)
+        {
+            <div class="col-md-12">
+                <h3>Editar usuaria</h3>
+            </div>
+            <div class="col-md-12">
+                <h3>Expediente de @Model.VC_NOMBRE @Model.VC_APELLIDO1 @Model.VC_APELLIDO2</h3>
+                <h5>Identificación: @Model.VC_IDENTIFICACION <br /> Número de expediente: @Model.PK_PERSONA</h5>
+            </div>
+        }
+        else
+        {
+            <h3>Crear usuaria</h3>
+        }
+    </div>
     
         <div class="col-md-2 form-group" id="botones_perfil">
             <button type="button" id="btnExpediente" class="btn btn-default btn-responsive selected2" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;" >Expediente</button>
