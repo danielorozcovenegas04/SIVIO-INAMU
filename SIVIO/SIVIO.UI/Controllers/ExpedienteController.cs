@@ -272,7 +272,8 @@ namespace SIVIO.UI.Controllers
                 var user = HttpContext.User.Identity.Name;
                 TBL_USUARIO usuario = entidades.TBL_USUARIO.Where(m => m.VC_USUARIO == user).First();
 
-                DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime fechaInicio = DateTime.Parse(fecha + " " + hora);
+                //DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime fechaFin = DateTime.Now;
 
                 int idPersona;
@@ -285,7 +286,7 @@ namespace SIVIO.UI.Controllers
                 registro.FK_USUARIOREGISTRA = usuario.PK_USUARIO;
                 registro.DT_FECHAINICIO = fechaInicio;
                 registro.DT_FECHAFIN = fechaFin;
-                registro.FK_TIPOSERVICIO = usuario.TBL_ROL_USUARIO.First().TBL_ROL.PK_ROL;
+                registro.FK_TIPOSERVICIO = usuario.TBL_ROL_USUARIO.First().TBL_ROL.FK_TIPOSERVICIO;//mete 640 en vez de 639
                 registro.FK_TIPOREGISTRO = 549;
                 return _modelExpediente.InsertarDatosAdministrativos(registro);
             }
