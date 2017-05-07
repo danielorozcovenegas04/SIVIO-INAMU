@@ -158,6 +158,29 @@ namespace SIVIO.UI.Models
             }
         }
 
+        public string Tipo(int valor)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    var referencia = entidades.TBL_VALOR_CATALOGO.Find(valor);
+                    if (referencia != null)
+                    {
+                        return referencia.VC_VALOR1;
+                    }
+                    else
+                    {
+                        return "Valor no hallado";
+                    }
+                }
+                catch
+                {
+                    return "ERROR EN BASE DE DATOS";
+                }
+            }
+        }
+
         public TBL_PERSONA BuscarPersona(int idPersona)
         {
             var entidades = new SIVIOEntities();

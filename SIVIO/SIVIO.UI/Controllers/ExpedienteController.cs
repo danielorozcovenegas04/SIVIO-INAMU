@@ -273,7 +273,8 @@ namespace SIVIO.UI.Controllers
                 var user = HttpContext.User.Identity.Name;
                 TBL_USUARIO usuario = entidades.TBL_USUARIO.Where(m => m.VC_USUARIO == user).First();
 
-                DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime fechaInicio = DateTime.Parse(fecha + " " + hora);
+                //DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime fechaFin = DateTime.Now;
 
                 int idPersona;
@@ -286,7 +287,7 @@ namespace SIVIO.UI.Controllers
                 registro.FK_USUARIOREGISTRA = usuario.PK_USUARIO;
                 registro.DT_FECHAINICIO = fechaInicio;
                 registro.DT_FECHAFIN = fechaFin;
-                registro.FK_TIPOSERVICIO = usuario.TBL_ROL_USUARIO.First().TBL_ROL.PK_ROL;
+                registro.FK_TIPOSERVICIO = usuario.TBL_ROL_USUARIO.First().TBL_ROL.FK_TIPOSERVICIO;//mete 640 en vez de 639
                 registro.FK_TIPOREGISTRO = 549;
                 return _modelExpediente.InsertarDatosAdministrativos(registro);
             }
@@ -389,15 +390,17 @@ namespace SIVIO.UI.Controllers
                     }
 
                 }
-                foreach (var c in listaCatalogo)
+                r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
+                r.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
+              
+               /* foreach (var c in listaCatalogo)
                 {
 //if (r.TBL_VALOR_CATALOGO==null) {
                         
                        
                   //  }
                     if (r.FK_TIPOSERVICIO == c.FK_CATALOGO) {
-                        r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
-                        r.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
+                       
                         r.TBL_VALOR_CATALOGO.FK_CATALOGO = c.FK_CATALOGO;
                         r.TBL_VALOR_CATALOGO.VC_VALOR1 = c.VC_VALOR1;
                         r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "0";
@@ -410,10 +413,12 @@ namespace SIVIO.UI.Controllers
                         r.TBL_VALOR_CATALOGO1.VC_VALOR1 = c.VC_VALOR1;
                         
                     }
-                }
+                }*/
                 foreach (var c in listaConsulta)
                 {
                    if (r.PK_REGISTRO==c.FK_REGISTRO ) {
+                        r.TBL_VALOR_CATALOGO.VC_VALOR1 = _modelExpediente.Tipo(c.FK_TIPOCEEAMREINGRESO.Value);
+                        r.TBL_VALOR_CATALOGO1.VC_VALOR1= _modelExpediente.Tipo(r.FK_TIPOREGISTRO);
                         r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
                     }
                 }
@@ -421,8 +426,13 @@ namespace SIVIO.UI.Controllers
                 {
                     if (r.PK_REGISTRO == a.FK_REGISTRO )
                     {
+                        r.TBL_VALOR_CATALOGO.VC_VALOR1 = _modelExpediente.Tipo(a.FK_TIPOATENCION);
+                        r.TBL_VALOR_CATALOGO1.VC_VALOR1 = _modelExpediente.Tipo(r.FK_TIPOREGISTRO);
                         r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
                     }
+                }
+                if (r.TBL_VALOR_CATALOGO1.VC_VALOR2 == null) {
+                    r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "0";
                 }
                 //SOLO PARA PRUEBAS ELIMINAR
               /* if (t == 0)
