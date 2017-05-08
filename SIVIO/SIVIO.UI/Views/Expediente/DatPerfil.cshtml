@@ -1,0 +1,246 @@
+﻿
+<div class="row comunForm">
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Identidad de género</label>
+            <select id="cmbIdentidadGenero" class="form-control">
+                <option></option>
+            </select>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Orientacion sexual</label>
+            <select id="cmbOrientacionSexual" class="form-control">
+                <option></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Origen étnico</label>
+            <select id="cmbOrigenEtnico" class="form-control">
+                <option></option>
+            </select>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Condición laboral</label>
+            <select id="cmbCondicionLaboral" class="form-control">
+                <option></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Experiencia laboral</label>
+            <input class="form-control" placeholder="Tiempo en años/meses" id="txtExperienciaLaboral" type="text" required="">
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Lugar de trabajo</label>
+            <input class="form-control" placeholder="Nombre del lugar" id="txtLugarTrabajo" type="text" required="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Puesto que desempeña</label>
+            <input class="form-control" placeholder="Puesto de trabajo" id="txtPuestoTrabajo" type="text" required="">
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Direccion de lugar de trabajo</label>
+            <input class="form-control" placeholder="Direccion" id="txtDireccionLugarTrabajo" type="text" required="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Tipo de familia</label>
+            <select id="cmbTipoFamilia" class="form-control">
+                <option></option>
+            </select>
+        </div>
+
+        <div class="col-xs-6 form-group">
+            <label>Condición de aseguramiento</label>
+            <select id="cmbCondicionAseguramiento" class="form-control">
+                <option></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 form-group">
+            <label>Tipo de vivienda</label>
+            <select id="cmbTipoVivienda" class="form-control">
+                <option></option>
+            </select>
+        </div>
+        <div class="col-md-4 form-group">
+            <label>Condiciones de Salud</label>
+            <select id="cmbCondSalud" class="form-control" multiple>
+                <option></option>
+            </select>
+        </div>
+        <div class="col-md-4 form-group">
+            <label>Adicciones</label>
+            <select id="cmdAdicciones" class="form-control" multiple>
+                <option></option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
+                <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
+                <thead>
+                    <tr>
+                        <th>PK_REDAPOYO</th>
+                        <th>FK_INSTITUCION</th>
+                        <th>FK_TIPORED</th>
+                        <th>Nombre</th>
+                        <th>Relacion</th>
+                        <th>Telefono</th>
+                        <th>Tipo de Red</th>
+                        <th>Institución</th>
+
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="row comunForm" id="frmEditorRedesApoyo">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-9"></div>
+                <div class="col-xs-3">
+                    <button class="botonCerrar danger" id="btnOcultarCampoRedApoyo">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6 form-group">
+                    <label>Tipo</label>
+                    <select id="cmdTipoRedApoyo" class="form-control redApoyo"></select>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Nombre</label>
+                    <input class="form-control redApoyo" placeholder="Nombre" id="txtNombreRedApoyo" type="text" required="">
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group" id="contenedorInstitucion">
+                    <label>Institución</label>
+                    <select id="cmdInstitucionRedApoyo" class="form-control redApoyo"></select>
+                </div>
+                <div class="col-md-6 form-group" id="contenedorRelacion">
+                    <label>Relación</label>
+                    <input class="form-control redApoyo" placeholder="Relación" id="txtRelacionRedApoyo" type="text" required="">
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Teléfono</label>
+                    <input class="form-control redApoyo" placeholder="Teléfono" id="txtTelefonoRedApoyo" type="text" required="">
+                </div>
+            </div>
+            @*<div class="row" style="text-align:center">
+                    <div class="col-md-12">
+                        <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Guardar Red</button>
+                    </div>
+                </div>*@
+            <div class="row">
+                <div class="col-md-12" style="text-align: center">
+                    <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Composición familiar-->
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tblComposicionFamiliar" class="display table-bordered" cellspacing="0" style="width: 100%">
+                <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-users" style="margin-right: 2px;"></i>Composición Familiar</div></caption>
+                <thead>
+                    <tr>
+                        <th>PK_FAMILIAR</th>
+                        <th>PK_PERSONA</th>
+                        <th>FK_PARENTESCO_PERSONA</th>
+                        <th>FK_ESCOLARIDAD</th>
+                        <th>FK_OCUPACION</th>
+                        <th>Nombre</th>
+                        <th>Parentesco</th>
+                        <th>Edad</th>
+                        <th>Escolaridad</th>
+                        <th>Ocupación</th>
+
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="row comunForm" id="frmEditorComposicionFamiliar">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-9"></div>
+                <div class="col-xs-3">
+                    <button class="botonCerrar danger" id="btnOcultarCampoComposicionFamiliar">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6 form-group">
+                    <label>Nombre completo</label>
+                    <input class="form-control composicionFamiliar" placeholder="Nombre completo" id="txtNombreFamiliar" type="text" required="">
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label>Parentesco</label>
+                    <select id="cmbParentescoFamiliar" class="form-control composicionFamiliar"></select>
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label>Edad</label>
+                    <input class="form-control composicionFamiliar" placeholder="Edad" id="txtEdadFamiliar" type="text" required="">
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label>Escolaridad</label>
+                    <select id="cmbEscolaridadFamiliar" class="form-control composicionFamiliar"></select>
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label>Ocupación</label>
+                    <select id="cmbOcupacionFamiliar" class="form-control composicionFamiliar"></select>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" style="text-align: center">
+                    <button type="button" id="btnGuardarComposicionFamiliar" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Finaliza Adicciones-->
+
+    <div class="row" id="contenedorBotones">
+        <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+            <button type="button" id="btnGuardarDatosPerfil" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+            <button type="button" id="btnCancelarDatosPerfil" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+        </div>
+    </div>
+</div>

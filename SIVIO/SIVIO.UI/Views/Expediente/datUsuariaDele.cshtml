@@ -1,0 +1,145 @@
+﻿
+<div class="row comunForm">
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Nombre</label>
+            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Primer apellido</label>
+            <input class="form-control" placeholder="Nombre" id="txtApellido1" type="text" required="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Segundo apellido</label>
+            <input class="form-control" placeholder="Nombre" id="txtApellido2" type="text" required="">
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Identificación</label>
+            <input class="form-control" placeholder="Número de identificación" id="txtIdentificacion" type="text" required="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Fecha de nacimiento</label>
+            <input type="date" id="txtFechaNacimiento" style="background-color:transparent" class="form-control">
+            <!-- Buscar manera de que el label se ubique SOBRE el calendario -->
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Edad</label>
+            <input class="form-control" placeholder="Edad en años cumplidos" id="txtEdad" type="text" required="">
+            <!-- Ocultar si se toca el calendario -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Provincia</label>
+            <select class="form-control" id="cmbPersonaProvincia" required></select>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Cantón</label>
+            <select class="form-control" id="cmbPersonaCanton" required></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Distrito</label>
+            <select class="form-control" id="cmbPersonaDistrito" required></select>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>País de procedencia</label>
+            <select id="cmbPaisProcedencia" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Dirección exacta de domicilio</label>
+            <input class="form-control" placeholder="Dirección exacta de domicilio" id="txtDireccionDomicilio" type="text" required="">
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Dirección para notificaciones</label>
+            <input class="form-control" placeholder="Dirección para notificaciones" id="txtDireccionNotificaciones" type="text" required="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Correo electrónico</label>
+            <input class="form-control" placeholder="Dirección de correo electrónico" id="txtCorreoElectronico" type="text" required="">
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Teléfono</label>
+            <input class="form-control" placeholder="Número de teléfono" id="txtTelefono" type="text" required="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Condición civil</label>
+            <select id="cmbCondicionCivil" class="form-control"></select>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Escolaridad</label>
+            <select id="cmbEscolaridad" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Número de hijas/os</label>
+            <input class="form-control" placeholder="Número de hijas/os" id="txtNumeroHijos" type="text" required="">
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Embarazo (meses)</label>
+            <select id="cmbEmbarazo" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Nacionalidad</label>
+            <select id="cmbNacionalidad" class="form-control"></select>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Otra nacionalidad</label>
+            <select id="cmbOtraNacionalidad" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Apátrida de</label>
+            <select id="cmbApatrida" class="form-control"></select>
+            <!-- Corregir - Apátrida es que no tiene nacionalidad -->
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Condición migratoria</label>
+            <select id="cmbCondicionMigratoria" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label>Ocupación</label>
+            <select id="cmbOcupacion" class="form-control"></select>
+        </div>
+
+        <div class="col-md-6 form-group">
+            <label>Tipificación de violencia</label>
+            <select id="cmbTipoViolencia" class="form-control" multiple></select>
+        </div>
+    </div>
+
+    <div class="row" id="contenedorBotones">
+        <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+            <button type="button" id="btnGuardarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Siguiente</button>
+        </div>
+    </div>
+
+</div>

@@ -135,6 +135,29 @@ namespace SIVIO.UI.Controllers
             return PartialView(_modelExpediente.ListarCategoriasViolenciaCuestionario());
         }
 
+
+
+        public PartialViewResult DatAdministrativosDele()
+        {
+            return PartialView(viewName: "~/Views/Expediente/DatAdministrativosDele.cshtml");
+        }
+
+        public PartialViewResult DatUsuariaDele()
+        {
+            return PartialView(viewName: "~/Views/Expediente/DatUsuariaDele.cshtml");
+        }
+
+        public PartialViewResult DatPerfil()
+        {
+            return PartialView(viewName: "~/Views/Expediente/DatPerfil.cshtml");
+        }
+
+        public PartialViewResult HistorialViolenciaDele()
+        {
+            return PartialView(viewName: "~/Views/Expediente/HistorialViolenciaDele.cshtml");
+        }
+
+
         [Authorize]
         public ActionResult GridConsultas(int persona)
         {

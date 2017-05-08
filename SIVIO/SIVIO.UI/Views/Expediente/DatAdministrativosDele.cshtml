@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = null;
+}
+<style>
+    .group {
+        background-color: cornflowerblue !important;
+        color: white;
+    }
+</style>
+
+
+
+
+
+<style>
+    input, select, textarea {
+        max-width: 100%;
+        padding: 4px;
+    }
+
+    input {
+        background-color: blue;
+    }
+
+    .inlineCheckBox {
+        display: inline-block;
+        vertical-align: middle;
+    }
+</style>
+
+<div class="row comunForm">
+    <div class="row">
+        <div class="col-md-10">
+        </div>
+        <div class="col-md-2">
+            @*<button class="botonCerrar danger" id="btnCerrarFrmDatosAdministrativos">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>*@
+        </div>
+    </div>
+    @*       -----------------          Inicio datos administrativos        --------------         *@
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Fecha de Registro</label>
+            <input type="text" id="txtFechaHoy" style="background-color:transparent" class="form-control" value="" readonly>
+        </div>
+
+        <div class="col-xs-6 form-group">
+            <label>Hora de inicio de registro</label>
+            <input type="time" id="txtHoraInicio" style="background-color:transparent" class="form-control" value="" readonly>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Tipo de atención</label>
+            <select class="form-control" id="txtTipoAten"></select>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Profesional</label>
+            <select class="form-control" id="txtProfesional"></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>institución que refiere</label>
+            <input class="form-control" placeholder="Nombre institución" id="txtinstitucionRefiere" type="text" required="">
+        </div>
+
+        <div class="col-xs-6 form-group">
+            <label>Persona que refiere</label>
+            <input class="form-control" placeholder="Nombre y Apellidos" id="txtPersonaRefiere" type="text" required="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Teléfono Persona que refiere</label>
+            <input class="form-control" placeholder="numero de teléfono" id="txtTelefonoRefiere" type="number" required="">
+        </div>
+
+        <div class="col-xs-6 form-group">
+            <label>Correo</label>
+            <input class="form-control" placeholder="ejemplo@ejemplo.com" id="txtCorreo" type="email" required="">
+        </div>
+    </div>
+    @*
+         <div class="row" id="contenedorBotones">
+            <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                <button onclick="" type="button" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; "data-toggle="tab" href="#datUsuaria">
+                    <i  aria-hidden="true"></i>Siguiente
+                </button>
+                <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+            </div>
+        </div>
+    *@
+</div>
