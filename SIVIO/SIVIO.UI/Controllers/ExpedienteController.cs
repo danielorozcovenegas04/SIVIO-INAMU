@@ -251,6 +251,8 @@ namespace SIVIO.UI.Controllers
                     TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
                 objetoRetorno.CatalogoIntitucion = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.PersonaInstucionRefiere).
                     TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoEmbarazo = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Embarazo).
+                    TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objetoRetorno), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -542,11 +544,22 @@ namespace SIVIO.UI.Controllers
         }
 
         [AllowAnonymous]
-        public JsonResult IsertarDatosUsuaria(FormCollection datos)
+        public Mensaje IsertarDatosUsuaria(FormCollection datos)
         {
             var entidades = new SIVIOEntities();
             TBL_PERSONA persona = new TBL_PERSONA();
             TBL_TELEFONO tel = new TBL_TELEFONO();
+            persona.FK_ESCOLARIDAD = 367;
+            persona.FK_ESTADOCIVIL = 218;
+            persona.FK_CONDICIONASEGURAMIENTO = 736;
+            persona.FK_TIPOIDENTIFICACION = 2;
+            persona.FK_TIPOFAMILIA = 344;
+            persona.FK_TIPOVIVIENDA = 244;
+            persona.FK_ORIENTACIONSEXUAL = 552;
+            persona.FK_OCUPACION = 221;
+            persona.FK_GENERO = 76;
+
+
             persona.VC_NOMBRE = datos["Nombre"];
             persona.VC_APELLIDO1 = datos["Apellido1"];
             persona.VC_APELLIDO2 = datos["Apellido2"];
@@ -562,8 +575,8 @@ namespace SIVIO.UI.Controllers
             persona.FK_DISTRITOPROCEDENCIA = Int32.Parse(datos["DistritoPersona"]);
             persona.FK_CANTONPROCEDENCIA = Int32.Parse(datos["CantonPersona"]);
             persona.FK_PROVINCIAPROCEDENCIA = Int32.Parse(datos["ProvinciaPersona"]);
-            if (datos["MesesEmbarazo"] != "")
-                persona.FK_ESTADOEMBARAZO = Int32.Parse(datos["MesesEmbarazo"]);
+            persona.FK_ESTADOEMBARAZO = Int32.Parse(datos["Embarazo"]);
+            persona.FK_CONDICIONSALUD = Int32.Parse(datos["Discapacidades"]);
             persona.VC_IDENTIFICACION = datos["Identificacion"];
             if (datos["FechaNacimiento"] != "")
             {
@@ -577,7 +590,7 @@ namespace SIVIO.UI.Controllers
             }
             entidades.TBL_PERSONA.Add(persona);
             entidades.SaveChanges();
-            return Json(new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Registro Exitoso", "valor"), JsonRequestBehavior.AllowGet);
+            return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
         }
         #endregion
 

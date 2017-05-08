@@ -35,15 +35,6 @@
             }
         });
 
-        $('#meses').hide();
-        $('#checkEmbarazo').change(function () {
-            if ($(this).is(':checked')) {
-                $('#meses').show();
-            } else {
-                $('#meses').hide();
-            }
-        });
-
         $('#checkApatrida').change(function () {
             if ($(this).is(':checked')) {
                 $('#nacionalidades').hide();
@@ -255,7 +246,6 @@
             var fechaPersona = $('#checkFecha').is(':checked') ? $("#dateNacimiento").val()  : '';
             var nacionalidadPersona = $('#checkApatrida').is(':checked') ? '' :$("#comNacionalidad").val();
             var nacionalidadPersona2 = $('#checkApatrida').is(':checked') ? '' :$("#comNacionalidad2").val();
-            var embarazoPersona = $('#checkEmbarazo').is(':checked') ? $("#intEmbarazo").val() : '';
             if (validacion === true) {
                 $.ajax(
                     {
@@ -273,7 +263,7 @@
                             CondicionMigratoria: $("#comMigratoria").val(),
                             NumeroHijos: $("#intHijos").val(),
                             MayorDoce: $("#intHijosMayores").val(),
-                            Discapasidades: $("#comDiscapacidad").val(),
+                            Discapacidades: $("#comDiscapacidad").val(),
                             Identificacion: $("#txtDocId").val(),
                             ProvinciaPersona: $("#cmbPersonaProvincia").val(),
                             CantonPersona: $("#cmbPersonaCanton").val(),
@@ -281,10 +271,10 @@
                             Nacionalidad: nacionalidadPersona,
                             Apatrida: $("#checkApatrida").val(),
                             LugarTrabajo: $("#txtLugarTrabajo").val(),
-                            MesesEmbarazo: embarazoPersona 
+                            Embarazo: $('#comEmbarazo').val()
                         },
-                        dataType: JSON,
-                        processData: true,
+                        //dataType: JSON,
+                        //processData: true,
                         success: function (resultado) {
                             $("#contenedorBotones").show();
                             $("#contenedorEspera").hide();
@@ -404,6 +394,13 @@
 
                     $.each(respuesta.CatalogoDiscapasidades, function (key, value) {
                         $('#comDiscapacidad').append($("<option/>", {
+                            value: value.PK_VALORCATALOGO,
+                            text: value.VC_VALOR1
+                        }));
+                    });
+
+                    $.each(respuesta.CatalogoEmbarazo, function (key, value) {
+                        $('#comEmbarazo').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
                             text: value.VC_VALOR1
                         }));
@@ -805,14 +802,12 @@
                                             <div class="col-md-6 form-group">
                                                 <label>Nacionalidad</label>
                                                 <select id="comNacionalidad" class="form-control">
-                                                    <option value=0></option>
                                                 </select>
                                             </div>
 
                                             <div class="col-md-6 form-group">
                                                 <label>Otra Nacionalidad</label>
                                                 <select id="comOtraNacionalidad" class="form-control">
-                                                    <option value=0></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -874,15 +869,10 @@
                                             <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
                                         </div>
 
-                                        <div class="col-md-12 form-group">
-                                            <label>
-                                                <input style="display:inline-block;" id="checkEmbarazo" type="checkbox"> Embarazo
-                                            </label>
-                                        </div>
-
                                         <div class="col-md-12 form-group" id="meses">
-                                            <label>Meses de embarazo</label>
-                                            <input class="form-control" placeholder="Meses de embarazo" id="intEmbarazo" type="number" required="" min="0">
+                                            <label>Embarazo</label>
+                                            <select id="comEmbarazo" class="form-control" required>
+                                            </select>
                                         </div>
 
                                         <div class="col-md-12 form-group">
