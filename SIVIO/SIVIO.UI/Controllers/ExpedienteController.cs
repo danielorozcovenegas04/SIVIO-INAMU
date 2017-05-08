@@ -248,6 +248,27 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
             }
         }
+
+
+
+        [Authorize]
+        public ActionResult BusquedaExpedienteDelegacion (string palabra)
+        {
+            bool estadoSesion = true;
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
+                return View(_modelExpediente.ListarPersonas(palabra));
+
+            }
+            else if (!estadoSesion)
+            {
+                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+            }
+            else
+            {
+                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+            }
+        }
         [Authorize]
         public ActionResult BusquedaExpedienteCEAAM(string palabra)
         {
