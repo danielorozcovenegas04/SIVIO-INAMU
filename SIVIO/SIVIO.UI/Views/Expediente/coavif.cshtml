@@ -59,6 +59,7 @@
         $('#cmbPersonaProvincia').val(@Model.FK_PROVINCIAPROCEDENCIA);
         $('#cmbPersonaCanton').val(@Model.FK_CANTONPROCEDENCIA);
         $('#cmbPersonaDistrito').val(@Model.FK_DISTRITOPROCEDENCIA);
+        debugger;
         $('#comOtraNacionalidad').val(@Model.FK_NACIONALIDAD2);
         $('#comNacionalidad').val(@Model.FK_NACIONALIDAD);
         $('#comMigratoria').val(@Model.FK_CONDICIONMIGRATORIA);
@@ -66,7 +67,10 @@
         $('#txtApellido1').val('@Model.VC_APELLIDO1');
 
         $('#txtApellido2').val('@Model.VC_APELLIDO2');
-        $('#dateNacimiento').val('@Model.DT_FECHANACIMIENTO.Value.ToString("yyyy-MM-dd")');
+        @if(Model.DT_FECHANACIMIENTO != null)
+        {
+            <text>$('#dateNacimiento').val('@Model.DT_FECHANACIMIENTO.Value.ToString("yyyy-MM-dd")');</text>
+        }
         $('#intEdad').val(@Model.I_EDAD);
 
         $('#intHijos').val(@Model.I_HIJOS);
@@ -244,14 +248,15 @@
             var validacion = $('#datosUsuariaForm').parsley().validate();
             var edadPersona = $('#checkFecha').is(':checked') ? '' : $("#intEdad").val();
             var fechaPersona = $('#checkFecha').is(':checked') ? $("#dateNacimiento").val()  : '';
-            var nacionalidadPersona = $('#checkApatrida').is(':checked') ? '' :$("#comNacionalidad").val();
-            var nacionalidadPersona2 = $('#checkApatrida').is(':checked') ? '' :$("#comNacionalidad2").val();
+            //var nacionalidadPersona = $('#checkApatrida').is(':checked') ? '' :$("#comNacionalidad").val();
+            //var nacionalidadPersona2 = $('#checkApatrida').is(':checked') ? '' :$("#comNacionalidad2").val();
             if (validacion === true) {
                 $.ajax(
                     {
                         type: "POST",
                         url: '@Url.Action("IsertarDatosUsuaria", "Expediente")',
                         data: {
+                            Pk: '@Model.PK_PERSONA',
                             Nombre: $("#txtNombre").val(),
                             Apellido1: $("#txtApellido1").val(),
                             Apellido2: $("#txtApellido2").val(),
@@ -268,7 +273,7 @@
                             ProvinciaPersona: $("#cmbPersonaProvincia").val(),
                             CantonPersona: $("#cmbPersonaCanton").val(),
                             DistritoPersona: $("#cmbPersonaDistrito").val(),
-                            Nacionalidad: nacionalidadPersona,
+                            Nacionalidad: $("#comNacionalidad").val(),
                             Apatrida: $("#checkApatrida").val(),
                             LugarTrabajo: $("#txtLugarTrabajo").val(),
                             Embarazo: $('#comEmbarazo').val()
@@ -831,7 +836,6 @@
                                         <div class="col-md-12 form-group">
                                             <label>Discapacidades en hijos/hijas</label>
                                             <select id="comDiscapacidad" class="form-control">
-                                                <option value=0>Ninguna</option>
                                             </select>
                                         </div>
 
@@ -848,37 +852,37 @@
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label>Provincia</label>
-                                            <select id="cmbPersonaProvincia" class="form-control" required>
+                                            <select id="cmbPersonaProvincia" class="form-control">
                                                 @*<option value=""></option>*@
                                             </select>
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label>Cantón</label>
-                                            <select id="cmbPersonaCanton" class="form-control" required>
+                                            <select id="cmbPersonaCanton" class="form-control">
                                                 @*<option value=""></option>*@
                                             </select>
                                         </div>
                                         <div class="col-md-4 form-group">
                                             <label>Distrito</label>
-                                            <select id="cmbPersonaDistrito" class="form-control" required>
+                                            <select id="cmbPersonaDistrito" class="form-control">
                                                 @*<option value=""></option>*@
                                             </select>
                                         </div>
 
                                         <div class="col-md-12 form-group">
                                             <label>Lugar de Trabajo</label>
-                                            <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text" required="">
+                                            <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text">
                                         </div>
 
                                         <div class="col-md-12 form-group" id="meses">
                                             <label>Embarazo</label>
-                                            <select id="comEmbarazo" class="form-control" required>
+                                            <select id="comEmbarazo" class="form-control">
                                             </select>
                                         </div>
 
                                         <div class="col-md-12 form-group">
                                             <label>Teléfono</label>
-                                            <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text" required="">
+                                            <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text">
                                         </div>
 
                                     </div>
@@ -901,7 +905,7 @@
                                 <div class="col-md-4 form-group">
                                     <label>Nombre de Persona Usuaria</label>
 
-                                    <input class="form-control" placeholder="Nombre" id="txtNombre3" type="date" required="">
+                                    <input class="form-control" placeholder="Nombre" id="txtNombre3" type="date">
                                 </div>
 
                             </div>
@@ -915,7 +919,7 @@
                                 <div class="col-md-4 form-group">
                                     <label>Nombre de Persona Usuaria</label>
 
-                                    <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date" required="">
+                                    <input class="form-control" placeholder="Nombre" id="txtNombre4" type="date">
                                 </div>
 
                             </div>

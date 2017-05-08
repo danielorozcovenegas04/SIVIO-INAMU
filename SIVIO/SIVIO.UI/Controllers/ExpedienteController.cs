@@ -559,13 +559,13 @@ namespace SIVIO.UI.Controllers
             persona.FK_OCUPACION = 221;
             persona.FK_GENERO = 76;
 
-
+            persona.PK_PERSONA = Int32.Parse(datos["Pk"]);
             persona.VC_NOMBRE = datos["Nombre"];
             persona.VC_APELLIDO1 = datos["Apellido1"];
             persona.VC_APELLIDO2 = datos["Apellido2"];
             if (datos["Nacionalidad"] != "")
                 persona.FK_NACIONALIDAD = Int32.Parse(datos["Nacionalidad"]);
-            if (datos["Nacionalidad2"] != "")
+            if (datos["OtraNacionalidad"] != "")
                 persona.FK_NACIONALIDAD2 = Int32.Parse(datos["OtraNacionalidad"]);
             persona.FK_CONDICIONMIGRATORIA = Int32.Parse(datos["CondicionMigratoria"]);
             if (datos["NumeroHijos"] != "")
@@ -588,7 +588,10 @@ namespace SIVIO.UI.Controllers
                 persona.I_EDAD = Int32.Parse(datos["Edad"]);
                 persona.B_CONOCEFECHANACIMIENTO = false;
             }
-            entidades.TBL_PERSONA.Add(persona);
+            if (persona.PK_PERSONA == 0)
+                entidades.TBL_PERSONA.Add(persona);
+            else
+                entidades.Entry(persona).State = System.Data.Entity.EntityState.Modified;
             entidades.SaveChanges();
             return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
         }

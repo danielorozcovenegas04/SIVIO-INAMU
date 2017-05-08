@@ -1603,3 +1603,6 @@ C:\Users\Usuario\Music\Proyecto\SIVIO\SIVIO.UI\bin\Microsoft.Owin.Security.Micro
 C:\Users\Usuario\Music\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.csprojResolveAssemblyReference.cache
 C:\Users\Usuario\Music\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.dll
 C:\Users\Usuario\Music\Proyecto\SIVIO\SIVIO.UI\obj\Debug\SIVIO.UI.pdb
+C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.UI\bin\EFJson.dll
+C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.UI\bin\SIVIO.InamuComun.dll
+C:\Users\b46671\Documents\Proyecto\SIVIO\SIVIO.UI\bin\SIVIO.InamuComun.pdb
