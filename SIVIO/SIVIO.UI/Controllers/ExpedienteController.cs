@@ -3,6 +3,7 @@ using SIVIO.InamuComun;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Data.Entity.Validation;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
@@ -414,6 +415,8 @@ namespace SIVIO.UI.Controllers
                     TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
                 objetoRetorno.CatalogoIntitucion = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.PersonaInstucionRefiere).
                     TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
+                objetoRetorno.CatalogoEmbarazo = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Embarazo).
+                    TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objetoRetorno), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -436,7 +439,8 @@ namespace SIVIO.UI.Controllers
                 var user = HttpContext.User.Identity.Name;
                 TBL_USUARIO usuario = entidades.TBL_USUARIO.Where(m => m.VC_USUARIO == user).First();
 
-                DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime fechaInicio = DateTime.Parse(fecha + " " + hora);
+                //DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime fechaFin = DateTime.Now;
 
                 int idPersona;
@@ -449,7 +453,7 @@ namespace SIVIO.UI.Controllers
                 registro.FK_USUARIOREGISTRA = usuario.PK_USUARIO;
                 registro.DT_FECHAINICIO = fechaInicio;
                 registro.DT_FECHAFIN = fechaFin;
-                registro.FK_TIPOSERVICIO = usuario.TBL_ROL_USUARIO.First().TBL_ROL.PK_ROL;
+                registro.FK_TIPOSERVICIO = usuario.TBL_ROL_USUARIO.First().TBL_ROL.FK_TIPOSERVICIO;//mete 640 en vez de 639
                 registro.FK_TIPOREGISTRO = 549;
                 return _modelExpediente.InsertarDatosAdministrativos(registro);
             }
@@ -552,15 +556,17 @@ namespace SIVIO.UI.Controllers
                     }
 
                 }
-                foreach (var c in listaCatalogo)
+                r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
+                r.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
+              
+               /* foreach (var c in listaCatalogo)
                 {
 //if (r.TBL_VALOR_CATALOGO==null) {
                         
                        
                   //  }
                     if (r.FK_TIPOSERVICIO == c.FK_CATALOGO) {
-                        r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
-                        r.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
+                       
                         r.TBL_VALOR_CATALOGO.FK_CATALOGO = c.FK_CATALOGO;
                         r.TBL_VALOR_CATALOGO.VC_VALOR1 = c.VC_VALOR1;
                         r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "0";
@@ -573,10 +579,12 @@ namespace SIVIO.UI.Controllers
                         r.TBL_VALOR_CATALOGO1.VC_VALOR1 = c.VC_VALOR1;
                         
                     }
-                }
+                }*/
                 foreach (var c in listaConsulta)
                 {
                    if (r.PK_REGISTRO==c.FK_REGISTRO ) {
+                        r.TBL_VALOR_CATALOGO.VC_VALOR1 = _modelExpediente.Tipo(c.FK_TIPOCEEAMREINGRESO.Value);
+                        r.TBL_VALOR_CATALOGO1.VC_VALOR1= _modelExpediente.Tipo(r.FK_TIPOREGISTRO);
                         r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
                     }
                 }
@@ -584,8 +592,13 @@ namespace SIVIO.UI.Controllers
                 {
                     if (r.PK_REGISTRO == a.FK_REGISTRO )
                     {
+                        r.TBL_VALOR_CATALOGO.VC_VALOR1 = _modelExpediente.Tipo(a.FK_TIPOATENCION);
+                        r.TBL_VALOR_CATALOGO1.VC_VALOR1 = _modelExpediente.Tipo(r.FK_TIPOREGISTRO);
                         r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
                     }
+                }
+                if (r.TBL_VALOR_CATALOGO1.VC_VALOR2 == null) {
+                    r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "0";
                 }
                 //SOLO PARA PRUEBAS ELIMINAR
               /* if (t == 0)
@@ -693,10 +706,62 @@ namespace SIVIO.UI.Controllers
             }
             return View(infopersona);
         }
+
+        [AllowAnonymous]
+        public Mensaje IsertarDatosUsuaria(FormCollection datos)
+        {
+            var entidades = new SIVIOEntities();
+            TBL_PERSONA persona = new TBL_PERSONA();
+            TBL_TELEFONO tel = new TBL_TELEFONO();
+            persona.FK_ESCOLARIDAD = 367;
+            persona.FK_ESTADOCIVIL = 218;
+            persona.FK_CONDICIONASEGURAMIENTO = 736;
+            persona.FK_TIPOIDENTIFICACION = 2;
+            persona.FK_TIPOFAMILIA = 344;
+            persona.FK_TIPOVIVIENDA = 244;
+            persona.FK_ORIENTACIONSEXUAL = 552;
+            persona.FK_OCUPACION = 221;
+            persona.FK_GENERO = 76;
+
+            persona.PK_PERSONA = Int32.Parse(datos["Pk"]);
+            persona.VC_NOMBRE = datos["Nombre"];
+            persona.VC_APELLIDO1 = datos["Apellido1"];
+            persona.VC_APELLIDO2 = datos["Apellido2"];
+            if (datos["Nacionalidad"] != "")
+                persona.FK_NACIONALIDAD = Int32.Parse(datos["Nacionalidad"]);
+            if (datos["OtraNacionalidad"] != "")
+                persona.FK_NACIONALIDAD2 = Int32.Parse(datos["OtraNacionalidad"]);
+            persona.FK_CONDICIONMIGRATORIA = Int32.Parse(datos["CondicionMigratoria"]);
+            if (datos["NumeroHijos"] != "")
+                persona.I_HIJOS = Int32.Parse(datos["NumeroHijos"]);
+            if (datos["MayorDoce"] != "")
+                persona.I_HIJOSMAYORESDOCE = Int32.Parse(datos["MayorDoce"]);
+            persona.FK_DISTRITOPROCEDENCIA = Int32.Parse(datos["DistritoPersona"]);
+            persona.FK_CANTONPROCEDENCIA = Int32.Parse(datos["CantonPersona"]);
+            persona.FK_PROVINCIAPROCEDENCIA = Int32.Parse(datos["ProvinciaPersona"]);
+            persona.FK_ESTADOEMBARAZO = Int32.Parse(datos["Embarazo"]);
+            persona.FK_CONDICIONSALUD = Int32.Parse(datos["Discapacidades"]);
+            persona.VC_IDENTIFICACION = datos["Identificacion"];
+            if (datos["FechaNacimiento"] != "")
+            {
+                persona.DT_FECHANACIMIENTO = Convert.ToDateTime(datos["FechaNacimiento"]);
+                persona.B_CONOCEFECHANACIMIENTO = true;
+            }
+            if (datos["Edad"] != "")
+            {
+                persona.I_EDAD = Int32.Parse(datos["Edad"]);
+                persona.B_CONOCEFECHANACIMIENTO = false;
+            }
+            if (persona.PK_PERSONA == 0)
+                entidades.TBL_PERSONA.Add(persona);
+            else
+                entidades.Entry(persona).State = System.Data.Entity.EntityState.Modified;
+            entidades.SaveChanges();
+            return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
+        }
         #endregion
 
         #region Delegacion
-
         [HttpPost]
         public Mensaje CrearUsuaria_DatosUsuaria(TBL_PERSONA objDatosUsuaria)
         {
