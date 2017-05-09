@@ -94,20 +94,26 @@ namespace SIVIO.UI.Models
             {
                 try
                 {
-                    TBL_PERSONA personaConsulta = (TBL_PERSONA)entidades.TBL_PERSONA.Find(Int32.Parse(persona)); //Where(m => m.PK_PERSONA == Int32.Parse(persona));// .Where(m => m.PK_PERSONA == Int32.Parse(persona));
-                    //TBL_REGISTRO_CEAAM = 
-                  /*  TBL_ADICCIONES adiciones                        = entidades.TBL_ADICCIONES.Find(personaConsulta.PK_PERSONA);
-                    TBL_AGRESOR agresor                             = entidades.TBL_AGRESOR.Find(personaConsulta.PK_PERSONA);
-                    TBL_DIRECCION direccion                         = entidades.TBL_DIRECCION.Find(personaConsulta.PK_PERSONA);
-                    TBL_LABORAL laboral                             = entidades.TBL_LABORAL.Find(personaConsulta.PK_PERSONA); 
-                    TBL_PERSONA_APOYO apoyo                         = entidades.TBL_PERSONA_APOYO.Find(personaConsulta.PK_PERSONA); 
-                    TBL_PERSONA_CONDICIONESPECIAL condicionEspecial = entidades.TBL_PERSONA_CONDICIONESPECIAL.Find(personaConsulta.PK_PERSONA); 
-                    TBL_PERSONA_RED_APOYO redApoyo                  = entidades.TBL_PERSONA_RED_APOYO.Find(personaConsulta.PK_PERSONA); 
-                    TBL_PERSONA_SALUD salud                         = entidades.TBL_PERSONA_SALUD.Find(personaConsulta.PK_PERSONA); 
-                    TBL_REGISTRO registro                           = entidades.TBL_REGISTRO.Find(personaConsulta.PK_PERSONA); 
-                    TBL_TELEFONO telefono                           = entidades.TBL_TELEFONO.Find(personaConsulta.PK_PERSONA); 
+                    int pk_persona = Int32.Parse(persona);
+                    TBL_PERSONA personaConsulta = (TBL_PERSONA)entidades.TBL_PERSONA.Find(pk_persona); //Where(m => m.PK_PERSONA == Int32.Parse(persona));// .Where(m => m.PK_PERSONA == Int32.Parse(persona));
+                    TBL_LABORAL laboral = entidades.TBL_LABORAL.Where(m => m.FK_PERSONA == pk_persona).FirstOrDefault();
+                      
+                    TBL_ADICCIONES adiciones = entidades.TBL_ADICCIONES.Where(m => m.FK_PERSONA == pk_persona).FirstOrDefault();
+                    TBL_AGRESOR agresor = entidades.TBL_AGRESOR.Where(m => m.FK_PERSONA == pk_persona).FirstOrDefault();
+                    TBL_DIRECCION direccion = entidades.TBL_DIRECCION.Where(m => m.FK_PERSONA == pk_persona).FirstOrDefault();
+                    TBL_PERSONA_CONDICIONESPECIAL condicionEspecial = entidades.TBL_PERSONA_CONDICIONESPECIAL.Where(m => m.FK_PERSONA == pk_persona).FirstOrDefault();
+                    TBL_PERSONA_RED_APOYO redApoyo = entidades.TBL_PERSONA_RED_APOYO.Where(m => m.FK_PERSONA == pk_persona).FirstOrDefault();
+                    TBL_PERSONA_SALUD salud = entidades.TBL_PERSONA_SALUD.Where(m => m.FK_PERSONA == pk_persona).FirstOrDefault();
+                    TBL_TELEFONO telefono = entidades.TBL_TELEFONO.Where(m => m.FK_PERSONA == pk_persona).FirstOrDefault();
+                    TBL_PERSONA_APOYO apoyo = entidades.TBL_PERSONA_APOYO.Where(m => m.FK_PERSONA == pk_persona).FirstOrDefault();
+                
+                    TBL_REGISTRO registro = entidades.TBL_REGISTRO.Where(m => m.FK_PERSONA == pk_persona).FirstOrDefault();
 
-                    personaConsulta.TBL_ADICCIONES = (TBL_PERSONA)adiciones;*/
+                    if (registro != null)
+                    {
+                        TBL_REGISTRO_CEAAM registro_ceaam = entidades.TBL_REGISTRO_CEAAM.Where(m => m.FK_REGISTRO == registro.PK_REGISTRO).FirstOrDefault();
+                    }
+
 
                     return personaConsulta;
                 }
@@ -122,7 +128,9 @@ namespace SIVIO.UI.Models
             TBL_PERSONA persona,            TBL_AGRESOR agresor,
             TBL_LABORAL laboral,            TBL_ADICCIONES adicciones,
             TBL_PERSONA_RED_APOYO apoyo1,   TBL_AGRESION agresion,
-            TBL_AGRESOR_MOTIVO_REGRESO agresorMotivoRegreso, TBL_AGRESION_ATENCION_MEDICA agresionAtencionMedica)
+            TBL_AGRESOR_MOTIVO_REGRESO agresorMotivoRegreso,    TBL_AGRESION_ATENCION_MEDICA agresionAtencionMedica,
+            TBL_AGRESION_VIOLENCIA agresionViolencia,           TBL_AGRESOR_ADICCIONES agresorAdicciones,
+            TBL_AGRESION_IMPACTO_VIOLENCIA impactoViolencia,    TBL_PERSONA_CONDICIONESPECIAL dispacidades)
         {
             using (var entidades = new SIVIOEntities())
             {
@@ -134,6 +142,10 @@ namespace SIVIO.UI.Models
                 entidades.Entry(agresion).State = System.Data.Entity.EntityState.Added;
                 entidades.Entry(agresorMotivoRegreso).State = System.Data.Entity.EntityState.Added;
                 entidades.Entry(agresionAtencionMedica).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(agresionViolencia).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(agresorAdicciones).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(impactoViolencia).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(dispacidades).State = System.Data.Entity.EntityState.Added;
 
                 entidades.SaveChanges();
             }
@@ -298,7 +310,21 @@ namespace SIVIO.UI.Models
                 }
             }
         }
-
+        public List<SP_LISTAR_ATENCIONES_Result> ListarAtencionesGrid()
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    List<SP_LISTAR_ATENCIONES_Result> Atencion = entidades.SP_LISTAR_ATENCIONES().ToList();
+                    return Atencion;
+                }
+                catch
+                {
+                    return new List<SP_LISTAR_ATENCIONES_Result>();
+                }
+            }
+        }
         public List<TBL_REGISTRO> ListarRegistro()
         {
             using (var entidades = new SIVIOEntities())

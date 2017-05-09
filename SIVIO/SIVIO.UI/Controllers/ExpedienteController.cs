@@ -24,6 +24,19 @@ namespace SIVIO.UI.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public JsonResult RetornarDivisionTerritorial()
+        {
+            try
+            {
+                return Json(_modelCatalogos.RetornarOrganizacionTerritorial(), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json("Error al procesar la solicitud: " + e.Message, JsonRequestBehavior.AllowGet);
+            }
+
+        }
         [Authorize]
         public ActionResult CrearCaso(string ValorPersona)
         {
@@ -77,6 +90,7 @@ namespace SIVIO.UI.Controllers
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoFamilia,
                 (int)Utilitarios.Enumerados.EnumCatalogos.Nacionalidad,
                 (int)Utilitarios.Enumerados.EnumCatalogos.SituacionMigratoria,
+                (int)Utilitarios.Enumerados.EnumCatalogos.Ocupacion,
                 (int)Utilitarios.Enumerados.EnumCatalogos.SituacionLaboral,
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoVivienda,
                 (int)Utilitarios.Enumerados.EnumCatalogos.TipoDiscapacidad,
@@ -111,8 +125,9 @@ namespace SIVIO.UI.Controllers
             TBL_PERSONA persona,            TBL_AGRESOR agresor,
             TBL_LABORAL laboral,            TBL_ADICCIONES adicciones,
             TBL_PERSONA_RED_APOYO apoyo1,   TBL_AGRESION agresion,
-            TBL_AGRESOR_MOTIVO_REGRESO agresorMotivoRegreso, TBL_AGRESION_ATENCION_MEDICA agresionAtencionMedica,
-            TBL_AGRESION_VIOLENCIA agresionViolencia) {
+            TBL_AGRESOR_MOTIVO_REGRESO agresorMotivoRegreso,    TBL_AGRESION_ATENCION_MEDICA agresionAtencionMedica,
+            TBL_AGRESION_VIOLENCIA agresionViolencia,           TBL_AGRESOR_ADICCIONES agresorAdicciones,
+            TBL_AGRESION_IMPACTO_VIOLENCIA impactoViolencia,    TBL_PERSONA_CONDICIONESPECIAL dispacidades) {
             try {
                 var listaAgresor = new List<TBL_AGRESOR>();
                 listaAgresor.Add(agresor);
@@ -147,12 +162,27 @@ namespace SIVIO.UI.Controllers
                 var listaAgresionViolencia = new List<TBL_AGRESION_VIOLENCIA>();
                 listaAgresionViolencia.Add(agresionViolencia);
                 agresion.TBL_AGRESION_VIOLENCIA = listaAgresionViolencia;
-                
+
+                agresorAdicciones.PK_AGRESORADICION = Guid.NewGuid();
+                var listaAgresorAdicciones = new List<TBL_AGRESOR_ADICCIONES>();
+                listaAgresorAdicciones.Add(agresorAdicciones);
+                agresor.TBL_AGRESOR_ADICCIONES = listaAgresorAdicciones;
+
+                impactoViolencia.PK_IMPACTOVIOLENCIA = Guid.NewGuid();
+                var listaImpactoViolencia = new List<TBL_AGRESION_IMPACTO_VIOLENCIA>();
+                listaImpactoViolencia.Add(impactoViolencia);
+                agresion.TBL_AGRESION_IMPACTO_VIOLENCIA = listaImpactoViolencia;
+
+                dispacidades.PK_CONDICIONESPECIAL = Guid.NewGuid();
+                var listaDispacidades = new List<TBL_PERSONA_CONDICIONESPECIAL>();
+                listaDispacidades.Add(dispacidades);
+                persona.TBL_PERSONA_CONDICIONESPECIAL = listaDispacidades;
 
                 persona.TBL_LABORAL = laboral;
 
                 _modelExpediente.InsertarPersonaConAgresor(persona, agresor, laboral, adicciones,
-                    apoyo1, agresion, agresorMotivoRegreso, agresionAtencionMedica);
+                    apoyo1, agresion, agresorMotivoRegreso, agresionAtencionMedica, agresionViolencia,
+                    agresorAdicciones, impactoViolencia, dispacidades);
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "true" }));
             } catch (Exception ex) {
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "false", error = ex.ToString() }));

@@ -1,1 +1,219 @@
-﻿
+﻿<h3>Seguimientos</h3>
+@* Pestaña seguimientos *@
+<label>Todas las acciones a continuación son reflejo de información obtenida una vez egresada la usuaria.</label>
+<div class="row">
+    
+
+    <div class="col-xs-6 form-group">
+        <label>Rechaza seguimiento</label><br>
+        <input type="checkbox" name="checkboxViolenciaPsicologica" value="Rechaza seguimiento" style="display:inline"><br>
+    </div>
+
+    <div class="col-xs-6 form-group">
+        <label>No aplica</label><br>
+        <input type="checkbox" name="checkboxNoAplica" value="No aplica" style="display:inline"><br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Plan de seguimiento</label>
+        <input class="form-control" id="txtPlanSeguimiento" type="text" required="">
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Fecha</label>
+        <input class="form-control" id="txtFechaSeguimiento" type="date" required="">
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Medio de comunicación</label>
+        <select id="cmbMedioComunicacion" class="form-control"></select>
+    </div>
+</div>
+<label>Aspectos abordados</label><br>
+<div class="row">
+    <div class="col-xs-12 form-group">
+        <label>Sociales</label><br>
+        <label>Seguimiento de la referencia</label>
+        <select id="cmbSeguimientoReferencia" class="form-control"></select>
+    </div>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
+            <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
+            <thead>
+                <tr>
+                    <th>PK_REDAPOYO</th>
+                    <th>FK_INSTITUCION</th>
+                    <th>FK_TIPORED</th>
+                    <th>Nombre</th>
+                    <th>Relacion</th>
+                    <th>Telefono</th>
+                    <th>Tipo de Red</th>
+                    <th>Institución</th>
+
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div class="row comunForm" id="frmEditorRedesApoyo">
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-xs-9"></div>
+            <div class="col-xs-3">
+                <button class="botonCerrar danger" id="btnOcultarCampoRedApoyo">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 form-group">
+                <label>Tipo</label>
+                <select id="cmdTipoRedApoyo" class="form-control redApoyo"></select>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Nombre</label>
+                <input class="form-control redApoyo" placeholder="Nombre" id="txtNombreRedApoyo" type="text" required="">
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group" id="contenedorInstitucion">
+                <label>Institución</label>
+                <select id="cmdInstitucionRedApoyo" class="form-control redApoyo"></select>
+            </div>
+            <div class="col-md-6 form-group" id="contenedorRelacion">
+                <label>Relación</label>
+                <input class="form-control redApoyo" placeholder="Relación" id="txtRelacionRedApoyo" type="text" required="">
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Teléfono</label>
+                <input class="form-control redApoyo" placeholder="Teléfono" id="txtTelefonoRedApoyo" type="text" required="">
+            </div>
+        </div>
+        @*<div class="row" style="text-align:center">
+            <div class="col-md-12">
+                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Guardar Red</button>
+            </div>
+        </div>*@
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Apoyo institucional</label>
+        <select id="cmbApoyoInstitucional" class="form-control"></select>
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Empleo</label>
+        <input type="checkbox" name="checkboxEmpleo" value="Empleo" style="display:inline"><br>
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Situación de riesgo</label>
+        <input type="checkbox" name="checkboxSituacionRiesgo" value="Situación de riesgo" style="display:inline"><br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Legales</label><br>
+        <label>Seguimiento de la referencia</label>
+        <select id="cmbSeguimientoReferencia" class="form-control"></select>
+    </div>
+    <div class="col-xs-4 form-group">
+        <label> </label><br>
+        <label>Incumplimiento de medidas</label>
+        <select id="cmbIncumplimientoMedidas" class="form-control"></select>
+    </div>
+    <div class="col-xs-4 form-group">
+        <label> </label><br>
+        <label>Audiencia pendiente</label>
+        <input type="checkbox" name="checkboxAudienciaPendiente" value="Audiencia pendiente" style="display:inline"><br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 form-group">
+        <label>En seguimiento con OAPVD</label>
+        <input type="checkbox" name="checkboxSeguimientoconOAPVD" value="Audiencia pendiente" style="display:inline"><br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Psicológicos</label><br>
+        <label>Seguimiento al plan de seguridad</label>
+        <input class="form-control"  id="txtSeguimientoPlanSeguridad" type="text" required="">
+    </div>
+    <div class="col-xs-4 form-group">
+        <label> </label><br>
+        <label>Seguimiento al kit</label>
+        <select id="cmbSeguimientoKit" class="form-control"></select>
+    </div>
+    <div class="col-xs-4 form-group">
+        <label> </label><br>
+        <label>Seguimiento a la referencia</label>
+        <select id="cmbSeguimientoReferencia" class="form-control"></select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Recibe atención especializada</label>
+        <select id="cmbRecibeAtencionEspecializada" class="form-control"></select>
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Lugar donde recibe atención actualmente</label>
+        <input class="form-control" id="txtLugarRecibeAtencionActualmente" type="text" required="">
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Enfrenta violencia</label>
+        <select id="cmbEnfrentaViolencia" class="form-control"></select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label> </label><br>
+        <label>Convive con persona agresora</label>
+        <select id="cmbConvivePersonaAgresora" class="form-control"></select>
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Hijas/os</label><br>
+        <label>Escolarización</label>
+        <select id="cmbEscolarización" class="form-control"></select>
+    </div>
+    <div class="col-xs-4 form-group">
+        <label> </label><br>
+        <label>Reciben atención especializada</label>
+        <select id="cmbHijosRecibenAtencionEspecializada" class="form-control"></select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Seguimiento al plan de seguridad</label>
+        <input type="checkbox" name="checkboxSeguimientoPlanSeguridad" value="SeguimientoPlanSeguridad" style="display:inline"><br>
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Situación de riesgo</label>
+        <input type="checkbox" name="checkboxSituacionRiesgo1" value="SituacionRiegso" style="display:inline"><br>
+    </div>
+    <div class="col-xs-4 form-group">
+        <label> </label><br>
+        <label>Nombre de la funcionaria que realiza el seguimiento</label>
+        <input class="form-control" id="txtFuncionariaRealizaSeguimiento" type="text" required="">
+    </div>
+</div>
+
+
+    

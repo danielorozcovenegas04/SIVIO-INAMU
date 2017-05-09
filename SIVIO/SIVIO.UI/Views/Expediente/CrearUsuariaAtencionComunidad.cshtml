@@ -1,5 +1,6 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 <script type="text/javascript">
     function llenarComboBox(nombreCatalogo, nombreComboBox, valorComboBox) {
@@ -77,6 +78,7 @@
             .then(llenarComboBox("Nacionalidad", "#cmbNacionalidad"))
             .then(llenarComboBox("Nacionalidad", "#cmbOtraNacionalidad"))
             .then(llenarComboBox("Situación Migratoria", "#cmbCondicionMigratoria"))
+            .then(llenarComboBox("Ocupación", "#cmbOcupacion"))
             .then(llenarComboBox("Situación Laboral", "#cmbCondicionLaboral"))
             .then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbExperienciaLaboral"))
             //.then(llenarComboBox("", "#cmbCondicionAseguramiento"))
@@ -96,7 +98,7 @@
             .then(llenarComboBox("Impacto producto de violencia", "#cmbImpactoViolencia"))
             .then(llenarComboBox("Valoracion de riesgo", "#cmbValoracionRiesgo"))
             .then(llenarComboBox("Condicion legal al ingreso", "#cmbCondicionLegalIngreso"))
-            //.then(llenarComboBox("Medida de Protección", "#cmbMedidasProteccion"))
+            .then(llenarComboBox("Medida de Protección", "#cmbMedidasProteccion"))
             //.then(llenarComboBox("", "#cmbEncuentraEnProgramaOAPVD"))
             .then(llenarComboBox("Situación de Violencia Física", "#cmbViolenciaFisica"))
             .then(llenarComboBox("Situación de Violencia Psicológica", "#cmbViolenciaPsicologica"))
@@ -126,6 +128,9 @@
             var agresorMotivoRegreso = serializeArrayAObjeto($("#formAgresorMotivoRegreso").serializeArray());
             var agresionAtencionMedica = serializeArrayAObjeto($("#formAgresionAtencionMedica").serializeArray());
             var agresionViolencia = serializeArrayAObjeto($("#formAgresionViolencia").serializeArray());
+            var agresorAdicciones = serializeArrayAObjeto($("#formAdiccionesAgresor").serializeArray());
+            var impactoViolencia = serializeArrayAObjeto($("#formImpactoViolencia").serializeArray());
+            var dispacidades = serializeArrayAObjeto($("#formDispacidades").serializeArray());
 
             var objparapost = {
                 persona: persona,
@@ -136,7 +141,10 @@
                 agresion: agresion,
                 agresorMotivoRegreso: agresorMotivoRegreso,
                 agresionAtencionMedica: agresionAtencionMedica,
-                agresionViolencia: agresionViolencia
+                agresionViolencia: agresionViolencia,
+                agresorAdicciones: agresorAdicciones,
+                impactoViolencia: impactoViolencia,
+                dispacidades: dispacidades
             }
             console.log(agresion);
 
@@ -410,7 +418,7 @@
     </ul>
 
     <div class="tab-content">
-        <div id="tabPerfilUsuaria" class="tab-pane fade in active" style="padding:5px">
+        <div id="tabPerfilUsuaria" class="tab-pane fade in active" style="padding:10px">
             <h3>Perfil</h3><br>
 
             @* Primera pestaña *@
@@ -420,28 +428,28 @@
                     
                     <div class="col-xs-4 form-group">
                         <label>Documento de identificación</label>
-                        <input class="form-control" id="txtIdentificacion" name="VC_IDENTIFICACION" type="text" value='12345' required="">
+                        <input class="form-control" id="txtIdentificacion" name="VC_IDENTIFICACION" type="text" required="">
                     </div>
                     <div class="col-xs-4 form-group"> <br><br><br><br> </div>
                     <div class="col-xs-4 form-group"> <br><br><br><br> </div>
                     <div class="col-xs-4 form-group">
                         <label>Nombre</label>
-                        <input class="form-control" id="txtNombre" name="VC_NOMBRE" type="text" value='Nombre' required="">
+                        <input class="form-control" id="txtNombre" name="VC_NOMBRE" type="text" required="">
                     </div>
 
                     <div class="col-xs-4 form-group">
                         <label>Primer apellido</label>
-                        <input class="form-control" id="txtApellido1" name="VC_APELLIDO1" type="text" value='Apellido1' required="">
+                        <input class="form-control" id="txtApellido1" name="VC_APELLIDO1" type="text" required="">
                     </div>
 
                     <div class="col-xs-4 form-group">
                         <label>Segundo apellido</label>
-                        <input class="form-control" id="txtApellido2" name="VC_APELLIDO2" type="text" value='Apellido2' required="">
+                        <input class="form-control" id="txtApellido2" name="VC_APELLIDO2" type="text" required="">
                     </div>
 
                     <div class="col-xs-4 form-group">
                         <label>Fecha de nacimiento</label><br>
-                        <input class="form-control" id="txtFecha" name="DT_FECHANACIMIENTO" type="date" value='1900-01-01' required="">
+                        <input class="form-control" id="txtFecha" name="DT_FECHANACIMIENTO" type="date" required="">
                     </div>
 
                     <div class="col-xs-4 form-group">
@@ -476,7 +484,7 @@
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Cantidad de hijos</label><br>
-                        <input class="form-control" id="txtHijos" name="I_HIJOS" type="number" value='3' required="">
+                        <input class="form-control" id="txtHijos" name="I_HIJOS" type="number" required="">
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Tipo de familia</label><br>
@@ -509,7 +517,7 @@
                         </div>
                     </div>
                     <div class="col-xs-4 form-group">
-                        <label>Comunidad</label><br>
+                        <label>Comunidad (Campo pendiente)</label><br>
                         <input class="form-control" id="txtHijos" type="number" required="" disabled>
                     </div>
                     <div class="col-xs-4 form-group"> <br><br><br><br> </div>
@@ -549,8 +557,21 @@
                         </div>
                     </div>
                     <div class="col-xs-4 form-group">
-                        <label>Condición de aseguramiento (falta combo)</label><br>
-                        <input class="form-control" id="txtCondicionAseguramiento" type="number" name="FK_CONDICIONASEGURAMIENTO" value='5' required="">
+                        <label>Condición de aseguramiento</label><br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @* ESTO ES TEMPORAL *@
+                                <select id="cmbTerritorio" class="form-control" name="FK_CONDICIONASEGURAMIENTO">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                    <option value="1">Directa</option>
+                                    <option value="2">Familiar</option>
+                                    <option value="3">Voluntario o convenio</option>
+                                    <option value="4">Pensionada</option>
+                                    <option value="5">Por el estado</option>
+                                    <option value="6">No tiene</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-xs-4 form-group">
@@ -580,7 +601,7 @@
                 <form id="formLaboral" method="post">
                     <div class="col-xs-4 form-group">
                         <label>Ocupación</label><br>
-                        <input class="form-control" id="txtOcupacion" name="VC_OCUPACION" type="text" value='Ama de casa' required="">
+                        <input class="form-control" id="txtOcupacion" name="VC_OCUPACION" type="text" required="">
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Condición laboral</label><br>
@@ -593,65 +614,136 @@
                         </div>
                     </div>
                     <div class="col-xs-4 form-group">
-                        <label>Experiencia laboral</label><br>
-                        <input class="form-control" id="txtAnosExperiencia" name="I_ANNOSEXPERIENCIA" type="number" value='2' required="">
+                        <label>Experiencia laboral (en años)</label><br>
+                        <input class="form-control" id="txtAnosExperiencia" name="I_ANNOSEXPERIENCIA" type="number" required="">
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Lugar de trabajo</label><br>
-                        <input class="form-control" id="txtHijos" name="VC_NOMBRELUGARTRABAJO" type="text" value='Los Pollos Hermanos' required="">
+                        <input class="form-control" id="txtHijos" name="VC_NOMBRELUGARTRABAJO" type="text" required="">
                     </div>
 
                     <input type="hidden" name="VC_OBSERVACIONES" value="ninguna" />
                     
                 </form>
 
-                <div class="col-xs-4 form-group">
-                    <label>Discapacidades:</label><br>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <select id="cmbDiscapacidad" class="form-control" multiple>
-                                @*<option selected disabled>Seleccione una opcion</option>*@
-                            </select>
-                        </div>
+                <form id="formDispacidades" method="post"> @* Form para TBL_PERSONA_CONDICIONESPECIAL *@
+                    <div class="col-xs-4 form-group">
+                        <label>Discapacidades:</label><br>
+                        <select id="cmbDiscapacidad" class="form-control" name="FK_CONDICIONESPECIAL" multiple></select>     
                     </div>
-                </div>
-                <div class="col-xs-4 form-group">
-                    <form id="formAdicciones" method="post">
+                </form>
+
+                <form id="formAdicciones" method="post"> @* Form para TBL_ADICCIONES *@
+                    <div class="col-xs-4 form-group">
                         <label>Adicciones</label><br>
-                        <select id="cmbAdicciones" class="form-control" name="FK_TIPOADICCION" multiple></select>                        
-                    </form>
-                </div>
+                        <select id="cmbAdicciones" class="form-control" name="FK_TIPOADICCION" multiple></select>
+                    </div>
+                </form>
 
 
                 @* Columna intermedia*@
                 <div class="col-xs-9 form-group">
-                    <br><h4>Redes o recursos de apoyo con los que cuenta la usuaria (Pendiente)</h4>
+                    <br><h4>Redes o recursos de apoyo con los que cuenta la usuaria (Esta parte está pendiente)</h4>
+                @*Redes de apoyo*@
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
+                            <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
+                            <thead>
+                                <tr>
+                                    <th>PK_REDAPOYO</th>
+                                    <th>FK_INSTITUCION</th>
+                                    <th>FK_TIPORED</th>
+                                    <th>Nombre</th>
+                                    <th>Relacion</th>
+                                    <th>Telefono</th>
+                                    <th>Tipo de Red</th>
+                                    <th>Institución</th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
+                <div class="row comunForm" id="frmEditorRedesApoyo">
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-xs-9"></div>
+                            <div class="col-xs-3">
+                                <button class="botonCerrar danger" id="btnOcultarCampoRedApoyo">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6 form-group">
+                                <label>Tipo</label>
+                                <select id="cmdTipoRedApoyo" class="form-control redApoyo"></select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Nombre</label>
+                                <input class="form-control redApoyo" placeholder="Nombre" id="txtNombreRedApoyo" type="text" required="">
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group" id="contenedorInstitucion">
+                                <label>Institución</label>
+                                <select id="cmdInstitucionRedApoyo" class="form-control redApoyo"></select>
+                            </div>
+                            <div class="col-md-6 form-group" id="contenedorRelacion">
+                                <label>Relación</label>
+                                <input class="form-control redApoyo" placeholder="Relación" id="txtRelacionRedApoyo" type="text" required="">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Teléfono</label>
+                                <input class="form-control redApoyo" placeholder="Teléfono" id="txtTelefonoRedApoyo" type="text" required="">
+                            </div>
+                        </div>
+                        @*<div class="row" style="text-align:center">
+                                <div class="col-md-12">
+                                    <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Guardar Red</button>
+                                </div>
+                            </div>*@
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center">
+                                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                
 
                 
             </div>
         </div>
 
         @* Segunda pestaña *@
-        <div id="tabHistoriaViolencia" class="tab-pane fade" style="padding:5px">
+        <div id="tabHistoriaViolencia" class="tab-pane fade" style="padding:10px">
             <h3>Historia de violencia</h3><br>
             <div class="row" id="tabHIstoriaViolencia">
                 <form id="formAgresor" method="post"> @* Form para TBL_AGRESOR *@
                     <div class="col-xs-4 form-group">
                         <label>Nombre persona agresora</label><br>
-                        <input class="form-control" id="txtNombre2" type="text" name="VC_NOMBRE" value='Nombre Agresor' required="">
+                        <input class="form-control" id="txtNombre2" type="text" name="VC_NOMBRE" required="">
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Primer apellido</label><br>
-                        <input class="form-control" id="txtApellido1" type="text" name="VC_APELLIDO1" value='Apellido Agresor' required="">
+                        <input class="form-control" id="txtApellido1" type="text" name="VC_APELLIDO1" required="">
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Segundo apellido</label><br>
-                        <input class="form-control" id="txtApellido2" type="text" name="VC_APELLIDO2" value='Apellido2 Agresor' required="">
+                        <input class="form-control" id="txtApellido2" type="text" name="VC_APELLIDO2" required="">
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Fecha de nacimiento</label><br>
-                        <input class="form-control" id="txtFechaNacAgresor" type="date" name="DT_FECHANACIMIENTO" value='1966-10-10' required="">
+                        <input class="form-control" id="txtFechaNacAgresor" type="date" name="DT_FECHANACIMIENTO" required="">
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Género</label><br>
@@ -684,20 +776,26 @@
                         </div>
                     </div>
                     <div class="col-xs-4 form-group">
-                        <label>Ocupación (falta combo)</label><br>
-                        <input class="form-control" id="txtOcupacionAgresor" type="number" name="FK_OCUPACION" value='5' required="">
+                        <label>Ocupación</label>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <select id="cmbOcupacion" class="form-control" name="FK_OCUPACION" required>
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Lugar trabajo</label><br>
-                        <input class="form-control" id="txtLugarTrabajoAgresor" type="text" name="VC_LUGARTRABAJO" value='Club de agresores' required="">
+                        <input class="form-control" id="txtLugarTrabajoAgresor" type="text" name="VC_LUGARTRABAJO" required="">
                     </div>
                     <div class="col-xs-4 form-group">
-                        <label>Vínculo con la usuaria (Tipo de relación)(falta combo)</label><br>
-                        <input class="form-control" id="txtTipoTipoRelacion" type="number" name="FK_TIPORELACION" value='5' required="">
+                        <label>Vínculo con la usuaria (Campo pendiente)</label>
+                        <input class="form-control" id="txtTipoTipoRelacion" type="number" name="FK_TIPORELACION" required="">
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Fecha de comienzo de la relación</label><br>
-                        <input class="form-control" id="txtComienzoRelacion" type="date" name="DT_COMIENZORELACION" value='1966-10-10' required="">
+                        <input class="form-control" id="txtComienzoRelacion" type="date" name="DT_COMIENZORELACION" required="">
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Número de separaciones de la persona agresora</label><br>
@@ -729,15 +827,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-4 form-group">
-                        <label>Impacto de la violencia (No encontrado)</label><br>
-                        <select id="cmbImpactoViolencia" class="form-control" multiple></select>
-                    </div>
 
                     <div class="col-xs-4 form-group">
-                        <label>Medidas de protección(falta combo)</label><br>
-                        <input class="form-control" id="txtTipoTipoRelacion" type="number" name="B_MEDIDASPROTECCION" value='1' required="">
+                        <label>Medidas de protección</label><br>
+                        <select id="cmbMedidasProteccion" class="form-control" name="B_MEDIDASPROTECCION"></select>
                     </div>
+
                     @* No encontrados (tabla agresor) *@
                     <input type="hidden" name="VC_IDENTIFICACION" value="123" />
                     <input type="hidden" name="VC_OBSERVACIONANTECEDESTESLEGALES" value="ninguna" />
@@ -751,17 +846,18 @@
 
                 <form id="formAgresion" method="post"> @* Form para TBL_AGRESION *@
                     <div class="col-xs-4 form-group">
-                        <label>Fecha de la agresión</label><br>
-                        <input class="form-control" id="txtTiempoAgresion" type="date" name="DT_FECHAAGRESION" value='2017-01-05' required="">
+                        <label>Fecha de la agresión</label>
+                        <input class="form-control" id="txtTiempoAgresion" type="date" name="DT_FECHAAGRESION" required="">
                     </div>
 
                     <input type="hidden" name="VC_CENTRODSALUDATENCION" value="Nada" />
                     <input type="hidden" name="I_DURACION" value="1" />
                     <input type="hidden" name="TXT_RELATO" value="Nada" />
                 </form>
+
                 <form id="formAgresorMotivoRegreso" method="post"> @* Form para TBL_AGRESOR_MOTIVO_REGRESO *@
                     <div class="col-xs-4 form-group">
-                        <label>Motivo para regresar</label><br>
+                        <label>Motivo para regresar</label>
                         <div class="row">
                             <div class="col-xs-12">
                                 <select id="cmbMotivosRegresar" class="form-control" name="FK_MOTIVOREGRESO" required>
@@ -771,6 +867,14 @@
                         </div>
                     </div>
                 </form>
+
+                <form id="formImpactoViolencia" method="post"> @* Form para TBL_AGRESION_IMPACTO_VIOLENCIA *@
+                    <div class="col-xs-4 form-group">
+                        <label>Impacto de la violencia</label>
+                        <select id="cmbImpactoViolencia" name="FK_IMPACTOVIOLENCIA" class="form-control" multiple></select>
+                    </div>
+                </form>
+
                 <form id="formAgresionAtencionMedica" method="post"> @* Form para TBL_AGRESION_ATENCION_MEDICA *@
                     <div class="col-xs-4 form-group">
                         <label>Atención médica producto de la agresión</label><br>
@@ -786,8 +890,24 @@
 
                 <form id="formAgresionViolencia" method="post"> @* Form para TBL_AGRESION_VIOLENCIA *@
                     <div class="col-xs-4 form-group">
-                        <label>Tipo de violencia (falta combo)</label><br>
-                        <input class="form-control" id="txtCondicionAseguramiento" type="number" name="FK_TIPOVIOLENCIA" value='1' required="">
+                        <label>Tipo de violencia</label><br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                @* ESTO ES TEMPORAL *@
+                                <select id="cmbTerritorio" class="form-control" name="FK_TIPOVIOLENCIA">
+                                    <option selected disabled>Seleccione una opcion</option>
+                                    <option value="1">Violencia patrimonial</option>
+                                    <option value="2">Violencia sexual</option>
+                                    <option value="3">Violencia física</option>
+                                    <option value="4">Violencia psicológica </option>
+                                    <option value="5">Acoso sexual callejero</option>
+                                    <option value="6">Acoso Laboral</option>
+                                    <option value="7">Hostigamiento sexual</option>
+                                    <option value="8">Trata de Personas</option>
+                                    <option value="9">Violencia Obstétrica</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                    
                     <input type="hidden" name="VC_OBSERVACIONES" value="ninguna" />
@@ -795,24 +915,31 @@
 
                 <form id="formAgresionCategoriaRiesgo" method="post"> @* Form para TBL_AGRESION_CATEGORIA_RIESGO *@
                     <div class="col-xs-4 form-group">
-                        <label>Valoración de riesgo (falta combo)</label><br>
-                        <input class="form-control" id="txtCondicionAseguramiento" type="number" name="FK_TIPORESPUESTA" value='1' required=""><br>
+                        <label>Valoración de riesgo</label>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <select id="cmbValoracionRiesgo" class="form-control" name="FK_TIPORESPUESTA" required>
+                                    <option selected disabled>Seleccione una opcion</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     
                     <input type="hidden" name="FK_OBSERVACION" value="ninguna" />
                 </form>
 
-                <div class="col-xs-4 form-group">
-                    <form id="formAdicciones" method="post">
-                        <label>Adicciones (No encontrado)</label><br>
-                        <select id="cmbAdiccionesHV" class="form-control" multiple></select>
-                    </form>
-                </div>
+                <form id="formAdiccionesAgresor" method="post"> @* Form para TBL_AGRESOR_ADICCIONES *@
+                    <div class="col-xs-4 form-group">
+                        <label>Adicciones de la persona agresora</label><br>
+                        <select id="cmbAdiccionesHV" name="FK_ADICCION" class="form-control" multiple></select>
+                    </div>
+                </form>
+
             </div>
         </div>
 
         @* Tercera pestaña *@
-        <div id="tabAtenciones" class="tab-pane fade" style="padding:5px">
+        <div id="tabAtenciones" class="tab-pane fade" style="padding:10px">
             <h3>Atenciones</h3><br>
             <div class="row" id="tabAtenciones">
                 <div class="col-xs-12">
@@ -821,50 +948,14 @@
             </div>
         </div>
 
-        @* Botón de cancelar *@
-        <a href="BusquedaExpediente" class="btn btn-primary" id="btnCancelar">Cancelar</a>
+        <div style="padding:10px">
+            @* Botón de cancelar *@
+            <a href="BusquedaExpediente" class="btn btn-primary" id="btnCancelar">Cancelar</a>
 
-        @* Botón de crear usuaria *@
-        <a href="#" class="btn btn-primary" form="formPersona" id="btnGuardarAtencionEnComunidad">Guardar</a>
-        <br><br>
-
-    </div>
-
-
-    @*
-        <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
-                <div class="row comunForm">
-                    <div class="row">
-                        <div class="col-xs-10">
-                        </div>
-                        <div class="col-xs-2">
-                            <button class="botonCerrar danger" id="btnCerrarFrmUsuarios">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    </div>
-
-
-                    Aqui iban los divs
-
-                    <div class="row" id="contenedorBotones">
-
-                        <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                            <button type="button" id="btnEnviarFormulario" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Registrar un nuevo caso</button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
+            @* Botón de crear usuaria *@
+            <a href="#" class="btn btn-primary" form="formPersona" id="btnGuardarAtencionEnComunidad">Guardar</a>
+            <br><br>
         </div>
-    *@
-
-
-
-
+    </div>
 </div>
 
