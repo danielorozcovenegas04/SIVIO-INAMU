@@ -128,7 +128,9 @@ namespace SIVIO.UI.Models
             TBL_PERSONA persona,            TBL_AGRESOR agresor,
             TBL_LABORAL laboral,            TBL_ADICCIONES adicciones,
             TBL_PERSONA_RED_APOYO apoyo1,   TBL_AGRESION agresion,
-            TBL_AGRESOR_MOTIVO_REGRESO agresorMotivoRegreso, TBL_AGRESION_ATENCION_MEDICA agresionAtencionMedica)
+            TBL_AGRESOR_MOTIVO_REGRESO agresorMotivoRegreso,    TBL_AGRESION_ATENCION_MEDICA agresionAtencionMedica,
+            TBL_AGRESION_VIOLENCIA agresionViolencia,           TBL_AGRESOR_ADICCIONES agresorAdicciones,
+            TBL_AGRESION_IMPACTO_VIOLENCIA impactoViolencia,    TBL_PERSONA_CONDICIONESPECIAL dispacidades)
         {
             using (var entidades = new SIVIOEntities())
             {
@@ -140,6 +142,10 @@ namespace SIVIO.UI.Models
                 entidades.Entry(agresion).State = System.Data.Entity.EntityState.Added;
                 entidades.Entry(agresorMotivoRegreso).State = System.Data.Entity.EntityState.Added;
                 entidades.Entry(agresionAtencionMedica).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(agresionViolencia).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(agresorAdicciones).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(impactoViolencia).State = System.Data.Entity.EntityState.Added;
+                entidades.Entry(dispacidades).State = System.Data.Entity.EntityState.Added;
 
                 entidades.SaveChanges();
             }
