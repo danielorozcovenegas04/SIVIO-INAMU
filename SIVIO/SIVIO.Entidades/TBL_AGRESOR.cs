@@ -19,6 +19,7 @@ namespace SIVIO.Entidades
         {
             this.TBL_AGRESION = new HashSet<TBL_AGRESION>();
             this.TBL_AGRESOR_MOTIVO_REGRESO = new HashSet<TBL_AGRESOR_MOTIVO_REGRESO>();
+            this.TBL_AGRESOR_ADICCIONES = new HashSet<TBL_AGRESOR_ADICCIONES>();
         }
     
         public int PK_AGRESOR { get; set; }
@@ -59,5 +60,7 @@ namespace SIVIO.Entidades
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO3 { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO4 { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO5 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_AGRESOR_ADICCIONES> TBL_AGRESOR_ADICCIONES { get; set; }
     }
 }

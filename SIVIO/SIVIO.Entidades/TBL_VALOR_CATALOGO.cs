@@ -66,6 +66,8 @@ namespace SIVIO.Entidades
             this.TBL_AGRESOR5 = new HashSet<TBL_AGRESOR>();
             this.TBL_PERSONA21 = new HashSet<TBL_PERSONA>();
             this.TBL_ROL_TIPO_ATENCION = new HashSet<TBL_ROL_TIPO_ATENCION>();
+            this.TBL_AGRESION_IMPACTO_VIOLENCIA = new HashSet<TBL_AGRESION_IMPACTO_VIOLENCIA>();
+            this.TBL_AGRESOR_ADICCIONES = new HashSet<TBL_AGRESOR_ADICCIONES>();
         }
     
         public int PK_VALORCATALOGO { get; set; }
@@ -173,5 +175,9 @@ namespace SIVIO.Entidades
         public virtual ICollection<TBL_PERSONA> TBL_PERSONA21 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_ROL_TIPO_ATENCION> TBL_ROL_TIPO_ATENCION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_AGRESION_IMPACTO_VIOLENCIA> TBL_AGRESION_IMPACTO_VIOLENCIA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_AGRESOR_ADICCIONES> TBL_AGRESOR_ADICCIONES { get; set; }
     }
 }

@@ -84,6 +84,8 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_USUARIO> TBL_USUARIO { get; set; }
         public virtual DbSet<TBL_VALOR_CATALOGO> TBL_VALOR_CATALOGO { get; set; }
         public virtual DbSet<TBL_ROL_TIPO_ATENCION> TBL_ROL_TIPO_ATENCION { get; set; }
+        public virtual DbSet<TBL_AGRESION_IMPACTO_VIOLENCIA> TBL_AGRESION_IMPACTO_VIOLENCIA { get; set; }
+        public virtual DbSet<TBL_AGRESOR_ADICCIONES> TBL_AGRESOR_ADICCIONES { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -205,6 +207,11 @@ namespace SIVIO.Entidades
         public virtual ObjectResult<SP_LISTAR_PROFESIONALES_Result> SP_LISTAR_PROFESIONALES()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LISTAR_PROFESIONALES_Result>("SP_LISTAR_PROFESIONALES");
+        }
+    
+        public virtual ObjectResult<SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO_Result> SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO_Result>("SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO");
         }
     }
 }

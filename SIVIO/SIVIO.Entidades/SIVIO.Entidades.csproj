@@ -67,6 +67,9 @@
     <Compile Include="SP_LISTAR_ATENCIONES_Result.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_LISTAR_CATEGORIAS_VIOLENCIA_CUESTIONARIO_Result.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_LISTAR_PROFESIONALES_Result.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
@@ -91,10 +94,16 @@
     <Compile Include="TBL_AGRESION_DETALLE_VIOLENCIA.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="TBL_AGRESION_IMPACTO_VIOLENCIA.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="TBL_AGRESION_VIOLENCIA.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_AGRESOR.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_AGRESOR_ADICCIONES.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_AGRESOR_MOTIVO_REGRESO.cs">

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="261dc61a5dd54530aa949a6ace175809" Name="Diagram1" ZoomLevel="90">
+      <Diagram DiagramId="261dc61a5dd54530aa949a6ace175809" Name="Diagram1" ZoomLevel="27">
         <EntityTypeShape EntityType="SIVIOModel.TBL_ACCION" Width="1.5" PointX="5.25" PointY="136.75" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_ADICCIONES" Width="1.5" PointX="10.5" PointY="117.25" />
         <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION" Width="1.5" PointX="15.75" PointY="115.375" />
@@ -164,6 +164,12 @@
         <EntityTypeShape EntityType="SIVIOModel.TBL_ROL_TIPO_ATENCION" Width="1.5" PointX="10.5" PointY="104.125" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ROL_TIPO_ATENCION_TBL_ROL" />
         <AssociationConnector Association="SIVIOModel.FK_TBL_ROL_TIPO_ATENCION_TBL_VALOR_CATALOGO" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESION_IMPACTO_VIOLENCIA" Width="1.5" PointX="18" PointY="95.375" />
+        <EntityTypeShape EntityType="SIVIOModel.TBL_AGRESOR_ADICCIONES" Width="1.5" PointX="15.75" PointY="97.375" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_IMPACTO_VIOLENCIA_TBL_AGRESION" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESION_IMPACTO_VIOLENCIA_TBL_VALOR_CATALOGO" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESOR_ADICCIONES_TBL_AGRESOR" />
+        <AssociationConnector Association="SIVIOModel.FK_TBL_AGRESOR_ADICCIONES_TBL_VALOR_CATALOGO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
