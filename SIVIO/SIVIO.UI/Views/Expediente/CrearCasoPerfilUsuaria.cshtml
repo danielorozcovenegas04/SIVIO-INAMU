@@ -2,362 +2,374 @@
 
 @* Pestaña Perfil de la Usuaria *@
 
-<div class="row">
-    <div class="col-xs-4 form-group">
-        <label>Edad</label>
-        <input class="form-control" id="txtEdadUsuaria" type="text" required="">
-    </div>
-
-
-
-
-    <div class="col-xs-4 form-group">
-        <label>Fecha de nacimiento:</label>
-        <input class="form-control" id="txtFechaNacimiento" type="date" required="">
-
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Orientación sexual:</label><br>
-        <select id="cmbOrientacionSexual" class="form-control">
-        </select>
-    </div>
-</div>
-
-<div class="row">
-
-
-    <div class="col-xs-4 form-group">
-        <label>Origen Étnico:</label><br>
-        <select id="cmbOrigenEtnico" class="form-control"></select>
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Condición civil</label><br>
-        <select id="cmbCondicionCivil" class="form-control"></select>
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Escolaridad</label><br>
-        <select id="cmbEscolaridad" class="form-control"></select>
-    </div>
-</div>
-
-
-<div class="row">
-
-    <div class="col-xs-4 form-group">
-        <label>Número total de hijas/os</label>
-        <input class="form-control" id="txtProvinciaDestino" type="number" required="" value="@Model.I_HIJOS">
-    </div>
-
-    <div class="col-xs-4 form-group">
-        <label>Número de hijos con los que ingresa al CEAAM</label>
-        <input class="form-control" id="txtNumeroHijos" type="number" required="" value="@Model.I_HIJOSCEEAM">
-    </div>
-
-
-    <div class="col-xs-4 form-group">
-        <label>Tipo de familia</label><br>
-        <select id="cmbTipoFamilia" class="form-control"></select>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-4 form-group">
-        <label>Nacionalidad</label><br>
-        <select id="cmbNacionalidad" class="form-control"></select>
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Otra nacionalidad</label><br>
-        <select id="cmbOtraNacionalidad" class="form-control"></select>
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Apátrida</label><br />
-        <input type="checkbox" style="display:inline" />
-    </div>
-
-</div>
-
-<div class="row">
-    <div class="col-xs-4 form-group">
-        <label>Condición migratoria</label><br>
-        <select id="cmbCondicionMigratoria" class="form-control"></select>
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Ocupación</label>
-        <select id="cmbOcupacion" class="form-control"></select>
-
-    </div>
-
-
-
-
-    <div class="col-xs-4 form-group">
-        <label>Condición laboral</label><br>
-        <select id="cmbCondicionLaboral" class="form-control"></select>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-4 form-group">
-        <label>Experiencia Laboral</label><br>
-        <select id="cmbExperienciaLaboral" class="form-control"></select>
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Lugar de trabajo</label><br>
-        <input class="form-control" id="txtLugarTrabajo" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Condición de aseguramiento</label><br>
-        <select id="cmbCondAseguramiento" class="form-control"></select>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-4 form-group">
-        <label> </label><br>
-        <label>Vivienda</label><br>
-        <select id="cmbVivienda" class="form-control"></select>
-    </div>
-
-    <div class="col-xs-4 form-group">
-
-        <label>Condiciones especiales y de salud</label><br />
-        <label>Discapacidad</label>
-        <select id="cmbDiscapacidad" class="form-control" multiple></select>
-    </div>
-
-
-
-
-    <div class="col-xs-4 form-group">
-
-        <label> </label><br>
-        <label>Adicciones</label><br>
-        <select id="cmbAdicciones" class="form-control" multiple></select>
-    </div>
-</div>
-@*Redes de apoyo*@
-<div class="row">
-    <div class="col-md-12">
-        <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
-            <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
-            <thead>
-                <tr>
-                    <th>PK_REDAPOYO</th>
-                    <th>FK_INSTITUCION</th>
-                    <th>FK_TIPORED</th>
-                    <th>Nombre</th>
-                    <th>Relacion</th>
-                    <th>Telefono</th>
-                    <th>Tipo de Red</th>
-                    <th>Institución</th>
-
-
-                </tr>
-            </thead>
-        </table>
-    </div>
-</div>
-<div class="row comunForm" id="frmEditorRedesApoyo">
-
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-xs-9"></div>
-            <div class="col-xs-3">
-                <button class="botonCerrar danger" id="btnOcultarCampoRedApoyo">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
+    <div class="row">
+        <div class="col-xs-4 form-group">
+            <label>Identificación</label>
+            <input class="form-control" id="txtIdentificacion" type="text" required="" value="@Model.VC_IDENTIFICACION" readonly>
         </div>
-        <div class="row">
+    </div>
 
-            <div class="col-md-6 form-group">
-                <label>Tipo</label>
-                <select id="cmdTipoRedApoyo" class="form-control redApoyo"></select>
-            </div>
-            <div class="col-md-6 form-group">
-                <label>Nombre</label>
-                <input class="form-control redApoyo" placeholder="Nombre" id="txtNombreRedApoyo" type="text" required="">
-            </div>
+    <div class="row">
 
 
+        <div class="col-xs-4 form-group">
+            <label>Edad</label>
+            <input class="form-control" id="txtEdadUsuaria" type="text" required="">
         </div>
-        <div class="row">
-            <div class="col-md-6 form-group" id="contenedorInstitucion">
-                <label>Institución</label>
-                <select id="cmdInstitucionRedApoyo" class="form-control redApoyo"></select>
-            </div>
-            <div class="col-md-6 form-group" id="contenedorRelacion">
-                <label>Relación</label>
-                <input class="form-control redApoyo" placeholder="Relación" id="txtRelacionRedApoyo" type="text" required="">
-            </div>
-            <div class="col-md-6 form-group">
-                <label>Teléfono</label>
-                <input class="form-control redApoyo" placeholder="Teléfono" id="txtTelefonoRedApoyo" type="text" required="">
-            </div>
-        </div>
-        @*<div class="row" style="text-align:center">
-            <div class="col-md-12">
-                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Guardar Red</button>
-            </div>
+
+
+        @*<div class="col-xs-4 form-group">
+            <label>Fecha de nacimiento:</label>
+            <input class="form-control" id="txtFechaNacimiento" type="date" required="">
+
         </div>*@
-        <div class="row">
-            <div class="col-md-12" style="text-align: center">
-                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+
+        <div class="col-md-4 form-group" id="fechaNacimiento">
+            <label>Fecha de nacimiento</label>
+            <input class="form-control" placeholder="Fecha nacimiento" id="dateNacimiento" type="datetime" required="" min="0">
+        </div>
+
+        <div class="col-xs-4 form-group">
+            <label>Orientación sexual:</label><br>
+            <select id="cmbOrientacionSexual" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <div class="col-xs-4 form-group">
+            <label>Origen étnico:</label><br>
+            <select id="cmbOrigenEtnico" class="form-control"></select>
+        </div>
+        <div class="col-xs-4 form-group">
+            <label>Condición civil</label><br>
+            <select id="cmbCondicionCivil" class="form-control"></select>
+        </div>
+        <div class="col-xs-4 form-group">
+            <label>Escolaridad</label><br>
+            <select id="cmbEscolaridad" class="form-control"></select>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-xs-4 form-group">
+            <label>Número total de hijas/os</label>
+            <input class="form-control" id="txtProvinciaDestino" type="number" required="" value="@Model.I_HIJOS">
+        </div>
+
+        <div class="col-xs-4 form-group">
+            <label>Número de hijos con los que ingresa al CEAAM</label>
+            <input class="form-control" id="txtNumeroHijos" type="number" required="" value="@Model.I_HIJOSCEEAM">
+        </div>
+
+
+        <div class="col-xs-4 form-group">
+            <label>Tipo de familia</label><br>
+            <select id="cmbTipoFamilia" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 form-group">
+            <label>Nacionalidad</label><br>
+            <select id="cmbNacionalidad" class="form-control"></select>
+        </div>
+        <div class="col-xs-4 form-group">
+            <label>Otra nacionalidad</label><br>
+            <select id="cmbOtraNacionalidad" class="form-control"></select>
+        </div>
+        <div class="col-xs-4 form-group">
+            <label>Apátrida</label><br />
+            <input type="checkbox" style="display:inline" />
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 form-group">
+            <label>Condición migratoria</label><br>
+            <select id="cmbCondicionMigratoria" class="form-control"></select>
+        </div>
+        <div class="col-xs-4 form-group">
+            <label>Ocupación</label>
+            <select id="cmbOcupacion" class="form-control"></select>
+
+        </div>
+
+
+
+
+        <div class="col-xs-4 form-group">
+            <label>Condición laboral</label><br>
+            <select id="cmbCondicionLaboral" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4 form-group">
+            <label>Experiencia Laboral</label><br>
+            <select id="cmbExperienciaLaboral" class="form-control"></select>
+        </div>
+        <div class="col-xs-4 form-group">
+            <label>Lugar de trabajo</label><br>
+            <input class="form-control" id="txtLugarTrabajo" type="text" required="" value="@Model.TBL_LABORAL.VC_NOMBRELUGARTRABAJO">
+        </div>
+        <div class="col-xs-4 form-group">
+            <label>Condición de aseguramiento</label><br>
+            <select id="cmbCondAseguramiento" class="form-control"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 form-group">
+            <label> </label><br>
+            <label>Vivienda</label><br>
+            <select id="cmbVivienda" class="form-control"></select>
+        </div>
+
+        <div class="col-xs-4 form-group">
+
+            <label>Condiciones especiales y de salud</label><br />
+            <label>Discapacidad</label>
+            <select id="cmbDiscapacidad" class="form-control" multiple></select>
+        </div>
+
+
+
+
+        <div class="col-xs-4 form-group">
+
+            <label> </label><br>
+            <label>Adicciones</label><br>
+            <select id="cmbAdicciones" class="form-control" multiple></select>
+        </div>
+    </div>
+    @*Redes de apoyo*@
+    <div class="row">
+        <div class="col-md-12">
+            <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
+                <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
+                <thead>
+                    <tr>
+                        <th>PK_REDAPOYO</th>
+                        <th>FK_INSTITUCION</th>
+                        <th>FK_TIPORED</th>
+                        <th>Nombre</th>
+                        <th>Relacion</th>
+                        <th>Telefono</th>
+                        <th>Tipo de Red</th>
+                        <th>Institución</th>
+
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="row comunForm" id="frmEditorRedesApoyo">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-9"></div>
+                <div class="col-xs-3">
+                    <button class="botonCerrar danger" id="btnOcultarCampoRedApoyo">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6 form-group">
+                    <label>Tipo</label>
+                    <select id="cmdTipoRedApoyo" class="form-control redApoyo"></select>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Nombre</label>
+                    <input class="form-control redApoyo" placeholder="Nombre" id="txtNombreRedApoyo" type="text" required="">
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group" id="contenedorInstitucion">
+                    <label>Institución</label>
+                    <select id="cmdInstitucionRedApoyo" class="form-control redApoyo"></select>
+                </div>
+                <div class="col-md-6 form-group" id="contenedorRelacion">
+                    <label>Relación</label>
+                    <input class="form-control redApoyo" placeholder="Relación" id="txtRelacionRedApoyo" type="text" required="">
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Teléfono</label>
+                    <input class="form-control redApoyo" placeholder="Teléfono" id="txtTelefonoRedApoyo" type="text" required="">
+                </div>
+            </div>
+            @*<div class="row" style="text-align:center">
+                <div class="col-md-12">
+                    <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Guardar Red</button>
+                </div>
+            </div>*@
+            <div class="row">
+                <div class="col-md-12" style="text-align: center">
+                    <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!--
-<label>Redes de Apoyo o Recursos con los que cuenta la usuaria  </label><label><input type="checkbox" id="checkRedesApoyo" value="No tiene"> No tiene</label><br>
-<label>Primaria</label>
-<div class="row">
+    <!--
+    <label>Redes de Apoyo o Recursos con los que cuenta la usuaria  </label><label><input type="checkbox" id="checkRedesApoyo" value="No tiene"> No tiene</label><br>
+    <label>Primaria</label>
+    <div class="row">
 
-    <div class="col-xs-4 form-group">
+        <div class="col-xs-4 form-group">
 
-        <label>Nombre</label>
-        <input class="form-control" id="txtNombreRedApoyo1" type="text" required="">
+            <label>Nombre</label>
+            <input class="form-control" id="txtNombreRedApoyo1" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Relación</label>
+            <input class="form-control" id="txtRelacionRedApoyo1" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Teléfono</label>
+            <input class="form-control" id="txtTeléfonoRedApoyo1" type="text" required="">
+        </div>
+
     </div>
-    <div class="col-xs-4 form-group">
+    <div class="row">
 
-        <label>Relación</label>
-        <input class="form-control" id="txtRelacionRedApoyo1" type="text" required="">
+        <div class="col-xs-4 form-group">
+
+            <label>Nombre</label>
+            <input class="form-control" id="txtNombreRedApoyo2" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Relación</label>
+            <input class="form-control" id="txtRelacionRedApoyo2" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Teléfono</label>
+            <input class="form-control" id="txtTeléfonoRedApoyo2" type="text" required="">
+        </div>
+
     </div>
-    <div class="col-xs-4 form-group">
+    <div class="row">
 
-        <label>Teléfono</label>
-        <input class="form-control" id="txtTeléfonoRedApoyo1" type="text" required="">
+        <div class="col-xs-4 form-group">
+
+            <label>Nombre</label>
+            <input class="form-control" id="txtNombreRedApoyo3" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Relación</label>
+            <input class="form-control" id="txtRelacionRedApoyo3" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Teléfono</label>
+            <input class="form-control" id="txtTeléfonoRedApoyo3" type="text" required="">
+        </div>
+
     </div>
+    <label>Secundaria</label>
+    <div class="row">
 
-</div>
-<div class="row">
+        <div class="col-xs-4 form-group">
 
-    <div class="col-xs-4 form-group">
+            <label>Nombre</label>
+            <input class="form-control" id="txtNombreRedApoyo4" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
 
-        <label>Nombre</label>
-        <input class="form-control" id="txtNombreRedApoyo2" type="text" required="">
+            <label>Relación</label>
+            <input class="form-control" id="txtRelacionRedApoyo4" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Teléfono</label>
+            <input class="form-control" id="txtTeléfonoRedApoyo4" type="text" required="">
+        </div>
+
     </div>
-    <div class="col-xs-4 form-group">
+    <div class="row">
 
-        <label>Relación</label>
-        <input class="form-control" id="txtRelacionRedApoyo2" type="text" required="">
+        <div class="col-xs-4 form-group">
+
+            <label>Nombre</label>
+            <input class="form-control" id="txtNombreRedApoyo5" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Relación</label>
+            <input class="form-control" id="txtRelacionRedApoyo5" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Teléfono</label>
+            <input class="form-control" id="txtTeléfonoRedApoyo5" type="text" required="">
+        </div>
+
     </div>
-    <div class="col-xs-4 form-group">
+    <div class="row">
 
-        <label>Teléfono</label>
-        <input class="form-control" id="txtTeléfonoRedApoyo2" type="text" required="">
+        <div class="col-xs-4 form-group">
+
+            <label>Nombre</label>
+            <input class="form-control" id="txtNombreRedApoyo6" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Relación</label>
+            <input class="form-control" id="txtRelacionRedApoyo6" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+
+            <label>Teléfono</label>
+            <input class="form-control" id="txtTeléfonoRedApoyo6" type="text" required="">
+        </div>
+
     </div>
+    <label>Institucional</label>
+    <div class="row">
 
-</div>
-<div class="row">
 
-    <div class="col-xs-4 form-group">
+        <div class="col-xs-4 form-group">
+            <label>Nombre</label>
+            <input class="form-control" id="txtNombreRedApoyo7" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+            <label>Institución</label>
+            <input class="form-control" id="txtRelacionRedApoyo7" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+            <label>Teléfono</label>
+            <input class="form-control" id="txtTeléfonoRedApoyo7" type="text" required="">
+        </div>
 
-        <label>Nombre</label>
-        <input class="form-control" id="txtNombreRedApoyo3" type="text" required="">
     </div>
-    <div class="col-xs-4 form-group">
+    <div class="row">
 
-        <label>Relación</label>
-        <input class="form-control" id="txtRelacionRedApoyo3" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
+        <div class="col-xs-4 form-group">
 
-        <label>Teléfono</label>
-        <input class="form-control" id="txtTeléfonoRedApoyo3" type="text" required="">
-    </div>
+            <label>Nombre</label>
+            <input class="form-control" id="txtNombreRedApoyo8" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
 
-</div>
-<label>Secundaria</label>
-<div class="row">
+            <label>Institución</label>
+            <input class="form-control" id="txtRelacionRedApoyo8" type="text" required="">
+        </div>
+        <div class="col-xs-4 form-group">
+            <label>Teléfono</label>
+            <input class="form-control" id="txtTeléfonoRedApoyo8" type="text" required="">
+        </div>
 
-    <div class="col-xs-4 form-group">
-
-        <label>Nombre</label>
-        <input class="form-control" id="txtNombreRedApoyo4" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-
-        <label>Relación</label>
-        <input class="form-control" id="txtRelacionRedApoyo4" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-
-        <label>Teléfono</label>
-        <input class="form-control" id="txtTeléfonoRedApoyo4" type="text" required="">
-    </div>
-
-</div>
-<div class="row">
-
-    <div class="col-xs-4 form-group">
-
-        <label>Nombre</label>
-        <input class="form-control" id="txtNombreRedApoyo5" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-
-        <label>Relación</label>
-        <input class="form-control" id="txtRelacionRedApoyo5" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-
-        <label>Teléfono</label>
-        <input class="form-control" id="txtTeléfonoRedApoyo5" type="text" required="">
-    </div>
-
-</div>
-<div class="row">
-
-    <div class="col-xs-4 form-group">
-
-        <label>Nombre</label>
-        <input class="form-control" id="txtNombreRedApoyo6" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-
-        <label>Relación</label>
-        <input class="form-control" id="txtRelacionRedApoyo6" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-
-        <label>Teléfono</label>
-        <input class="form-control" id="txtTeléfonoRedApoyo6" type="text" required="">
-    </div>
-
-</div>
-<label>Institucional</label>
-<div class="row">
-
-
-    <div class="col-xs-4 form-group">
-        <label>Nombre</label>
-        <input class="form-control" id="txtNombreRedApoyo7" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Institución</label>
-        <input class="form-control" id="txtRelacionRedApoyo7" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Teléfono</label>
-        <input class="form-control" id="txtTeléfonoRedApoyo7" type="text" required="">
-    </div>
-
-</div>
-<div class="row">
-
-    <div class="col-xs-4 form-group">
-
-        <label>Nombre</label>
-        <input class="form-control" id="txtNombreRedApoyo8" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-
-        <label>Institución</label>
-        <input class="form-control" id="txtRelacionRedApoyo8" type="text" required="">
-    </div>
-    <div class="col-xs-4 form-group">
-        <label>Teléfono</label>
-        <input class="form-control" id="txtTeléfonoRedApoyo8" type="text" required="">
-    </div>
-
-</div>-->
+    </div>-->

@@ -24,6 +24,19 @@ namespace SIVIO.UI.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public JsonResult RetornarDivisionTerritorial()
+        {
+            try
+            {
+                return Json(_modelCatalogos.RetornarOrganizacionTerritorial(), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json("Error al procesar la solicitud: " + e.Message, JsonRequestBehavior.AllowGet);
+            }
+
+        }
         [Authorize]
         public ActionResult CrearCaso(string ValorPersona)
         {
