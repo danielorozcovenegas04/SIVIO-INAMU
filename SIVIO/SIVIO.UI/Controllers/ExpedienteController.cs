@@ -75,7 +75,18 @@ namespace SIVIO.UI.Controllers
             }*/
             
         }
-        
+
+
+        [AllowAnonymous]
+        public JsonResult ListarCatalogosAtenciones()
+        {
+            List<int> catalogos = new List<int>()
+            {
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoAtencion
+            };
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_modelCatalogos.llenarListaCatalogos(catalogos)), JsonRequestBehavior.AllowGet);
+        }
+
         [AllowAnonymous]
         public JsonResult ListarCatalogosCrearCaso()
         {

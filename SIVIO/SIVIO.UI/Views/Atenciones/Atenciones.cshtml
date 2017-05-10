@@ -1,17 +1,68 @@
 ﻿
-@{
-    Layout = null;
-}
+<script type="text/javascript">
+    function llenarComboBoxAtenciones(nombreCatalogo, nombreComboBox) {
+        return function (respuesta) {
+            var catalogo = respuesta[nombreCatalogo];
+            if (catalogo.Mensaje.TipoMensaje === 1) {
+                $.each(catalogo.Catalogo, function (key, value) {
+                    $(nombreComboBox).append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
 
-<!DOCTYPE html>
+                });
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Atenciones</title>
-</head>
-<body>
-    <div> 
+                if (valorComboBox) {
+                    $(nombreComboBox).val(valorComboBox);
+                }
+            } else {
+                $("#contenedorBotones").show();
+                $("#contenedorEspera").hide();
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error");
+                $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            }
+
+            return respuesta
+
+        }
+    }
+
+        $(document).ready(function () {
+
+            var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ListarCatalogosAtenciones")',
+                dataType: "json",
+                contentType: "application/json",
+                processData: true,
+                error: function (xhr, ajaxOptions, error) {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error al registrar");
+                    $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+                }
+            }).then(function (resultado) {
+                var respuesta = JSON.parse(resultado);
+                return respuesta;
+            }).then(llenarComboBoxAtenciones("Tipo de Atención", "#cmbAtenciones"))
+                
+           });
+
+</script>
+
+<div class="row">
+    <div class="col-xs-4 form-group">
+        <label>Atenciones</label><br>
+        <select id="cmbAtenciones" class="form-control"></select>
     </div>
-</body>
-</html>
+</div>
+
+
