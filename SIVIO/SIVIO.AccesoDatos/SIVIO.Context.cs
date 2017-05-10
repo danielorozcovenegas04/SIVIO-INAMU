@@ -67,7 +67,6 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_INTERVENCION_TALLER> TBL_INTERVENCION_TALLER { get; set; }
         public virtual DbSet<TBL_INTERVENCION_TESTIMONIO_EXPERTO> TBL_INTERVENCION_TESTIMONIO_EXPERTO { get; set; }
         public virtual DbSet<TBL_LABORAL> TBL_LABORAL { get; set; }
-        public virtual DbSet<TBL_PERSONA> TBL_PERSONA { get; set; }
         public virtual DbSet<TBL_PERSONA_APOYO> TBL_PERSONA_APOYO { get; set; }
         public virtual DbSet<TBL_PERSONA_CONDICIONESPECIAL> TBL_PERSONA_CONDICIONESPECIAL { get; set; }
         public virtual DbSet<TBL_PERSONA_FAMILIAR> TBL_PERSONA_FAMILIAR { get; set; }
@@ -86,6 +85,8 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_UNIDAD> TBL_UNIDAD { get; set; }
         public virtual DbSet<TBL_USUARIO> TBL_USUARIO { get; set; }
         public virtual DbSet<TBL_VALOR_CATALOGO> TBL_VALOR_CATALOGO { get; set; }
+        public virtual DbSet<TBL_PERSONA> TBL_PERSONA { get; set; }
+        public virtual DbSet<TBL_REGISTRO_TIPIFICACION_VIOLENCIA> TBL_REGISTRO_TIPIFICACION_VIOLENCIA { get; set; }
     
         public virtual ObjectResult<SP_BUSCAR_EXPEDIENTE_CEEAM_Result> SP_BUSCAR_EXPEDIENTE_CEEAM(string vC_TERMINOBUSQUEDA)
         {

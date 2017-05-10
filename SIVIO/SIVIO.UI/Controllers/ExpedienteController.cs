@@ -216,14 +216,13 @@ namespace SIVIO.UI.Controllers
         [HttpPost]
         public Mensaje CrearUsuaria_DatosUsuaria(TBL_PERSONA objDatosUsuaria)
         {
-            using (var entities = new SIVIOEntities())
-            {
+
                 //  var name = datosForm["name"];
                 //   var lastName1 = datosForm["lastName1"];
                 //  var lastName2 = datosForm["lastName2"];
                 //  var mail = datosForm["mail"];
 
-                //TBL_PERSONA user = new TBL_PERSONA();
+               // TBL_PERSONA user = new TBL_PERSONA();
                 //user.VC_NOMBRE = datosForm["Nombre"];
                 //user.VC_APELLIDO1 = datosForm["Apellido1"];
                 //user.VC_APELLIDO2 = datosForm["Apellido2"];
@@ -246,10 +245,9 @@ namespace SIVIO.UI.Controllers
                 //      user.IM_CLAVE = StrToByteArray("mae");
                 //      user.IM_SALT1 = StrToByteArray("mae");
                 //      user.IM_SALT2 = StrToByteArray("mae");
-
-                //  return _modelExpediente.InsertarUsuaria(user);*/
-                return null;
-            }
+                */
+                return _modelExpediente.InsertarUsuaria(objDatosUsuaria);
+            
 
         }
 

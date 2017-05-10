@@ -19,7 +19,7 @@ namespace SIVIO.Entidades
         public string VC_NUMERO { get; set; }
         public int FK_TIPOTELEFONO { get; set; }
     
-        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
+        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
     }
 }

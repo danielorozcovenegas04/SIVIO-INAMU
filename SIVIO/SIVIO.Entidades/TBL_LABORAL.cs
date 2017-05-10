@@ -21,7 +21,7 @@ namespace SIVIO.Entidades
         public int FK_CONDICIONLABORAL { get; set; }
         public string VC_OCUPACION { get; set; }
     
-        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
+        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
     }
 }

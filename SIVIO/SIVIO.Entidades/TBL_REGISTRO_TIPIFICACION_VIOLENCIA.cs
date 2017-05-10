@@ -12,17 +12,13 @@ namespace SIVIO.Entidades
     using System;
     using System.Collections.Generic;
     
-    public partial class TBL_DIRECCION
+    public partial class TBL_REGISTRO_TIPIFICACION_VIOLENCIA
     {
-        public int PK_DIRECCION { get; set; }
-        public int FK_PERSONA { get; set; }
-        public string VC_DETALLE { get; set; }
-        public int FK_TIPODIRECCION { get; set; }
-        public int FK_PROVINCIA { get; set; }
-        public int FK_CANTON { get; set; }
-        public int FK_DISTRITO { get; set; }
+        public System.Guid PK_REGISTROTIPIFICACIONVIOLENCIA { get; set; }
+        public int FK_TIPIFICACIONVIOLENCIA { get; set; }
+        public System.Guid FK_REGISTRO { get; set; }
     
+        public virtual TBL_REGISTRO TBL_REGISTRO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
-        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
     }
 }

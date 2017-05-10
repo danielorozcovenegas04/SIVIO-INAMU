@@ -220,6 +220,9 @@
     <Compile Include="TBL_REGISTRO_COORDINACION.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="TBL_REGISTRO_TIPIFICACION_VIOLENCIA.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="TBL_ROL.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>

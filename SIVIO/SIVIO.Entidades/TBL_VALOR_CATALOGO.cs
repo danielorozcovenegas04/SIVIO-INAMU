@@ -45,10 +45,6 @@ namespace SIVIO.Entidades
             this.TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE = new HashSet<TBL_INTERVENCION_CRITERIO_EXPERTO_DETALLE>();
             this.TBL_INTERVENCION_PROCESO_GRUPAL = new HashSet<TBL_INTERVENCION_PROCESO_GRUPAL>();
             this.TBL_LABORAL = new HashSet<TBL_LABORAL>();
-            this.TBL_PERSONA = new HashSet<TBL_PERSONA>();
-            this.TBL_PERSONA1 = new HashSet<TBL_PERSONA>();
-            this.TBL_PERSONA2 = new HashSet<TBL_PERSONA>();
-            this.TBL_PERSONA3 = new HashSet<TBL_PERSONA>();
             this.TBL_PERSONA_APOYO = new HashSet<TBL_PERSONA_APOYO>();
             this.TBL_PERSONA_CONDICIONESPECIAL = new HashSet<TBL_PERSONA_CONDICIONESPECIAL>();
             this.TBL_PERSONA_FAMILIAR = new HashSet<TBL_PERSONA_FAMILIAR>();
@@ -68,6 +64,12 @@ namespace SIVIO.Entidades
             this.TBL_ROL = new HashSet<TBL_ROL>();
             this.TBL_ROL_TIPO_ATENCION = new HashSet<TBL_ROL_TIPO_ATENCION>();
             this.TBL_TELEFONO = new HashSet<TBL_TELEFONO>();
+            this.TBL_PERSONA = new HashSet<TBL_PERSONA>();
+            this.TBL_PERSONA1 = new HashSet<TBL_PERSONA>();
+            this.TBL_PERSONA2 = new HashSet<TBL_PERSONA>();
+            this.TBL_PERSONA3 = new HashSet<TBL_PERSONA>();
+            this.TBL_PERSONA4 = new HashSet<TBL_PERSONA>();
+            this.TBL_REGISTRO_TIPIFICACION_VIOLENCIA = new HashSet<TBL_REGISTRO_TIPIFICACION_VIOLENCIA>();
         }
     
         public int PK_VALORCATALOGO { get; set; }
@@ -134,14 +136,6 @@ namespace SIVIO.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_LABORAL> TBL_LABORAL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_PERSONA> TBL_PERSONA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_PERSONA> TBL_PERSONA1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_PERSONA> TBL_PERSONA2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_PERSONA> TBL_PERSONA3 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_PERSONA_APOYO> TBL_PERSONA_APOYO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_PERSONA_CONDICIONESPECIAL> TBL_PERSONA_CONDICIONESPECIAL { get; set; }
@@ -179,5 +173,17 @@ namespace SIVIO.Entidades
         public virtual ICollection<TBL_ROL_TIPO_ATENCION> TBL_ROL_TIPO_ATENCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_TELEFONO> TBL_TELEFONO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_PERSONA> TBL_PERSONA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_PERSONA> TBL_PERSONA1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_PERSONA> TBL_PERSONA2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_PERSONA> TBL_PERSONA3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_PERSONA> TBL_PERSONA4 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_REGISTRO_TIPIFICACION_VIOLENCIA> TBL_REGISTRO_TIPIFICACION_VIOLENCIA { get; set; }
     }
 }

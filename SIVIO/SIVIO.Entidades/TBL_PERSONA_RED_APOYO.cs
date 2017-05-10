@@ -23,8 +23,8 @@ namespace SIVIO.Entidades
         public string VC_TELEFONO { get; set; }
         public string VC_RELACION { get; set; }
     
-        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO1 { get; set; }
+        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
     }
 }

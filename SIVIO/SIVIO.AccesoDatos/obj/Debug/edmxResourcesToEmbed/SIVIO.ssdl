@@ -432,35 +432,36 @@
     </Key>
     <Property Name="PK_PERSONA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="VC_IDENTIFICACION" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="FK_TIPOIDENTIFICACION" Type="int" Nullable="false" />
-    <Property Name="FK_NACIONALIDAD" Type="int" Nullable="false" />
+    <Property Name="FK_TIPOIDENTIFICACION" Type="int" />
+    <Property Name="FK_NACIONALIDAD" Type="int" />
     <Property Name="VC_NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="VC_APELLIDO1" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="VC_APELLIDO2" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="DT_FECHANACIMIENTO" Type="datetime" />
-    <Property Name="FK_ESTADOCIVIL" Type="int" Nullable="false" />
-    <Property Name="FK_ESCOLARIDAD" Type="int" Nullable="false" />
-    <Property Name="FK_GENERO" Type="int" Nullable="false" />
-    <Property Name="FK_OCUPACION" Type="int" Nullable="false" />
-    <Property Name="FK_CONDICIONMIGRATORIA" Type="int" Nullable="false" />
-    <Property Name="FK_CONDICIONASEGURAMIENTO" Type="int" Nullable="false" />
-    <Property Name="FK_TIPOVIVIENDA" Type="int" Nullable="false" />
-    <Property Name="FK_TIPOFAMILIA" Type="int" Nullable="false" />
-    <Property Name="FK_ESTADOEMBARAZO" Type="int" Nullable="false" />
-    <Property Name="FK_CONDICIONSALUD" Type="int" Nullable="false" />
-    <Property Name="FK_ORIENTACIONSEXUAL" Type="int" Nullable="false" />
-    <Property Name="I_HIJOS" Type="int" Nullable="false" />
-    <Property Name="I_HIJOSCEEAM" Type="int" Nullable="false" />
-    <Property Name="I_HIJOSMAYORESDOCE" Type="int" Nullable="false" />
-    <Property Name="FK_PROVINCIAPROCEDENCIA" Type="int" Nullable="false" />
-    <Property Name="FK_CANTONPROCEDENCIA" Type="int" Nullable="false" />
-    <Property Name="FK_DISTRITOPROCEDENCIA" Type="int" Nullable="false" />
+    <Property Name="FK_ESTADOCIVIL" Type="int" />
+    <Property Name="FK_ESCOLARIDAD" Type="int" />
+    <Property Name="FK_GENERO" Type="int" />
+    <Property Name="FK_OCUPACION" Type="int" />
+    <Property Name="FK_CONDICIONMIGRATORIA" Type="int" />
+    <Property Name="FK_CONDICIONASEGURAMIENTO" Type="int" />
+    <Property Name="FK_TIPOVIVIENDA" Type="int" />
+    <Property Name="FK_TIPOFAMILIA" Type="int" />
+    <Property Name="FK_ESTADOEMBARAZO" Type="int" />
+    <Property Name="FK_CONDICIONSALUD" Type="int" />
+    <Property Name="FK_ORIENTACIONSEXUAL" Type="int" />
+    <Property Name="I_HIJOS" Type="int" />
+    <Property Name="I_HIJOSCEEAM" Type="int" />
+    <Property Name="I_HIJOSMAYORESDOCE" Type="int" />
+    <Property Name="FK_PROVINCIAPROCEDENCIA" Type="int" />
+    <Property Name="FK_CANTONPROCEDENCIA" Type="int" />
+    <Property Name="FK_DISTRITOPROCEDENCIA" Type="int" />
     <Property Name="VC_CORREO" Type="varchar" MaxLength="200" />
     <Property Name="FK_ETNIA" Type="int" />
     <Property Name="FK_NACIONALIDAD2" Type="int" />
     <Property Name="I_EDAD" Type="int" />
     <Property Name="B_CONOCEFECHANACIMIENTO" Type="bit" />
     <Property Name="FK_PUEBLOINDIGENA" Type="int" />
+    <Property Name="FK_PAISPROCEDENCIA" Type="int" />
   </EntityType>
   <EntityType Name="TBL_PERSONA_APOYO">
     <Key>
@@ -591,6 +592,14 @@
     <Property Name="VC_TELEFONO" Type="varchar" MaxLength="50" />
     <Property Name="VC_CORREO" Type="varchar" MaxLength="200" />
     <Property Name="FK_TIPOCOORDINACION" Type="int" />
+  </EntityType>
+  <EntityType Name="TBL_REGISTRO_TIPIFICACION_VIOLENCIA">
+    <Key>
+      <PropertyRef Name="PK_REGISTROTIPIFICACIONVIOLENCIA" />
+    </Key>
+    <Property Name="PK_REGISTROTIPIFICACIONVIOLENCIA" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FK_TIPIFICACIONVIOLENCIA" Type="int" Nullable="false" />
+    <Property Name="FK_REGISTRO" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
   <EntityType Name="TBL_ROL">
     <Key>
@@ -1558,8 +1567,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO3">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
+    <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_PERSONA">
+        <PropertyRef Name="FK_PAISPROCEDENCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TBL_PERSONA_TBL_VALORCATALOGO">
-    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="0..1" />
     <End Role="TBL_PERSONA" Type="Self.TBL_PERSONA" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TBL_VALOR_CATALOGO">
@@ -1798,6 +1819,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TBL_REGISTRO_TIPIFICACION_VIOLENCIA_TBL_REGISTRO">
+    <End Role="TBL_REGISTRO" Type="Self.TBL_REGISTRO" Multiplicity="1" />
+    <End Role="TBL_REGISTRO_TIPIFICACION_VIOLENCIA" Type="Self.TBL_REGISTRO_TIPIFICACION_VIOLENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_REGISTRO">
+        <PropertyRef Name="PK_REGISTRO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO_TIPIFICACION_VIOLENCIA">
+        <PropertyRef Name="FK_REGISTRO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_REGISTRO_TIPIFICACION_VIOLENCIA_TBL_VALOR_CATALOGO">
+    <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
+    <End Role="TBL_REGISTRO_TIPIFICACION_VIOLENCIA" Type="Self.TBL_REGISTRO_TIPIFICACION_VIOLENCIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_VALOR_CATALOGO">
+        <PropertyRef Name="PK_VALORCATALOGO" />
+      </Principal>
+      <Dependent Role="TBL_REGISTRO_TIPIFICACION_VIOLENCIA">
+        <PropertyRef Name="FK_TIPIFICACIONVIOLENCIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TBL_ROL_TBL_VALOR_CATALOGO">
     <End Role="TBL_VALOR_CATALOGO" Type="Self.TBL_VALOR_CATALOGO" Multiplicity="1" />
     <End Role="TBL_ROL" Type="Self.TBL_ROL" Multiplicity="*" />
@@ -1976,6 +2021,7 @@
     <EntitySet Name="TBL_REGISTRO" EntityType="Self.TBL_REGISTRO" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_REGISTRO_CEAAM" EntityType="Self.TBL_REGISTRO_CEAAM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_REGISTRO_COORDINACION" EntityType="Self.TBL_REGISTRO_COORDINACION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_REGISTRO_TIPIFICACION_VIOLENCIA" EntityType="Self.TBL_REGISTRO_TIPIFICACION_VIOLENCIA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_ROL" EntityType="Self.TBL_ROL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_ROL_ACCION" EntityType="Self.TBL_ROL_ACCION" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TBL_ROL_TIPO_ATENCION" EntityType="Self.TBL_ROL_TIPO_ATENCION" Schema="dbo" store:Type="Tables" />
@@ -2280,6 +2326,10 @@
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
     </AssociationSet>
+    <AssociationSet Name="FK_TBL_PERSONA_TBL_VALOR_CATALOGO3" Association="Self.FK_TBL_PERSONA_TBL_VALOR_CATALOGO3">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
+    </AssociationSet>
     <AssociationSet Name="FK_TBL_PERSONA_TBL_VALORCATALOGO" Association="Self.FK_TBL_PERSONA_TBL_VALORCATALOGO">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_PERSONA" EntitySet="TBL_PERSONA" />
@@ -2359,6 +2409,14 @@
     <AssociationSet Name="FK_TBL_REGISTRO_TBL_VALORCATALOGO1" Association="Self.FK_TBL_REGISTRO_TBL_VALORCATALOGO1">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
       <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_TIPIFICACION_VIOLENCIA_TBL_REGISTRO" Association="Self.FK_TBL_REGISTRO_TIPIFICACION_VIOLENCIA_TBL_REGISTRO">
+      <End Role="TBL_REGISTRO" EntitySet="TBL_REGISTRO" />
+      <End Role="TBL_REGISTRO_TIPIFICACION_VIOLENCIA" EntitySet="TBL_REGISTRO_TIPIFICACION_VIOLENCIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_REGISTRO_TIPIFICACION_VIOLENCIA_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_REGISTRO_TIPIFICACION_VIOLENCIA_TBL_VALOR_CATALOGO">
+      <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />
+      <End Role="TBL_REGISTRO_TIPIFICACION_VIOLENCIA" EntitySet="TBL_REGISTRO_TIPIFICACION_VIOLENCIA" />
     </AssociationSet>
     <AssociationSet Name="FK_TBL_ROL_TBL_VALOR_CATALOGO" Association="Self.FK_TBL_ROL_TBL_VALOR_CATALOGO">
       <End Role="TBL_VALOR_CATALOGO" EntitySet="TBL_VALOR_CATALOGO" />

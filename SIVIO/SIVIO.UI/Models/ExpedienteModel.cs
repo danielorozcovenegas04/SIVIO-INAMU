@@ -171,6 +171,7 @@ namespace SIVIO.UI.Models
                     //  usuaria.DT_FECHAREGISTRO = DateTime.Now;   // CONSULTAR 
                     entidades.SaveChanges();
 
+
                     return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, "Usuaria Registrada Correctamente", "valor");
                 }
 

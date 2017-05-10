@@ -22,6 +22,7 @@ namespace SIVIO.Entidades
             this.TBL_CONSULTA = new HashSet<TBL_CONSULTA>();
             this.TBL_REGISTRO_CEAAM = new HashSet<TBL_REGISTRO_CEAAM>();
             this.TBL_REGISTRO_COORDINACION = new HashSet<TBL_REGISTRO_COORDINACION>();
+            this.TBL_REGISTRO_TIPIFICACION_VIOLENCIA = new HashSet<TBL_REGISTRO_TIPIFICACION_VIOLENCIA>();
         }
     
         public System.Guid PK_REGISTRO { get; set; }
@@ -39,7 +40,6 @@ namespace SIVIO.Entidades
         public virtual ICollection<TBL_ATENCION> TBL_ATENCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_CONSULTA> TBL_CONSULTA { get; set; }
-        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_REGISTRO_CEAAM> TBL_REGISTRO_CEAAM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -47,5 +47,8 @@ namespace SIVIO.Entidades
         public virtual TBL_USUARIO TBL_USUARIO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO1 { get; set; }
+        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_REGISTRO_TIPIFICACION_VIOLENCIA> TBL_REGISTRO_TIPIFICACION_VIOLENCIA { get; set; }
     }
 }

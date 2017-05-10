@@ -362,6 +362,12 @@
     <Content Include="Views\Expediente\MenuExpediente.cshtml" />
     <Content Include="Views\Expediente\Delegacion_Mujer.cshtml" />
     <Content Include="Views\Expediente\CuestionarioCriterioViolenciaDelegacion.cshtml" />
+    <Content Include="Views\Expediente\ConsultaCoavif.cshtml" />
+    <Content Include="Views\Expediente\DatAdministrativosDele.cshtml" />
+    <Content Include="Views\Expediente\DatPerfil.cshtml" />
+    <Content Include="Views\Expediente\datUsuariaDele.cshtml" />
+    <Content Include="Views\Expediente\DetalleUsuaria.cshtml" />
+    <Content Include="Views\Expediente\HistorialViolenciaDele.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

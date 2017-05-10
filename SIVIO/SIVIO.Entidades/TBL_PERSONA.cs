@@ -31,35 +31,36 @@ namespace SIVIO.Entidades
     
         public int PK_PERSONA { get; set; }
         public string VC_IDENTIFICACION { get; set; }
-        public int FK_TIPOIDENTIFICACION { get; set; }
-        public int FK_NACIONALIDAD { get; set; }
+        public Nullable<int> FK_TIPOIDENTIFICACION { get; set; }
+        public Nullable<int> FK_NACIONALIDAD { get; set; }
         public string VC_NOMBRE { get; set; }
         public string VC_APELLIDO1 { get; set; }
         public string VC_APELLIDO2 { get; set; }
         public Nullable<System.DateTime> DT_FECHANACIMIENTO { get; set; }
-        public int FK_ESTADOCIVIL { get; set; }
-        public int FK_ESCOLARIDAD { get; set; }
-        public int FK_GENERO { get; set; }
-        public int FK_OCUPACION { get; set; }
-        public int FK_CONDICIONMIGRATORIA { get; set; }
-        public int FK_CONDICIONASEGURAMIENTO { get; set; }
-        public int FK_TIPOVIVIENDA { get; set; }
-        public int FK_TIPOFAMILIA { get; set; }
-        public int FK_ESTADOEMBARAZO { get; set; }
-        public int FK_CONDICIONSALUD { get; set; }
-        public int FK_ORIENTACIONSEXUAL { get; set; }
-        public int I_HIJOS { get; set; }
-        public int I_HIJOSCEEAM { get; set; }
-        public int I_HIJOSMAYORESDOCE { get; set; }
-        public int FK_PROVINCIAPROCEDENCIA { get; set; }
-        public int FK_CANTONPROCEDENCIA { get; set; }
-        public int FK_DISTRITOPROCEDENCIA { get; set; }
+        public Nullable<int> FK_ESTADOCIVIL { get; set; }
+        public Nullable<int> FK_ESCOLARIDAD { get; set; }
+        public Nullable<int> FK_GENERO { get; set; }
+        public Nullable<int> FK_OCUPACION { get; set; }
+        public Nullable<int> FK_CONDICIONMIGRATORIA { get; set; }
+        public Nullable<int> FK_CONDICIONASEGURAMIENTO { get; set; }
+        public Nullable<int> FK_TIPOVIVIENDA { get; set; }
+        public Nullable<int> FK_TIPOFAMILIA { get; set; }
+        public Nullable<int> FK_ESTADOEMBARAZO { get; set; }
+        public Nullable<int> FK_CONDICIONSALUD { get; set; }
+        public Nullable<int> FK_ORIENTACIONSEXUAL { get; set; }
+        public Nullable<int> I_HIJOS { get; set; }
+        public Nullable<int> I_HIJOSCEEAM { get; set; }
+        public Nullable<int> I_HIJOSMAYORESDOCE { get; set; }
+        public Nullable<int> FK_PROVINCIAPROCEDENCIA { get; set; }
+        public Nullable<int> FK_CANTONPROCEDENCIA { get; set; }
+        public Nullable<int> FK_DISTRITOPROCEDENCIA { get; set; }
         public string VC_CORREO { get; set; }
         public Nullable<int> FK_ETNIA { get; set; }
         public Nullable<int> FK_NACIONALIDAD2 { get; set; }
         public Nullable<int> I_EDAD { get; set; }
         public Nullable<bool> B_CONOCEFECHANACIMIENTO { get; set; }
         public Nullable<int> FK_PUEBLOINDIGENA { get; set; }
+        public Nullable<int> FK_PAISPROCEDENCIA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_ADICCIONES> TBL_ADICCIONES { get; set; }
@@ -78,6 +79,7 @@ namespace SIVIO.Entidades
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO1 { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO2 { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO3 { get; set; }
+        public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO4 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_PERSONA_APOYO> TBL_PERSONA_APOYO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

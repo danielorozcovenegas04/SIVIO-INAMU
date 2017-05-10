@@ -46,10 +46,10 @@ namespace SIVIO.Entidades
         public virtual ICollection<TBL_INTERVENCION_RED_APOYO> TBL_INTERVENCION_RED_APOYO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_INTERVENCION_TALLER> TBL_INTERVENCION_TALLER { get; set; }
-        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
         public virtual TBL_USUARIO TBL_USUARIO { get; set; }
         public virtual TBL_VALOR_CATALOGO TBL_VALOR_CATALOGO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_INTERVENCION_TESTIMONIO_EXPERTO> TBL_INTERVENCION_TESTIMONIO_EXPERTO { get; set; }
+        public virtual TBL_PERSONA TBL_PERSONA { get; set; }
     }
 }

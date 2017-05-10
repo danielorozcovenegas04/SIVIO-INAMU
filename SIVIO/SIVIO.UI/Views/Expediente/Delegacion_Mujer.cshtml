@@ -16,12 +16,41 @@
         CargarDivisionTerritorial();
         CargarEditorRedesApoyo();
         CargarEditorComposicionFamiliar();
-        fechaHoy();
-        //mostrarHora();
-        InicializarCategoriasRiesgo();
         $("#btnGuardarDatosUsuaria").click(function () {
+            debugger;
+
             var objDatosUsuaria = $();
-            objDatosUsuaria.VC_NOMBRE = "nombre";
+            var objDatosUsuariaDireccion1 = $();
+            var objDatosUsuariaDireccion2 = $();
+            var objDatosUsuariaTelefono = $();
+            objDatosUsuaria.VC_NOMBRE = $("#txtNombre").val();
+            objDatosUsuaria.VC_APELLIDO1 = $("#txtApellido1").val();
+            objDatosUsuaria.VC_APELLIDO2 = $("#txtApellido2").val();
+            objDatosUsuaria.VC_IDENTIFICACION = $("#txtIdentificacion").val();
+            objDatosUsuaria.DT_FECHANACIMIENTO = $("#txtFechaNacimiento").val();
+            // Edad?
+            objDatosUsuaria.FK_PROVINCIAPROCEDENCIA = $("#cmbPersonaProvincia").val();
+            objDatosUsuaria.FK_CANTONPROCEDENCIA = $("#cmbPersonaCanton").val();
+            objDatosUsuaria.FK_DISTRITOPROCEDENCIA = $("#cmbPersonaDistrito").val();
+            // País de procedencia?
+            // Falta agregarle Canton - distrito - provincia a este objDatosUsuariaDireccion1
+            objDatosUsuariaDireccion1.VC_DETALLE = $("#txtDireccionDomicilio").val();
+            // Falta agregarle Canton - distrito - provincia a este objDatosUsuariaDireccion2
+            objDatosUsuariaDireccion2.VC_DETALLE = $("#txtDireccionNotificaciones").val();
+            objDatosUsuaria.VC_CORREO = $("#txtCorreoElectronico").val();
+            objDatosUsuariaTelefono.VC_NUMERO = $("#txtTelefono").val();
+            objDatosUsuaria.FK_ESTADOCIVIL = $("#cmbCondicionCivil").val();
+            objDatosUsuaria.FK_ESCOLARIDAD = $("#cmbEscolaridad").val();
+            objDatosUsuaria.I_HIJOS = $("#txtNumeroHijos").val();
+            objDatosUsuaria.FK_NACIONALIDAD = $("#cmbNacionalidad").val();
+            objDatosUsuaria.FK_NACIONALIDAD2 = $("#cmbOtraNacionalidad").val();
+            // Agregados extra
+
+            // Apátrida?
+            objDatosUsuaria.FK_CONDICIONMIGRATORIA = $("#cmbCondicionMigratoria").val();
+            objDatosUsuaria.FK_OCUPACION = $("#cmbOcupacion").val();
+            objDatosUsuaria.TBL_ADICCIONES = [];
+            //objDatosUsuaria.TBL_ADICCIONES.push({ FK_TIPOADICCION: 3 });
             $.ajax(
             {
                 type: "POST",
@@ -37,6 +66,7 @@
         });
 
     });
+
     function InicializarCategoriasRiesgo() {
         $("#dvCatPrec").show();
         $("#dvCatSevRiesgo").hide();
