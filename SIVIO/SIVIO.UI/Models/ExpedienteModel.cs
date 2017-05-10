@@ -73,6 +73,25 @@ namespace SIVIO.UI.Models
             }
         }
 
+      
+        public List<SP_BUSCAR_EXPEDIENTE_CEEAM_Result> BuscarExpedienteDelegacion(string frase)
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    return entidades.SP_BUSCAR_EXPEDIENTE_CEEAM(frase).ToList();
+                }
+                catch
+                {
+                    return new List<SP_BUSCAR_EXPEDIENTE_CEEAM_Result>();
+                }
+            }
+        }
+
+
+
+
         public List<SP_BUSCAR_EXPEDIENTE_CEEAM_Result> BuscarExpedienteCEAAM(string frase)
         {
             using (var entidades = new SIVIOEntities())

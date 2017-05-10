@@ -3,16 +3,23 @@
 }
 
 @using SIVIO.Entidades
-@model List<TBL_PERSONA>
+@model List<SIVIO.Entidades.SP_BUSCAR_EXPEDIENTE_CEEAM_Result>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+            $("#busquedaExpediente").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $('#btnBusquedaExpediente').trigger('click');
+                }
+            });
+
             $("#btnBusquedaExpediente").click(function () {
                 $.LoadingOverlay("show");
                 $.ajax({
                     type: "POST",
-                    url: '@Url.Action("BusquedaExpediente", "Expediente")' + "?" + $("#frmBusqueda").serialize(),
+                    url: '@Url.Action("BusquedaExpedienteDelegacion", "Expediente")' + "?" + $("#frmBusqueda").serialize(),
                     async: true,
                 }).done(function (data) {
                     $.LoadingOverlay("hide");
@@ -69,20 +76,20 @@
     </style>
     <div class="container-fluid">
         <style>
-                .buttons-excel {
-                    background-color: green;
-                    color: white;
-                }
+            .buttons-excel {
+                background-color: green;
+                color: white;
+            }
 
-                .buttons-pdf {
-                    background-color: red;
-                    color: white;
-                }
+            .buttons-pdf {
+                background-color: red;
+                color: white;
+            }
 
-                .paginate_button {
-                    padding: 0px !important;
-                }
-                /*.paginate_button active {
+            .paginate_button {
+                padding: 0px !important;
+            }
+            /*.paginate_button active {
                 padding: 0px !important;
 
 
@@ -181,9 +188,13 @@
                                 if (contSeleccionados > 0) {
                                     $.LoadingOverlay("show");
                                     $("#contenedorEspera").show();
+                                    
+                                    var value = filaSeleccionada[0].VC_CASO_CLAIS, url1 = '@Url.Action("Delegacion_Mujer", "Expediente")',
+                                        url2 = '@Url.Action("DetalleUsuaria", "Expediente")';
+                                    console.log("Value is " + value);
                                     $.ajax({
                                         type: "POST",
-                                        url: '@Url.Action("CrearCaso", "Expediente")',
+                                        url: (value == null) ? url1 : url2,
                                         data: { valorpersona: filaSeleccionada[0].PKPERSONA },
                                         async: true
                                     }).done(function (data) {
@@ -299,13 +310,13 @@
                     //<th>Egreso técnico</th>
                     //<th>CLAIS</th>
                     "columns": [
-                        { "data": "PKPERSONA", "name": "PKPERSONA", "autoWidth": true, "visible": false },
-                        { "data": "NOMBRE", "name": "NOMBRE", "autoWidth": true },
-                        { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
-                        { "data": "FECHA", "name": "FECHA", "autoWidth": true },
-                        { "data": "SERVICIO", "name": "SERVICIO", "autoWidth": true },
-                        { "data": "EGRESOTECNICO", "name": "EGRESOTECNICO", "autoWidth": true },
-                        { "data": "CLAIS", "name": "CLAIS", "autoWidth": true }
+                                        { "data": "PKPERSONA", "name": "PKPERSONA", "autoWidth": true, "visible": false },
+                                        { "data": "NOMBRE", "name": "NOMBRE", "autoWidth": true },
+                                        { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
+                                        { "data": "FECHA", "name": "FECHA", "autoWidth": true },
+                                        { "data": "SERVICIO", "name": "SERVICIO", "autoWidth": true },
+                                        { "data": "EGRESOTECNICO", "name": "EGRESOTECNICO", "autoWidth": true },
+                                        { "data": "CLAIS", "name": "CLAIS", "autoWidth": true }
 
                     ]
 
@@ -356,7 +367,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach (TBL_PERSONA expediente in Model)
+                            @foreach (SP_BUSCAR_EXPEDIENTE_CEEAM_Result expediente in Model)
                             {
                             <tr>
                                 <td>
@@ -365,21 +376,37 @@
                                 <td>
                                     @Html.Raw(expediente.VC_NOMBRE + " " + expediente.VC_APELLIDO1 + " " + expediente.VC_APELLIDO2)
                                 </td>
-                                <td>
-                                    @Html.Raw(expediente.VC_IDENTIFICACION)
-                                </td>
-                                <td>
-                                    @Html.Raw(expediente.VC_IDENTIFICACION)
-                                </td>
-                                <td>
-                                    @Html.Raw(expediente.VC_IDENTIFICACION)
-                                </td>
-                                <td>
-                                    @Html.Raw(expediente.VC_IDENTIFICACION)
-                                </td>
-                                <td>
-                                    @Html.Raw(expediente.VC_IDENTIFICACION)
-                                </td>
+                                <td>@Html.Raw(expediente.VC_IDENTIFICACION)</td>
+                                <td>@Html.Raw(expediente.DT_ULTIMAATENCION)</td>
+                                <td>@Html.Raw(expediente.VC_SERVICIO)</td>
+
+                                @{if (expediente.DT_EGRESO_TECNICO != null)
+                                {
+                                <text>
+                                    <td style="background-color:red;text-align:center"><span class="glyphicon glyphicon-alert" style="color:white"></span></td>
+                                </text> }
+                                else
+                                {
+                                <text>
+                                    <td style="text-align:center"><span class="glyphicon glyphicon-ok"></span></td>
+                                </text> }
+                                }
+
+                                @{if (expediente.VC_CASO_CLAIS != null)
+                                {
+                                <text>
+                                    <td style="background-color:red;text-align:center">
+                                        <span class="glyphicon glyphicon-alert" style="color:white"></span><span style="color:white; padding-left:3px;padding-right:3px;">@Html.Raw(expediente.VC_CASO_CLAIS)</span>
+                                    </td>
+                                </text>
+                                }
+                                else
+                                {
+                                <text>
+                                    <td style="text-align:center"></td>
+                                </text>
+                                }
+                                }
                             </tr>
                             }
                         </tbody>
@@ -394,8 +421,8 @@
             <br>
 
             <div class="row" style="margin-left: 10px">
-                <a href="#" id="btnCrearUsuariaAtencionComunidad" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Crear usuaria (atención en comunidad)</a>
-                <a href="#" class="btn btn-default btn-responsive" style="margin-left:1.2em;color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Crear usuaria</a>
+                <a href="#" id="btnCrearUsuariaAtencionComunidad" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Crear usuaria</a>
+                @*    <a href="#" class="btn btn-default btn-responsive" style="margin-left:1.2em;color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Crear usuaria</a>*@
             </div>
             }
             }
