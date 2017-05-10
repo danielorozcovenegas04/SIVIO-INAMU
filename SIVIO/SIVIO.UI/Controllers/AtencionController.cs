@@ -13,6 +13,8 @@ namespace SIVIO.UI.Controllers
     {
 
         ExpedienteModel _modelExpediente = new ExpedienteModel();
+        CatalogosModel _modelCatalogo = new CatalogosModel();
+
         // GET: Atenciones
         public ActionResult Index()
         {
@@ -24,8 +26,25 @@ namespace SIVIO.UI.Controllers
         public ActionResult GridAtenciones()
         {
 
-                return View(_modelExpediente.ListarAtencionesGrid());
+            return View(_modelExpediente.ListarAtencionesGrid());
 
+        }
+
+        [Authorize]
+        public ActionResult CrearAtencionesPsicologiaAdultas(int persona)
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult ListarCatalogosPsicologiaAdulta()
+        {
+            List<int> catalogos = new List<int>()
+            {
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoAsesoriaAdultas,
+                (int)Utilitarios.Enumerados.EnumCatalogos.TipoDeGrupoIntervencionGrupal
+            };
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_modelCatalogo.llenarListaCatalogos(catalogos)), JsonRequestBehavior.AllowGet);
         }
     }
 }

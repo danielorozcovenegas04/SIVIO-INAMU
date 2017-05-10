@@ -1,0 +1,188 @@
+﻿
+<style>
+    .pad {
+        padding-bottom: 3px;
+        margin-bottom: 3px;
+    }
+
+    .parsley-required {
+        color: red;
+        font-weight: bold;
+    }
+
+    .checkNoSpace {
+        padding-left: 0px !important;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: white;
+    }
+
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: white;
+        opacity: 1;
+    }
+
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: white;
+        opacity: 1;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: white;
+    }
+</style>
+
+<style>
+    input, select, textarea {
+        max-width: 100%;
+        padding: 4px;
+    }
+
+    input {
+        background-color: blue;
+    }
+</style>
+
+<script type="text/javascript">
+    function llenarComboBox(nombreCatalogo, nombreComboBox, valorComboBox) {
+        return function (respuesta) {
+            var catalogo = respuesta[nombreCatalogo];
+            if (catalogo.Mensaje.TipoMensaje === 1) {
+                $.each(catalogo.Catalogo, function (key, value) {
+                    $(nombreComboBox).append($("<option/>", {
+                        value: value.PK_VALORCATALOGO,
+                        text: value.VC_VALOR1
+                    }));
+
+                });
+
+                if (valorComboBox) {
+                    $(nombreComboBox).val(valorComboBox);
+                }
+            } else {
+                $("#contenedorBotones").show();
+                $("#contenedorEspera").hide();
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error");
+                $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+            }
+
+            return respuesta
+
+        }
+    }
+
+    function comboMultiple(nombreComboBox, placeholder) {
+        return () => {
+            $(nombreComboBox).selectize({
+                plugins:  ['remove_button'],
+                sortField: 'text',
+                create: false,
+                placeholder: placeholder
+            });
+        }
+    }
+
+    $(document).ready(function () {
+
+        var instMensajes = $('[data-remodal-id=modalDialogo]').remodal();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ListarCatalogosPsicologiaAdulta")',
+            dataType: "json",
+            contentType: "application/json",
+            processData: true,
+            error: function (xhr, ajaxOptions, error) {
+                $("#contenedorBotones").show();
+                $("#contenedorEspera").hide();
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error al conectarse");
+                $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+
+            }
+        }).then(function (resultado) {
+            var respuesta = JSON.parse(resultado);
+            return respuesta;
+        }).then(llenarComboBox("Tipo de Asesoria para Atención Psicologica", "#cmbTipoAsesoria"))
+        .then(llenarComboBox("Tipo de Grupo para intervencion de Proceso Grupal", "#cmbTipoGrupo"))
+        .then(comboMultiple("#cmbTipoAsesoria", "Seleccione multiples"))
+        .then(function (respuesta) {
+            $("#cmbTipoAsesoria").change(function () {
+                var numeroADiv = {
+                    773: "#planDeSeguridad",
+                    780: "#procesoGrupal"
+                };
+
+                var habilitados = $("#cmbTipoAsesoria").val()
+
+                $.each(numeroADiv, function(numero, div) {
+                    if (habilitados != undefined && habilitados.indexOf(numero) > -1) {
+                        console.log(numero, habilitados);
+                        $(div).show();
+                    } else {
+                        $(div).hide();
+                    }
+                });
+                console.log(habilitados);
+            })
+            return respuesta
+        })
+
+    });
+
+</script>
+
+<div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+
+    <h2 style="padding-left:15px">Atención psicología de adultas</h2>
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12 form-group">
+            <label>Objetivo de la sesión</label>
+            <textarea class="form-control" id="txtNombreHijo" type="text" required=""></textarea>
+        </div>
+
+        <div class="col-md-6 col-xs-12 form-group">
+            <label>Plan de la intervención:</label>
+            <textarea class="form-control" id="txtNombreHijo" type="text" required=""></textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12 form-group">
+            <label>Tipo de asesoría:</label>
+            <select id="cmbTipoAsesoria" class="" multiple="multiple">
+                @*Catalogo 73*@
+            </select>
+        </div>
+    </div>
+
+    <div id="planDeSeguridad" hidden="true">
+        <h3>Plan de seguridad</h3>
+        <div class="row">
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Objetivo de la sesión</label>
+                <textarea class="form-control" id="txtNombreHijo" type="text" required=""></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div id="procesoGrupal" hidden="true">
+        <h3>Plan de seguridad</h3>
+        <div class="col-md-6 col-xs-12 form-group">
+            <label>Fecha de realización:</label>
+            <input type="date" class="form-control" id="dtFechaProcesoGrupal">
+        </div>
+        <div class="col-md-6 col-xs-12 form-group">
+            <label>Tipo de grupo:</label>
+            <select id="cmbTipoGrupo" class="form-control">
+                @* Catalogo 95 *@
+            </select>
+        </div>
+    </div>
+</div>
