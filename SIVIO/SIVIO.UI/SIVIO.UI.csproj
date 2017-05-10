@@ -203,8 +203,10 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AtencionController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CatalogosController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\ExpedienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
@@ -364,6 +366,23 @@
     <Content Include="Views\Expediente\CrearUsuaria_DatosAdministrativos.cshtml" />
     <Content Include="Views\Expediente\MenuExpediente.cshtml" />
     <Content Include="Views\Expediente\Delegacion_Mujer.cshtml" />
+    <Content Include="Views\Atenciones\AntencionesPsicologiaAdultas.cshtml" />
+    <Content Include="Views\Atenciones\AntencionesPsicologiaNinosNinas.cshtml" />
+    <Content Include="Views\Atenciones\Atenciones.cshtml" />
+    <Content Include="Views\Atenciones\AtencionesInterdisciplinaria.cshtml" />
+    <Content Include="Views\Atenciones\AtencionesLegal.cshtml" />
+    <Content Include="Views\Atenciones\AtencionesProgramaFormacionCapacitacionTecnica.cshtml" />
+    <Content Include="Views\Atenciones\AtencionesTrabajoSocial.cshtml" />
+    <Content Include="Views\Atenciones\GridAtenciones.cshtml" />
+    <Content Include="Views\Expediente\BusquedaExpedienteCoavif.cshtml" />
+    <Content Include="Views\Expediente\BusquedaExpedienteDelegacion.cshtml" />
+    <Content Include="Views\Expediente\ConsultaPersona.cshtml" />
+    <Content Include="Views\Expediente\CrearCasoAtenciones.cshtml" />
+    <Content Include="Views\Expediente\CrearCasoHijosHijas.cshtml" />
+    <Content Include="Views\Expediente\CrearCasoHistoriaViolencia.cshtml" />
+    <Content Include="Views\Expediente\CrearCasoIngresoEgreso.cshtml" />
+    <Content Include="Views\Expediente\CrearCasoPerfilUsuaria.cshtml" />
+    <Content Include="Views\Expediente\CrearCasoSeguimientos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
