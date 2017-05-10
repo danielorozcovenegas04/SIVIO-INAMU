@@ -104,6 +104,7 @@
             .then(llenarComboBox("Situación de Violencia Psicológica", "#cmbViolenciaPsicologica"))
             .then(llenarComboBox("Situación de Violencia Sexual", "#cmbViolenciaSexual"))
             .then(llenarComboBox("Situación de Violencia Patrimonial", "#cmbViolenciaPatrimonial"))
+            .then(llenarComboBox("Pueblo Indígena", "#cmbTerritorios"))
 
             //.then(llenarComboBox("Tipo de Respuesta Si o No que incluye la opción \"No especificado\"", "#cmbRespuestaSiNosponible"))
             .then(comboMultiple("#cmbDiscapacidad"))
@@ -424,8 +425,9 @@
             @* Primera pestaña *@
             <div class="row" id="tabPerfilUsuaria">
 
-                <form id="formPersona" method="post"> @* Form de TBL_Persona *@
-                    
+                <form id="formPersona" method="post">
+                    @* Form de TBL_Persona *@
+
                     <div class="col-xs-4 form-group">
                         <label>Documento de identificación</label>
                         <input class="form-control" id="txtIdentificacion" name="VC_IDENTIFICACION" type="text" required="">
@@ -498,23 +500,9 @@
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Territorio</label><br>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                @* ESTO ES TEMPORAL *@
-                                <select id="cmbTerritorio" class="form-control" name="FK_PUEBLOINDIGENA">
-                                    <option selected disabled>Seleccione una opcion</option>
-                                    <option value="89">Ninguno</option>
-                                    <option value="90">Cabécar</option>
-                                    <option value="91">Maleku</option>
-                                    <option value="92">Bribrí</option>
-                                    <option value="93">Boruca</option>
-                                    <option value="94">Chorotega</option>
-                                    <option value="95">Huetar</option>
-                                    <option value="96">Ngöbe</option>
-                                    <option value="97">Teribe</option>
-                                </select>
-                            </div>
-                        </div>
+                        <select id="cmbTerritorios" class="form-control" name="FK_PUEBLOINDIGENA">
+                            <option selected disabled>Seleccione una opcion</option>
+                        </select>
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>Comunidad (Campo pendiente)</label><br>
@@ -561,7 +549,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 @* ESTO ES TEMPORAL *@
-                                <select id="cmbTerritorio" class="form-control" name="FK_CONDICIONASEGURAMIENTO">
+                                <select id="cmbCondicionAseguramiento" class="form-control" name="FK_CONDICIONASEGURAMIENTO">
                                     <option selected disabled>Seleccione una opcion</option>
                                     <option value="1">Directa</option>
                                     <option value="2">Familiar</option>
@@ -596,7 +584,7 @@
                     <input type="hidden" name="FK_DISTRITOPROCEDENCIA" value="1" />
                     <input type="hidden" name="FK_ESTADOEMBARAZO" value="1" />
                     <input type="hidden" name="FK_CONDICIONSALUD" value="1" />
-                    
+
                 </form>
                 <form id="formLaboral" method="post">
                     <div class="col-xs-4 form-group">
@@ -623,17 +611,19 @@
                     </div>
 
                     <input type="hidden" name="VC_OBSERVACIONES" value="ninguna" />
-                    
+
                 </form>
 
-                <form id="formDispacidades" method="post"> @* Form para TBL_PERSONA_CONDICIONESPECIAL *@
+                <form id="formDispacidades" method="post">
+                    @* Form para TBL_PERSONA_CONDICIONESPECIAL *@
                     <div class="col-xs-4 form-group">
                         <label>Discapacidades:</label><br>
-                        <select id="cmbDiscapacidad" class="form-control" name="FK_CONDICIONESPECIAL" multiple></select>     
+                        <select id="cmbDiscapacidad" class="form-control" name="FK_CONDICIONESPECIAL" multiple></select>
                     </div>
                 </form>
 
-                <form id="formAdicciones" method="post"> @* Form para TBL_ADICCIONES *@
+                <form id="formAdicciones" method="post">
+                    @* Form para TBL_ADICCIONES *@
                     <div class="col-xs-4 form-group">
                         <label>Adicciones</label><br>
                         <select id="cmbAdicciones" class="form-control" name="FK_TIPOADICCION" multiple></select>
@@ -644,83 +634,83 @@
                 @* Columna intermedia*@
                 <div class="col-xs-9 form-group">
                     <br><h4>Redes o recursos de apoyo con los que cuenta la usuaria (Esta parte está pendiente)</h4>
-                @*Redes de apoyo*@
-                <div class="row">
-                    <div class="col-md-12">
-                        <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
-                            <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
-                            <thead>
-                                <tr>
-                                    <th>PK_REDAPOYO</th>
-                                    <th>FK_INSTITUCION</th>
-                                    <th>FK_TIPORED</th>
-                                    <th>Nombre</th>
-                                    <th>Relacion</th>
-                                    <th>Telefono</th>
-                                    <th>Tipo de Red</th>
-                                    <th>Institución</th>
+                    @*Redes de apoyo*@
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table id="tblRedesApoyo" class="display table-bordered" cellspacing="0" style="width: 100%">
+                                <caption><div class="comunForm" style="text-align: center; color: #17adc1; border-color: #17adc1 !important;"><i class="fa fa-phone" style="margin-right: 2px;"></i>Redes de Apoyo</div></caption>
+                                <thead>
+                                    <tr>
+                                        <th>PK_REDAPOYO</th>
+                                        <th>FK_INSTITUCION</th>
+                                        <th>FK_TIPORED</th>
+                                        <th>Nombre</th>
+                                        <th>Relacion</th>
+                                        <th>Telefono</th>
+                                        <th>Tipo de Red</th>
+                                        <th>Institución</th>
 
 
-                                </tr>
-                            </thead>
-                        </table>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
-                </div>
-                <div class="row comunForm" id="frmEditorRedesApoyo">
+                    <div class="row comunForm" id="frmEditorRedesApoyo">
 
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-xs-9"></div>
-                            <div class="col-xs-3">
-                                <button class="botonCerrar danger" id="btnOcultarCampoRedApoyo">
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="col-md-6 form-group">
-                                <label>Tipo</label>
-                                <select id="cmdTipoRedApoyo" class="form-control redApoyo"></select>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Nombre</label>
-                                <input class="form-control redApoyo" placeholder="Nombre" id="txtNombreRedApoyo" type="text" required="">
-                            </div>
-
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 form-group" id="contenedorInstitucion">
-                                <label>Institución</label>
-                                <select id="cmdInstitucionRedApoyo" class="form-control redApoyo"></select>
-                            </div>
-                            <div class="col-md-6 form-group" id="contenedorRelacion">
-                                <label>Relación</label>
-                                <input class="form-control redApoyo" placeholder="Relación" id="txtRelacionRedApoyo" type="text" required="">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>Teléfono</label>
-                                <input class="form-control redApoyo" placeholder="Teléfono" id="txtTelefonoRedApoyo" type="text" required="">
-                            </div>
-                        </div>
-                        @*<div class="row" style="text-align:center">
-                                <div class="col-md-12">
-                                    <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Guardar Red</button>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-xs-9"></div>
+                                <div class="col-xs-3">
+                                    <button class="botonCerrar danger" id="btnOcultarCampoRedApoyo">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
                                 </div>
-                            </div>*@
-                        <div class="row">
-                            <div class="col-md-12" style="text-align: center">
-                                <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-6 form-group">
+                                    <label>Tipo</label>
+                                    <select id="cmdTipoRedApoyo" class="form-control redApoyo"></select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Nombre</label>
+                                    <input class="form-control redApoyo" placeholder="Nombre" id="txtNombreRedApoyo" type="text" required="">
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 form-group" id="contenedorInstitucion">
+                                    <label>Institución</label>
+                                    <select id="cmdInstitucionRedApoyo" class="form-control redApoyo"></select>
+                                </div>
+                                <div class="col-md-6 form-group" id="contenedorRelacion">
+                                    <label>Relación</label>
+                                    <input class="form-control redApoyo" placeholder="Relación" id="txtRelacionRedApoyo" type="text" required="">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Teléfono</label>
+                                    <input class="form-control redApoyo" placeholder="Teléfono" id="txtTelefonoRedApoyo" type="text" required="">
+                                </div>
+                            </div>
+                            @*<div class="row" style="text-align:center">
+                                    <div class="col-md-12">
+                                        <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="display: block; color: white; background-color: #368DE9; border-color: #368DE9;">Guardar Red</button>
+                                    </div>
+                                </div>*@
+                            <div class="row">
+                                <div class="col-md-12" style="text-align: center">
+                                    <button type="button" id="btnGuardarRedApoyo" class="btn btn-default btn-responsive" style="color: white; background-color: #ff471a; border-color: #ff471a; margin-bottom: 1px">Guardar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
 
-                
 
-                
+
+
             </div>
         </div>
 
@@ -728,7 +718,8 @@
         <div id="tabHistoriaViolencia" class="tab-pane fade" style="padding:10px">
             <h3>Historia de violencia</h3><br>
             <div class="row" id="tabHIstoriaViolencia">
-                <form id="formAgresor" method="post"> @* Form para TBL_AGRESOR *@
+                <form id="formAgresor" method="post">
+                    @* Form para TBL_AGRESOR *@
                     <div class="col-xs-4 form-group">
                         <label>Nombre persona agresora</label><br>
                         <input class="form-control" id="txtNombre2" type="text" name="VC_NOMBRE" required="">
@@ -844,7 +835,8 @@
                     <input type="hidden" name="VC_SEDEJUDICIALDENUNCIA" value="1" />
                 </form>
 
-                <form id="formAgresion" method="post"> @* Form para TBL_AGRESION *@
+                <form id="formAgresion" method="post">
+                    @* Form para TBL_AGRESION *@
                     <div class="col-xs-4 form-group">
                         <label>Fecha de la agresión</label>
                         <input class="form-control" id="txtTiempoAgresion" type="date" name="DT_FECHAAGRESION" required="">
@@ -855,7 +847,8 @@
                     <input type="hidden" name="TXT_RELATO" value="Nada" />
                 </form>
 
-                <form id="formAgresorMotivoRegreso" method="post"> @* Form para TBL_AGRESOR_MOTIVO_REGRESO *@
+                <form id="formAgresorMotivoRegreso" method="post">
+                    @* Form para TBL_AGRESOR_MOTIVO_REGRESO *@
                     <div class="col-xs-4 form-group">
                         <label>Motivo para regresar</label>
                         <div class="row">
@@ -868,14 +861,16 @@
                     </div>
                 </form>
 
-                <form id="formImpactoViolencia" method="post"> @* Form para TBL_AGRESION_IMPACTO_VIOLENCIA *@
+                <form id="formImpactoViolencia" method="post">
+                    @* Form para TBL_AGRESION_IMPACTO_VIOLENCIA *@
                     <div class="col-xs-4 form-group">
                         <label>Impacto de la violencia</label>
                         <select id="cmbImpactoViolencia" name="FK_IMPACTOVIOLENCIA" class="form-control" multiple></select>
                     </div>
                 </form>
 
-                <form id="formAgresionAtencionMedica" method="post"> @* Form para TBL_AGRESION_ATENCION_MEDICA *@
+                <form id="formAgresionAtencionMedica" method="post">
+                    @* Form para TBL_AGRESION_ATENCION_MEDICA *@
                     <div class="col-xs-4 form-group">
                         <label>Atención médica producto de la agresión</label><br>
                         <div class="row">
@@ -888,7 +883,8 @@
                     </div>
                 </form>
 
-                <form id="formAgresionViolencia" method="post"> @* Form para TBL_AGRESION_VIOLENCIA *@
+                <form id="formAgresionViolencia" method="post">
+                    @* Form para TBL_AGRESION_VIOLENCIA *@
                     <div class="col-xs-4 form-group">
                         <label>Tipo de violencia</label><br>
                         <div class="row">
@@ -909,11 +905,12 @@
                             </div>
                         </div>
                     </div>
-                   
+
                     <input type="hidden" name="VC_OBSERVACIONES" value="ninguna" />
                 </form>
 
-                <form id="formAgresionCategoriaRiesgo" method="post"> @* Form para TBL_AGRESION_CATEGORIA_RIESGO *@
+                <form id="formAgresionCategoriaRiesgo" method="post">
+                    @* Form para TBL_AGRESION_CATEGORIA_RIESGO *@
                     <div class="col-xs-4 form-group">
                         <label>Valoración de riesgo</label>
                         <div class="row">
@@ -924,11 +921,12 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <input type="hidden" name="FK_OBSERVACION" value="ninguna" />
                 </form>
 
-                <form id="formAdiccionesAgresor" method="post"> @* Form para TBL_AGRESOR_ADICCIONES *@
+                <form id="formAdiccionesAgresor" method="post">
+                    @* Form para TBL_AGRESOR_ADICCIONES *@
                     <div class="col-xs-4 form-group">
                         <label>Adicciones de la persona agresora</label><br>
                         <select id="cmbAdiccionesHV" name="FK_ADICCION" class="form-control" multiple></select>

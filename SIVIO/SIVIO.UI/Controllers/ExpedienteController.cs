@@ -3,7 +3,6 @@ using SIVIO.InamuComun;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Data.Entity.Validation;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
@@ -41,7 +40,7 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult CrearCaso(string ValorPersona)
         {
-           // bool estadoSesion = true;
+            // bool estadoSesion = true;
             /* if (ComprobarPermisosAcccion(out estadoSesion))
             {
                 if (String.IsNullOrEmpty(pk_persona))
@@ -60,22 +59,22 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
             }
 
-             TBL_PERSONA persona = _modelExpediente.ObtenerPersona(ValorPersona);
-            
+            TBL_PERSONA persona = _modelExpediente.ObtenerPersona(ValorPersona);
+
             return View(persona);
 
-            
-           /* else if (!estadoSesion)
-            {
-                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
-            }
-            else
-            {
-                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
-            }*/
-            
+
+            /* else if (!estadoSesion)
+             {
+                 return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
+             }
+             else
+             {
+                 return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+             }*/
+
         }
-        
+
         [AllowAnonymous]
         public JsonResult ListarCatalogosCrearCaso()
         {
@@ -110,12 +109,13 @@ namespace SIVIO.UI.Controllers
                 (int)Utilitarios.Enumerados.EnumCatalogos.SituacionViolenciaSexual,
                 (int)Utilitarios.Enumerados.EnumCatalogos.SituacionViolenciaPatrimonial,
                 (int)Utilitarios.Enumerados.EnumCatalogos.RespuestaSiNosponible,
+                (int)Utilitarios.Enumerados.EnumCatalogos.PuebloIndigena,
 
             };
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_modelCatalogos.llenarListaCatalogos(catalogos)), JsonRequestBehavior.AllowGet);
         }
 
-       
+
         public ActionResult DetalleUsuaria()
         {
             return View();
@@ -123,13 +123,15 @@ namespace SIVIO.UI.Controllers
 
         [Authorize]
         public ActionResult CrearUsuariaAtencionComunidadPost(
-            TBL_PERSONA persona,            TBL_AGRESOR agresor,
-            TBL_LABORAL laboral,            TBL_ADICCIONES adicciones,
-            TBL_PERSONA_RED_APOYO apoyo1,   TBL_AGRESION agresion,
-            TBL_AGRESOR_MOTIVO_REGRESO agresorMotivoRegreso,    TBL_AGRESION_ATENCION_MEDICA agresionAtencionMedica,
-            TBL_AGRESION_VIOLENCIA agresionViolencia,           TBL_AGRESOR_ADICCIONES agresorAdicciones,
-            TBL_AGRESION_IMPACTO_VIOLENCIA impactoViolencia,    TBL_PERSONA_CONDICIONESPECIAL dispacidades) {
-            try {
+            TBL_PERSONA persona, TBL_AGRESOR agresor,
+            TBL_LABORAL laboral, TBL_ADICCIONES adicciones,
+            TBL_PERSONA_RED_APOYO apoyo1, TBL_AGRESION agresion,
+            TBL_AGRESOR_MOTIVO_REGRESO agresorMotivoRegreso, TBL_AGRESION_ATENCION_MEDICA agresionAtencionMedica,
+            TBL_AGRESION_VIOLENCIA agresionViolencia, TBL_AGRESOR_ADICCIONES agresorAdicciones,
+            TBL_AGRESION_IMPACTO_VIOLENCIA impactoViolencia, TBL_PERSONA_CONDICIONESPECIAL dispacidades)
+        {
+            try
+            {
                 var listaAgresor = new List<TBL_AGRESOR>();
                 listaAgresor.Add(agresor);
                 persona.TBL_AGRESOR = listaAgresor;
@@ -185,7 +187,9 @@ namespace SIVIO.UI.Controllers
                     apoyo1, agresion, agresorMotivoRegreso, agresionAtencionMedica, agresionViolencia,
                     agresorAdicciones, impactoViolencia, dispacidades);
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "true" }));
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(new { success = "false", error = ex.ToString() }));
             }
 
@@ -193,13 +197,19 @@ namespace SIVIO.UI.Controllers
 
 
         [Authorize]
-        public ActionResult CrearUsuariaAtencionComunidad() {
+        public ActionResult CrearUsuariaAtencionComunidad()
+        {
             bool estadoSesion = true;
-            if (ComprobarPermisosAcccion(out estadoSesion)) {
+            if (ComprobarPermisosAcccion(out estadoSesion))
+            {
                 return View((int)System.Web.HttpContext.Current.Session["tipoServicio"]);
-            } else if (!estadoSesion) {
+            }
+            else if (!estadoSesion)
+            {
                 return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
-            } else {
+            }
+            else
+            {
                 return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
             }
         }
@@ -264,26 +274,11 @@ namespace SIVIO.UI.Controllers
                 return View(viewName: "~/Views/Shared/Errores/Error.cshtml");
             }
             */
-            return View(_modelExpediente); 
+            return View(_modelExpediente);
         }
 
         [Authorize]
-        public ActionResult BusquedaExpediente(string palabra) {
-            bool estadoSesion = true;
-            if (ComprobarPermisosAcccion(out estadoSesion)) {
-                return View(_modelExpediente.ListarPersonas(palabra));
-
-            } else if (!estadoSesion) {
-                return View(viewName: "~/Views/Shared/Errores/Sesion.cshtml");
-            } else {
-                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
-            }
-        }
-
-
-
-        [Authorize]
-        public ActionResult BusquedaExpedienteDelegacion (string palabra)
+        public ActionResult BusquedaExpediente(string palabra)
         {
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion))
@@ -306,7 +301,7 @@ namespace SIVIO.UI.Controllers
             //bool estadoSesion = true;
             //if (ComprobarPermisosAcccion(out estadoSesion))
             //{
-                return View(_modelExpediente.BuscarExpedienteCEAAM(palabra));
+            return View(_modelExpediente.BuscarExpedienteCEAAM(palabra));
 
             //}
             //else if (!estadoSesion)
@@ -342,7 +337,7 @@ namespace SIVIO.UI.Controllers
         {
             return View(_modelExpediente.ListarRegistros(persona));
             bool estadoSesion = true;
-            if(ComprobarPermisosAcccion(out estadoSesion))
+            if (ComprobarPermisosAcccion(out estadoSesion))
             {
                 return View(_modelExpediente.ListarRegistros(persona));
             }
@@ -372,13 +367,15 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult BusquedaExpedienteCoavif(string palabra)
         {
-            return View(_modelExpediente.ListarPersonas(palabra));            
+            return View(_modelExpediente.ListarPersonas(palabra));
         }
 
         [AllowAnonymous]
-       public JsonResult CargarPersonas() {
+        public JsonResult CargarPersonas()
+        {
             dynamic objeto = new ExpandoObject();
-            using (var entidades = new SIVIOEntities()) {
+            using (var entidades = new SIVIOEntities())
+            {
                 try
                 {
                     objeto.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
@@ -391,7 +388,8 @@ namespace SIVIO.UI.Controllers
                     return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objeto), JsonRequestBehavior.AllowGet);
 
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     objeto.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al cargar persona", string.Empty);
                     return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objeto), JsonRequestBehavior.AllowGet);
                 }
@@ -415,13 +413,11 @@ namespace SIVIO.UI.Controllers
                     TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
                 objetoRetorno.CatalogoIntitucion = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.PersonaInstucionRefiere).
                     TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
-                objetoRetorno.CatalogoEmbarazo = _modelCatalogos.ObtenerCatalogoPorId((int)Utilitarios.Enumerados.EnumCatalogos.Embarazo).
-                    TBL_VALOR_CATALOGO.Select(m => new { m.PK_VALORCATALOGO, m.VC_VALOR1, m.VC_VALOR2 });
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objetoRetorno), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
-                objetoRetorno.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Error,"Error al cargar catalogos", string.Empty);
+                objetoRetorno.Mensaje = new Mensaje((int)Mensaje.CatTipoMensaje.Error, "Error al cargar catalogos", string.Empty);
                 return Json(Newtonsoft.Json.JsonConvert.SerializeObject(objetoRetorno), JsonRequestBehavior.AllowGet);
             }
         }
@@ -439,8 +435,7 @@ namespace SIVIO.UI.Controllers
                 var user = HttpContext.User.Identity.Name;
                 TBL_USUARIO usuario = entidades.TBL_USUARIO.Where(m => m.VC_USUARIO == user).First();
 
-                DateTime fechaInicio = DateTime.Parse(fecha + " " + hora);
-                //DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime fechaInicio = DateTime.ParseExact(fecha + hora, "dd/MM/yyyyHH:mm", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime fechaFin = DateTime.Now;
 
                 int idPersona;
@@ -453,7 +448,7 @@ namespace SIVIO.UI.Controllers
                 registro.FK_USUARIOREGISTRA = usuario.PK_USUARIO;
                 registro.DT_FECHAINICIO = fechaInicio;
                 registro.DT_FECHAFIN = fechaFin;
-                registro.FK_TIPOSERVICIO = usuario.TBL_ROL_USUARIO.First().TBL_ROL.FK_TIPOSERVICIO;//mete 640 en vez de 639
+                registro.FK_TIPOSERVICIO = usuario.TBL_ROL_USUARIO.First().TBL_ROL.PK_ROL;
                 registro.FK_TIPOREGISTRO = 549;
                 return _modelExpediente.InsertarDatosAdministrativos(registro);
             }
@@ -540,7 +535,7 @@ namespace SIVIO.UI.Controllers
                         r.TBL_USUARIO.VC_APELLIDO1 = u.VC_APELLIDO1;
                         r.TBL_USUARIO.VC_APELLIDO2 = u.VC_APELLIDO2;
                         r.TBL_USUARIO.VC_NOMBRE = u.VC_NOMBRE;
-                        
+
                     }
                 }
                 foreach (var p in listaPersonas)
@@ -556,17 +551,16 @@ namespace SIVIO.UI.Controllers
                     }
 
                 }
-                r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
-                r.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
-              
-               /* foreach (var c in listaCatalogo)
+                foreach (var c in listaCatalogo)
                 {
-//if (r.TBL_VALOR_CATALOGO==null) {
-                        
-                       
-                  //  }
-                    if (r.FK_TIPOSERVICIO == c.FK_CATALOGO) {
-                       
+                    //if (r.TBL_VALOR_CATALOGO==null) {
+
+
+                    //  }
+                    if (r.FK_TIPOSERVICIO == c.FK_CATALOGO)
+                    {
+                        r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
+                        r.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
                         r.TBL_VALOR_CATALOGO.FK_CATALOGO = c.FK_CATALOGO;
                         r.TBL_VALOR_CATALOGO.VC_VALOR1 = c.VC_VALOR1;
                         r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "0";
@@ -574,42 +568,36 @@ namespace SIVIO.UI.Controllers
                     }
                     if (r.FK_TIPOREGISTRO == c.FK_CATALOGO)
                     {
-                       
+
                         r.TBL_VALOR_CATALOGO1.FK_CATALOGO = c.FK_CATALOGO;
                         r.TBL_VALOR_CATALOGO1.VC_VALOR1 = c.VC_VALOR1;
-                        
+
                     }
-                }*/
+                }
                 foreach (var c in listaConsulta)
                 {
-                   if (r.PK_REGISTRO==c.FK_REGISTRO ) {
-                        r.TBL_VALOR_CATALOGO.VC_VALOR1 = _modelExpediente.Tipo(c.FK_TIPOCEEAMREINGRESO.Value);
-                        r.TBL_VALOR_CATALOGO1.VC_VALOR1= _modelExpediente.Tipo(r.FK_TIPOREGISTRO);
+                    if (r.PK_REGISTRO == c.FK_REGISTRO)
+                    {
                         r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
                     }
                 }
                 foreach (var a in listaAtencion)
                 {
-                    if (r.PK_REGISTRO == a.FK_REGISTRO )
+                    if (r.PK_REGISTRO == a.FK_REGISTRO)
                     {
-                        r.TBL_VALOR_CATALOGO.VC_VALOR1 = _modelExpediente.Tipo(a.FK_TIPOATENCION);
-                        r.TBL_VALOR_CATALOGO1.VC_VALOR1 = _modelExpediente.Tipo(r.FK_TIPOREGISTRO);
                         r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
                     }
                 }
-                if (r.TBL_VALOR_CATALOGO1.VC_VALOR2 == null) {
-                    r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "0";
-                }
                 //SOLO PARA PRUEBAS ELIMINAR
-              /* if (t == 0)
-                {
-                    r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
-                }
-                if ( t == 1)
-                {
-                    r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
-                }
-                t++;*/
+                /* if (t == 0)
+                  {
+                      r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
+                  }
+                  if ( t == 1)
+                  {
+                      r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
+                  }
+                  t++;*/
                 //SOLO PARA PRUEBAS ELIMINAR
             }
             return View(listaRegistro);
@@ -619,7 +607,7 @@ namespace SIVIO.UI.Controllers
         public ActionResult ConsultaPersona(string persona)
         {
             int t = 0;
-           // string persona = "Juliana Trump Beckenbauer";
+            // string persona = "Juliana Trump Beckenbauer";
             var listaPersonas = _modelExpediente.ListarPersonas();
             var listaUsuarios = _modelExpediente.ListarUSuarios();
             var listaConsulta = _modelExpediente.ListarConsultas();
@@ -627,26 +615,32 @@ namespace SIVIO.UI.Controllers
             var listaCatalogo = _modelExpediente.ListarCatalogo();
             var listaAtencion = _modelExpediente.ListarAtencion();
             var infopersona = new List<TBL_REGISTRO>();
-            foreach (var p in listaPersonas) {
+            foreach (var p in listaPersonas)
+            {
                 var nombre = p.VC_NOMBRE + " " + p.VC_APELLIDO1 + " " + p.VC_APELLIDO2;
-                if (persona.CompareTo(nombre) == 0) {
-                    foreach (var r in listaRegistro) {
-                        if (r.TBL_PERSONA == null) {
+                if (persona.CompareTo(nombre) == 0)
+                {
+                    foreach (var r in listaRegistro)
+                    {
+                        if (r.TBL_PERSONA == null)
+                        {
                             r.TBL_PERSONA = new TBL_PERSONA();
                             r.TBL_PERSONA.VC_NOMBRE = p.VC_NOMBRE;
                             r.TBL_PERSONA.VC_APELLIDO1 = p.VC_APELLIDO1;
                             r.TBL_PERSONA.VC_APELLIDO2 = p.VC_APELLIDO2;
-                            ViewBag.NombrePersona= p.VC_NOMBRE + " " + p.VC_APELLIDO1 + " " + p.VC_APELLIDO2;
+                            ViewBag.NombrePersona = p.VC_NOMBRE + " " + p.VC_APELLIDO1 + " " + p.VC_APELLIDO2;
                             ViewBag.IdPersona = p.VC_IDENTIFICACION;
                             ViewBag.Expediente = p.PK_PERSONA;
                         }
-                        if (r.FK_PERSONA == p.PK_PERSONA) {
+                        if (r.FK_PERSONA == p.PK_PERSONA)
+                        {
                             infopersona.Add(r);
                         }
                     }
                 }
             }
-            foreach (var ip in infopersona) {
+            foreach (var ip in infopersona)
+            {
                 foreach (var u in listaUsuarios)
                 {
                     if (ip.FK_USUARIOREGISTRA == u.PK_USUARIO)
@@ -706,62 +700,10 @@ namespace SIVIO.UI.Controllers
             }
             return View(infopersona);
         }
-
-        [AllowAnonymous]
-        public Mensaje IsertarDatosUsuaria(FormCollection datos)
-        {
-            var entidades = new SIVIOEntities();
-            TBL_PERSONA persona = new TBL_PERSONA();
-            TBL_TELEFONO tel = new TBL_TELEFONO();
-            persona.FK_ESCOLARIDAD = 367;
-            persona.FK_ESTADOCIVIL = 218;
-            persona.FK_CONDICIONASEGURAMIENTO = 736;
-            persona.FK_TIPOIDENTIFICACION = 2;
-            persona.FK_TIPOFAMILIA = 344;
-            persona.FK_TIPOVIVIENDA = 244;
-            persona.FK_ORIENTACIONSEXUAL = 552;
-            persona.FK_OCUPACION = 221;
-            persona.FK_GENERO = 76;
-
-            persona.PK_PERSONA = Int32.Parse(datos["Pk"]);
-            persona.VC_NOMBRE = datos["Nombre"];
-            persona.VC_APELLIDO1 = datos["Apellido1"];
-            persona.VC_APELLIDO2 = datos["Apellido2"];
-            if (datos["Nacionalidad"] != "")
-                persona.FK_NACIONALIDAD = Int32.Parse(datos["Nacionalidad"]);
-            if (datos["OtraNacionalidad"] != "")
-                persona.FK_NACIONALIDAD2 = Int32.Parse(datos["OtraNacionalidad"]);
-            persona.FK_CONDICIONMIGRATORIA = Int32.Parse(datos["CondicionMigratoria"]);
-            if (datos["NumeroHijos"] != "")
-                persona.I_HIJOS = Int32.Parse(datos["NumeroHijos"]);
-            if (datos["MayorDoce"] != "")
-                persona.I_HIJOSMAYORESDOCE = Int32.Parse(datos["MayorDoce"]);
-            persona.FK_DISTRITOPROCEDENCIA = Int32.Parse(datos["DistritoPersona"]);
-            persona.FK_CANTONPROCEDENCIA = Int32.Parse(datos["CantonPersona"]);
-            persona.FK_PROVINCIAPROCEDENCIA = Int32.Parse(datos["ProvinciaPersona"]);
-            persona.FK_ESTADOEMBARAZO = Int32.Parse(datos["Embarazo"]);
-            persona.FK_CONDICIONSALUD = Int32.Parse(datos["Discapacidades"]);
-            persona.VC_IDENTIFICACION = datos["Identificacion"];
-            if (datos["FechaNacimiento"] != "")
-            {
-                persona.DT_FECHANACIMIENTO = Convert.ToDateTime(datos["FechaNacimiento"]);
-                persona.B_CONOCEFECHANACIMIENTO = true;
-            }
-            if (datos["Edad"] != "")
-            {
-                persona.I_EDAD = Int32.Parse(datos["Edad"]);
-                persona.B_CONOCEFECHANACIMIENTO = false;
-            }
-            if (persona.PK_PERSONA == 0)
-                entidades.TBL_PERSONA.Add(persona);
-            else
-                entidades.Entry(persona).State = System.Data.Entity.EntityState.Modified;
-            entidades.SaveChanges();
-            return new Mensaje((int)Mensaje.CatTipoMensaje.Exitoso, string.Empty, string.Empty);
-        }
         #endregion
 
         #region Delegacion
+
         [HttpPost]
         public Mensaje CrearUsuaria_DatosUsuaria(TBL_PERSONA objDatosUsuaria)
         {
@@ -807,7 +749,7 @@ namespace SIVIO.UI.Controllers
         [Authorize]
         public ActionResult Delegacion_Mujer()
         {
-     
+
             return View();
         }
 
