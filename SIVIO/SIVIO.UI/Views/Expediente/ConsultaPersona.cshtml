@@ -263,9 +263,10 @@
                         
                         <th>Nombre de la usuaria</th>
                         <th>Identificación</th>
-                        <th>Fecha de atención</th>
+                        <th>Fecha de inicio de la atención</th>
+                        <th>Fecha de finalizacion de la atención</th>
                         <th>Estado de la atencion a la persona</th>
-                        <th>Administracion de caso</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -277,7 +278,8 @@
                         <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
                         <td>@Html.Raw(consulta.TBL_USUARIO.VC_USUARIO)</td>
                         <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
-                        @if(consulta.DT_FECHAINICIO!=null){
+                        <td>@Html.Raw(consulta.DT_FECHAFIN )</td>
+                        @if(consulta.DT_FECHAFIN!=null){
                             <td>Caso Cerrado</td>
                             
                         }else{
