@@ -71,6 +71,7 @@ namespace SIVIO.Utilitarios
             TipoServicio = 65,
             OrientacionSexual = 67, 
             TipoAsesoriaAdultas = 73,
+            TipoAtencion = 70,
             TipoIngresoCEAAM = 77,
             TipoEgresoCEAAM = 78,
             ValoracionRiesgo = 81,
