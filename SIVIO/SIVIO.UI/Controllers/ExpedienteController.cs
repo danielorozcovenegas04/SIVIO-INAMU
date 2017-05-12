@@ -116,9 +116,18 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult DetalleUsuaria(int pkUsuario)
+        public ActionResult DetalleUsuaria(string ValorPersona)
         {
-            return View(_modelExpediente.BuscarPersona(pkUsuario));
+
+            if (String.IsNullOrEmpty(ValorPersona))
+            {
+                return View(viewName: "~/Views/Shared/Errores/ErrorParcial.cshtml");
+            }
+
+            TBL_PERSONA persona = _modelExpediente.ObtenerPersona(ValorPersona);
+
+            return View(persona);
+            
         }
 
         [Authorize]

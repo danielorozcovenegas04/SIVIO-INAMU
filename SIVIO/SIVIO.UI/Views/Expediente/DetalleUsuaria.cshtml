@@ -1,168 +1,167 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
-@using SIVIO.Entidades
-@model List<TBL_PERSONA>
+@using SIVIO.Entidades;
+@model TBL_PERSONA
 
-    <style>
-        .jumbotron {
-            padding-left: 5px !important;
-            padding-right: 5px !important;
-        }
+<style>
+    .jumbotron {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
 
-        .container {
-            padding-left: 5px !important;
-            padding-right: 5px !important;
-        }
-    </style>
-    <script src="https://www.google.com/cloudprint/client/cpgadget.js">
-    </script>
-    <script type="text/javascript">
+    .container {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+</style>
+<script src="https://www.google.com/cloudprint/client/cpgadget.js">
+</script>
+<script type="text/javascript">
 
-        $(document).ready(function () {
-            $.LoadingOverlay("hide");
-            document.title = "SIVIO - Expediente";
-            $("#btnEnviarFormulario").click(function () {
-                $.LoadingOverlay("show");
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("Delegacion_Mujer", "Expediente")',
-                    async: true,
-                }).done(function (data) {
-                    $.LoadingOverlay("hide");
-                    $('#contendorFrames').html(data);
-                    $("#contenedorEspera").hide();
-                    $('#contendorFrames').fadeIn();
-                }).fail(function (exception) {
-                    $("#txtModalTitulo").css("color", "red");
-                    $("#txtModalTitulo").text("Error de Sistema");
-                    $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
-                    $("#contenedorEspera").hide();
-                    instMensajes.open();
-                    $.LoadingOverlay("hide");
-                });
+    $(document).ready(function () {
+        $.LoadingOverlay("hide");
+        document.title = "SIVIO - Expediente";
+        $("#btnEnviarFormulario").click(function () {
+            $.LoadingOverlay("show");
+            $.ajax({
+                type: "POST",
+                 url: '@Url.Action("Delegacion_Mujer", "Expediente")',
+                async: true,
+            }).done(function (data) {
+                $.LoadingOverlay("hide");
+                $('#contendorFrames').html(data);
+               $("#contenedorEspera").hide();
+                $('#contendorFrames').fadeIn();
+            }).fail(function (exception) {
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error de Sistema");
+                $("#txtModalContenido").text("Fallo al cargar la pantalla, contacte a la persona administradora de SIPAMU");
+                $("#contenedorEspera").hide();
+                instMensajes.open();
+                $.LoadingOverlay("hide");
             });
         });
-    </script>
-    <style>
-        .pad {
-            padding-bottom: 3px;
-            margin-bottom: 3px;
-        }
+    });
+</script>
+<style>
+    .pad {
+        padding-bottom: 3px;
+        margin-bottom: 3px;
+    }
 
-        .parsley-required {
-            color: red;
-            font-weight: bold;
-        }
+    .parsley-required {
+        color: red;
+        font-weight: bold;
+    }
 
-        .checkNoSpace {
-            padding-left: 0px !important;
-        }
+    .checkNoSpace {
+        padding-left: 0px !important;
+    }
 
-        ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-            color: white;
-        }
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: white;
+    }
 
-        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-            color: white;
-            opacity: 1;
-        }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: white;
+        opacity: 1;
+    }
 
-        ::-moz-placeholder { /* Mozilla Firefox 19+ */
-            color: white;
-            opacity: 1;
-        }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: white;
+        opacity: 1;
+    }
 
-        :-ms-input-placeholder { /* Internet Explorer 10-11 */
-            color: white;
-        }
-    </style>
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: white;
+    }
+</style>
 
-    <style>
-        input, select, textarea {
-            max-width: 100%;
-            padding: 4px;
-        }
+<style>
+    input, select, textarea {
+        max-width: 100%;
+        padding: 4px;
+    }
 
-        input {
-            background-color: blue;
-        }
-    </style>
+    input {
+        background-color: blue;
+    }
+</style>
 
-    <div class="container-fluid" id="contenedorPrincipal">
-        <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
-            <div class="tab-content">
-                <div id="home" class="tab-pane fade in active">
-                    <div class="row comunForm">
-                        <div class="row">
-                            <div class="col-xs-4 form-group">
-                                <label>Nombre</label>
-                                <input class="form-control" placeholder="Zocorro" id="txtNombre" type="text"  value="@Model.PK_PERSONA" readonly>
-                            </div>
-
-                            <div class="col-xs-4 form-group">
-                                <label>Primer Apellido</label>
-                                <input class="form-control" placeholder="Huye" id="txtApellido1" type="text" readonly>
-                            </div>
-
-                            <div class="col-xs-4 form-group">
-                                <label>Segundo Apellido</label>
-                                <input class="form-control" placeholder="Rapido" id="txtApellido2" type="text" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-
-                            <div class="col-xs-4 form-group">
-                                <label>Cedula</label>
-                                <input class="form-control" placeholder="1121212121" id="txtNombre" type="text" readonly>
-                            </div>
-
-                            <div class="col-xs-4 form-group">
-                                <label>Telefono</label>
-                                <input class="form-control" placeholder="8888-1212" id="txtApellido1" type="text" readonly>
-                            </div>
-
-                            <div class="col-xs-4 form-group">
-                                <label>Fecha ultimo egreso</label>
-                                <input class="form-control" placeholder="16/12/15" id="txtApellido2" type="text" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-4 form-group">
-                                <label>Provincia</label>
-                                <input class="form-control" placeholder="San Jose" id="txtNombre" type="text" readonly>
-                            </div>
-
-                            <div class="col-xs-4 form-group">
-                                <label>Canton</label>
-                                <input class="form-control" placeholder="Sabana" id="txtApellido1" type="text" readonly>
-                            </div>
-
-                            <div class="col-xs-4 form-group">
-                                <label>Entrega del kit de emercencia</label>
-                                <input class="form-control" placeholder="Si" id="txtApellido2" type="text" readonly>
-                            </div>
+<div class="container-fluid" id="contenedorPrincipal">
+    <form id="formagregarUsuarios" method="post" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <div class="row comunForm">
+                    <div class="row">
+                        <div class="col-xs-4 form-group">
+                            <label>Nombre</label>
+                            <input class="form-control" placeholder="Zocorro" id="txtNombre" type="text" value=@Model.VC_NOMBRE readonly>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12 form-group">
-                                <label>Justificacion</label>
-                                <input class="form-control" placeholder="" id="txtApellido2" type="text" required>
-                            </div>
+                        <div class="col-xs-4 form-group">
+                            <label>Primer Apellido</label>
+                            <input class="form-control" placeholder="Huye" id="txtApellido1" type="text" value=@Model.VC_APELLIDO1 readonly>
                         </div>
 
-                        <div class="row" id="contenedorBotones">
-                            <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                <button type="button" id="btnEnviarFormulario" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Continuar</button>
-                            </div>
-
+                        <div class="col-xs-4 form-group">
+                            <label>Segundo Apellido</label>
+                            <input class="form-control" placeholder="Rapido" id="txtApellido2" type="text" value=@Model.VC_APELLIDO2 readonly>
                         </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xs-4 form-group">
+                            <label>Cedula</label>
+                            <input class="form-control" placeholder="1121212121" id="txtNombre" type="text" value=@Model.VC_IDENTIFICACION readonly>
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Telefono</label>
+                            <input class="form-control" placeholder="8888-1212" id="txtApellido1" type="text" value=@Model.VC_IDENTIFICACION readonly>
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Fecha ultimo egreso</label>
+                            <input class="form-control" placeholder="16/12/15" id="txtApellido2" type="text" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 form-group">
+                            <label>Provincia</label>
+                            <input class="form-control" placeholder="San Jose" id="txtNombre" type="text" readonly>
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Canton</label>
+                            <input class="form-control" placeholder="Sabana" id="txtApellido1" type="text" readonly>
+                        </div>
+
+                        <div class="col-xs-4 form-group">
+                            <label>Entrega del kit de emercencia</label>
+                            <input class="form-control" placeholder="Si" id="txtApellido2" type="text" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Justificacion</label>
+                            <input class="form-control" placeholder="" id="txtApellido2" type="text" required>
+                        </div>
+                    </div>
+
+                    <div class="row" id="contenedorBotones">
+                        <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                            <button type="button" id="btnEnviarFormulario" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Continuar</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
+        </div>
 
-        </form>
+    </form>
 
-    </div>
+</div>
 
