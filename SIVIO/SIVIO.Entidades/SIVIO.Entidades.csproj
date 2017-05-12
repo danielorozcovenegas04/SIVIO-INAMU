@@ -73,6 +73,9 @@
     <Compile Include="SP_LISTAR_PROFESIONALES_Result.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
     <Compile Include="TBL_ACCION.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
@@ -224,6 +227,9 @@
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_REGISTRO_COORDINACION.cs">
+      <DependentUpon>SIVIO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_REGISTRO_TIPIFICACION_VIOLENCIA.cs">
       <DependentUpon>SIVIO.tt</DependentUpon>
     </Compile>
     <Compile Include="TBL_ROL.cs">

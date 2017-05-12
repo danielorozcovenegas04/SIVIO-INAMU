@@ -726,19 +726,12 @@ namespace SIVIO.UI.Controllers
         public Mensaje IsertarDatosUsuaria(FormCollection datos)
         {
             var entidades = new SIVIOEntities();
-            TBL_PERSONA persona = new TBL_PERSONA();
+            TBL_PERSONA persona;
             TBL_TELEFONO tel = new TBL_TELEFONO();
-            persona.FK_ESCOLARIDAD = 367;
-            persona.FK_ESTADOCIVIL = 218;
-            persona.FK_CONDICIONASEGURAMIENTO = 736;
-            persona.FK_TIPOIDENTIFICACION = 2;
-            persona.FK_TIPOFAMILIA = 344;
-            persona.FK_TIPOVIVIENDA = 244;
-            persona.FK_ORIENTACIONSEXUAL = 552;
-            persona.FK_OCUPACION = 221;
-            persona.FK_GENERO = 76;
-
-            persona.PK_PERSONA = Int32.Parse(datos["Pk"]);
+            if (datos["Pk"] == "0")
+                persona = new TBL_PERSONA();
+            else
+                persona = entidades.TBL_PERSONA.Find(Int32.Parse(datos["Pk"]));
             persona.VC_NOMBRE = datos["Nombre"];
             persona.VC_APELLIDO1 = datos["Apellido1"];
             persona.VC_APELLIDO2 = datos["Apellido2"];

@@ -17,8 +17,8 @@ namespace SIVIO.Entidades
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TBL_CATALOGO()
         {
-            this.TBL_VALOR_CATALOGO = new HashSet<TBL_VALOR_CATALOGO>();
             this.TBL_PERSONA_FAMILIAR = new HashSet<TBL_PERSONA_FAMILIAR>();
+            this.TBL_VALOR_CATALOGO = new HashSet<TBL_VALOR_CATALOGO>();
         }
     
         public int PK_CATALOGO { get; set; }
@@ -26,8 +26,8 @@ namespace SIVIO.Entidades
         public Nullable<int> FK_CATALOGOPADRE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TBL_VALOR_CATALOGO> TBL_VALOR_CATALOGO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TBL_PERSONA_FAMILIAR> TBL_PERSONA_FAMILIAR { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_VALOR_CATALOGO> TBL_VALOR_CATALOGO { get; set; }
     }
 }

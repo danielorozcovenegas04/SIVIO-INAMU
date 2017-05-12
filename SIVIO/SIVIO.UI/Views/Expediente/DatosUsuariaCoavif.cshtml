@@ -29,7 +29,7 @@
 
                     <div class="col-md-12 form-group" id="fechaNacimiento">
                         <label>Fecha Nacimiento</label>
-                        <input class="form-control" placeholder="Fecha nacimiento" id="dateNacimiento" type="date" min="0">
+                        <input class="form-control" placeholder="Fecha nacimiento" id="dateNacimiento" type="date">
                     </div>
 
                     <div class="col-md-12 form-group" id="edad">
@@ -39,8 +39,8 @@
 
                     <div class="col-md-12 form-group">
                         <label>País de Procedencia</label>
-                        <select id="comPais" class="form-control">
-                            <option value=-1>Escoja Una</option>
+                        <select id="comPais" class="form-control" required="">
+                            <option value="">Escoja Una</option>
                         </select>
                     </div>
 
@@ -54,40 +54,48 @@
                         <div class="col-md-6 form-group">
                             <label>Nacionalidad</label>
                             <select id="comNacionalidad" class="form-control">
-                                <option value=-1>Escoja Una</option>
+                                <option value="">Escoja Una</option>
                             </select>
                         </div>
 
                         <div class="col-md-6 form-group">
                             <label>Otra Nacionalidad</label>
                             <select id="comOtraNacionalidad" class="form-control">
-                                <option value=-1>Escoja Una</option>
+                                <option value="">Escoja Una</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="col-md-12 form-group">
                         <label>Condición Migratoria</label>
-                        <select id="comMigratoria" class="form-control">
-                            <option value=-1>Escoja Una</option>
+                        <select id="comMigratoria" class="form-control" required="">
+                            <option value="">Escoja Una</option>
                         </select>
                     </div>
 
                     <div class="col-md-12 form-group">
-                        <label>Numero de Hijos</label>
-                        <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
+                        <label>
+                            <input style="display:inline-block;" id="checkHijos" type="checkbox"> Hijos
+                        </label>
                     </div>
 
-                    <div class="col-md-12 form-group">
-                        <label> Hijo mayor de 12 años</label>
-                        <input class="form-control" placeholder="Número de Hijos mayores de 12" min="0" id="intHijosMayores" type="number" required="">
-                    </div>
+                    <div id="hijos">
+                        <div class="col-md-12 form-group">
+                            <label>Numero de Hijos</label>
+                            <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
+                        </div>
 
-                    <div class="col-md-12 form-group">
-                        <label>Discapacidades en hijos/hijas</label>
-                        <select id="comDiscapacidad" class="form-control">
-                            <option value=-1>Escoja Una</option>
-                        </select>
+                        <div class="col-md-12 form-group">
+                            <label> Hijo mayor de 12 años</label>
+                            <input class="form-control" placeholder="Número de Hijos mayores de 12" min="0" id="intHijosMayores" type="number" required="">
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <label>Discapacidades en hijos/hijas</label>
+                            <select id="comDiscapacidad" class="form-control">
+                                <option value="">Escoja Una</option>
+                            </select>
+                        </div>
                     </div>
 
                 </div>
@@ -103,20 +111,20 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Provincia</label>
-                        <select id="cmbPersonaProvincia" class="form-control">
-                            <option value=-1>Escoja Una</option>
+                        <select id="cmbPersonaProvincia" class="form-control" required="">
+                            <option value="">Escoja Una</option>
                         </select>
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Cantón</label>
-                        <select id="cmbPersonaCanton" class="form-control">
-                            <option value=-1>Escoja Una</option>
+                        <select id="cmbPersonaCanton" class="form-control" required="">
+                            <option value="">Escoja Una</option>
                         </select>
                     </div>
                     <div class="col-md-4 form-group">
                         <label>Distrito</label>
-                        <select id="cmbPersonaDistrito" class="form-control">
-                            <option value=-1>Escoja Una</option>
+                        <select id="cmbPersonaDistrito" class="form-control" required="">
+                            <option value="">Escoja Una</option>
                         </select>
                     </div>
 

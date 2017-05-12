@@ -27,6 +27,7 @@ namespace SIVIO.Entidades
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TBL_ACCION> TBL_ACCION { get; set; }
         public virtual DbSet<TBL_ADICCIONES> TBL_ADICCIONES { get; set; }
         public virtual DbSet<TBL_AGRESION> TBL_AGRESION { get; set; }
@@ -34,8 +35,10 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_AGRESION_CATEGORIA_RIESGO> TBL_AGRESION_CATEGORIA_RIESGO { get; set; }
         public virtual DbSet<TBL_AGRESION_CATEGORIZACION_RIESGO> TBL_AGRESION_CATEGORIZACION_RIESGO { get; set; }
         public virtual DbSet<TBL_AGRESION_DETALLE_VIOLENCIA> TBL_AGRESION_DETALLE_VIOLENCIA { get; set; }
+        public virtual DbSet<TBL_AGRESION_IMPACTO_VIOLENCIA> TBL_AGRESION_IMPACTO_VIOLENCIA { get; set; }
         public virtual DbSet<TBL_AGRESION_VIOLENCIA> TBL_AGRESION_VIOLENCIA { get; set; }
         public virtual DbSet<TBL_AGRESOR> TBL_AGRESOR { get; set; }
+        public virtual DbSet<TBL_AGRESOR_ADICCIONES> TBL_AGRESOR_ADICCIONES { get; set; }
         public virtual DbSet<TBL_AGRESOR_MOTIVO_REGRESO> TBL_AGRESOR_MOTIVO_REGRESO { get; set; }
         public virtual DbSet<TBL_ARCHIVO> TBL_ARCHIVO { get; set; }
         public virtual DbSet<TBL_ATENCION> TBL_ATENCION { get; set; }
@@ -76,16 +79,15 @@ namespace SIVIO.Entidades
         public virtual DbSet<TBL_REGISTRO> TBL_REGISTRO { get; set; }
         public virtual DbSet<TBL_REGISTRO_CEAAM> TBL_REGISTRO_CEAAM { get; set; }
         public virtual DbSet<TBL_REGISTRO_COORDINACION> TBL_REGISTRO_COORDINACION { get; set; }
+        public virtual DbSet<TBL_REGISTRO_TIPIFICACION_VIOLENCIA> TBL_REGISTRO_TIPIFICACION_VIOLENCIA { get; set; }
         public virtual DbSet<TBL_ROL> TBL_ROL { get; set; }
         public virtual DbSet<TBL_ROL_ACCION> TBL_ROL_ACCION { get; set; }
+        public virtual DbSet<TBL_ROL_TIPO_ATENCION> TBL_ROL_TIPO_ATENCION { get; set; }
         public virtual DbSet<TBL_ROL_USUARIO> TBL_ROL_USUARIO { get; set; }
         public virtual DbSet<TBL_TELEFONO> TBL_TELEFONO { get; set; }
         public virtual DbSet<TBL_UNIDAD> TBL_UNIDAD { get; set; }
         public virtual DbSet<TBL_USUARIO> TBL_USUARIO { get; set; }
         public virtual DbSet<TBL_VALOR_CATALOGO> TBL_VALOR_CATALOGO { get; set; }
-        public virtual DbSet<TBL_ROL_TIPO_ATENCION> TBL_ROL_TIPO_ATENCION { get; set; }
-        public virtual DbSet<TBL_AGRESION_IMPACTO_VIOLENCIA> TBL_AGRESION_IMPACTO_VIOLENCIA { get; set; }
-        public virtual DbSet<TBL_AGRESOR_ADICCIONES> TBL_AGRESOR_ADICCIONES { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
