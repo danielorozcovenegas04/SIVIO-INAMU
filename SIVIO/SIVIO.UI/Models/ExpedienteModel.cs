@@ -154,19 +154,20 @@ namespace SIVIO.UI.Models
         public DateTime fecha { get; set; }
         public string hora { get; set; }
         #region COAVIF
-        public List<TBL_PERSONA> ListarPersonas()
+        public TBL_PERSONA ListarPersonas(int persona)
         {
 
             using (var entidades = new SIVIOEntities())
             {
                 try
                 {
-                    List<TBL_PERSONA> personaConsulta = entidades.TBL_PERSONA.ToList();
+                    TBL_PERSONA personaConsulta = entidades.TBL_PERSONA.Find(persona);
+
                     return personaConsulta;
                 }
                 catch
                 {
-                    return new List<TBL_PERSONA>();
+                    return new TBL_PERSONA();
                 }
             }
         }

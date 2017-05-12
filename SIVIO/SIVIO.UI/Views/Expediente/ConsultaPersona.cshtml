@@ -207,11 +207,10 @@
                         //<th>Entidad Trasladada</th>
                         //<th>Fecha de Traslado</th>
             "columns": [
-                { "data": "NOMBREDEUSUARIA", "name": "NOMBREDEUSUARIA", "autoWidth": true, "visible": false },
-                { "data": "IDENTIFICACION", "name": "IDENTIFICACION", "autoWidth": true },
-                { "data": "FECHADEATENCION", "name": "FECHADEATENCION", "autoWidth": true },
-                { "data": "ATENCIONDELAATENCION", "name": "ATENCIONDELAATENCION", "autoWidth": true },
-                { "data": "ADMINISTACIONDECASO", "name": "ADMINISTACIONDECASO", "autoWidth": true },
+                { "data": "CASO", "name": "CASO", "autoWidth": true, "visible": false },
+                { "data": "FECHADEINICIO", "name": "FECHADEINICIO", "autoWidth": true },
+                { "data": "FECHADEFIN", "name": "FECHADEFIN", "autoWidth": true },
+                { "data": "ESTADO", "name": "ESTADO", "autoWidth": true },
                
 
             ]
@@ -260,28 +259,27 @@
                 <caption><div class="comunForm" style="text-align: center; color: #c31618; border-color: #c31618 !important;"><i class="fa fa-bell" style="margin-right: 2px"></i>Lista de Consultas Existentes</div></caption>
                 <thead>
                     <tr>
-                        
-                        <th>Nombre de la usuaria</th>
-                        <th>Identificación</th>
-                        <th>Fecha de atención</th>
-                        <th>Estado de la atencion a la persona</th>
-                        <th>Administracion de caso</th>
+                        <th></th>
+                        <th>Caso</th>
+                        <th>Fecha de Incio</th>
+                        <th>Fecha de Finalizacion</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var consulta in Model)
                     {
-
+                    
                     <tr>
-                        
-                        <td>@Html.Raw(consulta.TBL_USUARIO.VC_NOMBRE) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO1) @Html.Raw(consulta.TBL_USUARIO.VC_APELLIDO2)</td>
-                        <td>@Html.Raw(consulta.TBL_USUARIO.VC_USUARIO)</td>
+                        <td></td>
+                        <td></td>
                         <td>@Html.Raw(consulta.DT_FECHAINICIO)</td>
-                        @if(consulta.DT_FECHAINICIO!=null){
-                            <td>Caso Cerrado</td>
+                        <td>@Html.Raw(consulta.DT_FECHAFIN)</td>
+                        @if(consulta.DT_FECHAFIN!=null){
+                            <td><font color="red">Caso Cerrado</font></td>
                             
                         }else{
-                            <td>Caso Abierto</td>
+                            <td> <font color="red">Caso Abierto</font></td>
                             
                         }
                     </tr>

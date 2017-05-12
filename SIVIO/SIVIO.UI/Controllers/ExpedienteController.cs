@@ -523,7 +523,7 @@ namespace SIVIO.UI.Controllers
         {
             int t = 0;
             //TBL_REGISTRO
-            var listaPersonas = _modelExpediente.ListarPersonas();
+            //var listaPersonas = _modelExpediente.ListarPersonas();
             var listaUsuarios = _modelExpediente.ListarUSuarios();
             var listaConsulta = _modelExpediente.ListarConsultas();
             var listaRegistro = _modelExpediente.ListarRegistro();
@@ -543,7 +543,9 @@ namespace SIVIO.UI.Controllers
                         
                     }
                 }
-                foreach (var p in listaPersonas)
+                r.TBL_PERSONA = new TBL_PERSONA();
+                r.TBL_PERSONA = _modelExpediente.ListarPersonas(r.FK_PERSONA);
+               /* foreach (var p in listaPersonas)
                 {
                     if (r.FK_PERSONA == p.PK_PERSONA)
                     {
@@ -555,31 +557,9 @@ namespace SIVIO.UI.Controllers
                         r.TBL_PERSONA.VC_IDENTIFICACION = p.VC_IDENTIFICACION;
                     }
 
-                }
-                r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
-                r.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
-              
-               /* foreach (var c in listaCatalogo)
-                {
-//if (r.TBL_VALOR_CATALOGO==null) {
-                        
-                       
-                  //  }
-                    if (r.FK_TIPOSERVICIO == c.FK_CATALOGO) {
-                       
-                        r.TBL_VALOR_CATALOGO.FK_CATALOGO = c.FK_CATALOGO;
-                        r.TBL_VALOR_CATALOGO.VC_VALOR1 = c.VC_VALOR1;
-                        r.TBL_VALOR_CATALOGO1.VC_VALOR2 = "0";
-
-                    }
-                    if (r.FK_TIPOREGISTRO == c.FK_CATALOGO)
-                    {
-                       
-                        r.TBL_VALOR_CATALOGO1.FK_CATALOGO = c.FK_CATALOGO;
-                        r.TBL_VALOR_CATALOGO1.VC_VALOR1 = c.VC_VALOR1;
-                        
-                    }
                 }*/
+                r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
+                r.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();       
                 foreach (var c in listaConsulta)
                 {
                    if (r.PK_REGISTRO==c.FK_REGISTRO ) {
@@ -616,95 +596,47 @@ namespace SIVIO.UI.Controllers
         }
 
         [Authorize]
-        public ActionResult ConsultaPersona(string persona)
+        public ActionResult ConsultaPersona(/*int expedientePersona*/)
         {
-            int t = 0;
-           // string persona = "Juliana Trump Beckenbauer";
-            var listaPersonas = _modelExpediente.ListarPersonas();
+            int expedientePersona = 5;
+            var Persona = _modelExpediente.BuscarPersona(expedientePersona);
             var listaUsuarios = _modelExpediente.ListarUSuarios();
             var listaConsulta = _modelExpediente.ListarConsultas();
             var listaRegistro = _modelExpediente.ListarRegistro();
             var listaCatalogo = _modelExpediente.ListarCatalogo();
             var listaAtencion = _modelExpediente.ListarAtencion();
-            var infopersona = new List<TBL_REGISTRO>();
-            foreach (var p in listaPersonas) {
-                var nombre = p.VC_NOMBRE + " " + p.VC_APELLIDO1 + " " + p.VC_APELLIDO2;
-                if (persona.CompareTo(nombre) == 0) {
-                    foreach (var r in listaRegistro) {
-                        if (r.TBL_PERSONA == null) {
-                            r.TBL_PERSONA = new TBL_PERSONA();
-                            r.TBL_PERSONA.VC_NOMBRE = p.VC_NOMBRE;
-                            r.TBL_PERSONA.VC_APELLIDO1 = p.VC_APELLIDO1;
-                            r.TBL_PERSONA.VC_APELLIDO2 = p.VC_APELLIDO2;
-                            ViewBag.NombrePersona= p.VC_NOMBRE + " " + p.VC_APELLIDO1 + " " + p.VC_APELLIDO2;
-                            ViewBag.IdPersona = p.VC_IDENTIFICACION;
-                            ViewBag.Expediente = p.PK_PERSONA;
-                        }
-                        if (r.FK_PERSONA == p.PK_PERSONA) {
-                            infopersona.Add(r);
-                        }
-                    }
+            var listadoExpedientePersona = new List<TBL_REGISTRO>();
+            ViewBag.NombrePersona =Persona.VC_NOMBRE+Persona.VC_APELLIDO1+Persona.VC_APELLIDO2;
+            ViewBag.IdPersona = Persona.VC_IDENTIFICACION;
+            ViewBag.Expediente = Persona.PK_PERSONA;
+            foreach (var r in listaRegistro)
+            {
+                if (r.FK_PERSONA == Persona.PK_PERSONA)
+                {
+                    listadoExpedientePersona.Add(r);
                 }
+
+
+                r.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
+
             }
-            foreach (var ip in infopersona) {
+
+            foreach (var ep in listadoExpedientePersona)
+            {
+                
+                ep.TBL_USUARIO = new TBL_USUARIO();
                 foreach (var u in listaUsuarios)
                 {
-                    if (ip.FK_USUARIOREGISTRA == u.PK_USUARIO)
+                    if (ep.FK_USUARIOREGISTRA == u.PK_USUARIO)
                     {
-                        ip.TBL_USUARIO = new TBL_USUARIO();
-                        ip.TBL_USUARIO.PK_USUARIO = u.PK_USUARIO;
-                        ip.TBL_USUARIO.VC_APELLIDO1 = u.VC_APELLIDO1;
-                        ip.TBL_USUARIO.VC_APELLIDO2 = u.VC_APELLIDO2;
-                        ip.TBL_USUARIO.VC_NOMBRE = u.VC_NOMBRE;
-                        ip.TBL_USUARIO.VC_USUARIO = u.VC_USUARIO;
+                        ep.TBL_USUARIO.VC_NOMBRE = u.VC_NOMBRE;
+                        ep.TBL_USUARIO.VC_APELLIDO1 = u.VC_APELLIDO1;
+                        ep.TBL_USUARIO.VC_APELLIDO2 = u.VC_APELLIDO2;
                     }
                 }
-                foreach (var c in listaCatalogo)
-                {
-                    if (ip.TBL_VALOR_CATALOGO == null)
-                    {
-                        ip.TBL_VALOR_CATALOGO = new TBL_VALOR_CATALOGO();
-                        ip.TBL_VALOR_CATALOGO1 = new TBL_VALOR_CATALOGO();
-                    }
-                    if (ip.FK_TIPOSERVICIO == c.FK_CATALOGO)
-                    {
-                        ip.TBL_VALOR_CATALOGO.FK_CATALOGO = c.FK_CATALOGO;
-                        ip.TBL_VALOR_CATALOGO.VC_VALOR1 = c.VC_VALOR1;
-
-                    }
-                    if (ip.FK_TIPOREGISTRO == c.FK_CATALOGO)
-                    {
-                        ip.TBL_VALOR_CATALOGO1.FK_CATALOGO = c.FK_CATALOGO;
-                        ip.TBL_VALOR_CATALOGO1.VC_VALOR1 = c.VC_VALOR1;
-
-                    }
-                }
-                foreach (var c in listaConsulta)
-                {
-                    if (ip.PK_REGISTRO == c.FK_REGISTRO)
-                    {
-                        ip.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
-                    }
-                }
-                foreach (var a in listaAtencion)
-                {
-                    if (ip.PK_REGISTRO == a.FK_REGISTRO)
-                    {
-                        ip.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
-                    }
-                }
-                //SOLO PARA PRUEBAS ELIMINAR
-                /*if (t == 0)
-                {
-                    ip.TBL_VALOR_CATALOGO1.VC_VALOR2 = "1";
-                }
-                if (t == 1)
-                {
-                    ip.TBL_VALOR_CATALOGO1.VC_VALOR2 = "2";
-                }
-                t++;*/
             }
-            return View(infopersona);
+
+            return View(listadoExpedientePersona);
         }
 
         [AllowAnonymous]
