@@ -1,0 +1,149 @@
+﻿@{
+    Layout = null;
+}
+<div id="datUsuaria" class="tab-pane">
+    <form id="datosUsuariaForm" method="post">
+        <div class="row comunForm">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <div class="col-md-4 form-group">
+                        <label>Nombre</label>
+                        <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label>Primer Apellido</label>
+                        <input class="form-control" placeholder="Apellido" id="txtApellido1" type="text" required="">
+                    </div>
+
+                    <div class="col-md-4 form-group">
+                        <label>Segundo Apellido</label>
+                        <input class="form-control" placeholder="Apellido" id="txtApellido2" type="text" required="">
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>
+                            <input style="display:inline-block;" id="checkFecha" type="checkbox"> Conoce Fecha de Nacimiento
+                        </label>
+                    </div>
+
+                    <div class="col-md-12 form-group" id="fechaNacimiento">
+                        <label>Fecha Nacimiento</label>
+                        <input class="form-control" placeholder="Fecha nacimiento" id="dateNacimiento" type="date" min="0">
+                    </div>
+
+                    <div class="col-md-12 form-group" id="edad">
+                        <label>Edad</label>
+                        <input class="form-control" placeholder="Edad" id="intEdad" type="number" min="0">
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>País de Procedencia</label>
+                        <select id="comPais" class="form-control">
+                            <option value=-1>Escoja Una</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>
+                            <input style="display:inline-block;" id="checkApatrida" type="checkbox"> Apátrida
+                        </label>
+                    </div>
+
+                    <div id="nacionalidades">
+                        <div class="col-md-6 form-group">
+                            <label>Nacionalidad</label>
+                            <select id="comNacionalidad" class="form-control">
+                                <option value=-1>Escoja Una</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Otra Nacionalidad</label>
+                            <select id="comOtraNacionalidad" class="form-control">
+                                <option value=-1>Escoja Una</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>Condición Migratoria</label>
+                        <select id="comMigratoria" class="form-control">
+                            <option value=-1>Escoja Una</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>Numero de Hijos</label>
+                        <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label> Hijo mayor de 12 años</label>
+                        <input class="form-control" placeholder="Número de Hijos mayores de 12" min="0" id="intHijosMayores" type="number" required="">
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>Discapacidades en hijos/hijas</label>
+                        <select id="comDiscapacidad" class="form-control">
+                            <option value=-1>Escoja Una</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <div class="col-md-12 form-group">
+                        <label>Número Documento de identificación</label>
+                        <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="">
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>Lugar de Procedencia</label>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>Provincia</label>
+                        <select id="cmbPersonaProvincia" class="form-control">
+                            <option value=-1>Escoja Una</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>Cantón</label>
+                        <select id="cmbPersonaCanton" class="form-control">
+                            <option value=-1>Escoja Una</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>Distrito</label>
+                        <select id="cmbPersonaDistrito" class="form-control">
+                            <option value=-1>Escoja Una</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>Lugar de Trabajo</label>
+                        <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text">
+                    </div>
+
+                    <div class="col-md-12 form-group" id="meses">
+                        <label>Embarazo</label>
+                        <select id="comEmbarazo" class="form-control"></select>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <label>Teléfono</label>
+                        <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text">
+                    </div>
+
+                </div>
+
+                <div class="row" id="contenedorBotones">
+                    <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
+                        <button type="button" id="btnGuardarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
+                        <button type="button" id="btnCancelarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

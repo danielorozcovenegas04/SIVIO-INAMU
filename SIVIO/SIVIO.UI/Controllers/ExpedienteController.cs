@@ -363,6 +363,21 @@ namespace SIVIO.UI.Controllers
             return View(_modelExpediente.BuscarPersona(pkUsuario));
         }
 
+        public PartialViewResult DatosAdministrativosCoavif()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult DatosUsuariaCoavif()
+        {
+            return PartialView();
+        }
+
+        public PartialViewResult AtencionCoavif()
+        {
+            return PartialView();
+        }
+
         //[Authorize]
         //public ActionResult Coavif()
         //{
