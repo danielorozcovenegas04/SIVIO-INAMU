@@ -1,0 +1,255 @@
+﻿<style>
+    .pad {
+        padding-bottom: 3px;
+        margin-bottom: 3px;
+    }
+
+    .parsley-required {
+        color: red;
+        font-weight: bold;
+    }
+
+    .checkNoSpace {
+        padding-left: 0px !important;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: white;
+    }
+
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: white;
+        opacity: 1;
+    }
+
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: white;
+        opacity: 1;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: white;
+    }
+</style>
+
+<style>
+    input, select, textarea {
+        max-width: 100%;
+        padding: 4px;
+    }
+
+    input {
+        background-color: blue;
+    }
+</style>
+
+<script>
+        $(document).ready(function () {
+            $("#chbPersonaMenor").click(function () {
+                if ($('#chbPersonaMenor').is(':checked')) {
+                    $("#tallerPersonaMenor").show();
+                } else {
+                    $("#tallerPersonaMenor").hide();
+                }
+            })
+            $("#chbMadres").click(function () {
+                if ($('#chbMadres').is(':checked')) {
+                    $("#tallerMadres").show();
+                } else {
+                    $("#tallerMadres").hide();
+                }
+            })
+            $("#chbNoAtencion").click(function () {
+                if ($('#chbNoAtencion').is(':checked')) {
+                    $("#AtencionPsicologicaNinosNinas").hide();
+                } else {
+                    $("#AtencionPsicologicaNinosNinas").show();
+                }
+            })
+        })
+</script>
+
+<div class="container-fluid" id="contenedorPrincipal" style="background-color: whitesmoke;border: 1px solid #E3E3E3;border-radius: 4px;">
+
+    <h3>Atención psicológica de niños y niñas</h3>
+    @* Pestaña de atencion de hijos e hijas *@
+
+    <div class="row">
+
+        <div class="col-xs-12 form-group">
+            <input type="checkbox" id="chbNoAtencion" style="display:inline">
+            <label>La madre responsable de la persona menor NO desea recibir atención</label>
+        </div>
+
+    </div>
+
+    <div id="AtencionPsicologicaNinosNinas">
+
+        <div class="row">
+
+            <div class="col-xs-6 form-group">
+                <input type="checkbox" style="display:inline">
+                <label>Sesión individual persona menor de edad</label>
+            </div>
+
+            <div class="col-xs-6 form-group">
+                <input type="checkbox" style="display:inline">
+                <label>Sesión individual madre/responsable de la PME</label>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 form-group">
+                <label>Fecha de la atención o sesión realizada:</label>
+                <input class="form-control" id="txtFechaSesion" type="text" required="">
+            </div>
+
+            <div class="col-xs-6 form-group">
+                <label>Objetivo de la sesión:</label>
+                <input class="form-control" id="txtObjetivoSesion" type="text" required="">
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 form-group">
+                <label>Evaluación de la persona menor de edad:</label>
+                <input class="form-control" id="txtEvaluacionPersonaMenor" type="text" required="">
+            </div>
+
+            <div class="col-xs-6 form-group">
+                <label>Plan de Intervención:</label>
+                <input class="form-control" id="txtPlanIntervencion" type="text" required="">
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 form-group">
+                <label>Resumen de la sesión:</label>
+                <input class="form-control" id="txtResumenSesion" type="text" required="">
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 form-group">
+                <input type="checkbox" id="chbPersonaMenor" style="display:inline">
+                <label>Taller de persona menor</label>
+            </div>
+
+        </div>
+
+        <div id="tallerPersonaMenor" hidden="hidden">
+
+            <div class="row">
+
+                <div class="col-xs-4 form-group">
+                    <label>Fecha:</label>
+                    <input class="form-control" id="txtFechaTallerPersonaMenor" type="date" required="">
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-6 form-group">
+                    <label>Tipo:</label>
+                    <form>
+                        <label class="radio-inline">
+                            <input type="radio" name="radioTipoTaller">Taller niños/niñas testigos/as
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="radioTipoTaller">Abuso sexual
+                        </label>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-6 form-group">
+                    <label>Observaciones:</label>
+                    <input class="form-control" id="txtObservacionesPersonaMenor" type="text" required="">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 form-group">
+                <input type="checkbox" id="chbMadres" style="display:inline">
+                <label>Taller de madres</label>
+            </div>
+
+        </div>
+
+        <div id="tallerMadres" hidden="hidden">
+            
+            <div class="row">
+
+                <div class="col-xs-4 form-group">
+                    <label>Fecha:</label>
+                    <input class="form-control" id="txtFechaTallerMadres" type="date" required="">
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-6 form-group">
+                    <label>Tipo:</label>
+                    <input class="form-control" id="txtTipoTallerMadres" type="text" required="">
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-6 form-group">
+                    <label>Observaciones:</label>
+                    <input class="form-control" id="txtObservacionesMadres" type="text" required="">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 form-group">
+                <input type="checkbox" style="display:inline">
+                <label>Apoyo escolar o académico</label>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 form-group">
+                <input type="checkbox" style="display:inline">
+                <label>Actividad de estimulación temprana</label>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-6 form-group">
+                <input type="checkbox" style="display:inline">
+                <label>Aprestamiento</label>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

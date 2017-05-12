@@ -40,6 +40,11 @@ namespace SIVIO.UI.Controllers
             return View();
         }
 
+        public ActionResult AtencionesPsicologiaNinosNinas()
+        {
+            return View();
+        }
+
         [Authorize]
         public ActionResult ListarCatalogosPsicologiaAdulta()
         {
