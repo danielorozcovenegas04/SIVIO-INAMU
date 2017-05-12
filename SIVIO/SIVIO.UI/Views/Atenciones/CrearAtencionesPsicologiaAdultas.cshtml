@@ -115,7 +115,11 @@
             $("#cmbTipoAsesoria").change(function () {
                 var numeroADiv = {
                     773: "#planDeSeguridad",
-                    780: "#procesoGrupal"
+                    780: "#procesoGrupal",
+                    774: "#procesoPsicoeducativo",
+                    775: "#coordinaciones",
+                    776: "#acompanamientoProfesional",
+                    777: "#testimonioExperto"
                 };
 
                 var habilitados = $("#cmbTipoAsesoria").val()
@@ -155,14 +159,14 @@
 
     <div class="row">
         <div class="col-md-6 col-xs-12 form-group">
-            <label>Tipo de asesoría:</label>
+            <label>Tipo de asesoría</label>
             <select id="cmbTipoAsesoria" class="" multiple="multiple">
                 @*Catalogo 73*@
             </select>
         </div>
     </div>
 
-    <div id="planDeSeguridad" hidden="true">
+    <div id="planDeSeguridad" hidden="hidden">
         <h3>Plan de seguridad</h3>
         <div class="row">
             <div class="col-md-6 col-xs-12 form-group">
@@ -172,17 +176,102 @@
         </div>
     </div>
 
-    <div id="procesoGrupal" hidden="true">
-        <h3>Plan de seguridad</h3>
-        <div class="col-md-6 col-xs-12 form-group">
-            <label>Fecha de realización:</label>
-            <input type="date" class="form-control" id="dtFechaProcesoGrupal">
+    <div id="procesoGrupal" hidden="hidden">
+        <h3>Proceso grupal</h3>
+        <div class="row">
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Fecha de fecha inicio del periodo</label>
+                <input type="date" class="form-control" id="dtFechaInicioProcesoGrupal">
+            </div>
+
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Fecha de fecha fin del periodo</label>
+                <input type="date" class="form-control" id="dtFechaFinProcesoGrupal">
+            </div>
         </div>
-        <div class="col-md-6 col-xs-12 form-group">
-            <label>Tipo de grupo:</label>
-            <select id="cmbTipoGrupo" class="form-control">
-                @* Catalogo 95 *@
-            </select>
+        <div class="row">
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Tipo de grupo</label>
+                <select id="cmbTipoGrupo" class="form-control">
+                    @* Catalogo 95 *@
+                </select>
+            </div>
         </div>
     </div>
+
+    <div id="procesoPsicoeducativo" hidden="hidden">
+        <h3>Proceso Psicoeducativo</h3>
+        <div class="row">
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Fecha de inicio</label>
+                <input type="date" class="form-control" id="dtFechaInicioPsicoeducativo">
+            </div>
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Fecha fin</label>
+                <input type="date" class="form-control" id="dtFechaFinPsicoeducativo">
+            </div>
+        </div>
+    </div>
+
+    <div id="coordinaciones" hidden="hidden">
+        <h3>Coordinaciones</h3>
+        <div class="row">
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Nombre de la persona</label>
+                <input type="text" class="form-control" id="txtNombrePersonaCoordinacion" type="text" required=""></input>
+            </div>
+
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Institución</label>
+                <input type="text" class="form-control" id="txtInstitucionCoordinacion" type="text" required=""></input>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Teléfono</label>
+                <input type="text" class="form-control" id="txtTelefono" type="text" required=""></input>
+            </div>
+
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Correo</label>
+                <input type="email" class="form-control" id="txtCorreo" type="text" required=""></input>
+            </div>
+        </div>
+    </div>
+
+    <div id="acompanamientoProfesional" hidden="hidden">
+        <h3>Acompañamiento Profesional</h3>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <label>Acompañamiento Profesional</label>
+                <input type="text" class="form-control" id="txtAcompanamientoProfesional" type="text" required=""></input>
+            </div>
+        </div>
+    </div>
+
+    <div id="testimonioExperto" hidden="hidden">
+        <h3>Testimonio Experto</h3>
+        <div class="row">
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Tipo</label>
+                <input type="text" class="form-control" id="txtTipoTestimonioExperto" type="text" required=""></input>
+            </div>
+
+            <div class="col-md-6 col-xs-12 form-group">
+                <label>Lugar/Proceso</label>
+                <textarea class="form-control" id="txtLugarProceso" type="text" required=""></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div id="Observaciones">
+        <h3>Observaciones</h3>
+        <div class="row">
+            <div class="col-md-6 col-xs-12 form-group">
+                <textarea class="form-control" id="txtPlanDeSeguridad" type="text" required=""></textarea>
+            </div>
+        </div>
+    </div>
+    
 </div>
