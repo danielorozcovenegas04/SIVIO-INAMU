@@ -189,12 +189,12 @@
                                     $.LoadingOverlay("show");
                                     $("#contenedorEspera").show();
                                     
-                                    var value = filaSeleccionada[0].VC_CASO_CLAIS, url1 = '@Url.Action("Delegacion_Mujer", "Expediente")',
+                                    var value = filaSeleccionada[0].CLAISVAL, url1 = '@Url.Action("Delegacion_Mujer", "Expediente")',
                                         url2 = '@Url.Action("DetalleUsuaria", "Expediente")';
                                     console.log("Value is " + value);
                                     $.ajax({
                                         type: "POST",
-                                        url: (value == null) ? url1 : url2,
+                                        url: (value == "true") ? url2 : url1,
                                         data: { valorpersona: filaSeleccionada[0].PKPERSONA },
                                         async: true
                                     }).done(function (data) {
@@ -316,7 +316,8 @@
                                         { "data": "FECHA", "name": "FECHA", "autoWidth": true },
                                         { "data": "SERVICIO", "name": "SERVICIO", "autoWidth": true },
                                         { "data": "EGRESOTECNICO", "name": "EGRESOTECNICO", "autoWidth": true },
-                                        { "data": "CLAIS", "name": "CLAIS", "autoWidth": true }
+                                        { "data": "CLAIS", "name": "CLAIS", "autoWidth": true },
+                                        { "data": "CLAISVAL", "name": "CLAISVAL", "autoWidth": true, "visible": false }
 
                     ]
 
@@ -407,6 +408,18 @@
                                 </text>
                                 }
                                 }
+
+                                @{if (expediente.VC_CASO_CLAIS != null)
+                                {
+                                <td>true</td>
+                                }
+                                else
+                                {
+                                <td>false</td>
+                                }
+                                }
+
+
                             </tr>
                             }
                         </tbody>

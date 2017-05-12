@@ -115,10 +115,10 @@ namespace SIVIO.UI.Controllers
             return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_modelCatalogos.llenarListaCatalogos(catalogos)), JsonRequestBehavior.AllowGet);
         }
 
-       
-        public ActionResult DetalleUsuaria()
+        [Authorize]
+        public ActionResult DetalleUsuaria(int pkUsuario)
         {
-            return View();
+            return View(_modelExpediente.BuscarPersona(pkUsuario));
         }
 
         [Authorize]
