@@ -364,6 +364,9 @@
     <Content Include="Views\Expediente\CrearUsuaria_DatosAdministrativos.cshtml" />
     <Content Include="Views\Expediente\MenuExpediente.cshtml" />
     <Content Include="Views\Expediente\Delegacion_Mujer.cshtml" />
+    <Content Include="Views\Expediente\DatosAdministrativosCoavif.cshtml" />
+    <Content Include="Views\Expediente\DatosUsuariaCoavif.cshtml" />
+    <Content Include="Views\Expediente\AtencionCoavif.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

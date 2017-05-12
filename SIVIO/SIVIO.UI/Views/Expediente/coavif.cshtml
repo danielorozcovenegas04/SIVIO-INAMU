@@ -679,15 +679,10 @@
     
         <div class="col-md-2 form-group" id="botones_perfil">
             <button type="button" id="btnExpediente" class="btn btn-default btn-responsive selected2" style="margin-bottom:5px; margin-top:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;" >Expediente</button>
-
             <button type="button" id="btnReferencias" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Referencias</button>
-
             <button type="button" id="btnHistorial" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #368DE9; border-color: #368DE9;">Historiales</button>
 
-            <button type="button" id="btnCrearCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Crear Caso</button>
-
-            <button type="button" id="btnCerrarCaso" class="btn btn-default btn-responsive" style="margin-bottom:5px; display: block; width: 100%; color: white; background-color: #FA8258; border-color: #FA8258;">Cerrar Caso</button>
-        </div>
+          </div>
 
         <div class="col-md-10 form-group">
                 <ul class="nav nav-tabs">
@@ -714,213 +709,9 @@
                 </ul>
 
                 <div class="tab-content">
-                    <div id="datAdministrativos" class="tab-pane fade in active">
-                        <div class="row comunForm">
-                            <div class="row">
-                                <div class="col-md-10">
-                                </div>
-                                <div class="col-md-2">
-                                    @*<button class="botonCerrar danger" id="btnCerrarFrmDatosAdministrativos">
-                                            <i class="fa fa-times" aria-hidden="true"></i>
-                                        </button>*@
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>Fecha del incidente</label>
-                                    <input class="form-control" id="txtFecha" type="text" required="">
-                                </div>
-                                <div class="col-md-3 form-group">
-                                    <label>Hora inicio</label>
-                                    <input class="form-control" id="txtHoraInicio" type="text" required="">
-                                </div>
-                                <div class="col-md-3 form-group">
-                                    <label>Hora finalización</label>
-                                    <input class="form-control" placeholder="--:-- --" id="txtHoraFinalización" type="text" readonly="readonly">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>Persona que atiende</label>
-                                    <input class="form-control" id="txtPersonaAtiende" type="text" required="">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label id="lblDisponibilidad">Tipo de disponibilidad</label>
-                                    <select class="form-control" id="cmbTipoDisponibilidad" type="">
-                                        @*<option value=""></option>*@
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>Institucion que refiere</label>
-                                    <select class="form-control" id="cmbInstitucionRefiere" type="">
-                                    </select>
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Nombre de quien refiere</label>
-                                    <input class="form-control" id="txtPersonaQuienRefiere" type="text" required="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>Telefono</label>
-                                    <input class="form-control" id="txtTelefonoUsuario" type="text" required="">
-                                </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Correo</label>
-                                    <input class="form-control" id="txtCorreoUsuario" type="text" required="">
-                                </div>
-                            </div>
-                            <div class="row" id="contenedorBotones">
-                                <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                    <button type="button" id="btnGuardarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px;">Guardar</button>
-                                    <button type="button" id="btnCancelarDatosAdministrativos" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px;">Cancelar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @Html.Action("DatosAdministrativosCoavif", "Expediente")
 
-                        <div id="datUsuaria" class="tab-pane">
-                    <form id="datosUsuariaForm" method="post">
-                            <div class="row comunForm">
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <div class="col-md-4 form-group">
-                                            <label>Nombre</label>
-                                            <input class="form-control" placeholder="Nombre" id="txtNombre" type="text" required="">
-                                        </div>
-
-                                        <div class="col-md-4 form-group">
-                                            <label>Primer Apellido</label>
-                                            <input class="form-control" placeholder="Apellido" id="txtApellido1" type="text" required="">
-                                        </div>
-
-                                        <div class="col-md-4 form-group">
-                                            <label>Segundo Apellido</label>
-                                            <input class="form-control" placeholder="Apellido" id="txtApellido2" type="text" required="">
-                                        </div>
-
-                                        <div class="col-md-12 form-group">
-                                            <label>
-                                                <input style="display:inline-block;" id="checkFecha" type="checkbox"> Conoce Fecha de Nacimiento
-                                            </label>
-                                        </div>
-
-                                        <div class="col-md-12 form-group" id="fechaNacimiento">
-                                            <label>Fecha Nacimiento</label>
-                                            <input class="form-control" placeholder="Fecha nacimiento" id="dateNacimiento" type="date" min="0">
-                                        </div>
-
-                                        <div class="col-md-12 form-group" id="edad">
-                                            <label>Edad</label>
-                                            <input class="form-control" placeholder="Edad" id="intEdad" type="number" min="0">
-                                        </div>
-
-                                        <div class="col-md-12 form-group">
-                                            <label>País de Procedencia</label>
-                                            <select id="comPais" class="form-control"></select>
-                                        </div>
-
-                                        <div class="col-md-12 form-group">
-                                            <label>
-                                                <input style="display:inline-block;" id="checkApatrida" type="checkbox"> Apátrida
-                                            </label>
-                                        </div>
-
-                                        <div id="nacionalidades">
-                                            <div class="col-md-6 form-group">
-                                                <label>Nacionalidad</label>
-                                                <select id="comNacionalidad" class="form-control">
-                                                </select>
-                                            </div>
-
-                                            <div class="col-md-6 form-group">
-                                                <label>Otra Nacionalidad</label>
-                                                <select id="comOtraNacionalidad" class="form-control">
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-12 form-group">
-                                            <label>Condición Migratoria</label>
-                                            <select id="comMigratoria" class="form-control"></select>
-                                        </div>
-
-                                        <div class="col-md-12 form-group">
-                                            <label>Numero de Hijos</label>
-                                            <input class="form-control" placeholder="Número de Hijos" min="0" id="intHijos" type="number" required="">
-                                        </div>
-
-                                        <div class="col-md-12 form-group">
-                                            <label> Hijo mayor de 12 años</label>
-                                            <input class="form-control" placeholder="Número de Hijos mayores de 12" min="0" id="intHijosMayores" type="number" required="">
-                                        </div>
-
-                                        <div class="col-md-12 form-group">
-                                            <label>Discapacidades en hijos/hijas</label>
-                                            <select id="comDiscapacidad" class="form-control">
-                                            </select>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-6 form-group">
-                                        <div class="col-md-12 form-group">
-                                            <label>Número Documento de identificación</label>
-                                            <input class="form-control" placeholder="Número Documento de identificación" id="txtDocId" type="text" required="">
-                                        </div>
-
-                                        <div class="col-md-12 form-group">
-                                            <label>Lugar de Procedencia</label>
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <label>Provincia</label>
-                                            <select id="cmbPersonaProvincia" class="form-control">
-                                                @*<option value=""></option>*@
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <label>Cantón</label>
-                                            <select id="cmbPersonaCanton" class="form-control">
-                                                @*<option value=""></option>*@
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <label>Distrito</label>
-                                            <select id="cmbPersonaDistrito" class="form-control">
-                                                @*<option value=""></option>*@
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-12 form-group">
-                                            <label>Lugar de Trabajo</label>
-                                            <input class="form-control" placeholder="Lugar de Trabajo" id="txtLugarTrabajo" type="text">
-                                        </div>
-
-                                        <div class="col-md-12 form-group" id="meses">
-                                            <label>Embarazo</label>
-                                            <select id="comEmbarazo" class="form-control">
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-12 form-group">
-                                            <label>Teléfono</label>
-                                            <input class="form-control" placeholder="Telefono" id="txtTelefono" type="text">
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row" id="contenedorBotones">
-                                        <div class="col-md-12" style="text-align: center; margin-bottom: 5px">
-                                            <button type="button" id="btnGuardarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Guardar</button>
-                                            <button type="button" id="btnCancelarDatosUsuaria" class="btn btn-default btn-responsive" style="color: white; background-color: #368DE9; border-color: #368DE9; margin-bottom: 1px; ">Cancelar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </form>
-                        </div>
+                    @Html.Action("DatosUsuariaCoavif", "Expediente")
                     
                     <div id="valoracion" class="tab-pane">
                         <div class="row comunForm">
@@ -936,20 +727,7 @@
 
                         </div>
                     </div>
-                    <div id="atencion" class="tab-pane">
-                        <div class="row comunForm">
-
-                            <div class="row">
-                                <div class="col-md-4 form-group">
-                                    <label>Atenciones</label>
-
-                                    
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
+                    @Html.Action("AtencionCoavif", "Expediente")
                 </div>
 
 
