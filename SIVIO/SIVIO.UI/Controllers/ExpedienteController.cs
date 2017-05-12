@@ -91,7 +91,6 @@ namespace SIVIO.UI.Controllers
 
         public ActionResult CrearUsuaria_DatosAdministrativos()
         {
-            _modelExpediente.fecha = DateTime.Now.Date;
             /*
             bool estadoSesion = true;
             if (ComprobarPermisosAcccion(out estadoSesion))
@@ -252,6 +251,11 @@ namespace SIVIO.UI.Controllers
         }
 
 
+        [Authorize]
+        public JsonResult ListarProfesionales()
+        {
+            return Json(_modelExpediente.ListarProfesionales(), JsonRequestBehavior.AllowGet);
+        }
 
         [Authorize]
         public ActionResult Delegacion_Mujer()
