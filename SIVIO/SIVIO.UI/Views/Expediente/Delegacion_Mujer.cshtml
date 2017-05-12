@@ -16,6 +16,8 @@
         CargarDivisionTerritorial();
         CargarEditorRedesApoyo();
         CargarEditorComposicionFamiliar();
+        fechaHoy()
+        mostrarHora()
         $("#btnGuardarDatosUsuaria").click(function () {
             debugger;
 
@@ -84,7 +86,25 @@
                 debugger;
                 var respuesta = JSON.parse(resultado);
                 if (respuesta.Mensaje.TipoMensaje === 1) {
-      
+
+                    $.each(respuesta.CatalogoTipoAtencion, function (key, value) {
+                        if (value.VC_VALOR1 == "Atención legal" || value.VC_VALOR1 == "Atención trabajo social")
+                        {
+                            $('#txtTipoAten').append($("<option/>", {
+                                value: value.PK_VALORCATALOGO,
+                                text: value.VC_VALOR1
+
+                            }));
+                        }
+                        if (value.VC_VALOR1 == "Atención psicología de adultas") {
+                            $('#txtTipoAten').append($("<option/>", {
+                                value: value.PK_VALORCATALOGO,
+                                text: "Atención psicología"
+
+                            }));
+                        }
+                    });
+
                     $.each(respuesta.CatalogoNacionalidad, function (key, value) {
                         $('#cmbApatrida').append($("<option/>", {
                             value: value.PK_VALORCATALOGO,
@@ -207,12 +227,6 @@
                         }));
                     });
 
-                    $.each(respuesta.CatalogoTipoAtencion, function (key, value) {
-                        $('#txtTipoAten').append($("<option/>", {
-                            value: value.PK_VALORCATALOGO,
-                            text: value.VC_VALOR1
-                        }));
-                    });
 
                     $.each(respuesta.CatalogoViolencia, function (key, value) {
                         $('#cmbTipoViolencia').append($("<option/>", {
@@ -262,6 +276,55 @@
 
                     $('#btn-login').fadeIn();
                     $.LoadingOverlay("hide");
+                } else {
+                    $("#contenedorBotones").show();
+                    $("#contenedorEspera").hide();
+                    $("#txtModalTitulo").css("color", "red");
+                    $("#txtModalTitulo").text("Error");
+                    $("#txtModalContenido").text(respuesta.Mensaje.ContenidoMensaje);
+                    instMensajes.open();
+                    $.LoadingOverlay("hide");
+
+
+                }
+
+
+
+            },
+            error: function (xhr, ajaxOptions, error) {
+                $("#contenedorBotones").show();
+                $("#contenedorEspera").hide();
+                $("#txtModalTitulo").css("color", "red");
+                $("#txtModalTitulo").text("Error al registrar");
+                $("#txtModalContenido").text("Fallo al comunicarse con el servidor");
+                instMensajes.open();
+                $.LoadingOverlay("hide");
+
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ListarProfesionales")',
+            dataType: "json",
+            contentType: "application/json",
+            processData: true,
+            success: function (resultado) {
+                debugger;
+                var respuesta = JSON.parse(resultado);
+                if (respuesta.Mensaje.TipoMensaje === 1) {
+
+
+                    debugger;
+
+                    $.each(respuesta, function (key, value) {
+                        $('#txtProfesional').append($("<option/>", {
+                            value: value.PK_USUARIO,
+                            text: value.VC_NOMBREUSUARIO
+                        }));
+                    });
+
+
+
                 } else {
                     $("#contenedorBotones").show();
                     $("#contenedorEspera").hide();

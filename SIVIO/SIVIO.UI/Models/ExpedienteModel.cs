@@ -6,6 +6,7 @@ using SIVIO.Entidades;
 using SIVIO.Utilitarios;
 using System.Data;
 using System.Data.Entity.Validation;
+using System.Web.Mvc;
 
 namespace SIVIO.UI.Models
 {
@@ -193,15 +194,22 @@ namespace SIVIO.UI.Models
 
             }
         }
+        public List<SP_LISTAR_PROFESIONALES_Result> ListarProfesionales()
+        {
+            using (var entidades = new SIVIOEntities())
+            {
+                try
+                {
+                    return entidades.SP_LISTAR_PROFESIONALES().ToList();
+                }
+                catch
+                {
+                    return new List<SP_LISTAR_PROFESIONALES_Result>();
+                }
+            }
+        }
 
-        public DateTime fecha { get; set; }
-        public string horaInicio { get; set; }
-        public string horaFinal { get; set; }
-        public string institucionRefiere { get; set; }
-        public string personaRefiere { get; set; }
-        public string telefono { get; set; }
-        public string correo { get; set; }
-        public string tipoAtension { get; set; }
+
         #endregion
     }
 }
